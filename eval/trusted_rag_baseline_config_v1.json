@@ -1,0 +1,71 @@
+{
+    "schema_version": "1.0",
+    "data": {
+      "build_id": "day43_data_v2",
+      "manifest_path": "data/day43_data_v2/manifest.json",
+      "manifest_sha256": "06bba7db22db4ea7cde485b1695be624ba7aaf91f3150562b5044390af008e59",
+      "workspace_id": "demo-financial-reports",
+      "milvus_database_path": "data/milvus.db",
+      "collection_name": "findoc_day43_v2",
+      "collection_row_count": 5269
+    },
+    "embedding": {
+      "model": "BAAI/bge-m3",
+      "vector_dimension": 1024,
+      "metric_type": "COSINE"
+    },
+    "retrieval": {
+      "top_k": 5
+    },
+    "evidence_gate": {
+      "type": "ConservativeScoreEvidenceGate",
+      "min_top_score": 0.55,
+      "assumption": "该阈值只表示进入生成阶段的最低相似度资格，不代表证据在语义上足以回答问题；Q11约0.608和Q12约0.728均进入模型第二层判断。"
+    },
+    "context": {
+      "max_evidence_chars": 4000,
+      "budget_unit": "rendered_evidence_characters",
+      "boundary": "只允许完整编号证据进入上下文，不截断第一条或后续证据。"
+    },
+    "prompt": {
+      "version": "trusted-rag-json-v1",
+      "protocol": {
+        "answer": {
+          "decision": "answer",
+          "content": "带内联[n]引用的答案"
+        },
+        "refusal": {
+          "decision": "refuse"
+        }
+      },
+      "strict_json_only": true,
+      "markdown_not_allowed": true,
+      "automatic_repair": false
+    },
+    "llm": {
+      "provider_compatibility": "OpenAI-compatible Chat Completions",
+      "model": "deepseek-v4-flash",
+      "base_url": "https://api.deepseek.com",
+      "timeout_seconds": 30,
+      "stream": false,
+      "api_key_source": "LLM_API_KEY environment variable",
+      "api_key_persisted": false
+    },
+    "question_set": {
+      "path": "eval/trusted_rag_questions_v1.jsonl",
+      "sha256": "04cd650a541201c400d2da2449f4bcbbca408ba1cc155f5dfbe19a258cea1019",
+      "question_count": 20,
+      "answerable_count": 15,
+      "unanswerable_count": 5
+    },
+    "code": {
+      "tracking": "评测runner在执行时记录git HEAD和working_tree_dirty",
+      "required_working_tree_dirty": false
+    },
+    "execution": {
+      "runner": "python -m scripts.evaluate_trusted_rag",
+      "output_path": "eval/trusted_rag_baseline_v1.json",
+      "overwrite_existing_output": false,
+      "formal_run_limit": 1
+    }
+  }

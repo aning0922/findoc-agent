@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "suite": {
+    "path": "eval/trusted_rag_holdout_v1.jsonl",
+    "sha256": "2ffde40665008b5dc0af99de5118b702be2500e7ffddaf9890d0d2492e3bd507",
+    "question_count": 5,
+    "answerable_count": 3,
+    "unanswerable_count": 2,
+    "schema_fields": [
+      "case_id",
+      "query",
+      "category",
+      "answerable",
+      "relevant_chunk_ids",
+      "source_file",
+      "answer_points",
+      "ground_truth",
+      "expected_metadata",
+      "verification_scope",
+      "verification_basis"
+    ]
+  },
+  "code": {
+    "candidate_commit": "cf2610b8dd265b85054562d89b74f3de0f18782a",
+    "working_tree_required_clean": true
+  },
+  "runner": {
+    "path": "scripts/evaluate_trusted_rag.py",
+    "sha256": "e445a43ff1e5f0846174f41515d4cb7b8a0606ef55b3e3db742f6f6238997665"
+  },
+  "baseline_config": {
+    "path": "eval/trusted_rag_baseline_config_v1.json",
+    "sha256": "7c1361987141a4178c53ffbc6f2b8b580fa72a497043ccc46bcc800e0bcb5e09"
+  },
+  "data": {
+    "manifest_path": "data/day43_data_v2/manifest.json",
+    "manifest_sha256": "06bba7db22db4ea7cde485b1695be624ba7aaf91f3150562b5044390af008e59",
+    "build_id": "day43_data_v2",
+    "workspace": "demo-financial-reports",
+    "milvus_path": "data/milvus.db",
+    "collection": "findoc_day43_v2",
+    "row_count": 5269,
+    "metric": "COSINE",
+    "embedding": "BAAI/bge-m3/1024"
+  },
+  "effective_runtime": {
+    "top_k": 5,
+    "min_top_score": 0.55,
+    "max_evidence_chars": 4000,
+    "prompt_version": "trusted-rag-json-v1",
+    "LLM_MODEL": "deepseek-v4-flash",
+    "LLM_BASE_URL": "https://api.deepseek.com",
+    "LLM_TIMEOUT_SECONDS": 30,
+    "LLM_API_KEY_PRESENT": true
+  },
+  "formal_execution": {
+    "formal_run_limit": 1,
+    "run_id": "cff75a4b-d202-438c-ac40-5c7957c88a08",
+    "result_path": "eval/trusted_rag_holdout_result_cff75a4b-d202-438c-ac40-5c7957c88a08.json",
+    "no_peek": "正式运行前，执行者不打开JSONL正文；本题集为程序性封存，不是物理隔离盲测。",
+    "single_infrastructure_retry_rule": "只有完全未进入任何case且明确为API或数据库初始化故障时，保存首次失败证据后，才可由执行者决定使用新run-id和新输出名受控重试一次；任何case开始、部分结果或system_error均算正式运行，不得重试。"
+  }
+}

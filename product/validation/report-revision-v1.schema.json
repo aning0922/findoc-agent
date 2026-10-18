@@ -1,0 +1,1141 @@
+{
+  "$defs": {
+    "AnalysisRow": {
+      "additionalProperties": false,
+      "properties": {
+        "metric_key": {
+          "enum": [
+            "revenue",
+            "net_profit_parent",
+            "operating_cash_flow"
+          ],
+          "title": "Metric Key",
+          "type": "string"
+        },
+        "direction": {
+          "enum": [
+            "current_minus_previous",
+            "B_minus_A"
+          ],
+          "title": "Direction",
+          "type": "string"
+        },
+        "first_fact_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "First Fact Id",
+          "type": "string"
+        },
+        "second_fact_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Second Fact Id",
+          "type": "string"
+        },
+        "absolute_change": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?$",
+          "title": "Absolute Change",
+          "type": "string"
+        },
+        "percentage_change": {
+          "anyOf": [
+            {
+              "pattern": "^-?\\d+(?:\\.\\d+)?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Percentage Change"
+        },
+        "percentage_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Percentage Reason"
+        },
+        "absolute_change_unit": {
+          "const": "CNY_YUAN",
+          "title": "Absolute Change Unit",
+          "type": "string"
+        },
+        "percentage_change_unit": {
+          "const": "PERCENT",
+          "title": "Percentage Change Unit",
+          "type": "string"
+        },
+        "absolute_formula_id": {
+          "const": "financial_absolute_change_v1",
+          "title": "Absolute Formula Id",
+          "type": "string"
+        },
+        "percentage_formula_id": {
+          "enum": [
+            "financial_yoy_signed_base_v1",
+            "financial_company_relative_signed_base_v1"
+          ],
+          "title": "Percentage Formula Id",
+          "type": "string"
+        },
+        "absolute_expression": {
+          "title": "Absolute Expression",
+          "type": "string"
+        },
+        "percentage_expression": {
+          "title": "Percentage Expression",
+          "type": "string"
+        },
+        "limitations": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "metric_key",
+        "direction",
+        "first_fact_id",
+        "second_fact_id",
+        "absolute_change",
+        "percentage_change",
+        "percentage_reason",
+        "absolute_change_unit",
+        "percentage_change_unit",
+        "absolute_formula_id",
+        "percentage_formula_id",
+        "absolute_expression",
+        "percentage_expression",
+        "limitations"
+      ],
+      "title": "AnalysisRow",
+      "type": "object"
+    },
+    "AnnualPeriod": {
+      "additionalProperties": false,
+      "properties": {
+        "year": {
+          "maximum": 9999,
+          "minimum": 1,
+          "title": "Year",
+          "type": "integer"
+        },
+        "start": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "title": "End",
+          "type": "string"
+        },
+        "period_type": {
+          "const": "annual",
+          "title": "Period Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "year",
+        "start",
+        "end",
+        "period_type"
+      ],
+      "title": "AnnualPeriod",
+      "type": "object"
+    },
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "number": {
+          "maximum": 12,
+          "minimum": 1,
+          "title": "Number",
+          "type": "integer"
+        },
+        "workspace_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Workspace Id",
+          "type": "string"
+        },
+        "company_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Company Id",
+          "type": "string"
+        },
+        "report_year": {
+          "title": "Report Year",
+          "type": "integer"
+        },
+        "report_type": {
+          "const": "annual",
+          "title": "Report Type",
+          "type": "string"
+        },
+        "period_start": {
+          "title": "Period Start",
+          "type": "string"
+        },
+        "period_end": {
+          "title": "Period End",
+          "type": "string"
+        },
+        "basis": {
+          "const": "PRC_GAAP",
+          "title": "Basis",
+          "type": "string"
+        },
+        "document_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Document Id",
+          "type": "string"
+        },
+        "source_revision": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Revision",
+          "type": "string"
+        },
+        "content_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "attempt": {
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "parser_version": {
+          "title": "Parser Version",
+          "type": "string"
+        },
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "chunk_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Chunk Id",
+          "type": "string"
+        },
+        "source_file": {
+          "title": "Source File",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "paragraph",
+            "table"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "verification": {
+          "const": "exact_original_with_context",
+          "title": "Verification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "number",
+        "workspace_id",
+        "company_id",
+        "report_year",
+        "report_type",
+        "period_start",
+        "period_end",
+        "basis",
+        "document_id",
+        "source_revision",
+        "content_sha256",
+        "attempt",
+        "parser_version",
+        "physical_page",
+        "chunk_id",
+        "source_file",
+        "text",
+        "kind",
+        "verification"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "EditorRevision": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Title"
+        },
+        "conclusions": {
+          "items": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 4,
+          "title": "Conclusions",
+          "type": "array"
+        },
+        "origin": {
+          "const": "user_edit",
+          "default": "user_edit",
+          "title": "Origin",
+          "type": "string"
+        },
+        "validation_status": {
+          "const": "pending_semantic_review",
+          "default": "pending_semantic_review",
+          "title": "Validation Status",
+          "type": "string"
+        },
+        "verified_operating_attribution": {
+          "const": false,
+          "default": false,
+          "title": "Verified Operating Attribution",
+          "type": "boolean"
+        },
+        "qualification_limit": {
+          "const": "user_assertions_unverified",
+          "default": "user_assertions_unverified",
+          "title": "Qualification Limit",
+          "type": "string"
+        }
+      },
+      "title": "EditorRevision",
+      "type": "object"
+    },
+    "FactChoice": {
+      "additionalProperties": false,
+      "properties": {
+        "metric_key": {
+          "enum": [
+            "revenue",
+            "net_profit_parent",
+            "operating_cash_flow"
+          ],
+          "title": "Metric Key",
+          "type": "string"
+        },
+        "document_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Document Id",
+          "type": "string"
+        },
+        "disclosure_version": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Disclosure Version",
+          "type": "string"
+        },
+        "fact_set_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fact Set Id"
+        },
+        "fact_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fact Id"
+        }
+      },
+      "required": [
+        "metric_key",
+        "document_id",
+        "disclosure_version",
+        "fact_set_id",
+        "fact_id"
+      ],
+      "title": "FactChoice",
+      "type": "object"
+    },
+    "FactRow": {
+      "additionalProperties": false,
+      "properties": {
+        "side": {
+          "enum": [
+            "first",
+            "second"
+          ],
+          "title": "Side",
+          "type": "string"
+        },
+        "company_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Company Id",
+          "type": "string"
+        },
+        "company_name": {
+          "title": "Company Name",
+          "type": "string"
+        },
+        "period": {
+          "title": "Period",
+          "type": "integer"
+        },
+        "metric_key": {
+          "enum": [
+            "revenue",
+            "net_profit_parent",
+            "operating_cash_flow"
+          ],
+          "title": "Metric Key",
+          "type": "string"
+        },
+        "raw_value": {
+          "title": "Raw Value",
+          "type": "string"
+        },
+        "raw_unit": {
+          "title": "Raw Unit",
+          "type": "string"
+        },
+        "value_cny_yuan": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?$",
+          "title": "Value Cny Yuan",
+          "type": "string"
+        },
+        "unit": {
+          "const": "CNY_YUAN",
+          "title": "Unit",
+          "type": "string"
+        },
+        "currency": {
+          "const": "CNY",
+          "title": "Currency",
+          "type": "string"
+        },
+        "scope": {
+          "const": "consolidated",
+          "title": "Scope",
+          "type": "string"
+        },
+        "accounting_basis": {
+          "const": "PRC_GAAP",
+          "title": "Accounting Basis",
+          "type": "string"
+        },
+        "fact_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Fact Id",
+          "type": "string"
+        },
+        "fact_set_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Fact Set Id",
+          "type": "string"
+        },
+        "receipt_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Receipt Id",
+          "type": "string"
+        },
+        "disclosure_version": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Disclosure Version",
+          "type": "string"
+        },
+        "document_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Document Id",
+          "type": "string"
+        },
+        "source_revision": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Revision",
+          "type": "string"
+        },
+        "content_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "confirmation_kind": {
+          "enum": [
+            "local_operator",
+            "simulated_test"
+          ],
+          "title": "Confirmation Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "side",
+        "company_id",
+        "company_name",
+        "period",
+        "metric_key",
+        "raw_value",
+        "raw_unit",
+        "value_cny_yuan",
+        "unit",
+        "currency",
+        "scope",
+        "accounting_basis",
+        "fact_id",
+        "fact_set_id",
+        "receipt_id",
+        "disclosure_version",
+        "document_id",
+        "source_revision",
+        "content_sha256",
+        "physical_page",
+        "confirmation_kind"
+      ],
+      "title": "FactRow",
+      "type": "object"
+    },
+    "FieldVerification": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "origin": {
+          "enum": [
+            "D10",
+            "D11_D13",
+            "D21_PDF",
+            "D21_pending",
+            "D21_scope"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "identity": {
+          "title": "Identity",
+          "type": "string"
+        },
+        "snapshot_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Snapshot Sha256",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "verified_snapshot",
+            "pending_semantic_review"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "origin",
+        "identity",
+        "snapshot_sha256",
+        "status"
+      ],
+      "title": "FieldVerification",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "OperatingParagraph": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "citation": {
+          "$ref": "#/$defs/Citation"
+        },
+        "verification": {
+          "const": "exact_original_with_context",
+          "title": "Verification",
+          "type": "string"
+        },
+        "human_review_status": {
+          "const": "pending",
+          "title": "Human Review Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "citation",
+        "verification",
+        "human_review_status"
+      ],
+      "title": "OperatingParagraph",
+      "type": "object"
+    },
+    "PendingInterpretation": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "maxLength": 400,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "citations": {
+          "items": {
+            "maximum": 12,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "maxItems": 8,
+          "minItems": 1,
+          "title": "Citations",
+          "type": "array"
+        },
+        "validation_status": {
+          "const": "pending_semantic_review",
+          "title": "Validation Status",
+          "type": "string"
+        },
+        "verified_operating_attribution": {
+          "const": false,
+          "title": "Verified Operating Attribution",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "text",
+        "citations",
+        "validation_status",
+        "verified_operating_attribution"
+      ],
+      "title": "PendingInterpretation",
+      "type": "object"
+    },
+    "ReportChoice": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Document Id",
+          "type": "string"
+        },
+        "expected_source_revision": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Expected Source Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "expected_source_revision"
+      ],
+      "title": "ReportChoice",
+      "type": "object"
+    },
+    "ReportDraft": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "report-draft-v1",
+          "default": "report-draft-v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "builder_version": {
+          "const": "deterministic-report-builder-v1",
+          "default": "deterministic-report-builder-v1",
+          "title": "Builder Version",
+          "type": "string"
+        },
+        "task_id": {
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "task_revision": {
+          "title": "Task Revision",
+          "type": "integer"
+        },
+        "source_content_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Content Sha256",
+          "type": "string"
+        },
+        "business_content_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Business Content Sha256",
+          "type": "string"
+        },
+        "generated_at": {
+          "title": "Generated At",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "report_type": {
+          "enum": [
+            "company_period_change",
+            "company_same_period_comparison"
+          ],
+          "title": "Report Type",
+          "type": "string"
+        },
+        "research_question": {
+          "minLength": 1,
+          "title": "Research Question",
+          "type": "string"
+        },
+        "research_scope": {
+          "$ref": "#/$defs/TemplateRequest"
+        },
+        "executive_summary": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Executive Summary",
+          "type": "array"
+        },
+        "side_labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "maxProperties": 2,
+          "minProperties": 2,
+          "propertyNames": {
+            "enum": [
+              "first",
+              "second"
+            ]
+          },
+          "title": "Side Labels",
+          "type": "object"
+        },
+        "financial_facts": {
+          "items": {
+            "$ref": "#/$defs/FactRow"
+          },
+          "maxItems": 6,
+          "minItems": 6,
+          "title": "Financial Facts",
+          "type": "array"
+        },
+        "financial_analysis": {
+          "items": {
+            "$ref": "#/$defs/AnalysisRow"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Financial Analysis",
+          "type": "array"
+        },
+        "operating_information": {
+          "items": {
+            "$ref": "#/$defs/OperatingParagraph"
+          },
+          "maxItems": 8,
+          "minItems": 1,
+          "title": "Operating Information",
+          "type": "array"
+        },
+        "model_interpretations": {
+          "items": {
+            "$ref": "#/$defs/PendingInterpretation"
+          },
+          "maxItems": 4,
+          "title": "Model Interpretations",
+          "type": "array"
+        },
+        "unresolved_questions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unresolved Questions",
+          "type": "array"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "evidence_appendix": {
+          "$ref": "#/$defs/ReportEvidence"
+        },
+        "field_verification": {
+          "items": {
+            "$ref": "#/$defs/FieldVerification"
+          },
+          "title": "Field Verification",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "qualified_draft",
+            "simulated_draft"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "test_mode": {
+          "anyOf": [
+            {
+              "const": "simulated_test",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Test Mode"
+        },
+        "watermark": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Watermark"
+        },
+        "persisted": {
+          "const": false,
+          "default": false,
+          "title": "Persisted",
+          "type": "boolean"
+        },
+        "human_review_status": {
+          "const": "pending",
+          "default": "pending",
+          "title": "Human Review Status",
+          "type": "string"
+        },
+        "verified_operating_attribution": {
+          "const": false,
+          "default": false,
+          "title": "Verified Operating Attribution",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "task_id",
+        "task_revision",
+        "source_content_sha256",
+        "business_content_sha256",
+        "generated_at",
+        "title",
+        "report_type",
+        "research_question",
+        "research_scope",
+        "executive_summary",
+        "side_labels",
+        "financial_facts",
+        "financial_analysis",
+        "operating_information",
+        "model_interpretations",
+        "unresolved_questions",
+        "limitations",
+        "evidence_appendix",
+        "field_verification",
+        "status",
+        "test_mode",
+        "watermark"
+      ],
+      "title": "ReportDraft",
+      "type": "object"
+    },
+    "ReportEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "selected_reports": {
+          "items": {
+            "additionalProperties": {
+              "$ref": "#/$defs/JsonValue"
+            },
+            "type": "object"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Selected Reports",
+          "type": "array"
+        },
+        "financial_facts": {
+          "items": {
+            "additionalProperties": {
+              "$ref": "#/$defs/JsonValue"
+            },
+            "type": "object"
+          },
+          "maxItems": 6,
+          "minItems": 6,
+          "title": "Financial Facts",
+          "type": "array"
+        },
+        "deterministic_analysis": {
+          "items": {
+            "additionalProperties": {
+              "$ref": "#/$defs/JsonValue"
+            },
+            "type": "object"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Deterministic Analysis",
+          "type": "array"
+        },
+        "operating_evidence": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Operating Evidence",
+          "type": "object"
+        },
+        "citations": {
+          "items": {
+            "additionalProperties": {
+              "$ref": "#/$defs/JsonValue"
+            },
+            "type": "object"
+          },
+          "maxItems": 8,
+          "minItems": 1,
+          "title": "Citations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "selected_reports",
+        "financial_facts",
+        "deterministic_analysis",
+        "operating_evidence",
+        "citations"
+      ],
+      "title": "ReportEvidence",
+      "type": "object"
+    },
+    "ResearchSide": {
+      "additionalProperties": false,
+      "properties": {
+        "company_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+          "title": "Company Id",
+          "type": "string"
+        },
+        "period": {
+          "$ref": "#/$defs/AnnualPeriod"
+        },
+        "choices": {
+          "items": {
+            "$ref": "#/$defs/FactChoice"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Choices",
+          "type": "array"
+        }
+      },
+      "required": [
+        "company_id",
+        "period",
+        "choices"
+      ],
+      "title": "ResearchSide",
+      "type": "object"
+    },
+    "TemplateRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "operating-research-input-v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "template": {
+          "enum": [
+            "company_period_change",
+            "company_same_period_comparison"
+          ],
+          "title": "Template",
+          "type": "string"
+        },
+        "reports": {
+          "items": {
+            "$ref": "#/$defs/ReportChoice"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Reports",
+          "type": "array"
+        },
+        "first": {
+          "$ref": "#/$defs/ResearchSide"
+        },
+        "second": {
+          "$ref": "#/$defs/ResearchSide"
+        },
+        "direction": {
+          "enum": [
+            "business_overview",
+            "products_and_operations"
+          ],
+          "title": "Direction",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "template",
+        "reports",
+        "first",
+        "second",
+        "direction"
+      ],
+      "title": "TemplateRequest",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "report-revision-v1",
+      "default": "report-revision-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "workspace_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[^\\s\\x00-\\x1f\\x7f]+$",
+      "title": "Workspace Id",
+      "type": "string"
+    },
+    "report_id": {
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "parent_revision": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Parent Revision"
+    },
+    "operation_id": {
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "persisted": {
+      "const": true,
+      "default": true,
+      "title": "Persisted",
+      "type": "boolean"
+    },
+    "trusted_snapshot": {
+      "$ref": "#/$defs/ReportDraft"
+    },
+    "editor_revision": {
+      "$ref": "#/$defs/EditorRevision"
+    }
+  },
+  "required": [
+    "workspace_id",
+    "report_id",
+    "revision",
+    "parent_revision",
+    "operation_id",
+    "created_at",
+    "trusted_snapshot",
+    "editor_revision"
+  ],
+  "title": "ReportRevision",
+  "type": "object"
+}

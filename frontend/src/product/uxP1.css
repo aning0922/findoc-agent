@@ -1,0 +1,253 @@
+/* UX-P1 formal workflow layout. Component styles stay scoped to this workflow. */
+.creation-steps,
+.approval-steps {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  flex-wrap: wrap;
+  color: #596B7D;
+}
+.creation-steps [aria-current],
+.approval-steps [aria-current] {
+  color: #096E66;
+  font-weight: 650;
+}
+.creation-flow {
+  padding: 24px;
+}
+.creation-flow > h2 {
+  font-size: 24px;
+}
+.creation-flow .operating-templates {
+  margin-top: 24px;
+}
+.creation-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #dce4ef;
+  flex-wrap: wrap;
+}
+.fact-group {
+  margin-top: 24px;
+}
+.fact-group h3 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dce4ef;
+  font-size: 18px;
+}
+.fact-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.fact-checklist > li {
+  padding: 16px 0;
+  border-bottom: 1px solid #e3e9f0;
+  scroll-margin-top: 20px;
+}
+.fact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.fact-row strong {
+  font-size: 17px;
+}
+.fact-row p {
+  margin-top: 4px;
+}
+.confirmed-amount {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.fact-checklist details a {
+  margin-left: 16px;
+}
+.result-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.result-summary .operating-result {
+  border: 0;
+  border-radius: 0;
+  padding: 16px 0;
+  margin: 0;
+  min-width: 0;
+}
+.result-summary h3 {
+  font-size: 16px;
+}
+.result-change {
+  display: block;
+  font-size: 32px;
+  font-weight: 650;
+  margin-top: 12px;
+  color: #172C45;
+  font-variant-numeric: tabular-nums;
+}
+.result-next {
+  border-top: 1px solid #dce4ef;
+  padding-top: 18px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.saas-app a.operating-primary {
+  color: #fff;
+  background: #096E66;
+  padding: 10px 18px;
+  border-radius: 6px;
+  display: inline-flex;
+}
+.review-pending {
+  font-size: 15px;
+  color: #805009;
+  background: #fff5e4;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+.result-evidence {
+  padding: 18px 20px;
+  background: #fff;
+  border: 1px solid #dce4ef;
+  border-radius: 8px;
+}
+.result-evidence > summary {
+  cursor: pointer;
+  color: #096E66;
+}
+.candidate-item {
+  margin-top: 14px;
+  border: 1px solid #dce4ef;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.candidate-item > summary {
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.candidate-item .candidate-card {
+  border: 0;
+  border-top: 1px solid #dce4ef;
+  border-radius: 0;
+  margin: 0;
+  padding: 16px;
+}
+.review-range {
+  margin-block: 12px;
+}
+.approval-steps {
+  gap: 16px;
+  font-size: 15px;
+  margin: 12px 0;
+}
+.evidence-app .approval-primary {
+  background: #096E66;
+  color: #fff;
+  padding: 10px 16px;
+}
+.evidence-app .amount-comparison {
+  font-size: 15px;
+  grid-template-columns: 90px minmax(0, 1fr);
+}
+.evidence-app .candidate-card span {
+  font-size: 14px;
+}
+.evidence-app .pending-notice {
+  font-size: 15px;
+}
+.evidence-app .pdf-toolbar {
+  font-size: 14px;
+}
+.evidence-app .candidate-card .acceptance-check {
+  align-items: flex-start;
+  margin-top: 16px;
+}
+@media (max-width: 1100px) {
+  .result-summary {
+    gap: 16px;
+  }
+  .result-change {
+    font-size: 28px;
+  }
+}
+@media (max-width: 760px) {
+  .result-summary,
+  .operating-templates {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .creation-flow {
+    padding: 18px;
+  }
+  .fact-checklist > li {
+    scroll-margin-top: 20px;
+  }
+}
+.evidence-app .pdf-toolbar :is(button, select) {
+  font-size: 14px;
+}
+.evidence-app .pdf-location {
+  font-size: 14px;
+}
+.evidence-app .evidence-excerpt pre {
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.research-workspace:has([aria-label="研究阶段与下一步"]) > .page-heading {
+  margin-bottom: 8px;
+}
+.research-workspace:has([aria-label="研究阶段与下一步"]) > .page-heading h1 {
+  font-size: 22px;
+}
+.research-workspace:has([aria-label="研究阶段与下一步"])
+  > .page-heading
+  .eyebrow {
+  display: none;
+}
+.research-workspace:has([aria-label="研究阶段与下一步"]) > .research-modes {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+}
+
+.fact-group > summary { padding: 16px 0; font-size: 18px; font-weight: 600; cursor: pointer; }
+.fact-group[data-current="true"] { border-left: 3px solid #096E66; padding-left: 16px; }
+.fact-group-current { display: block; font-size: 14px; color: #096E66; }
+.fact-group-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+.fact-group-actions a { padding: 8px 12px; border: 1px solid #a8c9c4; border-radius: 6px; }
+.fact-checklist > li { padding: 12px 0; }
+.review-scope { padding: 12px 0; font-weight: 600; }
+.review-continuation { display: flex; flex-wrap: wrap; gap: 16px; margin-block: 16px; }
+.review-continuation a { padding: 12px; }
+
+.scope-change { border-left: 3px solid #096E66; padding: 12px 16px; background: #f1f5fc; }
+.creation-flow .operating-side { min-width: 0; }
+.creation-flow .operating-disclosure { padding-block: 10px; }
+.creation-flow .operating-side > a { display: inline-block; margin-block: 12px; }
+
+.result-change { overflow-wrap: anywhere; }
+.result-summary .operating-result p { overflow-wrap: anywhere; }
+.operating-result:focus { outline: 2px solid #096E66; outline-offset: 6px; }
+.result-limitation { padding: 12px; background: #fff5e4; }
+.result-exact { font-variant-numeric: tabular-nums; font-weight: 600; }
+.result-original { padding-top: 12px; border-top: 1px solid #dce4ef; color: #596B7D; }
+
+.creation-flow [hidden] { display: none; }
+
+.creation-flow .operating-disclosure:has(> strong):not(:has(select)) { margin-block: 6px; padding-block: 4px; }
+
+.evidence-app .evidence-header small { font-size: 14px; }

@@ -1,0 +1,888 @@
+{
+  "metrics": {
+    "answerable_count": 10,
+    "exploratory_p50_ms": 58.79139600074268,
+    "exploratory_p95_ms": 91.24609580139804,
+    "hit_at_1": 0.2,
+    "hit_at_5": 0.4,
+    "latency_sample_count": 12,
+    "mrr": 0.27,
+    "question_count": 12
+  },
+  "model_load_ms": 2746.821083001123,
+  "results": [
+    {
+      "answerable": true,
+      "case_id": "Q1",
+      "category": "ordinary_text",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "19646258-7c45-4936-be5f-e9621715f24c",
+          "page": 8,
+          "rank": 1,
+          "score": 0.7861018776893616,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "公司主要业务是茅台酒及系列酒的生产与销售。主导产品“贵州茅台酒”是我国大曲酱香型白酒的鼻祖和典型代表，集国家地理标志产品、有机食品和国家非物质文化遗产于一身，公司营销网络覆盖国内市场及五大洲 66个国家和地区。",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "7b205630-984a-4ecd-bddd-b0a974008eb4",
+          "page": 54,
+          "rank": 2,
+          "score": 0.7174950242042542,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "贵州茅台公司的营业收入主要来自于茅台酒及系列酒的生产及销售。2025 年度，贵州茅台公司的营业收入为人民币 16,883,810.25 万元。其中主营业务收入为人民币 16,877,458.52 万元，占营业收入的 99.96%。",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "b6fdfc7d-021a-4367-bd98-bfe13761a22e",
+          "page": 72,
+          "rank": 3,
+          "score": 0.6478438377380371,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "本公司及所属子公司经营业务：茅台酒及系列酒的生产与销售；饮料、食品、包装材料的生产、销售；防伪技术开发、信息产业相关产品的研制、开发；酒店经营管理、住宿、餐饮、娱乐、洗浴及停车场管理服务；车辆运输（不含危险化学品）、维修保养；第二类增值电信",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "259fff32-2b7b-42be-8502-0e9ad1f0f237",
+          "page": 1,
+          "rank": 4,
+          "score": 0.6475725173950195,
+          "section": "未分节",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "公司简称：贵州茅台",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "221f559d-5aaa-427b-8652-23055f510caf",
+          "page": 1,
+          "rank": 5,
+          "score": 0.6464974284172058,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "贵州茅台酒股份有限公司2025 年年度报告",
+          "type": "title"
+        }
+      ],
+      "latency_ms": 30.121666997729335,
+      "metadata_check": {
+        "filter_ok": null,
+        "relevant_hit_checks": [
+          {
+            "chunk_id": "19646258-7c45-4936-be5f-e9621715f24c",
+            "mismatches": {},
+            "ok": true
+          }
+        ],
+        "relevant_metadata_status": "passed"
+      },
+      "query": "贵州茅台的主要业务是什么？",
+      "relevant_rank": 1,
+      "source_file_filter": null,
+      "status": "normal"
+    },
+    {
+      "answerable": true,
+      "case_id": "Q2",
+      "category": "ordinary_text",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "08a702c8-20fc-4c3f-a072-6738969a9408",
+          "page": 1,
+          "rank": 1,
+          "score": 0.8111451864242554,
+          "section": "未分节",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "公司简称：成都华微",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "a534a7fa-e40e-49d3-a029-5d882d82541e",
+          "page": 10,
+          "rank": 2,
+          "score": 0.7170367240905762,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "成都华微主要从事特种集成电路的研发、生产、检测、销售和服务，公司产品涵盖数字集成电路产品和模拟集成电路产品，其中数字集成电路包含了可编程逻辑器件（FPGA/CPLD/SoPC/RF-FPGA）、MCU/SoC/SIP 系统级芯片、存储器、T",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "19edae57-21ec-4a52-974b-3a774474ebb6",
+          "page": 117,
+          "rank": 3,
+          "score": 0.6831870079040527,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "成都华微电子科技股份有限公司（以下简称“本公司”或“公司”）前身为成都华微电子科技有限公司（以下简称“成都华微有限”），成都华微有限以 2021 年 6 月 30 日为基准日，采用整体变更的方式设立本公司，本公司于 2021 年 9 月在成",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "619e1540-80ec-4664-8e16-91c7fc7aa983",
+          "page": 39,
+          "rank": 4,
+          "score": 0.6816799640655518,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "公司以服务国家战略、区域发展为己任，始终坚持国家利益优先，聚焦解决集成电路瓶颈等关键技术，立志成为具有世界一流集成电路研发水平的设计企业。成都华微立足国之所需，着力打造“3+N+1”平台化产品体系，在超大规模 FPGA、RF-FPGA 与 ",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "e5ded393-afc4-4711-ad40-2b34dc0471fe",
+          "page": 1,
+          "rank": 5,
+          "score": 0.6671218872070312,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "成都华微电子科技股份有限公司2025 年年度报告",
+          "type": "title"
+        }
+      ],
+      "latency_ms": 83.29883300029906,
+      "metadata_check": {
+        "filter_ok": null,
+        "relevant_hit_checks": [
+          {
+            "chunk_id": "a534a7fa-e40e-49d3-a029-5d882d82541e",
+            "mismatches": {},
+            "ok": true
+          }
+        ],
+        "relevant_metadata_status": "passed"
+      },
+      "query": "成都华微主要从事哪些业务？",
+      "relevant_rank": 2,
+      "source_file_filter": null,
+      "status": "normal"
+    },
+    {
+      "answerable": true,
+      "case_id": "Q3",
+      "category": "exact_table_number",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "221f559d-5aaa-427b-8652-23055f510caf",
+          "page": 1,
+          "rank": 1,
+          "score": 0.7664303779602051,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "贵州茅台酒股份有限公司2025 年年度报告",
+          "type": "title"
+        },
+        {
+          "chunk_id": "7b205630-984a-4ecd-bddd-b0a974008eb4",
+          "page": 54,
+          "rank": 2,
+          "score": 0.7022356986999512,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "贵州茅台公司的营业收入主要来自于茅台酒及系列酒的生产及销售。2025 年度，贵州茅台公司的营业收入为人民币 16,883,810.25 万元。其中主营业务收入为人民币 16,877,458.52 万元，占营业收入的 99.96%。",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "af0fee55-87af-4d0e-829e-92dc629120ce",
+          "page": 125,
+          "rank": 3,
+          "score": 0.6310648918151855,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "2025 年 9 月 19 日，公司与中国贵州茅台酒厂（集团）有限责任公司共同发起设立贵州茅台生物科技研发有限责任公司，认缴注册资本 100,000 万元，其中：中国贵州茅台酒厂（集团）有限责任公司认缴出资 51,000 万元，占比 51%",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "745acc4c-9b28-4b1d-94a2-bdc5f941e254",
+          "page": 53,
+          "rank": 4,
+          "score": 0.6226440668106079,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "经公司第二届董事会第九次会议审议通过，公司 2025 年度利润分配方案拟定如下：公司拟向全体股东每 10 股派发现金红利人民币 0.49 元（含税）。截至 2025 年 12 月 31 日公司总股本636,847,026 股，以此计算合计拟",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "9704bcce-77b2-40fc-a465-a3ae8cdca8b5",
+          "page": 2,
+          "rank": 5,
+          "score": 0.6142746806144714,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "公司拟以实施权益分派股权登记日登记的总股本扣除回购专用账户中的股份为基数，实施2025年年度利润分配。2025年年度利润分配拟向全体股东每股派发现金红利27.993元（含税），截至2026年3月31日，公司总股本为1,252,270,215",
+          "type": "paragraph"
+        }
+      ],
+      "latency_ms": 62.98349999997299,
+      "metadata_check": {
+        "filter_ok": null,
+        "relevant_hit_checks": [],
+        "relevant_metadata_status": "not_observed"
+      },
+      "query": "贵州茅台2025年基本每股收益是多少？",
+      "relevant_rank": null,
+      "source_file_filter": null,
+      "status": "recall_error"
+    },
+    {
+      "answerable": true,
+      "case_id": "Q4",
+      "category": "source_filter_and_table",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "47431037-6223-4919-84f8-635f7b713eb0",
+          "page": 169,
+          "rank": 1,
+          "score": 0.7308202385902405,
+          "section": "安永华明（2026）审字第70008969\\_A01号京东方科技集团股份有限公司",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "2025年",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "45e9a69f-b22b-4508-880c-ab8f9c4e4c77",
+          "page": 203,
+          "rank": 2,
+          "score": 0.7308202385902405,
+          "section": "安永华明（2026）审字第70008969\\_A01号京东方科技集团股份有限公司",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "2025年",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "2c50ac34-a588-4663-b42b-6c744c6bbed4",
+          "page": 206,
+          "rank": 3,
+          "score": 0.7308202385902405,
+          "section": "安永华明（2026）审字第70008969\\_A01号京东方科技集团股份有限公司",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "2025年",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "ae48621f-840b-4a23-b90d-017c2308d4a9",
+          "page": 211,
+          "rank": 4,
+          "score": 0.7308202385902405,
+          "section": "安永华明（2026）审字第70008969\\_A01号京东方科技集团股份有限公司",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "2025年",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "9e57468c-aabe-4a2d-8953-118d04c024e3",
+          "page": 218,
+          "rank": 5,
+          "score": 0.7308202385902405,
+          "section": "安永华明（2026）审字第70008969\\_A01号京东方科技集团股份有限公司",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "2025年",
+          "type": "paragraph"
+        }
+      ],
+      "latency_ms": 100.95941700274125,
+      "metadata_check": {
+        "filter_ok": true,
+        "relevant_hit_checks": [],
+        "relevant_metadata_status": "not_observed"
+      },
+      "query": "2025年营业收入是多少？",
+      "relevant_rank": null,
+      "source_file_filter": "data/京东方A 2025年报.pdf",
+      "status": "recall_error"
+    },
+    {
+      "answerable": false,
+      "case_id": "Q5",
+      "category": "unanswerable",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "77d38b7f-f154-46db-935c-4c8f857be8c0",
+          "page": 33,
+          "rank": 1,
+          "score": 0.5866802334785461,
+          "section": "未分节",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "公司是否披露了估值提升计划。",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "8246a016-72c7-44ee-951b-262d95bc8ffd",
+          "page": 25,
+          "rank": 2,
+          "score": 0.5816906094551086,
+          "section": "未分节",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "公司研发投入情况",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "a619160b-1a04-4b02-915a-653a7a31aef2",
+          "page": 8,
+          "rank": 3,
+          "score": 0.5632009506225586,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "报告期末公司前三年主要会计数据和财务指标的说明",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "6ca6d04d-7c55-4d58-8f69-7c476f30373c",
+          "page": 6,
+          "rank": 4,
+          "score": 0.5632009506225586,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "报告期末公司前三年主要会计数据和财务指标的说明",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "8296fc49-09df-4ee1-9431-12593e939bfa",
+          "page": 33,
+          "rank": 5,
+          "score": 0.5475516319274902,
+          "section": "未分节",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "公司是否披露了“质量回报双提升”行动方案公告。",
+          "type": "paragraph"
+        }
+      ],
+      "latency_ms": 57.924249998905,
+      "metadata_check": {
+        "filter_ok": null,
+        "relevant_hit_checks": [],
+        "relevant_metadata_status": "not_applicable"
+      },
+      "query": "这些年报中哪家公司披露了量子计算机收入？",
+      "relevant_rank": null,
+      "source_file_filter": null,
+      "status": "normal"
+    },
+    {
+      "answerable": true,
+      "case_id": "Q6",
+      "category": "confusable_financial_text",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "08a702c8-20fc-4c3f-a072-6738969a9408",
+          "page": 1,
+          "rank": 1,
+          "score": 0.6582028865814209,
+          "section": "未分节",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "公司简称：成都华微",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "19edae57-21ec-4a52-974b-3a774474ebb6",
+          "page": 117,
+          "rank": 2,
+          "score": 0.6223157048225403,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "成都华微电子科技股份有限公司（以下简称“本公司”或“公司”）前身为成都华微电子科技有限公司（以下简称“成都华微有限”），成都华微有限以 2021 年 6 月 30 日为基准日，采用整体变更的方式设立本公司，本公司于 2021 年 9 月在成",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "e5ded393-afc4-4711-ad40-2b34dc0471fe",
+          "page": 1,
+          "rank": 3,
+          "score": 0.62077397108078,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "成都华微电子科技股份有限公司2025 年年度报告",
+          "type": "title"
+        },
+        {
+          "chunk_id": "76d42290-b433-42a8-96ff-3c69f96349db",
+          "page": 66,
+          "rank": 4,
+          "score": 0.6112761497497559,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "4、如本公司违反上述承诺，造成成都华微损失的，本公司将依法承担相应责任。",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "d4690269-874f-46cc-b089-1c4d372de25e",
+          "page": 66,
+          "rank": 5,
+          "score": 0.5989811420440674,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "5、如本企业违反上述承诺，造成成都华微损失的，本企业将依法赔偿成都华微损失；本企业违反上述承诺而获得的收益归成都华微所有，并将在获得收入的五日内将前述收入支付至成都华微的指定账户；若本企业未将相关所得上缴公司，则本企业当年度及以后年度公司利",
+          "type": "paragraph"
+        }
+      ],
+      "latency_ms": 29.456165997544304,
+      "metadata_check": {
+        "filter_ok": null,
+        "relevant_hit_checks": [],
+        "relevant_metadata_status": "not_observed"
+      },
+      "query": "成都华微经营活动产生的现金流量净额变动原因是什么？",
+      "relevant_rank": null,
+      "source_file_filter": null,
+      "status": "recall_error"
+    },
+    {
+      "answerable": true,
+      "case_id": "Q7",
+      "category": "ordinary_text",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "4752db81-0e92-4c39-b142-e44ee05c26b8",
+          "page": 96,
+          "rank": 1,
+          "score": 0.7067995071411133,
+          "section": "安永华明（2026）审字第70008969\\_A01号京东方科技集团股份有限公司",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "京东方科技集团股份有限公司",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "cac3c5f5-075d-425b-a25b-4630d2385822",
+          "page": 15,
+          "rank": 2,
+          "score": 0.6959139704704285,
+          "section": "未分节",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "公司以“成为地球上最受人尊敬的伟大企业”为愿景，始终秉持“显示无处不在，用心改变生活”的使命，坚持“诚信担当、倾情客户、以人为本、开放创新”的核心价值观，恪守“正道经营、创新进取”的经营理念，持续强化产业生态集群建设，提升价值创造能力。历经",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "257c1555-d426-46ac-9a0e-5279f92911ba",
+          "page": 215,
+          "rank": 3,
+          "score": 0.6858071088790894,
+          "section": "安永华明（2026）审字第70008969\\_A01号京东方科技集团股份有限公司",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "(a) 显示器件业务—为器件整合设计制造模式，致力于提供应用 TFT-LCD、AMOLED等技术的端口器件，为客户提供高品质的手机、平板电脑、笔记本电脑、显示器、电视、车载等显示器件产品。",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "245deabc-18c6-4caf-b6eb-2672e3b7ccee",
+          "page": 2,
+          "rank": 4,
+          "score": 0.6713149547576904,
+          "section": "未分节",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "报告期内，公司核心优势持续提升，新兴赛道加速突破，产业布局稳步落地。其中，LCD五大主流及车载应用面板出货量连续多年稳居全球第一，柔性OLED器件出货量实现稳定增长；创新业务发展势头强劲，京东方精电、京东方能源、中联超清等多家主体斩获行业重",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "85995296-d774-4fb3-a8b8-62dc13ff31cf",
+          "page": 17,
+          "rank": 5,
+          "score": 0.6608770489692688,
+          "section": "未分节",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "公司不断夯实领先优势，五大主流应用 LCD面板出货量已连续多年位居全球第一，柔性 OLED器件出货量保持增长。与此同时，公司持续强化产业生态建设，2025年北京第 6代新型显示器件生产线、越南智慧终端二期项目实现量产，成都第 8.6代 AM",
+          "type": "paragraph"
+        }
+      ],
+      "latency_ms": 27.02237500125193,
+      "metadata_check": {
+        "filter_ok": null,
+        "relevant_hit_checks": [],
+        "relevant_metadata_status": "not_observed"
+      },
+      "query": "京东方的显示器件业务主要提供哪些产品？",
+      "relevant_rank": null,
+      "source_file_filter": null,
+      "status": "recall_error"
+    },
+    {
+      "answerable": true,
+      "case_id": "Q8",
+      "category": "exact_table_number",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "339438b8-9116-416d-8a40-7ccaabfe6480",
+          "page": 28,
+          "rank": 1,
+          "score": 0.7255163192749023,
+          "section": "未分节",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "京东方科技集团股份有限公司 2025年年度报告全文",
+          "type": "table"
+        },
+        {
+          "chunk_id": "b6dd7799-4ee5-45ac-9753-6a3e368d43c6",
+          "page": 79,
+          "rank": 2,
+          "score": 0.7255163192749023,
+          "section": "未分节",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "京东方科技集团股份有限公司 2025年年度报告全文",
+          "type": "table"
+        },
+        {
+          "chunk_id": "d8194424-a028-478b-b786-e51abe36bd83",
+          "page": 64,
+          "rank": 3,
+          "score": 0.7255162596702576,
+          "section": "未分节",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "京东方科技集团股份有限公司 2025年年度报告全文",
+          "type": "table"
+        },
+        {
+          "chunk_id": "4e7a081e-1f24-4b1c-ab1f-cf6e9c6dfe30",
+          "page": 68,
+          "rank": 4,
+          "score": 0.7255162596702576,
+          "section": "未分节",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "京东方科技集团股份有限公司 2025年年度报告全文",
+          "type": "table"
+        },
+        {
+          "chunk_id": "4752db81-0e92-4c39-b142-e44ee05c26b8",
+          "page": 96,
+          "rank": 5,
+          "score": 0.6454326510429382,
+          "section": "安永华明（2026）审字第70008969\\_A01号京东方科技集团股份有限公司",
+          "source_file": "data/京东方A 2025年报.pdf",
+          "text_preview": "京东方科技集团股份有限公司",
+          "type": "paragraph"
+        }
+      ],
+      "latency_ms": 57.75004200040712,
+      "metadata_check": {
+        "filter_ok": null,
+        "relevant_hit_checks": [],
+        "relevant_metadata_status": "not_observed"
+      },
+      "query": "京东方2025年显示器件业务占营业收入的比重是多少？",
+      "relevant_rank": null,
+      "source_file_filter": null,
+      "status": "recall_error"
+    },
+    {
+      "answerable": true,
+      "case_id": "Q9",
+      "category": "title_section_semantics",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "20a52203-302c-400c-bb6c-811fa18c9de7",
+          "page": 19,
+          "rank": 1,
+          "score": 0.7102542519569397,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "三、报告期内核心竞争力分析",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "2629708e-a9ae-4a07-819a-bc2fa51a302c",
+          "page": 9,
+          "rank": 2,
+          "score": 0.7029421329498291,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "四、报告期内核心竞争力分析",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "221f559d-5aaa-427b-8652-23055f510caf",
+          "page": 1,
+          "rank": 3,
+          "score": 0.6460669040679932,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "贵州茅台酒股份有限公司2025 年年度报告",
+          "type": "title"
+        },
+        {
+          "chunk_id": "e2638fe6-69b0-45ca-82e0-265244f01bfa",
+          "page": 21,
+          "rank": 4,
+          "score": 0.6354452967643738,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "四是文化辐射力强。茅台文化从“濮人善酿”的农耕文明中走来，于现代文明中赓续发展，引领中国白酒文化发展潮流，成为中国酒文化极致。在不断的发展中，公司持续优化茅台文化体系，形成了“酿造高品质生活”的企业使命，“让世界爱上茅台，让茅台香飘世界”的",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "a06b431e-08c4-453f-96ee-7ebe96ef4ad1",
+          "page": 9,
+          "rank": 5,
+          "score": 0.6349592208862305,
+          "section": "贵州茅台酒股份有限公司2025 年年度报告",
+          "source_file": "data/贵州茅台2025年报.pdf",
+          "text_preview": "公司坚持“顺天敬人、明理厚德”的企业价值观，拥有“品质、品牌、工艺、环境、文化”组成的“五大核心竞争力”。报告期内公司核心竞争力未发生重大变化。",
+          "type": "paragraph"
+        }
+      ],
+      "latency_ms": 59.65854200258036,
+      "metadata_check": {
+        "filter_ok": null,
+        "relevant_hit_checks": [
+          {
+            "chunk_id": "a06b431e-08c4-453f-96ee-7ebe96ef4ad1",
+            "mismatches": {
+              "section": {
+                "actual": "贵州茅台酒股份有限公司2025 年年度报告",
+                "expected": "四、报告期内核心竞争力分析"
+              }
+            },
+            "ok": false
+          }
+        ],
+        "relevant_metadata_status": "failed"
+      },
+      "query": "贵州茅台在“报告期内核心竞争力分析”章节列出的五大核心竞争力是什么？",
+      "relevant_rank": 5,
+      "source_file_filter": null,
+      "status": "normal"
+    },
+    {
+      "answerable": true,
+      "case_id": "Q10",
+      "category": "cross_company_confusable",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "26633e24-a3ce-42e8-b0b6-a6b2c16bd707",
+          "page": 83,
+          "rank": 1,
+          "score": 0.7615108489990234,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "2025 年 4 月 28 日，公司召开的第二届董事会第五次会议和第二届监事会第五次会议，审议通过《关于利用暂时闲置募集资金进行现金管理及暂时补充流动资金的议案》，同意公司使用最高额度不超过人民币 50,000 万元（包含本数）的暂时闲置募",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "332a3b31-8baf-493a-8099-9a2c466b49cb",
+          "page": 83,
+          "rank": 2,
+          "score": 0.6941370368003845,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "2025 年 4 月 28 日，公司召开的第二届董事会第五次会议和第二届监事会第五次会议，审议通过《关于利用暂时闲置募集资金进行现金管理及暂时补充流动资金的议案》，同意公司使用部分闲置募集资金不超过人民币 20,000 万元暂时补充流动资金",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "b3eb2302-8cd6-4a19-954f-ff76d1d055c1",
+          "page": 84,
+          "rank": 3,
+          "score": 0.6725674867630005,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "保荐机构华泰联合证券有限责任公司对公司募集资金存储与使用情况进行了专项核查，并出具了《关于公司 2025 年度募集资金存放与实际使用情况专项核查报告》，认为：成都华微 2025 年度募集资金存放与实际使用符合《上市公司募集资金监管规则》《上",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "4be10409-2792-4372-bd50-ee8498490a61",
+          "page": 83,
+          "rank": 4,
+          "score": 0.6648949980735779,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "3、对闲置募集资金进行现金管理，投资相关产品情况",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "08a702c8-20fc-4c3f-a072-6738969a9408",
+          "page": 1,
+          "rank": 5,
+          "score": 0.6602946519851685,
+          "section": "未分节",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "公司简称：成都华微",
+          "type": "paragraph"
+        }
+      ],
+      "latency_ms": 56.377042001258815,
+      "metadata_check": {
+        "filter_ok": null,
+        "relevant_hit_checks": [
+          {
+            "chunk_id": "26633e24-a3ce-42e8-b0b6-a6b2c16bd707",
+            "mismatches": {},
+            "ok": true
+          }
+        ],
+        "relevant_metadata_status": "passed"
+      },
+      "query": "成都华微使用闲置募集资金进行现金管理的最高额度是多少？",
+      "relevant_rank": 1,
+      "source_file_filter": null,
+      "status": "normal"
+    },
+    {
+      "answerable": true,
+      "case_id": "Q11",
+      "category": "source_file_filter",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "58d578a2-16e9-4eb0-a5f1-33eece63243e",
+          "page": 126,
+          "rank": 1,
+          "score": 0.819760262966156,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "24、生物资产",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "538a8908-e03e-48da-a4d7-2b4de52acc9d",
+          "page": 130,
+          "rank": 2,
+          "score": 0.8030334711074829,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "36、政府补助",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "a3d4faa6-cab5-4716-94d3-c35a1065dcec",
+          "page": 125,
+          "rank": 3,
+          "score": 0.796869695186615,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "21、固定资产",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "fa0efd6f-bae8-4dd8-8a46-3111d9b144f8",
+          "page": 203,
+          "rank": 4,
+          "score": 0.7956379652023315,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "(3).其他项目",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "2b601a33-1f58-4b0d-ad2a-9f6a6116e421",
+          "page": 120,
+          "rank": 5,
+          "score": 0.7946891188621521,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "2.共同经营的会计处理",
+          "type": "paragraph"
+        }
+      ],
+      "latency_ms": 71.96525000108522,
+      "metadata_check": {
+        "filter_ok": true,
+        "relevant_hit_checks": [],
+        "relevant_metadata_status": "not_observed"
+      },
+      "query": "董事长是谁？",
+      "relevant_rank": null,
+      "source_file_filter": "data/成都华微电子2025年报.pdf",
+      "status": "recall_error"
+    },
+    {
+      "answerable": false,
+      "case_id": "Q12",
+      "category": "unanswerable_hard_negative",
+      "error": null,
+      "hits": [
+        {
+          "chunk_id": "e5ded393-afc4-4711-ad40-2b34dc0471fe",
+          "page": 1,
+          "rank": 1,
+          "score": 0.7282190918922424,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "成都华微电子科技股份有限公司2025 年年度报告",
+          "type": "title"
+        },
+        {
+          "chunk_id": "4a2b1674-e946-4922-92a1-5a311fccf13b",
+          "page": 30,
+          "rank": 2,
+          "score": 0.6320565938949585,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "公司 2025 年实现营业收入 75,998.73 万元，同比上升 25.85%，营业成本为 22,834.81 万元，同比上升 55.74%，主要系报告期内受国内特种集成电路行业需求波动影响，订单规模和销售数量同比有所上升，同时部分产品的",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "19edae57-21ec-4a52-974b-3a774474ebb6",
+          "page": 117,
+          "rank": 3,
+          "score": 0.6208049654960632,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "成都华微电子科技股份有限公司（以下简称“本公司”或“公司”）前身为成都华微电子科技有限公司（以下简称“成都华微有限”），成都华微有限以 2021 年 6 月 30 日为基准日，采用整体变更的方式设立本公司，本公司于 2021 年 9 月在成",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "08a702c8-20fc-4c3f-a072-6738969a9408",
+          "page": 1,
+          "rank": 4,
+          "score": 0.6160492300987244,
+          "section": "未分节",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "公司简称：成都华微",
+          "type": "paragraph"
+        },
+        {
+          "chunk_id": "619e1540-80ec-4664-8e16-91c7fc7aa983",
+          "page": 39,
+          "rank": 5,
+          "score": 0.6115090250968933,
+          "section": "成都华微电子科技股份有限公司2025 年年度报告",
+          "source_file": "data/成都华微电子2025年报.pdf",
+          "text_preview": "公司以服务国家战略、区域发展为己任，始终坚持国家利益优先，聚焦解决集成电路瓶颈等关键技术，立志成为具有世界一流集成电路研发水平的设计企业。成都华微立足国之所需，着力打造“3+N+1”平台化产品体系，在超大规模 FPGA、RF-FPGA 与 ",
+          "type": "paragraph"
+        }
+      ],
+      "latency_ms": 60.53925000014715,
+      "metadata_check": {
+        "filter_ok": null,
+        "relevant_hit_checks": [],
+        "relevant_metadata_status": "not_applicable"
+      },
+      "query": "成都华微2025年光子芯片实现了多少营业收入？",
+      "relevant_rank": null,
+      "source_file_filter": null,
+      "status": "normal"
+    }
+  ],
+  "scope": {
+    "collection": "findoc",
+    "data_version": "legacy_7451_day41",
+    "git_commit": "1fec209",
+    "known_data_limitations": [
+      "旧表格 embedding text 大量退化为第N页表格",
+      "旧表体主要只存在于 table_md",
+      "旧 section 可能与真实章节不一致",
+      "旧 chunk_id 不是当前稳定 ID 构建流程的产物",
+      "旧 collection 没有 workspace_id 和 document_id"
+    ],
+    "latency_scope": "各版本单独 warm-up 后的非 system_error 单题；包含 query 校验、query embedding、filter 构造、Milvus search 和 SearchHit 合同转换",
+    "manifest_sha256": null,
+    "metric_type": "COSINE",
+    "model": "BAAI/bge-m3",
+    "question_set": "/Users/aipuli/Documents/AI应用学习/02_项目/findoc-rag/eval/day42_questions.jsonl",
+    "question_set_sha256": "a5965c79ea663d6fa5e249659f82b2345a156491d76aa37699c77d0e82067264",
+    "real_workspace_filter_supported": false,
+    "retriever": "app.rag.retriever.Retriever",
+    "row_count": 7451,
+    "run_order": 1,
+    "store_adapter": "LegacyComparisonStore(MilvusSearchStore)",
+    "top_k": 5,
+    "trusted_workspace_id": "demo-financial-reports",
+    "vector_dim": 1024,
+    "working_tree_dirty": true
+  },
+  "warmup_ms": 715.7931250003458
+}

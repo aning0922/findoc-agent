@@ -1,0 +1,1058 @@
+{
+  "experiment": {
+    "production_head": "66592e4",
+    "sample": "京东方A 2025年报 raw 782-787",
+    "raw_start": 782,
+    "raw_stop": 788,
+    "raw_count": 6,
+    "tokenizer": "cl100k_base",
+    "percentile_method": "statistics.quantiles inclusive",
+    "coverage_scope": "adapter粗正文到最终paragraph精块"
+  },
+  "configs": [
+    {
+      "config": {
+        "name": "S200",
+        "chunk_size": 200,
+        "overlap": 10
+      },
+      "summary": {
+        "chunk_count": 10,
+        "type_counts": {
+          "paragraph": 9,
+          "table": 1,
+          "title": 0
+        },
+        "lengths": {
+          "all": {
+            "chars": {
+              "count": 10,
+              "p50": 127.0,
+              "p95": 863.35,
+              "max": 1420
+            },
+            "tokens": {
+              "count": 10,
+              "p50": 126.0,
+              "p95": 493.15,
+              "max": 751
+            }
+          },
+          "paragraphs": {
+            "chars": {
+              "count": 9,
+              "p50": 122,
+              "p95": 173.8,
+              "max": 183
+            },
+            "tokens": {
+              "count": 9,
+              "p50": 125,
+              "p95": 165.2,
+              "max": 178
+            }
+          }
+        },
+        "empty_count": 0,
+        "over_limit_count": 1,
+        "over_limit_by_type": {
+          "paragraph": 0,
+          "table": 1
+        },
+        "metadata_values": {
+          "pages": [
+            73
+          ],
+          "sections": [
+            "适用 □不适用"
+          ],
+          "source_files": [
+            "京东方A 2025年报.pdf"
+          ]
+        },
+        "table_rows": [
+          {
+            "chunk_index": 3,
+            "char_len": 1420,
+            "token_len": 751,
+            "table_md_len": 1413,
+            "over_limit": true
+          }
+        ],
+        "empty_chunk_id_count": 0,
+        "unique_chunk_id_count": 10,
+        "coverage": {
+          "source_nonspace_chars": 1116,
+          "covered_nonspace_chars": 1116,
+          "coverage_ratio": 1.0,
+          "duplicate_chars": 0,
+          "paragraphs": [
+            {
+              "raw_index": 784,
+              "coarse_index": 2,
+              "source_nonspace_chars": 288,
+              "covered_nonspace_chars": 288,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  183
+                ],
+                [
+                  183,
+                  305
+                ]
+              ]
+            },
+            {
+              "raw_index": 785,
+              "coarse_index": 3,
+              "source_nonspace_chars": 137,
+              "covered_nonspace_chars": 137,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  140
+                ]
+              ]
+            },
+            {
+              "raw_index": 787,
+              "coarse_index": 5,
+              "source_nonspace_chars": 691,
+              "covered_nonspace_chars": 691,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  160
+                ],
+                [
+                  160,
+                  263
+                ],
+                [
+                  263,
+                  364
+                ],
+                [
+                  364,
+                  470
+                ],
+                [
+                  470,
+                  579
+                ],
+                [
+                  579,
+                  711
+                ]
+              ]
+            }
+          ]
+        },
+        "alignment_ok": true,
+        "order_preserved": true
+      },
+      "rows": [
+        {
+          "config_name": "S200",
+          "chunk_size": 200,
+          "overlap": 10,
+          "chunk_index": 0,
+          "type": "paragraph",
+          "char_len": 183,
+          "token_len": 178,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "8f981da2f9ebe15067817bd1ca8a8b29946a46e1102a484e308085cc1b3cc8b9",
+          "text": "1、公司于 2025年 2月 11日披露了《京东方科技集团股份有限公司 2022年面向专业投资者公开发行可续期公司债券（数字经济）（第一期）不行使发行人续期选择权的公告》（公告编号：2025-008），22BOEY1至 2025年 3月 25日将期满 3年。根据《募集说明书》和《上市公告》有关条款的规定，公司决定不行使本期债券发行人续期选择权，即将全额兑付本期债券",
+          "table_md": null,
+          "raw_index": 784,
+          "coarse_index": 2,
+          "piece_index": 0
+        },
+        {
+          "config_name": "S200",
+          "chunk_size": 200,
+          "overlap": 10,
+          "chunk_index": 1,
+          "type": "paragraph",
+          "char_len": 122,
+          "token_len": 109,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "53e09827c205da1ecac28f531776f5459b5c52d0f815266c244ec6bb7c52c9c0",
+          "text": "。公司于 2025年 3月 21日披露了《关于“22BOEY1”公司债券本息兑付暨摘牌公告》（公告编号：2025-010），公司于 2025年3月 25日支付自2024年 3月25日至 2025年 3月 24日期间的利息及本期债券的本金并摘牌。",
+          "table_md": null,
+          "raw_index": 784,
+          "coarse_index": 2,
+          "piece_index": 1
+        },
+        {
+          "config_name": "S200",
+          "chunk_size": 200,
+          "overlap": 10,
+          "chunk_index": 2,
+          "type": "paragraph",
+          "char_len": 140,
+          "token_len": 127,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "6e746f01b2eeff4a7fd55de5969d3bbfbf09b2e347ddfd5e0b1ffcfa7f20fe1a",
+          "text": "2、公司于 2024年10月 9日披露了《关于向专业投资者公开发行公司债券获得中国证监会注册批复的公告》（公告编号：2024-052），公司收到中国证券监督管理委员会出具的证监许可[2024]1330号文，同意公司向专业投资者公开发行面值总额不超过 100亿元公司债券的注册申请。",
+          "table_md": null,
+          "raw_index": 785,
+          "coarse_index": 3,
+          "piece_index": 0
+        },
+        {
+          "config_name": "S200",
+          "chunk_size": 200,
+          "overlap": 10,
+          "chunk_index": 3,
+          "type": "table",
+          "char_len": 1420,
+          "token_len": 751,
+          "empty": false,
+          "over_limit": true,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 1413,
+          "chunk_id": "9d45f42c4569a3ce7482e6ab276b318480426a1c4307d748f039bd6eb0e772ee",
+          "text": "第73页表格\n<table><tr><td rowspan=1 colspan=1>债券名称</td><td rowspan=1 colspan=1>债券简称</td><td rowspan=1 colspan=1>债券代码</td><td rowspan=1 colspan=1>发行日</td><td rowspan=1 colspan=1>到期日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>25BOEK1</td><td rowspan=1 colspan=1>524305.SZ</td><td rowspan=1 colspan=1>2025年6月12日至2025年6月13日</td><td rowspan=1 colspan=1>2030年06月13日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>25BOEK2</td><td rowspan=1 colspan=1>524510.SZ</td><td rowspan=1 colspan=1>2025年11月5日至2025年11月6日</td><td rowspan=1 colspan=1>2030年11月06日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第三期）</td><td rowspan=1 colspan=1>25BOEK3</td><td rowspan=1 colspan=1>524530.SZ</td><td rowspan=1 colspan=1>2025年11月13日至2025年11月14日</td><td rowspan=1 colspan=1>2030年11月14日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>26BOEK1</td><td rowspan=1 colspan=1>524641.SZ</td><td rowspan=1 colspan=1>2026年01月22日至2026年01月23日</td><td rowspan=1 colspan=1>2031年01月23日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>26BOEK2</td><td rowspan=1 colspan=1>524715.SZ</td><td rowspan=1 colspan=1>2026年03月18日至2026年03月19日</td><td rowspan=1 colspan=1>2031年03月19日</td></tr></table>",
+          "table_md": "<table><tr><td rowspan=1 colspan=1>债券名称</td><td rowspan=1 colspan=1>债券简称</td><td rowspan=1 colspan=1>债券代码</td><td rowspan=1 colspan=1>发行日</td><td rowspan=1 colspan=1>到期日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>25BOEK1</td><td rowspan=1 colspan=1>524305.SZ</td><td rowspan=1 colspan=1>2025年6月12日至2025年6月13日</td><td rowspan=1 colspan=1>2030年06月13日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>25BOEK2</td><td rowspan=1 colspan=1>524510.SZ</td><td rowspan=1 colspan=1>2025年11月5日至2025年11月6日</td><td rowspan=1 colspan=1>2030年11月06日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第三期）</td><td rowspan=1 colspan=1>25BOEK3</td><td rowspan=1 colspan=1>524530.SZ</td><td rowspan=1 colspan=1>2025年11月13日至2025年11月14日</td><td rowspan=1 colspan=1>2030年11月14日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>26BOEK1</td><td rowspan=1 colspan=1>524641.SZ</td><td rowspan=1 colspan=1>2026年01月22日至2026年01月23日</td><td rowspan=1 colspan=1>2031年01月23日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>26BOEK2</td><td rowspan=1 colspan=1>524715.SZ</td><td rowspan=1 colspan=1>2026年03月18日至2026年03月19日</td><td rowspan=1 colspan=1>2031年03月19日</td></tr></table>",
+          "raw_index": 786,
+          "coarse_index": 4,
+          "piece_index": 0
+        },
+        {
+          "config_name": "S200",
+          "chunk_size": 200,
+          "overlap": 10,
+          "chunk_index": 4,
+          "type": "paragraph",
+          "char_len": 160,
+          "token_len": 146,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "5ab325a3b0cc519deb4c627f6725c753ee74d0d11d717f569423c9401fb7aeae",
+          "text": "3、本公司于 2025年 1月15日披露了《2025年第一次临时股东大会决议公告》（公告编号：2025-002）、《第十一届董事会第一次会议决议公告》（公告编号：2025-005）、《第十一届监事会第一次会议决议公告》（公告编号：2025-006），会议审议通过了换届选举的相关议案，完成了换届选举，具体信息详见相关公告",
+          "table_md": null,
+          "raw_index": 787,
+          "coarse_index": 5,
+          "piece_index": 0
+        },
+        {
+          "config_name": "S200",
+          "chunk_size": 200,
+          "overlap": 10,
+          "chunk_index": 5,
+          "type": "paragraph",
+          "char_len": 103,
+          "token_len": 107,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "74d016c891ae0f4dc65788b647efb0637246b5ad9b09e6ddaa7b49c5e346325b",
+          "text": "。公司于2025年 7月 10日披露了《关于高级管理人员辞职的公告》（公告编号：2025-057），因工作变动原因，郭华平先生申请辞去公司高级副总裁、首席文化官职务，辞职后将不再担任公司及控股子公司任何职务",
+          "table_md": null,
+          "raw_index": 787,
+          "coarse_index": 5,
+          "piece_index": 1
+        },
+        {
+          "config_name": "S200",
+          "chunk_size": 200,
+          "overlap": 10,
+          "chunk_index": 6,
+          "type": "paragraph",
+          "char_len": 101,
+          "token_len": 102,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "f21a87c4970d39d1e1dc7788b510c23e72561a06e54424217a7ce1753551d075",
+          "text": "。公司于 2025年 9月 23日披露了《关于选举产生职工董事的公告》（公告编号：2025-071），公司工会于 2025年 9月 22日召开了公司职工代表大会，选举李洋先生为公司第十一届董事会职工董事",
+          "table_md": null,
+          "raw_index": 787,
+          "coarse_index": 5,
+          "piece_index": 2
+        },
+        {
+          "config_name": "S200",
+          "chunk_size": 200,
+          "overlap": 10,
+          "chunk_index": 7,
+          "type": "paragraph",
+          "char_len": 106,
+          "token_len": 117,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "d8a05a25b9a65060783b413a2b8b8bf54341ea6cd4d796f09d460138c3d0e9e7",
+          "text": "。公司于 2025年 10月 11日披露了《关于董事辞职的公告》（公告编号：2025-074），因个人原因，高文宝先生申请辞去公司董事、副董事长及董事会专门委员会委员职务，辞职后将不再担任公司及控股子公司任何职务",
+          "table_md": null,
+          "raw_index": 787,
+          "coarse_index": 5,
+          "piece_index": 3
+        },
+        {
+          "config_name": "S200",
+          "chunk_size": 200,
+          "overlap": 10,
+          "chunk_index": 8,
+          "type": "paragraph",
+          "char_len": 109,
+          "token_len": 125,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "704ff386b48e81af3db29f80a210681e0941d092e59da9cea1d4af2854764c7b",
+          "text": "。公司于 2025年 10月 31日披露了《关于选举第十一届董事会副董事长的公告》（公告编号：2025-078），董事会选举王锡平先生为第十一届董事会副董事长，任期自本次董事会选举通过之日起，至本届董事会任期届满之日止",
+          "table_md": null,
+          "raw_index": 787,
+          "coarse_index": 5,
+          "piece_index": 4
+        },
+        {
+          "config_name": "S200",
+          "chunk_size": 200,
+          "overlap": 10,
+          "chunk_index": 9,
+          "type": "paragraph",
+          "char_len": 132,
+          "token_len": 136,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "60e9b9235497dec3755ee2de059a416a07254c07edb5bfd7ba0c853f71e4620e",
+          "text": "。公司于 2025年 10月 31日披露了《关于选举公司第十一届董事会非独立董事的公告》（公告编号：2025-077）、2025年11月 18日披露了《2025年第三次临时股东会决议公告》（公告编号：2025-089）选举冯莉琼女士为公司第十一届董事会非独立董事。",
+          "table_md": null,
+          "raw_index": 787,
+          "coarse_index": 5,
+          "piece_index": 5
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "S400",
+        "chunk_size": 400,
+        "overlap": 10
+      },
+      "summary": {
+        "chunk_count": 5,
+        "type_counts": {
+          "paragraph": 4,
+          "table": 1,
+          "title": 0
+        },
+        "lengths": {
+          "all": {
+            "chars": {
+              "count": 5,
+              "p50": 347,
+              "p95": 1208.8,
+              "max": 1420
+            },
+            "tokens": {
+              "count": 5,
+              "p50": 355,
+              "p95": 676.4,
+              "max": 751
+            }
+          },
+          "paragraphs": {
+            "chars": {
+              "count": 4,
+              "p50": 326.0,
+              "p95": 361.45,
+              "max": 364
+            },
+            "tokens": {
+              "count": 4,
+              "p50": 321.0,
+              "p95": 374.55,
+              "max": 378
+            }
+          }
+        },
+        "empty_count": 0,
+        "over_limit_count": 1,
+        "over_limit_by_type": {
+          "paragraph": 0,
+          "table": 1
+        },
+        "metadata_values": {
+          "pages": [
+            73
+          ],
+          "sections": [
+            "适用 □不适用"
+          ],
+          "source_files": [
+            "京东方A 2025年报.pdf"
+          ]
+        },
+        "table_rows": [
+          {
+            "chunk_index": 2,
+            "char_len": 1420,
+            "token_len": 751,
+            "table_md_len": 1413,
+            "over_limit": true
+          }
+        ],
+        "empty_chunk_id_count": 0,
+        "unique_chunk_id_count": 5,
+        "coverage": {
+          "source_nonspace_chars": 1116,
+          "covered_nonspace_chars": 1116,
+          "coverage_ratio": 1.0,
+          "duplicate_chars": 0,
+          "paragraphs": [
+            {
+              "raw_index": 784,
+              "coarse_index": 2,
+              "source_nonspace_chars": 288,
+              "covered_nonspace_chars": 288,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  305
+                ]
+              ]
+            },
+            {
+              "raw_index": 785,
+              "coarse_index": 3,
+              "source_nonspace_chars": 137,
+              "covered_nonspace_chars": 137,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  140
+                ]
+              ]
+            },
+            {
+              "raw_index": 787,
+              "coarse_index": 5,
+              "source_nonspace_chars": 691,
+              "covered_nonspace_chars": 691,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  364
+                ],
+                [
+                  364,
+                  711
+                ]
+              ]
+            }
+          ]
+        },
+        "alignment_ok": true,
+        "order_preserved": true
+      },
+      "rows": [
+        {
+          "config_name": "S400",
+          "chunk_size": 400,
+          "overlap": 10,
+          "chunk_index": 0,
+          "type": "paragraph",
+          "char_len": 305,
+          "token_len": 287,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "2d0c02c90abd43b0455b9d12a09de4867b66c86f7ea0755c35018dba597e78eb",
+          "text": "1、公司于 2025年 2月 11日披露了《京东方科技集团股份有限公司 2022年面向专业投资者公开发行可续期公司债券（数字经济）（第一期）不行使发行人续期选择权的公告》（公告编号：2025-008），22BOEY1至 2025年 3月 25日将期满 3年。根据《募集说明书》和《上市公告》有关条款的规定，公司决定不行使本期债券发行人续期选择权，即将全额兑付本期债券。公司于 2025年 3月 21日披露了《关于“22BOEY1”公司债券本息兑付暨摘牌公告》（公告编号：2025-010），公司于 2025年3月 25日支付自2024年 3月25日至 2025年 3月 24日期间的利息及本期债券的本金并摘牌。",
+          "table_md": null,
+          "raw_index": 784,
+          "coarse_index": 2,
+          "piece_index": 0
+        },
+        {
+          "config_name": "S400",
+          "chunk_size": 400,
+          "overlap": 10,
+          "chunk_index": 1,
+          "type": "paragraph",
+          "char_len": 140,
+          "token_len": 127,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "6e746f01b2eeff4a7fd55de5969d3bbfbf09b2e347ddfd5e0b1ffcfa7f20fe1a",
+          "text": "2、公司于 2024年10月 9日披露了《关于向专业投资者公开发行公司债券获得中国证监会注册批复的公告》（公告编号：2024-052），公司收到中国证券监督管理委员会出具的证监许可[2024]1330号文，同意公司向专业投资者公开发行面值总额不超过 100亿元公司债券的注册申请。",
+          "table_md": null,
+          "raw_index": 785,
+          "coarse_index": 3,
+          "piece_index": 0
+        },
+        {
+          "config_name": "S400",
+          "chunk_size": 400,
+          "overlap": 10,
+          "chunk_index": 2,
+          "type": "table",
+          "char_len": 1420,
+          "token_len": 751,
+          "empty": false,
+          "over_limit": true,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 1413,
+          "chunk_id": "9d45f42c4569a3ce7482e6ab276b318480426a1c4307d748f039bd6eb0e772ee",
+          "text": "第73页表格\n<table><tr><td rowspan=1 colspan=1>债券名称</td><td rowspan=1 colspan=1>债券简称</td><td rowspan=1 colspan=1>债券代码</td><td rowspan=1 colspan=1>发行日</td><td rowspan=1 colspan=1>到期日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>25BOEK1</td><td rowspan=1 colspan=1>524305.SZ</td><td rowspan=1 colspan=1>2025年6月12日至2025年6月13日</td><td rowspan=1 colspan=1>2030年06月13日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>25BOEK2</td><td rowspan=1 colspan=1>524510.SZ</td><td rowspan=1 colspan=1>2025年11月5日至2025年11月6日</td><td rowspan=1 colspan=1>2030年11月06日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第三期）</td><td rowspan=1 colspan=1>25BOEK3</td><td rowspan=1 colspan=1>524530.SZ</td><td rowspan=1 colspan=1>2025年11月13日至2025年11月14日</td><td rowspan=1 colspan=1>2030年11月14日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>26BOEK1</td><td rowspan=1 colspan=1>524641.SZ</td><td rowspan=1 colspan=1>2026年01月22日至2026年01月23日</td><td rowspan=1 colspan=1>2031年01月23日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>26BOEK2</td><td rowspan=1 colspan=1>524715.SZ</td><td rowspan=1 colspan=1>2026年03月18日至2026年03月19日</td><td rowspan=1 colspan=1>2031年03月19日</td></tr></table>",
+          "table_md": "<table><tr><td rowspan=1 colspan=1>债券名称</td><td rowspan=1 colspan=1>债券简称</td><td rowspan=1 colspan=1>债券代码</td><td rowspan=1 colspan=1>发行日</td><td rowspan=1 colspan=1>到期日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>25BOEK1</td><td rowspan=1 colspan=1>524305.SZ</td><td rowspan=1 colspan=1>2025年6月12日至2025年6月13日</td><td rowspan=1 colspan=1>2030年06月13日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>25BOEK2</td><td rowspan=1 colspan=1>524510.SZ</td><td rowspan=1 colspan=1>2025年11月5日至2025年11月6日</td><td rowspan=1 colspan=1>2030年11月06日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第三期）</td><td rowspan=1 colspan=1>25BOEK3</td><td rowspan=1 colspan=1>524530.SZ</td><td rowspan=1 colspan=1>2025年11月13日至2025年11月14日</td><td rowspan=1 colspan=1>2030年11月14日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>26BOEK1</td><td rowspan=1 colspan=1>524641.SZ</td><td rowspan=1 colspan=1>2026年01月22日至2026年01月23日</td><td rowspan=1 colspan=1>2031年01月23日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>26BOEK2</td><td rowspan=1 colspan=1>524715.SZ</td><td rowspan=1 colspan=1>2026年03月18日至2026年03月19日</td><td rowspan=1 colspan=1>2031年03月19日</td></tr></table>",
+          "raw_index": 786,
+          "coarse_index": 4,
+          "piece_index": 0
+        },
+        {
+          "config_name": "S400",
+          "chunk_size": 400,
+          "overlap": 10,
+          "chunk_index": 3,
+          "type": "paragraph",
+          "char_len": 364,
+          "token_len": 355,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "3e0c492e7568a4f0e0476c200aa940490a3bb9b1f083160cb8c9a2bf939aa41f",
+          "text": "3、本公司于 2025年 1月15日披露了《2025年第一次临时股东大会决议公告》（公告编号：2025-002）、《第十一届董事会第一次会议决议公告》（公告编号：2025-005）、《第十一届监事会第一次会议决议公告》（公告编号：2025-006），会议审议通过了换届选举的相关议案，完成了换届选举，具体信息详见相关公告。公司于2025年 7月 10日披露了《关于高级管理人员辞职的公告》（公告编号：2025-057），因工作变动原因，郭华平先生申请辞去公司高级副总裁、首席文化官职务，辞职后将不再担任公司及控股子公司任何职务。公司于 2025年 9月 23日披露了《关于选举产生职工董事的公告》（公告编号：2025-071），公司工会于 2025年 9月 22日召开了公司职工代表大会，选举李洋先生为公司第十一届董事会职工董事",
+          "table_md": null,
+          "raw_index": 787,
+          "coarse_index": 5,
+          "piece_index": 0
+        },
+        {
+          "config_name": "S400",
+          "chunk_size": 400,
+          "overlap": 10,
+          "chunk_index": 4,
+          "type": "paragraph",
+          "char_len": 347,
+          "token_len": 378,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "dd9088a145ae1281b876d3320cd4753227ef7ab3fa1e8ee0bbe58f188cf43231",
+          "text": "。公司于 2025年 10月 11日披露了《关于董事辞职的公告》（公告编号：2025-074），因个人原因，高文宝先生申请辞去公司董事、副董事长及董事会专门委员会委员职务，辞职后将不再担任公司及控股子公司任何职务。公司于 2025年 10月 31日披露了《关于选举第十一届董事会副董事长的公告》（公告编号：2025-078），董事会选举王锡平先生为第十一届董事会副董事长，任期自本次董事会选举通过之日起，至本届董事会任期届满之日止。公司于 2025年 10月 31日披露了《关于选举公司第十一届董事会非独立董事的公告》（公告编号：2025-077）、2025年11月 18日披露了《2025年第三次临时股东会决议公告》（公告编号：2025-089）选举冯莉琼女士为公司第十一届董事会非独立董事。",
+          "table_md": null,
+          "raw_index": 787,
+          "coarse_index": 5,
+          "piece_index": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "S800",
+        "chunk_size": 800,
+        "overlap": 10
+      },
+      "summary": {
+        "chunk_count": 4,
+        "type_counts": {
+          "paragraph": 3,
+          "table": 1,
+          "title": 0
+        },
+        "lengths": {
+          "all": {
+            "chars": {
+              "count": 4,
+              "p50": 508.0,
+              "p95": 1313.65,
+              "max": 1420
+            },
+            "tokens": {
+              "count": 4,
+              "p50": 510.0,
+              "p95": 748.3,
+              "max": 751
+            }
+          },
+          "paragraphs": {
+            "chars": {
+              "count": 3,
+              "p50": 305,
+              "p95": 670.4,
+              "max": 711
+            },
+            "tokens": {
+              "count": 3,
+              "p50": 287,
+              "p95": 688.4,
+              "max": 733
+            }
+          }
+        },
+        "empty_count": 0,
+        "over_limit_count": 0,
+        "over_limit_by_type": {
+          "paragraph": 0,
+          "table": 0
+        },
+        "metadata_values": {
+          "pages": [
+            73
+          ],
+          "sections": [
+            "适用 □不适用"
+          ],
+          "source_files": [
+            "京东方A 2025年报.pdf"
+          ]
+        },
+        "table_rows": [
+          {
+            "chunk_index": 2,
+            "char_len": 1420,
+            "token_len": 751,
+            "table_md_len": 1413,
+            "over_limit": false
+          }
+        ],
+        "empty_chunk_id_count": 0,
+        "unique_chunk_id_count": 4,
+        "coverage": {
+          "source_nonspace_chars": 1116,
+          "covered_nonspace_chars": 1116,
+          "coverage_ratio": 1.0,
+          "duplicate_chars": 0,
+          "paragraphs": [
+            {
+              "raw_index": 784,
+              "coarse_index": 2,
+              "source_nonspace_chars": 288,
+              "covered_nonspace_chars": 288,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  305
+                ]
+              ]
+            },
+            {
+              "raw_index": 785,
+              "coarse_index": 3,
+              "source_nonspace_chars": 137,
+              "covered_nonspace_chars": 137,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  140
+                ]
+              ]
+            },
+            {
+              "raw_index": 787,
+              "coarse_index": 5,
+              "source_nonspace_chars": 691,
+              "covered_nonspace_chars": 691,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  711
+                ]
+              ]
+            }
+          ]
+        },
+        "alignment_ok": true,
+        "order_preserved": true
+      },
+      "rows": [
+        {
+          "config_name": "S800",
+          "chunk_size": 800,
+          "overlap": 10,
+          "chunk_index": 0,
+          "type": "paragraph",
+          "char_len": 305,
+          "token_len": 287,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "2d0c02c90abd43b0455b9d12a09de4867b66c86f7ea0755c35018dba597e78eb",
+          "text": "1、公司于 2025年 2月 11日披露了《京东方科技集团股份有限公司 2022年面向专业投资者公开发行可续期公司债券（数字经济）（第一期）不行使发行人续期选择权的公告》（公告编号：2025-008），22BOEY1至 2025年 3月 25日将期满 3年。根据《募集说明书》和《上市公告》有关条款的规定，公司决定不行使本期债券发行人续期选择权，即将全额兑付本期债券。公司于 2025年 3月 21日披露了《关于“22BOEY1”公司债券本息兑付暨摘牌公告》（公告编号：2025-010），公司于 2025年3月 25日支付自2024年 3月25日至 2025年 3月 24日期间的利息及本期债券的本金并摘牌。",
+          "table_md": null,
+          "raw_index": 784,
+          "coarse_index": 2,
+          "piece_index": 0
+        },
+        {
+          "config_name": "S800",
+          "chunk_size": 800,
+          "overlap": 10,
+          "chunk_index": 1,
+          "type": "paragraph",
+          "char_len": 140,
+          "token_len": 127,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "6e746f01b2eeff4a7fd55de5969d3bbfbf09b2e347ddfd5e0b1ffcfa7f20fe1a",
+          "text": "2、公司于 2024年10月 9日披露了《关于向专业投资者公开发行公司债券获得中国证监会注册批复的公告》（公告编号：2024-052），公司收到中国证券监督管理委员会出具的证监许可[2024]1330号文，同意公司向专业投资者公开发行面值总额不超过 100亿元公司债券的注册申请。",
+          "table_md": null,
+          "raw_index": 785,
+          "coarse_index": 3,
+          "piece_index": 0
+        },
+        {
+          "config_name": "S800",
+          "chunk_size": 800,
+          "overlap": 10,
+          "chunk_index": 2,
+          "type": "table",
+          "char_len": 1420,
+          "token_len": 751,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 1413,
+          "chunk_id": "9d45f42c4569a3ce7482e6ab276b318480426a1c4307d748f039bd6eb0e772ee",
+          "text": "第73页表格\n<table><tr><td rowspan=1 colspan=1>债券名称</td><td rowspan=1 colspan=1>债券简称</td><td rowspan=1 colspan=1>债券代码</td><td rowspan=1 colspan=1>发行日</td><td rowspan=1 colspan=1>到期日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>25BOEK1</td><td rowspan=1 colspan=1>524305.SZ</td><td rowspan=1 colspan=1>2025年6月12日至2025年6月13日</td><td rowspan=1 colspan=1>2030年06月13日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>25BOEK2</td><td rowspan=1 colspan=1>524510.SZ</td><td rowspan=1 colspan=1>2025年11月5日至2025年11月6日</td><td rowspan=1 colspan=1>2030年11月06日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第三期）</td><td rowspan=1 colspan=1>25BOEK3</td><td rowspan=1 colspan=1>524530.SZ</td><td rowspan=1 colspan=1>2025年11月13日至2025年11月14日</td><td rowspan=1 colspan=1>2030年11月14日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>26BOEK1</td><td rowspan=1 colspan=1>524641.SZ</td><td rowspan=1 colspan=1>2026年01月22日至2026年01月23日</td><td rowspan=1 colspan=1>2031年01月23日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>26BOEK2</td><td rowspan=1 colspan=1>524715.SZ</td><td rowspan=1 colspan=1>2026年03月18日至2026年03月19日</td><td rowspan=1 colspan=1>2031年03月19日</td></tr></table>",
+          "table_md": "<table><tr><td rowspan=1 colspan=1>债券名称</td><td rowspan=1 colspan=1>债券简称</td><td rowspan=1 colspan=1>债券代码</td><td rowspan=1 colspan=1>发行日</td><td rowspan=1 colspan=1>到期日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>25BOEK1</td><td rowspan=1 colspan=1>524305.SZ</td><td rowspan=1 colspan=1>2025年6月12日至2025年6月13日</td><td rowspan=1 colspan=1>2030年06月13日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>25BOEK2</td><td rowspan=1 colspan=1>524510.SZ</td><td rowspan=1 colspan=1>2025年11月5日至2025年11月6日</td><td rowspan=1 colspan=1>2030年11月06日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第三期）</td><td rowspan=1 colspan=1>25BOEK3</td><td rowspan=1 colspan=1>524530.SZ</td><td rowspan=1 colspan=1>2025年11月13日至2025年11月14日</td><td rowspan=1 colspan=1>2030年11月14日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>26BOEK1</td><td rowspan=1 colspan=1>524641.SZ</td><td rowspan=1 colspan=1>2026年01月22日至2026年01月23日</td><td rowspan=1 colspan=1>2031年01月23日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>26BOEK2</td><td rowspan=1 colspan=1>524715.SZ</td><td rowspan=1 colspan=1>2026年03月18日至2026年03月19日</td><td rowspan=1 colspan=1>2031年03月19日</td></tr></table>",
+          "raw_index": 786,
+          "coarse_index": 4,
+          "piece_index": 0
+        },
+        {
+          "config_name": "S800",
+          "chunk_size": 800,
+          "overlap": 10,
+          "chunk_index": 3,
+          "type": "paragraph",
+          "char_len": 711,
+          "token_len": 733,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "5701476e11a98e6d103889783ee0b1d651a430be727c7b1e04274ed806f051c1",
+          "text": "3、本公司于 2025年 1月15日披露了《2025年第一次临时股东大会决议公告》（公告编号：2025-002）、《第十一届董事会第一次会议决议公告》（公告编号：2025-005）、《第十一届监事会第一次会议决议公告》（公告编号：2025-006），会议审议通过了换届选举的相关议案，完成了换届选举，具体信息详见相关公告。公司于2025年 7月 10日披露了《关于高级管理人员辞职的公告》（公告编号：2025-057），因工作变动原因，郭华平先生申请辞去公司高级副总裁、首席文化官职务，辞职后将不再担任公司及控股子公司任何职务。公司于 2025年 9月 23日披露了《关于选举产生职工董事的公告》（公告编号：2025-071），公司工会于 2025年 9月 22日召开了公司职工代表大会，选举李洋先生为公司第十一届董事会职工董事。公司于 2025年 10月 11日披露了《关于董事辞职的公告》（公告编号：2025-074），因个人原因，高文宝先生申请辞去公司董事、副董事长及董事会专门委员会委员职务，辞职后将不再担任公司及控股子公司任何职务。公司于 2025年 10月 31日披露了《关于选举第十一届董事会副董事长的公告》（公告编号：2025-078），董事会选举王锡平先生为第十一届董事会副董事长，任期自本次董事会选举通过之日起，至本届董事会任期届满之日止。公司于 2025年 10月 31日披露了《关于选举公司第十一届董事会非独立董事的公告》（公告编号：2025-077）、2025年11月 18日披露了《2025年第三次临时股东会决议公告》（公告编号：2025-089）选举冯莉琼女士为公司第十一届董事会非独立董事。",
+          "table_md": null,
+          "raw_index": 787,
+          "coarse_index": 5,
+          "piece_index": 0
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "O60",
+        "chunk_size": 400,
+        "overlap": 60
+      },
+      "summary": {
+        "chunk_count": 5,
+        "type_counts": {
+          "paragraph": 4,
+          "table": 1,
+          "title": 0
+        },
+        "lengths": {
+          "all": {
+            "chars": {
+              "count": 5,
+              "p50": 347,
+              "p95": 1208.8,
+              "max": 1420
+            },
+            "tokens": {
+              "count": 5,
+              "p50": 355,
+              "p95": 676.4,
+              "max": 751
+            }
+          },
+          "paragraphs": {
+            "chars": {
+              "count": 4,
+              "p50": 326.0,
+              "p95": 361.45,
+              "max": 364
+            },
+            "tokens": {
+              "count": 4,
+              "p50": 321.0,
+              "p95": 374.55,
+              "max": 378
+            }
+          }
+        },
+        "empty_count": 0,
+        "over_limit_count": 1,
+        "over_limit_by_type": {
+          "paragraph": 0,
+          "table": 1
+        },
+        "metadata_values": {
+          "pages": [
+            73
+          ],
+          "sections": [
+            "适用 □不适用"
+          ],
+          "source_files": [
+            "京东方A 2025年报.pdf"
+          ]
+        },
+        "table_rows": [
+          {
+            "chunk_index": 2,
+            "char_len": 1420,
+            "token_len": 751,
+            "table_md_len": 1413,
+            "over_limit": true
+          }
+        ],
+        "empty_chunk_id_count": 0,
+        "unique_chunk_id_count": 5,
+        "coverage": {
+          "source_nonspace_chars": 1116,
+          "covered_nonspace_chars": 1116,
+          "coverage_ratio": 1.0,
+          "duplicate_chars": 0,
+          "paragraphs": [
+            {
+              "raw_index": 784,
+              "coarse_index": 2,
+              "source_nonspace_chars": 288,
+              "covered_nonspace_chars": 288,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  305
+                ]
+              ]
+            },
+            {
+              "raw_index": 785,
+              "coarse_index": 3,
+              "source_nonspace_chars": 137,
+              "covered_nonspace_chars": 137,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  140
+                ]
+              ]
+            },
+            {
+              "raw_index": 787,
+              "coarse_index": 5,
+              "source_nonspace_chars": 691,
+              "covered_nonspace_chars": 691,
+              "coverage_ratio": 1.0,
+              "duplicate_chars": 0,
+              "start_and_end_list": [
+                [
+                  0,
+                  364
+                ],
+                [
+                  364,
+                  711
+                ]
+              ]
+            }
+          ]
+        },
+        "alignment_ok": true,
+        "order_preserved": true
+      },
+      "rows": [
+        {
+          "config_name": "O60",
+          "chunk_size": 400,
+          "overlap": 60,
+          "chunk_index": 0,
+          "type": "paragraph",
+          "char_len": 305,
+          "token_len": 287,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "2d0c02c90abd43b0455b9d12a09de4867b66c86f7ea0755c35018dba597e78eb",
+          "text": "1、公司于 2025年 2月 11日披露了《京东方科技集团股份有限公司 2022年面向专业投资者公开发行可续期公司债券（数字经济）（第一期）不行使发行人续期选择权的公告》（公告编号：2025-008），22BOEY1至 2025年 3月 25日将期满 3年。根据《募集说明书》和《上市公告》有关条款的规定，公司决定不行使本期债券发行人续期选择权，即将全额兑付本期债券。公司于 2025年 3月 21日披露了《关于“22BOEY1”公司债券本息兑付暨摘牌公告》（公告编号：2025-010），公司于 2025年3月 25日支付自2024年 3月25日至 2025年 3月 24日期间的利息及本期债券的本金并摘牌。",
+          "table_md": null,
+          "raw_index": 784,
+          "coarse_index": 2,
+          "piece_index": 0
+        },
+        {
+          "config_name": "O60",
+          "chunk_size": 400,
+          "overlap": 60,
+          "chunk_index": 1,
+          "type": "paragraph",
+          "char_len": 140,
+          "token_len": 127,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "6e746f01b2eeff4a7fd55de5969d3bbfbf09b2e347ddfd5e0b1ffcfa7f20fe1a",
+          "text": "2、公司于 2024年10月 9日披露了《关于向专业投资者公开发行公司债券获得中国证监会注册批复的公告》（公告编号：2024-052），公司收到中国证券监督管理委员会出具的证监许可[2024]1330号文，同意公司向专业投资者公开发行面值总额不超过 100亿元公司债券的注册申请。",
+          "table_md": null,
+          "raw_index": 785,
+          "coarse_index": 3,
+          "piece_index": 0
+        },
+        {
+          "config_name": "O60",
+          "chunk_size": 400,
+          "overlap": 60,
+          "chunk_index": 2,
+          "type": "table",
+          "char_len": 1420,
+          "token_len": 751,
+          "empty": false,
+          "over_limit": true,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 1413,
+          "chunk_id": "9d45f42c4569a3ce7482e6ab276b318480426a1c4307d748f039bd6eb0e772ee",
+          "text": "第73页表格\n<table><tr><td rowspan=1 colspan=1>债券名称</td><td rowspan=1 colspan=1>债券简称</td><td rowspan=1 colspan=1>债券代码</td><td rowspan=1 colspan=1>发行日</td><td rowspan=1 colspan=1>到期日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>25BOEK1</td><td rowspan=1 colspan=1>524305.SZ</td><td rowspan=1 colspan=1>2025年6月12日至2025年6月13日</td><td rowspan=1 colspan=1>2030年06月13日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>25BOEK2</td><td rowspan=1 colspan=1>524510.SZ</td><td rowspan=1 colspan=1>2025年11月5日至2025年11月6日</td><td rowspan=1 colspan=1>2030年11月06日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第三期）</td><td rowspan=1 colspan=1>25BOEK3</td><td rowspan=1 colspan=1>524530.SZ</td><td rowspan=1 colspan=1>2025年11月13日至2025年11月14日</td><td rowspan=1 colspan=1>2030年11月14日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>26BOEK1</td><td rowspan=1 colspan=1>524641.SZ</td><td rowspan=1 colspan=1>2026年01月22日至2026年01月23日</td><td rowspan=1 colspan=1>2031年01月23日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>26BOEK2</td><td rowspan=1 colspan=1>524715.SZ</td><td rowspan=1 colspan=1>2026年03月18日至2026年03月19日</td><td rowspan=1 colspan=1>2031年03月19日</td></tr></table>",
+          "table_md": "<table><tr><td rowspan=1 colspan=1>债券名称</td><td rowspan=1 colspan=1>债券简称</td><td rowspan=1 colspan=1>债券代码</td><td rowspan=1 colspan=1>发行日</td><td rowspan=1 colspan=1>到期日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>25BOEK1</td><td rowspan=1 colspan=1>524305.SZ</td><td rowspan=1 colspan=1>2025年6月12日至2025年6月13日</td><td rowspan=1 colspan=1>2030年06月13日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>25BOEK2</td><td rowspan=1 colspan=1>524510.SZ</td><td rowspan=1 colspan=1>2025年11月5日至2025年11月6日</td><td rowspan=1 colspan=1>2030年11月06日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2025年面向专业投资者公开发行科技创新公司债券（第三期）</td><td rowspan=1 colspan=1>25BOEK3</td><td rowspan=1 colspan=1>524530.SZ</td><td rowspan=1 colspan=1>2025年11月13日至2025年11月14日</td><td rowspan=1 colspan=1>2030年11月14日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第一期）</td><td rowspan=1 colspan=1>26BOEK1</td><td rowspan=1 colspan=1>524641.SZ</td><td rowspan=1 colspan=1>2026年01月22日至2026年01月23日</td><td rowspan=1 colspan=1>2031年01月23日</td></tr><tr><td rowspan=1 colspan=1>京东方科技集团股份有限公司2026年面向专业投资者公开发行科技创新公司债券（第二期）</td><td rowspan=1 colspan=1>26BOEK2</td><td rowspan=1 colspan=1>524715.SZ</td><td rowspan=1 colspan=1>2026年03月18日至2026年03月19日</td><td rowspan=1 colspan=1>2031年03月19日</td></tr></table>",
+          "raw_index": 786,
+          "coarse_index": 4,
+          "piece_index": 0
+        },
+        {
+          "config_name": "O60",
+          "chunk_size": 400,
+          "overlap": 60,
+          "chunk_index": 3,
+          "type": "paragraph",
+          "char_len": 364,
+          "token_len": 355,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "3e0c492e7568a4f0e0476c200aa940490a3bb9b1f083160cb8c9a2bf939aa41f",
+          "text": "3、本公司于 2025年 1月15日披露了《2025年第一次临时股东大会决议公告》（公告编号：2025-002）、《第十一届董事会第一次会议决议公告》（公告编号：2025-005）、《第十一届监事会第一次会议决议公告》（公告编号：2025-006），会议审议通过了换届选举的相关议案，完成了换届选举，具体信息详见相关公告。公司于2025年 7月 10日披露了《关于高级管理人员辞职的公告》（公告编号：2025-057），因工作变动原因，郭华平先生申请辞去公司高级副总裁、首席文化官职务，辞职后将不再担任公司及控股子公司任何职务。公司于 2025年 9月 23日披露了《关于选举产生职工董事的公告》（公告编号：2025-071），公司工会于 2025年 9月 22日召开了公司职工代表大会，选举李洋先生为公司第十一届董事会职工董事",
+          "table_md": null,
+          "raw_index": 787,
+          "coarse_index": 5,
+          "piece_index": 0
+        },
+        {
+          "config_name": "O60",
+          "chunk_size": 400,
+          "overlap": 60,
+          "chunk_index": 4,
+          "type": "paragraph",
+          "char_len": 347,
+          "token_len": 378,
+          "empty": false,
+          "over_limit": false,
+          "page": 73,
+          "section": "适用 □不适用",
+          "source_file": "京东方A 2025年报.pdf",
+          "table_md_len": 0,
+          "chunk_id": "dd9088a145ae1281b876d3320cd4753227ef7ab3fa1e8ee0bbe58f188cf43231",
+          "text": "。公司于 2025年 10月 11日披露了《关于董事辞职的公告》（公告编号：2025-074），因个人原因，高文宝先生申请辞去公司董事、副董事长及董事会专门委员会委员职务，辞职后将不再担任公司及控股子公司任何职务。公司于 2025年 10月 31日披露了《关于选举第十一届董事会副董事长的公告》（公告编号：2025-078），董事会选举王锡平先生为第十一届董事会副董事长，任期自本次董事会选举通过之日起，至本届董事会任期届满之日止。公司于 2025年 10月 31日披露了《关于选举公司第十一届董事会非独立董事的公告》（公告编号：2025-077）、2025年11月 18日披露了《2025年第三次临时股东会决议公告》（公告编号：2025-089）选举冯莉琼女士为公司第十一届董事会非独立董事。",
+          "table_md": null,
+          "raw_index": 787,
+          "coarse_index": 5,
+          "piece_index": 1
+        }
+      ]
+    }
+  ]
+}

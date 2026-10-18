@@ -1,0 +1,56 @@
+[
+    {
+      "type": "text",
+      "text": "金额单位：人民币万元",
+      "text_level": null,
+      "page_idx": 0
+    },
+    {
+      "type": "text",
+      "text": "第一章 风险管理",
+      "text_level": 1,
+      "page_idx": 1
+    },
+    {
+      "type": "text",
+      "text": "1.1.1 汇率风险",
+      "text_level": 3,
+      "page_idx": 1
+    },
+    {
+      "type": "text",
+      "text": "汇率上升会增加美元负债的人民币结算成本。汇率下降则可能影响出口收入折算。",
+      "text_level": null,
+      "page_idx": 1
+    },
+    {
+      "type": "table",
+      "table_caption": [],
+      "table_body": "| 币种 | 敞口 |\n| --- | --- |\n| 美元 | 1200 |",
+      "page_idx": 2
+    },
+    {
+      "type": "text",
+      "text": "1.2 利率风险",
+      "text_level": 2,
+      "page_idx": 2
+    },
+    {
+      "type": "text",
+      "text": "利率上升会提高融资成本。",
+      "text_level": null,
+      "page_idx": 2
+    },
+    {
+      "type": "text",
+      "text": "第二章 经营回顾",
+      "text_level": 1,
+      "page_idx": 3
+    },
+    {
+      "type": "text",
+      "text": "本期海外收入增长。",
+      "text_level": null,
+      "page_idx": 3
+    }
+  ]

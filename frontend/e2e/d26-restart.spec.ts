@@ -1,0 +1,22 @@
+import { test, expect } from '@playwright/test';
+import { readFileSync, writeFileSync } from 'node:fs';
+const proof=JSON.parse(readFileSync(process.env.INTEGRATION_REPORT_PROOF!,'utf8'));
+test('D26 new read only process restores v2/v1, back and refresh then exact historical Markdown export',async({page})=>{
+  await page.route('**/src/main.tsx*',route=>route.fulfill({contentType:'text/javascript',body:'import "/tests/support/d20-entry.tsx";'}));
+  const writes:string[]=[];page.on('request',r=>{if(['POST','PUT','PATCH','DELETE'].includes(r.method()))writes.push(r.url());});
+  const rid=proof.saved.report.report_id;
+  await page.goto(`/reports?report=${rid}&revision=2`);
+  const article=page.getByRole('article',{name:'已保存报告版本'});
+  await expect(article).toContainText('D26 保存的 v2');await expect.poll(async()=>await article.innerText()).not.toContain('草稿尚未保存');
+  await page.getByLabel('报告版本', { exact: true }).selectOption('1');await expect(article).toContainText('D26 保存的 v1');
+  await page.reload();await expect(article).toContainText('D26 保存的 v1');await expect.poll(async()=>await article.innerText()).not.toContain('草稿尚未保存');
+  const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'下载 v1 · Markdown',exact:true}).click();
+  const download=await downloaded;const file=`${process.env.INTEGRATION_RESTART_OUT}/historical-v1.md`;await download.saveAs(file);
+  expect(await download.failure()).toBeNull();
+  const exportResponse=await page.request.get(`/api/reports/${rid}/revisions/1/markdown`);expect(exportResponse.ok()).toBe(true);
+  expect(readFileSync(file)).toEqual(await exportResponse.body());
+  expect(exportResponse.headers()['x-report-revision']).toBe('1');expect(exportResponse.headers()['x-markdown-sha256']).toBe(proof.markdown_sha256);
+  expect(writes).toEqual([]);
+  await page.screenshot({path:`${process.env.INTEGRATION_RESTART_OUT}/readonly-v1.png`,fullPage:true});
+  writeFileSync(`${process.env.INTEGRATION_RESTART_OUT}/browser-proof.json`,JSON.stringify({writes,v1_restored:true,v2_restored:true,export_sha256:proof.markdown_sha256,unsaved_text_visible:(await article.innerText()).includes('草稿尚未保存'),actual_model:false,human_acceptances:0},null,2));
+});

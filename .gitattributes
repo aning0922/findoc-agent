@@ -1,0 +1,5 @@
+* text=auto
+*.png binary
+
+# Reviewed demo files are byte-frozen and verified by SHA-256.
+demo/site/** -text -whitespace

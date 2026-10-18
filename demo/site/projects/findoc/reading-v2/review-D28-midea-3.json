@@ -1,0 +1,74 @@
+{
+  "copy_kind": "reviewed_projection",
+  "historical_only": true,
+  "original_access": "private repository; original links may require access",
+  "record": {
+    "kind": "operating",
+    "record_id": "D28-midea-3",
+    "workspace_id": "demo",
+    "task_id": "91625207-e3d0-4450-9c61-11a6e9a09a44",
+    "task_revision": 4,
+    "statement_index": 2,
+    "statement_sha256": "ceba540fae6bb6028ac73ed37185aa38b4e22cd03a18842def7ee5e482a38a09",
+    "citations": [
+      1,
+      6,
+      7
+    ],
+    "target_sha256": "9a3ee66507adccac6563a485f3b61cb0e587379b8533064da0bf853053ac44d8",
+    "sources": [
+      {
+        "attempt": 1,
+        "basis": "PRC_GAAP",
+        "company_id": "3e794ed2-1145-4c9f-937b-547208b2de8f",
+        "content_sha256": "bc82a1be9e09101ed2c2772844a44b8a356c87a4dbdc0fa44a55eeeabaf94455",
+        "document_id": "0b91c04391d3c09b8f868ffaf3ed9fc34d6838d6aba692890bb7270dbf6cfdaf",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "period_end": "2024-12-31",
+        "period_start": "2024-01-01",
+        "report_type": "annual",
+        "report_year": 2024,
+        "source_revision": "ae837215a6e5906f6021cb9ab634cc4ec181b9b75b82627d4b78e6404ef3028e",
+        "workspace_id": "demo"
+      },
+      {
+        "attempt": 1,
+        "basis": "PRC_GAAP",
+        "company_id": "3e794ed2-1145-4c9f-937b-547208b2de8f",
+        "content_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+        "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "period_end": "2025-12-31",
+        "period_start": "2025-01-01",
+        "report_type": "annual",
+        "report_year": 2025,
+        "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+        "workspace_id": "demo"
+      }
+    ],
+    "decision": "approved_with_rewrite",
+    "original_words": "第三条同意改写",
+    "opinion": "proposed rewrite of interpretation 3 only",
+    "scope": "仅美的 Task revision 4 第 3 条；不核准经营因果或用户新增断言",
+    "recorded_at": "2026-10-13T16:28:04.066603+08:00",
+    "reviewer_name": null,
+    "rewrite": "2025 年报披露，首席经营决策者分别管理各报告分部、评价经营成果并配置资源。2024 和 2025 年报均披露了内部报告变更及相应的报告分部构成调整。",
+    "evidence": [
+      {
+        "path": "product/d28/evidence/human-followup/operating-semantic-review.json",
+        "sha256": "9f109d3fbf6819a49539abaf6492dbf8139ac1a9b6d781c69a0d936763c051df",
+        "commit": "43d7badfb6a6eb270c7d233cb9a64926e90f9bd6"
+      },
+      {
+        "path": "product/d28/evidence/human-followup/midea-user-resume-completed.json",
+        "sha256": "a7963bf628953438e80f5fd8d8d3b727ad985a95565e1879a68405ef62a52f28",
+        "commit": "43d7badfb6a6eb270c7d233cb9a64926e90f9bd6"
+      },
+      {
+        "path": "product/d28/APPROVED-OPERATING-NOTES.md",
+        "sha256": "ff5f7aefd6a012aceda8e08ba011c3a02de175ec35945b708b8b9497c71d0e82",
+        "commit": "43d7badfb6a6eb270c7d233cb9a64926e90f9bd6"
+      }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+{"case_id":"Q1","query":"贵州茅台的主要业务是什么？","category":"ordinary_text","answerable":true,"relevant_chunk_ids":["19646258-7c45-4936-be5f-e9621715f24c"],"source_file":null}
+{"case_id":"Q2","query":"成都华微主要从事哪些业务？","category":"ordinary_text","answerable":true,"relevant_chunk_ids":["a534a7fa-e40e-49d3-a029-5d882d82541e"],"source_file":null}
+{"case_id":"Q3","query":"贵州茅台2025年基本每股收益是多少？","category":"exact_table_number","answerable":true,"relevant_chunk_ids":["8a7a2aee-85c5-45cf-81ad-919610bbb154"],"source_file":null}
+{"case_id":"Q4","query":"2025年营业收入是多少？","category":"source_filter_and_table","answerable":true,"relevant_chunk_ids":["45986ebe-5115-430d-adc7-973e34bd6d17"],"source_file":"data/京东方A 2025年报.pdf"}
+{"case_id":"Q5","query":"这些年报中哪家公司披露了量子计算机收入？","category":"unanswerable","answerable":false,"relevant_chunk_ids":[],"source_file":null}
+{"case_id":"Q6","query":"成都华微经营活动产生的现金流量净额变动原因是什么？","category":"confusable_financial_text","answerable":true,"relevant_chunk_ids":["21121486-e64c-465d-9f42-3762ec682cbb"],"source_file":null}

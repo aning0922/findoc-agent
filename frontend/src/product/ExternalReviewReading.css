@@ -1,0 +1,7 @@
+.external-review-reading { margin: 16px 0; padding: 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-muted); overflow-wrap: anywhere; }
+.external-review-reading p { margin: 8px 0; }
+.external-review-decision { font-weight: 600; color: var(--ink); }
+.external-review-rewrite { padding: 12px; border-left: 3px solid var(--success); background: var(--surface); }
+.external-review-evidence { margin-top: 12px; font-size: 14px; }
+.external-review-evidence code { overflow-wrap: anywhere; }
+.external-review-evidence pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 420px; overflow: auto; }

@@ -1,0 +1,77 @@
+[project]
+name = "findoc-agent"
+version = "0.1.0"
+description = "FinDoc Agent — evidence-grounded financial research with RAG and bounded agent workflows"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "httpx",
+    "pydantic",
+    "pydantic-settings",
+    "python-dotenv",
+    "openai",  # hello_llm.py 依赖(OpenAI 兼容接口调 DeepSeek/Qwen)
+    # RAG / 向量库(按周逐步加,先留占位)
+    # "pymilvus",
+    # "llama-index",
+    # "langchain", "langgraph",
+    # "langfuse",
+    "pymupdf>=1.27.1",
+    "pdfplumber>=0.11.10",
+    "langchain-text-splitters>=1.1.2",
+    "tiktoken>=0.13.0",
+    "pymilvus[milvus-lite]>=3.0.0",
+    "flagembedding>=1.4.0",
+    "sentence-transformers>=5.6.0",
+    "python-multipart>=0.0.32",
+    "langchain-core==1.5.0",
+    "langgraph==1.2.13",
+]
+
+[project.optional-dependencies]
+# Offline MinerU tooling is not required by the HTTP fast-PDF parser.
+mineru = ["mineru[all]>=3.4.4"]
+
+[dependency-groups]
+dev = ["pytest", "ruff", "mypy", "markdown-it-py"]
+e2e = [
+    "fastapi",
+    "httpx",
+    "openai",
+    "pytest",
+    "python-multipart",
+    "ruff",
+    "uvicorn[standard]",
+]
+
+# CI checks use fake model/vector implementations and need no embedding weights.
+checks = [
+    "fastapi", "uvicorn[standard]", "httpx", "pydantic", "openai",
+    "python-multipart", "pymupdf>=1.27.1", "pdfplumber>=0.11.10",
+    "langchain-text-splitters>=1.1.2", "tiktoken>=0.13.0",
+    "pymilvus>=3.0.0", "langchain-core==1.5.0", "langgraph==1.2.13",
+    "pytest", "ruff",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+strict = true
+untyped_calls_exclude = ["pymupdf"]
+
+[[tool.mypy.overrides]]
+module = ["pymilvus", "pymilvus.*", "FlagEmbedding", "FlagEmbedding.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+markers = [
+    "local_data: 依赖本地未纳入仓库的数据",
+]

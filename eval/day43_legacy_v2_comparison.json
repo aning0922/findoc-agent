@@ -1,0 +1,346 @@
+{
+  "comparison_contract": {
+    "legacy_workspace_compatibility": "legacy collection 不含 workspace_id；LegacyComparisonStore 只移除已验证的固定 workspace 条件，并保留 source_file 条件",
+    "same_embedding_model": "BAAI/bge-m3",
+    "same_evaluation_functions": true,
+    "same_metric_type": "COSINE",
+    "same_query_text": true,
+    "same_retriever": "app.rag.retriever.Retriever",
+    "same_top_k": 5,
+    "same_vector_dim": 1024,
+    "same_warmup_policy": true
+  },
+  "interpretation_limitations": [
+    "指标没有提升不代表 Day43 数据修复失败",
+    "本次不因结果好坏调整模型、top_k、chunk 参数或阈值",
+    "延迟仅为本机单次探索性结果，不是正式性能基准",
+    "本报告只记录差异；Day43 只人工分析一个代表性差异"
+  ],
+  "legacy": {
+    "metrics": {
+      "answerable_count": 10,
+      "exploratory_p50_ms": 58.79139600074268,
+      "exploratory_p95_ms": 91.24609580139804,
+      "hit_at_1": 0.2,
+      "hit_at_5": 0.4,
+      "latency_sample_count": 12,
+      "mrr": 0.27,
+      "question_count": 12
+    },
+    "result_path": "/Users/aipuli/Documents/AI应用学习/02_项目/findoc-rag/eval/day43_legacy_comparison.json"
+  },
+  "metric_deltas": {
+    "hit_at_1_delta_v2_minus_legacy": 0.0,
+    "hit_at_5_delta_v2_minus_legacy": 0.09999999999999998,
+    "mrr_delta_v2_minus_legacy": 0.06333333333333335
+  },
+  "per_question": [
+    {
+      "answerable": true,
+      "case_id": "Q1",
+      "legacy_relevant_rank": 1,
+      "legacy_status": "normal",
+      "legacy_top_chunk_ids": [
+        "19646258-7c45-4936-be5f-e9621715f24c",
+        "7b205630-984a-4ecd-bddd-b0a974008eb4",
+        "b6fdfc7d-021a-4367-bd98-bfe13761a22e",
+        "259fff32-2b7b-42be-8502-0e9ad1f0f237",
+        "221f559d-5aaa-427b-8652-23055f510caf"
+      ],
+      "query": "贵州茅台的主要业务是什么？",
+      "rank_change": "unchanged",
+      "v2_relevant_rank": 1,
+      "v2_status": "normal",
+      "v2_top_chunk_ids": [
+        "cfb9d3a9eb90f717fca61bc7f0d963bbb1327f9d389f37fb649eff3708fb93f0",
+        "9fcb3db2ae4b5dcd444ec365c9ee5c903147fe48ed8fc3579eb4ebe45e16d639",
+        "354791a644cbfffbf8de78d186b4fd78745a3431ab6bb62000431b301a14236a",
+        "476c49254c5a536a66a7066fa0b33e80d9b725956f8a0ae61d5bae14bb6503bf",
+        "95c91173e21be8c9012a252aa9fb2d65e66ba6643c30e6a799199c95db03f49b"
+      ]
+    },
+    {
+      "answerable": true,
+      "case_id": "Q2",
+      "legacy_relevant_rank": 2,
+      "legacy_status": "normal",
+      "legacy_top_chunk_ids": [
+        "08a702c8-20fc-4c3f-a072-6738969a9408",
+        "a534a7fa-e40e-49d3-a029-5d882d82541e",
+        "19edae57-21ec-4a52-974b-3a774474ebb6",
+        "619e1540-80ec-4664-8e16-91c7fc7aa983",
+        "e5ded393-afc4-4711-ad40-2b34dc0471fe"
+      ],
+      "query": "成都华微主要从事哪些业务？",
+      "rank_change": "unchanged",
+      "v2_relevant_rank": 2,
+      "v2_status": "normal",
+      "v2_top_chunk_ids": [
+        "005a7e4688077fab8c0e0913c793635f40a3ffafea1345f48171c43195566206",
+        "91c0a24ba1c1761f42aa8a0cbd834240749a53554e7d5c6634b70417d549fa1d",
+        "7b18573f98ade83e1597f5ec084f4f56b5339511558ac9b6b320b15da4a03919",
+        "3113bc288cf9bbeb308143ecd97e7b5d6c428da3a4c998516566398fac1aa3e1",
+        "959288df0c1a90e61470f92147c4e553c0df0f4d020daf1550eff2a13a95452b"
+      ]
+    },
+    {
+      "answerable": true,
+      "case_id": "Q3",
+      "legacy_relevant_rank": null,
+      "legacy_status": "recall_error",
+      "legacy_top_chunk_ids": [
+        "221f559d-5aaa-427b-8652-23055f510caf",
+        "7b205630-984a-4ecd-bddd-b0a974008eb4",
+        "af0fee55-87af-4d0e-829e-92dc629120ce",
+        "745acc4c-9b28-4b1d-94a2-bdc5f941e254",
+        "9704bcce-77b2-40fc-a465-a3ae8cdca8b5"
+      ],
+      "query": "贵州茅台2025年基本每股收益是多少？",
+      "rank_change": "unchanged",
+      "v2_relevant_rank": null,
+      "v2_status": "recall_error",
+      "v2_top_chunk_ids": [
+        "5231e4659c45ecdd72041879daf77e8d796762c8bcf5ab3f1f713efa3e9f876e",
+        "354791a644cbfffbf8de78d186b4fd78745a3431ab6bb62000431b301a14236a",
+        "4dbfbdc02566b22762dfad0157ed882caad98ea3b7944a14b3140c54acbca217",
+        "668e553a81fdc8fb16d666bdf7adfac6c59e0b3a254cede06f851626e49d4662",
+        "248c9a406ed5216d36ac93a2cbd8d5e7e77f291cfa8778b1b1de002c83a7a4be"
+      ]
+    },
+    {
+      "answerable": true,
+      "case_id": "Q4",
+      "legacy_relevant_rank": null,
+      "legacy_status": "recall_error",
+      "legacy_top_chunk_ids": [
+        "47431037-6223-4919-84f8-635f7b713eb0",
+        "45e9a69f-b22b-4508-880c-ab8f9c4e4c77",
+        "2c50ac34-a588-4663-b42b-6c744c6bbed4",
+        "ae48621f-840b-4a23-b90d-017c2308d4a9",
+        "9e57468c-aabe-4a2d-8953-118d04c024e3"
+      ],
+      "query": "2025年营业收入是多少？",
+      "rank_change": "unchanged",
+      "v2_relevant_rank": null,
+      "v2_status": "recall_error",
+      "v2_top_chunk_ids": [
+        "532ed59d6163c585b30984a1898b7c37688fb07e357fc4797c6b5254af3f7c19",
+        "b672f61c37faf8163091e6dea0e3f1c9a9bd9476999e46676aebee2c41f42be6",
+        "6ba494a46de881853fba7d57744eb18febc411aa197b1f85cf7df6329a665fde",
+        "1b2b4226485316c02277567766fca5fd1c03b4832feed2b1f1cc07385ecdf668",
+        "d1c519286af0332c416134c390538bfcddf4d3cd88c5f25740a4365020764ad4"
+      ]
+    },
+    {
+      "answerable": false,
+      "case_id": "Q5",
+      "legacy_relevant_rank": null,
+      "legacy_status": "normal",
+      "legacy_top_chunk_ids": [
+        "77d38b7f-f154-46db-935c-4c8f857be8c0",
+        "8246a016-72c7-44ee-951b-262d95bc8ffd",
+        "a619160b-1a04-4b02-915a-653a7a31aef2",
+        "6ca6d04d-7c55-4d58-8f69-7c476f30373c",
+        "8296fc49-09df-4ee1-9431-12593e939bfa"
+      ],
+      "query": "这些年报中哪家公司披露了量子计算机收入？",
+      "rank_change": "unchanged",
+      "v2_relevant_rank": null,
+      "v2_status": "normal",
+      "v2_top_chunk_ids": [
+        "1fd2f8dcd4d40bab2267131bc78a8cbd56e37af382c29abac85d3a0096bdcb85",
+        "79b0df13975cc9f8548571677e92c4cfdb286865ddab94798531f38c15f374a8",
+        "7df6112c7f7f2b82903978ab91935978f2194d217748a5139c9b863c2e596498",
+        "6d56b8f460e0786ce96e7f0ca8af71140c7b28642baafaaa677b11ca6de20b0a",
+        "9152b6e31923666816efa2ecbbda2a792f4da48ad42066c7a2d4f12858f003de"
+      ]
+    },
+    {
+      "answerable": true,
+      "case_id": "Q6",
+      "legacy_relevant_rank": null,
+      "legacy_status": "recall_error",
+      "legacy_top_chunk_ids": [
+        "08a702c8-20fc-4c3f-a072-6738969a9408",
+        "19edae57-21ec-4a52-974b-3a774474ebb6",
+        "e5ded393-afc4-4711-ad40-2b34dc0471fe",
+        "76d42290-b433-42a8-96ff-3c69f96349db",
+        "d4690269-874f-46cc-b089-1c4d372de25e"
+      ],
+      "query": "成都华微经营活动产生的现金流量净额变动原因是什么？",
+      "rank_change": "improved",
+      "v2_relevant_rank": 2,
+      "v2_status": "normal",
+      "v2_top_chunk_ids": [
+        "6df73db661571f380d8606c8961135988211298349fa42b0770e11df2b9900ce",
+        "5e739485500376bf4ac2aae25b324859bd809dc78a61350e5cd5cb1d8113da9e",
+        "166b688339498e1c23a001e26abee9a338f88d7f87b0d99186ac4bb87379782f",
+        "2ec07b62dec4b0d71d5d52c3fc23a9165bf9db1a7097c54cffb97a46a47e1472",
+        "8428b3c3d950a8f2f49cfdc8d7b5adecd5c284ecfbc34130c84213ccea8aa8b5"
+      ]
+    },
+    {
+      "answerable": true,
+      "case_id": "Q7",
+      "legacy_relevant_rank": null,
+      "legacy_status": "recall_error",
+      "legacy_top_chunk_ids": [
+        "4752db81-0e92-4c39-b142-e44ee05c26b8",
+        "cac3c5f5-075d-425b-a25b-4630d2385822",
+        "257c1555-d426-46ac-9a0e-5279f92911ba",
+        "245deabc-18c6-4caf-b6eb-2672e3b7ccee",
+        "85995296-d774-4fb3-a8b8-62dc13ff31cf"
+      ],
+      "query": "京东方的显示器件业务主要提供哪些产品？",
+      "rank_change": "unchanged",
+      "v2_relevant_rank": null,
+      "v2_status": "recall_error",
+      "v2_top_chunk_ids": [
+        "9c6e853ea96eb6b7fd063138518748ae5752df5bc147aa45a4228d7d9593bb7d",
+        "0f98b6e1daf40a69fae23dccd4f4490843ff60f878a1c0495bb957299b39220c",
+        "954a6018b4712668bcb35be85abdc7d24bd78be826136a09c721fdfdb1ba0966",
+        "62ebe059fefd535682a03ff5a7cf5629bb922f93060c292dae88e754d13d5083",
+        "feb64b6d7f5aded685ef1fee60c1e042c26689940fb5dd1c74fb3387d210b9e7"
+      ]
+    },
+    {
+      "answerable": true,
+      "case_id": "Q8",
+      "legacy_relevant_rank": null,
+      "legacy_status": "recall_error",
+      "legacy_top_chunk_ids": [
+        "339438b8-9116-416d-8a40-7ccaabfe6480",
+        "b6dd7799-4ee5-45ac-9753-6a3e368d43c6",
+        "d8194424-a028-478b-b786-e51abe36bd83",
+        "4e7a081e-1f24-4b1c-ab1f-cf6e9c6dfe30",
+        "4752db81-0e92-4c39-b142-e44ee05c26b8"
+      ],
+      "query": "京东方2025年显示器件业务占营业收入的比重是多少？",
+      "rank_change": "unchanged",
+      "v2_relevant_rank": null,
+      "v2_status": "recall_error",
+      "v2_top_chunk_ids": [
+        "9c6e853ea96eb6b7fd063138518748ae5752df5bc147aa45a4228d7d9593bb7d",
+        "895a327765c3506eaf5f602400e52dd35fd280f9dc4140bf54654ae40d2c9faf",
+        "62ebe059fefd535682a03ff5a7cf5629bb922f93060c292dae88e754d13d5083",
+        "7df6112c7f7f2b82903978ab91935978f2194d217748a5139c9b863c2e596498",
+        "feb64b6d7f5aded685ef1fee60c1e042c26689940fb5dd1c74fb3387d210b9e7"
+      ]
+    },
+    {
+      "answerable": true,
+      "case_id": "Q9",
+      "legacy_relevant_rank": 5,
+      "legacy_status": "normal",
+      "legacy_top_chunk_ids": [
+        "20a52203-302c-400c-bb6c-811fa18c9de7",
+        "2629708e-a9ae-4a07-819a-bc2fa51a302c",
+        "221f559d-5aaa-427b-8652-23055f510caf",
+        "e2638fe6-69b0-45ca-82e0-265244f01bfa",
+        "a06b431e-08c4-453f-96ee-7ebe96ef4ad1"
+      ],
+      "query": "贵州茅台在“报告期内核心竞争力分析”章节列出的五大核心竞争力是什么？",
+      "rank_change": "improved",
+      "v2_relevant_rank": 3,
+      "v2_status": "normal",
+      "v2_top_chunk_ids": [
+        "5231e4659c45ecdd72041879daf77e8d796762c8bcf5ab3f1f713efa3e9f876e",
+        "9fdd7940abe05edeed409bb5798e6396e05ebb03817bdf8be3667e1891a917ed",
+        "11352699a389a7b3881ad631447123432dd4cb4f767705ffff4753642c999184",
+        "42f619ce3d347917124c1c97cd8ceac86998d81ddeea02bc073d7be2266b44dc",
+        "05466ed57e5ec15f523de87dd048967d504490d8e9bb999de818181f4524b2c1"
+      ]
+    },
+    {
+      "answerable": true,
+      "case_id": "Q10",
+      "legacy_relevant_rank": 1,
+      "legacy_status": "normal",
+      "legacy_top_chunk_ids": [
+        "26633e24-a3ce-42e8-b0b6-a6b2c16bd707",
+        "332a3b31-8baf-493a-8099-9a2c466b49cb",
+        "b3eb2302-8cd6-4a19-954f-ff76d1d055c1",
+        "4be10409-2792-4372-bd50-ee8498490a61",
+        "08a702c8-20fc-4c3f-a072-6738969a9408"
+      ],
+      "query": "成都华微使用闲置募集资金进行现金管理的最高额度是多少？",
+      "rank_change": "unchanged",
+      "v2_relevant_rank": 1,
+      "v2_status": "normal",
+      "v2_top_chunk_ids": [
+        "49f7404915a07d00950862c641b9aeaf819709f197dd57a422f310ee3db522ca",
+        "a21b80e21b3e0e65c08dd892ef6ab7b8bab38d5cc88a891e70b700e9eec254cf",
+        "89b619bd47821a79769b189fa16d6334bba9a0a897e01de64e3c3c0f84ad3680",
+        "03d61f55e9755956b09af1917b26706428c82265f72ddd95d0796f2dee34ee6c",
+        "c58f4f9a2b35713a13273ef3f54e155b672693d2d5a1ef76211fd6402818545f"
+      ]
+    },
+    {
+      "answerable": true,
+      "case_id": "Q11",
+      "legacy_relevant_rank": null,
+      "legacy_status": "recall_error",
+      "legacy_top_chunk_ids": [
+        "58d578a2-16e9-4eb0-a5f1-33eece63243e",
+        "538a8908-e03e-48da-a4d7-2b4de52acc9d",
+        "a3d4faa6-cab5-4716-94d3-c35a1065dcec",
+        "fa0efd6f-bae8-4dd8-8a46-3111d9b144f8",
+        "2b601a33-1f58-4b0d-ad2a-9f6a6116e421"
+      ],
+      "query": "董事长是谁？",
+      "rank_change": "unchanged",
+      "v2_relevant_rank": null,
+      "v2_status": "recall_error",
+      "v2_top_chunk_ids": [
+        "986ae53e40fea0de18302b6223a5c217c975c15fa224ccbefd692811c6356b13",
+        "6d59d89ad6ed5855b783db04837b5f42fc1490cbd99e3e6240d7d61af0461674",
+        "60d2b644b7a30eec937b5d37d874b2215671a062e48f284629774b145a8e216c",
+        "4ef7d4a7c2500a6f442568bce4ea89d48cf388662302e4499ba6ab4dcbdaea78",
+        "965ff1578978f6ee2b74f8a2ba1690e755323f0a0b29ec0fcb501cf7bbdb9822"
+      ]
+    },
+    {
+      "answerable": false,
+      "case_id": "Q12",
+      "legacy_relevant_rank": null,
+      "legacy_status": "normal",
+      "legacy_top_chunk_ids": [
+        "e5ded393-afc4-4711-ad40-2b34dc0471fe",
+        "4a2b1674-e946-4922-92a1-5a311fccf13b",
+        "19edae57-21ec-4a52-974b-3a774474ebb6",
+        "08a702c8-20fc-4c3f-a072-6738969a9408",
+        "619e1540-80ec-4664-8e16-91c7fc7aa983"
+      ],
+      "query": "成都华微2025年光子芯片实现了多少营业收入？",
+      "rank_change": "unchanged",
+      "v2_relevant_rank": null,
+      "v2_status": "normal",
+      "v2_top_chunk_ids": [
+        "959288df0c1a90e61470f92147c4e553c0df0f4d020daf1550eff2a13a95452b",
+        "0ce912686a10586321828724fa6695b4bbd06b53222d45e31c486398c3b71d35",
+        "676212e97b5125d21852d2c5ae331a5c067a48496815e7d5cf9bfc4c0814d1bf",
+        "1b2b4226485316c02277567766fca5fd1c03b4832feed2b1f1cc07385ecdf668",
+        "7b18573f98ade83e1597f5ec084f4f56b5339511558ac9b6b320b15da4a03919"
+      ]
+    }
+  ],
+  "protected_inputs": {
+    "day42_baseline_path": "/Users/aipuli/Documents/AI应用学习/02_项目/findoc-rag/eval/day42_baseline.json",
+    "day42_baseline_sha256": "4aa091ff65d2499487674268bc6986a86fb5ddf1d036d9e521a6fd069d60b0cf",
+    "v2_manifest_path": "/Users/aipuli/Documents/AI应用学习/02_项目/findoc-rag/data/day43_data_v2/manifest.json",
+    "v2_manifest_sha256": "06bba7db22db4ea7cde485b1695be624ba7aaf91f3150562b5044390af008e59"
+  },
+  "v2": {
+    "metrics": {
+      "answerable_count": 10,
+      "exploratory_p50_ms": 68.92914649870363,
+      "exploratory_p95_ms": 70.81241234918707,
+      "hit_at_1": 0.2,
+      "hit_at_5": 0.5,
+      "latency_sample_count": 12,
+      "mrr": 0.33333333333333337,
+      "question_count": 12
+    },
+    "result_path": "/Users/aipuli/Documents/AI应用学习/02_项目/findoc-rag/eval/day43_v2_comparison.json"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "release_date": "2026-10-18",
+  "project": "FinDoc Agent",
+  "mode": "public source snapshot; independent Git history",
+  "source_commit": "b7c2a78b84db902fb6c3092684638ccd4535e495",
+  "product_code": {
+    "app": {
+      "file_count": 116,
+      "tree_sha256": "ac3c84c18e4e0591d3bb161f728afc0c3a88a09a66c83cfdbd1ab8ca05142180",
+      "unchanged_from_source": true
+    },
+    "frontend/src": {
+      "file_count": 105,
+      "tree_sha256": "eacaa1ff6e56de805479bcfa856ae28f2aeff1591882c8075a72185266d60bd3",
+      "unchanged_from_source": true
+    }
+  },
+  "publication_changes": [
+    "Public README and documentation",
+    "Project distribution name",
+    "Minimal frozen CI dependency group",
+    "Explicit skips for unavailable private historical review fixtures",
+    "Approved static demo packaging"
+  ],
+  "validation": {
+    "documented_backend_cases_passed": 136,
+    "controlled_ci_backend_cases_passed": 139,
+    "frontend_passed": 183,
+    "frontend_private_fixture_cases_skipped": 25,
+    "private_fixture_cases_passed_when_explicitly_supplied": 25,
+    "controlled_browser_passed": 2,
+    "build_exit_code": 0,
+    "lint_exit_code": 0,
+    "existing_lint_warnings": 1,
+    "static_asset_hashes_verified": 22,
+    "gitleaks_version": "8.30.1",
+    "public_source_secret_findings": 0
+  },
+  "excluded": [
+    "Private Git branches and commit history",
+    "Browser trace archives",
+    "Internal command logs and runtime snapshots",
+    "Original annual-report PDFs",
+    "Databases, model weights and credentials"
+  ]
+}

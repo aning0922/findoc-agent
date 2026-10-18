@@ -1,0 +1,50 @@
+name: findoc-d1
+
+services:
+  api:
+    platform: linux/arm64
+    build:
+      context: .
+      target: api
+    image: findoc-api:local
+    env_file:
+      - path: .env.container
+        required: false
+    environment:
+      FINDOC_RUNTIME_ROOT: /var/lib/findoc
+      HF_HOME: /var/cache/findoc/huggingface
+      # 分块器的编码表也属于可重建缓存，避免容器替换后重复获取。
+      TIKTOKEN_CACHE_DIR: /var/cache/findoc/tiktoken
+      HF_HUB_DISABLE_IMPLICIT_TOKEN: "1"
+    volumes:
+      - runtime-data:/var/lib/findoc
+      - model-cache:/var/cache/findoc
+    # 只检查 HTTP 是否可响应；文档是否 ready 仍须通过业务 API 验证。
+    healthcheck:
+      test:
+        - CMD
+        - /app/.venv/bin/python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).close()"
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      # CPU 模型预热期间暂不累计失败；不代表允许跳过真实初始化。
+      start_period: 300s
+    stop_grace_period: 30s
+
+  web:
+    platform: linux/arm64
+    build:
+      context: .
+      target: web
+    image: findoc-web:local
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  runtime-data:
+  model-cache:

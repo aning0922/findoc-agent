@@ -1,0 +1,19 @@
+{
+  "schema_version": "agent_eval_case_v1",
+  "dataset_path": "agent_tasks_v1.jsonl",
+  "dataset_sha256": "2d7ab53bc5fafb2a295e5c4391de3b73422c7a117fe0e6687f6b5c375e88012c",
+  "case_count": 12,
+  "tool_schema_version": "finance_tools_v1",
+  "tool_names": [
+    "search_finance_docs",
+    "calculate_financial_metric"
+  ],
+  "runner_config_version": "agent_eval_runner_v1",
+  "parameter_rule_version": "argument_rules_v1",
+  "allowed_rule_operators": [
+    "equals",
+    "non_empty_string",
+    "contains_all"
+  ],
+  "max_steps": 4
+}

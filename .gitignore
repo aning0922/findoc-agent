@@ -1,0 +1,85 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+*.egg-info/
+
+# 环境与密钥
+.env
+.env.*
+!.env.example
+
+# 数据(年报 PDF 不入库、不重分发)
+data/*
+!data/.gitkeep
+
+# 可由公开生成器重建的合成 PDF
+artifacts/demo/*.pdf
+
+# 索引/缓存/模型
+*.faiss
+volumes/
+models/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+mineru_out/
+
+*.db
+eval/agent_results/*.sqlite3
+
+# 浏览器测试失败报告与 trace
+frontend/playwright-report/
+frontend/test-results/
+
+# Copied from the pinned PDF.js package by frontend postinstall
+frontend/public/pdf-assets/
+
+# S4 failure traces can contain full PDF/network assets; retain logs and DOM evidence only.
+product/ux-global-s4/evidence/**/trace.zip
+
+product/ux-global-s5/evidence/**/trace.zip
+# S5 traces may embed complete public PDFs; deliver logs/DOM/identity evidence instead.
+product/ux-global-s5/evidence/**/traces/.playwright-artifacts-*/
+product/ux-global-s5/evidence/**/*.pdf
+product/ux-global-s5/evidence/**/*.trace
+product/ux-global-s5/evidence/**/*.network
+
+# S6 retains failure logs/DOM and screenshots; trace archives can embed full PDFs.
+product/ux-global-s6/evidence/**/trace.zip
+product/ux-global-s6/evidence/**/traces/.playwright-artifacts-*/
+product/ux-global-s6/evidence/**/*.pdf
+product/ux-global-s6/evidence/**/*.trace
+product/ux-global-s6/evidence/**/*.network
+
+# D28 public PDFs, runtime/model assets and network traces stay local.
+product/d28/evidence/**/*.pdf
+product/d28/evidence/**/trace.zip
+product/d28/evidence/**/*.trace
+product/d28/evidence/**/*.network
+
+# D30 browser traces may contain complete PDFs; publish the reviewed static package only.
+product/d30/evidence/**/trace.zip
+product/d30/evidence/**/*.trace
+product/d30/evidence/**/*.network
+product/d30/evidence/**/*.pdf
+
+# Raw browser and runtime evidence stays outside the public source release.
+*.zip
+*.tar
+*.tar.gz
+*.trace
+*.sqlite
+*.sqlite3
+*.log
+!frontend/public/.gitkeep

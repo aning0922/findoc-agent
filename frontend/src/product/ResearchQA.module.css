@@ -1,0 +1,93 @@
+.workspace { min-width: 0; color: var(--color-text); font-size: var(--font-size-body); line-height: 1.7; }
+.workspace *, .dialog * { box-sizing: border-box; }
+.toolbar, .actions, .dialogHeader { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.toolbar { justify-content: space-between; margin-bottom: 20px; }
+.toolbar h2 { margin: 0; font-size: 21px; }
+.workspace button, .dialog button { min-height: 44px; padding: 8px 16px; border: 1px solid var(--color-border-strong); border-radius: var(--radius-control); background: var(--color-surface); color: var(--color-text); font: inherit; line-height: 1.5; overflow-wrap: anywhere; cursor: pointer; }
+.workspace button:disabled, .dialog button:disabled { cursor: default; opacity: .65; }
+.workspace .primary, .dialog .primary { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 24px; align-items: start; }
+.main, .sources { min-width: 0; }
+.card, .sources, .history { padding: 24px; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+.card + .card { margin-top: 20px; }
+.card h2, .sources h3 { margin-top: 0; }
+.range { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; font-size: 14px; overflow-wrap: anywhere; }
+.range span { padding: 4px 9px; background: var(--color-surface-subtle); border: 1px solid var(--color-border); border-radius: 5px; }
+.question { display: block; font-weight: 600; }
+.question textarea { display: block; width: 100%; max-width: 100%; margin: 8px 0 16px; padding: 12px; border: 1px solid var(--color-border-strong); border-radius: 8px; background: white; color: var(--color-text); font: inherit; font-weight: 400; line-height: 1.7; resize: vertical; min-height: 112px; }
+.hint, .meta { color: var(--color-text-secondary); font-size: 14px; }
+.savedQuestion { font-size: 21px; line-height: 1.65; overflow-wrap: anywhere; margin: 8px 0 12px; }
+.sourceCard { padding-block: 16px; border-top: 1px solid var(--color-border); overflow-wrap: anywhere; font-size: 14px; }
+.sourceCard strong { display: block; font-size: 16px; }
+.sourceCard p { margin: 8px 0; }
+.sourceCard a { display: inline-block; padding-block: 8px; }
+.history { margin-top: 24px; }
+.history > summary { cursor: pointer; font-weight: 600; min-height: 24px; }
+.history ul { padding: 0; list-style: none; }
+.history li { padding-block: 16px; border-top: 1px solid var(--color-border); }
+.history li button { text-align: left; max-width: 100%; }
+.history time { font-variant-numeric: tabular-nums; }
+.dialog { position: fixed; inset: 0; width: min(720px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); margin: auto; padding: 24px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); color: var(--color-text); box-shadow: var(--shadow-overlay); font-size: 16px; line-height: 1.7; overflow: auto; }
+.dialog::backdrop { background: #12283f80; }
+.dialogHeader { justify-content: space-between; margin-bottom: 16px; }
+.dialogHeader h2 { font-size: 21px; margin: 0; }
+.sourceOptions { margin: 16px 0; }
+.sourceOption { padding: 16px 0; border-top: 1px solid var(--color-border); }
+.sourceOption label { display: flex; align-items: flex-start; gap: 10px; overflow-wrap: anywhere; }
+.sourceOption input { flex-shrink: 0; margin-top: 8px; }
+.sourceOption p { margin: 6px 0 6px 25px; font-size: 14px; color: var(--color-text-secondary); }
+.workspace :is(button, a, summary, textarea):focus-visible, .dialog :is(button, a, summary, input, select):focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+@media (max-width: 1280px) { .grid { grid-template-columns: minmax(0, 1fr) 250px; gap: 20px; } }
+@media (max-width: 1024px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) {
+  .card, .sources, .history { padding: 18px; }
+  .toolbar { align-items: flex-start; }
+  .toolbar .actions { width: 100%; }
+  .toolbar .actions button { flex: 1; }
+  .savedQuestion { font-size: 19px; }
+  .dialog { padding: 18px; width: calc(100vw - 20px); max-height: calc(100dvh - 20px); }
+  .question + .primary { width: 100%; }
+}
+.answer { margin-top: 24px; }
+.focusCard { padding: 20px; border: 1px solid var(--color-border-strong); border-radius: 12px; background: var(--color-surface-subtle); }
+.focusHeading { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+.focusHeading > div { min-width: 0; flex: 1 1 260px; }
+.focusHeading h3 { margin: 4px 0; font-size: 18px; overflow-wrap: anywhere; }
+.focusHeading .meta { margin: 0; }
+.focusValue { margin: 8px 0 0; font-size: 16px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.focusValue strong { font-size: 26px; line-height: 1.5; }
+.focusRow, .fullTable { min-width: 0; }
+.focusRow summary, .fullTable summary { cursor: pointer; min-height: 44px; padding-block: 10px; }
+@media (max-width: 640px) { .focusCard { padding: 16px; } .focusValue strong { font-size: 22px; } }
+.sourceExcerpt { border-top: 1px solid var(--color-border); margin-top: 24px; padding-top: 20px; }
+.sourceExcerpt h3 { margin: 0 0 8px; font-size: 18px; overflow-wrap: anywhere; }
+.citation { scroll-margin-top: 90px; margin-top: 20px; min-width: 0; }
+.excerpt { font-size: 16px; line-height: 1.9; }
+.excerpt :global(.report-table-scroll) { max-width: 100%; overflow-x: auto; margin-block: 12px; border: 1px solid var(--color-border); border-radius: 8px; }
+.excerpt table { width: 100%; min-width: max-content; border-collapse: collapse; font-size: 16px; line-height: 1.7; font-variant-numeric: tabular-nums; }
+.excerpt :is(th, td) { padding: 12px 14px; border-bottom: 1px solid var(--color-border); vertical-align: top; text-align: right; white-space: nowrap; }
+.excerpt th { background: var(--color-surface-subtle); color: var(--color-text); font-weight: 600; }
+.excerpt :is(th, td):first-child { text-align: left; min-width: 20px; max-width: 240px; white-space: normal; overflow-wrap: anywhere; }
+.excerpt :global(.report-table-scroll):focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.citationActions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 14px; line-height: 1.6; margin: 12px 0; }
+.citationActions > span:first-child { flex-basis: 100%; }
+.citationActions a { padding-block: 10px; overflow-wrap: anywhere; }
+.fullText { border-top: 1px dashed var(--color-border); padding-block: 12px; font-size: 14px; }
+.fullText summary { cursor: pointer; }
+.fullText pre { font: inherit; font-size: 16px; line-height: 1.9; white-space: pre-wrap; overflow-wrap: anywhere; }
+.expired { color: var(--color-danger); }
+.pdfDialog { width: min(1000px, calc(100vw - 32px)); }
+.pdfTools { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 16px; }
+.pdfTools select { padding: 8px; font: inherit; min-height: 44px; max-width: 100%; }
+.pdfDialog :global(.pdf-scroll) { height: min(60dvh, 700px); min-height: 240px; }
+@media (max-width: 640px) { .main .primary { width: 100%; } .pdfDialog { width: calc(100vw - 20px); } }
+.meta { overflow-wrap: anywhere; }
+.excerpt td[data-cell-kind="text"] { white-space: normal; width: 210px; min-width: 170px; max-width: 230px; overflow-wrap: anywhere; text-align: left; }
+.excerpt td[data-cell-kind="empty"] { min-width: 16px; width: 16px; padding-inline: 6px; }
+:global(.qa-workspace) > :global(.page-heading) { margin-bottom: 12px; }
+:global(.qa-workspace) > :global(.page-heading) h1 { margin: 0 0 8px; }
+:global(.qa-workspace) > :global(.page-heading) p { margin: 0; font-size: 14px; line-height: 1.65; }
+:global(.qa-workspace) > :global(.research-modes) { margin-block: 12px 16px; padding-bottom: 12px; }
+.savedHeader .meta { margin: 0 0 6px; }
+.answer :global(.status-notice) { padding: 12px 16px; font-size: 14px; line-height: 1.65; }
+.answer > .hint { margin-block: 12px; }

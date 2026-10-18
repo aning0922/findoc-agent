@@ -1,0 +1,76 @@
+/* S1: real routes and objects in the shared Astra visual system. */
+.saas-app .nav-item { height: auto; min-height: 48px; font-size: 15px; color: var(--color-nav-muted) !important; }
+.saas-app .nav-item.active { color: white !important; }
+.saas-app .brand-mark { background: var(--color-primary); }
+.saas-app .workspace-label strong, .saas-app .profile strong { font-size: 14px; }
+.saas-app .workspace-label div > span, .saas-app .profile div > span, .saas-app .nav-caption, .saas-app .research-principle :is(strong, p) { font-size: 13px; color: var(--color-nav-muted); }
+.saas-app .breadcrumb, .saas-app .company-picker, .saas-app .app-footer { font-size: 14px; }
+.saas-app :is(h1, h2, h3, p, summary, label, a, button, code) { overflow-wrap: anywhere; }
+.saas-app :is(button, a, select, input, textarea) { max-width: 100%; }
+.saas-app button, .saas-app select { min-height: 44px; }
+.saas-app button { white-space: normal; }
+.saas-app h2 { font-size: 21px; line-height: 1.45; }
+.saas-app h3 { font-size: 18px; line-height: 1.5; }
+.saas-app .page-heading h1 { font-size: 30px; }
+.saas-app .page-heading p { font-size: 16px; line-height: 1.65; }
+.context-lock { color: var(--color-text-secondary); font-size: 14px; max-width: 100%; }
+.home-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 24px; flex-wrap: wrap; }
+.home-heading p { color: var(--color-text-secondary); margin-top: 8px; }
+.home-create { display: inline-flex; align-items: center; min-height: 44px; border: 1px solid var(--color-border-strong); background: var(--color-surface); padding: 10px 16px; border-radius: var(--radius-control); font-weight: 600; }
+.task-context-header { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 20px 24px 0; margin-block: 16px; min-width: 0; }
+.task-context-header h1 { font-size: 25px; line-height: 1.45; margin-block: 8px; }
+.task-context-header h2 { font-size: 23px; margin-block: 8px; }
+.task-context-header a { color: var(--color-primary); }
+.context-title-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.context-state { font-size: 14px; background: var(--color-primary-soft); color: var(--color-primary); border-radius: 6px; padding: 4px 10px; }
+.context-state[data-user-state='unknown'], .context-state[data-user-state='waiting'] { color: var(--color-warning); background: var(--color-warning-soft); }
+.context-state[data-user-state='failed'], .context-state[data-user-state='invalidated'] { color: var(--color-danger); background: var(--color-danger-soft); }
+.context-scope, .context-note { color: var(--color-text-secondary); font-size: 14px; line-height: 1.65; }
+.context-scope p { margin-top: 6px; }
+.context-back { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; }
+.research-context-nav { display: flex; gap: 24px; max-width: 100%; overflow-x: auto; padding: 4px 2px 0; border-bottom: 1px solid var(--color-border); margin-top: 12px; }
+.research-context-nav a { display: inline-flex; align-items: center; min-height: 48px; flex: 0 0 auto; font-size: 15px; color: var(--color-text-secondary); border-bottom: 3px solid transparent; padding: 8px 0; }
+.research-context-nav a[aria-current] { color: var(--color-primary); border-color: var(--color-primary); font-weight: 650; }
+.research-workspace:has(.task-context-header) > :is(.page-heading, .research-modes) { display: none; }
+.task-context-header + .operating-card { margin-top: 16px; }
+.qa-context, .qa-return { padding: 16px; border: 1px solid var(--color-border); border-radius: var(--radius-control); background: var(--color-surface-subtle); margin-block: 16px; }
+.qa-context p, .qa-return p { margin-block: 8px; }
+.directory-card { padding: 24px; }
+.company-list { list-style: none; padding: 0; margin: 16px 0 0; }
+.company-list li { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 20px; border-top: 1px solid var(--color-border); flex-wrap: wrap; }
+.company-list li > div { min-width: 0; flex: 1 1 320px; }
+.company-list p { margin-top: 6px; color: var(--color-text-secondary); }
+.company-list nav { display: flex; gap: 16px; flex-wrap: wrap; }
+.company-list a { display: inline-flex; align-items: center; min-height: 44px; }
+.saas-app .report-workspace, .saas-app .research-workspace, .saas-app .operating-main { min-width: 0; }
+.evidence-app .candidate-card, .evidence-app .candidate-heading, .evidence-app .review-scope { overflow-wrap: anywhere; }
+.evidence-app .candidate-card .amount-link { white-space: normal; }
+.evidence-app .candidate-card .candidate-value { font-size: 24px; line-height: 1.5; font-weight: 650; }
+.evidence-app .candidate-item > summary { overflow-wrap: anywhere; }
+.evidence-app .acceptance-dialog { max-width: calc(100vw - 24px); }
+.evidence-app .acceptance-dialog :is(label, li, h2, button) { overflow-wrap: anywhere; }
+@media (max-width: 759px) {
+  .saas-app { --page-padding: 16px; }
+  .saas-app .topbar { padding-inline: 16px; gap: 10px; }
+  .saas-app .company-picker { flex-wrap: wrap; }
+  .saas-app .company-picker select { width: 100%; }
+  .saas-app .page-heading h1, .home-heading h1 { font-size: 27px; }
+  .task-context-header { padding: 16px 16px 0; }
+  .task-context-header h1 { font-size: 23px; }
+  .research-context-nav { gap: 20px; }
+  .home-heading { gap: 16px; }
+  .directory-card { padding: 16px; }
+  .diagnostic-details dl > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .saas-app *, .saas-app *::before, .saas-app *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+
+.report-history { padding: 24px; margin-block: 20px; }
+.report-history > p { margin-block: 12px; }
+.report-history > ul { list-style: none; padding: 0; }
+.report-history > ul > li { padding-block: 14px; border-bottom: 1px solid var(--color-border); }
+.report-draft-entry { padding: 20px 24px; margin-bottom: 20px; }
+.report-draft-entry > summary { color: var(--color-primary); font-weight: 600; }
+.report-draft-entry .report-controls { padding: 16px 0 0; }
+@media (max-width: 759px) { .report-history, .report-draft-entry { padding: 16px; } }

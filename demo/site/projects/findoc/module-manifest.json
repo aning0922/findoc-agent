@@ -1,0 +1,94 @@
+{
+  "schema": "findoc-portfolio-module-v1",
+  "version": "findoc-portfolio-module-v1.0",
+  "path": "/projects/findoc/",
+  "frozen_reading_version": "findoc-static-reading-v2.0",
+  "p1b_commit": "9d3714a440bc7359000a967862b9f7b82153168f",
+  "business_baseline": "781ee149c8705ef9715d43fac2f3de667df7b763",
+  "p1b_archive_sha256": "ca5bbdc261d291a990a37af5a33439f37d6f5551f637f187949d31be781143a4",
+  "frozen_reading_files": 18,
+  "live_business_runtime": false,
+  "files": {
+    "index.html": {
+      "sha256": "bdbe272f35d7a195d9acecea03cb761ab1f3d47a97129f446c4d88733e6d45fa",
+      "bytes": 8719
+    },
+    "portfolio.css": {
+      "sha256": "7817fd9122dc5c247ee5b74b4b0ea9e82842915acae85cdb138a57fa09b60827",
+      "bytes": 6382
+    },
+    "reading-v2/compare.html": {
+      "sha256": "c5d09aa970d2946c9206128d344af38cc7148ca051ead91d8b5bc94c30847865",
+      "bytes": 8852
+    },
+    "reading-v2/index.html": {
+      "sha256": "d9968dcd94362cfd8be39f101ea962409e90fdc528673926d0c7b210fe629040",
+      "bytes": 4021
+    },
+    "reading-v2/product-midea-1440.png": {
+      "sha256": "95a5fb8c463eadf3bc69b1c70f72886e25f24616ed83526772ab091e0aa77867",
+      "bytes": 182330
+    },
+    "reading-v2/qa-A10.html": {
+      "sha256": "973d572a311cfefe5439065e00242f0c8d23e713b787654909566973aba96a85",
+      "bytes": 17787
+    },
+    "reading-v2/release-public-manifest.json": {
+      "sha256": "40eeb0c84b6d64c3973a84def7f7dc5a1995b179d9ca93fcec3bd8be99c68ee3",
+      "bytes": 4429
+    },
+    "reading-v2/report-v1.html": {
+      "sha256": "104425ddfcb21b3610f253105f1bd8106665354632e55a657356d9a8176bae81",
+      "bytes": 632859
+    },
+    "reading-v2/report-v1.md": {
+      "sha256": "28ddda7dc495e3396a387ff966d9c56a99679084de8841d9eb57d940fd61b9d0",
+      "bytes": 668050
+    },
+    "reading-v2/report-v2.html": {
+      "sha256": "b99965efa0c16f3b1060bc966f74f8eee21cb4c311c531ae45f3d72ed8a2a4ca",
+      "bytes": 633786
+    },
+    "reading-v2/report-v2.md": {
+      "sha256": "007405bac67158f9eeea1e3ee1405c72b00262d15bc6b153a0a94847f8fbc80a",
+      "bytes": 668903
+    },
+    "reading-v2/research.html": {
+      "sha256": "c176dbab728f90d81fc6d877cd1af9ec4e786ca10f64a1f80d12638817dac010",
+      "bytes": 427498
+    },
+    "reading-v2/review-D28-A10.json": {
+      "sha256": "e039b1f1da9c1436b9ede89a6f03e27816249d472d6c50a0540ee52cf031eb95",
+      "bytes": 2436
+    },
+    "reading-v2/review-D28-midea-1.json": {
+      "sha256": "74b9022f68078d7431207bed27abdb3d88b5c5a2802029b08384915a6068c5b4",
+      "bytes": 3236
+    },
+    "reading-v2/review-D28-midea-2.json": {
+      "sha256": "ecdd09f3e8d98a8b9b1e97fa3d5faca4b879462d09cb71a9e5e6fd815771931b",
+      "bytes": 3043
+    },
+    "reading-v2/review-D28-midea-3.json": {
+      "sha256": "76b3520d639c690f343837e7c6d9c48263853702e6a289bbc7f364356a8a2989",
+      "bytes": 3241
+    },
+    "reading-v2/review-D28-midea-4.json": {
+      "sha256": "929f4e7509d1a2afce146a0ab6b4f2fb9e62d024de564899cf112321ef55099b",
+      "bytes": 3096
+    },
+    "reading-v2/sources.html": {
+      "sha256": "04f75c05df576946518319f15ecf61c81664f638e2ee7ea3fc7a41ec5af449e0",
+      "bytes": 4355
+    },
+    "reading-v2/sources.json": {
+      "sha256": "f5bec3f0ab52f2e935f72b7dab21accd794383d30bae6e3745be20a5ca0ede8b",
+      "bytes": 983
+    },
+    "reading-v2/style.css": {
+      "sha256": "75b1318194f441909267284c7e5c5c39aff2cf43028250f68e2cc56900acdb59",
+      "bytes": 13693
+    }
+  },
+  "self_hash": "External artifact-manifest.json covers this manifest; no self-reference"
+}

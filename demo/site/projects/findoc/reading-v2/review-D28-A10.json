@@ -1,0 +1,55 @@
+{
+  "copy_kind": "reviewed_projection",
+  "historical_only": true,
+  "original_access": "private repository; original links may require access",
+  "record": {
+    "kind": "qa",
+    "record_id": "D28-A10",
+    "question_id": "A10",
+    "run_id": "d1474a54-eeee-4d1d-82c0-d8800b0daf81",
+    "operation_id": "c0b9ac36-d84b-4dc8-8ca5-5c38680409f2",
+    "workspace_id": "demo",
+    "query_sha256": "0fa846d608e44e0f1687170ca571736a10383dc3bd168fe7df960e61eab3abf3",
+    "answer_sha256": "e38e6cb29b7942ad5b789415df404394510740868a3613fde934f74dc99d085c",
+    "target_sha256": "1c87a36a454bed43f83c95c55a736c9fdafb0c233c3e3bc36741fbb031698dc0",
+    "sources": [
+      {
+        "workspace_id": "demo",
+        "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+        "company_id": "3e794ed2-1145-4c9f-937b-547208b2de8f",
+        "report_year": 2025,
+        "report_type": "annual",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "basis": "PRC_GAAP",
+        "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+        "content_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+        "attempt": 1,
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10"
+      }
+    ],
+    "decision": "pass",
+    "reviewer_name": null,
+    "original_words": "A10通过",
+    "opinion": "本人原话：A10通过。该结论仅针对A10真实历史回答；认可2025列营业收入456,451,731千元及引用符合题意，同版PDF既有本人核对证据F12复用。",
+    "recorded_at": "2026-10-14T18:56:07.821882+08:00",
+    "scope": "仅 A10 的历史问题与回答",
+    "evidence": [
+      {
+        "path": "product/d28/human/semantic-18.csv",
+        "sha256": "70c1bf47df1c85d39ed7a164dd72111ecdae54cb79091135ccc1fe102439ef9a",
+        "commit": "43d7badfb6a6eb270c7d233cb9a64926e90f9bd6"
+      },
+      {
+        "path": "product/d28/evidence/human-followup/A10-owner-semantic-pass.json",
+        "sha256": "add090fbbaa03374bf4ae15553b60d3ac7a40131ddfa073c2e99b14fd3cf81cb",
+        "commit": "43d7badfb6a6eb270c7d233cb9a64926e90f9bd6"
+      },
+      {
+        "path": "product/d28/evidence/qa-real/A10.json",
+        "sha256": "039cf91125b13050e9b4cabb92641f984b094d268012ab56e188f5a99a9beafa",
+        "commit": "43d7badfb6a6eb270c7d233cb9a64926e90f9bd6"
+      }
+    ]
+  }
+}

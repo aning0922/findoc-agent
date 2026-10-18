@@ -1,0 +1,44 @@
+/* Transferable semantic tokens. Scoped to the product shell for frontend migration. */
+.findoc-app {
+  --color-canvas: #F4F7FA;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f8fafc;
+  --color-nav: #12283F;
+  --color-nav-muted: #B9C9D7;
+  --color-text: #172C45;
+  --color-text-secondary: #596B7D;
+  --color-text-muted: #596B7D;
+  --color-border: #DBE3EB;
+  --color-border-strong: #B7C6D4;
+  --color-primary: #096E66;
+  --color-primary-hover: #075A54;
+  --color-primary-soft: #E5F3EF;
+  --color-success: #096E66;
+  --color-success-soft: #E5F3EF;
+  --color-warning: #8A5A16;
+  --color-warning-soft: #FFF5DF;
+  --color-danger: #A53838;
+  --color-danger-soft: #FDECEB;
+  --font-sans:
+    Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --color-focus: #3181B2;
+  --color-blue: #274F78;
+  --font-mono: "SFMono-Regular", Consolas, monospace;
+  --font-size-caption: 14px;
+  --font-size-body: 16px;
+  --font-size-heading: 30px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-pill: 30px;
+  --shadow-overlay: 0 12px 48px #162c4d24;
+  --evidence-width: 340px;
+  --page-padding: 32px;
+}

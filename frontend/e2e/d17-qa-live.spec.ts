@@ -1,0 +1,42 @@
+import { expect, test } from "@playwright/test";
+import { readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+const index = JSON.parse(readFileSync("../product/validation/d17-real-save.json", "utf8"));
+const midea = index.reports.filter((r: any) => r.report_id.startsWith("midea"));
+test("actual BGE + FLAT Milvus + LLM through research UI and PDF endpoint", async ({ page }) => {
+  const started = Date.now();
+  await page.goto(`/research?company=${midea[0].source.company_id}`);
+  const panel = page.getByRole("region", { name: "研究资料选择" });
+  await expect(panel.getByLabel(/美的集团股份有限公司 · 2025/)).toBeEnabled({ timeout: 90_000 });
+  for (const year of [2024,2025]) await panel.getByLabel(new RegExp(`美的集团股份有限公司 · ${year}`)).check();
+  await panel.getByLabel("研究问题").fill("请分别摘录美的2024和2025两份年报描述主营业务或核心业务的原文，不推断变化原因。");
+  const pending = page.waitForResponse(r => r.url().endsWith("/research/runs") && r.request().method() === "POST", { timeout: 180_000 });
+  await panel.getByRole("button", { name: "开始研究", exact: true }).click();
+  const response = await pending;
+  const run = await response.json();
+  const result = run.result;
+  const proof: any = { http_status: response.status(), run, result, pdf_checks: [], human_review: "pending", actual_models: true };
+  writeFileSync(`${process.env.D17_ARTIFACT_DIR}/live-proof.json`, JSON.stringify(proof,null,2));
+  expect(response.status()).toBe(200); expect(result.outcome).toBe("answered");
+  expect([...new Set(result.citations.map((c: any) => c.document_id))].sort()).toEqual(midea.map((r: any) => r.document_id).sort());
+  await expect(panel.getByRole("region", { name: "有证据的回答" })).toBeVisible();
+  const links = panel.getByRole("link", { name: /打开原 PDF/ });
+  for (let i = 0; i < await links.count(); i++) {
+    const href = await links.nth(i).getAttribute("href");
+    const citation = result.citations[i];
+    expect(href).toContain(citation.source_revision); expect(href).toContain(`#page=${citation.physical_page}`);
+    const pdf = await page.request.get(href!.split("#")[0]); expect(pdf.ok()).toBe(true);
+    const sha = createHash("sha256").update(await pdf.body()).digest("hex");
+    expect(sha).toBe(citation.content_sha256);
+    proof.pdf_checks.push({ document_id: citation.document_id, source_revision: citation.source_revision, physical_page: citation.physical_page, sha256: sha });
+  }
+  await page.screenshot({ path: `${process.env.D17_ARTIFACT_DIR}/live-saved.png`, fullPage: true });
+  const popup = page.waitForEvent("popup");
+  await links.first().click();
+  const pdfPage = await popup;
+  await pdfPage.waitForURL(/\/file\?/, { waitUntil: "commit", timeout: 30_000 });
+  expect(pdfPage.url()).toContain("/file?");
+  await pdfPage.close();
+  proof.seconds = (Date.now()-started)/1000;
+  writeFileSync(`${process.env.D17_ARTIFACT_DIR}/live-proof.json`, JSON.stringify(proof,null,2));
+});

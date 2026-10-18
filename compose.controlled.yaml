@@ -1,0 +1,46 @@
+# 独立受控验收入口：单独运行，不与 compose.yaml 合并。
+# fake embedding/store/provider 仅证明流程；预置文档不算上传摄取证据。
+name: findoc-d1-controlled
+
+services:
+  api:
+    platform: linux/arm64
+    image: findoc-api:local
+    command:
+      - tests.support.controlled_agent_app:create_controlled_agent_app_from_env
+      - --factory
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --workers
+      - "1"
+    environment:
+      FINDOC_CONTROLLED_RUNTIME_ROOT: /var/lib/findoc
+    volumes:
+      # 复用现有 C1 装配，测试代码只读挂载，不加入生产镜像。
+      - ./tests:/app/tests:ro
+      - controlled-runtime-data:/var/lib/findoc
+    healthcheck:
+      test:
+        - CMD
+        - /app/.venv/bin/python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).close()"
+      interval: 5s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+    stop_grace_period: 30s
+
+  web:
+    platform: linux/arm64
+    image: findoc-web:local
+    ports:
+      - "127.0.0.1:18081:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  controlled-runtime-data:

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; script-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="FinDoc Analyst：把企业年报接成可核对的财务变化、原文证据与版本研究报告。个人作品案例与历史成果阅读。">
+  <title>FinDoc Analyst · 财报研究与证据工程</title>
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header" id="top">
+    <a class="wordmark" href="#top"><span class="monogram" aria-hidden="true">F</span>FinDoc Analyst</a>
+    <nav aria-label="作品页导航"><a href="#capabilities">项目能力</a><a href="#route">三分钟路线</a><a href="#architecture">技术与职责</a></nav>
+    <span class="edition">个人项目 / 01</span>
+  </header>
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">FINANCIAL RESEARCH · EVIDENCE ENGINEERING</p>
+        <h1 id="hero-title">财务变化，<br>有据可查。</h1>
+        <p class="lead">从企业年报，到可核对的财务事实、<br class="wide">原文证据和版本研究报告。</p>
+        <p class="intro">FinDoc Analyst 是一个 React + FastAPI 单机财报研究工作台。本页呈现项目设计与正式界面，并提供一条已保存历史案例的阅读路径。</p>
+        <a class="primary" href="reading-v2/research.html">查看可交互阅读的历史案例 <span aria-hidden="true">↗</span></a>
+        <p class="caption">约 3 分钟 · 展开原文 / 核对证据 / 下载指定版本<br>历史结果只读展示，无现场模型调用。</p>
+      </div>
+      <figure class="product-shot">
+        <div class="frame-label"><span>正式 React 工作台</span><span>已保存研究</span></div>
+        <a href="reading-v2/product-midea-1440.png" aria-label="查看正式 React 工作台截图原图"><img src="reading-v2/product-midea-1440.png" width="1440" height="1000" alt="正式 React 美的跨年研究：三项财务变化与原顶部隔离历史提示"></a>
+        <figcaption>D30 验收中的正式 React 组件，隔离读取 D28 已保存历史。保留原图及隔离横幅；这是留存截图，不是本页实时运行，也不是 D30 新 Task 截图。</figcaption>
+      </figure>
+    </section>
+    <section id="capabilities" class="section" aria-labelledby="cap-title">
+      <div class="section-title"><p class="eyebrow">01 / WHAT THIS PROJECT SHOWS</p><h2 id="cap-title">把结果接回证据。</h2><p>三项能力，从业务问题落实到可验证的工程边界。</p></div>
+      <div class="capabilities">
+        <article><span class="number">01</span><h3>财务变化可核对</h3><p>先核对和接受事实，再独立保存。Decimal 计算差额与同比，原值、单位与比较方向一并保留。</p><p class="proof">案例：收入 +12.11%，经营现金流 −11.84%。</p><a href="reading-v2/research.html">阅读财务变化 →</a></article>
+        <article><span class="number">02</span><h3>回答可回原表</h3><p>限定年报版本检索，将答案绑定到原值、年度列和 PDF 物理页。出处核验与人工语义审阅分别记录。</p><p class="proof">案例：A10 营业收入 456,451,731 千元。</p><a href="reading-v2/qa-A10.html">核对 A10 原表证据 →</a></article>
+        <article><span class="number">03</span><h3>报告可追版本</h3><p>冻结研究结果，追加报告 v1 / v2。明确展示字段差异，按指定版本下载保存时的 Markdown 原字节。</p><p class="proof">案例：标题改变，新增一条用户结论；编辑仍待审。</p><a href="reading-v2/compare.html">查看报告字段对照 →</a></article>
+      </div>
+    </section>
+    <section id="route" class="section route" aria-labelledby="route-title">
+      <div class="section-title"><p class="eyebrow">02 / A THREE-MINUTE WALKTHROUGH</p><h2 id="route-title">沿着一份研究，走完三分钟。</h2><p>时间是讲解预算，未作为陌生用户完成时间实测。</p></div>
+      <ol class="timeline">
+        <li><span class="time">00:00—00:45</span><div><h3><a href="reading-v2/research.html">看结果：两年原值与三项变化</a></h3><p>辨认年度、千元单位、比较方向和精确差额。金额计算来自确定性结果。</p></div></li>
+        <li><span class="time">00:45—01:30</span><div><h3><a href="reading-v2/qa-A10.html#original-row">看证据：A10 原表与年度列</a></h3><p>展开完整表格；区分原生 pending 与仅适用该历史 Run 的 D28 外部意见。</p></div></li>
+        <li><span class="time">01:30—02:15</span><div><h3><a href="reading-v2/report-v2.html#summary">看报告：摘要与待审编辑</a></h3><p>财务结果、模型原句、人工意见和用户结论分别保留。</p></div></li>
+        <li><span class="time">02:15—03:00</span><div><h3><a href="reading-v2/compare.html">看版本：对照变化，再下载 v1</a></h3><p>核对标题和结论的变化，再<a href="reading-v2/report-v1.html#download">读取指定 v1 原件</a>。历史原件中的 API / 相对引用需要原应用环境。</p></div></li>
+      </ol>
+    </section>
+    <section id="architecture" class="section" aria-labelledby="arch-title">
+      <div class="section-title"><p class="eyebrow">03 / SYSTEM & OWNERSHIP</p><h2 id="arch-title">把人工决定留在流程里。</h2><p>以下是正式单机工作台的技术架构；当前作品页仅承载静态文件。</p></div>
+      <ol class="architecture" aria-label="正式工作台技术层次">
+        <li><span>交互与决策</span><strong>React / TypeScript</strong><p>核对 → 接受 → 独立保存 → 明确继续</p></li>
+        <li><span>服务与流程</span><strong>FastAPI / LangGraph</strong><p>固定模板编排、人工等待与持久继续</p></li>
+        <li><span>检索与计算</span><strong>BGE-M3 / Decimal</strong><p>Milvus Lite 限定来源检索；有限 Function Calling</p></li>
+        <li><span>状态与交付</span><strong>SQLite / 版本报告</strong><p>持久状态、冻结研究与指定 revision 下载</p></li>
+      </ol>
+      <div class="ownership"><h3>本人负责</h3><div><p>业务范围与产品决策、单企 / 双企比较方向、工程合同和验收标准；亲自核对原 PDF 与十二项财务事实，决定接受、独立保存和三次明确继续；组织演示与证据交付。</p><p>与 Codex 协作设计、实现和验证。D30 报告 v2 标题示例由 Codex 执行，仍待审，不归为本人语义批准。</p><p class="caption">固定模板与有限工具调用不等于自主规划 Agent。未实现混合检索 / rerank，当前为单机作品，不宣称多人生产平台或已验证的逐指标经营因果分析。</p></div></div>
+    </section>
+    <section id="boundary" class="section boundary" aria-labelledby="boundary-title">
+      <div class="section-title"><p class="eyebrow">04 / SCOPE & STATUS</p><h2 id="boundary-title">你正在看哪一层？</h2></div>
+      <div class="boundary-grid"><article><h3>这份静态展示</h3><p>阅读 D28 冻结历史、展开原文、对照字段并下载原件。没有上传、接受、保存、继续研究或模型执行能力。</p><a href="reading-v2/sources.html">来源与展示边界 →</a></article><article><h3>正式业务工作台</h3><p>React + FastAPI 已在单机运行真实业务链路，由负责人引导演示。正式业务未开放匿名公网访问。</p><p>截至 2026-10-15：四报十二事实、三项研究、三份报告六个版本已完成。</p></article></div>
+      <p class="status-note">仍待完成：D30 新十八题问答与十二条解释的人工语义审阅；五人陌生用户验收未执行。D28 的外部意见不授予 D30 新对象通过。</p>
+      <p class="caption">公开材料是经审核的有限摘录、原字节截图与两份历史 Markdown。私有仓库证据不作为匿名可读链接；完整运行库、trace、凭据和环境配置不属于本展示。</p>
+      <a class="primary" href="reading-v2/index.html">进入历史阅读 V2 概览 <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+  <footer><span>FinDoc Analyst · 独立作品模块 v1.0</span><div><a href="module-manifest.json">公开资产与版本身份</a><a href="#top">回到页首 ↑</a></div></footer>
+</body>
+</html>

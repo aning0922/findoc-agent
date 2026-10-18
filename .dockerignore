@@ -1,0 +1,28 @@
+# Only application/build inputs may enter the context.
+**
+!Dockerfile
+!pyproject.toml
+!uv.lock
+!app/
+!app/**
+!frontend/
+!frontend/**
+!deploy/
+!deploy/nginx.conf
+
+# Never copy host dependencies, generated output, credentials or local data.
+**/.env
+**/.env.*
+**/.venv
+**/node_modules
+**/__pycache__
+**/*.pyc
+**/dist
+**/playwright-report
+**/test-results
+**/*.tsbuildinfo
+**/*.db
+**/*.sqlite3
+**/*.pdf
+**/*.log
+**/.DS_Store
