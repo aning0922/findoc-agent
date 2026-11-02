@@ -6,4 +6,3 @@ export function researchTitle(task: Task, companies: Company[]) {
     ? `${name(task.input.first.company_id)} · ${task.input.first.period.year} / ${task.input.second.period.year} 年`
     : `${name(task.input.first.company_id)} × ${name(task.input.second.company_id)} · ${task.input.first.period.year} 年`;
 }
-
