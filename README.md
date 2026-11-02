@@ -26,6 +26,14 @@ FinDoc Agent 将 **RAG 检索、受控工具调用、LangGraph 工作流与人�
 
 <sub>工作台读取已保存研究的截图。截图所用数据与运行状态见<a href="docs/project-status.md#界面截图">界面说明</a>。</sub>
 
+## V1.2 多轮研究助手候选
+
+新增 `/conversations`：选择并冻结 1–4 份年报后，可连续追问、恢复历史，并沿核验引用打开原 PDF。公司、年度或指代不明确时先澄清；财务比较只使用明确选择且当前有效的已确认事实。用户可单独确认、编辑和删除研究偏好，后续会话在有限上下文中召回。
+
+本版以原文证据阅读和确定性财务结果为主，自由解释关闭。GET/历史恢复不会重发模型；未知提交通过原 operation 查询。当前是本地单人开发候选，真实模型观察、自动化测试与真人财务审核分别记录，尚不作为发布通过声明。
+
+[使用与演示路径](docs/conversation-v12/user-guide.md) · [验证证据](docs/conversation-v12/tests.md) · [交付状态与限制](docs/conversation-v12/release-notes.md) · [可见聊天分工与模型调节](docs/conversation-v12/orchestration.md)
+
 ## 本轮 UX 工作台
 
 当前开发分支将首页收敛为开始、待办、最近完成，并增加独立研究任务列表。新研究按目标、年报、核对推进；六项数据与实际 PDF 在同一页面核对，接受、保存和继续研究仍分别由用户明确操作。问答原文使用侧栏阅读；报告列表与版本阅读分离。
@@ -38,6 +46,7 @@ FinDoc Agent 将 **RAG 检索、受控工具调用、LangGraph 工作流与人�
 | --- | --- |
 | **企业与年报管理** | 建立企业目录，上传年报，绑定报告年度与会计口径，查看解析和索引状态。 |
 | **财务核对与分析** | 提取营业收入、归母净利润、经营活动现金流量净额；对照 PDF 确认并保存后，进行单企业跨年分析或双企业同期比较。 |
+| **多轮研究助手** | 冻结年报范围、连续追问、持久历史与明确确认的研究偏好；证据/财务工具只读。 |
 | **原文问答** | 在选定报告中检索，由模型选择相关证据，服务端返回原文摘录、来源版本与页码；证据不足时拒答。 |
 | **经营研究** | 按研究模板组织数据核对、财务计算、经营原文检索和模型解释；缺少已确认数据时等待用户操作。 |
 | **版本报告** | 从已完成的经营研究生成草稿，编辑标题与结论，保存历史版本并导出指定版本的 Markdown。 |
@@ -148,7 +157,8 @@ npm --prefix frontend run dev -- --host 127.0.0.1
 | --- | --- |
 | 研究首页 | [http://127.0.0.1:5173/](http://127.0.0.1:5173/) |
 | 企业与资料 | [http://127.0.0.1:5173/companies](http://127.0.0.1:5173/companies) |
-| 原文问答 | [http://127.0.0.1:5173/research?mode=qa](http://127.0.0.1:5173/research?mode=qa) |
+| 研究助手 | [http://127.0.0.1:5173/conversations](http://127.0.0.1:5173/conversations) |
+| 单次原文问答（保留深链） | [http://127.0.0.1:5173/research?mode=qa](http://127.0.0.1:5173/research?mode=qa) |
 | 研究报告 | [http://127.0.0.1:5173/reports](http://127.0.0.1:5173/reports) |
 | API 文档 | [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) |
 
@@ -161,7 +171,7 @@ Vite 将 `/api` 代理到本地后端的 `8000` 端口。更多路由和端口�
 3. 按页面引导核对三项指标的原值、单位、期间与 PDF 来源，接受后单独保存财务事实。
 4. 返回研究任务，确认继续执行；研究完成后生成报告、保存版本或导出。
 
-只查原文时，可以直接从首页进入“原文问答”，选择报告后提问。涉及差额、增长率等计算的问题需要走财务核对与分析流程。
+连续追问可进入“研究助手”，选择报告并创建会话；单次原文核验仍可使用 `/research?mode=qa`。涉及差额、增长率等计算的问题需要走财务核对与分析流程。
 
 也可生成一份虚构资料，先体验 `/legacy` 中的单文档上传与问答：
 
@@ -182,7 +192,7 @@ uv run python scripts/generate_demo_pdf.py
 | 财务与持久化 | Decimal、SQLite、本地文件存储 |
 | 工程验证 | pytest、Ruff、mypy、Node.js 单元测试、Playwright |
 
-核心代码按 `app/documents`、`app/rag`、`app/agent`、`app/research` 和 `app/reports` 划分职责。模块入口与数据流见[系统架构](docs/architecture.md)，前端运行说明见 [frontend/README.md](frontend/README.md)。
+核心代码按 `app/documents`、`app/rag`、`app/agent`、`app/research`、`app/conversations`、`app/memory` 和 `app/reports` 划分职责。模块入口与数据流见[系统架构](docs/architecture.md)，前端运行说明见 [frontend/README.md](frontend/README.md)。
 
 ## 开发与验证
 
@@ -207,6 +217,7 @@ npm --prefix frontend run build
 
 | 文档 | 阅读目的 |
 | --- | --- |
+| [V1.2 多轮与偏好交付](docs/conversation-v12/release-notes.md) | 查看独立分支、运行证据、真实/模拟边界和未完成的人工作业。 |
 | [系统架构](docs/architecture.md) | 理解 RAG、Agent、人工确认与版本报告如何协作。 |
 | [开发与测试](docs/development.md) | 配置运行环境、查找入口、复现测试与排查启动问题。 |
 | [项目状态与截图](docs/project-status.md) | 区分当前实现、公开可复现检查和历史验证记录。 |

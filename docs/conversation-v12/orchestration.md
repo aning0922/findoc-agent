@@ -21,8 +21,12 @@
 | 阶段 | 实际调节 | 原因 |
 | --- | --- | --- |
 | A0 | 创建上述三聊天与配置 | 持久化/来源边界需要独立审查，前端影响分析使用中推理 |
+| B1 Memory并行 | 新建 FinDoc V1.2｜偏好记忆开发（01a19c9f-385b-7093-9459-74fafa5b44bd），GPT-6.1 / medium | 枚举偏好CRUD与回执独立实现，集成阶段再high；不写共享migrations/runtime |
 | A0 验收准备 | 新建 FinDoc V1.2｜测试与验收（01a19c93-1676-7743-a92c-80bc2fe0af89），GPT-6.1 / medium | 独立梳理 C01-C20 与隔离测试入口 |
 | A3 前端基础 | 前端聊天从 medium 提升 high | 请求归属、UNKNOWN 和模态焦点管理涉及跨状态边界 |
+| A0 收敛 / A1 | 后端high→medium收敛DTO，再→high实现持久化 | 避免设计持续扩张，写入边界恢复高推理 |
+| A4/G 准备 | 验收聊天medium→high | 真实HTTP/SQLite故障注入与跨层证据 |
+| A3 基础轻量审查 | 架构审查聊天Astra/high→GPT-6.1/medium | 复杂架构已定，检查前端基础具体回归；G再升级 |
 
 ## 门禁
 
@@ -31,3 +35,39 @@ A0 → A1/A2/A3 → A4 → B1/B2 → G。业务合同不弱化；GET 不执行�
 ## 用户仓库指正
 
 用户追加要求当前项目统一使用 findoc-agent。全部工作聊天已同步，代码始终在该仓库独立worktree。Codex的项目列表仍指向旧目录；现有API无修改项目根目录能力，电脑控制访问Codex自身被工具拒绝，主控已明确请用户在项目设置更改目录。未绕过该限制修改内部状态文件。此UI归属问题不阻断正确仓库的代码工作。
+
+## 已有阶段提交
+
+- A0文档与合同：`4d88756`。
+- Vite最窄修补：`3957f04`，安装后audit 0漏洞，最终新功能检查仍待执行。
+
+## B1文件所有权调整
+
+app/memory/**、tests/test_memory*.py归偏好记忆开发聊天独占；原后端聊天已撤回这部分写权限，仍独占Conversation与migrations/runtime/history装配。Memory只导出v11 schema，注册由后端A1之后集成；ConversationGraph摘要/召回归后端，前端偏好管理归前端。
+
+## 后续阶段提交与调控
+
+- B1独立模块：71468aa，31PASS/ruff；集成未冒充完成。
+- A3/B2界面阶段快照：b5208c0，199PASS/25SKIP、Vite8.2.4 build通过，待真实接口E2E。
+- A1持久化：e458389，最终48PASS、旧新联合241PASS（部分重叠，不求和）。
+- A2：后端由high升xhigh，处理Graph/来源/财务提交资格。
+- 轻量A1独立审查：GPT-6.1 medium→high，针对固定e458389快照；G再Astra/high。
+- 前端常规接线修订、验收准备收敛：high→medium；有跨层复杂缺陷再升级。
+
+## A2至G实际调度
+
+| 阶段 | 实际调节与分工 | 原因 / 结果 |
+| --- | --- | --- |
+| A2正式Graph | 后端GPT-6.1 xhigh，完成后回high | 来源/事实资格、事务末复验、预算与UNKNOWN跨层边界 |
+| B2有界摘要 | 后端high | 追加v12、派生摘要与generation fencing，不新增模型调用 |
+| G最终独立审查 | 审查聊天升级GPT-6 Astra/high；修复后窄复核仍high | 原3项P2保留记录，后端c103ab3/前端337916f修复后均关闭 |
+| G恢复修复 | 前端GPT-6.1 high，QA high | 未登记create/delete与已删Memory回执，避免UNKNOWN误解锁 |
+| G真实检索证据诊断 | 后端high只读定位，再降medium修观测脚本 | 版本化检索绕过legacy hook，改物理MilvusClient.search，原失败不改写 |
+| G手机表格 | 前端降medium，仅CSS与只读实际截图 | 补局部宽表排版；390/1440页面无横溢，原文/金额不变 |
+| G交付文档窄审 | 偏好记忆聊天medium只读 | 指出v12文档过时、fresh runtime准备步骤和S4原句链证据缺口 |
+| G回归 | QA保持high | 隔离旧UX/报告/财务/失效回归，按依赖顺序运行，不重复root后端全套 |
+
+所有写代码聊天使用 findoc-agent 的同一隔离 worktree，按文件所有权并行；root是唯一提交者。不是让多个聊天同时任意改同一文件，也不把多聊天数量等同于正确性。动态配置由实际send_message_to_thread的model/thinking参数下发，未修改用户全局模型设置。各阶段原始可见聊天记录可以直接核验。
+
+- 最终低成本交付一致性窄审：偏好聊天从GPT-6.1/medium切换GPT-6 Luna/medium，只读检查文档与真实/替身边界，无新实质不一致；没有检查代替HTML或真人语义。
+- QA最终固定ad12570全21PASS、0失败/跳过/retry，S4原句独立UI写入/新context召回/删除后不复活通过，旧Agent/QA/阅读/报告/财务边界/来源失效全部按各自证据收口。root复核manifest和关键proof后准备本地交付提交；没有远程CI/push/合并或发布声明。

@@ -1,0 +1,498 @@
+{
+  "schema": "findoc-conversation-v12-readonly-v1",
+  "observation": {
+    "status": "observed_pending_human_review",
+    "head": "10339fd77d64f3873cea65fbd42bed4966ef5696",
+    "configured_model": "deepseek-v4-flash",
+    "provider_response_models": [
+      "deepseek-flash",
+      "deepseek-flash"
+    ],
+    "physical_provider_attempts": 2,
+    "bge_calls": 5,
+    "milvus_search_calls": 4,
+    "milvus_search_attempts": 4,
+    "milvus_search_failures": 0,
+    "human_semantic_review": "pending",
+    "financial_write_counts": {
+      "financial_acceptance_receipts": 0,
+      "confirmed_financial_facts": 0
+    },
+    "live_execution_requirements": {
+      "completed_source_quote": true,
+      "physical_provider_attempt_observed": true,
+      "actual_model_response": true,
+      "bge_call_observed": true,
+      "milvus_search_observed": true
+    }
+  },
+  "conversation": {
+    "conversation_id": "3b2863d4-fc10-4883-b0cd-5f6db6f7d5cb",
+    "selected_documents": [
+      {
+        "document_id": "0b91c04391d3c09b8f868ffaf3ed9fc34d6838d6aba692890bb7270dbf6cfdaf",
+        "id": "midea-2024",
+        "sha256": "bc82a1be9e09101ed2c2772844a44b8a356c87a4dbdc0fa44a55eeeabaf94455"
+      },
+      {
+        "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+        "id": "midea-2025",
+        "sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c"
+      }
+    ]
+  },
+  "turns": [
+    {
+      "schema_version": "conversation-turn-v1",
+      "conversation_id": "3b2863d4-fc10-4883-b0cd-5f6db6f7d5cb",
+      "turn_id": "c687e327-8e16-41be-bd8f-e214ab42062d",
+      "operation_id": "aee786d3-4864-4afc-b7ef-a6b276f532c3",
+      "seq": 1,
+      "status": "completed",
+      "user_text": "请引用年报原文说明美的集团2025年的营业收入，不计算同比。",
+      "resolved_query": {
+        "text": "美的集团股份有限公司 请引用年报原文说明美的集团2025年的营业收入，不计算同比。",
+        "intent": "source_quote",
+        "company_id": "3b414bb9-79bb-44b9-820d-902de4a40559",
+        "metric_key": "revenue",
+        "periods": [
+          2025
+        ],
+        "resolution": "explicit",
+        "context_turn_ids": []
+      },
+      "fact_selections": [],
+      "result": {
+        "kind": "source_quote",
+        "answer_text": "2025年报《midea-2025.pdf》原文：\n|  | 2025年 | 2024年 | 本年比上年增减 | 2023年 |\n| --- | --- | --- | --- | --- |\n| 营业收入（千元） | 456,451,731 | 407,149,600 | 12.11% | 372,037,280 |\n| 归属于上市公司股东的净利润（千元） | 43,945,411 | 38,537,237 | 14.03% | 33,719,935 |\n| 归属于上市公司股东的扣除非经常性损 益的净利润（千元） | 41,267,233 | 35,741,418 | 15.46% | 32,974,908 |\n| 经营活动产生的现金流量净额（千元） | 53,345,930 | 60,511,572 | -11.84% | 57,902,611 |\n| 基本每股收益（元/股） | 5.80 | 5.44 | 6.62% | 4.93 |\n| 稀释每股收益（元/股） | 5.76 | 5.42 | 6.27% | 4.92 |\n| 境内会计师事务所名称 | 普华永道中天会计师事务所（特殊普通合伙） |\n| --- | --- |\n|  | 中国(上海)自由贸易试验区海阳西路 555 号、东育路 588 号第 45 层 4501、 4504单元 |\n| 境内会计师事务所办公地址 |  |\n|  |  |\n| 境内签字会计师姓名 | 周伟然、吴芳芳 |\n| 境外会计师事务所名称 | 罗兵咸永道会计师事务所 |\n| 境外会计师事务所办公地址 | 香港中环雪厂街5号太子大厦22楼 |\n| 境外签字会计师姓名 | 周伟然 |\n公司年度报告备置地点 \n公司投资者关系部 \n四、注册变更情况 \n \n统一社会信用代码 \n91440606722473344C \n公司上市以来主营业务的变化情况（如有） \n无变更 \n历次控股股东的变更情况（如有） \n无变更 \n五、其他有关资料 \n公司聘请的会计师事务所 \n境内会计师事务所名称 \n普华永道中天会计师事务所（特殊普通合伙） \n境内会计师事务所办公地址 \n中国(上海)自由贸易试验区海阳西路555 号、东育路588 号第45 层4501、\n4504 单元 \n境内签字会计师姓名 \n周伟然、吴芳芳 \n境外会计师事务所名称 \n罗兵咸永道会计师事务所 \n境外会计师事务所办公地址 \n香港中环雪厂街5 号太子大厦22 楼 \n境外签字会计师姓名 \n周伟然 \n公司聘请的报告期内履行持续督导职责的保荐机构 \n□ 适用 √ 不适用 \n公司聘请的报告期内履行持续督导职责的财务顾问 \n□ 适用 √ 不适用 \n六、主要会计数据和财务指标 \n公司是否需追溯调整或重述以前年度会计数据 \n□ 是 √ 否 \n \n2025 年 \n2024 年 \n本年比上年增减 \n2023 年 \n营业收入（千元） \n456,451,731 \n407,149,600 \n12.11% \n372,037,280 \n归属于上市公司股东的净利润（千元） \n43,945,411 \n38,537,237 \n14.03% \n33,719,935 \n归属于上市公司股东的扣除非经常性损\n益的净利润（千元） \n41,267,233 \n35,741,418 \n15.46% \n32,974,908 \n经营活动产生的现金流量净额（千元） \n53,345,930 \n60,511,572 \n-11.84% \n57,902,611 \n基本每股收益（元/股） \n5.80 \n5.44 \n6.62% \n4.93 \n稀释每股收益（元/股） \n5.76 \n5.42 \n6.27% \n4.92\n|  | 公司年度报告备置地点 |  | 公司投资者关系部 |\n| --- | --- | --- | --- |\n|  | 统一社会信用代码 |  | 91440606722473344C |\n| --- | --- | --- | --- |\n|  | 公司上市以来主营业务的变化情况（如有） |  | 无变更 |\n|  | 历次控股股东的变更情况（如有） |  | 无变更 |\n[2]",
+        "evidence_refs": [
+          {
+            "workspace_id": "demo",
+            "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+            "company_id": "3b414bb9-79bb-44b9-820d-902de4a40559",
+            "report_year": 2025,
+            "report_type": "annual",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "basis": "PRC_GAAP",
+            "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+            "content_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+            "attempt": 1,
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "number": 2,
+            "chunk_id": "1a7c92b437924e62f14282030c350b2099074d8a01f9e1bdd42c2e8951498b2c",
+            "physical_page": 9,
+            "source_file": "midea-2025.pdf",
+            "text": "|  | 2025年 | 2024年 | 本年比上年增减 | 2023年 |\n| --- | --- | --- | --- | --- |\n| 营业收入（千元） | 456,451,731 | 407,149,600 | 12.11% | 372,037,280 |\n| 归属于上市公司股东的净利润（千元） | 43,945,411 | 38,537,237 | 14.03% | 33,719,935 |\n| 归属于上市公司股东的扣除非经常性损 益的净利润（千元） | 41,267,233 | 35,741,418 | 15.46% | 32,974,908 |\n| 经营活动产生的现金流量净额（千元） | 53,345,930 | 60,511,572 | -11.84% | 57,902,611 |\n| 基本每股收益（元/股） | 5.80 | 5.44 | 6.62% | 4.93 |\n| 稀释每股收益（元/股） | 5.76 | 5.42 | 6.27% | 4.92 |\n| 境内会计师事务所名称 | 普华永道中天会计师事务所（特殊普通合伙） |\n| --- | --- |\n|  | 中国(上海)自由贸易试验区海阳西路 555 号、东育路 588 号第 45 层 4501、 4504单元 |\n| 境内会计师事务所办公地址 |  |\n|  |  |\n| 境内签字会计师姓名 | 周伟然、吴芳芳 |\n| 境外会计师事务所名称 | 罗兵咸永道会计师事务所 |\n| 境外会计师事务所办公地址 | 香港中环雪厂街5号太子大厦22楼 |\n| 境外签字会计师姓名 | 周伟然 |\n公司年度报告备置地点 \n公司投资者关系部 \n四、注册变更情况 \n \n统一社会信用代码 \n91440606722473344C \n公司上市以来主营业务的变化情况（如有） \n无变更 \n历次控股股东的变更情况（如有） \n无变更 \n五、其他有关资料 \n公司聘请的会计师事务所 \n境内会计师事务所名称 \n普华永道中天会计师事务所（特殊普通合伙） \n境内会计师事务所办公地址 \n中国(上海)自由贸易试验区海阳西路555 号、东育路588 号第45 层4501、\n4504 单元 \n境内签字会计师姓名 \n周伟然、吴芳芳 \n境外会计师事务所名称 \n罗兵咸永道会计师事务所 \n境外会计师事务所办公地址 \n香港中环雪厂街5 号太子大厦22 楼 \n境外签字会计师姓名 \n周伟然 \n公司聘请的报告期内履行持续督导职责的保荐机构 \n□ 适用 √ 不适用 \n公司聘请的报告期内履行持续督导职责的财务顾问 \n□ 适用 √ 不适用 \n六、主要会计数据和财务指标 \n公司是否需追溯调整或重述以前年度会计数据 \n□ 是 √ 否 \n \n2025 年 \n2024 年 \n本年比上年增减 \n2023 年 \n营业收入（千元） \n456,451,731 \n407,149,600 \n12.11% \n372,037,280 \n归属于上市公司股东的净利润（千元） \n43,945,411 \n38,537,237 \n14.03% \n33,719,935 \n归属于上市公司股东的扣除非经常性损\n益的净利润（千元） \n41,267,233 \n35,741,418 \n15.46% \n32,974,908 \n经营活动产生的现金流量净额（千元） \n53,345,930 \n60,511,572 \n-11.84% \n57,902,611 \n基本每股收益（元/股） \n5.80 \n5.44 \n6.62% \n4.93 \n稀释每股收益（元/股） \n5.76 \n5.42 \n6.27% \n4.92\n|  | 公司年度报告备置地点 |  | 公司投资者关系部 |\n| --- | --- | --- | --- |\n|  | 统一社会信用代码 |  | 91440606722473344C |\n| --- | --- | --- | --- |\n|  | 公司上市以来主营业务的变化情况（如有） |  | 无变更 |\n|  | 历次控股股东的变更情况（如有） |  | 无变更 |",
+            "kind": "paragraph",
+            "verification": "exact_original_with_context",
+            "ref_id": "e2"
+          }
+        ],
+        "verified_financial_fact_refs": [],
+        "analysis": null,
+        "interpretation_status": "not_generated",
+        "reason_code": null,
+        "error_code": null,
+        "actions": [
+          {
+            "kind": "open_source",
+            "label": "查看原文",
+            "href": "/api/documents/d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92/file?source_revision=88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24#page=9",
+            "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+            "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+            "physical_page": 9,
+            "research_run_id": null
+          }
+        ],
+        "memory_candidates": []
+      },
+      "research_run_id": null,
+      "tool_events": [
+        {
+          "sequence": 1,
+          "tool_name": "search_annual_report",
+          "status": "started",
+          "summary": "开始只读工具",
+          "evidence_ref_ids": [],
+          "created_at": "2026-11-02T15:28:29.756791+00:00"
+        },
+        {
+          "sequence": 2,
+          "tool_name": "search_annual_report",
+          "status": "completed",
+          "summary": "只读工具完成",
+          "evidence_ref_ids": [
+            "e2"
+          ],
+          "created_at": "2026-11-02T15:28:33.671158+00:00"
+        }
+      ],
+      "created_at": "2026-11-02T15:28:29.667604+00:00",
+      "ended_at": "2026-11-02T15:28:33.752339+00:00",
+      "provider_outcome": "returned",
+      "usage": {
+        "model_attempts": 1,
+        "tool_calls": 1
+      },
+      "historical_snapshot": true,
+      "source_states": [
+        {
+          "document_id": "0b91c04391d3c09b8f868ffaf3ed9fc34d6838d6aba692890bb7270dbf6cfdaf",
+          "source_revision": "ae837215a6e5906f6021cb9ab634cc4ec181b9b75b82627d4b78e6404ef3028e",
+          "status": "current_at_read"
+        },
+        {
+          "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+          "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+          "status": "current_at_read"
+        }
+      ],
+      "financial_fact_validity": "not_applicable",
+      "integrity_sha256": "ab28fa681f5cb751444dcd3fd02f1207c69b799db187305a8feb1eeab0f884ba"
+    },
+    {
+      "schema_version": "conversation-turn-v1",
+      "conversation_id": "3b2863d4-fc10-4883-b0cd-5f6db6f7d5cb",
+      "turn_id": "3c2e29c5-0e4e-40f9-aa5f-281e26b1b396",
+      "operation_id": "a0fec7f7-793f-40d4-b642-7d44d273f71f",
+      "seq": 2,
+      "status": "refused",
+      "user_text": "同比变化呢？",
+      "resolved_query": {
+        "text": "美的集团股份有限公司 2025,2024年度 营业收入原文",
+        "intent": "compare_metric",
+        "company_id": "3b414bb9-79bb-44b9-820d-902de4a40559",
+        "metric_key": "revenue",
+        "periods": [
+          2025,
+          2024
+        ],
+        "resolution": "context",
+        "context_turn_ids": [
+          "c687e327-8e16-41be-bd8f-e214ab42062d"
+        ]
+      },
+      "fact_selections": [],
+      "result": {
+        "kind": "needs_human_review",
+        "answer_text": "尚无可用于本轮计算的明确已确认事实，请核对来源并选择披露版本。",
+        "evidence_refs": [],
+        "verified_financial_fact_refs": [],
+        "analysis": null,
+        "interpretation_status": "not_generated",
+        "reason_code": "explicit_fact_selection_required",
+        "error_code": null,
+        "actions": [
+          {
+            "kind": "review_facts",
+            "label": "核对并明确选择财务事实",
+            "href": "/research?mode=operating",
+            "document_id": null,
+            "source_revision": null,
+            "physical_page": null,
+            "research_run_id": null
+          }
+        ],
+        "memory_candidates": []
+      },
+      "research_run_id": null,
+      "tool_events": [
+        {
+          "sequence": 1,
+          "tool_name": "compare_confirmed_metrics",
+          "status": "started",
+          "summary": "开始只读工具",
+          "evidence_ref_ids": [],
+          "created_at": "2026-11-02T15:28:33.926799+00:00"
+        },
+        {
+          "sequence": 2,
+          "tool_name": "compare_confirmed_metrics",
+          "status": "refused",
+          "summary": "资料或资格不足",
+          "evidence_ref_ids": [],
+          "created_at": "2026-11-02T15:28:33.928179+00:00"
+        }
+      ],
+      "created_at": "2026-11-02T15:28:33.840906+00:00",
+      "ended_at": "2026-11-02T15:28:34.005386+00:00",
+      "provider_outcome": "not_started",
+      "usage": {
+        "model_attempts": 0,
+        "tool_calls": 1
+      },
+      "historical_snapshot": true,
+      "source_states": [
+        {
+          "document_id": "0b91c04391d3c09b8f868ffaf3ed9fc34d6838d6aba692890bb7270dbf6cfdaf",
+          "source_revision": "ae837215a6e5906f6021cb9ab634cc4ec181b9b75b82627d4b78e6404ef3028e",
+          "status": "current_at_read"
+        },
+        {
+          "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+          "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+          "status": "current_at_read"
+        }
+      ],
+      "financial_fact_validity": "not_applicable",
+      "integrity_sha256": "89bb4dab9dd5b7a007e25b5ce622518e65352fc956c91f9daf9df52987bce364"
+    },
+    {
+      "schema_version": "conversation-turn-v1",
+      "conversation_id": "3b2863d4-fc10-4883-b0cd-5f6db6f7d5cb",
+      "turn_id": "8f652b2c-9062-4e53-8b72-0ac65b25bcb8",
+      "operation_id": "2d04f3a0-6263-46e9-be3d-a2fc4673205c",
+      "seq": 3,
+      "status": "refused",
+      "user_text": "经营现金流也这样吗？",
+      "resolved_query": {
+        "text": "美的集团股份有限公司 2025,2024年度 经营活动产生的现金流量净额原文",
+        "intent": "compare_metric",
+        "company_id": "3b414bb9-79bb-44b9-820d-902de4a40559",
+        "metric_key": "operating_cash_flow",
+        "periods": [
+          2025,
+          2024
+        ],
+        "resolution": "context",
+        "context_turn_ids": [
+          "3c2e29c5-0e4e-40f9-aa5f-281e26b1b396"
+        ]
+      },
+      "fact_selections": [],
+      "result": {
+        "kind": "needs_human_review",
+        "answer_text": "尚无可用于本轮计算的明确已确认事实，请核对来源并选择披露版本。",
+        "evidence_refs": [],
+        "verified_financial_fact_refs": [],
+        "analysis": null,
+        "interpretation_status": "not_generated",
+        "reason_code": "explicit_fact_selection_required",
+        "error_code": null,
+        "actions": [
+          {
+            "kind": "review_facts",
+            "label": "核对并明确选择财务事实",
+            "href": "/research?mode=operating",
+            "document_id": null,
+            "source_revision": null,
+            "physical_page": null,
+            "research_run_id": null
+          }
+        ],
+        "memory_candidates": []
+      },
+      "research_run_id": null,
+      "tool_events": [
+        {
+          "sequence": 1,
+          "tool_name": "compare_confirmed_metrics",
+          "status": "started",
+          "summary": "开始只读工具",
+          "evidence_ref_ids": [],
+          "created_at": "2026-11-02T15:28:34.167638+00:00"
+        },
+        {
+          "sequence": 2,
+          "tool_name": "compare_confirmed_metrics",
+          "status": "refused",
+          "summary": "资料或资格不足",
+          "evidence_ref_ids": [],
+          "created_at": "2026-11-02T15:28:34.168942+00:00"
+        }
+      ],
+      "created_at": "2026-11-02T15:28:34.085770+00:00",
+      "ended_at": "2026-11-02T15:28:34.246112+00:00",
+      "provider_outcome": "not_started",
+      "usage": {
+        "model_attempts": 0,
+        "tool_calls": 1
+      },
+      "historical_snapshot": true,
+      "source_states": [
+        {
+          "document_id": "0b91c04391d3c09b8f868ffaf3ed9fc34d6838d6aba692890bb7270dbf6cfdaf",
+          "source_revision": "ae837215a6e5906f6021cb9ab634cc4ec181b9b75b82627d4b78e6404ef3028e",
+          "status": "current_at_read"
+        },
+        {
+          "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+          "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+          "status": "current_at_read"
+        }
+      ],
+      "financial_fact_validity": "not_applicable",
+      "integrity_sha256": "d953fc18b2fdaa55d8cf55935911def74499fe20328ed34424cf925f2c80a226"
+    },
+    {
+      "schema_version": "conversation-turn-v1",
+      "conversation_id": "3b2863d4-fc10-4883-b0cd-5f6db6f7d5cb",
+      "turn_id": "3dced097-6a00-47ed-8407-5875959d38e7",
+      "operation_id": "6a16ca13-0451-4558-8c4c-75f388535642",
+      "seq": 4,
+      "status": "completed",
+      "user_text": "格力同一年呢？",
+      "resolved_query": {
+        "text": " 格力同一年呢？",
+        "intent": "clarify",
+        "company_id": null,
+        "metric_key": "operating_cash_flow",
+        "periods": [
+          2025,
+          2024
+        ],
+        "resolution": "ambiguous",
+        "context_turn_ids": [
+          "8f652b2c-9062-4e53-8b72-0ac65b25bcb8"
+        ]
+      },
+      "fact_selections": [],
+      "result": {
+        "kind": "clarification",
+        "answer_text": "请明确所选企业、财务年度和指标；更换企业或来源请创建新会话。",
+        "evidence_refs": [],
+        "verified_financial_fact_refs": [],
+        "analysis": null,
+        "interpretation_status": "not_generated",
+        "reason_code": "unknown_company",
+        "error_code": null,
+        "actions": [],
+        "memory_candidates": []
+      },
+      "research_run_id": null,
+      "tool_events": [],
+      "created_at": "2026-11-02T15:28:34.333480+00:00",
+      "ended_at": "2026-11-02T15:28:34.490904+00:00",
+      "provider_outcome": "not_started",
+      "usage": {
+        "model_attempts": 0,
+        "tool_calls": 0
+      },
+      "historical_snapshot": true,
+      "source_states": [
+        {
+          "document_id": "0b91c04391d3c09b8f868ffaf3ed9fc34d6838d6aba692890bb7270dbf6cfdaf",
+          "source_revision": "ae837215a6e5906f6021cb9ab634cc4ec181b9b75b82627d4b78e6404ef3028e",
+          "status": "current_at_read"
+        },
+        {
+          "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+          "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+          "status": "current_at_read"
+        }
+      ],
+      "financial_fact_validity": "not_applicable",
+      "integrity_sha256": "42f14d4236a85f1ebd341096e49c9ae25adab889f304f17d208de63926a9f125"
+    },
+    {
+      "schema_version": "conversation-turn-v1",
+      "conversation_id": "3b2863d4-fc10-4883-b0cd-5f6db6f7d5cb",
+      "turn_id": "4de3c190-1cee-4d96-89e5-a734fcc856f0",
+      "operation_id": "394d9620-6a1b-44bb-ad2b-f1f08c7b9554",
+      "seq": 5,
+      "status": "completed",
+      "user_text": "请引用年报原文说明美的集团2025年的主要业务，不计算同比。",
+      "resolved_query": {
+        "text": "美的集团股份有限公司 请引用年报原文说明美的集团2025年的主要业务，不计算同比。",
+        "intent": "source_quote",
+        "company_id": "3b414bb9-79bb-44b9-820d-902de4a40559",
+        "metric_key": null,
+        "periods": [
+          2025
+        ],
+        "resolution": "explicit",
+        "context_turn_ids": []
+      },
+      "fact_selections": [],
+      "result": {
+        "kind": "source_quote",
+        "answer_text": "2025年报《midea-2025.pdf》原文：\n第三节 管理层讨论与分析 \n一、报告期内公司从事的主要业务 \n美的是一家覆盖智能家居、工业技术、楼宇科技、机器人与自动化、新能源、健康医疗、智慧物流\n等业务的全球领先的科技集团，已建立ToC 与ToB 并重发展的业务矩阵，既可为消费者提供各类智能家\n居的产品与服务，也可为企业客户提供多元化的商业及工业解决方案。 \n美的智能家居业务主要覆盖智慧家电、智慧家居及周边相关产业和生态链，围绕面向终端用户的智\n能化场景搭建、用户运营和数据价值发掘，致力于为终端用户提供最佳体验的全屋智能家居及服务。 \n美的工业技术业务聚焦暖通家电、新能源汽车、机器人核心部件领域，拥有美芝、威灵、美仁等品\n牌，产品覆盖压缩机、电机、芯片、阀/泵、新能源汽车部件、机器人部件等，致力于用领先的科技、品\n[3]",
+        "evidence_refs": [
+          {
+            "workspace_id": "demo",
+            "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+            "company_id": "3b414bb9-79bb-44b9-820d-902de4a40559",
+            "report_year": 2025,
+            "report_type": "annual",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "basis": "PRC_GAAP",
+            "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+            "content_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+            "attempt": 1,
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "number": 3,
+            "chunk_id": "66b9131e8d2ff3a2d87990f84d299d8616824f9d97e0b357a52bffb5116d69e8",
+            "physical_page": 13,
+            "source_file": "midea-2025.pdf",
+            "text": "第三节 管理层讨论与分析 \n一、报告期内公司从事的主要业务 \n美的是一家覆盖智能家居、工业技术、楼宇科技、机器人与自动化、新能源、健康医疗、智慧物流\n等业务的全球领先的科技集团，已建立ToC 与ToB 并重发展的业务矩阵，既可为消费者提供各类智能家\n居的产品与服务，也可为企业客户提供多元化的商业及工业解决方案。 \n美的智能家居业务主要覆盖智慧家电、智慧家居及周边相关产业和生态链，围绕面向终端用户的智\n能化场景搭建、用户运营和数据价值发掘，致力于为终端用户提供最佳体验的全屋智能家居及服务。 \n美的工业技术业务聚焦暖通家电、新能源汽车、机器人核心部件领域，拥有美芝、威灵、美仁等品\n牌，产品覆盖压缩机、电机、芯片、阀/泵、新能源汽车部件、机器人部件等，致力于用领先的科技、品",
+            "kind": "paragraph",
+            "verification": "exact_original_with_context",
+            "ref_id": "e3"
+          }
+        ],
+        "verified_financial_fact_refs": [],
+        "analysis": null,
+        "interpretation_status": "not_generated",
+        "reason_code": null,
+        "error_code": null,
+        "actions": [
+          {
+            "kind": "open_source",
+            "label": "查看原文",
+            "href": "/api/documents/d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92/file?source_revision=88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24#page=13",
+            "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+            "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+            "physical_page": 13,
+            "research_run_id": null
+          }
+        ],
+        "memory_candidates": []
+      },
+      "research_run_id": null,
+      "tool_events": [
+        {
+          "sequence": 1,
+          "tool_name": "search_annual_report",
+          "status": "started",
+          "summary": "开始只读工具",
+          "evidence_ref_ids": [],
+          "created_at": "2026-11-02T15:28:34.656607+00:00"
+        },
+        {
+          "sequence": 2,
+          "tool_name": "search_annual_report",
+          "status": "completed",
+          "summary": "只读工具完成",
+          "evidence_ref_ids": [
+            "e3"
+          ],
+          "created_at": "2026-11-02T15:28:41.833669+00:00"
+        }
+      ],
+      "created_at": "2026-11-02T15:28:34.573363+00:00",
+      "ended_at": "2026-11-02T15:28:41.915050+00:00",
+      "provider_outcome": "returned",
+      "usage": {
+        "model_attempts": 1,
+        "tool_calls": 1
+      },
+      "historical_snapshot": true,
+      "source_states": [
+        {
+          "document_id": "0b91c04391d3c09b8f868ffaf3ed9fc34d6838d6aba692890bb7270dbf6cfdaf",
+          "source_revision": "ae837215a6e5906f6021cb9ab634cc4ec181b9b75b82627d4b78e6404ef3028e",
+          "status": "current_at_read"
+        },
+        {
+          "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+          "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+          "status": "current_at_read"
+        }
+      ],
+      "financial_fact_validity": "not_applicable",
+      "integrity_sha256": "f674f135a0d7140f4b4980170b4c0452f53aff13e77fc084484266dc98f12864"
+    }
+  ]
+}

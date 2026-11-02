@@ -18,3 +18,15 @@
 ## 实施门禁
 
 A1先仓储/API+fake，再A2真实只读工具；前端基础可并行，精确DTO以上述规范接线。A4为真实HTTP/SQLite+明确标记的替身浏览器测试；G另有限真实模型/真实年报证据。所有Green、skip、失败与人工待验分别保留。
+
+## 集成路由修订（A1主控审查）
+
+实际PDF路由是服务端 `/documents/{document_id}/file`，前端经代理使用 `/api/documents/{URL编码id}/file?source_revision={sha}#page={physical_page}`。open_source Action.href统一为此形态，不使用不存在的 `/source/file` 路径；fragment只能为精确物理页。Action的document/revision/page仍与冻结来源/引用关联，打开经ResearchPdfDialog复验字节。
+
+## 明确未登记的冲突与UNKNOWN
+
+新Turn请求返回409 `conversation_busy`、`source_changed`、`source_not_ready`、`report_identity_unverified`时，该请求尚未登记operation，前端可解除仅本次未登记线索、保留草稿并只读刷新会话；不得自动重新提交。登记后发生这些问题则保存终态Turn并200读回。`operation_request_conflict`不能视作未登记，原operation可能已执行，仍只读查证。网络/5xx/损坏响应与GET404均不能用来解除未知操作。此区别保证双标签拒绝方可在明确查明另一轮终态后，由用户主动发送下一轮。
+
+## 最终恢复补充
+
+新Conversation写入口将底层`selection_changed`规范为`source_changed`，不改旧来源/ResearchRun协议。原DELETE请求的410+conversation_deleted表示本operation未登记且资源已被其他操作删除；相同删除operation重放为200，操作冲突为409。前端可对此确切DELETE组合解除本地线索并提示已被他处删除，不能把后来的GET404/410推广为未执行证明。Memory旧create/update回执在资源后来删除后允许completed+resource_deleted=true；这只查明原操作，不恢复旧value。

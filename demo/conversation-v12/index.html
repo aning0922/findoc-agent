@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>FinDoc V1.2 · 真实模型历史阅读</title>
+  <style>
+    :root{color-scheme:light;--canvas:#f5f6f3;--surface:#fff;--ink:#263b36;--muted:#61706a;--line:#dfe5df;--accent:#096e66;--soft:#e5f3ef;--warn:#8a5a16;--warn-bg:#fff5df;--focus:#3181b2;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.75}
+    *{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink)}a{color:var(--accent);text-underline-offset:4px}button{font:inherit;color:var(--accent);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 16px;min-height:44px;cursor:pointer}button:disabled{opacity:.6;cursor:wait}:focus-visible{outline:3px solid var(--focus);outline-offset:3px}h1,h2,h3,p{margin:0 0 12px}h1{font-size:clamp(28px,4vw,40px);line-height:1.35}h2{font-size:23px}h3{font-size:17px}small,.muted{color:var(--muted);font-size:14px}.wrap{max-width:1200px;margin:auto;padding:28px 24px 64px}.brand{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:32px}.brand strong{font-size:20px}.brand span{font-size:14px;color:var(--muted)}.hero{max-width:850px;margin-bottom:24px}.eyebrow{font-size:13px;letter-spacing:.08em;color:var(--accent);font-weight:650}.notice{padding:16px 20px;border:1px solid #ead5ad;background:var(--warn-bg);color:var(--warn);border-radius:12px;margin-bottom:24px}.notice p:last-child{margin:0}.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;align-items:start}.side{position:sticky;top:20px}.card{padding:24px;border:1px solid var(--line);border-radius:14px;background:var(--surface);min-width:0;margin-bottom:20px}.side .card{padding:20px}.side ol{margin:0;padding-left:22px}.side li{margin:10px 0}.side a{display:block;padding:4px 0}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}.stat{padding:12px;background:var(--canvas);border-radius:8px;min-width:0}.stat dt{font-size:13px;color:var(--muted)}.stat dd{font-weight:650;font-size:20px;margin:2px 0 0}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.pill{background:var(--soft);color:var(--accent);padding:3px 9px;border-radius:6px;font-size:13px}.turn{scroll-margin-top:20px}.turn header{border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:20px}.question{font-size:19px;font-weight:550;margin-bottom:20px;white-space:pre-wrap}.focus{padding:12px 16px;border-left:3px solid var(--accent);background:var(--canvas);margin-bottom:20px}.answer,.quote{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;line-height:1.9}.quote{border-left:2px solid var(--line);padding-left:16px;margin:12px 0}.evidence{border-top:1px solid var(--line);padding-top:18px;margin-top:20px}.evidence h3{font-size:16px}details{margin-top:16px}summary{cursor:pointer;min-height:36px;padding:4px 0;color:var(--accent)}pre{font:13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--canvas);padding:12px;border-radius:8px;max-height:420px;overflow:auto}p,li,dt,dd,h1,h2,h3,small,span,a{overflow-wrap:anywhere}.empty{padding:28px 0}.footer{border-top:1px solid var(--line);padding-top:20px;margin-top:28px;font-size:14px;color:var(--muted)}[hidden]{display:none!important}
+    @media(max-width:760px){.wrap{padding:20px 16px 40px}.brand{margin-bottom:24px}.layout{grid-template-columns:minmax(0,1fr);gap:0}.side{position:static}.side ol{display:grid;grid-template-columns:minmax(0,1fr);gap:4px}.side li{margin:0}.card{padding:18px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.notice{padding:14px 16px}.question{font-size:18px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="brand"><strong>FinDoc.</strong><span>V1.2 / 对话与记忆 · 只读种子</span></header>
+  <section class="hero"><p class="eyebrow">SAVED CONVERSATION</p><h1>沿着所选年报，继续追问</h1><p class="muted">阅读本轮实际模型已提交的对话快照，查看问题如何解析、回答使用哪些原文，以及资料不足时如何停下。</p></section>
+  <aside class="notice" aria-label="阅读边界"><strong>只读历史 · 人工语义待审 · 无真人财务接受</strong><p>本页不提供发送、接受、保存事实或恢复执行入口，不发送任何模型或业务请求。引用和模型结果仍需人工审读；历史记录不证明来源现在仍有效。</p><p id="sample-warning" hidden>当前加载的是合成样例，仅用于布局自查，不是真实模型证据。</p></aside>
+  <div class="row"><p id="load-status" role="status" aria-live="polite">正在读取同目录历史快照…</p><button id="reload" type="button">重新读取本地快照</button></div>
+  <div id="content" class="layout" hidden>
+    <aside class="side"><nav class="card" aria-label="对话轮次"><h2>对话目录</h2><ol id="outline"></ol></nav><div class="card"><h3>原 PDF 核对</h3><p class="muted">本页不打包或伪造 PDF，也不提供可能失效的 API 链接。请回到完整本地 app，按报告年度、物理页及冻结来源身份核对真实文件。</p></div></aside>
+    <main id="history"><section class="card"><h2>本轮运行记录</h2><p class="muted">下列数据原样来自快照；失败、未记录及不足状态均保留，不视作全部验收通过。</p><div id="observation"></div></section><div id="turns"></div></main>
+  </div>
+  <footer class="footer">独立静态阅读页 · 数据只来自 <code>./real-model-history.json</code> · 无后端、无第三方脚本、无外部字体。<br>本页不替代新会话交互、真实 PDF 复验、真人财务核准或完整检索链验收。</footer>
+</div>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const labels = {source_quote:'原文摘录',confirmed_metric:'确认事实',comparison:'确定性比较',clarification:'请求澄清',needs_human_review:'需要人工核对',unsupported:'当前不支持',error:'错误记录',running:'执行中',completed:'已提交',refused:'已保存拒答',failed:'失败',interrupted:'已中断'};
+const metricLabels = {revenue:'营业收入',net_profit_parent:'归母净利润',operating_cash_flow:'经营活动现金流量净额'};
+function el(tag, text, className) {const node=document.createElement(tag);if(text!==undefined)node.textContent=String(text);if(className)node.className=className;return node;}
+function raw(value) {return value===undefined||value===null?'未记录':typeof value==='object'?JSON.stringify(value,null,2):String(value);}
+function details(title, value) {const node=el('details');node.append(el('summary',title),el('pre',raw(value)));return node;}
+function stat(label,value) {const node=el('div',undefined,'stat');node.append(el('dt',label),el('dd',raw(value)));return node;}
+function displayObservation(data) {
+  const o=data.observation, target=$('observation');
+  target.replaceChildren(el('p',`观测状态：${raw(o.status)}`),el('p',`配置模型：${raw(o.configured_model)} · 返回模型：${raw(o.provider_response_models)}`,'muted'));
+  const stats=el('dl',undefined,'stats');stats.append(stat('物理供应商尝试',o.physical_provider_attempts),stat('BGE 调用',o.bge_calls),stat('Milvus 检索',o.milvus_search_calls));target.append(stats);
+  target.append(el('p',`人工语义审阅：${raw(o.human_semantic_review)}`),details('查看运行及财务写计数',o),details('查看导出会话及所选资料 ID / SHA',data.conversation));
+}
+function displayTurn(t,index) {
+  const article=el('article',undefined,'card turn');article.id=`turn-${index+1}`;article.setAttribute('aria-label',`第 ${index+1} 轮对话`);
+  const header=el('header',undefined,'row');header.append(el('h2',`第 ${raw(t.seq)} 轮`),el('span',`${labels[t.status]||raw(t.status)} · ${t.result?labels[t.result.kind]||raw(t.result.kind):'尚无已提交结果'}`,'pill'));article.append(header,el('h3','用户问题'),el('p',t.user_text,'question'));
+  const q=t.resolved_query, focus=el('section',undefined,'focus');focus.append(el('h3','解析焦点'));
+  if(q){focus.append(el('p',q.text),el('p',`意图：${raw(q.intent)} · 指标：${metricLabels[q.metric_key]||raw(q.metric_key)} · 财务年度：${Array.isArray(q.periods)&&q.periods.length?q.periods.join(' / '):'待明确'} · 解析方式：${raw(q.resolution)}`,'muted'),details('查看解析身份与上下文轮次',q));}else{focus.append(el('p','本轮未保存结构化解析焦点。'));}article.append(focus);
+  const r=t.result;
+  if(!r){article.append(el('p','本轮没有已提交结果。本页不会恢复或重新执行。'));}
+  else {
+    article.append(el('h3',`研究助手 · ${labels[r.kind]||raw(r.kind)}`),el('p',r.answer_text,'answer'));
+    if(r.interpretation_status==='pending_human_review')article.append(el('p','AI 分析待人工语义审核。','muted'));
+    for(const e of r.evidence_refs||[]){const evidence=el('section',undefined,'evidence');evidence.append(el('h3',`引用 [${raw(e.number)}] · ${raw(e.report_year)} 年报《${raw(e.source_file)}》· 物理第 ${raw(e.physical_page)} 页`),el('p',e.text,'quote'),el('p','原文在保存时核验；请回完整本地 app 检查真实 PDF 与当前来源资格。','muted'),details('来源 SHA 与引用技术身份', {document_id:e.document_id,company_id:e.company_id,source_revision:e.source_revision,content_sha256:e.content_sha256,parser_version:e.parser_version,attempt:e.attempt,chunk_id:e.chunk_id,verification:e.verification}));article.append(evidence);}
+    if((r.verified_financial_fact_refs||[]).length)article.append(el('p','以下是快照中的历史事实引用，仅表示完成时验证，不代表本页进行了真人财务接受或当前资格复验。','muted'),details('历史财务事实引用',r.verified_financial_fact_refs));
+    if(r.analysis)article.append(details('已保存的确定性分析',r.analysis));
+    if(r.reason_code||r.error_code)article.append(el('p',`原因：${raw(r.reason_code)} · 错误：${raw(r.error_code)}`,'muted'));
+  }
+  article.append(details('本轮状态、调用次数与完整性身份',{status:t.status,result_kind:r?r.kind:null,interpretation_status:r?r.interpretation_status:null,turn_id:t.turn_id,operation_id:t.operation_id,created_at:t.created_at,ended_at:t.ended_at,provider_outcome:t.provider_outcome,usage:t.usage,source_states:t.source_states,financial_fact_validity:t.financial_fact_validity,integrity_sha256:t.integrity_sha256}));
+  return article;
+}
+async function load() {
+  $('reload').disabled=true;$('content').hidden=true;$('sample-warning').hidden=true;$('load-status').textContent='正在读取同目录历史快照…';
+  try {
+    const response=await fetch('./real-model-history.json',{method:'GET',cache:'no-store',credentials:'omit',redirect:'error'});
+    if(!response.ok)throw new Error('快照尚未提供或无法读取');
+    const data=await response.json();
+    if(!data||data.schema!=='findoc-conversation-v12-readonly-v1'||!data.observation||typeof data.observation!=='object'||!data.conversation||typeof data.conversation.conversation_id!=='string'||!Array.isArray(data.turns)||data.turns.some(t=>!t||t.schema_version!=='conversation-turn-v1'||t.conversation_id!==data.conversation.conversation_id||typeof t.user_text!=='string'||!Number.isSafeInteger(t.seq)))throw new Error('快照格式或会话身份不匹配');
+    $('sample-warning').hidden=!/synthetic|sample/i.test(String(data.observation.status));
+    displayObservation(data);$('outline').replaceChildren();$('turns').replaceChildren();
+    data.turns.forEach((t,i)=>{const item=el('li'),link=el('a',`第 ${raw(t.seq)} 轮 · ${t.result?labels[t.result.kind]||raw(t.result.kind):labels[t.status]||raw(t.status)}`);link.href=`#turn-${i+1}`;item.append(link);$('outline').append(item);$('turns').append(displayTurn(t,i));});
+    $('load-status').textContent=`已读取 ${data.turns.length} 轮已保存历史。${data.turns.length===5?'':'快照并非五轮；未补造其余对话。'}`;$('content').hidden=false;
+  }catch(error){$('load-status').textContent=`暂不能展示历史：${error.message}。请确认同目录存在 real-model-history.json，并通过 README 中的本地静态服务打开；不会请求 app API 或模型。`;}
+  finally{$('reload').disabled=false;}
+}
+$('reload').addEventListener('click',load);load();
+</script>
+</body>
+</html>
