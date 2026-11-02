@@ -136,6 +136,12 @@ export class ConversationHTTPError extends Error {
   code: string | null;
   constructor(status: number, code: string | null = null) { super(status === 404 ? '暂未查到记录。未再次提交，请继续只读核对。' : status === 410 ? '会话内容已删除。' : status === 409 ? '请求冲突或来源状态已变化，请先只读查证本次操作。' : '服务暂不能确认结果，请只读查询。'); this.status = status; this.code = code; }
 }
+// Frozen pre-registration errors for a new Turn only. A matching code on a 5xx,
+// an operation conflict, or a failed GET never proves execution did not start.
+export function isUnregisteredConversationTurn(error: unknown): boolean {
+  return error instanceof ConversationHTTPError && error.status === 409
+    && ['conversation_busy', 'source_changed', 'source_not_ready', 'report_identity_unverified'].includes(error.code || '');
+}
 export async function conversationJSON<T>(path: string, signal: AbortSignal, method = 'GET', body?: unknown): Promise<T> {
   const response = await fetch(`/api${path}`, { method, signal, cache: 'no-store', ...(body === undefined ? {} : { headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }) });
   if (!response.ok) {

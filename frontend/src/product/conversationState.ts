@@ -28,11 +28,23 @@ export function rememberConversationOperation(storage: Pick<Storage, 'getItem' |
   if (!old) storage.setItem(key, JSON.stringify([...operations.map(v => ({ operationId: v.operationId, conversationId: v.conversationId, kind: v.kind })),
     { operationId: operation.operationId, conversationId: operation.conversationId, kind: operation.kind }]));
 }
-// Only call after a validated definitive receipt, never after a transport error or 404.
+// Only call after a validated definitive receipt or the frozen pre-registration
+// rejection of this exact POST, never after a transport error or GET 404.
 export function resolveConversationOperation(storage: Pick<Storage, 'getItem' | 'setItem'>, operationId: string): void {
   storage.setItem(key, JSON.stringify(readConversationOperations(storage).filter(v => v.operationId !== operationId)
     .map(v => ({ operationId: v.operationId, conversationId: v.conversationId, kind: v.kind }))));
 }
 export function ownsConversationView(active: { conversationId: string | null; epoch: number }, candidate: { conversationId: string | null; epoch: number }): boolean {
   return active.conversationId === candidate.conversationId && active.epoch === candidate.epoch;
+}
+export interface ConversationScopeState<T> {
+  facts: T[];
+  chosenFacts: string[];
+  factError: string;
+  invalidPdf: string[];
+}
+// Preserve explicit choices on a read-only refresh of the same scope. They are
+// never transferable to a newly created/recovered conversation, even in-place.
+export function conversationScopeState<T>(previousId: string | null, nextId: string, current: ConversationScopeState<T>): ConversationScopeState<T> {
+  return previousId === nextId ? current : { facts: [], chosenFacts: [], factError: '', invalidPdf: [] };
 }

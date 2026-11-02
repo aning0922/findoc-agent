@@ -13,9 +13,9 @@ import { VerifiedExcerpt } from './VerifiedExcerpt.tsx';
 import { METRICS } from '../evidence/contracts.ts';
 import { readConversationSources, selectableConversationScope } from './conversationSources.ts';
 import type { ConversationSourceOptions } from './conversationSources.ts';
-import { createConversation, listConversations, readConversation, readConversationOperation, readConversationTurn, sendConversationTurn, conversationJSON, validateConversationOperation } from './conversationApi.ts';
+import { createConversation, isUnregisteredConversationTurn, listConversations, readConversation, readConversationOperation, readConversationTurn, sendConversationTurn, conversationJSON, validateConversationOperation } from './conversationApi.ts';
 import type { Action, ConversationDetail, ConversationSummary, EvidenceRef, MemoryCandidate, Turn } from './conversationTypes.ts';
-import { readConversationOperations, rememberConversationOperation, resolveConversationOperation } from './conversationState.ts';
+import { conversationScopeState, readConversationOperations, rememberConversationOperation, resolveConversationOperation } from './conversationState.ts';
 import type { ConversationOperation } from './conversationState.ts';
 import { conversationFactSelection, readConversationFacts } from './conversationFacts.ts';
 import { conversationActionPdfLocation, readConversationActionPdf, verifyConversationPdf } from './conversationPdf.ts';
@@ -39,6 +39,7 @@ export default function Conversations({ companies }: { companies: Company[] }) {
   const [listReload, setListReload] = useState(0);
   const [question, setQuestion] = useState('');
   const [busy, setBusy] = useState(false);
+  const [sendNeedsRefresh, setSendNeedsRefresh] = useState(false);
   const [message, setMessage] = useState('');
   const [storageError, setStorageError] = useState('');
   const [pending, setPending] = useState<ConversationOperation[]>([]);
@@ -125,9 +126,27 @@ export default function Conversations({ companies }: { companies: Company[] }) {
   }
   function resolve(op: string) { resolveConversationOperation(sessionStorage, op); syncPending(); }
   function showConversation(v: ConversationDetail) {
+    if (detail?.conversation_id !== v.conversation_id) {
+      // Revoke old readers before publishing B: their late callbacks check the
+      // aborted signals and cannot restore A's choices or PDF failure markers.
+      factReading.current?.abort(); factReading.current = null;
+      pdfReading.current?.abort(); pdfReading.current = null;
+      const state = conversationScopeState(detail?.conversation_id || null, v.conversation_id, { facts, chosenFacts, factError, invalidPdf });
+      setFacts(state.facts); setChosenFacts(state.chosenFacts); setFactError(state.factError); setInvalidPdf(state.invalidPdf);
+      setFactBusy(false); setPdf(null);
+    }
     setDetail(v); history.replaceState(null, '', conversationPath(v.conversation_id));
+    setSendNeedsRefresh(false);
     // Running turns discovered in another tab also block a new local submission.
     for (const t of v.turns.filter(t => t.status === 'running')) remember({ operationId: t.operation_id, conversationId: v.conversation_id, kind: 'send' });
+    // A validated read of the exact committed turn also resolves its pending
+    // hint, including the other tab's active turn discovered during refresh.
+    try {
+      const operations = readConversationOperations(sessionStorage);
+      for (const t of v.turns.filter(t => t.status !== 'running')) {
+        if (operations.some(op => op.kind === 'send' && op.conversationId === v.conversation_id && op.operationId === t.operation_id)) resolve(t.operation_id);
+      }
+    } catch { setStorageError('无法更新本机操作线索，请先核对记录。'); }
   }
   async function loadDetail(id: string, before?: number) {
     if (active.current) return;
@@ -162,7 +181,7 @@ export default function Conversations({ companies }: { companies: Company[] }) {
   const scopeCurrent = !!detail && detail.source_states.every(s => s.status === 'current_at_read') && !invalidPdf.length;
   const localPending = pending.some(p => p.conversationId === detail?.conversation_id || p.kind === 'create');
   async function send() {
-    if (active.current || storageError || !detail || localPending || detail.active_turn_id || !scopeCurrent || !question.trim()) return;
+    if (active.current || storageError || sendNeedsRefresh || !detail || localPending || detail.active_turn_id || !scopeCurrent || !question.trim()) return;
     const text = question.trim(); const selections = facts.filter(f => chosenFacts.includes(f.fact_id)).map(conversationFactSelection);
     const op: ConversationOperation = { operationId: crypto.randomUUID(), conversationId: detail.conversation_id, kind: 'send' };
     if (!remember(op)) return;
@@ -173,7 +192,18 @@ export default function Conversations({ companies }: { companies: Company[] }) {
       mergeTurn(turn); setQuestion(current => current.trim() === text ? '' : current);
       if (turn.status !== 'running') resolve(op.operationId);
       setListReload(n => n + 1);
-    } catch { if (!c.signal.aborted) setMessage('结果尚未确认。请查询本次操作状态；未再次发送或重新运行模型。'); }
+    } catch (error) {
+      if (!c.signal.aborted) {
+        if (isUnregisteredConversationTurn(error)) {
+          // Only this rejected POST's own hint may be removed. Do not retry,
+          // consume the draft, or clear any other tab/operation identity.
+          setSendNeedsRefresh(true);
+          try { resolve(op.operationId); }
+          catch { setStorageError('无法更新本机操作线索，发送暂不可用。'); }
+          setMessage('本次问题未登记，草稿已保留。会话可能正由其他标签处理，或来源资格已变化；请先只读刷新会话。确认无执行中任务且来源可用后，再由你明确点击发送。');
+        } else setMessage('结果尚未确认。请查询本次操作状态；未再次发送或重新运行模型。');
+      }
+    }
     finally { if (!c.signal.aborted) { active.current = null; setBusy(false); } }
   }
   async function recover(op: ConversationOperation) {
@@ -272,7 +302,7 @@ export default function Conversations({ companies }: { companies: Company[] }) {
       {initialId.current && !detail && !busy && <p>历史读取不会重新生成回答。<button onClick={() => void loadDetail(initialId.current!)}>重试读取历史</button></p>}
       <div className={styles.messages} aria-label="消息记录">{detail?.next_before_seq && <button disabled={busy} onClick={() => void loadDetail(detail.conversation_id, detail.next_before_seq!)}>读取更早消息</button>}{detail?.turns.map(renderTurn)}{!detail?.turns.length && <><h2>{detail ? '年报范围已确定，可以开始提问' : '从年报原文开始'}</h2><p>示例只填入草稿，不自动发送。</p><div className={styles.examples}>{examples.map(e => <button key={e} onClick={() => { setQuestion(e); input.current?.focus(); }}>{e}</button>)}</div></>}</div>
       <div className={styles.composer}><label htmlFor="conversation-question">研究问题</label><textarea ref={input} id="conversation-question" value={question} onChange={e => setQuestion(e.target.value)} rows={3} maxLength={1000} placeholder="例如：那上一年呢？" aria-describedby="conversation-send-help" />
-        <div className={styles.sendRow}><p id="conversation-send-help">{detail ? `已明确选择 ${chosenFacts.length} 项财务事实；发送才会创建新一轮。` : '先创建会话，再明确发送问题。'}</p><button disabled={busy || !detail || !scopeCurrent || !!detail.active_turn_id || localPending || !!storageError || !question.trim()} onClick={() => void send()}>发送</button></div>
+        <div className={styles.sendRow}><p id="conversation-send-help">{detail ? `已明确选择 ${chosenFacts.length} 项财务事实；发送才会创建新一轮。` : '先创建会话，再明确发送问题。'}</p><button disabled={busy || sendNeedsRefresh || !detail || !scopeCurrent || !!detail.active_turn_id || localPending || !!storageError || !question.trim()} onClick={() => void send()}>发送</button></div>
         {detail && <button onClick={() => { setPdf(null); openPanel('facts'); void discoverFacts(); }}>选择已确认财务事实</button>}
       </div><p className={styles.muted}>本地单人研究空间。必要的问题与证据会发送给所配置的模型供应商；来源资格与计算时验证不代替人工语义审读。</p>
       {detail && <button disabled={busy || localPending || !!detail.active_turn_id || !!storageError} onClick={() => openPanel('delete')}>删除此会话</button>}

@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createConversation, readConversationOperation, safeConversationAction, validateConversationDetail, validateConversationOperation, validateConversationTurn } from '../src/product/conversationApi.ts';
+import { ConversationHTTPError, createConversation, isUnregisteredConversationTurn, readConversation, readConversationOperation, safeConversationAction, sendConversationTurn, validateConversationDetail, validateConversationOperation, validateConversationTurn } from '../src/product/conversationApi.ts';
+import { conversationScopeState, readConversationOperations, rememberConversationOperation, resolveConversationOperation } from '../src/product/conversationState.ts';
 import { conversationFactEligible, conversationFactSelection } from '../src/product/conversationFacts.ts';
 import { validPreference, validateMemoryItem, validateMemoryOperation } from '../src/product/memoryApi.ts';
 import type { ConversationDetail, Turn, EvidenceRef } from '../src/product/conversationTypes.ts';
@@ -69,6 +70,57 @@ test('failed create and 404 operation lookup each send exactly one request with 
     assert.deepEqual(JSON.parse(calls[0].body as string), { operation_id: op, document_ids: ['d'] });
   } finally { globalThis.fetch = prior; }
 });
+test('only frozen new-Turn HTTP 409 rejection codes establish non-registration', () => {
+  for (const code of ['conversation_busy', 'source_changed', 'source_not_ready', 'report_identity_unverified']) {
+    assert.equal(isUnregisteredConversationTurn(new ConversationHTTPError(409, code)), true);
+    for (const status of [404, 422, 500, 503]) assert.equal(isUnregisteredConversationTurn(new ConversationHTTPError(status, code)), false);
+  }
+  for (const error of [new ConversationHTTPError(409, 'operation_request_conflict'), new ConversationHTTPError(409),
+    new TypeError('network failed'), new SyntaxError('bad JSON'), { status: 409, code: 'conversation_busy' }]) assert.equal(isUnregisteredConversationTurn(error), false);
+});
+test('losing tab clears only its unregistered send, reads winner to terminal, then sends only on a new explicit action', async () => {
+  function storage() {
+    let data: string | null = null;
+    return { getItem: () => data, setItem: (_key: string, value: string) => { data = value; } };
+  }
+  const tabA = storage(), tabB = storage(), c = conversation();
+  const loser = { operationId: tid, conversationId: cid, kind: 'send' as const };
+  const winner = { operationId: op, conversationId: cid, kind: 'send' as const };
+  rememberConversationOperation(tabA, winner); rememberConversationOperation(tabB, loser);
+  const prior = globalThis.fetch, calls: { method: string; body: unknown }[] = [];
+  let reads = 0;
+  globalThis.fetch = async (_url, init) => {
+    const method = init?.method || 'GET'; calls.push({ method, body: init?.body ? JSON.parse(init.body as string) : null });
+    if (method === 'POST' && calls.filter(c => c.method === 'POST').length === 1) return Response.json({ detail: 'conversation_busy' }, { status: 409 });
+    if (method === 'POST') return Response.json({ ...turn(), operation_id: '00000000-0000-4000-8000-000000000004' });
+    reads++;
+    const first = reads === 1;
+    return Response.json({ ...c, active_turn_id: first ? tid : null, turns: [first ? { ...turn(), status: 'running', result: null, ended_at: null } : turn()] });
+  };
+  try {
+    const draft = '问题';
+    await assert.rejects(sendConversationTurn(c, { operation_id: loser.operationId, text: draft }, new AbortController().signal), error => {
+      assert.equal(isUnregisteredConversationTurn(error), true);
+      resolveConversationOperation(tabB, loser.operationId); return true;
+    });
+    assert.deepEqual(readConversationOperations(tabB), []);
+    assert.deepEqual(readConversationOperations(tabA), [winner], 'other tab identity survives');
+    const running = await readConversation(cid, new AbortController().signal);
+    assert.ok(running.active_turn_id);
+    rememberConversationOperation(tabB, winner);
+    assert.equal(calls.filter(c => c.method === 'POST').length, 1, 'busy rejection and refresh do not resend');
+    const completed = await readConversation(cid, new AbortController().signal);
+    assert.equal(completed.active_turn_id, null);
+    for (const t of completed.turns) if (t.status !== 'running') resolveConversationOperation(tabB, t.operation_id);
+    assert.deepEqual(readConversationOperations(tabB), []);
+    assert.deepEqual(readConversationOperations(tabA), [winner]);
+    assert.equal(calls.filter(c => c.method === 'POST').length, 1, 'reading terminal still does not submit');
+    // The user explicitly clicks Send again, retaining their original question.
+    await sendConversationTurn(completed, { operation_id: '00000000-0000-4000-8000-000000000004', text: draft }, new AbortController().signal);
+    assert.deepEqual(calls.map(c => c.method), ['POST', 'GET', 'GET', 'POST']);
+    assert.equal((calls[3].body as { text: string }).text, draft);
+  } finally { globalThis.fetch = prior; }
+});
 test('confirmed fact choices preserve comparison-column years and exclude simulated/foreign source versions', () => {
   const c = conversation();
   const f = { ...c.sources[0], current_valid: true, production_calculable: true, confirmation_kind: 'local_operator', calculable: true, confirmation_status: 'confirmed', integrity: 'verified', fact_id: 'f', fact_set_id: 'set', metric_key: 'revenue', period: 2024, disclosure_version: `disclosure-v1:${'d'.repeat(64)}` } as unknown as Fact;
@@ -78,6 +130,30 @@ test('confirmed fact choices preserve comparison-column years and exclude simula
   assert.equal(conversationFactEligible({ ...f, confirmation_kind: 'simulated_test' }, c), false);
   assert.equal(conversationFactEligible({ ...f, attempt: 2 }, c), false);
   assert.equal(conversationFactEligible({ ...f, current_valid: false }, c), false);
+});
+test('in-place A to B switch discards selected facts and PDF failures before a B send, even for identical source documents', async () => {
+  const a = conversation(), b = { ...conversation(), conversation_id: tid };
+  const fact = { fact_id: 'a-fact', fact_set_id: 'a-set', company_id: 'c', metric_key: 'revenue', period: 2024, disclosure_version: `disclosure-v1:${'e'.repeat(64)}` } as Fact;
+  const aState = { facts: [fact], chosenFacts: [fact.fact_id], factError: 'A fact error', invalidPdf: [`d:${a.sources[0].source_revision}`] };
+  const bState = conversationScopeState(a.conversation_id, b.conversation_id, aState);
+  const selectedForB = bState.facts.filter(f => bState.chosenFacts.includes(f.fact_id)).map(conversationFactSelection);
+  assert.deepEqual(bState, { facts: [], chosenFacts: [], factError: '', invalidPdf: [] });
+  assert.equal(aState.chosenFacts.length, 1, 'switch does not mutate the historical A state');
+  assert.equal(b.source_states.every(s => s.status === 'current_at_read') && !bState.invalidPdf.length, true, 'A PDF failure must not disable the qualified B scope');
+  const prior = globalThis.fetch;
+  let sent: unknown;
+  globalThis.fetch = async (_url, init) => {
+    sent = JSON.parse(init!.body as string);
+    return Response.json({ ...turn(), conversation_id: b.conversation_id });
+  };
+  try {
+    await sendConversationTurn(b, { operation_id: op, text: '问题', fact_selections: selectedForB }, new AbortController().signal);
+    assert.deepEqual(sent, { operation_id: op, text: '问题', fact_selections: [] });
+  } finally { globalThis.fetch = prior; }
+});
+test('read-only refresh of the same conversation retains explicit fact choices and PDF failure state', () => {
+  const state = { facts: [{ fact_id: 'chosen' }], chosenFacts: ['chosen'], factError: 'retain error', invalidPdf: ['frozen-source'] };
+  assert.equal(conversationScopeState(cid, cid, state), state);
 });
 test('memory accepts only frozen enum preferences and validates deleted operation identity', () => {
   assert.equal(validPreference('analysis_focus', 'cash_flow'), true);
