@@ -26,6 +26,7 @@ from app.conversations.models import (
 from app.conversations.repository import ConversationError, ConversationRepository
 from app.conversations.service import ConversationService, fake_handler
 from app.documents.preparation import DocumentTaskPreparer
+from app.documents.source_models import SourceError
 from tests.test_document_sources import Harness
 
 
@@ -648,3 +649,26 @@ def test_history_factory_mounts_read_only_routes_without_provider(setup, monkeyp
         assert client.post("/conversations", json={"operation_id": uid(),
             "document_ids": [h.id]}).status_code == 405
     assert handler.await_count == 0
+
+
+@pytest.mark.parametrize("kind", ["create", "send"])
+def test_registration_source_race_uses_frozen_error_and_leaves_no_operation(setup, monkeypatch, kind):
+    h, repo, _, handler, _, client, _ = setup
+    cid = create(setup)[0]["conversation_id"] if kind == "send" else None
+    monkeypatch.setattr(repo.sources, "verify_selection_in", Mock(side_effect=SourceError("selection_changed")))
+    body = {"operation_id": uid(), **({"text": "q"} if kind == "send" else {"document_ids": [h.id]})}
+    path = f"/conversations/{cid}/turns" if cid else "/conversations"
+    response = client.post(path, json=body)
+    assert response.status_code == 409 and response.json()["detail"] == "source_changed"
+    assert client.get("/conversation-operations/" + body["operation_id"]).status_code == 404
+    assert handler.await_count == 0
+
+
+def test_registered_source_failure_still_returns_terminal_turn_not_registration_409(setup):
+    _, repo, _, handler, _, client, _ = setup
+    cid = create(setup)[0]["conversation_id"]
+    handler.side_effect = SourceError("selection_changed")
+    value, body = send(setup, cid)
+    assert value["status"] == "failed" and value["result"]["error_code"] == "source_changed"
+    receipt = client.get("/conversation-operations/" + body["operation_id"])
+    assert receipt.status_code == 200 and receipt.json()["status"] == "failed"

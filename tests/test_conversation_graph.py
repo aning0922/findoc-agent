@@ -15,6 +15,7 @@ from fastapi.testclient import TestClient
 import pytest
 
 from app.agent.revenue_confirmation import RevenueConfirmationError, RevenueConfirmationService
+from app.companies.migrations import MIGRATIONS
 from app.conversations.api import create_conversation_router
 from app.conversations.context import load_context, tokens
 from app.conversations.graph import ConversationGraph
@@ -140,8 +141,69 @@ def test_previous_year_context_and_read_only_get_no_repeat(graph_env):
 ])
 def test_negative_calculation_and_explicit_reading_use_original_rag(graph_env, text):
     value, _ = ask(graph_env, text)
+    assert text in value["resolved_query"]["text"]
+    if "只摘录同比原文" in text:
+        # Full predicates now reach the unchanged conservative D26 gate. These
+        # forms were previously (incorrectly) made to pass by dropping 同比.
+        assert value["status"] == "refused"
+        assert value["result"]["reason_code"] == "requires_confirmed_financial_analysis"
+        assert graph_env[4].call_count == 0
+        return
     assert value["status"] == "completed" and value["result"]["kind"] == "source_quote", value
     assert value["resolved_query"]["intent"] == "source_quote" and graph_env[4].call_count == 1
+
+
+@pytest.mark.parametrize("with_facts", [False, True])
+def test_g01_complete_reason_original_and_value_queries_remain_distinct(graph_env, with_facts):
+    env = graph_env
+    choices = [dict(company_id=env[0].company.company_id, metric_key="revenue", period=2025,
+        fact_set_id="untrusted-key", fact_id="untrusted-key", disclosure_version="untrusted-key")] if with_facts else []
+    original, _ = ask(env, "2025年营业收入原文是什么？")
+    text = "2025年营业收入下降原因原文是什么？"
+    reason, _ = ask(env, text, choices)
+    assert reason["resolved_query"]["text"] != original["resolved_query"]["text"]
+    assert text in reason["resolved_query"]["text"]
+    assert reason["resolved_query"]["intent"] == "source_quote"
+    assert text in env[3].search.await_args.args[0].query
+    assert text in env[4].call_args.args[0]
+    env[5].read_financial_facts.assert_not_called()
+    assert reason["result"]["verified_financial_fact_refs"] == []
+
+
+@pytest.mark.parametrize("with_facts", [False, True])
+def test_g01_free_causal_explanation_clarifies_without_value_tool_or_model(graph_env, with_facts):
+    env = graph_env
+    choices = [dict(company_id=env[0].company.company_id, metric_key="revenue", period=2025,
+        fact_set_id="untrusted-key", fact_id="untrusted-key", disclosure_version="untrusted-key")] if with_facts else []
+    text = "2025年营业收入下降原因是什么？"
+    value, _ = ask(env, text, choices)
+    assert value["result"]["kind"] == "clarification"
+    assert value["result"]["reason_code"] == "interpretation_not_supported"
+    assert text in value["resolved_query"]["text"]
+    assert "当前不生成原因解释" in value["result"]["answer_text"]
+    assert env[4].call_count == 0 and env[3].search.await_count == 0
+    env[5].read_financial_facts.assert_not_called()
+
+
+def test_g01_complete_qualified_reading_keeps_qualifier_despite_fact_keys(graph_env):
+    env = graph_env
+    text = "2025年营业收入分地区情况原文是什么？不计算同比。"
+    value, _ = ask(env, text, [dict(company_id=env[0].company.company_id, metric_key="revenue", period=2025,
+        fact_set_id="untrusted", fact_id="untrusted", disclosure_version="untrusted")])
+    assert value["resolved_query"]["intent"] == "source_quote"
+    assert text in env[3].search.await_args.args[0].query
+    assert text in env[4].call_args.args[0]
+    env[5].read_financial_facts.assert_not_called()
+
+
+def test_g01_qualified_comparison_cannot_silently_use_annual_single_metric_tools(graph_env):
+    env = graph_env
+    text = "2025年营业收入按季度计算同比原文"
+    value, _ = ask(env, text)
+    assert value["result"]["kind"] == "clarification"
+    assert value["result"]["reason_code"] == "qualified_analysis_not_supported"
+    assert text in value["resolved_query"]["text"]
+    assert env[4].call_count == 0 and env[3].search.await_count == 0
 
 
 def test_registered_chinese_safe_alias_preserves_name_ending_in_de(graph_env, monkeypatch):
@@ -438,7 +500,7 @@ def test_runtime_factory_real_graph_and_memory_share_registry(tmp_path, monkeypa
             "key": "analysis_focus", "value": "cash_flow", "confirmed": True}).status_code == 201
         assert client.get("/conversations").status_code == 200
         with closing(app.state.conversation_repository.registry._connect()) as conn:
-            assert [r[0] for r in conn.execute("SELECT version FROM analyst_schema_migrations")] == list(range(1, 12))
+            assert [r[0] for r in conn.execute("SELECT version FROM analyst_schema_migrations")] == [m[0] for m in MIGRATIONS]
         model.generate_once.assert_not_called()
 
 

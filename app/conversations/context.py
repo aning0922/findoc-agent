@@ -205,8 +205,30 @@ def resolve(execution: TurnExecution, context: ConversationContext) -> tuple[Res
         reason = reason or "ambiguous_company"
     if inferred and focus_id:
         context_ids = [focus_id]
+    # Only a finite value/comparison grammar can select financial tools. A
+    # supplied fact ID does not change an explanatory or qualified question.
+    request_body = compact
+    for alias in sorted(aliases, key=len, reverse=True):
+        request_body = request_body.replace(alias, "")
+    request_body = re.sub(r"(?:19|20)\d{2}年(?:度)?", "", request_body)
+    for phrase in sorted({word for words in METRICS.values() for word in words}, key=len, reverse=True):
+        request_body = request_body.replace(phrase, "")
+    request_body = re.sub(
+        r"请问|告诉我|查询|请|是多少|多少|数值|金额|原值|同比|变化|增长率|增幅|差额|相差|比较|计算|"
+        r"同一年|上一年|那一年|去年|也这样|公司|该|它|那|的|呢|吗|[？?。！!，,：:、\s]", "", request_body)
+    simple_request = not request_body
+    simple_comparison = not re.sub(r"(?:只|仅)?(?:摘录|引用|阅读)原文|然后|再", "", request_body)
+    explicit_reading = any(word in compact for word in ("原文", "摘录", "引用"))
+    explanation = any(word in compact for word in ("原因", "为何", "为什么", "归因", "解释"))
+    if explanation and not explicit_reading:
+        reason = reason or "interpretation_not_supported"
+    if compare and not simple_comparison and not explanation:
+        reason = reason or "qualified_analysis_not_supported"
+    if explanation or (explicit_reading and not requires_financial_analysis(calculation_text)):
+        compare = False
     intent = "compare_metric" if compare and metric else (
-        "confirmed_metric" if metric and execution.turn.fact_selections else "source_quote")
+        "confirmed_metric" if metric and simple_request and execution.turn.fact_selections
+        else "source_quote")
     if compare and metric is None:
         reason = reason or "metric_required"
     if extract_user_memory_candidates(text, execution.turn.turn_id):
@@ -216,10 +238,11 @@ def resolve(execution: TurnExecution, context: ConversationContext) -> tuple[Res
     if reason:
         intent = "unsupported" if reason == "unsupported_request" else "clarify"
     company = next((c.name for c in companies if c.company_id == company_id), "")
-    # For source tools keep the original subject terms (e.g. main business), but
-    # replace elliptical metric questions with a standalone evidence request.
+    # Fill only a recognized ellipsis. Complete questions keep their original
+    # predicates, qualifications and negations all the way into the RAG gate.
+    elliptical = bool(inferred and simple_request and metric)
     query = (f"{company} {','.join(str(y) for y in years)}年度 {LABELS[metric]}原文"
-             if metric else f"{company} {text}")
+             if elliptical else f"{company} {text}")
     return ResolvedQuery(text=query, intent=intent,
         company_id=company_id if company_id in selected_companies else None,
         metric_key=metric, periods=years[:2],

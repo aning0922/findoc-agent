@@ -86,7 +86,10 @@ def create_conversation_router(repository: ConversationRepository,
         except DocumentNotReadyError:
             raise HTTPException(409, "source_not_ready") from None
         except SourceError as exc:
-            raise HTTPException(exc.status, exc.code) from None
+            # The new Conversation contract uses source_changed for a source
+            # race before registration; legacy source/research APIs are unchanged.
+            raise HTTPException(exc.status, "source_changed" if exc.code == "selection_changed"
+                                else exc.code) from None
         except Exception:
             raise HTTPException(503, "conversation_save_failed") from None
 

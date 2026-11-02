@@ -84,7 +84,9 @@ class ConversationGraph:
     def clarify(self, state: State) -> dict:
         reason = state["reason"]
         result = TurnResult(kind="unsupported" if reason == "unsupported_request" else "clarification",
-            answer_text="请明确所选企业、财务年度和指标；更换企业或来源请创建新会话。"
+            answer_text="当前不生成原因解释或限定口径的计算；请明确请求年报原文，或选择已确认事实查询数值。"
+                if reason in ("interpretation_not_supported", "qualified_analysis_not_supported") else
+                "请明确所选企业、财务年度和指标；更换企业或来源请创建新会话。"
                 if reason != "preference_confirmation_required" else "请点击保存偏好，明确确认后才会用于后续会话。",
             reason_code=reason)
         return {"output": ExecutionResult(result,
