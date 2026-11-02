@@ -91,3 +91,16 @@
 .savedHeader .meta { margin: 0 0 6px; }
 .answer :global(.status-notice) { padding: 12px 16px; font-size: 14px; line-height: 1.65; }
 .answer > .hint { margin-block: 12px; }
+
+/* QA retains the question and reading position behind the native evidence drawer. */
+.pdfDrawer { inset: 0 0 0 auto; margin: 0; width: min(560px, calc(100vw - 24px)); max-width: 100vw; height: 100dvh; max-height: 100dvh; border-radius: 16px 0 0 16px; border-right: 0; padding: 24px; }
+.pdfDrawer::backdrop { background: #182a2633; }
+.pdfDrawer .dialogHeader { position: sticky; top: -24px; z-index: 2; margin: -24px -24px 16px; padding: 20px 24px; background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+.pdfDrawer :global(.pdf-scroll) { height: max(320px, calc(100dvh - 350px)); }
+.answerHeading { margin-bottom: 16px; }
+.answerHeading h3 { margin: 0; font-size: 20px; }
+.answerHeading .hint { margin: 4px 0 0; }
+.reviewDetails { margin-top: 24px; border-top: 1px solid var(--color-border); padding-top: 12px; }
+.reviewDetails > summary { cursor: pointer; min-height: 44px; padding-block: 10px; font-size: 14px; color: var(--color-text-secondary); }
+@media (min-width: 1025px) { .sources { position: sticky; top: 24px; max-height: calc(100dvh - 48px); overflow-y: auto; } }
+@media (max-width: 640px) { .pdfDrawer { width: 100vw; border-radius: 0; padding: 18px; } .pdfDrawer .dialogHeader { top: -18px; margin: -18px -18px 16px; padding: 16px 18px; } }

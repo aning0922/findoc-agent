@@ -59,8 +59,8 @@ test('D23 lost response locks POST and operation GET recovers across refresh',as
   await expect(page.getByRole('alert')).toContainText('保存结果未知');
   await expect(page.getByRole('button',{name:'保存第 1 版',exact:true})).toBeDisabled();
   await page.reload();
-  await expect(page.getByLabel('按 operation 查询')).toHaveValue(body!.operation_id);
-  await page.getByRole('button',{name:'查询历史操作（GET）',exact:true}).click();
+  await expect(page.getByLabel('保存操作身份')).toHaveValue(body!.operation_id);
+  await page.getByRole('button',{name:'查看这次保存的结果',exact:true}).click();
   await expect(page.getByRole('article',{name:'已保存报告版本'})).toBeVisible();
   expect(posts).toBe(1);
 });

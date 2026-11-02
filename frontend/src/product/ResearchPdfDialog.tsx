@@ -10,8 +10,8 @@ import styles from './ResearchQA.module.css';
 import '../evidence/evidence.css';
 
 export type PdfCitation = Pick<ResearchCitation, 'document_id' | 'company_id' | 'report_year' | 'source_revision' | 'physical_page' | 'source_file' | 'parser_version'> & { number?: number };
-export function ResearchPdfDialog({ citation, close, invalid, readingContext = '回答' }: {
-  citation: PdfCitation; close: () => void; invalid: () => void; readingContext?: '回答' | '报告' | '经营原文';
+export function ResearchPdfDialog({ citation, close, invalid, readingContext = '回答', drawer = false }: {
+  citation: PdfCitation; close: () => void; invalid: () => void; readingContext?: '回答' | '报告' | '经营原文'; drawer?: boolean;
 }) {
   const [data, setData] = useState<{ source: Source; bytes: Uint8Array } | null>(null);
   const [error, setError] = useState('');
@@ -50,7 +50,7 @@ export function ResearchPdfDialog({ citation, close, invalid, readingContext = '
     // Mounted by full citation identity. Display callbacks never grant source eligibility.
     // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [citation]);
-  return <QADialog title={citation.number === undefined ? '原 PDF · 财务事实' : `原 PDF · 引用 [${citation.number}]`} close={close} className={styles.pdfDialog}>
+  return <QADialog title={citation.number === undefined ? '原 PDF · 财务事实' : `原 PDF · 引用 [${citation.number}]`} close={close} className={`${styles.pdfDialog} ${drawer ? styles.pdfDrawer : ''}`}>
     <p className={styles.meta}>{citation.report_year} 年报《{citation.source_file}》 · 引用物理第 {citation.physical_page} 页</p>
     <button onClick={close}>返回{readingContext}阅读位置</button>
     {error ? <><StatusNotice state="invalidated" title="原 PDF 暂不可查看">来源可能已变化或文件无法核验。已撤下原 PDF，请只读刷新{readingContext}记录。</StatusNotice><DiagnosticDetails label="高级诊断：PDF 核验" fields={{ error }} /></>

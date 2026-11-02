@@ -115,9 +115,9 @@ test('all twelve original values retain their actual annual column, unit, full r
       expect(cells.some(s => s.includes(c.source_file.startsWith('midea') ? '千元' : '（元）'))).toBe(true);
       proof.push({ document: c.document_id, revision: c.source_revision, citation: c.number, page: c.physical_page, amount, headers, cells });
     }
-    await excerpt.locator('summary').click();
+    await excerpt.locator('summary').filter({ hasText: '完整已保存原文' }).click();
     expect(await excerpt.locator('[data-saved-excerpt]').textContent()).toBe(c.text);
-    await excerpt.locator('summary').click();
+    await excerpt.locator('summary').filter({ hasText: '完整已保存原文' }).click();
   }
   expect(proof).toHaveLength(12);
   const reread = await (await page.request.get(`/api/research/runs/${saved.run_id}`)).json();
@@ -162,7 +162,7 @@ test('Run A to draft B then history and exact A URL keep original ownership with
   await page.getByLabel('研究问题').fill('资料 B 的新问题');
   await expect(page.getByRole('region', { name: '有证据的回答' })).toHaveCount(0);
   await page.getByRole('button', { name: '历史问答', exact: true }).click();
-  await page.getByRole('region', { name: '研究历史列表' }).getByRole('button', { name: saved.query, exact: true }).click();
+  await page.getByRole('region', { name: '研究历史列表' }).locator(`[data-history-run-id="${saved.run_id}"]`).getByRole('button', { name: saved.query, exact: true }).click();
   await expect(page.getByLabel('原问题')).toHaveText(saved.query);
   await expect(page.getByRole('complementary', { name: '本次回答来源' }).locator('[data-source-document]')).toHaveCount(4);
   await page.reload(); await expect(page.getByLabel('原问题')).toHaveText(saved.query);

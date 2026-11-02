@@ -12,11 +12,12 @@ export function ReportSaveControls({ draft, saved, simulated, onSaved, onCancel 
   const [title, setTitle] = useState(saved?.report.editor_revision.title || '');
   const [conclusions, setConclusions] = useState(saved?.report.editor_revision.conclusions.length ? saved.report.editor_revision.conclusions : ['']);
   const [pending, setPending] = useState(storedOperation), [error, setError] = useState(''), [busy, setBusy] = useState(false);
+  const preflight = useRef<AbortController | null>(null);
   const lock = useRef(false), alive = useRef(true), titleInput = useRef<HTMLInputElement>(null);
   const { setEditorState } = useReportNavigation();
   const savedEditor = useRef(Boolean(saved));
   const dirty = editorDirty(title, conclusions, saved?.report.editor_revision.title || null, saved?.report.editor_revision.conclusions || []);
-  useEffect(() => { alive.current = true; const opener = document.activeElement as HTMLElement | null; if (savedEditor.current) titleInput.current?.focus(); return () => { alive.current = false; if (opener?.isConnected) opener.focus({ preventScroll: true }); }; }, []);
+  useEffect(() => { alive.current = true; const opener = document.activeElement as HTMLElement | null; if (savedEditor.current) titleInput.current?.focus(); return () => { alive.current = false; preflight.current?.abort(); if (opener?.isConnected) opener.focus({ preventScroll: true }); }; }, []);
   useEffect(() => { setEditorState({ dirty, pending: !!pending || busy }); return () => setEditorState({ dirty: false, pending: false }); }, [dirty, pending, busy, setEditorState]);
   async function accept(value: ReportDetail, op: string, edits: { title: string | null; conclusions: string[] }) {
     const detail = validateReport(value, simulated);
@@ -34,9 +35,15 @@ export function ReportSaveControls({ draft, saved, simulated, onSaved, onCancel 
     let op = '';
     try {
       if (saved) {
-        const current = await readExactReport(saved.report.report_id, saved.report.revision, simulated, new AbortController().signal, saved.payload_sha256);
+        const check = new AbortController(); preflight.current = check;
+        const current = await readExactReport(saved.report.report_id, saved.report.revision, simulated, check.signal, saved.payload_sha256);
+        check.signal.throwIfAborted();
+        if (!alive.current) return;
         if (!canEditReport(current)) throw new SaveRejected('此版本已不是最新有效版本，请取消编辑并重新读取最新版本');
       }
+      // Leaving before POST revokes this save. Once POST begins, retain its identity until read back.
+      if (!alive.current) return;
+      preflight.current = null;
       op = crypto.randomUUID(); rememberOperation(op); setPending(op);
       const edits = { title: title.trim() || null, conclusions: conclusions.map(c => c.trim()).filter(Boolean) };
       const body = { operation_id: op, task_id: draft.task_id, expected_task_revision: draft.task_revision, edits, ...(saved ? { expected_report_revision: saved.current_revision } : {}) };
