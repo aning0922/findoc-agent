@@ -20,8 +20,8 @@ export function QADialog({ title, children, close, className = '' }: {
   return <dialog ref={ref} className={`${styles.dialog} ${className}`} aria-label={title}
     onCancel={e => { e.preventDefault(); close(); }} onKeyDown={e => {
       if (e.key !== 'Tab') return;
-      const controls = [...ref.current!.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), summary, [tabindex="0"]')]
-        .filter(n => n.getClientRects().length && !n.closest('details:not([open]) > :not(summary)'));
+      const controls = [...ref.current!.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), textarea:not(:disabled), select:not(:disabled), summary, [tabindex="0"]')]
+        .filter(n => n.getClientRects().length && !n.closest('[inert], [hidden]') && !n.matches(':disabled') && !n.closest('details:not([open]) > :not(summary)'));
       if (e.shiftKey && document.activeElement === controls[0]) { e.preventDefault(); controls.at(-1)?.focus(); }
       else if (!e.shiftKey && document.activeElement === controls.at(-1)) { e.preventDefault(); controls[0]?.focus(); }
     }}>

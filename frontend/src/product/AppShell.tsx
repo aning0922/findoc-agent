@@ -11,7 +11,7 @@ const navigation: { key: string; page: Page; label: string; icon: IconName; href
   { key: 'home', page: 'home', label: '首页', icon: 'book', href: '/' },
   { key: 'tasks', page: 'tasks', label: '研究任务', icon: 'research', href: '/tasks' },
   { key: 'companies', page: 'companies', label: '企业与年报', icon: 'library', href: '/companies' },
-  { key: 'qa', page: 'research', label: '年报问答', icon: 'quote', href: '/research?mode=qa' },
+  { key: 'qa', page: 'conversations', label: '研究助手', icon: 'quote', href: '/conversations' },
   { key: 'reports', page: 'reports', label: '我的报告', icon: 'file', href: '/reports' },
 ];
 export function AppShell({
@@ -28,7 +28,7 @@ export function AppShell({
   label?: string;
   contextLocked?: boolean;
 }) {
-  const globalPage = page === 'research' ? new URLSearchParams(location.search).get('mode') === 'qa' ? 'qa' : 'tasks' : ['overview', 'documents', 'analysis'].includes(page) ? 'companies' : page;
+  const globalPage = page === 'conversations' ? 'qa' : page === 'research' ? new URLSearchParams(location.search).get('mode') === 'qa' ? 'qa' : 'tasks' : ['overview', 'documents', 'analysis'].includes(page) ? 'companies' : page;
   const [drawerMode, setDrawerMode] = useState(() => window.innerWidth < 1100);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const sidebar = useRef<HTMLElement>(null);

@@ -45,6 +45,7 @@ import "./shell.css";
 import "./product.css";
 import './foundation.css';
 const FinancialChart = lazy(() => import("./FinancialChart.tsx"));
+const Conversations = lazy(() => import('./Conversations.tsx'));
 function readRoute() {
   try { return { ...readProductRoute(new URL(window.location.href)), routeError: '' }; }
   catch (e) { return { ...readProductRoute(new URL('/', location.origin)), key: location.pathname + location.search, routeError: (e as Error).message }; }
@@ -123,6 +124,10 @@ export default function FinancialProduct({
         <ResearchTasks companies={companies} />
       ) : route.page === "companies" ? (
         <CompanyDirectory companies={companies} loading={companiesLoading} />
+      ) : route.page === 'conversations' ? (
+        <Suspense fallback={<p role="status">正在打开研究助手…</p>}>
+          <Conversations companies={companies} />
+        </Suspense>
       ) : route.page === "research" ? (
         <ResearchWorkbench
           key={route.key}
