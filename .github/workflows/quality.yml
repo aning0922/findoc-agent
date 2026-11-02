@@ -25,7 +25,9 @@ jobs:
       - name: Run controlled backend checks
         run: |
           .venv/bin/python -m pytest tests/test_controlled_agent_app.py tests/test_parse.py tests/test_demo_pdf.py tests/test_revenue_research_api.py tests/test_runtime_revenue.py tests/test_d26_calculation_intent.py tests/test_d29_c1_focus_api.py -q
+          .venv/bin/python -m pytest tests/test_conversation*.py tests/test_memory*.py -q
           .venv/bin/ruff check app/api/runtime_paths.py app/api/runtime_factory.py tests/support/controlled_agent_app.py tests/test_controlled_agent_app.py tests/test_runtime_startup.py
+          .venv/bin/ruff check app/conversations app/memory tests/test_conversation*.py tests/test_memory*.py
 
       - name: Set up Node 24
         uses: actions/setup-node@v7
