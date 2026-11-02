@@ -130,6 +130,25 @@ def create_app():
     factory._build_runtime_indexer = indexer
     factory._build_runtime_rag_resources = lambda *a: factory.RuntimeRAGResources(
         rag_service=rag, retriever=retriever, milvus_client=NoVectorClient())
+    import app.conversations.graph as graph_module
+    original_load_context = graph_module.load_context
+    context_observations = {}
+
+    def observed_context(execution, memory):
+        context = original_load_context(execution, memory)
+        # Capture the actual returned Graph input, not a separately reconstructed
+        # or model-inferred preference. Enum data only; no raw prompt or amounts.
+        context_observations[execution.turn.turn_id] = dict(
+            turn_id=execution.turn.turn_id,
+            conversation_id=execution.turn.conversation_id,
+            memory_generation=context.memory_generation,
+            preferences=list(context.preferences),
+            prompt_preferences=json.loads(context.prompt_data)['confirmed_preferences'],
+            prior_turn_ids=[turn.turn_id for turn in context.turns],
+            actual_context_observation=True, actual_llm=False)
+        return context
+
+    graph_module.load_context = observed_context
     app = factory.create_runtime_app(root)
     paths = app.openapi()['paths']
     if '/conversations' not in paths:
@@ -169,5 +188,12 @@ def create_app():
             else:
                 provider_release.set()
         return dict(isolated_test_only=True, **modes)
+
+    @app.get('/__test__/conversation-context/{turn_id}')
+    def observed_turn_context(turn_id: str):
+        from fastapi import HTTPException
+        if turn_id not in context_observations:
+            raise HTTPException(404, 'context_not_observed')
+        return context_observations[turn_id]
 
     return app

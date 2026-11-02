@@ -27,6 +27,7 @@ for (const width of [390, 1440]) {
     await page.goto(`/conversations?conversation=${c.conversation_id}`)
     await expect(page.getByRole('heading', { name: '财报研究助手', exact: true })).toBeVisible()
     await expect(page.getByLabel('消息记录')).toContainText(turn.user_text)
+    const tableReadability: { first_column_width: number; container_width: number; content_width: number }[] = []
     for (const ref of turn.result.evidence_refs) {
       const card = page.getByLabel('消息记录').locator('section').filter({
         has: page.getByRole('button', { name: `查看原 PDF [${ref.number}]`, exact: true }),
@@ -36,15 +37,33 @@ for (const width of [390, 1440]) {
       for (const block of excerptBlocks(ref.text)) {
         if (block.kind === 'text') await expect(card).toContainText(block.text)
         else {
-          const rows = card.locator('table').nth(tableIndex++).locator('tr')
+          const table = card.locator('table').nth(tableIndex++)
+          const rows = table.locator('tr')
           const expectedRows = [block.header, ...block.rows]
           await expect(rows).toHaveCount(expectedRows.length)
           for (let i = 0; i < expectedRows.length; i++) {
             expect(await rows.nth(i).locator('th,td').allTextContents()).toEqual(expectedRows[i])
           }
+          const metrics = await table.evaluate(el => ({
+            first_column_width: el.querySelector('th,td')!.getBoundingClientRect().width,
+            container_width: el.parentElement!.clientWidth,
+            content_width: el.parentElement!.scrollWidth,
+          }))
+          expect(metrics.first_column_width).toBeGreaterThanOrEqual(150)
+          tableReadability.push(metrics)
+          for (const cell of await table.locator('[data-cell-kind="number"]').all()) {
+            expect(await cell.evaluate(el => getComputedStyle(el).whiteSpace)).toBe('nowrap')
+          }
         }
       }
       await expect(card.locator('table')).toHaveCount(tableIndex)
+    }
+    if (width === 390 && tableReadability.length) {
+      const wide = page.getByRole('region', { name: '原文表格横向阅读', exact: true }).first()
+      expect(tableReadability[0].content_width).toBeGreaterThan(tableReadability[0].container_width)
+      await wide.focus()
+      await wide.press('ArrowRight')
+      await expect.poll(() => wide.evaluate(el => el.scrollLeft)).toBeGreaterThan(0)
     }
     const input = page.getByRole('textbox', { name: '研究问题', exact: true })
     await expect(input).toBeVisible()
@@ -82,7 +101,8 @@ for (const width of [390, 1440]) {
     expect(after.tables).toEqual(before.tables)
     await page.screenshot({ path: `${out}/conversation-${width}-history.png`, fullPage: true })
     writeFileSync(`${out}/conversation-${width}-proof.json`, JSON.stringify({ before, after, writes,
-      pdf_sha256: ref.content_sha256, physical_page: ref.physical_page, human_review: 'pending' }, null, 2))
+      pdf_sha256: ref.content_sha256, physical_page: ref.physical_page, tableReadability,
+      human_review: 'pending' }, null, 2))
   })
 }
 

@@ -34,10 +34,12 @@ test('G02 stale catalog create409 is unregistered, retains draft, and permits ex
   const dialog = page.getByRole('dialog')
   await dialog.getByRole('checkbox', { name: new RegExp(filename) }).check()
   const changed = await request.post(`/api/documents/${id}/binding-corrections`, { data: {
-    expected_attempt: source.attempt, metadata: { ...metadata, report_year: 2023,
-      period_start: '2023-01-01', period_end: '2023-12-31' }, reason: 'G02 isolated stale source',
+    expected_attempt: source.attempt, metadata: { ...metadata, basis: 'unknown' }, reason: 'G02 isolated stale source',
   } })
   expect(changed.status()).toBe(200)
+  const corrected = await (await request.get(`/api/documents/${id}`)).json()
+  expect(corrected.status).toBe('failed')
+  expect(corrected.error_code).toBe('SOURCE_BINDING_CORRECTED')
   const ops: string[] = []
   page.on('request', r => { if (r.method() === 'POST' && r.url().endsWith('/api/conversations')) ops.push(r.postDataJSON().operation_id) })
   const rejection = page.waitForResponse(r => r.request().method() === 'POST' && r.url().endsWith('/api/conversations'))
