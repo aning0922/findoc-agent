@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { conversationJSON, ConversationHTTPError } from './conversationApi.ts';
-import { listMemories, preferenceKeys, preferenceValues, readMemoryOperation, readPendingMemory, storePendingMemory, validPreference, validateMemoryItem, validateMemoryOperation } from './memoryApi.ts';
+import { listMemories, memoryOperationNotice, preferenceKeys, preferenceValues, readMemoryOperation, readPendingMemory, storePendingMemory, validPreference, validateMemoryItem, validateMemoryOperation } from './memoryApi.ts';
 import type { MemoryItem, MemoryOperation, PendingMemory } from './memoryApi.ts';
 import type { MemoryCandidate, MemoryKey } from './conversationTypes.ts';
 import { StatusNotice } from './StatusNotice.tsx';
@@ -36,11 +36,15 @@ export function ResearchPreferences({ candidate }: { candidate?: MemoryCandidate
     if (!pending || busy) return;
     const c = new AbortController(); active.current?.abort(); active.current = c; setBusy(true); setError('');
     try {
-      await readMemoryOperation(pending, c.signal);
+      const receipt = await readMemoryOperation(pending, c.signal);
       if (c.signal.aborted) return;
-      storePendingMemory(sessionStorage, null); setPending(null); setNotice('本次偏好操作已查明。');
+      storePendingMemory(sessionStorage, null); setPending(null); setEditing(null); setDeleting(null);
+      setNotice(memoryOperationNotice(receipt));
+      // A tombstone never carries a value. Remove any stale list/editor before
+      // reading current items, so a failed list GET cannot revive old content.
+      if (receipt.resource_deleted) { setItems(old => old.filter(i => i.memory_id !== receipt.memory_id)); setLoaded(false); }
       const v = await listMemories(c.signal); if (!c.signal.aborted) { setItems(v.items); setLoaded(true); }
-    } catch { if (!c.signal.aborted) setError('尚不能确认本次偏好操作。请继续只读查证，未重新提交。'); }
+    } catch { if (!c.signal.aborted) setError('偏好操作或当前列表暂不可读取，请只读重试。未重新提交。'); }
     finally { if (!c.signal.aborted) setBusy(false); }
   }
   async function write(kind: PendingMemory['kind']) {
@@ -54,20 +58,23 @@ export function ResearchPreferences({ candidate }: { candidate?: MemoryCandidate
     const c = new AbortController(); active.current?.abort(); active.current = c;
     setPending(op); setBusy(true); setError(''); setNotice('');
     try {
+      let completedReceipt: MemoryOperation;
       if (kind === 'delete_memory') {
         const receipt = await conversationJSON<MemoryOperation>(`/memories/${target!.memory_id}`, c.signal, 'DELETE', { operation_id: op.operationId, expected_revision: target!.revision });
-        validateMemoryOperation(receipt, op);
+        completedReceipt = validateMemoryOperation(receipt, op);
       } else {
         const body = kind === 'create_memory'
           ? { operation_id: op.operationId, type: 'research_preference', key, value, confirmed: true, ...(candidate && candidate.key === key && candidate.value === value ? { source_turn_id: candidate.source_turn_id } : {}) }
           : { operation_id: op.operationId, expected_revision: target!.revision, value, confirmed: true };
         const item = validateMemoryItem(await conversationJSON<MemoryItem>(kind === 'create_memory' ? '/memories' : `/memories/${target!.memory_id}`, c.signal, kind === 'create_memory' ? 'POST' : 'PATCH', body));
         if (item.key !== key || item.value !== value || target && item.memory_id !== target.memory_id) throw new Error();
-        await readMemoryOperation(op, c.signal);
+        completedReceipt = await readMemoryOperation(op, c.signal);
       }
       if (c.signal.aborted) return;
-      storePendingMemory(sessionStorage, null); setPending(null); setEditing(null); setDeleting(null); setNotice(kind === 'delete_memory' ? '偏好已删除；后续请求不再使用该偏好。' : '研究偏好已明确保存。');
-      const v = await listMemories(c.signal); if (!c.signal.aborted) setItems(v.items);
+      storePendingMemory(sessionStorage, null); setPending(null); setEditing(null); setDeleting(null);
+      setNotice(completedReceipt.resource_deleted ? memoryOperationNotice(completedReceipt) : '研究偏好已明确保存。');
+      if (completedReceipt.resource_deleted) { setItems(old => old.filter(i => i.memory_id !== completedReceipt.memory_id)); setLoaded(false); }
+      const v = await listMemories(c.signal); if (!c.signal.aborted) { setItems(v.items); setLoaded(true); }
     } catch (e) {
       if (!c.signal.aborted) {
         if (e instanceof ConversationHTTPError && e.status === 409 && ['memory_revision_conflict', 'memory_key_conflict'].includes(e.code || '')) {

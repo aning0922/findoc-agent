@@ -33,8 +33,15 @@ export function validateMemoryOperation(v: MemoryOperation, pending: PendingMemo
   if (!v || v.schema_version !== 'memory-operation-v1' || v.operation_id !== pending.operationId || v.kind !== pending.kind
     || !uuid.test(v.memory_id) || pending.memoryId !== null && pending.memoryId !== v.memory_id
     || v.status !== 'completed' || !Number.isSafeInteger(v.revision) || v.revision < 1
-    || v.resource_deleted !== (pending.kind === 'delete_memory') || !Number.isFinite(Date.parse(v.created_at))) throw new Error('研究偏好操作回执不一致。');
+    || typeof v.resource_deleted !== 'boolean' || pending.kind === 'delete_memory' && !v.resource_deleted
+    || !Number.isFinite(Date.parse(v.created_at))) throw new Error('研究偏好操作回执不一致。');
   return v;
+}
+export function memoryOperationNotice(receipt: MemoryOperation): string {
+  return receipt.resource_deleted ? receipt.kind === 'delete_memory'
+    ? '本次偏好删除已查明；后续请求不再使用该偏好。'
+    : '原操作已查明，偏好后来已删除。不会恢复旧偏好。'
+    : '本次偏好操作已查明。';
 }
 export function readPendingMemory(storage: Pick<Storage, 'getItem'>): PendingMemory | null {
   const raw = storage.getItem('findoc:memory-operation:v1');
