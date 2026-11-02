@@ -67,7 +67,11 @@ def test_v8_upgrade_rollback_retry_preserves_all_prior_ddl_rows(tmp_path, monkey
         log = conn.execute(
             "SELECT version,name,checksum FROM analyst_schema_migrations ORDER BY version"
         ).fetchall()
-    assert log[-1] == (9, full[8][1], hashlib.sha256("\n".join(full[8][2]).encode()).hexdigest())
+    assert log[8] == (9, full[8][1], hashlib.sha256("\n".join(full[8][2]).encode()).hexdigest())
+    assert log == [
+        (version, name, hashlib.sha256("\n".join(statements).encode()).hexdigest())
+        for version, name, statements in full
+    ]
     (tmp_path / f"d23-migration-{failure}.json").write_text(
         json.dumps(
             dict(failure=failure, versions=log, old_tables_unchanged=True, foreign_keys_ok=True)
@@ -81,8 +85,10 @@ def test_reviewed_migration_history_fail_closed(tmp_path, damage):
     SQLiteCompanyRepository(db)
     with sqlite3.connect(db) as conn:
         if damage == "unknown":
+            unknown_version = max(version for version, _, _ in migrations.MIGRATIONS) + 1
             conn.execute(
-                "INSERT INTO analyst_schema_migrations VALUES(10,'unknown','unknown','today')"
+                "INSERT INTO analyst_schema_migrations VALUES(?,'unknown','unknown','today')",
+                (unknown_version,),
             )
         elif damage == "missing":
             conn.execute("DELETE FROM analyst_schema_migrations WHERE version=8")

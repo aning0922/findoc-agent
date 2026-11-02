@@ -2,7 +2,7 @@
 
 日期：2026-11-02（Asia/Taipei）。状态：**验收设计完成；V1.2 功能尚未验收**。
 
-本聊天只写本文件；主控统一冻结合同、分配测试文件和提交。未修改业务代码、数据库、测试、依赖或 Git index；未启动模型或重复运行主控基线。唯一代码来源为 findoc-agent 的独立 worktree `/Users/aipuli/Documents/AI应用学习/02_项目/findoc-conversation-v12`，实际分支为 `codex/conversation-memory-v12-20261102`。
+A0 初始阶段只写本文件；主控统一冻结合同、分配测试文件和提交。A0 阶段未修改业务代码、数据库、测试、依赖或 Git index；未启动模型或重复运行主控基线。之后主控授权的 A4/G 工程准备单列在第8节。唯一代码来源为 findoc-agent 的独立 worktree `/Users/aipuli/Documents/AI应用学习/02_项目/findoc-conversation-v12`，实际分支为 `codex/conversation-memory-v12-20261102`。
 
 ## 1. 已读来源与现状
 
@@ -118,3 +118,37 @@
 等待主控冻结 API/状态/终态发布合同及分配新测试 app、后端测试、Playwright spec/config 和 G 运行器的独占文件。建议优先明确：UNKNOWN/interrupted 的服务状态；by-operation 404 语义；同会话冲突/排队策略；工具和物理 provider 全局预算；删除会话/旧 ResearchRun/摘要/偏好边界；摘要中偏好删除策略。
 
 本报告为 A0 准备交付；C01–C20 均未因本文件创建而获得功能 PASS。
+
+## 8. 后续获授权的 A4/G 工程准备记录
+
+主控随后授权本聊天独占新增 conversation fixture、E2E/live 运行器、Playwright 配置和 `conversation*` E2E 文件。依据正式 `contracts.md` 与 `backend-a0.md` 第3节编写；未改业务代码、旧测试、旧 controlled app、正式数据、Git index 或依赖。
+
+当前文件：
+
+- `tests/support/conversation_app.py`：以正式 `runtime_factory.create_runtime_app` 装配新/旧业务；替换重依赖为确定 model/retriever/indexer，保留 HTTP、SQLite、PDF parser、source guards 和服务端提交。outgoing socket 与越界 SQLite 被阻断，默认真实模型调用为0。业务路由尚未接入正式 factory 时明确报错，不能用伪 API 顶替。
+- `scripts/run_conversation_v12_e2e.py`：校验当前 worktree 四 PDF SHA、新建 runtime/端口、去除凭据、Node24、零重试、独立 manifest/log/trace。另有 `--legacy-proof-only` 和 `--migration-proof-only`，提供历史回归所需不同版本的全新 seed。
+- `frontend/playwright.conversations.config.ts`、`frontend/e2e/conversation-{helpers.ts,api.spec.ts,browser.spec.ts,memory.spec.ts}`：15 项可收集测试。覆盖创建/Turn operation、冲突、三轮、范围/澄清、并发、错误引用/供应商错误、删除 tombstone、真实来源绑定纠错、旧ResearchRun不变、偏好CRUD/拒绝不合格值、390/1440 PDF/焦点、真实POST丢响应后的UNKNOWN查证。**目前通过收集检查及下述两项A1 API测试，尚未执行A2/B2/浏览器新功能测试**。C12财务正向、C16实际上下文注入/摘要删除、C17长会话和真实重启专项仍需随后端/前端实际实现补足；不把编号出现在测试名当成完整覆盖。
+- `scripts/validate_conversation_v12_live.py`：显式 `--execute-live`、最多5新Turn/10物理provider请求、单次输出上限、SDK重试0、独立实际BGE/Milvus观察计数、原始SHA/结果/只读计数、财务写路由白名单。仅通过AST与`--help`检查，**未执行live，模型请求0**；仍需在G前对实际DTO/异常状态做集成复核。
+
+### 已实际执行的旧回归与失败
+
+1. `--legacy-proof-only --out data/conversation-v12-validation/legacy-proof-01`：**1 PASS**，约2分钟，原 `ux-simplification-journey.spec.ts`，真实四PDF/HTTP/SQLite，原独立前端测试入口，模拟接受与模型/检索替身。不能称为新研究助手或正式前端完整验收。全新 runtime 在报告生成前经 SQLite backup 导出一致 clean seed，原报告行没有删除或改写。proof 为该目录 `report-test-proof.json`，用于 `FINDOC_REPORT_TEST_PROOF`。
+2. 使用上述 report proof 运行 `test_d22_reports.py test_d23_reports.py test_d23_migrations.py test_d24_exports.py`：**80 PASS / 3 FAIL**，87.42秒。3 FAIL 为 D23 migrations 还需要独立 `FINDOC_MIGRATION_TEST_PROOF`，不能使用要求v9报告表的report seed代替v8。其余原报告契约通过。
+3. `--migration-proof-only --out data/conversation-v12-validation/migration-proof-01`：从空目录按现有 migrations 前8条构造全新v8库及真实PDF源记录；不降级已有库、不DROP新表、不删除历史报告。生成 `migration-test-proof.json` 供 `FINDOC_MIGRATION_TEST_PROOF`。
+4. 用新v8 proof 重跑原 `test_d23_migrations.py`：**2 PASS / 4 FAIL**，0.94秒。此时后端追加migration10已落盘，3项原测试仍要求最后migration固定为9，另1项将10当“未知版本”插入，触发版本主键重复。这是旧测试固定版本假设与追加迁移的冲突；没有改变旧断言或截断当前迁移列表来报绿。待主控分配后修订测试范围/未知版本选择，并保留对旧v8→v9校验、失败回滚与旧表不变的全部原义；新v10完整迁移由后端专属测试验证。
+5. 主控随后明确授权独占修订 `tests/test_d23_migrations.py`：保留v8 seed和对v9的全部旧约束；改为精确验证 `log[8]` 的v9 checksum及整个log等于实际MIGRATIONS的version/name/checksum；unknown使用max版本+1参数化SQL。重跑精确D23组 **6 PASS / 0 FAIL，0.72秒**（当时完整迁移为1–10）。未截断产品迁移，未删新表。
+6. `--a1-only --out data/conversation-v12-validation/a1-api-01`：**2 PASS / 0 FAIL，约1.2分钟**。明确使用真实ConversationRepository/Service/API及A1官方`fake_handler`，以当前四真实PDF建立来源；覆盖create operation重复/冲突/只读精确回执、非法范围和自报workspace拒绝，model计数不增加。不是A2语义/图或真实模型验收。此模式仅在正式factory尚未接入Conversation路由且显式A1开关时装配实际service；默认A2模式不会偷偷退回fake_handler。
+
+静态工具检查：三个新增Python文件AST通过，专属Python文件及授权修改的D23测试ruff通过；Playwright显式配置收集15项。新功能正式装配、Graph和Memory集成仍在其他聊天开发，本聊天没有在缺路由时伪造API来取得语义通过。
+
+联调待核：读取时后端 `Action.allowed_href` 的open_source路径为`/documents/{id}/source/file?source_revision=…`，前端 `safeConversationAction` 接受的是`/api/documents/{id}/file?...#page=…`，两者静态不一致。待前后端责任聊天统一实际合同，不能通过放宽E2E身份断言掩盖。尚未运行新浏览器，故不将静态发现写成已观察运行失败。
+
+本聊天未重跑主控完整后端。主控另报告完整 `not local_data` 为645 PASS / 20 deselected / 3 ERROR，错误是D22缺旧proof且maxfail3提前停止；相关旧后端196 PASS另记，不与本聊天80项机械相加。所有这些记录均不构成V1.2功能验收，也不抹去较早缺PDF/缺proof失败。
+
+### 后续 build 修复与 B1 对齐
+
+主控报告完整 build 被 `conversation-memory.spec.ts` 的重复 `value` 字段构造触发TS2783阻断。已改成四个完整的无效字段场景（非法财务值、未确认、伪造workspace、非法key），请求只拼接operation/type和单个场景对象，保留每项无效value与422断言。Node v24.19.0、Vite **8.2.4** 的 `npm run build` 完整通过（tsc -b + Vite）；仍有既有大于500kB chunk提示。
+
+依据实际 `app/memory/candidates.py`，C14输入改为明确支持的“记住：我更关注现金流。”，断言候选的完整key/value/source_turn_id/confirmation_required；不假定任意自然语言均能生成候选。删除回执校验revision递增。上述B1端到端断言尚待v11/runtime及Graph集成后执行，未把后端模块31PASS转换为浏览器通过。
+
+财务来源PDF正向入口已见前端实现与专属单测；真实浏览器正向场景需要实际A2已确认事实结果，待A2集成后追加。不会伪造EvidenceRef或整API结果来使该路径先通过。
