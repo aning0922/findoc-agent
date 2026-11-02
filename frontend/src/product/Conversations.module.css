@@ -46,6 +46,57 @@
 .primaryAction { display: inline-block; padding: 12px 0; margin-right: 16px; font-weight: 600; }
 .preferences { min-width: 0; }
 .preferences fieldset { min-width: 0; margin-top: 20px; }
-.turn :global(.report-table-scroll) { max-width: 100%; overflow-x: auto; }
+.turn :global(.report-table-scroll) {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  margin-block: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+}
+.turn :global(.report-table-scroll) table {
+  width: 100%;
+  min-width: max-content;
+  table-layout: auto;
+  border-collapse: collapse;
+  font-size: var(--font-size-body);
+  line-height: 1.7;
+  font-variant-numeric: tabular-nums;
+}
+.turn :global(.report-table-scroll) :is(th, td) {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+  text-align: right;
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+.turn :global(.report-table-scroll) th {
+  background: var(--color-surface-subtle);
+  color: var(--color-text);
+  font-weight: 600;
+}
+.turn :global(.report-table-scroll) :is(th, td):first-child,
+.turn :global(.report-table-scroll) td[data-cell-kind="text"] {
+  width: 210px;
+  min-width: 170px;
+  max-width: 240px;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.turn :global(.report-table-scroll) td[data-cell-kind="number"] {
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+.turn :global(.report-table-scroll) td[data-cell-kind="empty"]:not(:first-child) {
+  width: 16px;
+  min-width: 16px;
+  padding-inline: var(--space-2);
+}
+.turn :global(.report-table-scroll):focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -3px;
+}
 @media (max-width: 1099px) { .layout { grid-template-columns: minmax(0, 1fr); } .history { display: none; } .mobileTools { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; } }
 @media (max-width: 600px) { .main { padding: 16px; } .heading { align-items: start; } .context button { width: 100%; } .messages { min-height: 180px; } .examples button { width: 100%; } .dialog { max-height: calc(100dvh - 16px); width: calc(100vw - 16px); } }

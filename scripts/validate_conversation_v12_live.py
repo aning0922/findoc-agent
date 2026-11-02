@@ -5,6 +5,7 @@ and an explicit credentials file. Real provider responses remain human pending.
 """
 
 import argparse
+from contextlib import contextmanager, ExitStack
 import hashlib
 import json
 import os
@@ -21,6 +22,36 @@ import uuid
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
+
+
+@contextmanager
+def observe_milvus_search(proof, lock, save):
+    """Observe the physical API used by both versioned and legacy stores."""
+    from pymilvus import MilvusClient
+
+    original = MilvusClient.search
+
+    def observed(client, *args, **kwargs):
+        with lock:
+            proof['milvus_search_attempts'] += 1
+            save()
+        try:
+            value = original(client, *args, **kwargs)
+        except BaseException:
+            with lock:
+                proof['milvus_search_failures'] += 1
+                save()
+            raise
+        with lock:
+            proof['milvus_search_calls'] += 1  # Successful returns; existing gate unchanged.
+            save()
+        return value
+
+    MilvusClient.search = observed
+    try:
+        yield
+    finally:
+        MilvusClient.search = original
 
 
 def main():
@@ -67,7 +98,7 @@ def main():
         git_status=subprocess.check_output(['git', 'status', '--short'], cwd=REPO, text=True),
         physical_provider_attempts=0, provider_budget=args.max_provider_attempts,
         provider_usage=[], provider_response_models=[], actual_model_response=False,
-        bge_calls=0, milvus_search_calls=0,
+        bge_calls=0, milvus_search_calls=0, milvus_search_attempts=0, milvus_search_failures=0,
         human_acceptances=0, financial_acceptance_performed=False,
         human_semantic_review='pending', turns=[], sources=[],
     )
@@ -111,23 +142,18 @@ def main():
         return response
 
     httpx.Client.send, Completions.create = physical_send, bounded_create
+    observers = ExitStack()
     try:
         import app.api.runtime_factory as factory
         original_embed = factory._runtime_bge_embed
-        original_search = factory.MilvusSearchStore.search
+        observers.enter_context(observe_milvus_search(proof, lock, save))
 
         def observed_embed(texts):
             value = original_embed(texts)
             proof['bge_calls'] += 1
             return value
 
-        def observed_search(store, *a, **kw):
-            value = original_search(store, *a, **kw)
-            proof['milvus_search_calls'] += 1
-            return value
-
         factory._runtime_bge_embed = observed_embed
-        factory.MilvusSearchStore.search = observed_search
         from fastapi.testclient import TestClient
         app = factory.create_runtime_app(runtime)
         if '/conversations' not in app.openapi()['paths']:
@@ -256,9 +282,9 @@ def main():
         # Exception messages can contain provider URLs or credentials; never persist them.
     finally:
         httpx.Client.send, Completions.create = old_send, old_create
+        observers.close()
         if 'factory' in locals() and 'original_embed' in locals():
             factory._runtime_bge_embed = original_embed
-            factory.MilvusSearchStore.search = original_search
         proof['ended_at'] = time.time()
         save()
     print(json.dumps({k: proof[k] for k in ('status', 'physical_provider_attempts', 'human_semantic_review')}))
