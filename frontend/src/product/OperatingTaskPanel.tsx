@@ -2,9 +2,8 @@ import { correctionInvalidates, currentSource, invalidFactReason, taskInvalidate
 import type { VerificationState } from './researchVerification.ts';
 import type { Readiness } from './ResearchTaskHeader.tsx';
 import { resultReading } from "./resultReading.ts";
-import { taskReviewPath } from "./researchJourney.ts";
 import { receiptStates, type ReceiptState } from "./researchReceiptStatus.ts";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { METRICS } from "../evidence/contracts.ts";
 import type { Company, DataAccess, Fact, Analysis, Comparison } from "./api.ts";
 import {
@@ -15,6 +14,10 @@ import {
   formatDecimal,
 } from "./api.ts";
 import { FactEvidence } from "./FactEvidence.tsx";
+import { EmbeddedTaskReview } from "../evidence/EvidenceWorkbench.tsx";
+import { readResearchCandidates } from './researchCandidates.ts';
+import type { Candidate } from '../evidence/contracts.ts';
+import './researchMatrix.css';
 import {
   errorLabel,
   metrics,
@@ -80,7 +83,21 @@ export function TaskPanel({
   const [evidence, setEvidence] = useState<Fact | null>(null);
   const [issues, setIssues] = useState<Record<string, string>>({});
   const [receipts, setReceipts] = useState<Record<string, ReceiptState>>({});
-  const [showAll, setShowAll] = useState(false);
+  const [reviewSlot, setReviewSlot] = useState<{ side: 'first' | 'second'; metric: string; fact?: Fact } | null>(null);
+  const [viewerTarget, setViewerTarget] = useState<HTMLDivElement | null>(null);
+  const reviewFocusArea = useRef<HTMLDivElement>(null);
+  const statusFocus = useRef<HTMLDivElement>(null);
+  const pausedFocus = useRef<HTMLElement | null>(null);
+  const [wideReview, setWideReview] = useState(() => window.matchMedia('(min-width: 1200px)').matches);
+  useEffect(() => {
+    const media = window.matchMedia('(min-width: 1200px)');
+    const update = () => setWideReview(media.matches);
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+  const [verificationRevision, setVerificationRevision] = useState(0);
+  const [candidateRead, setCandidateRead] = useState<{ taskId: string; revision: number; values: Record<string, Candidate> } | null>(null);
+  const candidatePreview = candidateRead?.taskId === task.task_id && candidateRead.revision === task.revision ? candidateRead.values : {};
   const owner = useRef(0);
   useEffect(() => {
     let disposed = false;
@@ -228,7 +245,15 @@ export function TaskPanel({
       clearInterval(timer);
       window.removeEventListener("focus", focus);
     };
-  }, [task, access, setGuard]);
+  }, [task, access, setGuard, verificationRevision]);
+  useEffect(() => {
+    if (guard !== 'current' || !task.waiting_checkpoint) return;
+    const c = new AbortController();
+    void readResearchCandidates(task, c.signal).then(values => {
+      if (!c.signal.aborted) setCandidateRead({ taskId: task.task_id, revision: task.revision, values });
+    }).catch(() => { if (!c.signal.aborted) setCandidateRead(null); });
+    return () => c.abort();
+  }, [task, guard]);
   let refs: ReturnType<typeof resumeFacts> | null = null,
     notReady = "";
   try {
@@ -340,6 +365,18 @@ export function TaskPanel({
   const blocked =
     guard === "invalidated" ||
     task.publication_eligibility?.status === "invalidated";
+  useLayoutEffect(() => {
+    const active = document.activeElement;
+    if (!safe && reviewSlot && active instanceof HTMLElement && (reviewFocusArea.current?.contains(active) || viewerTarget?.contains(active))) {
+      pausedFocus.current = active;
+      statusFocus.current?.focus({ preventScroll: true });
+    } else if (safe && pausedFocus.current) {
+      if (document.activeElement === statusFocus.current && pausedFocus.current.isConnected)
+        pausedFocus.current.focus({ preventScroll: true });
+      pausedFocus.current = null;
+    }
+    if (guard === 'invalidated') pausedFocus.current = null;
+  }, [safe, guard, reviewSlot, viewerTarget]);
   const checklist = sides.map((side) => ({
     side,
     input: task.active_input[side],
@@ -382,9 +419,9 @@ export function TaskPanel({
             : invalid
               ? "失效"
               : chosen
-                ? "已入库"
+                ? "已保存"
                 : receipt?.status === "accepted-unpersisted"
-                  ? "已接受待入库"
+                  ? "已核对，待保存"
                   : "待核对",
       };
     }),
@@ -399,27 +436,14 @@ export function TaskPanel({
   const nextRow = nextGroup?.rows.find((r) => !r.chosen && !r.invalid);
   const nextHref =
     nextGroup && nextRow && guard === "current"
-      ? nextRow.options.length > 1
-        ? `#fact-${nextGroup.side}-${nextRow.choice.metric_key}`
-        : taskReviewPath(task, nextGroup.side, nextRow.choice.metric_key)
+      ? `#fact-${nextGroup.side}-${nextRow.choice.metric_key}`
       : "";
   const nextLabel =
     nextGroup && nextRow
       ? nextRow.options.length > 1
         ? "选择已核准事实"
-        : `${nextRow.receipt?.status === "unknown" ? "查证接受结果：" : nextRow.state === "已接受待入库" ? "保存已接受数据：" : "核对"} ${nextGroup.input.period.year} 年财务数据`
+        : `${nextRow.receipt?.status === "unknown" ? "查证接受结果：" : nextRow.state === "已核对，待保存" ? "保存已接受数据：" : "核对"} ${nextGroup.input.period.year} 年财务数据`
       : "";
-  function groupEntries(group: typeof checklist[number]) {
-    const entries = new Map<string, typeof group.rows>();
-    for (const row of group.rows) {
-      const key = `${row.choice.document_id}:${row.choice.disclosure_version}`;
-      entries.set(key, [...(entries.get(key) || []), row]);
-    }
-    return [...entries].filter(([, rows]) => rows.some(r => !r.chosen && !r.invalid && r.options.length <= 1)).map(([key, rows]) => ({ key, rows,
-      href: taskReviewPath(task, group.side, rows.find(r => !r.chosen && !r.invalid && r.options.length <= 1)!.choice.metric_key),
-      label: `${rows.some(r => r.receipt?.status === 'unknown') ? '查证接受结果' : rows.some(r => r.receipt?.status === 'accepted-unpersisted') ? '保存已接受数据' : '核对'} ${group.input.period.year} 年 · ${rows.length} 项数据`,
-    }));
-  }
   useEffect(() => {
     readiness?.({
       taskId: task.task_id,
@@ -454,128 +478,37 @@ export function TaskPanel({
     >
       <div className="operating-heading">
         <h2>六项财务核对清单</h2>
-        <strong>{guard === 'current' ? `${completed} / 6 项已入库` : verificationText[guard]}</strong>
+        <strong>{guard === 'current' ? `${completed} / 6 项已保存` : verificationText[guard]}</strong>
       </div>
       <p className="muted">
         按企业与财务年度核对，每组通常包含三项。明确接受后独立保存；六项保存齐备后仍需点击继续研究。
       </p>
-      <button onClick={() => setShowAll(!showAll)}>{showAll ? '收起已完成组' : '查看全部六项'}</button>
-      {[...checklist].sort((a, b) => Number(b === nextGroup) - Number(a === nextGroup)).map((group) => (
-        <details open={showAll || group.rows.some(r => !r.chosen)}
-          key={group.side}
-          className="fact-group"
-          data-side={group.side}
-          data-current={group === nextGroup ? 'true' : undefined}
-          aria-label={`${group.input.period.year} 年财务清单`}
-        >
-          <summary>
-            {group === nextGroup && <span className="fact-group-current">当前核对组</span>}
-            {
-              companies.find((c) => c.company_id === group.input.company_id)
-                ?.name
-            }{" "}
-            · {group.input.period.year} 年财务期间 · {guard === 'current' ? `${group.rows.filter(r => r.chosen).length}/${group.rows.length} 项已入库` : '保存身份保留 · ' + verificationText[guard]}
-          </summary>
-          {safe && <div className="fact-group-actions">
-            {groupEntries(group).map(entry => <a key={entry.key} href={entry.href}>{entry.label} →</a>)}
-          </div>}
-          <ul className="fact-checklist">
-            {group.rows.map((row) => (
-              <li
-                key={row.key}
-                id={`fact-${group.side}-${row.choice.metric_key}`}
-                tabIndex={-1}
-                data-testid={`slot-${row.key}`}
-              >
-                <div className="fact-row">
-                  <div>
-                    <strong>{METRICS[row.choice.metric_key]}</strong>
-                    <p
-                      className={
-                        row.chosen ? "operating-ready" : "operating-pending"
-                      }
-                    >
-                      {row.state}
-                      {row.state === "待核对" && " · 财报已准备"}
-                    </p>
-                  </div>
-                  {row.chosen ? (
-                    <span className="confirmed-amount">
-                      {row.chosen.raw_value || "—"}{" "}
-                      {row.chosen.raw_unit}
-                    </span>
-                  ) : null}
-                </div>
-                {row.options.length > 1 && (
-                  <label>
-                    多个有效事实，请明确选择
-                    <select
-                      aria-label={`${row.key} 恢复事实`}
-                      value={selected[row.key] || ""}
-                      onChange={(e) =>
-                        setSelected((old) => ({
-                          ...old,
-                          [row.key]: e.target.value,
-                        }))
-                      }
-                    >
-                      <option value="">明确选择已确认事实</option>
-                      {row.options.map((f) => (
-                        <option key={f.fact_id} value={f.fact_id}>
-                          {formatDecimal(f.value_cny_yuan)} 元 ·{" "}
-                          {f.confirmation_kind === "local_operator"
-                            ? "人工核准"
-                            : "隔离模拟"}{" "}
-                          · {f.fact_id.slice(-8)}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                )}
-                {row.receipt && !row.chosen && row.receipt.status === "unknown" && <p>{row.receipt.message}</p>}
-                {row.invalid && (
-                  <p role="alert">
-                    {issues[row.key] ||
-                      "来源或事实资格失效。旧金额已撤下，请核对来源后明确新建研究。"}
-                  </p>
-                )}
-                {row.chosen && (
-                  <details>
-                    <summary>已入库事实与证据</summary>
-                    <p>
-                      已经具备有效核准事实 · 财务年度 {row.chosen.period} ·
-                      合并口径 ·{" "}
-                      {row.chosen.confirmation_kind === "simulated_test"
-                        ? "模拟测试接受"
-                        : "人工明确接受"}
-                    </p>
-                    <button onClick={() => setEvidence(row.chosen)}>
-                      查看原 PDF
-                    </button>
-                    <a
-                      href={taskReviewPath(
-                        task,
-                        group.side,
-                        row.choice.metric_key,
-                        row.chosen,
-                      )}
-                    >
-                      查看已保存核对记录（只读） →
-                    </a>
-                    <details>
-                      <summary>高级审计：披露与事实身份</summary>
-                      <p>{row.choice.disclosure_version}</p>
-                      <p>
-                        {row.chosen.fact_set_id} / {row.chosen.fact_id}
-                      </p>
-                    </details>
-                  </details>
-                )}
-              </li>
-            ))}
-          </ul>
-        </details>
-      ))}
+      <div className="research-review-grid" data-open={!!reviewSlot}>
+      <div className="research-review-left">
+      <div className="research-matrix-scroll">
+        <table className="research-matrix">
+          <thead><tr><th scope="col">财务指标</th>{checklist.map(group => <th scope="col" key={group.side}>{companies.find(c => c.company_id === group.input.company_id)?.name || '企业'} · {group.input.period.year} 年</th>)}</tr></thead>
+          <tbody>{metrics.map(metric => <tr key={metric}><th scope="row">{METRICS[metric]}</th>{checklist.map(group => {
+            const row = group.rows.find(r => r.choice.metric_key === metric)!;
+            return <td key={row.key} id={`fact-${group.side}-${metric}`} data-testid={`slot-${row.key}`} data-label={`${companies.find(c => c.company_id === group.input.company_id)?.name || '企业'} · ${group.input.period.year} 年`}>
+              <strong>{row.chosen ? `${row.chosen.raw_value || '—'} ${row.chosen.raw_unit || ''}` : guard === 'current' && candidatePreview[row.key]?.status === 'candidate' && candidatePreview[row.key]?.raw_value && candidatePreview[row.key]?.raw_unit ? `${candidatePreview[row.key].raw_value} ${candidatePreview[row.key].raw_unit} · 候选待核对` : '候选暂不可用'}</strong>
+              <p>{row.state}{row.receipt?.status === 'unknown' ? ' · 结果待查证' : ''}</p>
+              {row.options.length > 1 && <label>多个有效事实，请明确选择<select aria-label={`${row.key} 恢复事实`} value={selected[row.key] || ''} onChange={e => setSelected(old => ({ ...old, [row.key]: e.target.value }))}><option value="">明确选择已确认事实</option>{row.options.map(f => <option key={f.fact_id} value={f.fact_id}>{formatDecimal(f.value_cny_yuan)} 元 · {f.confirmation_kind === 'local_operator' ? '人工核准' : '隔离模拟'} · {f.fact_id.slice(-8)}</option>)}</select></label>}
+              {row.receipt?.status === 'unknown' && !row.chosen && <p>{row.receipt.message}</p>}
+              {row.invalid && <p role="alert">{issues[row.key] || '来源或事实资格失效，请重新核对来源。'}</p>}
+              <button disabled={!safe || row.invalid || (!row.chosen && row.options.length > 1)} onClick={() => setReviewSlot({ side: group.side, metric, fact: row.chosen || undefined })}>{row.chosen ? '查看核对记录与原文' : row.receipt?.status === 'unknown' ? '查证并核对' : '核对原文'}</button>
+            </td>;
+          })}</tr>)}</tbody>
+        </table>
+      </div>
+      {reviewSlot && <section className="research-inline-review" aria-label="原位核对财报">
+        <div className="research-inline-review-heading"><h3>核对财报原文</h3><button onClick={() => { setReviewSlot(null); setVerificationRevision(n => n + 1); }}>完成并刷新核对状态</button></div>
+        {!safe && <p role="status">正在核验任务与来源；核验完成前暂停核对操作。</p>}
+        <div ref={reviewFocusArea} hidden={!safe}><EmbeddedTaskReview key={`${task.task_id}:${task.revision}:${reviewSlot.side}:${task.active_input[reviewSlot.side].choices.find(c => c.metric_key === reviewSlot.metric)?.document_id}:${task.active_input[reviewSlot.side].choices.find(c => c.metric_key === reviewSlot.metric)?.disclosure_version}:${reviewSlot.fact?.fact_set_id || ''}`} task={task} side={reviewSlot.side} metric={reviewSlot.metric} fact={reviewSlot.fact} viewerTarget={wideReview ? viewerTarget : null} paused={!safe} /></div>
+      </section>}
+      </div>
+      {reviewSlot && <aside className="research-review-viewer" hidden={!safe || !wideReview} aria-label="当前原文"><div ref={setViewerTarget} /></aside>}
+      </div>
       {task.waiting_checkpoint && (
         <p>
           {refs
@@ -583,7 +516,7 @@ export function TaskPanel({
             : guard === 'unavailable' || guard === 'invalidated'
               ? verificationText[guard]
             : notReady
-              ? "请完成六项入库；有多个有效事实时需明确选择。"
+              ? "请完成六项保存；有多个有效事实时需明确选择。"
               : "正在核验当前来源与事实资格。"}
         </p>
       )}
@@ -620,7 +553,7 @@ export function TaskPanel({
           {errorLabel(task.error_code)}
         </p>
       )}
-      <div data-verification-state={guard} role="status">{verificationText[guard]}</div>
+      <div ref={statusFocus} tabIndex={-1} data-verification-state={guard} role="status">{verificationText[guard]}</div>
       {(section === 'sources' || (task.status !== "completed" && section === 'operating')) && factList}
       {section === 'financial' && task.status !== 'completed' && <section id="research-results" tabIndex={-1} className="operating-card"><h2>财务分析尚未取得完整结果</h2><p>完成数据核对与独立保存后，再明确继续经营研究。浏览此页不会执行研究。</p><a href={`/research?${new URLSearchParams({ task: task.task_id, company: task.input.first.company_id, mode: 'operating', section: 'sources' })}#research-facts`}>查看资料与核对</a></section>}
       {task.status === "completed" && section !== 'sources' && (

@@ -38,7 +38,7 @@ export function TaskContextHeader({ task, companies, unknown = false, executing 
     {verification && !compact && <p className="context-note">历史任务状态：{taskLabels[task.status]} · 当前资格：{verificationText[verification]}</p>}
     <h1>{context.scopes[0].name}{task.input.template === 'company_period_change' ? ` · ${context.scopes[1].year}—${context.scopes[0].year} 经营变化` : ` × ${context.scopes[1].name} · ${context.scopes[0].year} 年经营比较`}</h1>
     {compact ? <details><summary>期间、口径与冻结来源</summary><Scope {...context} /></details> : <Scope {...context} />}
-    {compact && <p className="context-note">历史结果读取 · 不会重新运行模型 · 当前资格：{verificationText[verification || "checking"]}</p>}
+    {compact && task.status === 'completed' && <p className="context-note">历史结果读取 · 不会重新运行模型 · 当前资格：{verificationText[verification || "checking"]}</p>}
     {children}
     <ResearchContextNav task={task} section={section} />
   </header>;

@@ -115,7 +115,7 @@ export function ResearchCreation({
       aria-label="企业与期间配置"
     >
       <ol className="creation-steps" aria-label="创建研究三阶段">
-        {["研究范围", "准备财报", "确认来源"].map((title, i) => (
+        {["研究目标", "准备年报", "核对准备"].map((title, i) => (
           <li key={title} aria-current={stage === i + 1 ? "step" : undefined}>
             {i + 1} · {title}
           </li>
@@ -150,14 +150,14 @@ export function ResearchCreation({
           ? "先确定要研究什么"
           : stage === 2
             ? "检查两组研究资料"
-            : "确认六项指标的披露来源"}
+            : "准备核对六项财务数据"}
       </h2>
       <p className="muted">
         {stage === 1
           ? "选择企业、研究方式和全年期间。"
           : stage === 2
             ? "选择能覆盖财务期间的年报。上一年度数据也可能披露于本年度报告。"
-            : "披露来源需要你的明确选择；财务接受将在原文核对中单独完成。"}
+            : "检查所选年报和披露来源。创建研究后，在同一研究页面逐项核对原文。"}
       </p>
       {stage === 1 && (
         <div className="operating-templates" aria-label="经营研究模板">
@@ -393,7 +393,7 @@ export function ResearchCreation({
                           })
                         }
                       >
-                        {metrics.every(m => s.versions[m] === p.disclosure.disclosure_versions[0]) ? "已采用这组三项来源" : "采用这组三项来源"}
+                        {metrics.every(m => s.versions[m] === p.disclosure.disclosure_versions[0]) ? "已匹配这组三项来源" : "采用这组三项来源"}
                       </button>
                     )}
                     {p.disclosure.disclosure_versions.length > 1 && (
@@ -457,7 +457,7 @@ export function ResearchCreation({
                                 }
                               >
                                 <option value="">
-                                  稍后在任务中核验已入库事实
+                                  稍后在任务中核验已保存数据
                                 </option>
                                 {fs.map((f) => (
                                   <option key={f.fact_id} value={f.fact_id}>
@@ -478,7 +478,7 @@ export function ResearchCreation({
                                   )
                                 ? "披露已失效，请重新选择"
                                 : fs.length
-                                  ? "已入库事实当前有效，将按所选披露重新核验。"
+                                  ? "已保存数据当前有效，将按所选披露重新核验。"
                                   : "已准备 · 创建后核对原文并明确接受"}
                           </p>}
                         </div>
@@ -518,7 +518,7 @@ export function ResearchCreation({
               setUpload("");
             }}
           >
-            下一步：确认来源
+            下一步：准备核对
           </button>
         )}
         {stage === 3 && (

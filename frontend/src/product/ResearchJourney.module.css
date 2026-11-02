@@ -274,3 +274,13 @@
 .sticky[data-compact="true"] .row h2 { margin-block: 6px; font-size: 16px; }
 .sticky[data-compact="true"] .stageDetails { margin-block: 6px; }
 .sticky[data-compact="true"] .chapterNav { margin-top: 8px; }
+.sticky[data-review-compact="true"] { padding: 10px 16px; margin-bottom: 10px; }
+.sticky[data-review-compact="true"] :global(.task-context-header) { border: 0; padding: 0; margin: 0; }
+.sticky[data-review-compact="true"] :global(.task-context-header h1) { font-size: 20px; line-height: 1.25; margin: 4px 0; }
+.sticky[data-review-compact="true"] :global(.context-title-row) { margin-top: 3px; }
+.sticky[data-review-compact="true"] :global(.research-context-nav) { margin-top: 3px; }
+.sticky[data-review-compact="true"] :global(.research-context-nav a) { min-height: 32px; padding: 3px 0; }
+.sticky[data-review-compact="true"] .stageDetails { margin: 4px 0; }
+.sticky[data-review-compact="true"] .row h2 { margin: 2px 0; font-size: 16px; }
+.sticky[data-review-compact="true"] .row p { margin: 2px 0; }
+.sticky[data-review-compact="true"] .chapterNav { margin-top: 4px; }

@@ -3,23 +3,22 @@ import type { ReactNode } from "react";
 import type { Company } from "./api.ts";
 import { Icon } from "./Icon.tsx";
 import type { IconName } from "./Icon.tsx";
-import { pathFor, type Page } from './productRoutes.ts';
+import { type Page } from './productRoutes.ts';
 export type { Page } from './productRoutes.ts';
 // oxlint-disable-next-line react/only-export-components
 export { pathFor } from './productRoutes.ts';
-const navigation: { page: Page; label: string; icon: IconName }[] = [
-  { page: "home", label: "我的研究", icon: "research" },
-  { page: "companies", label: "企业与资料", icon: "library" },
-  { page: "reports", label: "报告", icon: "file" },
+const navigation: { key: string; page: Page; label: string; icon: IconName; href: string }[] = [
+  { key: 'home', page: 'home', label: '首页', icon: 'book', href: '/' },
+  { key: 'tasks', page: 'tasks', label: '研究任务', icon: 'research', href: '/tasks' },
+  { key: 'companies', page: 'companies', label: '企业与年报', icon: 'library', href: '/companies' },
+  { key: 'qa', page: 'research', label: '年报问答', icon: 'quote', href: '/research?mode=qa' },
+  { key: 'reports', page: 'reports', label: '我的报告', icon: 'file', href: '/reports' },
 ];
 export function AppShell({
   page,
-  company,
-  companies,
   navigate,
   children,
   label,
-  contextLocked = false,
 }: {
   page: Page;
   company: string;
@@ -29,14 +28,7 @@ export function AppShell({
   label?: string;
   contextLocked?: boolean;
 }) {
-  const [resolvedLock, setResolvedLock] = useState<boolean | null>(null);
-  useEffect(() => {
-    const lock = () => { const q = new URLSearchParams(location.search); setResolvedLock(q.get('mode') === 'qa' ? q.has('run') : true); };
-    window.addEventListener('findoc:fixed-context', lock);
-    return () => window.removeEventListener('findoc:fixed-context', lock);
-  }, []);
-  const locked = resolvedLock ?? contextLocked;
-  const globalPage = page === 'research' ? 'home' : ['overview', 'documents', 'analysis'].includes(page) ? 'companies' : page;
+  const globalPage = page === 'research' ? new URLSearchParams(location.search).get('mode') === 'qa' ? 'qa' : 'tasks' : ['overview', 'documents', 'analysis'].includes(page) ? 'companies' : page;
   const [drawerMode, setDrawerMode] = useState(() => window.innerWidth < 1100);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const sidebar = useRef<HTMLElement>(null);
@@ -106,21 +98,22 @@ export function AppShell({
         <nav aria-label="产品导航">
           {navigation.map((item) => (
             <a
-              key={item.page}
-              href={pathFor(item.page, company)}
-              aria-current={item.page === globalPage ? "page" : undefined}
+              key={item.key}
+              href={item.href}
+              aria-current={item.key === globalPage ? "page" : undefined}
               title={item.label}
               aria-label={item.label}
-              className={`nav-item ${item.page === globalPage ? "active" : ""}`}
+              className={`nav-item ${item.key === globalPage ? "active" : ""}`}
               onClick={(e) => {
                 e.preventDefault();
                 setDrawerOpen(false);
-                navigate(item.page, company);
+                if (item.key === 'qa') { window.history.pushState(null, '', item.href); window.dispatchEvent(new PopStateEvent('popstate')); window.requestAnimationFrame(() => document.getElementById('main-content')?.focus()); }
+                else navigate(item.page, '');
               }}
             >
               <Icon name={item.icon} />
               <span className="nav-label">{item.label}</span>
-              {item.page === globalPage && <span className="nav-active-dot" />}
+              {item.key === globalPage && <span className="nav-active-dot" />}
             </a>
           ))}
         </nav>
@@ -148,23 +141,9 @@ export function AppShell({
           {drawerMode && <button ref={trigger} className="nav-toggle" aria-label="打开导航" aria-expanded={drawerOpen} aria-controls="product-navigation" onClick={() => setDrawerOpen(true)}>菜单</button>}
           <div className="breadcrumb">
             工作空间 <Icon name="chevron" size={13} />
-            <span>{navigation.find((n) => n.page === globalPage)?.label}</span>
+            <span>{navigation.find((n) => n.key === globalPage)?.label}</span>
           </div>
-          {locked || page === 'reports' ? <p className="context-lock">{page === 'reports' ? locked ? '报告范围来自保存时的研究' : '报告库 · 全部企业' : '当前研究范围固定'} · <a href="/companies">查看企业目录</a></p> : <label className="company-picker">
-            {page === 'home' ? '企业筛选' : '当前企业'}
-            <select
-              aria-label="当前企业"
-              value={company}
-              onChange={(e) => navigate(page, e.target.value)}
-            >
-              <option value="">选择企业</option>
-              {companies.map((c) => (
-                <option key={c.company_id} value={c.company_id}>
-                  {c.name} · {c.security_code}
-                </option>
-              ))}
-            </select>
-          </label>}
+          <span className="workspace-note">个人研究空间</span>
         </header>
         {label && (
           <div className="test-banner" role="status">

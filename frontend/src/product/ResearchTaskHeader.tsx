@@ -67,8 +67,8 @@ export function ResearchTaskHeader({
           : taskLabels[task.status];
   const compact = task.status === "completed" && section !== "sources" && verification === "current";
   return (
-    <section className={styles.sticky} aria-label="研究阶段与下一步" data-compact={compact}>
-      <TaskContextHeader task={task} companies={companies} unknown={unknown} executing={executing} section={section} verification={verification} compact={compact} />
+    <section className={styles.sticky} aria-label="研究阶段与下一步" data-compact={compact} data-review-compact={task.waiting_checkpoint || undefined}>
+      <TaskContextHeader task={task} companies={companies} unknown={unknown} executing={executing} section={section} verification={verification} compact={compact || task.waiting_checkpoint} />
       {!compact && <details className={styles.stageDetails}>
         <summary>第 {stage + 1}/5 步 · {["研究范围", "准备财报", "核对六项事实", "执行研究", "结果与报告"][stage]}</summary>
         <div className={styles.steps}>
@@ -95,8 +95,8 @@ export function ResearchTaskHeader({
                 ? "冻结来源无法继续使用。请核对当前来源，并明确建立新研究。"
                 : task.waiting_checkpoint && checked
                   ? ready
-                    ? "六项已入库且当前有效。复核后明确继续研究。"
-                    : `已入库 ${readiness.completed || 0} / 6 项。${readiness.next?.label || "请检查下方失效或冲突项。"}`
+                    ? "六项已保存且当前有效。复核后明确继续研究。"
+                    : `已保存 ${readiness.completed || 0} / 6 项。${readiness.next?.label || "请检查下方失效或冲突项。"}`
                   : nextAction(task)}
           </p>}
         </div>
