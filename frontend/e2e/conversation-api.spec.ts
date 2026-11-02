@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test'
-import { writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
+import { createHash } from 'node:crypto'
 import { counts, createConversation, operation, out, seedSources, send } from './conversation-helpers.ts'
 
 let documents: Record<string, string>
@@ -183,9 +184,29 @@ test('strict create range and server-owned workspace reject without execution', 
 })
 
 test('C09 actual isolated binding correction expires new use while historical answer is immutable', async ({ request }) => {
-  const c = await createConversation(request, [documents['gree-2024']])
-  const turn = await send(request, c.conversation_id, '请引用格力电器2024年的主要业务原文。')
+  const original = JSON.parse(readFileSync(`${out}/sources.json`, 'utf8')).find((s: { id: string }) => s.id === 'gree-2024')
+  const originalBytes = readFileSync(original.absolute_path)
+  expect(createHash('sha256').update(originalBytes).digest('hex')).toBe(original.sha256)
+  const derivedBytes = Buffer.concat([originalBytes, Buffer.from(`\n% isolated C09 ${operation()}\n`)])
+  const derivedSha = createHash('sha256').update(derivedBytes).digest('hex')
+  expect(derivedSha).not.toBe(original.sha256)
+  const seed = await createConversation(request, [documents['gree-2024']])
+  const company = seed.sources[0].company_id
+  const upload = await request.post('/api/report-documents', { multipart: {
+    file: { name: 'gree-2024-c09-derived.pdf', mimeType: 'application/pdf', buffer: derivedBytes },
+    metadata: JSON.stringify({ company_id: company, report_year: 2024, report_type: 'annual',
+      basis: 'PRC_GAAP', period_start: '2024-01-01', period_end: '2024-12-31' }),
+  } })
+  expect(upload.status()).toBe(202)
+  const derivedId = (await upload.json()).document_id
+  expect(derivedId).not.toBe(documents['gree-2024'])
+  await expect.poll(async () => (await (await request.get(`/api/documents/${derivedId}`)).json()).status,
+    { timeout: 120_000 }).toBe('ready')
+  const c = await createConversation(request, [derivedId])
+  const turn = await send(request, c.conversation_id, '请引用珠海格力电器股份有限公司2024年的主要业务原文。')
   expect(turn.status).toBe('completed')
+  expect(turn.result.kind).toBe('source_quote')
+  expect(turn.result.evidence_refs.length).toBeGreaterThan(0)
   const source = c.sources[0]
   const before = await counts(request)
   const changed = await request.post(`/api/documents/${source.document_id}/binding-corrections`, { data: {
@@ -198,14 +219,16 @@ test('C09 actual isolated binding correction expires new use while historical an
   expect(read.source_states[0].status).toBe('expired')
   expect(read.turns[0].result).toEqual(turn.result)
   expect(read.turns[0].integrity_sha256).toBe(turn.integrity_sha256)
-  const denied = await request.get(`/api/documents/${source.document_id}/source/file?source_revision=${source.source_revision}`)
+  const denied = await request.get(`/api/documents/${source.document_id}/file?source_revision=${source.source_revision}`)
   expect(denied.status()).toBe(409)
   const next = await request.post(`/api/conversations/${c.conversation_id}/turns`, { data: {
     operation_id: operation(), text: '请再说明主要业务。',
   } })
   expect(next.status()).toBe(409)
   expect((await counts(request)).calls).toEqual(before.calls)
+  expect(createHash('sha256').update(readFileSync(original.absolute_path)).digest('hex')).toBe(original.sha256)
   writeFileSync(`${out}/c09-invalidation-proof.json`, JSON.stringify({ before,
     after: await counts(request), source, historical_integrity: turn.integrity_sha256,
+    original_sha256: original.sha256, derived_sha256: derivedSha, isolated_derived_copy: true,
     source_states: read.source_states, old_pdf_status: denied.status() }, null, 2))
 })

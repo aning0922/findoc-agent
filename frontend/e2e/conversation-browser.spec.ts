@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test'
 import { createHash } from 'node:crypto'
 import { writeFileSync } from 'node:fs'
 import { counts, createConversation, out, seedSources, send } from './conversation-helpers.ts'
+import { excerptBlocks } from '../src/product/excerptBlocks.ts'
 
 let documents: Record<string, string>
 test.beforeAll(async ({ request }) => {
@@ -26,7 +27,25 @@ for (const width of [390, 1440]) {
     await page.goto(`/conversations?conversation=${c.conversation_id}`)
     await expect(page.getByRole('heading', { name: '财报研究助手', exact: true })).toBeVisible()
     await expect(page.getByLabel('消息记录')).toContainText(turn.user_text)
-    await expect(page.getByLabel('消息记录')).toContainText(turn.result.answer_text)
+    for (const ref of turn.result.evidence_refs) {
+      const card = page.getByLabel('消息记录').locator('section').filter({
+        has: page.getByRole('button', { name: `查看原 PDF [${ref.number}]`, exact: true }),
+      })
+      await expect(card).toHaveCount(1)
+      let tableIndex = 0
+      for (const block of excerptBlocks(ref.text)) {
+        if (block.kind === 'text') await expect(card).toContainText(block.text)
+        else {
+          const rows = card.locator('table').nth(tableIndex++).locator('tr')
+          const expectedRows = [block.header, ...block.rows]
+          await expect(rows).toHaveCount(expectedRows.length)
+          for (let i = 0; i < expectedRows.length; i++) {
+            expect(await rows.nth(i).locator('th,td').allTextContents()).toEqual(expectedRows[i])
+          }
+        }
+      }
+      await expect(card.locator('table')).toHaveCount(tableIndex)
+    }
     const input = page.getByRole('textbox', { name: '研究问题', exact: true })
     await expect(input).toBeVisible()
     await input.focus()
@@ -41,7 +60,7 @@ for (const width of [390, 1440]) {
     await expect(dialog).toHaveCount(0)
     await expect(sourceButton).toBeFocused()
     const ref = turn.result.evidence_refs[0]
-    const pdf = await request.get(`/api/documents/${ref.document_id}/source/file?source_revision=${ref.source_revision}`)
+    const pdf = await request.get(`/api/documents/${ref.document_id}/file?source_revision=${ref.source_revision}`)
     expect(pdf.status()).toBe(200)
     expect(createHash('sha256').update(await pdf.body()).digest('hex')).toBe(ref.content_sha256)
     const pdfButton = page.getByRole('button', { name: /查看原 PDF/ }).first()
@@ -84,6 +103,7 @@ test('C07 sent POST response lost: UNKNOWN recovery only GET, same operation and
   const before = await counts(request)
   await input.fill('请引用美的集团2025年的主要业务原文。')
   await page.getByRole('button', { name: '发送', exact: true }).click()
+  await expect.poll(() => submitted?.operation_id, { timeout: 60_000 }).toBeTruthy()
   await expect(page.getByRole('button', { name: '查询本次操作状态', exact: true })).toBeVisible()
   expect(submitted?.operation_id).toBeTruthy()
   const committed = await counts(request)
@@ -138,7 +158,8 @@ test('C04 two real tabs: unregistered conversation_busy releases only loser oper
     await firstSend.click()
     // Hold the real provider boundary after server registration; no fixed sleep
     // or fabricated 409 can stand in for the two competing actual HTTP writes.
-    await expect.poll(async () => (await counts(request)).calls.model).toBeGreaterThan(before.calls.model)
+    await expect.poll(async () => (await (await request.get(
+      `/api/conversations/${c.conversation_id}`)).json()).active_turn_id).not.toBeNull()
     const active = await (await request.get(`/api/conversations/${c.conversation_id}`)).json()
     expect(active.active_turn_id).not.toBeNull()
     const busyResponse = secondPage.waitForResponse(r => r.request().method() === 'POST' && r.url().endsWith(turnPath))

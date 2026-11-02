@@ -131,7 +131,7 @@ def create_app():
     factory._build_runtime_rag_resources = lambda *a: factory.RuntimeRAGResources(
         rag_service=rag, retriever=retriever, milvus_client=NoVectorClient())
     app = factory.create_runtime_app(root)
-    paths = {r.path for r in app.routes if hasattr(r, 'path')}
+    paths = app.openapi()['paths']
     if '/conversations' not in paths:
         if os.environ.get('FINDOC_CONVERSATION_A1_ONLY') != '1':
             raise RuntimeError('actual_conversation_runtime_routes_not_implemented_yet')

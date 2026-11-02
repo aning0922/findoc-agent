@@ -62,11 +62,12 @@ def main():
                       PYTHONDONTWRITEBYTECODE='1', FINDOC_E2E_DISABLE_ENV_FILES='1')
     proof = dict(
         schema='conversation-v12-live-v1', started_at=time.time(), status='starting',
-        worktree=str(REPO), runtime_root=str(runtime), model=cfg['LLM_MODEL'],
+        worktree=str(REPO), runtime_root=str(runtime), configured_model=cfg['LLM_MODEL'],
         head=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=REPO, text=True).strip(),
         git_status=subprocess.check_output(['git', 'status', '--short'], cwd=REPO, text=True),
         physical_provider_attempts=0, provider_budget=args.max_provider_attempts,
-        provider_usage=[], actual_model_response=False, bge_calls=0, milvus_search_calls=0,
+        provider_usage=[], provider_response_models=[], actual_model_response=False,
+        bge_calls=0, milvus_search_calls=0,
         human_acceptances=0, financial_acceptance_performed=False,
         human_semantic_review='pending', turns=[], sources=[],
     )
@@ -102,6 +103,9 @@ def main():
         response = old_create(resource, *a, **kw)
         with lock:
             proof['actual_model_response'] = True
+            response_model = getattr(response, 'model', None)
+            proof['provider_response_models'].append(
+                response_model if isinstance(response_model, str) else None)
             proof['provider_usage'].append(response.usage.model_dump() if response.usage else None)
             save()
         return response
@@ -126,7 +130,7 @@ def main():
         factory.MilvusSearchStore.search = observed_search
         from fastapi.testclient import TestClient
         app = factory.create_runtime_app(runtime)
-        if '/conversations' not in {r.path for r in app.routes if hasattr(r, 'path')}:
+        if '/conversations' not in app.openapi()['paths']:
             raise RuntimeError('conversation_routes_missing')
         with TestClient(app) as client:
             def request(method, path, **kw):
@@ -204,7 +208,8 @@ def main():
                     save()
                     raise
                 (out / f'turn-{i + 1:02d}.json').write_text(json.dumps(answer, ensure_ascii=False, indent=2))
-                turn.update(state=answer.get('status', 'UNKNOWN'), turn_id=answer.get('turn_id'))
+                turn.update(state=answer.get('status', 'UNKNOWN'), turn_id=answer.get('turn_id'),
+                            result_kind=(answer.get('result') or {}).get('kind'))
                 turn['usage'] = answer.get('usage')
                 if answer.get('usage', {}).get('model_attempts', 0) > 2 or answer.get('usage', {}).get('tool_calls', 0) > 3:
                     raise RuntimeError('per_turn_budget_violation')
@@ -220,7 +225,6 @@ def main():
                     raise RuntimeError('readonly_replay_or_result_mismatch')
                 if turn['state'] in ('failed', 'interrupted', 'unknown', 'UNKNOWN', 'running'):
                     raise RuntimeError('turn_not_terminal_safe_stop')
-            proof['status'] = 'observed_pending_human_review'
         with sqlite3.connect(f'file:{runtime / "documents.db"}?mode=ro', uri=True) as db:
             names = {r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
             proof['financial_write_counts'] = {
@@ -229,6 +233,24 @@ def main():
             }
             if any(proof['financial_write_counts'].values()):
                 raise RuntimeError('unexpected_financial_write')
+        # Terminal clarification/refusal alone is not evidence of live execution.
+        # Keep the original questions; do not evade a routing defect by changing
+        # the financial wording merely to make this gate pass.
+        proof['live_execution_requirements'] = {
+            'completed_source_quote': any(
+                t.get('state') == 'completed' and t.get('result_kind') == 'source_quote'
+                for t in proof['turns']
+            ),
+            'physical_provider_attempt_observed': proof['physical_provider_attempts'] > 0,
+            'actual_model_response': proof['actual_model_response'] is True,
+            'bge_call_observed': proof['bge_calls'] > 0,
+            'milvus_search_observed': proof['milvus_search_calls'] > 0,
+        }
+        proof['missing_live_execution_evidence'] = [
+            name for name, observed in proof['live_execution_requirements'].items() if not observed
+        ]
+        proof['status'] = ('insufficient_live_execution' if proof['missing_live_execution_evidence']
+                           else 'observed_pending_human_review')
     except Exception as exc:
         proof.update(status='failed', error_type=type(exc).__name__)
         # Exception messages can contain provider URLs or credentials; never persist them.

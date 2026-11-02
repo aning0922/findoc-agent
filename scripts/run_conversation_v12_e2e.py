@@ -73,12 +73,17 @@ def main():
                         help='Build a fresh schema-v8 source seed for the legacy migration-9 tests')
     parser.add_argument('--a1-only', action='store_true',
                         help='Only create/conflict/range checks with the explicitly marked actual-service A1 fake handler')
+    parser.add_argument('--legacy-extra', nargs='+', default=[],
+                        help='After a fresh original journey/clean backup, run selected existing UX specs')
     args = parser.parse_args()
     node = shutil.which('node')
     if not node or not subprocess.check_output([node, '--version'], text=True).startswith('v24.'):
         parser.error('Node24 must be on PATH')
     if any('/' in s or not s.startswith('conversation') or not s.endswith('.spec.ts') for s in args.spec):
         parser.error('--spec accepts conversation*.spec.ts basenames only')
+    if args.legacy_extra and (not args.legacy_proof_only or any(
+            '/' in s or not s.endswith('.spec.ts') for s in args.legacy_extra)):
+        parser.error('--legacy-extra requires --legacy-proof-only and spec basenames')
     sources = json.loads((REPO / 'product/validation/sources.json').read_text())
     for source in sources:
         path = REPO / source['path']
@@ -109,6 +114,7 @@ def main():
         FINDOC_UX_INTEGRATION='1',
         UX_ARTIFACT_DIR=str(out),
         UX_SOURCE_FILE=str(out / 'sources.json'),
+        D26_REPORT_SEED_DIR=str(out),
         FINDOC_CONVERSATION_A1_ONLY='1' if args.a1_only else '0',
     )
     (out / 'sources.json').write_text(json.dumps([
@@ -201,6 +207,26 @@ def main():
             record.update(clean_seed_root=str(seed), report_test_proof=str(proof),
                           report_test_environment='FINDOC_REPORT_TEST_PROOF',
                           seed_method='sqlite_backup_before_report_generation')
+            if args.legacy_extra:
+                extra_config = runtime / 'legacy-extra.config.mjs'
+                needle = '"testMatch": "ux-simplification-journey.spec.ts"'
+                original_config = config.read_text()
+                if needle not in original_config:
+                    raise RuntimeError('unexpected_legacy_config_format')
+                extra_config.write_text(original_config.replace(needle,
+                    '"testMatch": ' + json.dumps(args.legacy_extra)).replace(
+                    str(out / 'results.json'), str(out / 'legacy-extra-results.json')).replace(
+                    str(out / 'legacy-traces'), str(out / 'legacy-extra-traces')))
+                extra_command = [node, 'node_modules/@playwright/test/cli.js', 'test',
+                                 '--config', str(extra_config)]
+                record['legacy_extra_command'] = extra_command
+                with (out / 'legacy-extra.log').open('w') as log:
+                    code = subprocess.run(extra_command, cwd=REPO / 'frontend', env=env,
+                                          stdout=log, stderr=subprocess.STDOUT).returncode
+                record.update(status='passed' if code == 0 else 'failed')
+    except KeyboardInterrupt:
+        code = 130
+        record.update(status='interrupted', error_type='KeyboardInterrupt')
     except Exception as exc:
         record.update(status='failed', error_type=type(exc).__name__)
     finally:

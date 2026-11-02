@@ -26,8 +26,9 @@ export async function seedSources(api: APIRequestContext) {
   for (const source of pinned) {
     const company = companies[source.id.split('-')[0]]
     const year = Number(source.id.slice(-4))
-    const known = existing.documents.find((d: { company_id: string; report_year: number }) =>
-      d.company_id === company && d.report_year === year)
+    const known = existing.documents.find((d: { company_id: string; report_year: number; source_file: string; selectable: boolean }) =>
+      d.company_id === company && d.report_year === year
+      && d.source_file === `${source.id}.pdf` && d.selectable)
     if (known) documents[source.id] = known.document_id
     else {
       const response = await api.post('/api/report-documents', { multipart: {
