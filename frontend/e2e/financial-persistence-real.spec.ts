@@ -3,8 +3,9 @@ import { expect, test } from '@playwright/test'
 import type { Page } from '@playwright/test'
 import { generateReview, returnToReview } from './financial-review-helpers.ts'
 import { readFileSync, writeFileSync } from 'node:fs'
-const root = readFileSync('../data/30d-foundation/d10-runtime-path.txt', 'utf8').trim()
+const root = readFileSync(process.env.FINDOC_FINANCIAL_RUNTIME_PATH_FILE || '../data/30d-foundation/d10-runtime-path.txt', 'utf8').trim()
 const reports: { report_id: string; source: any }[] = JSON.parse(readFileSync(`${root}/manifest.json`, 'utf8')).reports
+const screenshots = process.env.FINDOC_FINANCIAL_SCREENSHOTS || '../product/validation/d10-screenshots'
 const gold = JSON.parse(readFileSync('../product/validation/manual-benchmark.json', 'utf8')).facts
 const observations: any[] = []
 test.afterAll(() => writeFileSync(process.env.FINDOC_D10_MEASUREMENTS_FILE || '../product/validation/d10-facts-browser-measurements.json', JSON.stringify({ runtime: root, observations, human_acceptance: 'pending', automated_acceptance: 'simulated_test' }, null, 2)))
@@ -61,7 +62,7 @@ for (const report of reports) {
     }
     await expect(page.locator('.pdf-location')).toContainText('金额区域已核验', { timeout: 30_000 })
     await expect(page.locator('canvas')).toHaveAttribute('aria-label', `PDF 物理第 ${ref.physical_page} 页`)
-    await page.screenshot({ path: `../product/validation/d10-screenshots/${report.report_id}-facts.png`, fullPage: true })
+    await page.screenshot({ path: `${screenshots}/${report.report_id}-facts.png`, fullPage: true })
     observations.push({ report: report.report_id, receipt_id: receipt.receipt_id, fact_set_id: facts.fact_set_id, disclosure_version: facts.disclosure_version, count: facts.facts.length, values: facts.facts.map((f: any) => ({metric: f.metric_key, period: f.period, value: f.value_cny_yuan})), evidence_id: ref.evidence_id, physical_page: ref.physical_page })
   })
 }
@@ -73,7 +74,7 @@ test('事实响应丢失：刷新仅恢复已知ID的GET，不自动重复保存
   await page.getByRole('button', { name: '保存已接受数据' }).click()
   await expect(page.getByTestId('fact-result')).toContainText('事实操作结果未知')
   await expect(page.getByRole('button', { name: '保存已接受数据' })).toHaveCount(0)
-  await page.screenshot({ path: '../product/validation/d10-screenshots/facts-unknown.png' })
+  await page.screenshot({ path: `${screenshots}/facts-unknown.png` })
   let reviewPosts = 0
   page.on('request', r => { if (r.method() === 'POST' && r.url().endsWith('/financial-facts/reviews')) reviewPosts++ })
   await page.reload()
@@ -100,7 +101,7 @@ test('确定保存失败和取消，不能把接受凭证显示为事实', async
   await page.getByRole('button', { name: '保存已接受数据' }).click()
   await expect(page.getByTestId('fact-result')).toContainText('财务事实保存失败')
   await expect(page.getByTestId('fact-result')).not.toContainText('已确认财务事实')
-  await page.screenshot({ path: '../product/validation/d10-screenshots/facts-failed.png' })
+  await page.screenshot({ path: `${screenshots}/facts-failed.png` })
 })
 
 test('双击只保存一次；切企业后迟到事实响应不显示旧成功', async ({ page }) => {

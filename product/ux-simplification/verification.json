@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-02",
+  "branch": "codex/ux-simplification-20261102",
+  "base": "cdbd08151cfa282b20f518a45b5350d5c7e62002",
+  "status": "engineering_complete",
+  "formal_human_acceptance": "pending",
+  "frontend": {
+    "passed": 184,
+    "skipped": 25,
+    "failed": 0,
+    "lint": "passed with one unchanged Fast Refresh warning",
+    "build": "passed with large-chunk advisory"
+  },
+  "backend": {
+    "passed": 161,
+    "suites": [
+      "financial_reviews",
+      "d19_tasks",
+      "d21_research",
+      "d10_financial_facts",
+      "d22_reports",
+      "d23_reports"
+    ]
+  },
+  "browser_unique_cases": 57,
+  "browser_groups": {
+    "journey": 1,
+    "qa_dashboard_new_reading": 17,
+    "report_regressions": 20,
+    "financial_boundary": 18,
+    "embedded_source_correction": 1
+  },
+  "live": {
+    "runtime_root": "/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-ux-live-w09par4e",
+    "actual_model": true,
+    "actual_bge": true,
+    "actual_milvus": true,
+    "human_acceptances": 0,
+    "provider_attempts": 1,
+    "status": "answered",
+    "financial_acceptance_performed": false,
+    "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+    "source_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+    "http_status": 200,
+    "run_id": "1dc8b8bc-70be-400e-a663-69cd6de7fff0",
+    "error_code": null,
+    "readonly_result_unchanged": true,
+    "provider_attempts_after_reread": 1
+  },
+  "preview": "http://127.0.0.1:14288",
+  "limitations": [
+    "Automated financial acceptances are simulated_test, never human acceptance.",
+    "Full live financial-research journey with human acceptance has not been signed off.",
+    "Five-person usability study and exhaustive keyboard accessibility audit have not been performed.",
+    "ACCEPT, SAVE, RESUME remain separate explicit actions in one page; no automatic compound write."
+  ]
+}
