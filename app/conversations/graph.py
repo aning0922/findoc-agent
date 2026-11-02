@@ -25,6 +25,10 @@ class State(TypedDict, total=False):
 
 
 class ConversationGraph:
+    def prepare_context(self, execution: TurnExecution) -> None:
+        from app.conversations.summaries import SummaryRepository
+        SummaryRepository(execution.repository).refresh(execution, self.memory)
+
     def __init__(self, tools: ConversationTools, memory: MemoryService):
         self.tools, self.memory = tools, memory
         builder = StateGraph(State)

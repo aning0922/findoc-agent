@@ -78,7 +78,11 @@ class ConversationService:
             return self.repository.get_turn(cid, turn.turn_id)
         assert claim is not None
         try:
-            output = await self.handler(TurnExecution(self.repository, turn, pinned, claim))
+            execution = TurnExecution(self.repository, turn, pinned, claim)
+            prepare = getattr(type(self.handler), "prepare_context", None)
+            if prepare is not None:
+                prepare(self.handler, execution)
+            output = await self.handler(execution)
             # Bytes first, then scope/fact qualification inside the commit transaction.
             await self.preparer.revalidate(pinned)
         except asyncio.CancelledError:

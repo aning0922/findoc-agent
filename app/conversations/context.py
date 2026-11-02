@@ -13,6 +13,7 @@ from app.memory.candidates import extract_user_memory_candidates
 from app.memory.service import MemoryService
 from app.rag.calculation_intent import requires_financial_analysis
 from app.research.models import canonical
+from app.conversations.summaries import Summary, SummaryRepository
 
 METRICS = {
     "revenue": ("营业收入", "营收"),
@@ -35,11 +36,19 @@ class ConversationContext:
     memory_generation: int
     # Only untrusted user text and structural focus; never historical answer numbers.
     prompt_data: str
+    summary: Summary | None = None
 
 
 def load_context(execution: TurnExecution, memory: MemoryService) -> ConversationContext:
     snapshot = memory.recall_context()
     excluded = memory.excluded_source_turn_ids()
+    summary = SummaryRepository(execution.repository).read(execution.turn.conversation_id,
+                                                         snapshot.generation, excluded)
+    if summary and summary.covered_through_seq != execution.turn.seq - 9:
+        summary = None  # An unprocessed gap cannot authorize old focus.
+    summary_data = summary.model_dump(exclude={"source_turn_ids", "source_digest"}) if summary else None
+    if summary_data and tokens(canonical(summary_data)) > 512:
+        raise ConversationError("context_budget_error", 409)
     recent = execution.repository.detail(execution.turn.conversation_id, limit=9).turns
     selected: list[Turn] = []
     payloads: list[dict[str, Any]] = []
@@ -52,6 +61,7 @@ def load_context(execution: TurnExecution, memory: MemoryService) -> Conversatio
         payload = {"turn_id": turn.turn_id, "user_text": turn.user_text,
                    "focus": turn.resolved_query.model_dump() if turn.resolved_query else None}
         if tokens(canonical([payload, *payloads])) > 4096:
+            summary, summary_data = None, None
             break  # Whole-message suffix only; never reach past an omitted focus.
         selected.insert(0, turn)
         payloads.insert(0, payload)
@@ -60,8 +70,9 @@ def load_context(execution: TurnExecution, memory: MemoryService) -> Conversatio
     preferences = tuple({"key": item.key, "value": item.value} for item in snapshot.items[:5])
     if tokens(canonical(preferences)) > 256:
         raise ConversationError("context_budget_error", 409)
-    data = canonical({"recent_user_data": payloads, "confirmed_preferences": preferences})
-    return ConversationContext(tuple(selected), preferences, snapshot.generation, data)
+    data = canonical({"recent_user_data": payloads, "confirmed_preferences": preferences,
+                      "structural_summary": summary_data})
+    return ConversationContext(tuple(selected), preferences, snapshot.generation, data, summary)
 
 
 def resolve(execution: TurnExecution, context: ConversationContext) -> tuple[ResolvedQuery, str | None]:
@@ -92,6 +103,13 @@ def resolve(execution: TurnExecution, context: ConversationContext) -> tuple[Res
                           and latest.resolved_query.company_id is not None
                           and latest.resolved_query.resolution != "ambiguous") else None
     focus = previous.resolved_query if previous else None
+    focus_id = previous.turn_id if previous else None
+    if latest is None and context.summary and not context.summary.barrier and context.summary.focus:
+        saved = context.summary.focus
+        focus = ResolvedQuery(text="结构焦点", company_id=saved.company_id,
+            metric_key=saved.metric_key, periods=saved.periods, intent=saved.intent,
+            resolution="explicit", context_turn_ids=[])
+        focus_id = context.summary.focus_turn_id
     company_id = next(iter(mentioned)) if len(mentioned) == 1 else (
         focus.company_id if not mentioned and focus else
         next(iter(selected_companies)) if len(selected_companies) == 1 and not mentioned else None)
@@ -185,8 +203,8 @@ def resolve(execution: TurnExecution, context: ConversationContext) -> tuple[Res
         reason = reason or "outside_period"
     if "它" in compact and len(selected_companies) > 1 and not mentioned and focus is None:
         reason = reason or "ambiguous_company"
-    if inferred and previous:
-        context_ids = [previous.turn_id]
+    if inferred and focus_id:
+        context_ids = [focus_id]
     intent = "compare_metric" if compare and metric else (
         "confirmed_metric" if metric and execution.turn.fact_selections else "source_quote")
     if compare and metric is None:

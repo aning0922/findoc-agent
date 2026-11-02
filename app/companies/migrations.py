@@ -12,6 +12,7 @@ from app.rag.publication_schema import INDEX_PUBLICATION_MIGRATION
 from app.documents.source_schema import LAYOUT_MIGRATION, SOURCE_MIGRATION
 from app.conversations.schema import CONVERSATION_MIGRATION
 from app.memory.schema import MEMORY_MIGRATION
+from app.conversations.context_schema import CONVERSATION_CONTEXT_MIGRATION
 
 MIGRATIONS: tuple[tuple[int, str, tuple[str, ...]], ...] = (
     (
@@ -75,6 +76,7 @@ MIGRATIONS: tuple[tuple[int, str, tuple[str, ...]], ...] = (
     REPORT_MIGRATION,
     CONVERSATION_MIGRATION,
     MEMORY_MIGRATION,
+    CONVERSATION_CONTEXT_MIGRATION,
 )
 
 
