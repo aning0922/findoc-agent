@@ -236,7 +236,8 @@ def test_gets_read_only_and_history_surface(env):
 
 
 def test_migration_preserves_prior_checksums_and_transactional_rollback(tmp_path, monkeypatch):
-    baseline = migrations.MIGRATIONS
+    baseline = tuple(item for item in migrations.MIGRATIONS if item[0] < 11)
+    monkeypatch.setattr(migrations, "MIGRATIONS", baseline)
     companies = SQLiteCompanyRepository(tmp_path / "upgrade.db")
     with closing(companies._connect()) as connection:
         before = [tuple(row) for row in connection.execute("SELECT * FROM analyst_schema_migrations")]
@@ -373,3 +374,37 @@ def test_all_memory_responses_no_store_and_query_scope_rejected(env):
         assert response.headers["cache-control"] == "no-store"
         response = client.post(f"/memories?{key}=attacker", json=create_payload())
         assert response.status_code == 422
+
+
+def test_s4_exact_user_utterance_candidate_does_not_persist(env):
+    _, repo, companies = env
+    turn_id = uid()
+    traces = []
+    original = repo._connect
+
+    def traced():
+        connection = original()
+        connection.set_trace_callback(traces.append)
+        return connection
+
+    repo._connect = traced
+    before = repo.list().model_dump()
+    for text in ["以后研究先关注现金流", "以后研究先关注现金流。"]:
+        candidates = extract_user_memory_candidates(text, turn_id)
+        assert [candidate.model_dump() for candidate in candidates] == [{
+            "type": "research_preference", "key": "analysis_focus", "value": "cash_flow",
+            "source_turn_id": turn_id, "confirmation_required": True,
+        }]
+    for text in [
+        "报告引用：以后研究先关注现金流", "报告写道：以后研究先关注现金流",
+        "不要以后研究先关注现金流", "不是以后研究先关注现金流",
+        "“以后研究先关注现金流”", "用户说以后研究先关注现金流，请解释",
+    ]:
+        assert extract_user_memory_candidates(text, turn_id) == []
+    assert repo.list().model_dump() == before
+    assert not any(sql.lstrip().upper().startswith(("INSERT", "UPDATE", "DELETE", "CREATE"))
+                   for sql in traces)
+    with closing(companies._connect()) as connection:
+        for table in ["memory_items", "memory_operations", "memory_events",
+                      "memory_context_generation", "memory_context_exclusions"]:
+            assert connection.execute(f"SELECT count(*) FROM {table}").fetchone()[0] == 0

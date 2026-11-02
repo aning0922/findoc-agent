@@ -6,6 +6,7 @@ Quoted, embedded, negated, or ambiguous expressions do not match this finite gra
 from app.memory.models import MemoryCandidate
 
 EXPRESSIONS = {
+    "以后研究先关注现金流": ("analysis_focus", "cash_flow"),
     "记住：我更关注现金流": ("analysis_focus", "cash_flow"),
     "记住：我更关注营收": ("analysis_focus", "revenue"),
     "记住：我更关注盈利能力": ("analysis_focus", "profitability"),
