@@ -18,6 +18,8 @@ from app.documents.sqlite_repository import SQLiteDocumentRepository
 from app.research.repository import ResearchOwner, ResearchRepository
 from app.research.task_repository import TaskRepository
 from app.api.research_tasks import create_task_router
+from app.conversations.repository import ConversationRepository
+from app.conversations.api import create_conversation_router
 
 
 class ReadOnlyDispatcher:
@@ -36,6 +38,8 @@ def create_history_app_from_env() -> FastAPI:
         history.recover_interrupted()
         tasks = TaskRepository(registry, "demo")
         tasks.recover_interrupted()
+        conversations = ConversationRepository(registry, "demo")
+        conversations.recover_interrupted()
         companies = CompanyService(registry, workspace_id="demo")
         objects = LocalObjectStore(root / "objects")
         documents = DocumentService(
@@ -59,6 +63,8 @@ def create_history_app_from_env() -> FastAPI:
             document_service=documents, sources=sources, workspace_id="demo",
         )))
         app.include_router(create_task_router(tasks))
+        app.include_router(create_conversation_router(conversations))
+        app.state.conversation_repository = conversations
         app.add_event_handler("shutdown", owner.close)
         return app
     except Exception:
