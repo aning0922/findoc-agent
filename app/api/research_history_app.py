@@ -20,6 +20,9 @@ from app.research.task_repository import TaskRepository
 from app.api.research_tasks import create_task_router
 from app.conversations.repository import ConversationRepository
 from app.conversations.api import create_conversation_router
+from app.memory.api import create_memory_router
+from app.memory.repository import MemoryRepository
+from app.memory.service import MemoryService
 
 
 class ReadOnlyDispatcher:
@@ -65,6 +68,9 @@ def create_history_app_from_env() -> FastAPI:
         app.include_router(create_task_router(tasks))
         app.include_router(create_conversation_router(conversations))
         app.state.conversation_repository = conversations
+        memory_service = MemoryService(MemoryRepository(registry))
+        app.include_router(create_memory_router(memory_service, read_only=True))
+        app.state.memory_service = memory_service
         app.add_event_handler("shutdown", owner.close)
         return app
     except Exception:

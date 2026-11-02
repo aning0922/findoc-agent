@@ -47,6 +47,14 @@ from app.rag.retriever import Retriever
 from app.rag.selected_scope import SelectedScopeSearch
 from app.rag.service import RAGService
 from app.rag.store import MilvusSearchStore, ensure_document_collection, get_client
+from app.conversations.api import create_conversation_router
+from app.conversations.graph import ConversationGraph
+from app.conversations.repository import ConversationRepository
+from app.conversations.service import ConversationService
+from app.conversations.tools import ConversationTools
+from app.memory.api import create_memory_router
+from app.memory.repository import MemoryRepository
+from app.memory.service import MemoryService
 
 
 RUNTIME_COLLECTION_NAME = "findoc_runtime_documents_v1"
@@ -313,6 +321,22 @@ def create_runtime_app(
                 research_repository.recover_interrupted()
                 task_repository = TaskRepository(registry, DEMO_WORKSPACE_ID)
                 task_repository.recover_interrupted()
+                conversation_repository = ConversationRepository(registry, DEMO_WORKSPACE_ID)
+                conversation_repository.recover_interrupted()
+                memory_service = MemoryService(MemoryRepository(registry))
+                conversation_graph = ConversationGraph(ConversationTools(
+                    preparer=selection_preparer, scope=selected_scope_search,
+                    rag=rag_resources.rag_service, facts=revenue_service,
+                    generate_once=llm_client.generate_once), memory_service)
+                conversation_service = ConversationService(conversation_repository,
+                    selection_preparer, handler=conversation_graph)
+                app.include_router(create_conversation_router(conversation_repository,
+                                                              conversation_service))
+                app.include_router(create_memory_router(memory_service))
+                app.state.conversation_repository = conversation_repository
+                app.state.conversation_service = conversation_service
+                app.state.conversation_graph = conversation_graph
+                app.state.memory_service = memory_service
                 app.include_router(create_task_router(task_repository, PersistentTemplateService(template_service, task_repository)))
                 app.state.task_repository = task_repository
                 app.include_router(create_report_router(ReportService(task_repository, source_service)))

@@ -12,7 +12,7 @@ from app.conversations.models import (
     ConversationDetail, CreateConversationRequest, CreateTurnRequest, ResolvedQuery,
     Turn, TurnData, TurnResult, TurnStatus, error_result,
 )
-from app.conversations.repository import ConversationError, ConversationRepository
+from app.conversations.repository import CandidateValidationError, ConversationError, ConversationRepository
 from app.documents.preparation import DocumentTaskPreparer, PreparedDocumentSelection
 from app.documents.source_models import SourceError
 
@@ -94,7 +94,11 @@ class ConversationService:
             output = ExecutionResult(error_result("source_changed"), status="failed")
         except Exception:
             output = ExecutionResult(error_result("execution_error"), status="failed")
-        self.repository.finish(cid, turn.turn_id, claim, output.result,
-                               status=output.status, resolved=output.resolved,
-                               provider_outcome=output.provider_outcome, admit=output.admit)
+        try:
+            self.repository.finish(cid, turn.turn_id, claim, output.result,
+                                   status=output.status, resolved=output.resolved,
+                                   provider_outcome=output.provider_outcome, admit=output.admit)
+        except CandidateValidationError:
+            self.repository.finish(cid, turn.turn_id, claim, error_result("result_validation_error"),
+                                   status="failed")
         return self.repository.get_turn(cid, turn.turn_id)

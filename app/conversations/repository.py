@@ -20,7 +20,7 @@ from app.companies.sqlite_repository import SQLiteCompanyRepository
 from app.conversations.models import (
     ConversationDetail, ConversationList, ConversationSummary, CreateConversationRequest,
     CreateTurnRequest, DeleteRequest, Identity, OperationRecord, ResolvedQuery, SourceState,
-    Turn, TurnData, TurnResult, TurnStatus, Usage, error_result, validate_quote,
+    ToolEvent, Turn, TurnData, TurnResult, TurnStatus, Usage, error_result, validate_quote,
 )
 from app.documents.preparation import PreparedDocumentSelection, SelectedDocumentIdentity
 from app.documents.source_models import SourceError
@@ -33,6 +33,13 @@ class ConversationError(Exception):
     def __init__(self, code: str, status: int = 503):
         super().__init__(code)
         self.code, self.status = code, status
+
+
+class CandidateValidationError(ConversationError):
+    """A new in-memory candidate is invalid; persisted data has not been changed."""
+
+    def __init__(self):
+        super().__init__("result_validation_error", 409)
 
 
 def now() -> str:
@@ -352,13 +359,23 @@ class ConversationRepository:
             self._turn(conn, cid, tid)
         return value, claim, True
 
-    def reserve(self, cid: str, tid: str, claim: str, counter: str) -> TurnData:
+    @staticmethod
+    def check_generation_in(conn: sqlite3.Connection, generation: int) -> None:
+        row = conn.execute("""SELECT generation FROM memory_context_generation
+            WHERE workspace_id='demo' AND principal_id='local_operator'""").fetchone()
+        if (row[0] if row else 0) != generation:
+            raise ConversationError("context_changed", 409)
+
+    def reserve(self, cid: str, tid: str, claim: str, counter: str,
+                *, memory_generation: int | None = None) -> TurnData:
         if counter not in ("model_attempts", "tool_calls"):
             raise ValueError("invalid_budget_counter")
         with closing(self.registry._connect()) as conn, conn:
             conn.execute("BEGIN IMMEDIATE")
             value, saved_claim = self._turn(conn, cid, tid)
             self._fence(value, saved_claim, claim)
+            if memory_generation is not None:
+                self.check_generation_in(conn, memory_generation)
             usage = value.usage.model_dump()
             usage[counter] += 1
             try:
@@ -374,6 +391,38 @@ class ConversationRepository:
             self._write_turn(conn, updated, claim, digest, insert=False)
             self._turn(conn, cid, tid)
         return updated
+
+    def model_returned(self, cid: str, tid: str, claim: str) -> None:
+        with closing(self.registry._connect()) as conn, conn:
+            conn.execute("BEGIN IMMEDIATE")
+            value, saved = self._turn(conn, cid, tid)
+            self._fence(value, saved, claim)
+            if value.usage.model_attempts < 1:
+                raise ConversationError("conversation_integrity_error")
+            updated = TurnData.model_validate({**value.model_dump(), "provider_outcome": "returned"})
+            digest = self._op(conn, value.operation_id)[1]
+            self._write_turn(conn, updated, claim, digest, insert=False)
+            self._turn(conn, cid, tid)
+
+    def event(self, cid: str, tid: str, claim: str, tool: str, status: str,
+              *, ref_ids: list[str] | None = None) -> None:
+        """Append stable metadata only; full event list is part of turn integrity."""
+        with closing(self.registry._connect()) as conn, conn:
+            conn.execute("BEGIN IMMEDIATE")
+            value, saved = self._turn(conn, cid, tid)
+            self._fence(value, saved, claim)
+            event = ToolEvent(sequence=len(value.tool_events) + 1, tool_name=tool,
+                status=status, summary={"started": "开始只读工具", "completed": "只读工具完成",
+                "refused": "资料或资格不足", "failed": "只读工具未完成",
+                "unknown": "调用结果未知"}[status],
+                evidence_ref_ids=ref_ids or [], created_at=now())
+            raw = canonical(event.model_dump())
+            conn.execute("INSERT INTO conversation_tool_events VALUES(?,?,?,?,?,?)",
+                (self.workspace, cid, tid, event.sequence, raw, sha(raw)))
+            updated = TurnData.model_validate({**value.model_dump(),
+                "tool_events": [e.model_dump() for e in (*value.tool_events, event)]})
+            self._write_turn(conn, updated, claim, self._op(conn, value.operation_id)[1], insert=False)
+            self._turn(conn, cid, tid)
 
     @staticmethod
     def _fence(value: TurnData, saved: str | None, claim: str) -> None:
@@ -407,7 +456,31 @@ class ConversationRepository:
             conn.execute("BEGIN IMMEDIATE")
             value, saved_claim = self._turn(conn, cid, tid)
             self._fence(value, saved_claim, claim)
-            _, docs = self._scope(conn, cid)
+            scope, docs = self._scope(conn, cid)
+            # Validate the new candidate separately from decoding existing rows.
+            # Only this determinate failure can safely be closed by the service.
+            try:
+                candidate = TurnData.model_validate({**value.model_dump(), "status": status,
+                    "result": result.model_dump(), "ended_at": now(),
+                    "resolved_query": resolved.model_dump() if resolved else None,
+                    "provider_outcome": provider_outcome or value.provider_outcome})
+                validate_quote(candidate.result, docs, scope["source_scope_sha"])
+                self._validate_refs(candidate, docs)
+                if resolved and resolved.company_id is not None and resolved.company_id not in {
+                        d.company_id for d in docs}:
+                    raise ValueError("focus_outside_scope")
+                if resolved:
+                    for context_id in resolved.context_turn_ids:
+                        prior = conn.execute("""SELECT seq,status,payload,payload_sha FROM conversation_turns
+                            WHERE workspace_id=? AND conversation_id=? AND turn_id=?""",
+                            (self.workspace, cid, context_id)).fetchone()
+                        if prior is None or prior["seq"] >= value.seq or prior["status"] not in (
+                                "completed", "refused"):
+                            raise ValueError("invalid_context_turn")
+                        if sha(prior["payload"]) != prior["payload_sha"]:
+                            raise ConversationError("conversation_integrity_error")
+            except (ValueError, TypeError, KeyError):
+                raise CandidateValidationError() from None
             if status in ("completed", "refused"):
                 try:
                     self.sources.verify_selection_in(conn, tuple(d.model_dump() for d in docs))
@@ -415,8 +488,11 @@ class ConversationRepository:
                         raise ConversationError("financial_admission_required", 409)
                     if admit:
                         admit(conn, value)
-                except (SourceError, ConversationError):
-                    result, status, resolved = error_result("source_changed"), "failed", None
+                except (SourceError, ConversationError) as exc:
+                    code = getattr(exc, "code", None)
+                    code = code if code in ("context_changed", "fact_changed") else "source_changed"
+                    result, status, resolved = error_result(code), (
+                        "interrupted" if code == "context_changed" else "failed"), None
             return self._finish_in(conn, value, result, status, resolved,
                                    provider_outcome or value.provider_outcome)
 
@@ -573,6 +649,8 @@ class ConversationRepository:
                 WHERE workspace_id=? AND conversation_id=?""", (self.workspace, cid)).fetchall()
             for row in turns:
                 self._turn(conn, cid, row[0])
+            from app.memory.repository import MemoryRepository
+            MemoryRepository.detach_source_turns_in(conn, [row[0] for row in turns])
             operations = conn.execute("""SELECT operation_id FROM conversation_operations
                 WHERE workspace_id=? AND conversation_id=?""", (self.workspace, cid)).fetchall()
             for row in operations:

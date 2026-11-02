@@ -437,7 +437,7 @@ def test_history_pagination_is_bounded_and_stable_while_new_conversation_added(s
 
 def test_v9_upgrade_retains_prior_checksums_and_rows_failure_rolls_back(tmp_path, monkeypatch):
     path = tmp_path / "documents.db"
-    old = migrations.MIGRATIONS[:-1]
+    old = tuple(m for m in migrations.MIGRATIONS if m[0] <= 9)
     monkeypatch.setattr(migrations, "MIGRATIONS", old)
     registry = SQLiteCompanyRepository(path)
     before = all_rows(registry)
