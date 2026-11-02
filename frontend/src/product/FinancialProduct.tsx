@@ -10,6 +10,7 @@ import {
 } from "./sourceIntent.ts";
 import type { SourceIntent } from "./sourceIntent.ts";
 import { taskRequest } from "./operatingResearch.ts";
+import { ResearchTasks } from "./ResearchTasks.tsx";
 import { ResearchHome } from "./ResearchHome.tsx";
 import { DocumentLibrary } from "./DocumentLibrary.tsx";
 import { ReportPreview } from "./ReportPreview.tsx";
@@ -118,6 +119,8 @@ export default function FinancialProduct({
           company={route.company}
           access={access}
         />
+      ) : route.page === "tasks" ? (
+        <ResearchTasks companies={companies} />
       ) : route.page === "companies" ? (
         <CompanyDirectory companies={companies} loading={companiesLoading} />
       ) : route.page === "research" ? (
@@ -157,10 +160,10 @@ export default function FinancialProduct({
           </h1>
           <p>
             {companies.length
-              ? "当前地址中的企业不可用，请通过顶部选择器选择企业。"
+              ? "当前地址中的企业不可用，请返回企业目录选择企业。"
               : "企业目录为空或正在加载。建立企业并绑定年报后，即可核对事实并开展分析。"}
           </p>
-          <a href="/evidence">打开原文审阅入口</a>
+          <a href="/companies">返回企业目录</a>
         </section>
       )}
     </AppShell>

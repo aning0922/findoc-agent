@@ -22,6 +22,7 @@ export function ResearchAnswerView({ run, companies, unavailable, openPdf, openT
   const focus = projection && focusedCitation && currentCitation(focusedCitation) ? projection : null;
   const historical = verification.invalidated || run.source_states.some(s => s.status === 'expired');
   return <section aria-label="有证据的回答" className={styles.answer}>
+    <div className={styles.answerHeading}><h3>回答与证据</h3><p className={styles.hint}>以下为已保存的年报原文摘录。人工语义审阅待完成。</p></div>
     {focus && focusedCitation ? <section className={styles.focusCard} aria-label="本题可信焦点"
       data-focus-version="trusted-answer-focus-v1" data-focus-run={run.run_id} data-focus-table={focus.table_id}
       data-focus-row={focus.row_index} data-focus-column={focus.column_index}>
@@ -34,7 +35,7 @@ export function ResearchAnswerView({ run, companies, unavailable, openPdf, openT
         <p className={styles.hint}>目标年度列：{focus.year_header}。保留同一行的全部年度、原值和原单位。</p></details>
       <p className={styles.hint}>来自已核验来源单元格的只读摘录，人工语义审读待完成。未写入财务事实。</p>
     </section> : <StatusNotice state="unknown" title="当前无法可靠定位本题数值">请继续阅读下方完整表格与已保存原文；本题焦点尚不可核验。</StatusNotice>}
-    <h3>完整年报原文</h3>
+    <h3>来源证据 · {citations.length} 条引用</h3>
     <StatusNotice state={historical ? 'invalidated' : verification.verified ? 'completed' : 'unknown'} title={historical ? '已保存的历史原文' : verification.verified ? '已找到可核验的原文' : '已保存的历史原文 · 当前来源暂不可核验'}>引用内容在保存时已核验，人工语义审读待完成。</StatusNotice>
     <p className={styles.hint}>按来源阅读完整年度表格，保留原值、原单位与原列。口径、说明及周边文字可在完整已保存原文中核对。此处不新增计算或解释。</p>
     {citationGroups(citations).map(group => <section key={`${group[0].document_id}:${group[0].source_revision}`} className={styles.sourceExcerpt}>

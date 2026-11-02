@@ -159,7 +159,7 @@ export function ResearchRuns({ company, companies, selected, question, disabled,
   const name = (id: string) => companies.find(c => c.company_id === id)?.name || '企业名称暂不可读取';
   const displayedSources = run?.documents || selectedSources;
   return <section aria-label="原文问答">
-    {pdf && <ResearchPdfDialog key={`${pdf.document_id}:${pdf.source_revision}:${pdf.number}`} citation={pdf} close={() => setPdf(null)} invalid={() => markUnavailable(pdf)} />}
+    {pdf && <ResearchPdfDialog key={`${pdf.document_id}:${pdf.source_revision}:${pdf.number}`} citation={pdf} drawer close={() => setPdf(null)} invalid={() => markUnavailable(pdf)} />}
     <header className={styles.toolbar}><h2>{run ? "阅读已保存问答" : "向原文提问"}</h2><div className={styles.actions}>
       <button onClick={manageSources}>管理来源</button><button onClick={() => { if (historyPanel.current) { historyPanel.current.open = true; historyPanel.current.querySelector('summary')?.focus(); historyPanel.current.scrollIntoView({ block: 'start' }); } }}>历史问答</button>
     </div></header>
@@ -179,9 +179,9 @@ export function ResearchRuns({ company, companies, selected, question, disabled,
         </StatusNotice>}
         {run && <section className={styles.card} aria-label="研究历史详情" data-run-id={run.run_id}>
           <header className={styles.savedHeader}>
-            <p className={styles.meta}>历史问答读取 · 阅读不会重新运行模型</p>
+            <p className={styles.meta}>已保存问答 · 阅读不会重新运行模型</p>
             <p className={styles.meta}>{labels[run.status]} · <time dateTime={run.created_at}>{new Date(run.created_at).toLocaleString("zh-CN")}</time> · {run.documents.length} 份资料</p>
-            <p className={styles.meta}>原问题</p><h2 className={styles.savedQuestion} aria-label="原问题">{run.query}</h2>
+            <p className={styles.meta}>本次问题</p><h2 className={styles.savedQuestion} aria-label="原问题">{run.query}</h2>
             <div className={styles.range} aria-label="独立问答上下文">{[...new Set(run.documents.map(d => d.company_id))].map(id => <span key={id}>{name(id)} · {run.documents.filter(d => d.company_id === id).map(d => d.report_year).join(' / ')} 年报</span>)}</div>
             <button onClick={() => { editRun(run); clearView(); const q = new URLSearchParams(location.search); q.delete('run'); history.replaceState(null, '', `/research?${q}`); window.dispatchEvent(new Event('findoc:fixed-context')); requestAnimationFrame(() => document.getElementById('qa-question')?.focus()); }}>修改问题或资料</button>
           </header>
@@ -189,8 +189,8 @@ export function ResearchRuns({ company, companies, selected, question, disabled,
           {run.source_states.some(s => s.status === "expired") && <StatusNotice state="invalidated" title="来源已过期或绑定已纠错">以下内容仅为历史审计快照，旧证据不能作为当前有效来源，原 PDF 入口已禁用。</StatusNotice>}
           {result?.outcome === "refused" && <StatusNotice state="refused" title={qaRefusalTitle(result.reason, run.query)}>{qaRefusalMessage(result.reason, run.query)}</StatusNotice>}
           {result?.outcome === "system_error" && <><StatusNotice state="failed" title={qaFailureTitle(result.error_code)}>{qaFailureMessage(result.error_code)}</StatusNotice><DiagnosticDetails label="高级诊断：已保存的错误身份" fields={{ error: result.error_code, run: run.run_id, operation: run.operation_id }} /></>}
-          {run.result && <RunReviewReading run={run} />}
           {result?.outcome === "answered" && <ResearchAnswerView key={run.run_id} run={run} companies={companies} unavailable={unavailable} openPdf={setPdf} openTab={openTab} />}
+          {run.result && <details className={styles.reviewDetails}><summary>人工语义审阅与历史附注</summary><RunReviewReading run={run} /></details>}
           {pdfError && <StatusNotice state="invalidated" title="原 PDF 暂不可打开">{pdfError}</StatusNotice>}
 
         </section>}
@@ -214,7 +214,7 @@ export function ResearchRuns({ company, companies, selected, question, disabled,
         <button disabled={listBusy} onClick={() => void loadHistory()}>刷新研究历史</button>
         {listError && <StatusNotice state="failed" title="问答历史暂时无法读取">{listError}</StatusNotice>}
         {!items.length && !listBusy && !listError && <p>暂无研究记录。</p>}
-        <ul>{items.map(i => <li key={i.run_id}><button onClick={() => void open(i.run_id)}>{i.query.length > 80 ? `${i.query.slice(0, 80)}…` : i.query}</button>
+        <ul>{items.map(i => <li key={i.run_id} data-history-run-id={i.run_id}><button onClick={() => void open(i.run_id)}>{i.query.length > 80 ? `${i.query.slice(0, 80)}…` : i.query}</button>
           <div className={styles.meta}><time dateTime={i.created_at}>{new Date(i.created_at).toLocaleString("zh-CN")}</time> · {i.documents.length} 份资料 · {labels[i.status]}</div>
         </li>)}</ul>
         {cursor && <button disabled={listBusy} onClick={() => void loadHistory(cursor)}>加载更多研究</button>}

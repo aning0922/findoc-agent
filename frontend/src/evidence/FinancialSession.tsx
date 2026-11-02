@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from 'react-dom';
 import { citations, METRICS, sourceKey } from "./contracts.ts";
 import type { Candidate, Citation, Selection, Source } from "./contracts.ts";
 import { EvidenceViewer, SourceGuard } from "./EvidenceViewer.tsx";
@@ -65,6 +66,9 @@ export function FinancialSession({
   groupMetrics,
   continuation = [],
   returnHref,
+  expectedDisclosure,
+  viewerTarget,
+  paused = false,
   route,
   navigate,
   onFatal,
@@ -76,6 +80,9 @@ export function FinancialSession({
   groupMetrics?: string[];
   continuation?: { href: string; label: string }[];
   returnHref?: string;
+  expectedDisclosure?: string;
+  viewerTarget?: HTMLElement | null;
+  paused?: boolean;
   data: { source: Source; candidates: Candidate[]; bytes: Uint8Array };
   route: Selection & {
     cite: string;
@@ -141,7 +148,7 @@ export function FinancialSession({
   const workspace = useRef<HTMLDivElement>(null);
   const [workspaceWidth, setWorkspaceWidth] = useState<number | null>(null);
   const [fullReader, setFullReader] = useState(false);
-  const panelReader = (workspaceWidth !== null && workspaceWidth < 900) || fullReader;
+  const panelReader = (!viewerTarget && workspaceWidth !== null && workspaceWidth < 900) || fullReader;
   useEffect(() => {
     const element = workspace.current;
     if (!element) return;
@@ -150,6 +157,7 @@ export function FinancialSession({
     return () => observer.disconnect();
   }, []);
   const [modal, setModal] = useState(false);
+  useEffect(() => { if (paused) setModal(false); }, [paused]);
   const controller = useRef<AbortController | null>(null);
   const sequence = useRef(0);
   const busy = useRef(false);
@@ -158,9 +166,7 @@ export function FinancialSession({
   const storageKey = `financial-acceptance-pending-v1:${sourceKey(source)}${recoverySuffix}`;
   useEffect(() => {
     if (route.metric_key)
-      document
-        .getElementById(`candidate-${route.metric_key}`)
-        ?.scrollIntoView({ block: "nearest" });
+      document.getElementById(`candidate-summary-${route.metric_key}`)?.focus({ preventScroll: true });
   }, [route.metric_key]);
   useEffect(
     () => () => {
@@ -290,7 +296,7 @@ export function FinancialSession({
     }
   }
   async function generate() {
-    if (recordId || readOnly) return;
+    if (recordId || readOnly || paused) return;
     if (busy.current) return;
     let q: ReviewSelection;
     try {
@@ -342,7 +348,7 @@ export function FinancialSession({
   }
   async function accept() {
     if (
-      busy.current || readOnly || !!recordId ||
+      busy.current || paused || readOnly || !!recordId ||
       !review ||
       review.review_status !== "ready_for_acceptance" ||
       !modal ||
@@ -405,7 +411,7 @@ export function FinancialSession({
     }
   }
   async function saveFacts(onlyRead = false) {
-    if (busy.current || !receipt || (!onlyRead && (readOnly || factPhase !== "idle"))) return;
+    if (busy.current || paused || !receipt || (!onlyRead && (readOnly || factPhase !== "idle"))) return;
     const own = start();
     setFactPhase(onlyRead ? "recovering" : "sending");
     setFactMessage("");
@@ -448,7 +454,7 @@ export function FinancialSession({
       try {
         const saved = await readFacts(source, result.receipt, own.signal);
         if (!current(own.id)) return;
-        if (route.task && new URLSearchParams(location.search).get("disclosure") !== saved.disclosure_version) throw new Error("记录披露版本与任务不一致");
+        if (route.task && (expectedDisclosure ?? new URLSearchParams(location.search).get("disclosure")) !== saved.disclosure_version) throw new Error("记录披露版本与任务不一致");
         if (expectedFactSet && saved.fact_set_id !== expectedFactSet) throw new Error('事实组身份不一致');
         setFacts(saved); setFactPhase('saved');
       } catch (e) {
@@ -530,7 +536,7 @@ export function FinancialSession({
     factPhase === "sending" ||
     factPhase === "recovering";
   return (
-    <div ref={workspace} data-reader-mode={panelReader ? "panel" : "split"} className={`evidence-layout ${open ? "is-open" : ""}`}>
+    <div ref={workspace} data-reader-mode={panelReader ? "panel" : "split"} data-embedded-viewer={viewerTarget ? 'true' : undefined} className={`evidence-layout ${open ? "is-open" : ""}`}>
       <SourceGuard source={source} onFatal={onFatal} />
       <section className="candidate-panel" inert={open && panelReader || undefined}>
         {!recordId && !receipt && !["unknown", "sending", "recovering"].includes(phase) && <p role="status">本次未提交核对 · 勾选仅为本地意图，尚未接受或保存。</p>}
@@ -719,7 +725,7 @@ export function FinancialSession({
             </strong>
             <p>
               接受已保存 ·{" "}
-              {facts ? "对应财务事实已入库并读回" : "财务事实入库待完成"}
+              {facts ? "数据已保存并读回" : "数据尚未保存"}
               。此凭证不会启动分析。
             </p>
             <details>
@@ -732,7 +738,7 @@ export function FinancialSession({
             </details>
           </details>
         )}
-        {readOnly && receipt && !facts && factPhase === "idle" && <button onClick={openSave}>继续独立保存这条接受记录</button>}
+        {readOnly && openSave && receipt && !facts && factPhase === "idle" && <button onClick={openSave}>继续独立保存这条接受记录</button>}
         {receipt && (
           <div className="fact-result" data-testid="fact-result">
             <p role="status">
@@ -809,6 +815,7 @@ export function FinancialSession({
               key={candidate.candidate_id}
             >
               <summary
+                id={`candidate-summary-${candidate.metric_key}`}
                 onClick={(e) => {
                   e.preventDefault();
                   const item = items.find((i) => i.candidate === candidate);
@@ -825,9 +832,9 @@ export function FinancialSession({
               >
                 {METRICS[candidate.metric_key]} · {candidate.period} 年 ·{" "}
                 {facts
-                  ? "已入库"
+                  ? "已保存"
                   : receipt
-                    ? factPhase === "unknown" || factPhase === "recovering" ? "已接受 · 保存待查证" : "已接受待入库"
+                    ? factPhase === "unknown" || factPhase === "recovering" ? "已接受 · 保存待查证" : "已核对，待保存"
                     : checkedItems.includes(candidate.candidate_id)
                       ? "已核对待接受"
                       : "待核对"}
@@ -845,9 +852,9 @@ export function FinancialSession({
                   <span>
                     {candidate.period} 年 ·{" "}
                     {facts
-                      ? "已入库 · 来源已复验"
+                      ? "已保存 · 来源已复验"
                       : receipt
-                        ? factPhase === "unknown" || factPhase === "recovering" ? "已接受 · 保存待查证" : "已接受待入库"
+                        ? factPhase === "unknown" || factPhase === "recovering" ? "已接受 · 保存待查证" : "已核对，待保存"
                         : checkedItems.includes(candidate.candidate_id)
                           ? "已核对待接受"
                           : STATUS[candidate.status] || "状态不可用"}
@@ -888,7 +895,7 @@ export function FinancialSession({
                     {facts
                       ? "已确认财务事实 · 当前来源有效"
                       : receipt
-                        ? `${receipt.confirmation_kind === "simulated_test" ? "模拟" : "人工"}接受凭证已保存 · 事实尚未入库`
+                        ? `${receipt.confirmation_kind === "simulated_test" ? "模拟" : "人工"}核对记录已保存 · 数据尚未保存`
                         : "候选未确认"}
                   </dd>
                 </dl>
@@ -998,8 +1005,9 @@ export function FinancialSession({
           </p>
         </details>
       </section>
-      {(!recordId || receipt) && <EvidenceViewer
-          active={open}
+      {(!recordId || receipt) && (() => {
+        const viewer = <EvidenceViewer
+          active={open && !paused}
           panelMode={panelReader}
           source={source}
           bytes={data.bytes}
@@ -1009,8 +1017,10 @@ export function FinancialSession({
           onNavigate={navigate}
           onClose={() => { setOpen(false); setFullReader(false); }}
           onFatal={onFatal}
-        />}
-      {modal && review && (
+        />;
+        return viewerTarget ? createPortal(viewer, viewerTarget) : viewer;
+      })()}
+      {modal && review && !paused && (
         <AcceptanceDialog
           review={review}
           phase={phase}
@@ -1079,7 +1089,7 @@ function AcceptanceDialog({
         ))}
       </ul>
       <p>
-        本次保存人工接受凭证。取得凭证后，可另行保存完整财务事实；当前不启动分析。
+        本次确认会保存核对记录。确认后请继续保存数据；当前不会启动分析。
       </p>
       {phase === "unknown" && (
         <p role="status">

@@ -645,7 +645,7 @@ function Session({
     <div className={`operating-workbench ${styles.journey}`}>
       {busy && <WaitingNotice key={waitingIdentity} title={waitingFor === 'resume' ? '正在执行经营研究' : waitingFor === 'create' ? '正在建立研究任务' : '正在只读查证研究状态'} message={waitingFor === "resume"
         ? "正在等待经营研究结果，服务端将复验已接受事实、执行财务分析并收集经营解释。"
-        : waitingFor === "create" ? "正在核验所选年报并建立研究任务，财务接受与入库需要之后独立完成。"
+        : waitingFor === "create" ? "正在核验所选年报并建立研究任务，数据核对与保存需要之后依次完成。"
         : "正在只读查询已保存的任务与执行状态。"} stop={() => {
           revoke(); setMessage("已停止本页等待，已提交的服务端任务可能仍在执行。原操作身份与任务编号已保留，请查询最新执行结果（只读）。");
         }} />}

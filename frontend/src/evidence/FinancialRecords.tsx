@@ -7,6 +7,8 @@ import type { Receipt } from './reviewApi.ts';
 
 export function FinancialRecords(props: Parameters<typeof FinancialSession>[0] & {
   record: string; receiptId: string; factSetId: string;
+  allowWrites?: boolean;
+  compact?: boolean;
   selectMode: (record: string, receipt?: string, factSet?: string) => void;
 }) {
   const { source } = props.data;
@@ -28,10 +30,8 @@ export function FinancialRecords(props: Parameters<typeof FinancialSession>[0] &
   const selected = !!props.receiptId;
   const newReview = props.record === 'new';
   const readOnly = props.record !== 'save';
-  return <>
-    <section className="operating-card" aria-label="财务核对记录">
-      <h2>{newReview ? '新核对流程' : '财务核对记录 · 只读阅读'}</h2>
-      <p>接受凭证、已保存事实与研究运行分别记录。阅读、刷新和返回不会接受、保存或继续研究。</p>
+  const recordContent = <>
+      <p>核对记录、数据保存和研究执行分别记录。阅读、刷新和返回不会提交操作。</p>
       {message && <p role="status">{message}</p>}
       {records.map(({ receipt, saved }) => <article key={receipt.receipt_id}>
         <p>{saved === true ? `本来源已有 ${receipt.review.candidates.length} 项已保存财务事实` : saved === false ? '已接受未保存' : '保存结果暂不可核验'} · {receipt.confirmation_kind === 'simulated_test' ? '隔离模拟' : '人工接受'} · 接受时间 {receipt.accepted_at}</p>
@@ -40,14 +40,18 @@ export function FinancialRecords(props: Parameters<typeof FinancialSession>[0] &
       </article>)}
       {records.length > 1 && <p>有多条接受记录，请按凭证身份明确选择。系统不会自动选最近一条。</p>}
       <button onClick={() => setRetry(n => n + 1)}>刷新核对记录（只读）</button>
-      {!newReview && <button onClick={() => props.selectMode('new')}>开始新核对</button>}
+      {!newReview && props.allowWrites !== false && <button onClick={() => props.selectMode('new')}>开始新核对</button>}
       {props.returnHref && <a href={props.returnHref}>返回原研究（只读） →</a>}
+  </>;
+  return <>
+    <section className="operating-card" aria-label="财务核对记录">
+      {props.compact ? <details open={!newReview}><summary>{newReview ? '查看已有核对记录' : '财务核对记录 · 只读阅读'}</summary>{recordContent}</details> : <><h2>{newReview ? '新核对流程' : '财务核对记录 · 只读阅读'}</h2>{recordContent}</>}
     </section>
     {(newReview || selected) && <FinancialSession {...props}
       key={`${newReview ? 'new' : props.receiptId}:${props.record}`}
       recordId={selected ? props.receiptId : undefined}
       expectedFactSet={props.factSetId || undefined}
-      readOnly={selected && readOnly}
-      openSave={() => props.selectMode('save', props.receiptId, props.factSetId)} />}
+      readOnly={props.allowWrites === false || selected && readOnly}
+      openSave={props.allowWrites === false ? undefined : () => props.selectMode('save', props.receiptId, props.factSetId)} />}
   </>;
 }

@@ -27,7 +27,11 @@ test('Report P1 original excerpt, annual table, frozen revisions and exact Markd
   const measures = [];
   for (const width of widths) {
     await page.setViewportSize({ width, height: width === 390 ? 450 : 900 });
-    await page.getByRole('navigation', { name: '报告正文目录' }).getByRole('button', { name: /04.*经营原文与来源/ }).click();
+    const outline = page.getByRole('navigation', { name: '报告正文目录' });
+    const chapter = outline.getByRole('button', { name: /04.*经营原文与来源/ });
+    if (!await chapter.isVisible()) await outline.getByRole('button', { name: /^报告目录/ }).click();
+    await chapter.click();
+    await expect(section.getByRole('heading', { name: /04.*经营原文与来源/ })).toBeFocused();
     await withinPage(page); measures.push({ width, height: await section.evaluate(el => el.getBoundingClientRect().height) });
     await page.screenshot({ path: `${out}/report-original-${width}.png` });
     if (width === 1440 || width === 390) await section.screenshot({ path: `${out}/report-section04-${width}.png` });

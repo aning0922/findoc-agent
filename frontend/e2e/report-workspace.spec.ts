@@ -95,7 +95,7 @@ test('S5 dirty editing protects navigation, cancellation and versions without au
   const title = page.getByLabel('报告标题', { exact: true }); await expect(title).toBeFocused();
   const writes: string[] = []; page.on('request', r => { if (r.method() !== 'GET') writes.push(r.url()); });
   await title.fill('尚未保存的新标题'); await expect(page.getByRole('status').filter({ hasText: '当前编辑尚未保存' })).toBeVisible();
-  await page.getByRole('navigation', { name: '产品导航' }).getByRole('link', { name: '我的研究', exact: true }).click();
+  await page.getByRole('navigation', { name: '产品导航' }).getByRole('link', { name: '研究任务', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: '修改尚未保存' }); await expect(dialog).toBeVisible();
   await page.keyboard.press('Escape'); await expect(dialog).toHaveCount(0); await expect(title).toHaveValue('尚未保存的新标题');
   await page.getByLabel('报告版本', { exact: true }).selectOption('1'); await expect(dialog).toBeVisible();
@@ -168,11 +168,11 @@ test('S5 long title, four user conclusions and frozen company text wrap at seven
   for (const f of presented.report.trusted_snapshot.financial_facts) f.company_name = longCompany;
   await page.route(`**/api/reports/${v1.report.report_id}/revisions/3`, r => r.fulfill({ json: presented }));
   await page.goto(`/reports?report=${v1.report.report_id}&revision=3`);
-  const article = page.getByRole('article', { name: '已保存报告版本' }); await expect(article).toContainText(title); await expect(page.getByRole('region', { name: '报告冻结上下文' })).toContainText(longCompany);
+  const article = page.getByRole('article', { name: '已保存报告版本' }); await expect(article).toContainText(title); await expect(article.locator('.report-frozen-scope')).toContainText(longCompany);
   const observations: any[] = [];
   for (const width of [1440, 1280, 1024, 720, 640, 512, 390]) {
     await page.setViewportSize({ width, height: 900 });
-    const bounds = await page.evaluate(() => ({ width: innerWidth, page: document.documentElement.scrollWidth, titles: [...document.querySelectorAll<HTMLElement>('.report-paper h1,.report-detail .task-context-header h2')].map(n => ({ scroll: n.scrollWidth, client: n.clientWidth, left: n.getBoundingClientRect().left, right: n.getBoundingClientRect().right })) }));
+    const bounds = await page.evaluate(() => ({ width: innerWidth, page: document.documentElement.scrollWidth, titles: [...document.querySelectorAll<HTMLElement>('.report-paper h1,.report-paper .report-frozen-scope,.report-detail .task-context-header h2')].map(n => ({ scroll: n.scrollWidth, client: n.clientWidth, left: n.getBoundingClientRect().left, right: n.getBoundingClientRect().right })) }));
     expect(bounds.page).toBeLessThanOrEqual(width + 1); for (const b of bounds.titles) { expect(b.scroll).toBeLessThanOrEqual(b.client + 1); expect(b.left).toBeGreaterThanOrEqual(-1); expect(b.right).toBeLessThanOrEqual(width + 1); }
     observations.push(bounds); await page.screenshot({ path: `${out}/long-title-${width}.png` });
   }
@@ -188,7 +188,8 @@ test('S5 wrong revision identity and refresh failure remove cached details while
   await page.route(`**/api/reports/${v1.report.report_id}/revisions/1`, r => r.fulfill({ json: v2 }));
   await page.goto(url);
   const alert = page.getByRole('alert').filter({ hasText: '报告版本身份或不可变内容不一致' }); await expect(alert).toBeVisible();
-  await expect(page.getByRole('button', { name: '刷新报告历史', exact: true })).toBeEnabled();
+  await expect(page.getByRole('button', { name: '重新读取这个版本', exact: true })).toBeEnabled();
+  await page.getByRole('button', { name: '重新读取这个版本', exact: true }).click();
   await expect(alert).toBeVisible(); await expect(page.getByRole('article', { name: '已保存报告版本' })).toHaveCount(0);
   await page.unroute(`**/api/reports/${v1.report.report_id}/revisions/1`); await page.goto(url);
   await expect(page.getByRole('article', { name: '已保存报告版本' })).toBeVisible();
@@ -198,7 +199,7 @@ test('S5 wrong revision identity and refresh failure remove cached details while
   await expect(page.getByRole('article', { name: '已保存报告版本' })).toHaveCount(0);
   await expect(page.getByRole('button', { name: '下载 v1 · Markdown', exact: true })).toHaveCount(0);
   await expect(page.getByRole('alert').filter({ hasText: '历史完整性或资格无法读回' })).toBeVisible(); expect(writes).toEqual([]);
-  writeFileSync(`${out}/identity-failure-proof.json`, JSON.stringify({ wrong_revision_rejected: true, detail_error_survives_successful_list: true, failed_refresh_removes_cached_report: true, writes }, null, 2));
+  writeFileSync(`${out}/identity-failure-proof.json`, JSON.stringify({ wrong_revision_rejected: true, wrong_identity_stays_rejected_after_read_retry: true, failed_refresh_removes_cached_report: true, writes }, null, 2));
 });
 for (const fault of ['wrong-report', 'wrong-revision', 'wrong-payload', 'bad-sha', 'truncated', 'unsafe-filename', 'wrong-eligibility', 'dispatch']) {
   test(`S5 export fails closed for ${fault}`, async ({ page }) => {

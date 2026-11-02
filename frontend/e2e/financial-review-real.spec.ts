@@ -6,15 +6,15 @@ import { generateReview, openCandidate, returnToReview } from './financial-revie
 import { readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 const stage = process.env.FINDOC_E2E_STAGE || 'd9'
-const root = readFileSync(`../data/30d-foundation/${stage}-runtime-path.txt`, 'utf8').trim()
+const root = readFileSync(process.env.FINDOC_FINANCIAL_RUNTIME_PATH_FILE || `../data/30d-foundation/${stage}-runtime-path.txt`, 'utf8').trim()
 const manifest = JSON.parse(readFileSync(`${root}/manifest.json`, 'utf8'))
 const reports: { report_id: string; source: any }[] = manifest.reports
 const gold = JSON.parse(readFileSync('../product/validation/manual-benchmark.json', 'utf8')).facts
-const screenshots = resolve(`../product/validation/${stage}-screenshots`)
+const screenshots = resolve(process.env.FINDOC_FINANCIAL_SCREENSHOTS || `../product/validation/${stage}-screenshots`)
 const observations: any[] = []
 let browserVersion = ''
 test.beforeAll(({ browser }) => { browserVersion = browser.version() })
-test.afterAll(() => writeFileSync(stage === 'd9' ? '../product/validation/d9-browser-measurements.json' : `../product/validation/${stage}-review-browser-measurements.json`, JSON.stringify({ runtime: root, browserVersion, observations, human_acceptance: 'pending', automated_acceptance: 'simulated_test', substitutions: manifest.substitutions }, null, 2)))
+test.afterAll(() => writeFileSync(process.env.FINDOC_FINANCIAL_REVIEW_MEASUREMENTS || (stage === 'd9' ? '../product/validation/d9-browser-measurements.json' : `../product/validation/${stage}-review-browser-measurements.json`), JSON.stringify({ runtime: root, browserVersion, observations, human_acceptance: 'pending', automated_acceptance: 'simulated_test', substitutions: manifest.substitutions }, null, 2)))
 function url(report = reports.find(r => r.report_id === 'midea-2025')!) { const s = report.source; return `/evidence?record=new&company=${s.company_id}&document=${s.document_id}&revision=${s.source_revision}` }
 async function initial(page: Page, report?: typeof reports[number]) {
   await page.goto(url(report)); await expect(page.locator('.pdf-location')).toContainText('金额区域已核验', { timeout: 30_000 })
@@ -65,7 +65,7 @@ for (const report of reports) {
     await d.getByRole('button', { name: '我已核对并接受' }).click()
     await page.getByTestId('acceptance-result').locator(':scope > summary').click()
     await expect(page.getByTestId('acceptance-result')).toContainText('自动化模拟接受凭证', { timeout: 30_000 })
-    await expect(page.getByTestId('acceptance-result')).toContainText('财务事实入库待完成')
+    await expect(page.getByTestId('acceptance-result')).toContainText('数据尚未保存')
     expect(errors).toEqual([])
     if (report.report_id === 'midea-2025') await page.screenshot({ path: `${screenshots}/simulated-acceptance-saved.png`, fullPage: true })
     observations.push({ report: report.report_id, snapshot_id: review.snapshot_id, candidates: review.candidates.length, evidenceProofs, review_and_accept_ms: performance.now()-start, errors })

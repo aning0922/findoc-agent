@@ -14,16 +14,21 @@ import { ReportSaveControls } from './ReportEditor.tsx';
 export { ReportSaveControls } from './ReportEditor.tsx';
 import { useReportNavigation } from './reportNavigationContext.ts';
 import { ReportVersionComparison } from './ReportVersionComparison.tsx';
+import styles from './ReportReading.module.css';
 
-export function ReportHistory({ simulated, onOpen, draftActive = false }: { simulated: boolean; onOpen?: () => void; draftActive?: boolean }) {
+export function ReportHistory({ simulated, onOpen, onClose, draftActive = false }: { simulated: boolean; onOpen?: () => void; onClose?: () => void; draftActive?: boolean }) {
   const [items, setItems] = useState<HistoryItem[]>([]), [before, setBefore] = useState<number | null>(null), [detail, setDetail] = useState<ReportDetail | null>(null), [error, setError] = useState("");
   const [listError, setListError] = useState('');
   const [revision, setRevision] = useState(1), [operation, setOperation] = useState(storedOperation);
   const { requestLeave } = useReportNavigation();
+  const [reading, setReading] = useState(() => new URLSearchParams(location.search).has('report'));
+  const [readBusy, setReadBusy] = useState(false);
   const [comparing, setComparing] = useState(false), [sourceBlocked, setSourceBlocked] = useState(false);
+  const libraryHeading = useRef<HTMLHeadingElement>(null);
+  const requestedVersion = useRef<{ id: string; revision: number } | null>(null);
   const sequence = useRef(0), listSequence = useRef(0), alive = useRef(true);
   const [summaries, setSummaries] = useState<Record<string, ReportDetail | null>>({}), [editing, setEditing] = useState(false), [loading, setLoading] = useState(true);
-  useEffect(() => { if (draftActive) { sequence.current++; setDetail(null); setEditing(false); } }, [draftActive]);
+  useEffect(() => { if (draftActive) { sequence.current++; setDetail(null); setEditing(false); setReading(false); setReadBusy(false); } }, [draftActive]);
   async function list(cursor?: number) {
     const n = ++listSequence.current; setLoading(true);
     try {
@@ -43,11 +48,13 @@ export function ReportHistory({ simulated, onOpen, draftActive = false }: { simu
     finally { if (alive.current && n === listSequence.current) setLoading(false); }
   }
   async function open(id: string, rev: number, navigate = true) {
-    const n = ++sequence.current; setDetail(null); setEditing(false); setComparing(false); setSourceBlocked(false); setError("");
+    requestedVersion.current = { id, revision: rev };
+    const n = ++sequence.current; setReading(true); setReadBusy(true); setDetail(null); setEditing(false); setComparing(false); setSourceBlocked(false); setError("");
     try { const value = await readExactReport(id, rev, simulated, new AbortController().signal);
       if (value.report.report_id !== id || value.report.revision !== rev) throw new Error("历史身份不一致");
       if (alive.current && n === sequence.current) { onOpen?.(); setDetail(value); setRevision(rev); if (navigate) history.pushState(null, "", reportPath(id, rev)); }
     } catch (e) { if (alive.current && n === sequence.current) setError(`报告历史无法读回：${e instanceof Error ? e.message : "读取失败"}`); }
+    finally { if (alive.current && n === sequence.current) setReadBusy(false); }
   }
   useEffect(() => {
     alive.current = true; void list(); const q = new URLSearchParams(location.search), id = q.get("report"), rev = Number(q.get("revision"));
@@ -70,15 +77,23 @@ export function ReportHistory({ simulated, onOpen, draftActive = false }: { simu
     return () => { c.abort(); clearInterval(timer); window.removeEventListener("focus", check); };
   }, [detail, simulated]);
   async function findOperation() {
+    requestedVersion.current = null;
     const n = ++sequence.current; setError(""); setDetail(null);
     try { const value = validateReport(await json<ReportDetail>(`/reports/by-operation/${encodeURIComponent(operation)}`, new AbortController().signal), simulated);
       if (value.report.operation_id !== operation) throw new Error("操作身份不一致");
       if (alive.current && n === sequence.current) { if (storedOperation() === operation) remember(""); window.location.assign(reportPath(value.report.report_id, value.report.revision)); }
-    } catch { if (alive.current && n === sequence.current) setError("操作尚未查证或读取失败；结果仍未知，只能按 operation GET 查询。"); }
+    } catch { if (alive.current && n === sequence.current) setError("刚才的保存结果仍未确认。请继续查看这次保存的结果，避免重复保存。"); }
+  }
+  function closeReader() {
+    requestLeave(() => {
+      requestedVersion.current = null; sequence.current++; setDetail(null); setEditing(false); setComparing(false); setReading(false); setReadBusy(false); setError('');
+      setOperation(storedOperation()); history.pushState(null, '', '/reports'); onClose?.(); requestAnimationFrame(() => libraryHeading.current?.focus());
+    });
   }
   return <>
-    <details className="surface report-library-disclosure" open={!detail && !draftActive}><summary>已保存报告历史</summary><section className="report-history" aria-label="已保存报告历史">
-      <div className="report-library-heading"><div><h2>报告库</h2><p>全空间已保存报告 · 企业与期间来自冻结快照</p></div><button disabled={loading} onClick={() => void list()}>刷新报告历史</button></div>
+    {reading && <button className={styles.back} onClick={closeReader}>返回报告库</button>}
+    {!reading && <section className={`surface report-history ${styles.library}`} aria-label="已保存报告历史">
+      <div className="report-library-heading"><div><h2 ref={libraryHeading} tabIndex={-1}>报告库</h2><p>全空间已保存报告 · 企业与期间来自冻结快照</p></div><button disabled={loading} onClick={() => void list()}>刷新报告历史</button></div>
       {loading && <p role="status">正在读取已保存报告与范围…</p>}{listError && <p role="alert">{listError}</p>}
       {!loading && !items.length && !listError && <p>尚无已保存报告。可从下方已完成研究整理草稿，明确保存后加入报告库。</p>}
       <ul className="report-library-list">{items.map(item => {
@@ -91,17 +106,20 @@ export function ReportHistory({ simulated, onOpen, draftActive = false }: { simu
           </div><button onClick={() => requestLeave(() => void open(item.report_id, item.current_revision))}>阅读报告</button>
         </li>;
       })}</ul>{before && <button disabled={loading} onClick={() => void list(before)}>加载更多报告</button>}
-    </section></details>
-    {(!detail || !!operation) && <details className="report-operation" open={!!storedOperation()}><summary>待查证的保存操作</summary><section aria-label="待查证的保存"><label>按 operation 查询<input value={operation} onChange={e => setOperation(e.target.value)} /></label><button disabled={!operation} onClick={() => requestLeave(() => void findOperation())}>查询历史操作（GET）</button></section></details>}
+    </section>}
+    {readBusy && <p role="status">正在读取所选报告版本…</p>}
+    {(!detail || !!operation) && <details className="report-operation" open={!!storedOperation()} onToggle={e => { if (e.currentTarget.open && storedOperation()) setOperation(storedOperation()); }}><summary>查看尚未确认的保存结果</summary><section aria-label="待查证的保存"><p>先读取刚才的操作结果，确认是否已经保存；不会再次提交。</p><label>保存操作身份<input value={operation} onChange={e => setOperation(e.target.value)} /></label><button disabled={!operation} onClick={() => requestLeave(() => void findOperation())}>查看这次保存的结果</button></section></details>}
     {error && <p role="alert" className="operating-alert">{error}</p>}
+    {error && reading && requestedVersion.current && <button disabled={readBusy} onClick={() => { const target = requestedVersion.current!; void open(target.id, target.revision, false); }}>重新读取这个版本</button>}
     {detail && <section className="report-detail" aria-label="报告阅读工作区">
       <ReportContextHeader draft={detail.report.trusted_snapshot} saved={detail} compact />
-      <div className="surface report-version-bar"><p className="report-badge">正在阅读 v{detail.report.revision} · {detail.report.revision === detail.current_revision ? '最新版本' : `历史版本只读 / 最新 v${detail.current_revision}`}</p>
+      <div className={`surface report-version-bar ${styles.toolbar}`}><p className="report-badge">正在阅读 v{detail.report.revision} · {detail.report.revision === detail.current_revision ? '最新版本' : `历史版本只读 / 最新 v${detail.current_revision}`}</p>
         <label>报告版本<select aria-label="报告版本" value={revision} onChange={e => { const rev = Number(e.target.value); requestLeave(() => void open(detail.report.report_id, rev)); }}>{Array.from({ length: detail.current_revision }, (_, i) => <option key={i+1} value={i+1}>v{i+1}{i+1 === detail.current_revision ? ' · 最新版本' : ' · 历史版本'}</option>)}</select></label>
-        {!editing && <button disabled={detail.current_revision < 2} onClick={() => setComparing(true)}>比较版本</button>}
         {!editing && <ReportExport key={`${detail.report.report_id}:${detail.report.revision}:${detail.payload_sha256}:${detail.current_eligibility.status}`} detail={detail} simulated={simulated} sourceBlocked={sourceBlocked} compact />}
         {detail.current_eligibility.status === 'current_at_read' && !sourceBlocked && !editing && (detail.report.revision === detail.current_revision ? <button className="primary-button" onClick={() => setEditing(true)}>编辑为新版本</button> : <button onClick={() => requestLeave(() => void open(detail.report.report_id, detail.current_revision))}>打开最新版本后编辑</button>)}
       </div>
+      <p className={styles.versionHelp}>{detail.report.revision === detail.current_revision ? '编辑会保存为新版本，当前已保存内容保留不变。' : '此历史版本只读。需要修改时，请先打开最新版本，再编辑为新版本。'}</p>
+      {!editing && detail.current_revision > 1 && <button className={styles.compare} onClick={() => setComparing(true)}>比较版本</button>}
       {editing && canEditReport(detail) && !sourceBlocked && <ReportSaveControls key={`${detail.report.report_id}:${detail.report.revision}`} draft={detail.report.trusted_snapshot} saved={detail} simulated={simulated} onCancel={() => requestLeave(() => setEditing(false))} onSaved={value => { sequence.current++; setEditing(false); setDetail(value); setRevision(value.report.revision); void list(); history.replaceState(null, "", reportPath(value.report.report_id, value.report.revision)); }} />}
       {comparing && !editing && <ReportVersionComparison detail={detail} simulated={simulated} close={() => setComparing(false)} />}
       {sourceBlocked && <StatusNotice state="invalidated" title="原 PDF 核验失败">当前文件暂不可核验，已撤下编辑与下载入口。请查阅来源状态；报告仍保留只读审计。</StatusNotice>}

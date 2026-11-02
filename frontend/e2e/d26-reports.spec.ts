@@ -16,7 +16,7 @@ test('D26 actual report commit lost response, failed history read, v1/v2 and exa
   await expect(page.getByRole('button',{name:'保存第 1 版',exact:true})).toBeDisabled();
   const unknownPrompt=await page.getByRole('alert').filter({hasText:'保存结果未知'}).innerText();
   await page.reload();
-  await page.getByRole('button',{name:'查询历史操作（GET）',exact:true}).click();
+  await page.getByRole('button',{name:'查看这次保存的结果',exact:true}).click();
   const article=page.getByRole('article',{name:'已保存报告版本'});
   await expect(article).toContainText('D26 保存的 v1');
   expect(writes.filter(w=>w.url.endsWith('/reports'))).toHaveLength(1);
@@ -35,12 +35,15 @@ test('D26 actual report commit lost response, failed history read, v1/v2 and exa
   await page.goForward(); await expect(article).toContainText('D26 保存的 v1'); await expect(page.getByLabel('报告版本', { exact: true })).toHaveValue('1');
   const before=await (await page.request.get('/api/__test__/d26-counts')).json();
   await page.route('**/api/reports?*',async route=>{const r=await route.fetch();expect(r.status()).toBe(200);await route.abort('failed');});
-  await page.getByText('已保存报告历史',{exact:true}).click();
+  await page.getByRole('button',{name:'返回报告库',exact:true}).click();
+  await expect(page.getByRole('region',{name:'已保存报告历史',exact:true})).toBeVisible();
   await page.getByRole('button',{name:'刷新报告历史',exact:true}).click();
   await expect(page.getByRole('alert').filter({hasText:'报告历史读取失败'})).toBeVisible();
   const historyPrompt=await page.getByRole('alert').filter({hasText:'报告历史读取失败'}).innerText();
   await page.unroute('**/api/reports?*');await page.getByRole('button',{name:'刷新报告历史',exact:true}).click();
   expect(await (await page.request.get('/api/__test__/d26-counts')).json()).toEqual(before);
+  await page.locator(`.report-library-list [data-report-id="${saved.report.report_id}"]`).getByRole('button',{name:'阅读报告',exact:true}).click();
+  await page.getByLabel('报告版本',{exact:true}).selectOption('1');await expect(article).toContainText('D26 保存的 v1');
   const downloadEvent=page.waitForEvent('download');await page.getByRole('button',{name:'下载 v1 · Markdown',exact:true}).click();
   const download=await downloadEvent;await download.saveAs(`${out}/saved-v1.md`);
   expect(await download.failure()).toBeNull();

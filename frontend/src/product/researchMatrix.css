@@ -1,0 +1,29 @@
+.research-matrix-scroll { overflow-x: auto; }
+.research-matrix { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.research-matrix th, .research-matrix td { border: 1px solid #e1e9e5; padding: 14px; vertical-align: top; text-align: left; overflow-wrap: anywhere; }
+.research-matrix th { background: #f6f9f7; }
+.research-matrix td p { margin: 6px 0; font-size: .85em; }
+.research-matrix td button { margin-top: 6px; }
+.research-matrix select { display: block; width: 100%; }
+.research-inline-review { margin-top: 24px; border-top: 1px solid #dce7e1; padding-top: 18px; }
+.research-inline-review-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 700px) {
+  .research-matrix, .research-matrix tbody, .research-matrix tr, .research-matrix th, .research-matrix td { display: block; width: 100%; }
+  .research-matrix thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .research-matrix td::before { content: attr(data-label); display: block; font-size: .85em; color: #425b53; margin-bottom: 6px; }
+}
+.research-matrix th, .research-matrix td { padding: 9px 12px; }
+.research-matrix td p { margin: 3px 0; }
+.research-inline-review > .research-inline-review-heading { margin-bottom: 8px; }
+.research-inline-review .evidence-layout[data-reader-mode="split"] .evidence-viewer { position: sticky; top: 12px; }
+.research-review-left { min-width: 0; }
+.research-review-viewer { min-width: 0; }
+@media (min-width: 1200px) {
+  .research-review-grid[data-open="true"] { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .research-review-viewer > div { position: sticky; top: 12px; }
+  .research-review-viewer .evidence-viewer { position: sticky; top: 12px; }
+  .research-inline-review .evidence-layout[data-embedded-viewer="true"] { display: block; }
+  .research-matrix { font-size: 13px; }
+  .research-matrix th, .research-matrix td { padding: 7px; }
+  .research-matrix td button { font-size: 12px; padding: 4px 7px; min-height: 30px; }
+}

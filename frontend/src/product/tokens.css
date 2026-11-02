@@ -1,15 +1,15 @@
 /* Transferable semantic tokens. Scoped to the product shell for frontend migration. */
 .findoc-app {
-  --color-canvas: #F4F7FA;
+  --color-canvas: #f5f6f3;
   --color-surface: #ffffff;
-  --color-surface-subtle: #f8fafc;
-  --color-nav: #12283F;
-  --color-nav-muted: #B9C9D7;
-  --color-text: #172C45;
-  --color-text-secondary: #596B7D;
-  --color-text-muted: #596B7D;
-  --color-border: #DBE3EB;
-  --color-border-strong: #B7C6D4;
+  --color-surface-subtle: #f8f9f6;
+  --color-nav: #173d38;
+  --color-nav-muted: #b9cfca;
+  --color-text: #263b36;
+  --color-text-secondary: #61706a;
+  --color-text-muted: #61706a;
+  --color-border: #dfe5df;
+  --color-border-strong: #b9c8c0;
   --color-primary: #096E66;
   --color-primary-hover: #075A54;
   --color-primary-soft: #E5F3EF;

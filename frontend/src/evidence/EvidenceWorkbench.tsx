@@ -316,10 +316,16 @@ function DocumentSession({
   route,
   context,
   navigate,
+  embedded = false,
+  viewerTarget,
+  paused = false,
 }: {
   context: ReturnType<typeof validateReviewContext> | null;
   route: Route;
   navigate: (update: Partial<Route>, replace?: boolean) => void;
+  embedded?: boolean;
+  viewerTarget?: HTMLElement | null;
+  paused?: boolean;
 }) {
   const [data, setData] = useState<{
     source: Source;
@@ -416,21 +422,79 @@ function DocumentSession({
       record={route.record}
       receiptId={route.receipt}
       factSetId={route.fact_set}
-      selectMode={(record, receipt = "", fact_set = "") => navigate({ record, receipt, fact_set, review_session: record === "new" ? crypto.randomUUID() : "", evidence: "", cite: "", page: "" })}
+      compact={embedded}
+      allowWrites={!embedded || !!context?.task.waiting_checkpoint}
+      selectMode={(record, receipt = "", fact_set = "") => {
+        if (embedded && !context?.task.waiting_checkpoint && (record === 'new' || record === 'save')) return;
+        let session = '';
+        if (record === 'new') {
+          if (embedded) {
+            const key = `embedded-review-session-v1:${route.task}:${route.side}:${route.document}:${route.period}:${route.disclosure}`;
+            session = sessionStorage.getItem(key) || crypto.randomUUID();
+            sessionStorage.setItem(key, session);
+          } else session = crypto.randomUUID();
+        }
+        navigate({ record, receipt, fact_set, review_session: session, evidence: "", cite: "", page: "" });
+      }}
       key={`${data.source.source_revision}:${route.period}:${route.record}:${route.receipt}:${route.fact_set}:${route.review_session}`}
       data={data}
+      viewerTarget={viewerTarget}
+      paused={paused}
+      expectedDisclosure={context ? route.disclosure : undefined}
       groupMetrics={context ? context.task.active_input[context.side].choices.filter(c => c.document_id === route.document && c.disclosure_version === route.disclosure).map(c => c.metric_key) : undefined}
-      continuation={context ? ['first', 'second'].flatMap(side => {
+      continuation={context && !embedded ? ['first', 'second'].flatMap(side => {
         const s = side as 'first' | 'second';
         return context.task.active_input[s].choices.filter((c, i, choices) =>
           (s !== context.side || c.document_id !== route.document || c.disclosure_version !== route.disclosure) &&
           choices.findIndex(other => other.document_id === c.document_id && other.disclosure_version === c.disclosure_version) === i
         ).map(c => ({ href: taskReviewPath(context.task, s, c.metric_key), label: `查看 ${context.task.active_input[s].period.year} 年另一组数据` }));
       }) : []}
-      returnHref={context ? taskPath(context.task) : undefined}
+      returnHref={context && !embedded ? taskPath(context.task) : undefined}
       route={route}
       navigate={navigate}
       onFatal={fail}
     />
   );
+}
+
+// Embedded research review owns its navigation locally. The task is read again
+// before opening the document; the caller's selection is only navigation intent.
+export function EmbeddedTaskReview({ task, side, metric, fact, viewerTarget, paused = false }: {
+  task: Task; side: 'first' | 'second'; metric: string;
+  fact?: import('../product/api.ts').Fact;
+  viewerTarget?: HTMLElement | null;
+  paused?: boolean;
+}) {
+  const [route, setRoute] = useState<Route>(() => {
+    const q = new URL(taskReviewPath(task, side, metric, fact), location.origin).searchParams;
+    return {
+      company: q.get('company') || '', document: q.get('document') || '', revision: q.get('revision') || '',
+      evidence: '', page: '', cite: '', task: q.get('task') || '', side: q.get('side') || '',
+      period: q.get('period') || '', metric_key: q.get('metric_key') || '', disclosure: q.get('disclosure') || '',
+      return_to: 'operating', record: q.get('record') || '', receipt: q.get('receipt') || '',
+      fact_set: q.get('fact_set') || '', review_session: '',
+    };
+  });
+  const [context, setContext] = useState<ReturnType<typeof validateReviewContext> | null>(null);
+  const [error, setError] = useState('');
+  useEffect(() => {
+    const c = new AbortController();
+    void taskRequest(`/${encodeURIComponent(route.task)}`, c.signal).then(fresh => {
+      const q = new URLSearchParams();
+      Object.entries(route).forEach(([k, v]) => { if (v) q.set(k, v); });
+      const verified = validateReviewContext(fresh, q);
+      if (fresh.revision !== task.revision || fresh.execution_status !== 'idle' || (!fact && !fresh.waiting_checkpoint))
+        throw new Error('研究任务状态已变化，请关闭核对并重新读取任务。');
+      if (!c.signal.aborted) setContext(verified);
+    }).catch(e => { if (!c.signal.aborted) setError((e as Error).message); });
+    return () => c.abort();
+    // Initial frozen navigation is immutable for this keyed session.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    setRoute(old => old.metric_key === metric ? old : { ...old, metric_key: metric, evidence: '', cite: '', page: '' });
+  }, [metric]);
+  if (error) return <p role="alert">无法核验研究上下文：{error}</p>;
+  if (!context) return <p role="status">正在核验研究任务和冻结来源…</p>;
+  return <DocumentSession embedded viewerTarget={viewerTarget} paused={paused} route={route} context={context} navigate={(update) => setRoute(old => ({ ...old, ...update }))} />;
 }
