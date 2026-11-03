@@ -1,6 +1,6 @@
 {
   "schema_version": "cplus-core-execution-matrix-v1",
-  "snapshot_root_head": "bc2e7cc46ed470cea4f82d46291485724d868db7",
+  "snapshot_root_head": "daa9173986dde5d462de5bc94e193afa6f72bf9e",
   "fixed_case_count": 24,
   "fixed_cases_sha256": "ce1899994a71f1119464b216c19c5f6fe90fa38ece483b7d616647c505f034f8",
   "archive_action": "READ_ONLY_RECEIPT_RECONCILIATION_NO_NEW_EXECUTION",
@@ -146,6 +146,66 @@
       "path": "docs/cplus/evidence/M5-followup/batch-ai-controls.json",
       "sha256": "864a6840e45f7bca44c962ab5cb66c99f3f04db4cd8d6c853adfe7aa45a46869",
       "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "data/cplus-final-point-memory-v1/result.json",
+      "sha256": "9a7a64894a41de65f354973d75685f2c2569ed996820c89164c69e70407736f4",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "docs/cplus/eval/results/interview-b-two-years-v1/result.json",
+      "sha256": "0728390cfc5d6b7359f4c7c6c16cadcc9d004946ef41f429c47fd0f2a605ae84",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "docs/cplus/eval/results/interview-b-two-years-synthesis-v1/result.json",
+      "sha256": "2912e8be343faf65e96766080bd6fe42bb3e57ea5498d58feee5a7bbd825a7f6",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "data/cplus-final-business-native-v1/result.json",
+      "sha256": "29bf82cff7739c71b960fe88d52277b22bd745634fe090dc2a4319c541add689",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "data/cplus-final-point-memory-v1/point-exact-highlight-1440.png",
+      "sha256": "21a4fd3776166ced37d9f53de18028271bc31882b79b9716de36fad90825bd32",
+      "visual_audit": "citation and locate button screenshot viewed; explicit fallback mode comes from same-run location receipt, not inferred rectangle highlights"
+    },
+    {
+      "path": "docs/cplus/eval/results/template-numeric-policy-real-v1/result.json",
+      "sha256": "1394a4d859f985e25308e23685627591d4f59e5ea4ac2b3016422fb2ffe5d632",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "docs/cplus/evidence/M5-followup/point-memory-final.json",
+      "sha256": "312a4db327d68774c248da797cb9fb7dad90de9b4085eefd2819a4a2da2e090f",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "data/cplus-final-business-native-corrected-v1/result.json",
+      "sha256": "14a391638aec9a64c5fa30d8984ff4d738a4b4e57713e9ad00637b82ed856607",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "docs/cplus/reviews/M5-final-business-file-review.md",
+      "sha256": "4cee65fc835dc555e2afda64715d914ec8c18badb2410c42f5eec62aee92ea22",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "tests/test_cplus_template_numeric_gate.py",
+      "sha256": "5110a62c7358c97cb8ad35e42eb9c54ed236b27e386b797fcfda0dfef0609acc",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "tests/test_cplus_g4_templates_drafts.py",
+      "sha256": "9432cdf99a98e68ca87e6d5806672f9eb1084a559a931c6b25439eeebe582b03",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "tests/test_cplus_template_child_report_boundary.py",
+      "sha256": "b553ea9a646c192f16b1e2562488d4fe9da3d3c8fd6ecf2f0d48d39b5a01c25e",
+      "read_only_audit_no_new_execution": true
     }
   ],
   "totals": {
@@ -158,8 +218,9 @@
     "real_agent_sdk_calls_scope": "22 counts only Agent v2 plus E01-15 pair; business OCR/checkup/annual model executions are separate archived windows, not added blindly"
   },
   "pending_root_supplements": [
-    "public physical SDK budget verification for CP21 (raw counter null; 3 real AI returned cells observed)",
-    "remaining fixed cases and CP24 same-point highlight/fallback full combination; human review remains pending"
+    "remaining 11 fixed-case whole-goal executions and human review",
+    "public physical SDK budget verification when counters were null",
+    "independent final native-export file QA in progress; do not prefill"
   ],
   "entries": [
     {
@@ -1126,7 +1187,7 @@
       "fixed_mode": null,
       "source_fixture": null,
       "ground_truth": "明确发送，真实bbox或页码回退，删除不复活",
-      "actual_tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED_PARTIAL_SCENARIO",
+      "actual_tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
       "status": "partial",
       "exact_case_model_executed": false,
       "observed_mode": null,
@@ -1134,23 +1195,37 @@
       "full_answer_pass": false,
       "human_semantic_review": "pending",
       "human_financial_acceptance": "pending",
-      "result_and_gap": "累计真实浏览器/HTTP路线已执行：比较期间focus、显式context、原文收藏、跨context真实BGE召回及删除后不召回。原生OCR另有bbox页图预览；尚缺同一图点追问到精准高亮/回退的完整组合回执，保留partial，不因本轮未跑而记未执行。",
+      "result_and_gap": "同一路线真实运行：2025报告内2024比较期图点→服务器focus→显式context/answer→该回答同条引文实际定位及原页回退→收藏→明确新context→真实BGE召回→删除后不召回。实际page_only、物理页7、rects0、exact_quote_not_located_open_original_page，不称精确框高亮；人工语义仍未审。",
       "evidence": [
         "docs/cplus/EVAL_RESULTS.md",
         "docs/cplus/evidence/M5-point-memory/result.json",
-        "docs/cplus/evidence/M1-M2-native/result.json"
+        "docs/cplus/evidence/M1-M2-native/result.json",
+        "data/cplus-final-point-memory-v1/result.json",
+        "docs/cplus/evidence/M5-followup/point-memory-final.json"
       ],
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
-      "execution_status": "executed",
+      "execution_status": "executed_required_REAL_BROWSER_same_point_flow",
       "program_checks": {
-        "actual_period_focus": "pass_archived",
-        "explicit_context": "pass_archived",
-        "favorite_semantic_recall_delete": "pass_archived",
-        "OCR_bbox_preview": "pass_separate_archived_path",
-        "same_point_highlight_or_fallback_complete_flow": "not_established"
+        "report_year_and_actual_period": "2025_report_2024_annual_point_verified",
+        "location_ref_belongs_to_same_answer": "independently_compared_equal",
+        "actual_location_mode": "page_only",
+        "actual_physical_page": 7,
+        "rectangles": 0,
+        "fallback_reason": "exact_quote_not_located_open_original_page",
+        "exact_rectangle_highlight": "not_claimed",
+        "favorite_new_context_BGE_recall_delete": "same_route_runner_checks_pass",
+        "complete_native_route_check_count": 9,
+        "human_semantics": "pending"
       },
       "human_acceptance": "pending",
-      "archive_reexecution_this_turn": false
+      "archive_reexecution_this_turn": false,
+      "execution_verdict": "PASS_NATIVE_POINT_EVIDENCE_MEMORY_WITH_EXPLICIT_PAGE_FALLBACK",
+      "provider_call_upper_bound": 1,
+      "saved_answer_id": "48d587eb-4fe3-48bc-ac39-7ad9661fca5a",
+      "route_started_at": "2026-11-03T13:21:06.837Z",
+      "route_ended_at": "2026-11-03T13:21:45.619Z",
+      "same_run_screenshot": "data/cplus-final-point-memory-v1/point-exact-highlight-1440.png",
+      "screenshot_audit": "citation text and locate button visible; no rectangle-highlight assertion derived from screenshot"
     }
   ],
   "paired_continuation_accounting": {
@@ -1187,18 +1262,18 @@
       "CP-22",
       "CP-23",
       "E01-14",
-      "CP-21"
+      "CP-21",
+      "CP-24"
     ],
-    "cumulative_required_tier_execution_count": 12,
+    "cumulative_required_tier_execution_count": 13,
     "not_claimed_as_full_answer_pass": true,
     "whole_invariants_incomplete_or_deviation_ids": [
       "E01-01",
-      "CP-20",
-      "CP-24"
+      "CP-20"
     ],
     "CP21_excluded_reason": null,
-    "CP24_excluded_from_full_core_count_reason": "real browser components executed; same-point highlight/fallback complete combination not established",
-    "minimum_12_verdict": "12_REQUIRED_TIER_EXECUTED_NOT_12_FULL_GOAL_OR_HUMAN_ANSWER_PASSES",
+    "CP24_excluded_from_full_core_count_reason": null,
+    "minimum_12_verdict": "13_REQUIRED_TIER_EXECUTED_NOT_13_FULL_GOAL_OR_HUMAN_ANSWER_PASSES",
     "human_acceptance_count": 0,
     "note": "10 is the cumulative required-tier execution inventory, not 10 accepted answers or proof all program axes passed. Prior count2 was the matching complete model-path subset only, not the total real E2E count.",
     "CP21_required_tier_execution_verified": true,
@@ -1213,9 +1288,9 @@
       "E01-10",
       "E01-11",
       "E01-12",
-      "E01-13",
-      "CP-24"
-    ]
+      "E01-13"
+    ],
+    "CP24_verified_variant": "same_point_native_full_route_explicit_page_only_fallback_allowed_by_fixed_ground_truth"
   },
   "supplemental_G4_paths": {
     "not_additional_fixed_cases": true,
@@ -1411,6 +1486,210 @@
       "evidence": "data/cplus-g4-exact-exports-v2/result.json"
     },
     "no_failure_overwrite": true,
-    "human_acceptance": "pending"
+    "human_acceptance": "pending",
+    "final_business_native": {
+      "overall_result": "PASS",
+      "tier": "REAL_REACT_HTTP_PUBLIC_PDF_GUARDED_MODEL",
+      "check_count": 32,
+      "cash_template_run_id": "9bdde3ed-75c7-4b46-85b3-d7523b4ebf9e",
+      "cash_points": 10,
+      "cash_rules": 3,
+      "cash_AI_outcome": "returned",
+      "cash_financial_authority": false,
+      "files": [
+        {
+          "label": "cash-template",
+          "format": "csv",
+          "sha256": "dc53b9486d34d0a9fa16ab983ec5b72224aac1642a094982057ee0149ddb4bec",
+          "bytes": 20485
+        },
+        {
+          "label": "cash-template",
+          "format": "xlsx",
+          "sha256": "6b9a316cd22affdc07c80d2d3bb407477d77058d9df7efda2440600e2e7d0a88",
+          "bytes": 26819
+        },
+        {
+          "label": "cash-template",
+          "format": "pptx",
+          "sha256": "089d9dcb350e9a0ed3c17564b0385a1e5a95a3c71f8ae2b8333f16788a56c583",
+          "bytes": 83660
+        },
+        {
+          "label": "cash-template",
+          "format": "pdf",
+          "bytes": 512112,
+          "sha256": "ee9c2f3f434e63ce802f1bbca082dbfc870cca315c8fe5247d7a18772a9fdb22"
+        },
+        {
+          "label": "deep",
+          "format": "pptx",
+          "sha256": "386ae71e8b51518548bb1de6b39fc957c8200a91bb2b48f7c4259a97954542a8",
+          "bytes": 60574
+        },
+        {
+          "label": "synthesis",
+          "format": "pptx",
+          "sha256": "7a7dea83ee2d8af252ee900fb33891a9e497d7ca191351b643113bea7bb9dc68",
+          "bytes": 65278
+        }
+      ],
+      "references": [
+        {
+          "label": "cash-template",
+          "report_ref": {
+            "domain": "template_run_v1",
+            "id": "9bdde3ed-75c7-4b46-85b3-d7523b4ebf9e",
+            "revision": 1,
+            "payload_sha256": "53057cf23944fa17120b39bab41b1763d0d0cbc5718628f5dbf41979812dfdaf"
+          }
+        },
+        {
+          "label": "deep",
+          "report_ref": {
+            "domain": "showcase_report_v2",
+            "id": "925d4633-086c-4e64-af38-1a65863f1d03",
+            "revision": 1,
+            "payload_sha256": "671561aec8a06ab344fb352e16f6d9c7b0e1d622f2ac6847c405b7425778f242"
+          }
+        },
+        {
+          "label": "synthesis",
+          "report_ref": {
+            "domain": "showcase_report_v2",
+            "id": "80ba3e6e-d083-45aa-b312-09f49a1f808c",
+            "revision": 1,
+            "payload_sha256": "9c0f1f8da7f402924ed0b42f0d71e341c06a3aeda8dc56251255b189a37045a7"
+          }
+        }
+      ],
+      "browser_PDF_observed": true,
+      "agent_PPTX_downloads_observed": true,
+      "independent_readonly_file_layout_QA": {
+        "status": "COMPLETED_WITH_MATERIAL_AI_YEAR_ORDER_ERROR_AND_PDF_LIMITS",
+        "evidence": "docs/cplus/reviews/M5-final-business-file-review.md",
+        "PPTX_pages_viewed": 6,
+        "PPTX_pages_total": 6,
+        "browser_PDF_pages_viewed": [
+          1,
+          3
+        ],
+        "browser_PDF_pages_total": 3,
+        "PDF_issue": "small print and first-page long structured JSON runs into right edge; page2 not visually accepted",
+        "old_AI_year_order": "incorrect_not_fixed_by_AI_unreviewed_label",
+        "new_non_numeric_policy_separate_result": "docs/cplus/eval/results/template-numeric-policy-real-v1/result.json"
+      },
+      "not_new_Microsoft_Office_acceptance": true,
+      "no_new_fixed_case_count": true,
+      "evidence": "data/cplus-final-business-native-v1/result.json"
+    }
+  },
+  "supplemental_interview_B_two_years": {
+    "additional_fixed_case_count": 0,
+    "single_2025_E0115_fixture_replaced": false,
+    "first_run_overall_execution": "STOPPED_WITH_RECEIPTS_NO_REPLAY",
+    "first_run_stop": {
+      "type": "StopRun",
+      "reason": "insufficient_physical_call_headroom_no_further_task_started"
+    },
+    "first_completed_deep_preserved": true,
+    "second_run_execution": "COMPLETED_TWO_YEAR_INTERVIEW_COMPARISON_HUMAN_PENDING",
+    "same_question_sources_fact_selection_independently_verified": true,
+    "both_modes_quote_both_document_ids": [
+      "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+      "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479"
+    ],
+    "runs": [
+      {
+        "mode": "deep",
+        "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+        "state": "completed",
+        "report_id": "925d4633-086c-4e64-af38-1a65863f1d03",
+        "roles": [
+          "evidence",
+          "finance"
+        ],
+        "physical_SDK_rows": 8
+      },
+      {
+        "mode": "synthesis",
+        "job_id": "3cc58d35-1dc9-449a-bda0-07fd7019d613",
+        "state": "completed",
+        "report_id": "80ba3e6e-d083-45aa-b312-09f49a1f808c",
+        "roles": [
+          "generalist"
+        ],
+        "physical_SDK_rows": 5
+      }
+    ],
+    "SDK_rows_separate_business_route": 13,
+    "evidence": [
+      "docs/cplus/eval/results/interview-b-two-years-v1/result.json",
+      "docs/cplus/eval/results/interview-b-two-years-synthesis-v1/result.json"
+    ],
+    "human_quality_preference": "pending_no_multi_agent_superiority_claim"
+  },
+  "supplemental_template_non_numeric_policy": {
+    "additional_fixed_case_count": 0,
+    "policy": "non_numeric_review_v1",
+    "real_evidence": "docs/cplus/eval/results/template-numeric-policy-real-v1/result.json",
+    "real_execution": "PASS_REAL_PROVIDER_NATIVE_NON_NUMERIC_POLICY_HUMAN_PENDING",
+    "template_run_id": "3f941792-2b7e-41f3-aaec-f6e4ccf775d5",
+    "interpretation_published": true,
+    "interpretation_character_gate_independently_passed": true,
+    "interpretation_review_status": "ai_unreviewed",
+    "points": 10,
+    "rules": 3,
+    "new_SDK_rows": 1,
+    "SDK_row_states": [
+      "returned"
+    ],
+    "budget_after": {
+      "cap_cny": "5",
+      "physical_guard_rows": 123,
+      "reserved_cny": "2.468274",
+      "unknown_rows": 4,
+      "actual_billed_cny": "not_observed"
+    },
+    "financial_approvals": 0,
+    "logout_http_status": 200,
+    "old_session_http_status": 401,
+    "controller_after": "ready",
+    "native_proof": {
+      "path": "data/cplus-final-business-native-corrected-v1/result.json",
+      "sha256": "14a391638aec9a64c5fa30d8984ff4d738a4b4e57713e9ad00637b82ed856607",
+      "result": "PASS",
+      "checks": 18
+    },
+    "old_wrong_year_order_sample": {
+      "evidence": "data/cplus-final-business-native-v1/result.json",
+      "QA": "docs/cplus/reviews/M5-final-business-file-review.md",
+      "review_commit": "1052e1c4465743054601724e34927a7a1155bb82",
+      "status": "WRONG_AI_YEAR_AMOUNT_ORDER_RETAINED_NOT_ACCEPTED",
+      "structured_ten_points_status": "independently_verified_exact_candidates_not_human_approved",
+      "immutable_old_result_overwritten": false
+    },
+    "synthetic_validation": {
+      "worker_independently_executed": {
+        "total": 22,
+        "numeric_gate_cases": 7,
+        "original_G4_cases": 15,
+        "root_baseline": "1052e1c4465743054601724e34927a7a1155bb82",
+        "result": "22_passed",
+        "implementation_commit": "3b3578a9feb1c08f91f1cd3f2a356dad07697b29"
+      },
+      "root_reported_expanded_suite": {
+        "total": 23,
+        "additional_child_report_boundary_cases": 1,
+        "additional_test": "tests/test_cplus_template_child_report_boundary.py",
+        "provenance": "controller_reported_23; source inspected, not rerun during this metadata audit"
+      }
+    },
+    "limits": [
+      "Conservative numeric-character gate can withhold ordinary Chinese words",
+      "Passing character gate is not mathematical or semantic verification",
+      "Original child answer remains auditable; root child-report-boundary test covers standalone export rejection",
+      "This audit made zero provider calls; saved public budget is not a billed-cost claim"
+    ]
   }
 }
