@@ -10,6 +10,7 @@ import sqlite3
 import sys
 import tempfile
 from uuid import UUID, uuid4
+from datetime import datetime, timezone
 from .projection import canonical, digest, matrix, project
 
 
@@ -106,8 +107,11 @@ class ExportService:
         body = ExportRequest.model_validate(body).model_dump()
         owner = self.check(identity)
         oid = body["operation_id"]
-        if str(UUID(oid)) != oid:
-            raise ExportError("invalid_operation_id", 422)
+        try:
+            if str(UUID(oid)) != oid:
+                raise ValueError()
+        except (ValueError, TypeError, AttributeError):
+            raise ExportError("invalid_operation_id", 422) from None
         with self.tx(identity) as db:
             row = db.execute("SELECT * FROM ops WHERE id=?", (oid,)).fetchone()
             if row:
@@ -202,6 +206,7 @@ class ExportService:
         eid = str(uuid4())
         manifest = dict(
             schema_version="cplus-export-manifest-v1",
+            created_at=datetime.now(timezone.utc).isoformat(),
             export_id=eid,
             report_ref=ref,
             export_profile_version=body["export_profile_version"],

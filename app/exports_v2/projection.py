@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import re
 from .csv_projection import safe_text
 
 SCHEMAS = {
@@ -59,6 +60,7 @@ def project(ref, resolved):
                                 "scope",
                                 "currency",
                                 "raw_unit",
+                                "unit",
                                 "raw_decimal",
                                 "normalized_decimal",
                                 "value_decimal",
@@ -99,6 +101,17 @@ def project(ref, resolved):
                 )
                 if isinstance(v["text"], str):
                     texts.append(v["text"])
+            if "rule" in v:
+                evidence.append(dict(path=path, kind="saved_checkup_rule", text=canonical(v)))
+            elif "topic" in v and "explanation" in v:
+                evidence.append(
+                    dict(
+                        path=path,
+                        kind="saved_topic_explanation",
+                        text=v["explanation"],
+                        interpretation_review_status=v.get("interpretation_review_status"),
+                    )
+                )
             for k, x in v.items():
                 visit(x, path + "." + k)
         elif isinstance(v, list):
@@ -141,4 +154,15 @@ def project(ref, resolved):
 
 def matrix(rows, defaults):
     fields = list(dict.fromkeys(defaults + [k for r in rows for k in r]))
-    return [fields] + [[safe_text(row.get(k)) for k in fields] for row in rows]
+
+    def value(row, key):
+        raw = row.get(key)
+        if (
+            key in ("raw_decimal", "normalized_decimal", "value_decimal")
+            and isinstance(raw, str)
+            and re.fullmatch(r"-?\d+(?:\.\d+)?", raw)
+        ):
+            return raw  # XLSX stores this exact original string, including negative sign.
+        return safe_text(raw)
+
+    return [fields] + [[value(row, k) for k in fields] for row in rows]

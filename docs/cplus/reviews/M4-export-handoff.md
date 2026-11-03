@@ -15,3 +15,19 @@ Root组装：`ExportService(runtime_root, resolver=async_resolver, identity_vali
 CSV UTF8 BOM；XLSX三sheet：概览/财务数据/来源证据。财务行只来自已有typed Decimal字段，不从AI文本解析财务数值；所有数值原字符串作文本保留，unknown字段留空。domain/ref/status每数据行保留。用户文本前置公式字符含控制空白已转义，Excel全部数据单元格为字符串，无公式，JSON引用/期间信息保留。AI无解释则明确未生成；源stale明确历史，不升confirmed。
 
 CSV/XLSX专项test为3 passed：真实文件保存+openpyxl重开、长Decimal、三sheet、无公式、GET/同op不重新resolve或渲染、权限撤销拒绝、错domain UNKNOWN不重放。PPTX属于下一独立commit；视觉render/完整root浏览器接线另记录后续结果，当前不冒充端到端验收。
+
+## PPTX及最终文件验证
+
+formats现在支持csv/xlsx/pptx，可一次显式POST生成多格式，同一导出manifest绑定同snapshot/ref。PPTX六页：封面、范围版本、快照引用页码分布原生图、原文节选、已有AI解释/未生成说明、来源限制。图表统计已保存引用数，明确不代表财务表现或语义相关性；没有可靠财务序列时不捏造趋势。每页页脚保留domain/revision/source状态，notes含snapshot ref及图表完整来源映射。长摘录明确标节选，完整文本保留CSV/XLSX；源码不调用模型。生成后以python-pptx重开验证6页/图表/形状画布边界。
+
+本机实际使用LibreOfficeDev 26.8分别渲染PPTX→6页PDF、XLSX→3页PDF，并转PNG检查中文。初次缺Fontconfig配置时中文丢失，保留该失败，不冒充通过；后以私有临时FONTCONFIG_FILE指向/System/Library/Fonts及本机STHeiti字体，重渲染成功，六页PPTX已目视检查无中文截断/越界，XLSX概览两列可读，宽数据页在Excel可横向查看，非独立精美打印模板。没有修改bundled dependency目录；目标主机需要中文字体，root不能把当前本机font路径硬编码成产品前置。CSV Decimal列使用Excel文本前缀，避免直接打开时精度丢失；XLSX保存原Decimal字符串（包括负号），没有便利浮点列。32k以上单元格文本明确拒绝，不静默截断为成功工件。
+
+最终专项测试：**4 passed**（无provider/human）。增加最终beforecommit拒绝时files=0/opUNKNOWN回归。Ruff通过。测试工件明确为合成saved snapshot，未声称真实root业务报告/浏览器路径已验收。root负责真实resolver、展示权限、source guard和gateway最终输出fence；其余导出服务/路由/持久化/三格式文件已实现。
+
+实际最终工件（未提交二进制）：
+- `/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-export-delivery-iixgl7qa/research.csv` SHA `8ef4b8a0852f8937846d49ff950cb89a5ccad4712eb25b5b349b18890d63d4e0`
+- 同目录`research.xlsx` SHA `75d31a97ea0d6d8fd4f70fe9d7812599d40b65c900198d119c9fee296089cb84`
+- 同目录`research.pptx` SHA `7199cc63072392eac519e2ebc19fb50fbb05e8bbc6adfaec8c1f9f3f6d6d3c81`
+- 同目录`artifact-proof.json`及render-pptx/research.pdf、render-xlsx/research.pdf、逐页PNG。一次过严的“所有格式body都含来源”断言对XLSX失败，原因是sheet名不作为打印正文；改为格式对应中文sentinel，未重写成初次全PASS。
+
+CSV/XLSX独立实现提交e39f264；本节PPTX与最终QA另独立提交。b921ac1仍为历史partial，不代表最终状态。没有改runtime/API注册或前端报告入口、旧迁移/报告合同；没有新模型、人审、自动下载或外部服务。

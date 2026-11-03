@@ -95,7 +95,7 @@ def test_real_csv_xlsx_files_immutable_get_and_permission(tmp_path):
                 revision=2,
                 payload_sha256=digest(payload),
             ),
-            formats=["csv", "xlsx"],
+            formats=["csv", "xlsx", "pptx"],
             export_profile_version="research-v1",
         )
         first = await service.create(body, identity)
@@ -118,6 +118,13 @@ def test_real_csv_xlsx_files_immutable_get_and_permission(tmp_path):
             str(tmp_path / "research.xlsx"),
         )
         assert await proc.wait() == 0
+        check = await asyncio.create_subprocess_exec(
+            BUNDLED,
+            "-c",
+            "from pptx import Presentation;import sys;p=Presentation(sys.argv[1]);assert len(p.slides)==6;assert any(s.has_chart for sl in p.slides for s in sl.shapes);assert any('待审阅' in s.text for sl in p.slides for s in sl.shapes if s.has_text_frame)",
+            str(tmp_path / "research.pptx"),
+        )
+        assert await check.wait() == 0
         allowed[0] = False
         with pytest.raises(ExportError, match="display_permission_denied"):
             await service.file(eid, "xlsx", identity)
@@ -160,5 +167,52 @@ def test_bad_domain_or_hash_leaves_unknown_without_files(tmp_path):
             await s.create(body, {"generation": 1})
         assert s.operation(body["operation_id"], {"generation": 1})["state"] == "unknown"
         assert (await s.create(body, {"generation": 1}))["state"] == "unknown"
+
+    asyncio.run(run())
+
+
+def test_final_fence_failure_keeps_unknown_without_artifacts(tmp_path):
+    async def run():
+        async def resolver(*args):
+            return dict(snapshot=sample(), display_status="current", selected_sources=[])
+
+        @contextmanager
+        def guard(*args):
+            yield
+
+        commits = []
+
+        def commit(identity):
+            commits.append(1)
+            if len(commits) == 2:
+                raise ExportError("lease_expired", 401)
+
+        s = ExportService(
+            tmp_path,
+            resolver=resolver,
+            identity_validator=lambda i: None,
+            publication_guard=guard,
+            before_commit_sync=commit,
+            authorize_read=lambda i, m: True,
+            renderer_python=BUNDLED,
+        )
+        body = dict(
+            operation_id=str(uuid4()),
+            report_ref=dict(
+                domain="showcase_report_v2",
+                id="report-one",
+                revision=2,
+                payload_sha256=digest(sample()),
+            ),
+            formats=["csv"],
+            export_profile_version="research-v1",
+        )
+        with pytest.raises(ExportError, match="lease_expired"):
+            await s.create(body, {"generation": 1})
+        import sqlite3
+
+        with sqlite3.connect(s.path) as db:
+            assert db.execute("select count(*) from files").fetchone()[0] == 0
+        assert s.operation(body["operation_id"], {"generation": 1})["state"] == "unknown"
 
     asyncio.run(run())

@@ -25,7 +25,7 @@ class ExportRequest(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     operation_id: str
     report_ref: Ref
-    formats: list[Literal["csv", "xlsx"]] = Field(min_length=1, max_length=3)
+    formats: list[Literal["csv", "xlsx", "pptx"]] = Field(min_length=1, max_length=3)
     export_profile_version: Literal["research-v1"]
 
     @model_validator(mode="after")
