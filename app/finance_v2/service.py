@@ -184,6 +184,30 @@ class ExtendedFinanceService:
         return {"schema_version": "extended-metric-list-v2", "company_id": company_id, "metrics": output,
                 "limitations": ["Candidates and simulated_test receipts are not confirmed financial facts."]}
 
+    async def signals(self, company_id, document_id, source_revision):
+        from app.finance_v2.signals import build_signals
+
+        # Even an empty selection must validate this exact current source.
+        context = await self._read(company_id, document_id, source_revision)
+        with self.store.tx() as db:
+            rows = db.execute("SELECT * FROM fv2_metrics WHERE company_id=?", (company_id,)).fetchall()
+            metrics = [self.store.decode(row) for row in rows]
+        selected = [m for m in metrics if m["document_id"] == document_id and m["source_revision"] == source_revision]
+        if selected:
+            selected, contexts = await self._selected([m["metric_id"] for m in selected])
+        else:
+            contexts = [context]
+        with self.store.tx(source=True) as db:
+            self._guard(db, contexts, selected)
+            admitted = []
+            for metric in selected:
+                receipt = self._receipt(db, metric["metric_id"])
+                if metric["status"] == "candidate" and receipt:
+                    admitted.append({**metric, "status": "confirmed", "source_status": "current_valid",
+                                     "confirmation_ref": {"receipt_id": receipt["receipt_id"],
+                                                          "confirmation_kind": "local_operator"}})
+            return build_signals(context[0], admitted)
+
     async def review(self, request):
         async def work():
             metrics, contexts = await self._selected(request.metric_refs)

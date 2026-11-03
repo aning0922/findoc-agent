@@ -64,6 +64,16 @@ def create_finance_v2_router(service, *, owner_authorizer=None):
             raise FinanceError("unknown_query_parameter", 422)
         return await service.list_metrics(company_id)
 
+    @router.get("/extended-signals")
+    async def signals(request: Request,
+                      company_id: Annotated[str, Query(min_length=1, max_length=128)],
+                      document_id: Annotated[str, Query(min_length=1, max_length=128)],
+                      source_revision: Annotated[str, Query(pattern=r"^[a-f0-9]{64}$")]):
+        keys = {"company_id", "document_id", "source_revision"}
+        if set(request.query_params) != keys or any(len(request.query_params.getlist(key)) != 1 for key in keys):
+            raise FinanceError("unknown_query_parameter", 422)
+        return await service.signals(company_id, document_id, source_revision)
+
     @router.post("/extended-reviews")
     async def review(payload: Select):
         return await service.review(payload)
