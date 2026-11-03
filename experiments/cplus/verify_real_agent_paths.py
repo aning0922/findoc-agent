@@ -12,6 +12,7 @@ from contextlib import closing
 from decimal import Decimal
 import hashlib
 import json
+import os
 from pathlib import Path
 import sqlite3
 import subprocess
@@ -148,7 +149,13 @@ class Runner:
         sleep=time.sleep,
         monotonic=time.monotonic,
         tier="INJECTED_PROTOCOL_CALLER",
+        api_prefix="",
+        private_session_file=None,
     ):
+        if api_prefix not in ("", "/api"):
+            raise ValueError("unsupported_api_prefix")
+        self.api_prefix=api_prefix
+        self.private_session_file=private_session_file
         self.client, self.window, self.output = client, window, output
         self.sleep, self.monotonic = sleep, monotonic
         self.proof = {
@@ -183,7 +190,7 @@ class Runner:
         write_json(self.output / "result.json", self.proof)
 
     def get(self, path, *, params=None, raw=False):
-        response = self.client.get(path, params=params)
+        response = self.client.get(self.api_prefix+path, params=params)
         self.proof["reads"].append({"path": path, "params": params, "status": response.status_code})
         self.save()
         if response.status_code != 200:
@@ -206,7 +213,7 @@ class Runner:
         self.proof["operations"].append(record)
         self.save()
         try:
-            response = self.client.post(path, json=body)
+            response = self.client.post(self.api_prefix+path, json=body)
             record["http_status"] = response.status_code
             if response.status_code not in expected:
                 record.update(state="REJECTED_OR_UNKNOWN_NO_REPLAY", safe_error=response.json())
@@ -257,6 +264,14 @@ class Runner:
             recovery=lambda oid: "/demo/operations/" + oid,
         )
         self.proof["session"] = self.get("/demo/session")
+        if self.private_session_file is not None:
+            cookies=[dict(name=c.name,value=c.value,domain=c.domain,path=c.path,
+                          expires=c.expires if c.expires is not None else -1,httpOnly=True,
+                          secure=c.secure,sameSite="Lax") for c in self.client.cookies.jar]
+            descriptor=os.open(self.private_session_file,os.O_CREAT|os.O_EXCL|os.O_WRONLY|os.O_NOFOLLOW,0o600)
+            with os.fdopen(descriptor,"w") as stream:
+                json.dump({'cookies':cookies,'origins':[]},stream)
+            self.proof['private_session_saved_for_owned_browser']=True
         self.save()
 
     def frozen_source(self):
@@ -552,14 +567,18 @@ class Runner:
         entry["budget_after"] = public_budget(self.window.current())
         self.save()
 
-    def execute(self, cases, username, password, *, only_mode=None):
+    def execute(self, cases, username, password, *, only_mode=None, paired_case=False):
         try:
             self.login(username, password)
             source, pages = self.frozen_source()
-            for case_id, mode, upper in CASE_MODES:
+            modes=(("E01-15","deep",10),("E01-15","synthesis",5)) if paired_case else CASE_MODES
+            for case_id, mode, upper in modes:
                 if only_mode and mode != only_mode:
                     continue
                 self.run_case(cases[case_id], mode, upper, source, pages)
+            if paired_case and not only_mode:
+                a,b=self.proof["cases"]
+                self.proof["paired_same_question_comparison"]=(a["exact_question"]==b["exact_question"] and a["conversation"]["sources"]==b["conversation"]["sources"])
             self.proof["execution"] = "COMPLETED_REQUESTED_HTTP_PATHS_NOT_HUMAN_ANSWER_ACCEPTANCE"
         except Exception as exc:
             self.proof["execution"] = "STOPPED_WITH_RECEIPTS_NO_REPLAY"
@@ -587,6 +606,9 @@ def main():
     )
     p.add_argument("--max-new-calls", required=True, type=int, choices=range(1, 13))
     p.add_argument("--only-mode", choices=("deep", "synthesis"))
+    p.add_argument("--api-prefix",choices=("", "/api"),default="",help="Use /api through the local React gateway; empty for direct controller")
+    p.add_argument("--paired-case",action="store_true",help="Execute the exact E01-15 question independently in both modes")
+    p.add_argument("--private-session-file",type=Path,help="New ignored data/600 storage state for the root-owned browser only; never written into evidence")
     args = p.parse_args()
     u = urlsplit(args.origin)
     if (
@@ -602,6 +624,11 @@ def main():
     if args.output.exists() and any(args.output.iterdir()):
         p.error("existing output refused; inspect/reconcile the original run, do not auto-resume")
     args.output.mkdir(parents=True, exist_ok=True)
+    if args.private_session_file is not None:
+        args.private_session_file=args.private_session_file.resolve()
+        if not args.private_session_file.is_relative_to((PROJECT/"data").resolve()) or args.private_session_file.exists():
+            p.error("private session must be a new file in ignored project data")
+        args.private_session_file.parent.mkdir(parents=True,exist_ok=True)
     # This branch is for the authorized root operator only. Worker fixture tests
     # inject a fake reader/MockTransport and never call main with real paths.
     from app.demo.shared_budget import existing_shared_budget
@@ -627,6 +654,8 @@ def main():
             Window(SQLiteLedger(budget_path), args.max_new_calls),
             args.output,
             tier="OPERATOR_REAL_HTTP_GUARDED_SDK",
+            api_prefix=args.api_prefix,
+            private_session_file=args.private_session_file,
         )
         runner.proof.update(
             script_sha256=file_sha(Path(__file__)),
@@ -651,7 +680,7 @@ def main():
             origin=args.origin,
         )
         result = runner.execute(
-            cases, config["DEMO_USERNAME"], config["DEMO_PASSWORD"], only_mode=args.only_mode
+            cases, config["DEMO_USERNAME"], config["DEMO_PASSWORD"], only_mode=args.only_mode, paired_case=args.paired_case
         )
     print(
         json.dumps(
