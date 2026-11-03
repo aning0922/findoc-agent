@@ -1,0 +1,553 @@
+{
+  "schema_version": "cplus-real-agent-paths-v1",
+  "tier": "CONTROLLED_HTTP_MOCK_PROTOCOL_ONLY",
+  "execution": "STOPPED_WITH_RECEIPTS_NO_REPLAY",
+  "max_new_calls": 12,
+  "budget_before": {
+    "cap_cny": "5",
+    "physical_guard_rows": 1,
+    "reserved_cny": "0.01",
+    "unknown_rows": 1,
+    "actual_billed_cny": "not_observed"
+  },
+  "physical_denominator": "new existing guarded SDK reservation/attempt rows; not billed cost or accepted-answer count",
+  "logical_denominator": "sr_budgets.attempts from each final job.usage; tool reservations are separate",
+  "operations": [
+    {
+      "path": "/demo/login",
+      "operation_id": "1f23031a-653a-44d8-99b3-d90c01ba83e5",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 0,
+      "http_status": 202,
+      "result": {
+        "operation_id": "1f23031a-653a-44d8-99b3-d90c01ba83e5"
+      }
+    },
+    {
+      "path": "/demo/claim",
+      "operation_id": "082f098d-ed40-42e0-a8fc-17d57f009958",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 0,
+      "http_status": 200,
+      "result": {
+        "state": "active"
+      }
+    },
+    {
+      "path": "/conversations",
+      "operation_id": "866bf1b2-9e28-44e5-a2d6-ee0ccddb8359",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 0,
+      "request_body": {
+        "operation_id": "866bf1b2-9e28-44e5-a2d6-ee0ccddb8359",
+        "document_ids": [
+          "fixture-doc"
+        ],
+        "title": "C+ E01-06 deep bounded source study"
+      },
+      "request_sha256": "8f90f5e8c72db91c4e95d865ea54dec66a97ddc09d7b643806bbd73619386fb0",
+      "http_status": 201,
+      "result": {
+        "conversation_id": "e94be5b7-3b56-4742-9d82-b086acc1b6ef",
+        "sources": [
+          {
+            "workspace_id": "demo",
+            "document_id": "fixture-doc",
+            "company_id": "fixture-company",
+            "report_year": 2025,
+            "report_type": "annual",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "basis": "PRC_GAAP",
+            "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "content_sha256": "3c29fdf4317c8d044cacf572133568a554a8c6fe599043e904bf49741c230b53",
+            "attempt": 1,
+            "parser_version": "fixture-only"
+          }
+        ],
+        "source_scope_sha": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "active_turn_id": null
+      }
+    },
+    {
+      "path": "/research/intent",
+      "operation_id": "340890e3-e70d-40b7-8603-de8556ba088a",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 1,
+      "request_body": {
+        "operation_id": "340890e3-e70d-40b7-8603-de8556ba088a",
+        "conversation_id": "e94be5b7-3b56-4742-9d82-b086acc1b6ef",
+        "text": "请列出格力经营风险，区分披露原文与推断。",
+        "requested_mode": "deep"
+      },
+      "request_sha256": "5f2a7f686d82f13d6c25202bc409b849e3a2fd2aabb359eb47bbeb03e1887241",
+      "http_status": 200,
+      "result": {
+        "intent_id": "4988c695-ede5-4b96-8178-7dd252d16b68",
+        "conversation_id": "e94be5b7-3b56-4742-9d82-b086acc1b6ef",
+        "mode": "deep",
+        "goal": "请列出格力经营风险，区分披露原文与推断。",
+        "provider_error": null,
+        "proposal_origin": "model_proposal_program_validated",
+        "clarifying_question": null,
+        "scope": {
+          "scope_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "runtime_instance_id": "fixture-instance",
+          "lease_generation": 1,
+          "source_scope_sha": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "fact_selection_sha": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "memory_generation": 0,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      }
+    },
+    {
+      "path": "/synthesis/plans",
+      "operation_id": "e0af6068-6c17-4ba7-9867-7e11acf5472b",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 1,
+      "request_body": {
+        "operation_id": "e0af6068-6c17-4ba7-9867-7e11acf5472b",
+        "intent_id": "4988c695-ede5-4b96-8178-7dd252d16b68"
+      },
+      "request_sha256": "34c2321997db60d7fe83c000332a4919ec2844886d93b45c71fdafa6cb661d17",
+      "http_status": 200,
+      "result": {
+        "plan_id": "929ff1db-2769-4c69-a06e-b10f38c193bb",
+        "revision": 1,
+        "plan_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "intent_id": "4988c695-ede5-4b96-8178-7dd252d16b68",
+        "mode": "deep",
+        "provider_error": null,
+        "plan_origin": "supervisor_model_program_validated",
+        "scope": {
+          "scope_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "runtime_instance_id": "fixture-instance",
+          "lease_generation": 1,
+          "source_scope_sha": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "fact_selection_sha": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "memory_generation": 0,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        },
+        "roles": [
+          "evidence",
+          "risk_operations"
+        ],
+        "requires_explicit_confirmation": true,
+        "limits": {
+          "model_attempts": 10,
+          "parallel_agents": 2
+        }
+      }
+    },
+    {
+      "path": "/deep-research/jobs",
+      "operation_id": "0b0fd138-357a-43aa-ade7-ffab206e3487",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 8,
+      "request_body": {
+        "operation_id": "0b0fd138-357a-43aa-ade7-ffab206e3487",
+        "approved_plan_id": "929ff1db-2769-4c69-a06e-b10f38c193bb",
+        "approved_plan_revision": 1,
+        "approved_plan_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "confirmed": true
+      },
+      "request_sha256": "41378f8ebdb9751b79b5394aecaf2ef30605137136bc9b2da73eb440afc40479",
+      "http_status": 202,
+      "result": {
+        "job_id": "c1c810cf-00fb-4233-9778-6785f534174a",
+        "state": "queued"
+      }
+    }
+  ],
+  "reads": [
+    {
+      "path": "/demo/status",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/1f23031a-653a-44d8-99b3-d90c01ba83e5",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/session",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/companies",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/fixture-doc/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/cplus/documents/fixture-doc/research-source",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/fixture-doc/file",
+      "params": {
+        "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "company_id": "fixture-company"
+      },
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/c1c810cf-00fb-4233-9778-6785f534174a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/c1c810cf-00fb-4233-9778-6785f534174a/events",
+      "params": {
+        "after_seq": 0
+      },
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/c1c810cf-00fb-4233-9778-6785f534174a/events",
+      "params": {
+        "after_seq": 5
+      },
+      "status": 200
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "E01-06",
+      "exact_question": "请列出格力经营风险，区分披露原文与推断。",
+      "mode": "deep",
+      "state": "STARTING",
+      "case_upper_model_attempts": 10,
+      "budget_before": {
+        "cap_cny": "5",
+        "physical_guard_rows": 1,
+        "reserved_cny": "0.01",
+        "unknown_rows": 1,
+        "actual_billed_cny": "not_observed"
+      },
+      "conversation": {
+        "conversation_id": "e94be5b7-3b56-4742-9d82-b086acc1b6ef",
+        "sources": [
+          {
+            "workspace_id": "demo",
+            "document_id": "fixture-doc",
+            "company_id": "fixture-company",
+            "report_year": 2025,
+            "report_type": "annual",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "basis": "PRC_GAAP",
+            "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "content_sha256": "3c29fdf4317c8d044cacf572133568a554a8c6fe599043e904bf49741c230b53",
+            "attempt": 1,
+            "parser_version": "fixture-only"
+          }
+        ],
+        "source_scope_sha": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "active_turn_id": null
+      },
+      "intent": {
+        "intent_id": "4988c695-ede5-4b96-8178-7dd252d16b68",
+        "conversation_id": "e94be5b7-3b56-4742-9d82-b086acc1b6ef",
+        "mode": "deep",
+        "goal": "请列出格力经营风险，区分披露原文与推断。",
+        "provider_error": null,
+        "proposal_origin": "model_proposal_program_validated",
+        "clarifying_question": null,
+        "scope": {
+          "scope_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "runtime_instance_id": "fixture-instance",
+          "lease_generation": 1,
+          "source_scope_sha": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "fact_selection_sha": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "memory_generation": 0,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      },
+      "plan": {
+        "plan_id": "929ff1db-2769-4c69-a06e-b10f38c193bb",
+        "revision": 1,
+        "plan_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "intent_id": "4988c695-ede5-4b96-8178-7dd252d16b68",
+        "mode": "deep",
+        "provider_error": null,
+        "plan_origin": "supervisor_model_program_validated",
+        "scope": {
+          "scope_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "runtime_instance_id": "fixture-instance",
+          "lease_generation": 1,
+          "source_scope_sha": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "fact_selection_sha": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "memory_generation": 0,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        },
+        "roles": [
+          "evidence",
+          "risk_operations"
+        ],
+        "requires_explicit_confirmation": true,
+        "limits": {
+          "model_attempts": 10,
+          "parallel_agents": 2
+        }
+      },
+      "explicit_approval": {
+        "approved_plan_id": "929ff1db-2769-4c69-a06e-b10f38c193bb",
+        "approved_plan_revision": 1,
+        "approved_plan_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "confirmed": true
+      },
+      "approval_basis": "operator explicitly runs this fixed-case bounded harness; exact stored plan identity/roles checked and persisted before POST",
+      "job_ack": {
+        "job_id": "c1c810cf-00fb-4233-9778-6785f534174a",
+        "state": "queued"
+      },
+      "job": {
+        "job_id": "c1c810cf-00fb-4233-9778-6785f534174a",
+        "mode": "deep",
+        "plan_id": "929ff1db-2769-4c69-a06e-b10f38c193bb",
+        "scope": {
+          "scope_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "runtime_instance_id": "fixture-instance",
+          "lease_generation": 1,
+          "source_scope_sha": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "fact_selection_sha": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "memory_generation": 0,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        },
+        "state": "partial",
+        "usage": {
+          "attempts": 7,
+          "unknown_attempts": 0
+        },
+        "result": {
+          "agents": [
+            {
+              "agent_id": "evidence",
+              "state": "completed"
+            },
+            {
+              "agent_id": "risk_operations",
+              "state": "completed"
+            }
+          ],
+          "findings": [
+            {
+              "finding_id": "quote-c1c810cf-00fb-4233-9778-6785f534174a",
+              "kind": "sourced_excerpt",
+              "text": "经营风险原文。",
+              "evidence_refs": [
+                {
+                  "document_id": "fixture-doc",
+                  "company_id": "fixture-company",
+                  "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                  "content_sha256": "3c29fdf4317c8d044cacf572133568a554a8c6fe599043e904bf49741c230b53",
+                  "parser_version": "fixture-only",
+                  "physical_page": 1,
+                  "chunk_id": "fixture-chunk",
+                  "evidence_id": "fixture-evidence",
+                  "text": "经营风险原文。"
+                }
+              ],
+              "financial_refs": []
+            },
+            {
+              "finding_id": "interpretation-c1c810cf-00fb-4233-9778-6785f534174a",
+              "kind": "model_interpretation",
+              "text": "模型待审解释。",
+              "evidence_refs": [
+                {
+                  "document_id": "fixture-doc",
+                  "company_id": "fixture-company",
+                  "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                  "content_sha256": "3c29fdf4317c8d044cacf572133568a554a8c6fe599043e904bf49741c230b53",
+                  "parser_version": "fixture-only",
+                  "physical_page": 1,
+                  "chunk_id": "fixture-chunk",
+                  "evidence_id": "fixture-evidence",
+                  "text": "经营风险原文。"
+                }
+              ],
+              "financial_refs": []
+            }
+          ]
+        },
+        "steps": [
+          {
+            "agent_id": "evidence",
+            "state": "completed",
+            "tools": [
+              "search_evidence"
+            ]
+          },
+          {
+            "agent_id": "risk_operations",
+            "state": "completed",
+            "tools": [
+              "search_evidence"
+            ]
+          }
+        ]
+      },
+      "events": [
+        {
+          "job_id": "c1c810cf-00fb-4233-9778-6785f534174a",
+          "event_seq": 1,
+          "agent_id": "controller",
+          "event_type": "phase",
+          "state": "completed"
+        },
+        {
+          "job_id": "c1c810cf-00fb-4233-9778-6785f534174a",
+          "event_seq": 2,
+          "agent_id": "supervisor",
+          "event_type": "phase",
+          "state": "completed"
+        },
+        {
+          "job_id": "c1c810cf-00fb-4233-9778-6785f534174a",
+          "event_seq": 3,
+          "agent_id": "evidence",
+          "event_type": "phase",
+          "state": "completed"
+        },
+        {
+          "job_id": "c1c810cf-00fb-4233-9778-6785f534174a",
+          "event_seq": 4,
+          "agent_id": "risk_operations",
+          "event_type": "phase",
+          "state": "completed"
+        },
+        {
+          "job_id": "c1c810cf-00fb-4233-9778-6785f534174a",
+          "event_seq": 5,
+          "agent_id": "verifier",
+          "event_type": "phase",
+          "state": "completed"
+        }
+      ]
+    }
+  ],
+  "financial_approvals": 0,
+  "full_human_answer_acceptance": false,
+  "paired_same_question_comparison": false,
+  "original_unknown_policy": "baseline unknown rows retained; never retried/refunded",
+  "readonly_recoveries": [],
+  "budget_after": {
+    "cap_cny": "5",
+    "physical_guard_rows": 8,
+    "reserved_cny": "0.017",
+    "unknown_rows": 1,
+    "actual_billed_cny": "not_observed"
+  },
+  "new_guard_rows": {
+    "fixture-new-1": {
+      "reserved_cny": "0.001",
+      "state": "returned",
+      "input_tokens": 2,
+      "output_tokens": 1
+    },
+    "fixture-new-2": {
+      "reserved_cny": "0.001",
+      "state": "returned",
+      "input_tokens": 2,
+      "output_tokens": 1
+    },
+    "fixture-new-3": {
+      "reserved_cny": "0.001",
+      "state": "returned",
+      "input_tokens": 2,
+      "output_tokens": 1
+    },
+    "fixture-new-4": {
+      "reserved_cny": "0.001",
+      "state": "returned",
+      "input_tokens": 2,
+      "output_tokens": 1
+    },
+    "fixture-new-5": {
+      "reserved_cny": "0.001",
+      "state": "returned",
+      "input_tokens": 2,
+      "output_tokens": 1
+    },
+    "fixture-new-6": {
+      "reserved_cny": "0.001",
+      "state": "returned",
+      "input_tokens": 2,
+      "output_tokens": 1
+    },
+    "fixture-new-7": {
+      "reserved_cny": "0.001",
+      "state": "returned",
+      "input_tokens": 2,
+      "output_tokens": 1
+    }
+  },
+  "new_guard_rows_count": 7,
+  "old_unknown_state_changes": {},
+  "session": {
+    "lease_generation": 1,
+    "state": "active"
+  },
+  "source": {
+    "kind": "fast",
+    "workspace_id": "demo",
+    "document_id": "fixture-doc",
+    "company_id": "fixture-company",
+    "report_year": 2025,
+    "report_type": "annual",
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "basis": "PRC_GAAP",
+    "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "content_sha256": "3c29fdf4317c8d044cacf572133568a554a8c6fe599043e904bf49741c230b53",
+    "attempt": 1,
+    "parser_version": "fixture-only",
+    "identity_status": "fast_source_verified"
+  },
+  "http_pdf": {
+    "sha256": "3c29fdf4317c8d044cacf572133568a554a8c6fe599043e904bf49741c230b53",
+    "physical_pages": 1
+  },
+  "stop": {
+    "type": "StopRun",
+    "reason": "job_partial_failed_or_interrupted_retained_no_report_or_next_job"
+  },
+  "actual_provider_calls": 0,
+  "fixture_notice": "All guard rows, model text, phases and HTTP endpoints are simulated; no real model or SDK was called.",
+  "script_sha256": "ff8f172e7002256218f42187102186f972399762b41d46e4b41d7753fa2844d8"
+}
