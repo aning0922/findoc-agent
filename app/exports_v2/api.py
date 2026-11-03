@@ -15,6 +15,8 @@ class Ref(BaseModel):
         "checkup_v1",
         "peer_comparison_v1",
         "research_answer_v1",
+        "chart_report_v1",
+        "template_run_v1",
     ]
     id: str = Field(min_length=1, max_length=100)
     revision: int = Field(ge=1)

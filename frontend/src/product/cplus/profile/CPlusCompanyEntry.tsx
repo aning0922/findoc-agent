@@ -28,5 +28,5 @@ export function CPlusCompanyEntry({companyId,companies}:{companyId:string;compan
  <details id="peer-comparison" open={window.location.hash==='#peer-comparison'} className="product-card cplus-module-card"><summary>同行对标 · 明确选择可比数据</summary><p>先在各企业三表中提取候选，再刷新资料。每项选择具体期间，不自动挑最新版本。</p><PeerComparisonPanel companies={companies} collections={collections}/></details>
  <details className="product-card cplus-module-card"><summary>主营业务结构 · 产品与地区</summary><SegmentResearchPanel companyId={companyId} sources={sources.filter(s=>s.company_id===companyId)}/></details>
  <details id="cplus-checkup" className="product-card cplus-module-card"><summary>AI 体检解释 · 从程序规则到核查建议</summary><CheckupExplanationPanel companyId={companyId}/></details>
- <details className="product-card cplus-module-card"><summary>研究模板与指标释义</summary><ResearchTemplatesPanel companyId={companyId} sources={sources.filter(s=>s.company_id===companyId)} onResearchDraft={draft}/></details></>;
+ <details className="product-card cplus-module-card"><summary>研究模板与指标释义</summary><ResearchTemplatesPanel companyId={companyId} companies={companies} sources={sources} onResearchDraft={draft}/></details></>;
 }

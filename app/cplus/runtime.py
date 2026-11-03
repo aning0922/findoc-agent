@@ -261,6 +261,18 @@ def register_cplus_runtime(app, runtime_root, *, sources, parse_service, prepare
                      provider_json=checkup_explanation if llm_client.model!='disabled-no-calls' else None,memory=cplus_memory)
     app.include_router(create_checkup_explanation_router(explanations,identity_provider))
     app.state.cplus_checkup_explanation_service=explanations
+    from app.research_templates_v1 import TemplateRunService, create_template_run_router
+    from app.chart_report_drafts import ChartReportDraftService, create_chart_report_draft_router
+    shared = dict(statements=statements, identity_validator=validate_identity,
+                  publication_guard=publication_guard,
+                  commit_check=lambda identity, payload: validate_identity(identity))
+    templates = TemplateRunService(root, checkups=CheckupService(statements), annual_diff=annual,
+                                   peers=peer, hybrid=hybrid, **shared)
+    chart_drafts = ChartReportDraftService(root, **shared)
+    app.include_router(create_template_run_router(templates, identity_provider))
+    app.include_router(create_chart_report_draft_router(chart_drafts, identity_provider))
+    app.state.cplus_template_service = templates
+    app.state.cplus_chart_report_service = chart_drafts
     from app.cplus.exports import register_exports
     register_exports(app,root,hybrid=hybrid,annual=annual,peer=peer,statements=statements,
                      identity_provider=identity_provider,validate=validate_identity,guard=publication_guard,

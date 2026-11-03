@@ -58,6 +58,17 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
             snapshot=statements.read(identifier,'checkup')
             collections=[statements.read(r['collection_id'] if isinstance(r,dict) else r,'collection') for r in snapshot['collection_refs']]
             fence={'selected_sources':[fast_source(c['source'],identity.workspace_id) for c in collections]}
+        elif domain in ('template_run_v1','chart_report_v1'):
+            if revision!=1:
+                raise RetrievalError('export_revision_mismatch')
+            name='cplus_template_service' if domain=='template_run_v1' else 'cplus_chart_report_service'
+            leaf=getattr(app.state,name,None)
+            if leaf is None:
+                raise RetrievalError('export_snapshot_not_found',404)
+            snapshot=owned(leaf.store.path,'snapshots',identifier,owner)
+            collections=[statements.read(r['collection_id'],'collection') for r in snapshot['collection_refs']]
+            fence={'selected_sources':snapshot['selected_sources'],
+                   'memory_generation':snapshot.get('memory_generation')}
         elif domain=='research_answer_v1':
             if revision!=1:
                 raise RetrievalError('export_revision_mismatch')
@@ -87,7 +98,7 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
             raise RetrievalError('unsupported_export_domain',422)
         if digest(snapshot)!=expected_sha:
             raise RetrievalError('export_snapshot_hash_mismatch')
-        if domain in ('peer_comparison_v1','checkup_v1'):
+        if domain in ('peer_comparison_v1','checkup_v1','template_run_v1','chart_report_v1'):
             try:
                 current_collections,contexts=await statements.selected(snapshot['collection_refs'])
                 with statements.tx(source=True) as db:
@@ -97,6 +108,12 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
                     for comparison in snapshot['comparisons']:
                         if any(receipts.get(p['cell_id'])!=p['receipt_ref'] for p in comparison['points']):
                             status='stale'
+                elif domain in ('template_run_v1','chart_report_v1'):
+                    from app.research_templates_v1.shared import validate_point_snapshot
+                    points=[{**c,'source_status':'current','receipt_ref':receipts[c['cell_id']],
+                             'financial_review':'local_operator_confirmed' if receipts[c['cell_id']] else 'unconfirmed'}
+                            for collection in current_collections for c in collection['cells']]
+                    validate_point_snapshot(snapshot['financial_points'],points)
                 elif not snapshot['candidate_view'] and any(r is None for r in receipts.values()):
                     status='stale'
             except Exception:
@@ -174,7 +191,13 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
             identity=identity_provider(request)
             owner=await hybrid.authorize(identity)
             candidates=[]
-            for domain,path,sql,params in [
+            domains=[]
+            for domain,name in [('template_run_v1','cplus_template_service'),('chart_report_v1','cplus_chart_report_service')]:
+                leaf=getattr(app.state,name,None)
+                if leaf is not None:
+                    domains.append((domain,leaf.store.path,'SELECT rowid AS persistence_order,payload FROM snapshots WHERE owner=? ORDER BY rowid DESC',(owner,)))
+            for domain,path,sql,params in domains+[
+
                 ('annual_diff_v1',annual.path,'SELECT rowid AS persistence_order,payload FROM results WHERE owner=? ORDER BY rowid DESC',(owner,)),
                 ('peer_comparison_v1',peer.store.path,'SELECT rowid AS persistence_order,payload FROM snapshots WHERE owner=? ORDER BY rowid DESC',(owner,)),
                 ('research_answer_v1',hybrid.path,"SELECT rowid AS persistence_order,payload FROM objects WHERE owner=? AND kind='answer' ORDER BY rowid DESC",(owner,)),
@@ -182,7 +205,7 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
                 ('showcase_report_v2',app.state.showcase_report_service.path,'SELECT v.rowid AS persistence_order,v.payload FROM revisions v JOIN reports r ON r.id=v.report_id WHERE r.workspace=? ORDER BY v.rowid DESC',(identity.workspace_id,))]:
                 for row in rows(path,sql,params):
                     snapshot=json.loads(row['payload'])
-                    identifier=next(snapshot[k] for k in ('answer_id','result_id','report_id','id') if k in snapshot)
+                    identifier=next(snapshot[k] for k in ('answer_id','result_id','report_id','run_id','id') if k in snapshot)
                     revision=snapshot.get('revision',1)
                     ref={'domain':domain,'id':identifier,'revision':revision,'payload_sha256':digest(snapshot)}
                     try:
@@ -191,7 +214,7 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
                         if getattr(exc,'status',None) in (401,403):
                             raise
                         continue
-                    labels={'annual_diff_v1':'双年经营原文','peer_comparison_v1':'同行候选对照','checkup_v1':'财报体检规则','research_answer_v1':'原文研究结果','showcase_report_v2':'综合研究报告'}
+                    labels={'template_run_v1':'结构化研究模板','chart_report_v1':'图表报告草稿','annual_diff_v1':'双年经营原文','peer_comparison_v1':'同行候选对照','checkup_v1':'财报体检规则','research_answer_v1':'原文研究结果','showcase_report_v2':'综合研究报告'}
                     candidates.append({'report_ref':ref,'label':snapshot.get('title') or snapshot.get('question') or labels[domain],
                                        'display_status':resolved['display_status'],
                                        'company_ids':sorted(resolved.get('display_companies',{})),
