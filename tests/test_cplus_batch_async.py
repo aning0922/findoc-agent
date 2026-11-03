@@ -35,7 +35,7 @@ def test_background_start_exposes_matrix_and_cancel_before_tool_finishes(tmp_pat
         assert await service.start(request, identity, background=True) == receipt
         assert len(calls) == 1
         await service.cancel(
-            batch, dict(operation_id=str(uuid4()), expected_revision=current["revision"]), identity
+            batch, dict(operation_id=str(uuid4()), expected_revision=receipt["result"]["revision"]), identity
         )
         release.set()
         await asyncio.gather(*service._tasks)

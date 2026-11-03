@@ -17,6 +17,7 @@ class Plan(Strict):
     operation_id: str
     cells: list[Cell] = Field(min_length=1, max_length=12)
     preparation_confirmed: bool
+    generate_explanations: bool = False
 
 
 class Start(Strict):
@@ -69,6 +70,10 @@ def create_batch_router(service, identity_provider):
     async def read_plan(plan_id: str, request: Request):
         identity = await resolve(identity_provider(request))
         return service.store.read(plan_id, await service.owner(identity))
+
+    @router.get("/batches")
+    async def list_batches(request: Request):
+        return await service.list(await resolve(identity_provider(request)))
 
     @router.get("/batches/{batch}")
     async def read(batch: str, request: Request):

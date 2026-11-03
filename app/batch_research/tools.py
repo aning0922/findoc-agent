@@ -30,6 +30,7 @@ class ExistingToolAdapter:
             selected_sources=[r.model_dump() for r in refs],
             memory_generation=generation,
             source_scope_sha256=sha([r.model_dump() for r in refs]),
+            generate_explanation=cell.get("generate_explanation",False),
         )
 
     async def validate_prepared(self, p, identity):
@@ -44,6 +45,15 @@ class ExistingToolAdapter:
     async def execute_cell(self, cell, operation_id, identity):
         p = cell["prepared"]
         await self.validate_prepared(p, identity)
+        if cell["template"] == "risk_excerpt" and p.get("generate_explanation"):
+            context=await self.hybrid.mutate("context",dict(operation_id=cell["child_context_operation_id"],
+                title="批次固定范围研究",selected_sources=p["selected_sources"]),identity)
+            if context["state"]!="completed":
+                return dict(domain="research_answer_v1",state="partial",payload={"reason":"context_unknown_no_replay"})
+            scope=context["result"]
+            result=await self.hybrid.mutate("answer",dict(operation_id=operation_id,context_id=scope["context_id"],
+                context_revision=scope["revision"],context_sha256=scope["context_sha256"],question=cell["question"]),identity)
+            return dict(domain="research_answer_v1",state=result["state"],payload=result.get("result") or {})
         if cell["template"] == "risk_excerpt":
             r = await self.hybrid.mutate(
                 "search",
@@ -61,7 +71,7 @@ class ExistingToolAdapter:
                 operation_id=operation_id,
                 left_source=SourceRef.model_validate(p["selected_sources"][0]),
                 right_source=SourceRef.model_validate(p["selected_sources"][1]),
-                generate_explanation=False,
+                generate_explanation=p.get("generate_explanation",False),
             ),
             identity,
         )
