@@ -9,3 +9,5 @@ PeerComparisonService(runtime_root, *, statements, identity_validator, publicati
 测试test_cplus_peer_compare.py为FAKE，验证候选Decimal差额20.20/幂等/期间不同比较拒绝。真实公开seed物化副本M3-peer-public-proof.json：格力2025-12-31提取7个候选，美的同期期末候选0，实际comparison=null，不冒充两家公司真实对比成功；root须补美的提取。源seed efc10a4...前后校验一致，LLM0/真人0。脚本M3-peer-public-proof.py使用当前公开seed与新temp，未读原DB/账本/配置。最终真实UI/owner回执正向与并发fence仍待root。
 
 配套annual_diff P1修复SHA单独aedca75：新增相同同步commit_check钩子，外层guard退出不再被当成内库最终COMMIT检查；root须更新装配。此前A01原实现已有独立提交，不需重新cherry-pick本分支的基线重复A01。
+
+真实美的扩展后复验：修复point投影的dict重复financial_review关键字（使用mapping positional后显式覆盖），fixture补入真实cell已有的financial_review，回归通过。真实同一seed两公司2025年末：格力7候选、美的2候选；资产差额217419766180.51元、负债差额130786823855.21元（美的减格力），均candidate_observation/human0/LLM0；其他只有格力的项明确missing_or_ambiguous_period_selection。公开M3-peer-public-proof.json已更新为实际service输出，nullcontext仍不代表root并发fence验收。

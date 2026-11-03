@@ -75,7 +75,7 @@ class PeerComparisonService:
                     )
                     points.append(
                         dict(
-                            **cell,
+                            cell,
                             receipt_ref=receipt,
                             financial_review="local_operator_confirmed"
                             if receipt

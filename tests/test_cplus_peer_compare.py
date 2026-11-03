@@ -38,6 +38,7 @@ def test_candidates_comparability_and_idempotency(tmp_path):
                     normalized_unit="CNY_YUAN",
                     normalized_decimal=v,
                     extraction_status="candidate",
+                    financial_review="unconfirmed",
                 )
                 for c, v in [("a", "100.10"), ("b", "120.30")]
             ]
