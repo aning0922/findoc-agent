@@ -1,0 +1,384 @@
+{
+  "status": "FROZEN_V1",
+  "baseline": "45d55d75662f01d9bc78da1a946d845a01a27480",
+  "review_commit": "129d8d424aef6e9f60d2e222d84186f16a502e6a",
+  "browser_prefix": "/api",
+  "notice": "implementation contracts, not a claim routes exist; optional query schemas finalized by owner without altering invariants",
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/cplus/discovery/searches",
+      "body_fields": [
+        "operation_id",
+        "mode:companies|announcements",
+        "query?|security_id?",
+        "report_year?",
+        "kind?"
+      ],
+      "response": "DiscoverySearchReceipt",
+      "owner": "DATA",
+      "side_effects": "bounded_official_metadata"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/discovery/searches/{operation_id}",
+      "body_fields": [],
+      "response": "DiscoverySearchReceipt",
+      "owner": "DATA",
+      "side_effects": "none"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/discovery/imports",
+      "body_fields": [
+        "operation_id",
+        "candidate_id",
+        "candidate_digest",
+        "company_id?",
+        "create_company:false",
+        "confirmed:true"
+      ],
+      "response": "ImportReceipt",
+      "owner": "DATA",
+      "side_effects": "explicit_official_pdf_cache_and_generation_bind"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/discovery/imports/{operation_id}",
+      "body_fields": [],
+      "response": "ImportReceipt+document_state",
+      "owner": "DATA",
+      "side_effects": "none"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/financial/collections",
+      "body_fields": [
+        "operation_id",
+        "document_id",
+        "expected_source_revision"
+      ],
+      "response": "StatementCollectionV3",
+      "owner": "FINANCE",
+      "side_effects": "extract_candidates"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/financial/collections/{collection_id}",
+      "body_fields": [],
+      "response": "StatementCollectionV3",
+      "owner": "FINANCE",
+      "side_effects": "none"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/companies/{company_id}/statements",
+      "body_fields": [],
+      "response": "StatementCollectionListV3",
+      "owner": "FINANCE",
+      "side_effects": "none"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/financial/reviews",
+      "body_fields": [
+        "operation_id",
+        "cell_refs:[cell_id,cell_revision,payload_sha256]"
+      ],
+      "response": "StatementReviewV3",
+      "owner": "FINANCE",
+      "side_effects": "prepare_review_only"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/financial/confirmations",
+      "body_fields": [
+        "operation_id",
+        "review_id",
+        "review_sha256",
+        "confirmed:true"
+      ],
+      "response": "StatementReceiptV3",
+      "owner": "FINANCE",
+      "side_effects": "owner_only_human_confirmation"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/financial/confirmations/{receipt_id}/revoke",
+      "body_fields": [
+        "operation_id",
+        "reason"
+      ],
+      "response": "RevocationEvent",
+      "owner": "FINANCE",
+      "side_effects": "owner_only_revoke"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/financial/operations/{operation_id}",
+      "body_fields": [],
+      "response": "OperationReceipt",
+      "owner": "FINANCE",
+      "side_effects": "none"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/financial/trend-projections",
+      "body_fields": [
+        "operation_id",
+        "collection_refs",
+        "metric_keys",
+        "candidate_view:false"
+      ],
+      "response": "ImmutableTrendProjection",
+      "owner": "FINANCE",
+      "side_effects": "selected_versions_projection_no_llm"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/companies/{company_id}/profile",
+      "body_fields": [],
+      "response": "Company360ReadProjection",
+      "owner": "FINANCE",
+      "side_effects": "none"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/checkups",
+      "body_fields": [
+        "operation_id",
+        "collection_refs",
+        "candidate_view:false",
+        "generate_explanation:false"
+      ],
+      "response": "CheckupResult",
+      "owner": "FINANCE",
+      "side_effects": "three_rules_optional_guarded_ai_explicit"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/checkups/{result_id}",
+      "body_fields": [],
+      "response": "CheckupResult",
+      "owner": "FINANCE",
+      "side_effects": "none"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/retrieval/builds",
+      "body_fields": [
+        "operation_id",
+        "sources:[TypedSourceRef]"
+      ],
+      "response": "IndexBuildReceipt",
+      "owner": "RETRIEVAL",
+      "side_effects": "bounded_fts_and_optional_dense_build"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/retrieval/searches",
+      "body_fields": [
+        "operation_id",
+        "sources:[TypedSourceRef]",
+        "query",
+        "top_k:5"
+      ],
+      "response": "RetrievalDiagnostics",
+      "owner": "RETRIEVAL",
+      "side_effects": "source_scoped_search_no_llm"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/research/enrollments",
+      "body_fields": [
+        "operation_id",
+        "document_id",
+        "artifact_id",
+        "expected_source_revision",
+        "expected_artifact_sha256",
+        "selected_pages",
+        "confirmed:true"
+      ],
+      "response": "OCREnrollment",
+      "owner": "RETRIEVAL",
+      "side_effects": "research_only_not_finance"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/research/contexts",
+      "body_fields": [
+        "operation_id",
+        "title",
+        "selected_sources",
+        "parent_conversation_id?"
+      ],
+      "response": "CPlusContext",
+      "owner": "RETRIEVAL",
+      "side_effects": "typed_scope"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/research/contexts/{context_id}",
+      "body_fields": [],
+      "response": "CPlusContext",
+      "owner": "RETRIEVAL",
+      "side_effects": "none"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/research/answers",
+      "body_fields": [
+        "operation_id",
+        "context_id",
+        "context_revision",
+        "context_sha256",
+        "question"
+      ],
+      "response": "CPlusResearchAnswerV1",
+      "owner": "RETRIEVAL",
+      "side_effects": "at_most_one_guarded_model_call"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/research/answers/{answer_id}",
+      "body_fields": [],
+      "response": "CPlusResearchAnswerV1",
+      "owner": "RETRIEVAL",
+      "side_effects": "none"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/research/operations/{operation_id}",
+      "body_fields": [],
+      "response": "OperationReceipt",
+      "owner": "RETRIEVAL",
+      "side_effects": "none"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/annual-diffs",
+      "body_fields": [
+        "operation_id",
+        "left_source",
+        "right_source",
+        "topics",
+        "generate_explanation:false"
+      ],
+      "response": "AnnualDiffResult",
+      "owner": "RESEARCH",
+      "side_effects": "explicit_comparison_optional_llm"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/peer-comparisons",
+      "body_fields": [
+        "operation_id",
+        "company_ids",
+        "collection_refs",
+        "candidate_view:false"
+      ],
+      "response": "PeerComparison",
+      "owner": "RESEARCH",
+      "side_effects": "selected_comparable_projection"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/batch-plans",
+      "body_fields": [
+        "operation_id",
+        "cells",
+        "preparation_confirmed:true"
+      ],
+      "response": "PreparedBatchManifest",
+      "owner": "RESEARCH",
+      "side_effects": "explicit_paid_child_preparation"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/batches",
+      "body_fields": [
+        "operation_id",
+        "batch_plan_id",
+        "batch_plan_revision",
+        "batch_plan_sha256",
+        "confirmed:true"
+      ],
+      "response": "BatchReceipt",
+      "owner": "RESEARCH",
+      "side_effects": "approved_child_jobs"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/batches/{batch_id}",
+      "body_fields": [],
+      "response": "BatchMatrix",
+      "owner": "RESEARCH",
+      "side_effects": "none"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/batches/{batch_id}/cancel",
+      "body_fields": [
+        "operation_id",
+        "expected_revision"
+      ],
+      "response": "CancelReceipt",
+      "owner": "RESEARCH",
+      "side_effects": "queued_only"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/reports/drafts",
+      "body_fields": [
+        "operation_id",
+        "result_refs",
+        "parent_report_ref?"
+      ],
+      "response": "CPlusDraft",
+      "owner": "ROOT",
+      "side_effects": "verified_server_snapshots"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/reports",
+      "body_fields": [
+        "operation_id",
+        "draft_id",
+        "title",
+        "notes"
+      ],
+      "response": "CPlusReportRevision",
+      "owner": "ROOT",
+      "side_effects": "immutable_v3_report"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/reports/{report_id}/revisions/{revision}",
+      "body_fields": [],
+      "response": "CPlusReportRevision",
+      "owner": "ROOT",
+      "side_effects": "none"
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/exports",
+      "body_fields": [
+        "operation_id",
+        "report_ref",
+        "formats",
+        "export_profile_version"
+      ],
+      "response": "ExportManifest",
+      "owner": "EXPORT",
+      "side_effects": "explicit_generate_files"
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/exports/{export_id}/files/{format}",
+      "body_fields": [],
+      "response": "BinaryImmutableFile",
+      "owner": "EXPORT",
+      "side_effects": "none"
+    }
+  ]
+}

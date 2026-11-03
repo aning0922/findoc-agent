@@ -12,9 +12,9 @@
 
 ## 当前阶段
 
-M0 IN_PROGRESS：root已真实读README/00/02/10/12/11/15、data、contracts、其余专项与现关键源码；Astra Ultra独立审查中；Terra High可点击React候选6ecb5ee待root审查；Sol High官方来源spike已发现海尔智家2025全文/摘要/英文元数据，待交接，不能据此声称动态导入READY。
+M0 FROZEN v1：root已真实读README/00/02/10/12/11/15、data、contracts、其余专项与现关键源码；Astra Ultra审查129d8d4已集成3ae6b43，八项P0修订纳入ADR/API/ports；React6ecb5ee→fc987a4已由root三宽实际复跑；D01 f413803→40ea97d真实官方17请求/全文PDF245页预检通过（不是READY）。
 
-B00基线VERIFIED；B01合同评审IN_PROGRESS；B02UI CANDIDATE；B03真实资产与旧dense检索基线IN_PROGRESS。ADR标为草案的项目不可当已冻结接口。主控不等待普通任务逐项用户许可；M0冻结后进入三条后端并行链及真实UI接线。
+B00/B01/B02/B03达到各自M0层级：SOURCE_REVIEW/CODE_REVIEW/UI_MOCK/REAL_BGE_MILVUS，不能升级成业务完成。旧dense6题已实际运行，历史物理70页委托理财误引用另存且不伪称本轮同题重现。主控不等待普通任务逐项用户许可；M0冻结后进入三条后端并行链及真实UI接线。
 
 ## 原C遗留，不可擦除
 
@@ -49,6 +49,6 @@ B00→B01/B02/B03→(DATA D02–D05 ∥ FINANCE F01–F06 ∥ RETRIEVAL R01–R0
 
 ## 阻断与下一步
 
-目前没有用户输入阻断。需要真人核准时先准备单页原PDF/指标/期间/单位/页码清单，由用户本人操作；候选路线可继续。官方动态源不可用则blocked_external+官网/上传回退，其余并行。现C OCR legacy failed不允许伪造READY，新typed OCR合同待Astra冻结。
+目前没有用户输入阻断。需要真人核准时先准备单页原PDF/指标/期间/单位/页码清单，由用户本人操作；候选路线可继续。官方动态源不可用则blocked_external+官网/上传回退，其余并行。现C OCR legacy failed不允许伪造READY，新typed OCR enrollment/context/单次有界answer已冻结，旧legacy READY合同保持。
 
-下一个出口：独立review+可点击React审查→ADR/API冻结→M0提交→自动启动M1及M2可并行任务。不购买服务、不增加预算、不合main/强推/公开部署。
+下一个出口：自动启动M1 DATA/RETRIEVAL与M2财务纯提取并行；root接controller/private child、同账本launcher及业务UI。不购买服务、不增加预算、不合main/强推/公开部署。

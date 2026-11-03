@@ -33,5 +33,13 @@
   "provider_calls_owner": "root only",
   "provider_ledger": "/Users/aipuli/.codex/worktrees/findoc-showcase-c-integration/findoc-agent/data/showcase-cost-control/provider-budget.db",
   "provider_cap_cny": "5",
-  "new_budget_created": false
+  "new_budget_created": false,
+  "m0_status": "FROZEN_V1",
+  "m0_review": "129d8d4 integrated3ae6b43",
+  "next_batch": [
+    "DATA D02-D05",
+    "FINANCE F01-F06",
+    "RETRIEVAL R01-R03"
+  ],
+  "root_model": "inherited, no claim of self model override"
 }
