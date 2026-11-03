@@ -1,5 +1,16 @@
 # C+ 实际证据
 
+## 当前追加证据（优先于后文历史检查点）
+
+- `M5-followup/provider-one-answer.json`、`three-business-explanations.json`、`annual-after-projection-fix.json`：新的真实来源问答、体检三规则解释、OCR待审解读、双年三主题解释。先前输入超预算失败及FTS五来源超过四上限的脚本失败均保留；修复后只用新操作，旧4 UNKNOWN不重放。
+- `../eval/results/agent-paths-real-v2/result.json`：E01-06 deep evidence/risk_operations与E01-01 synthesis generalist，不同题，共11实际SDK调用。后者现金流检索不足如实保留。
+- `../eval/results/agent-paired-e0115-v1/result.json`：最初同题实验因脚本写死角色在两次成功准备后停止，未派发job。`agent-paired-e0115-continued-v1/result.json`使用原有效会话与已保存成功plan继续，deep evidence/finance及synthesis generalist同题同源完成，再新增9次调用，总11；finance没有已核准输入，明确证据不足。原始断言失败未覆盖。
+- `M5-followup/batch-pure-controls.json`：真实Chrome异步ack、运行中取消仅queued三格、当前代单个公开PDF暂不可读→1UNKNOWN+3完成、恢复原字节、GET不重放和历史可发现10检查PASS，纯工具provider0。
+- `M5-followup/profile-native.json`与截图：真实两年候选、五KPI及Decimal比率、体检来源/公式/期间/下一问、不足状态和三宽。未知basis未有真实样本，不由合成单测替代。
+- 最新隔离checks环境 `pytest -q tests/test_cplus_*.py`：114 PASS/3 SKIP/5 SWIG warnings。3个真实PDF opt-in没有在此命令设置，真实PDF/浏览器证据单列。依赖安装到独立ignored检查环境，原模型环境未sync。
+- 当前ledger103 physical/保守预留1.976784元/原5元cap/旧UNKNOWN4/实际账单未观察（这是四模板新AI前的检查点，最终以更新后的STATE为准）。所有AI仍未人类语义接受，人工财务确认0。
+
+
 M0基线见[evidence/M0-baseline.json](evidence/M0-baseline.json)：fetch SHA无漂移、原Cseed保留与独立备份校验、同一预算只读、工作包原文副本。现代码AST位置清单[evidence/M0-source-inventory.json](evidence/M0-source-inventory.json)。工作包verify_package实际PASS（35manifest文件/16features/42tasks）。此时C+业务尚未完成，不借用旧C CI作为新增验收。
 
 
