@@ -74,6 +74,13 @@ function App() {
       setGate("none");
     }, 1000);
   };
+  if (gate === "login") {
+    return (
+      <div className={`app ${theme} login-app`}>
+        <Login onEnter={() => setGate("none")} onBusy={() => setGate("busy")} />
+      </div>
+    );
+  }
   return (
     <div className={`app ${theme}`}>
       <aside className={menu ? "sidebar open" : "sidebar"}>
@@ -615,10 +622,7 @@ function App() {
           FinDoc AI Research <span>UI_MOCK · 所有数字与内容仅为界面示意</span>
         </footer>
       </div>
-      {gate === "login" && (
-        <Login onEnter={() => setGate("none")} onBusy={() => setGate("busy")} />
-      )}
-      {gate !== "none" && gate !== "login" && (
+      {gate !== "none" && (
         <div className="overlay" role="presentation">
           <div
             className="modal"

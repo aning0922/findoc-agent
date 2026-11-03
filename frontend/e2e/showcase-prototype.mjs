@@ -6,7 +6,7 @@ await mkdir(out, { recursive: true });
 const browser = await chromium.launch({headless:true, ...(process.env.CHROME_PATH ? {executablePath:process.env.CHROME_PATH} : {})});
 for (const width of [1440,1280,390]) {
  const page = await browser.newPage({viewport:{width,height:900}}); const errors=[]; page.on('pageerror',e=>errors.push(e.message));
- await page.goto(url); await page.getByText('欢迎体验 FinDoc').waitFor(); await page.screenshot({path:`${out}/login-${width}.png`,fullPage:true});
+ await page.goto(url); await page.getByText('欢迎体验 FinDoc').waitFor(); if(await page.locator('.sidebar').count()) throw Error('login exposes underlying workspace'); if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)) throw Error(`login overflow ${width}`); await page.getByRole('button',{name:'进入演示工作台 →'}).scrollIntoViewIfNeeded(); await page.evaluate(()=>window.scrollTo(0,0)); await page.screenshot({path:`${out}/login-${width}.png`,fullPage:true});
  await page.getByRole('button',{name:'只读预览首页'}).click(); await page.getByText('研究概览').waitFor();
  await page.screenshot({path:`${out}/navy-${width}.png`,fullPage:true});
  if(width===1440){await page.getByRole('button',{name:'◐ Navy / Blue'}).click();await page.screenshot({path:`${out}/ink-1440.png`,fullPage:true});}

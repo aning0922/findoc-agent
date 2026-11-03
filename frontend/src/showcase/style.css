@@ -871,10 +871,11 @@ footer {
     flex-wrap: wrap;
   }
 }
+.login-app {
+  display: block;
+}
 .login-cover {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
+  min-height: 100svh;
   display: grid;
   grid-template-columns: 58% 42%;
   overflow: auto;
