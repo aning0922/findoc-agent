@@ -1,5 +1,6 @@
 """Serial bounded tool batches; injected existing tools, no provider or private budget."""
 
+import asyncio
 import time
 from uuid import uuid4
 from app.peer_compare.store import Store
@@ -33,6 +34,7 @@ class BatchResearchService:
             commit_check,
         )
         self.prepare, self.validate, self.execute = prepare_cell, validate_prepared, execute_cell
+        self._tasks = set()
         self.store = Store(runtime_root, "batch-research")
         with self.store.tx() as db:
             db.execute(
@@ -125,7 +127,7 @@ class BatchResearchService:
                 self.store.finish(db, value["batch_plan_id"], owner, body["operation_id"], value)
         return self.store.operation(body["operation_id"], owner)
 
-    async def start(self, body, i):
+    async def start(self, body, i, *, background=False):
         owner = await self.owner(i)
         if not self.store.reserve(body["operation_id"], owner, body):
             return self.store.operation(body["operation_id"], owner)
@@ -160,6 +162,40 @@ class BatchResearchService:
                         for c in plan["cells"]
                     ],
                 )
+        if background:
+            # The durable receipt acknowledges dispatch, not research completion.
+            # The caller can immediately observe/cancel queued cells via matrix GET.
+            acknowledged = self.matrix(batch, owner)
+            acknowledged.update(dispatch_acknowledged=True, completion_via_get=True)
+            with self.guard(i, fence):
+                with self.store.tx(before_commit=lambda: self.before_commit(i, fence)) as db:
+                    db.execute("UPDATE operations SET state='completed',result=? WHERE id=? AND owner=?",
+                               (canonical(acknowledged), body["operation_id"], owner))
+            task = asyncio.create_task(self._background_dispatch(plan, batch, owner, i, fence))
+            self._tasks.add(task)
+            task.add_done_callback(self._tasks.discard)
+            return self.store.operation(body["operation_id"], owner)
+        await self._dispatch_cells(plan, batch, owner, i, fence)
+        await self.owner(i)
+        snapshot = self.matrix(batch, owner)
+        with self.guard(i, fence):
+            with self.store.tx(before_commit=lambda: self.before_commit(i, fence)) as db:
+                self.store.finish(db, batch, owner, body["operation_id"], snapshot)
+        return self.store.operation(body["operation_id"], owner)
+
+    async def _background_dispatch(self, plan, batch, owner, i, fence):
+        try:
+            await self._dispatch_cells(plan, batch, owner, i, fence)
+        except BaseException as exc:
+            # Only mark this old, private namespace. No task is resumed or replayed.
+            with self.store.tx() as db:
+                db.execute("UPDATE cells SET state='unknown',error='dispatch_interrupted' "
+                           "WHERE batch_id=? AND state IN ('queued','dispatching')", (batch,))
+                db.execute("UPDATE batches SET revision=revision+1 WHERE id=?", (batch,))
+            if isinstance(exc, asyncio.CancelledError):
+                raise
+
+    async def _dispatch_cells(self, plan, batch, owner, i, fence):
         for cell in plan["cells"]:
             try:
                 await self.checked(cell["prepared"], i)
@@ -212,13 +248,6 @@ class BatchResearchService:
                         (getattr(exc, "code", "execution_unknown"), batch, cell["cell_key"]),
                     )
                     db.execute("UPDATE batches SET revision=revision+1 WHERE id=?", (batch,))
-        await self.owner(i)
-        snapshot = self.matrix(batch, owner)
-        with self.guard(i, fence):
-            with self.store.tx(before_commit=lambda: self.before_commit(i, fence)) as db:
-                self.store.finish(db, batch, owner, body["operation_id"], snapshot)
-        return self.store.operation(body["operation_id"], owner)
-
     def matrix(self, batch, owner):
         with self.store.tx() as db:
             b = db.execute(

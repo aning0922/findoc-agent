@@ -38,6 +38,8 @@ def create_batch_router(service, identity_provider):
     async def invoke(action, p, request, batch=None):
         try:
             i = await resolve(identity_provider(request))
+            if action == "start":
+                return await service.start(p.model_dump(), i, background=True)
             if action == "cancel":
                 return await service.cancel(batch, p.model_dump(), i)
             return await getattr(service, action)(p.model_dump(), i)

@@ -386,9 +386,11 @@ class StatementService:
                             else "unconfirmed",
                         }
                     )
+            from .ratios import debt_asset_ratios
             value = {
                 "id": str(uuid4()),
                 "schema_version": "statement-trend-v3",
+                "ratios": debt_asset_ratios(points),
                 "changes": changes,
                 "points": points,
                 "collection_refs": collection_refs,

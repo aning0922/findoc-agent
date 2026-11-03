@@ -108,7 +108,18 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
             validate(identity)  # Lease/instance failures are never historical-read permission.
             status='stale'
         validate(identity)
+        display_companies={}
+        for source in fence.get('selected_sources',[]):
+            cid=source.get('company_id')
+            if cid and cid not in display_companies:
+                try:
+                    company=statements.companies.get(cid)
+                    display_companies[cid]={'name':company.name,'security_code':company.security_code,
+                                            'exchange':company.exchange}
+                except Exception:
+                    display_companies[cid]={'name':None,'security_code':None,'exchange':None}
         return {'snapshot':snapshot,**fence,'display_status':status,
+                'display_companies':display_companies,
                 'statement_contexts':contexts,'statement_receipts':receipts}
 
     @contextmanager
@@ -164,11 +175,11 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
             owner=await hybrid.authorize(identity)
             candidates=[]
             for domain,path,sql,params in [
-                ('annual_diff_v1',annual.path,'SELECT payload FROM results WHERE owner=?',(owner,)),
-                ('peer_comparison_v1',peer.store.path,'SELECT payload FROM snapshots WHERE owner=?',(owner,)),
-                ('research_answer_v1',hybrid.path,"SELECT payload FROM objects WHERE owner=? AND kind='answer'",(owner,)),
-                ('checkup_v1',statements.path,"SELECT payload FROM records WHERE kind='checkup'",()),
-                ('showcase_report_v2',app.state.showcase_report_service.path,'SELECT v.payload FROM revisions v JOIN reports r ON r.id=v.report_id WHERE r.workspace=?',(identity.workspace_id,))]:
+                ('annual_diff_v1',annual.path,'SELECT rowid AS persistence_order,payload FROM results WHERE owner=? ORDER BY rowid DESC',(owner,)),
+                ('peer_comparison_v1',peer.store.path,'SELECT rowid AS persistence_order,payload FROM snapshots WHERE owner=? ORDER BY rowid DESC',(owner,)),
+                ('research_answer_v1',hybrid.path,"SELECT rowid AS persistence_order,payload FROM objects WHERE owner=? AND kind='answer' ORDER BY rowid DESC",(owner,)),
+                ('checkup_v1',statements.path,"SELECT rowid AS persistence_order,payload FROM records WHERE kind='checkup' ORDER BY rowid DESC",()),
+                ('showcase_report_v2',app.state.showcase_report_service.path,'SELECT v.rowid AS persistence_order,v.payload FROM revisions v JOIN reports r ON r.id=v.report_id WHERE r.workspace=? ORDER BY v.rowid DESC',(identity.workspace_id,))]:
                 for row in rows(path,sql,params):
                     snapshot=json.loads(row['payload'])
                     identifier=next(snapshot[k] for k in ('answer_id','result_id','report_id','id') if k in snapshot)
@@ -182,7 +193,10 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
                         continue
                     labels={'annual_diff_v1':'双年经营原文','peer_comparison_v1':'同行候选对照','checkup_v1':'财报体检规则','research_answer_v1':'原文研究结果','showcase_report_v2':'综合研究报告'}
                     candidates.append({'report_ref':ref,'label':snapshot.get('title') or snapshot.get('question') or labels[domain],
-                                       'display_status':resolved['display_status']})
+                                       'display_status':resolved['display_status'],
+                                       'company_ids':sorted(resolved.get('display_companies',{})),
+                                       'saved_at':snapshot.get('created_at'),
+                                       'persistence_order':row['persistence_order']})
             return {'schema_version':'export-snapshot-list-v1','items':candidates}
         except Exception as exc:
             return fail(exc)
@@ -206,3 +220,20 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
         except Exception as exc:
             return fail(exc)
     app.include_router(router)
+    workflow_router=APIRouter(prefix='/cplus/companies')
+
+    @workflow_router.get('/{company_id}/workflow')
+    async def workflow(company_id:str,request:Request):
+        try:
+            statements.companies.get(company_id)
+            payload=await listing(request)
+            if isinstance(payload,JSONResponse):
+                return payload
+            # Membership comes from resolver-validated saved sources, never a title.
+            return {'schema_version':'company-workflow-v1','company_id':company_id,
+                    'items':[item for item in payload['items'] if company_id in item['company_ids']],
+                    'limitations':['Dates are saved server timestamps when present; persistence_order is per domain only.',
+                                   'Historical items are read-only and grant no financial authority.']}
+        except Exception as exc:
+            return fail(exc)
+    app.include_router(workflow_router)
