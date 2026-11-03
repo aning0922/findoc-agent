@@ -1,0 +1,20 @@
+{
+  "baseline": "a2c778dd915ceb7703db52260672a436366069b4",
+  "branch": "codex/cplus-g4-templates-drafts",
+  "tiers": [
+    "UNIT_SYNTHETIC",
+    "UI_MOCK_ACTUAL_REACT"
+  ],
+  "python_tests": 15,
+  "python_result": "passed",
+  "typescript_build": "passed",
+  "ruff_owned_python": "passed",
+  "diff_check": "passed",
+  "real_sdk_calls": 0,
+  "real_bge_calls": 0,
+  "real_milvus_calls": 0,
+  "private_runtime_config_or_ledger_reads": 0,
+  "human_financial_acceptances": 0,
+  "root_runtime_or_exports_or_profile_edits": false,
+  "root_assembly_pending": true
+}
