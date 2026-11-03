@@ -1,17 +1,25 @@
 # V1.2 主控状态
 
-日期：2026-11-02，Asia/Taipei。代码实现与本地自动验证已完成，交付为本地候选，G人工语义/财务核准待用户，尚无发布/合并声明。最新精确结果见 [tests.md](tests.md)。
+更新：2026-11-03（Asia/Taipei）。代码已形成独立开发候选，本轮只做交付与状态审计。最新结果与真实/替身边界见 [交付审计](delivery-audit-20261103.md)，历史验证见 [tests.md](tests.md)。
 
-- 仓库为findoc-agent，基线main@1f0a3d4；隔离worktree `/Users/aipuli/Documents/AI应用学习/02_项目/findoc-conversation-v12`，分支 `codex/conversation-memory-v12-20261102`。旧findoc-rag及正式runtime未用于覆盖实验。
-- A0合同、A1持久化、A2只读Graph、A3界面、B1明确偏好管理、B2有界结构摘要均已提交；迁移仅追加v10/v11/v12。解释模式关闭，原文与确定性财务不混同。
-- 可见聊天为架构审查、后端、前端、测试、偏好五个；实际模型/推理调整及文件所有权见 [orchestration.md](orchestration.md)。root负责唯一Git提交与门禁。
-- 独立A1与G原finding已修复并关闭，原记录保留。G后端c103ab3、前端337916f；表格CSS/真实物理检索观测10339fd。
-- 完整后端1681PASS/1SKIP为8638b05启动快照；后续G相关284PASS为5e9fb1b。前端209PASS/25SKIP、lint/build/audit通过，旧报告83PASS。重叠测试不求和。
-- 旧Agent2PASS、QA12PASS、阅读4PASS、报告20PASS、财务边界18PASS、来源失效1PASS及各自fresh模拟经营旅程通过。最终新21项在固定ad12570全PASS（0失败/跳过/重试），服务器停止，S4实际context观察链通过；早先19/1失败和dirty20PASS记录保留。
-- 真实g-live-01有2个provider响应及2个source_quote，但Milvus挂钩错API计数0，保留insufficient。修正物理观测后新g-live-02已完成：2provider、4物理Milvus成功0失败、2source_quote、GET新增0、财务写0，observed_pending_human_review；真人语义及财务接受不由自动化代替。
+## 仓库与实现
 
-## 待收口
+- 当前根目录：`/Users/aipuli/Documents/Projects/findoc-agent`；分支`codex/conversation-memory-v12-20261102`；审计/复跑产品HEAD`77a2e18ff42173d7e555a594a092439c51b116ac`。原17提交全部保留，未合并main或重写历史。
+- A0/A1/A2/A3/B1/B2在冻结合同及本版保守范围内已实现接通；A4和G为**部分完成**。不是所有人工/端到端质量闸口通过。
+- 正式runtime注入ConversationGraph、只读RAG/确认事实/确定性比较、MemoryService及结构摘要。GET不重执行，中断轮不自动续跑；无saver调整有明确合同依据。
+- 长期Memory是明确确认的有限研究偏好，跨会话fresh recall，revision/generation/墓碑及旧候选排除实际生效。删除不改旧回答或撤回已发送供应商内容；会话删除与偏好删除独立。
+- 本版自由解释关闭；不是多用户生产认证或任意自主规划器。v10/v11/v12仅追加，旧ResearchRun原文及财务公式合同保留。
 
-最终新旧浏览器结果、实际live物理证据、README/交付文档、独立审查和本地PR说明已准备。用户需对真实原文语义和明确财务核准旅程作人工复核，见human-review.md。详见tests/release-notes/user-guide，不把未覆盖项称通过。
+## 验证与交付边界
 
-Codex侧栏项目根目录仍需用户在UI改为findoc-agent：现有API不能改项目路径，电脑控制访问Codex自身被拒。代码与所有工作聊天都已使用正确仓库的绝对路径，此UI归属问题不阻断实现。
+本轮固定77a2e18复跑前端209PASS/25SKIP、lint/build/audit exit0；新会话浏览器21PASS、原controlled Agent2PASS，均为真实HTTP/SQLite/PDF配合明确provider/BGE/vector替身。完整后端1690PASS/1SKIP/0FAIL（1050.08秒），CI范围两组Ruff均exit0；命令、跳过原因及原始记录SHA由交付审计记录，不将历史重跑/交叠组相加。
+
+历史g-live-02使用真实provider/BGE/Milvus，有2实际模型响应、4物理检索成功，状态observed_pending_human_review；本轮不重跑provider或真实业务。当前预览runtime只读观察财务接受和已确认事实均0，不能宣布真人财务核准通过。
+
+本轮用户已授权向GitHub同名独立开发分支提交推送；代码交付与A4/G真人验收分开。远程HEAD/CI以实际GitHub记录及交付会话为准，未创建远程PR、未合并main、未部署发布。
+
+## 当前未完成
+
+真人原文语义和接受/保存事实后再提问旅程；新助手C12正向PDF、长会话及真实重启浏览器专项；完整读屏/软键盘；缺私有冻结资料的skip。详见 [人工复核工作单](human-review.md)。这些不因代码推送自动转为通过。
+
+工作树已迁到新主目录，五个协作聊天归入findoc-agent；主控聊天侧栏归属API读回未生效，但所有仓库命令显式使用新根目录，不阻断代码交付。

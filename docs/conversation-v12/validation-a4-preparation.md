@@ -245,3 +245,7 @@ hook不修改应用代码，不解除外网限制，也不为模型安装网络�
 最终21项前完成的完整build/ruff检查通过；没有为这些旧组重复主控139/136/83或完整后端1681等结果。所有后端数字仅由主控汇总，不与浏览器层机械相加。仍未覆盖：新助手独立C12已确认财务Action PDF正向UI、20+轮摘要浏览器专项、真实进程重启、完整辅助技术/触屏软键盘及真人财务/语义核准。
 
 真实provider运行由主控另存`g-live-*`证据，不混入本聊天fake报告。本聊天真实provider请求0、Git提交0；不据21项与旧回归宣布完整C01–C20、真人业务接受、合并、部署或发布。最终本聊天仅补此收口记录，产品/测试冻结不再修改。
+
+## 2026-11-03交付审计的档案更正
+
+QA只读复核旧legacy-extra目录发现：后置规格实际复用`results.json`，覆盖原种子JSON，并没有前文所写的独立`legacy-extra-results.json`。种子PASS仍保留于browser.log及journey proof，后置规格有其最终JSON，不能宣称两份独立JSON或重复累计种子用例。原始文件未重建或改写。具体SHA与观察见忽略目录`delivery-audit-20261103/archive-findings.json`、`historical-evidence-audit.json`，当前复跑和交付结论见 [交付审计](delivery-audit-20261103.md)。

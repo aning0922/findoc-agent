@@ -1,6 +1,6 @@
 # FinDoc V1.2 本地开发候选交付
 
-分支：`codex/conversation-memory-v12-20261102`，仓库findoc-agent，基线`main@1f0a3d4131480ac0ea742772127afac3c892fc7c`。实现与本地自动验证已完成，G的人工作业尚未通过；没有push、远程PR、合并、部署或发布。
+分支：`codex/conversation-memory-v12-20261102`，仓库findoc-agent，基线`main@1f0a3d4131480ac0ea742772127afac3c892fc7c`。实现与本地自动验证已完成，G的人工作业尚未通过。2026-11-03用户授权将已完成工作交付GitHub独立开发分支；当前阶段判定、复跑及交付记录见 [状态审计](delivery-audit-20261103.md)。没有远程PR、main合并、部署或发布。
 
 ## 可使用的能力
 
@@ -29,4 +29,4 @@
 
 删除偏好只阻止后续Memory注入，不改写旧已提交聊天、不撤回供应商已收到内容或备份。删除会话保留幂等墓碑，不删除原PDF/旧ResearchRun/已确认事实。回退需停服务使用升级前完整备份或新runtime；不支持手动删migration降级，见 [migration.md](migration.md)。
 
-Codex侧栏当前项目根目录的UI归属尚需用户改为findoc-agent：现有项目API不能更改路径，Codex自身电脑控制被拒。所有实际代码与开发聊天均使用正确仓库独立worktree，旧项目目录未用于实现。
+2026-11-03已将V1.2工作树迁到 `/Users/aipuli/Documents/Projects/findoc-agent`，应用已识别该Git仓库，五个协作聊天归入findoc-agent项目。主控聊天侧栏归属API读回未生效，仓库操作显式使用新目录；该UI问题不改变代码、分支或验收状态。

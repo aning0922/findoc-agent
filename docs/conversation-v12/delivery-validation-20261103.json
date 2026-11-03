@@ -1,0 +1,236 @@
+{
+  "schema": "findoc-v12-delivery-validation-v1",
+  "date": "2026-11-03",
+  "timezone": "Asia/Taipei",
+  "product_head": "77a2e18ff42173d7e555a594a092439c51b116ac",
+  "origin_main": "1f0a3d4131480ac0ea742772127afac3c892fc7c",
+  "branch": "codex/conversation-memory-v12-20261102",
+  "source_tree_ids": {
+    "app": "138fd528361b434ad047330f3258a8d27a105b17",
+    "frontend": "0757a70d879c1cb64d58d7432acc28cce7b72f07",
+    "tests": "e49e3cb12887d9b4221cafc1c737c60f71832ee0",
+    "scripts": "90bd9a0a82657b8d866ac025946221ab1bf6f6bd",
+    ".github": "fd7c413845f0e9e47521c8c403bae84882f50b32",
+    "pyproject.toml": "a55ef8f2ee218c005c858211a1e7f971b7de2969",
+    "uv.lock": "1e6d0e12a2e808dcf757e30b34c049b07e84eba9"
+  },
+  "product_test_script_dependency_changes_during_audit": [],
+  "current_checks": {
+    "full_backend": {
+      "passed": 1690,
+      "failed": 0,
+      "skipped": 1,
+      "warnings": 5,
+      "duration_seconds": 1050.08,
+      "exit_code": 0,
+      "local_data_excluded": false
+    },
+    "backend_commands": [
+      {
+        "name": "pytest",
+        "command": [
+          "python",
+          "-B",
+          "-m",
+          "pytest",
+          "-q",
+          "-rs",
+          "-p",
+          "no:cacheprovider"
+        ],
+        "exit_code": 0
+      },
+      {
+        "name": "ruff-runtime",
+        "command": [
+          "python",
+          "-m",
+          "ruff",
+          "check",
+          "app/api/runtime_paths.py",
+          "app/api/runtime_factory.py",
+          "tests/support/controlled_agent_app.py",
+          "tests/test_controlled_agent_app.py",
+          "tests/test_runtime_startup.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "name": "ruff-conversations",
+        "command": [
+          "python",
+          "-m",
+          "ruff",
+          "check",
+          "app/conversations",
+          "app/memory",
+          "tests/test_conversation_a1.py",
+          "tests/test_conversation_context.py",
+          "tests/test_conversation_graph.py",
+          "tests/test_memory_b1.py"
+        ],
+        "exit_code": 0
+      }
+    ],
+    "frontend": {
+      "tests": {
+        "total": 234,
+        "pass": 209,
+        "skip": 25,
+        "fail": 0,
+        "exit": 0
+      },
+      "lint": {
+        "exit": 0,
+        "warnings": [
+          "Existing D14 Fast Refresh only-export-components warning"
+        ]
+      },
+      "build": {
+        "exit": 0,
+        "vite": "8.2.4",
+        "warnings": [
+          "Some chunks exceed 500 kB after minification"
+        ]
+      },
+      "audit": {
+        "exit": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        }
+      }
+    },
+    "frontend_skip_reason": "25 external-review tests require private exact historical payload fixtures. FINDOC_REVIEW_FIXTURES was unset and default product/d28/evidence/qa-real/A01.json absent. No test or fixture was changed to obtain skips.",
+    "new_conversation_browser": {
+      "pass": 21,
+      "fail": 0,
+      "skip": 0,
+      "flaky": 0,
+      "retry": 0,
+      "duration_seconds": 162.18614000000002,
+      "exit": 0,
+      "servers_stopped": true,
+      "server_exit_codes": [
+        -15,
+        143
+      ]
+    },
+    "controlled_agent_browser": {
+      "pass": 2,
+      "fail": 0,
+      "skip": 0,
+      "retry": 0,
+      "duration_seconds_from_log": 2.9,
+      "exit": 0,
+      "server_ports_closed": {
+        "api": true,
+        "web": true
+      },
+      "runtime_dirs_remaining": []
+    },
+    "s4_actual_graph_observation_with_fake_provider": {
+      "phrase": "以后研究先关注现金流",
+      "preferences_before": [],
+      "saved_preferences": [
+        {
+          "key": "analysis_focus",
+          "value": "cash_flow"
+        }
+      ],
+      "deleted_new_conversation": [],
+      "deleted_old_conversation": [],
+      "generation": [
+        3,
+        4,
+        5,
+        5
+      ],
+      "memory_write_methods": [
+        "POST",
+        "DELETE"
+      ],
+      "actual_graph_context_observation": true,
+      "actual_llm": false
+    }
+  },
+  "backend_skip_reason": "Missing frozen local data/day43_data_v2; original -rs line retained in raw log; old worktree filename in cached source-location display does not change the reason.",
+  "backend_nonfatal_logs": [
+    "5 existing SWIG deprecation warnings",
+    "gRPC GOAWAY ENHANCE_YOUR_CALM/too_many_pings diagnostic; process continued and exited 0"
+  ],
+  "fixture_provenance": {
+    "reuse_existing_isolated_proofs": true,
+    "source_sha_all_match": true,
+    "report_fixture_receipts": [
+      {
+        "confirmation_kind": "simulated_test",
+        "count": 2
+      }
+    ],
+    "human_financial_acceptance_claimed": false
+  },
+  "historical_real_model_not_rerun": {
+    "head": "10339fd77d64f3873cea65fbd42bed4966ef5696",
+    "status": "observed_pending_human_review",
+    "configured_model": "deepseek-v4-flash",
+    "provider_response_models": [
+      "deepseek-flash",
+      "deepseek-flash"
+    ],
+    "physical_provider_attempts": 2,
+    "bge_calls": 5,
+    "milvus_search_calls": 4,
+    "milvus_search_failures": 0,
+    "human_semantic_review": "pending",
+    "human_acceptances": 0,
+    "financial_write_counts": {
+      "financial_acceptance_receipts": 0,
+      "confirmed_financial_facts": 0
+    }
+  },
+  "current_preview_runtime_read_only_observation": {
+    "observed_at_unix": 1793671305.086275,
+    "scope": "current g-live-02 preview runtime read-only; not a human review attestation",
+    "proof_conversation_id": "3b2863d4-fc10-4883-b0cd-5f6db6f7d5cb",
+    "counts": {
+      "financial_acceptance_receipts": 0,
+      "confirmed_financial_facts": 0,
+      "conversations": 1,
+      "conversation_turns": 5,
+      "memory_items": 1
+    },
+    "turn_status_counts": [
+      [
+        "completed",
+        3
+      ],
+      [
+        "refused",
+        2
+      ]
+    ],
+    "human_semantic_review": "pending; no explicit user approval received"
+  },
+  "historical_archive_limit": "legacy-extra reused results.json and overwrote seed JSON; seed pass retained in browser text log/journey proof. No independent legacy-extra-results.json; records not reconstructed.",
+  "raw_records": {
+    "data/conversation-v12-validation/delivery-audit-20261103/manifest.json": "ddf4b76a195085e13baf27add6700302bd70006ad90b810f239cd3e7daf7515b",
+    "data/conversation-v12-validation/delivery-audit-20261103/pytest.log": "66bc9b9b016590ad6466c57e333ee55b2dbab64ed82eced360b1d2ae80d44590",
+    "data/conversation-v12-validation/delivery-audit-20261103/ruff-runtime.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "data/conversation-v12-validation/delivery-audit-20261103/ruff-conversations.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "data/conversation-v12-validation/delivery-audit-20261103/fixture-audit.json": "619975c24ff8719eb08060dd00848f9f62de6b38ff8aedfdbc2bf42008eb67dd",
+    "data/conversation-v12-validation/delivery-audit-20261103/historical-evidence-audit.json": "41279524376f0683a10e9c09cff5c5d273a9f20a07c68478d3bc6edb48c5b627",
+    "data/conversation-v12-validation/delivery-audit-20261103/archive-findings.json": "bbc550fa2dca53b3210be361ebb02130f96c8844300b6131589c333a9398ec98",
+    "data/conversation-v12-validation/delivery-frontend-audit-20261103/commands.json": "3e483370552bf3ed2e3ff5d32d6b6d3976990629bbf72b280aff7868ed7b8ea7",
+    "data/conversation-v12-validation/delivery-frontend-audit-20261103/summary.json": "ef015da83a4ae20e4725c8984df0311921411651fe27af79dcad86188eb9b5d3",
+    "data/conversation-v12-validation/delivery-browser-audit-20261103/run-manifest.json": "7820a4dee508349ff0616a8c89b20299aabf20dd8ca728b73f241fc08517f918",
+    "data/conversation-v12-validation/delivery-browser-audit-20261103/results.json": "923cefdea2ca9248f52987c0ecbf44bdb4b674bab4df4d588566b9d99ff55737",
+    "data/conversation-v12-validation/delivery-browser-audit-20261103/delivery-summary.json": "c2ef531648f05be2ec3dbf4d374cbbbf157c71cf5cc50128dc65c6d06975a394",
+    "data/conversation-v12-validation/g-live-02/proof.json": "0041f391d8c920056322af86d4260bfbdc810e7ce614f2f05d6a29afa4d6a6f7"
+  },
+  "remote_ci_claim": "Local validation only. Actual push HEAD and GitHub Actions outcome must be checked separately."
+}

@@ -32,7 +32,7 @@ FinDoc Agent 将 **RAG 检索、受控工具调用、LangGraph 工作流与人�
 
 本版以原文证据阅读和确定性财务结果为主，自由解释关闭。GET/历史恢复不会重发模型；未知提交通过原 operation 查询。当前是本地单人开发候选，真实模型观察、自动化测试与真人财务审核分别记录，尚不作为发布通过声明。
 
-[使用与演示路径](docs/conversation-v12/user-guide.md) · [验证证据](docs/conversation-v12/tests.md) · [交付状态与限制](docs/conversation-v12/release-notes.md) · [可见聊天分工与模型调节](docs/conversation-v12/orchestration.md)
+[2026-11-03 交付审计](docs/conversation-v12/delivery-audit-20261103.md) · [使用与演示路径](docs/conversation-v12/user-guide.md) · [验证证据](docs/conversation-v12/tests.md) · [交付状态与限制](docs/conversation-v12/release-notes.md) · [可见聊天分工与模型调节](docs/conversation-v12/orchestration.md)
 
 ## 本轮 UX 工作台
 

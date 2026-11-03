@@ -1,5 +1,7 @@
 # V1.2 验证证据
 
+本页下述表格为2026-11-02历史记录。迁移后固定产品HEAD77a2e18的2026-11-03当前复跑、档案核验及交付结果，见 [代码交付与状态审计](delivery-audit-20261103.md)，两轮不得相加或混同。
+
 日期：2026-11-02，Asia/Taipei。环境：macOS arm64、Python3.12.13、Node24.19.0。独立 worktree `findoc-conversation-v12`，基线 `main@1f0a3d4131480ac0ea742772127afac3c892fc7c`。本文件区分测试层次，不将重跑、交叠组或模拟财务接受相加为通过总数。原始本机记录位于 Git 忽略的 `data/conversation-v12-validation/`；公开仓库不包含私有 PDF、runtime 数据库或凭据。
 
 ## 代码与质量检查
@@ -75,4 +77,4 @@ python -m pytest tests/test_conversation*.py tests/test_memory*.py -q
 
 全部本轮隔离验收服务已停止；root另外保留完整功能preview及静态案例供用户复核，不属于仍在运行的测试。
 
-本地质量检查不等于GitHub CI已运行；本分支尚未push、PR创建、合并、部署或发布。
+2026-11-02本页历史快照尚未push或执行远程CI。2026-11-03的独立分支交付见上述审计；本地检查仍不等于GitHub CI通过，无main合并、部署或发布。
