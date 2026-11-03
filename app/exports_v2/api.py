@@ -5,6 +5,7 @@ from fastapi.responses import Response, JSONResponse
 from fastapi.routing import APIRoute
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from .service import ExportError
+from app.retrieval_v2.models import RetrievalError
 
 
 class Ref(BaseModel):
@@ -44,7 +45,7 @@ class Route(APIRoute):
         async def checked(request):
             try:
                 response = await handler(request)
-            except ExportError as exc:
+            except (ExportError, RetrievalError) as exc:
                 response = JSONResponse({"detail": {"code": exc.code}}, exc.status)
             response.headers["Cache-Control"] = "no-store"
             return response

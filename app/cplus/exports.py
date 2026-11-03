@@ -190,6 +190,14 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
         try:
             identity=identity_provider(request)
             owner=await hybrid.authorize(identity)
+            selected_domain=request.query_params.get('domain')
+            selected_id=request.query_params.get('identifier')
+            selected_revision=request.query_params.get('revision')
+            if any((selected_domain,selected_id,selected_revision)) and not (
+                selected_domain and selected_id and selected_revision and selected_revision.isdigit()
+                and int(selected_revision)>0
+            ):
+                raise RetrievalError('invalid_snapshot_selection',422)
             candidates=[]
             domains=[]
             for domain,name in [('template_run_v1','cplus_template_service'),('chart_report_v1','cplus_chart_report_service')]:
@@ -203,10 +211,14 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
                 ('research_answer_v1',hybrid.path,"SELECT rowid AS persistence_order,payload FROM objects WHERE owner=? AND kind='answer' ORDER BY rowid DESC",(owner,)),
                 ('checkup_v1',statements.path,"SELECT rowid AS persistence_order,payload FROM records WHERE kind='checkup' ORDER BY rowid DESC",()),
                 ('showcase_report_v2',app.state.showcase_report_service.path,'SELECT v.rowid AS persistence_order,v.payload FROM revisions v JOIN reports r ON r.id=v.report_id WHERE r.workspace=? ORDER BY v.rowid DESC',(identity.workspace_id,))]:
+                if selected_domain and domain!=selected_domain:
+                    continue
                 for row in rows(path,sql,params):
                     snapshot=json.loads(row['payload'])
                     identifier=next(snapshot[k] for k in ('answer_id','result_id','report_id','run_id','id') if k in snapshot)
                     revision=snapshot.get('revision',1)
+                    if selected_domain and (identifier!=selected_id or revision!=int(selected_revision)):
+                        continue
                     ref={'domain':domain,'id':identifier,'revision':revision,'payload_sha256':digest(snapshot)}
                     try:
                         resolved=await resolve(domain,identifier,revision,ref['payload_sha256'],identity)
