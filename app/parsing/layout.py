@@ -37,6 +37,8 @@ def candidate_grid(lines):
                 dict(
                     row=row_number,
                     column=column,
+                    row_span=None,
+                    column_span=None,
                     text=line["text"],
                     bbox=line["bbox"],
                     source_line_index=original_index,

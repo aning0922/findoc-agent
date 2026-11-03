@@ -211,7 +211,7 @@ class ParseV2Service:
     def parse(self, identity, raw):
         config = dict(
             dpi=180,
-            layout_version="bbox-lines-v1",
+            layout_version="bbox-lines-v2",
             routing_version="image-coverage-blank-v1",
             max_pages=self.max_pages,
             max_seconds=self.max_seconds,

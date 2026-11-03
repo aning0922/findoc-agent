@@ -103,6 +103,12 @@ def test_complete_replay_search_partial_keeps_active(tmp_path):
         (1, 1, "45"),
     ]
     assert grid["cells"][1]["bbox"] == [0.6, 0.1, 0.7, 0.11]
+    assert all(c["row_span"] is None and c["column_span"] is None for c in grid["cells"])
+    assert all(
+        c["text"] == q["pages"][0]["lines"][c["source_line_index"]]["text"]
+        and c["bbox"] == q["pages"][0]["lines"][c["source_line_index"]]["bbox"]
+        for c in grid["cells"]
+    )
     assert q["identity_assessment"]["financial_facts"] == "not_verified"
     assert run(s.search(doc, r["artifact_id"], "营业收入"))["items"][0]["physical_page"] == 1
     assert run(s.image(doc, r["artifact_id"], 1)).startswith(b"\x89PNG")

@@ -70,3 +70,66 @@ PYTHONPATH=. .venv/bin/python /tmp/findoc-o02-real.py
 单页 Swift 超时为 min(30秒,任务剩余预算)，OCR 启动前和每页之间检查总预算；任务一次最多50页、图像像素有限制。**限制：180秒不是绝对的进程级硬截止**：本机 PyMuPDF get_text/图像渲染属于同步原生调用，若单次卡死，线程不能被安全中断；generation 进程组退出会终止它，但本轮未实现独立可杀进程级总 watchdog。主控需要按演示要求判断这项限制，不能把全局硬超时写成已通过；这是后续需补齐/评估的交付缺口。
 
 最终 ruff PASS；pytest 3 PASS / 1.18s（5条 PyMuPDF SWIG弃用警告）。补修首轮因测试的合成扫描图是纯白，按新增空白规则正确不执行 OCR，旧断言出现2 FAIL；将用于扫描测试的图改为有灰度内容，另独立保留真正空白及白色栅格空白测试后全部通过。最终测试还验证带文字页眉扫描图走OCR、fast-only 引擎标识、页面上限导致 partial、候选格 text/bbox 不变。真实样本依旧无 LLM、财务签核或旧证据准入。
+
+## O03 消费合同：OCR 布局候选 DTO（最终冻结）
+
+本节覆盖上文示意字段，按当前 `candidate_grid` 和 `parse-quality` 的实际返回冻结；`row_span` / `column_span` 本次加入，值恒为 `null`（未知），不是默认1，也不是已识别的合并单元格。`layout_version=bbox-lines-v2` 已纳入 config_hash。下列文字和坐标仅为**合成字段示例**，不是实际财务值：
+
+```json
+{
+  "schema_version": "parse-artifact-v2",
+  "artifact_id": "<artifact-id>",
+  "document_id": "<document-id>",
+  "content_sha256": "<pdf-sha256>",
+  "source_revision": "<computed-legacy-revision>",
+  "state": "completed",
+  "source_status": "current",
+  "legacy_source_verified": false,
+  "pages_total": 1,
+  "pages_processed": 1,
+  "page_limit": 50,
+  "ocr_pages": 1,
+  "pages": [{
+    "physical_page": 1,
+    "method": "ocr",
+    "method_reason": "substantial_image_coverage",
+    "image_coverage": 1.0,
+    "status": "completed",
+    "text": "示意行甲\n示意行乙",
+    "warnings": ["ocr_transcription_unreviewed", "ocr_layout_clustering_not_verified"],
+    "lines": [{"text": "示意行甲", "confidence": 0.9, "bbox": [0.1, 0.2, 0.3, 0.21]}],
+    "tables": [{
+      "table_id": "ocr-layout-candidate",
+      "quality": "needs_review",
+      "method": "bbox_line_clustering",
+      "coordinate_system": "normalized_top_left",
+      "row_count": 1,
+      "column_count": 2,
+      "warning": "整页版面聚类并非表格区域检测；合并单元格和换行可能错位，必须对照原图。",
+      "cells": [{
+        "row": 0, "column": 0,
+        "row_span": null, "column_span": null,
+        "text": "示意行甲", "bbox": [0.1, 0.2, 0.3, 0.21],
+        "source_line_index": 0, "confidence": 0.9
+      }]
+    }]
+  }]
+}
+```
+
+该示例只解释单个字段；真实算法在至少两个多列候选视觉行时才产出 tables，示例没有给出完整的两行 cells，不能作为有效布局样例或预置事实。
+
+**精确语义与 UI 规则：**
+
+- `pages`、`pages[].lines`、`pages[].tables`、`tables[].cells` 均为数组；fast/空白页不一定存在 `lines`，OCR 失败页 `lines=[]`；不满足候选条件时 `tables=[]`。`pages_processed` 可小于 `pages_total`，`state=partial` 时须展示已处理/总页数及限制，不渲染不存在的页面为成功。
+- `physical_page` 是该输入 PDF 的**1 起**物理页；`row`、`column` 和 `source_line_index` 均为**0 起**整数。`source_line_index` 指向同一 page 的 `lines[index]`；cell 的 `text` 与 `bbox` 是该原始 line 的原样拷贝，`confidence` 来自该 line，可为 null。相同 `(row,column)` 可能对应多格，UI 必须保留全部原始格，不得以该二元组覆盖或合并文本。
+- bbox 是 `[x_min,y_min,x_max,y_max]`，均为0–1的 top-left 归一坐标；`coordinate_system` 当前固定 `normalized_top_left`。它是 OCR 候选框，不保证与 PDF 精确几何对齐或成为已验证表格边界。table_id 当前在**单页内**固定为 `ocr-layout-candidate`，跨页不唯一；渲染 key 应包含 artifact_id、physical_page、table_id 以及 source_line_index。
+- `row_count` 为候选行数、`column_count` 为候选列锚点数，不表示真实行列/表格数量。当前整个页面满足对齐条件的行可能被放进**一个**候选 grid，不做表格区域识别；必须同时展示 warning、`needs_review` 和 OCR未核对标签，允许打开对应页原图。不得自动纠正数字、补格、认定财务事实或声称原文已人工核对。
+- 行/列 UI 可以按 `(row,column)` 排布并在冲突位置保留多个元素；无法完整视觉排版时可用行号、列号、原文列表展示。`row_span=null / column_span=null` 代表未知，不能用它断言无合并；UI仅为布局显示使用 HTML 默认跨度不等于验证合并结构。
+- `method_reason` 当前可能是 `empty_page`、`raster_blank_heuristic`、`substantial_image_coverage`、`sparse_text_with_image`、`no_text_visual_content`、`text_layer`。空白启发式可漏极淡文字，显示相关 warning；fast-only 顶层 engine 为 PyMuPDF，实际尝试 OCR 后为 Apple Vision。样本 derived scan 的页1是栅格 PDF 自身的页1；来源年报的物理页9/印刷页8属于 O01 外部来源说明，不能写成此输入 PDF 的页9。
+- `source_status=stale` 表示当前对象/元数据已变化；历史 artifact 可展示为历史但原图/file/search 不会借用新源。`current` 只表示当前 identity 匹配，不能当作旧研究 `matches_cover` 或财务确认。`identity_assessment.status=manual_check` 和 `legacy_source_verified=false` 应保留；不存在人工身份接受流程。
+- URL：质量 `GET /documents/{id}/parse-quality?artifact_id={id}`；原图 `GET /documents/{id}/parse-artifacts/{artifact_id}/pages/{physical_page}/image`；PDF `GET /documents/{id}/parse-artifacts/{artifact_id}/file`；候选检索 `GET /documents/{id}/parse-artifacts/{artifact_id}/search?q=...`。浏览器请求加 `/api`；必须等待主控接 runtime/gateway。接口不自动创建研究或调用模型。
+
+最终真实 DTO 验证：派生扫描 SHA `175235d1122aec489a6c943ec8c1f8f9fcb5ffdd0e75f938f5ce6080c8ed163a`，Vision 实际68行，候选17行/9列/54格，54格 `text/bbox` 均匹配 `page.lines[source_line_index]`，两个跨度字段均为 null。该样本碰巧无重复行列坐标；不保证其他文档没有。artifact `6344350c-0418-4a22-9b92-d00899b9c918`，output SHA `d4bb9ef6da8f904a962e4b579beba5690f769f3328e09ee81a61d5ec7e157ea2`，config hash `4e2c21e3b53049b46d42a3dc25cc1d6aec719dd2e4ea8a2b7c63d4de67103df8`；本次证据 `/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-o02-real-ulfkzfb_/proof.json`。旧记录中的 45e215a/b9779d9 输出 SHA 是各自当时的历史证据，不代表当前 DTO。
+
+本次修订 `ruff check app/parsing tests/test_parse_v2.py` PASS，`pytest -q tests/test_parse_v2.py` 3 PASS / 1.20s，保留5条 PyMuPDF SWIG DeprecationWarning；同一真实 Vision 样本已重新执行，无财务签核或模型调用。**进程级绝对硬截止仍未实现**：单页 Swift 有超时、总预算在页间检查，但单次 PyMuPDF 原生调用卡死时不能保证硬截止；不能据本合同或测试声称该项完成。
