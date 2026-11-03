@@ -1,0 +1,59 @@
+{
+  "intent": {
+    "schema_version": "intent-v2",
+    "intent_id": "357549ef-2838-4c1d-82c8-4447d22a9ae1",
+    "conversation_id": "24f53526-53b1-46c3-a608-12bb60a49d64",
+    "mode": "synthesis",
+    "goal": "比较格力2025和2024年营业收入，准备研究任务。",
+    "company_ids": [
+      "d9080344-8c69-4dea-a5d9-51bf84710105"
+    ],
+    "periods": [
+      2025,
+      2024
+    ],
+    "metric_keys": [
+      "revenue"
+    ],
+    "actions": [
+      "read_evidence",
+      "read_confirmed_facts",
+      "create_task"
+    ],
+    "clarifying_question": null,
+    "requires_confirmed_facts": true,
+    "source_turn_ids": [],
+    "proposal_origin": "model_proposal_program_validated",
+    "provider_error": null,
+    "scope": {
+      "scope_hash": "bf9d18704b14e3917db2dea2b8bfe1ac18666264f25a661398e70b73229dd1f5",
+      "runtime_instance_id": "dd8c749f-20f1-490b-ac7c-daa5e4d8b3f6",
+      "lease_generation": 1,
+      "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+      "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "memory_generation": 2,
+      "allowed_tools": [
+        "search_evidence",
+        "read_confirmed_facts",
+        "recall_notes"
+      ]
+    }
+  },
+  "handoff": {
+    "schema_version": "research-handoff-v2",
+    "intent_id": "357549ef-2838-4c1d-82c8-4447d22a9ae1",
+    "task_id": "f9568a21-6322-456c-84fd-cd5b194c9865",
+    "href": "/research/tasks/f9568a21-6322-456c-84fd-cd5b194c9865",
+    "task_status": "awaiting_human_confirmation",
+    "actions": [
+      {
+        "kind": "review_facts",
+        "label": "人工核对后分别接受、保存、恢复",
+        "href": "/research?mode=operating"
+      }
+    ],
+    "automatic_confirmation": false,
+    "automatic_resume": false
+  },
+  "human_financial_approvals": 0
+}

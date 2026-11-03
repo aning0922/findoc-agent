@@ -1,43 +1,36 @@
 # FinDoc C 主控状态
 
-日期：2026-11-03（Asia/Taipei）。目标：F01–F18 求职演示候选；不是生产 SaaS。
+更新：2026-11-03（Asia/Taipei）。当前为 **完整功能候选已集成、本地可体验**；不是全量验收或生产发布。M0→M5 研发及自动化核心走查完成，真人财务核准和完整评测仍保留待验证。
 
-- Integration: `codex/findoc-showcase-c-integration`。
-- 工作树：`/Users/aipuli/.codex/worktrees/findoc-showcase-c-integration/findoc-agent`。
-- Git fetch 已执行；V1.2 本地/远端 `c8be30808a3ac8c6d13daa5fd9d43c0ea1212c78`；main `1f0a3d4131480ac0ea742772127afac3c892fc7c`。原 V1.2 保留、工作区干净。
-- B00/B01/B02 已完成 M0；M1核心真实HTTP/双浏览器验收通过，完整产品种子仍待E03。
-- 主控唯一 owner：runtime_factory.py、migrations.py、DocumentService、AppShell、ResearchHome、Conversations 及产品路由；worker 新文件优先。
-- task-board.csv 为 36 项实时表；work-package/data/task_board.csv 为原始不可改参考。
-- 会话可见、按当前任务改名；模型/推理在每次派工记录。Astra 架构专项；Terra React 中推理；Sol 后端高推理。
-- 当前：M2 真实官方PDF、OCR、扩展财务候选UI已联通；M3 Agent/统一工作区/记忆/报告并行集成。
-- 未授权：公开部署、合并 main、force push、真实财务人工接受、覆盖真实数据库、购买服务。
+- 集成分支：`codex/findoc-showcase-c-integration`；工作树 `/Users/aipuli/.codex/worktrees/findoc-showcase-c-integration/findoc-agent`。
+- 已重新 fetch，V1.2 远端／本地仍为 `c8be30808a3ac8c6d13daa5fd9d43c0ea1212c78`，main 为 `1f0a3d4131480ac0ea742772127afac3c892fc7c`；原 V1.2 工作区 tracked clean，原资料与私有数据保留。
+- 业务集成实现检查点 `9f4993cf3463fa0d3c4520799435f3bf45eefeac`，最终 Astra 独立审查 `4ef39b5`（源 `90ac635`）；launcher TTL 跟进 `94ad7890321eda3f69034c977b8f32f54e32ecce`（源 `e51654c`）。最终交付 SHA 以本分支 `git rev-parse HEAD` 为准。
+- [36 项任务表](task-board.csv)分别记录实现和验证状态，全部已集成；存在 human_pending、eval_partial 和旧 fixture 缺失，不把它们算完整 PASS。[F01–F18 地图](PRODUCT_MAP.md)与原工作包一致。
+- 热点由主控唯一集成；3 个可见 worker chat／worktree 已完成实质任务，最后轻量交付核查采用 Terra medium。当前没有待并行开发批次，后续只按实际体验发现修演示 P0。
 
-M0完成证据：独立审查源49e0eba（集成5feba0c），UI源370e3d0/0ec4a71（集成6c619c0/5209c8e），主控补修8c2c8a7；API_MINIMUM v1.0纳入六项P0合同。主控在集成工作树复跑1440/1280/390 Chromium+主要点击PASS；build/lint PASS（chunk/fast-refresh警告保留）。本地原型 http://127.0.0.1:14521/showcase.html ，仅UI_MOCK。
+## 实际体验入口
 
-M1排程：Sol/high负责L01→L02→L03；Dashboard数据H01独立owner；原UI会话转Terra/medium负责H02/H03新组件+L04界面，遇跨身份状态再high。主控唯一接线AppShell/ResearchHome/main/runtime，独立审查每个SHA。完整seed/reset HTTP/进程验证属于L03/L04 owner，不能用空runtime启动spike代替。
+主入口 **http://127.0.0.1:14530**。本机 launcher 已实跑登录／完整首页／退出复位和 Ctrl+C 清理；交付时由主控重新启动并保持未登录 ready。它依赖当前本机进程，不承诺应用关闭后持续无人运行。
 
-U01主控接线进行中：五导航顺序/中文名、Navy全站tokens、question/company URL仅预填Conversations草稿/资料筛选（不选源/不创建/不发模型）；相关route/conversationFoundation 6PASS。Dashboard与Demo模块待worker交割后接入。
+本机固定演示账号与随机密码保存在 Git 忽略、600 权限的 `data/showcase-local.env`，本人本地查看。默认 wait_only、20 分钟，可选 30；独立 owner 密码的接管模式需明确启动参数。provider 密钥仅从原仓库 Git 忽略 `.env` 读取，不入前端、种子或证据。
 
-最新调度：H01已集成b5768ee/bfadd8a并独立模块/真实重依赖装配通过；独立认证review dcf6a8f集成2f3223d两P0未关闭；原Dashboard会话转Sol/high做D02官方目录/导入，UI会话Terra/high视觉修订不足后转Sol/high聚焦完整组合布局/负向测试。D01主控f024be2真实官方四PDF通过，D02并行。所有模型/分支/任务状态详CSV+orchestration。
+## 里程碑结果
 
-2026-11-03 最新集成：H02/H03/L04 UI9cdc3d5已集成4bf1bef，主控main启用VITE_FINDOC_DEMO_MODE=1时包裹所有入口（默认保留经典模式），ResearchHome接真实Dashboard组件。主控实际AppShell三宽UI_MOCK截图/指标/退出，以及非法overview/Decimal、到期卸载、迟到refresh、UNKNOWN claim只读恢复PASS，截图/tmp/findoc-root-m1-ui。build/lint PASS，chunk、effect/ref和fast-refresh提示保留；尚不代表真实后台登录验收。D02已集成4b36493+f2b7028，14PASS；O01真实Apple Vision spike91cbc67，Mac专用且表结构仍待复核。原D02会话切Astra/high独立复核L03；UI会话Sol/high补跨代存储隔离。
+| 里程碑 | 用户可见结果与真实证据 |
+|---|---|
+| M0 | 真实读工作包／V1.2，独立 Astra 最高专项评审，两套 token 实际比较选择 Navy/Blue，可点击 React、六组最小 API 与分工冻结。 |
+| M1 | 完整 React 首页／统一导航；登录、剩余时间、owner 二次确认接管、旧浏览器下线、独立代际恢复。最初机制 seed 验证后，M4 已用完整产品 seed 重新验证。 |
+| M2 | 官方下载→219 页真实解析／BGE／Milvus；真实 Apple Vision OCR 68 行／54 格与原页；资产／负债四候选、真实财务日期及待核对界面。财务本人确认未执行。 |
+| M3 | 单／双真实子代理受限交接、意图／计划／明确批准、事件、原文与解释、财务任务等待；版本报告及实际 PDF；跨会话真实 BGE 记忆与删除、偏好改变首页。 |
+| M4 | 完整只读 seed 及可搬运 bundle；双独立 Chromium 真实 HTTP 复位恢复全部库存与 OCR SHA；历史报告与 OCR 只读浏览无模型调用。15 题只做 5 条 intent 层观察，其余保留 skipped。 |
+| M5 | 实际 UI 单／多研究→报告 v1/v2→5 页 PDF→财务任务等待本人；三宽桌面手机、截图和真实录屏；launcher 实跑及停止验证；README 与独立分支交付资料。三脚本为自动化走查，未冒充真人财务验收。 |
 
-M1后台候选7f6f268已集成c826a05，Astra独立复核cf5f881→7141ec8正式关闭两旧P0；12定点PASS+真实HTTP到期1PASS，真实OS/HTTP/Chromium合成seed。主控真实产品main→Vite /api→controller→真实BGE/Milvus双独立Chromium也PASS：三宽login/home、旧DTO补X-Operation-ID、冲突/owner二次接管、旧A401/业务卸载、新代公司恢复1、logout ready、seed SHA不变（/private/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-integrated-http-uz81ifdo）。首轮test漏填再次共享口令失败保留，修test后PASS；实际截图发现旧CSS标题/导航覆盖，视觉修补后还需复跑截图。后台L03完整产品seed仍未完成。主控16目标tests PASS/ruff。
+最新主界面走查 `06nyuff2`：真实 Chromium／HTTP／官方 PDF／BGE／模型，单 4 次模型／2 次工具、双 7／4；另 1 次意图创建旧任务等待本人。最终独立审查 23 个离线检查通过，无复现 P0/P1，但不替代真实运行证据。主控较宽回归 141 PASS／57 fixture setup ERROR；build/lint 成功且 warning 保留。[证据](EVIDENCE.md) · [截图／录屏](evidence/M5) · [限制](KNOWN_ISSUES.md)。
 
-下一批：原Demo后端会话转Sol/high F01/F02；原review会话转Terra/high O02独立产物；UI Sol/high正在补同代硬reload UNKNOWN提示保留，后转Terra/medium D03。LLM配置当前未知/缺失，已异步询问配置文件路径和小额验证预算，不收聊天密钥；独立研发继续。
+## 种子与费用
 
-M1最终集成89230aa后实跑通过 ex46xvoe：同代硬reload保留UNKNOWN线索、跨代清理mock、真实CSS Hero白色、显式sample图真实端点（虚构数值有水印）、双独立Chromium真实HTTP/real child再通过，LLM0/真实PDF0/真人财务0。精选首页图与结果存档evidence/M1。查看实际390登录封面发现同类h1深色覆盖，主控demo.css补显式white，下一资料导入真实UI轮次复查；不回报该未复查截图完成。
+- Manifest `efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4`，3 官方 READY PDF＋1 派生扫描、2 真实历史研究、2 报告／3 revision、2 示例笔记、1 会话、真实 OCR 68／54。无财务授权。
+- `data/findoc-showcase-seed-v1.tar.gz`，29,355,026 bytes，SHA `3693670d2369e6bed5f4981108f00a62602686a6a72bc44a64dc997bc28a2afc`；已解包校验。不进 Git，另附本地交付，不含凭据／provider／预算账本。
+- 用户授权本轮 runtime API 上限 5 元；root 唯一调用，共享 ledger 在 generation 外。最终快照 73 calls、保守预留 **1.354700 元**，UNKNOWN 0，实际账单未观测；不以演示 reset 补额度。不再为收尾重复付费调用。
 
-M2资料完整真实UI链已PASS（57iyclvz）：界面建立格力→查2025官方目录→明确导入→下载SHA一致→真实fast解析219页→真实BGE/Milvus READY约40.233秒，PDF1/LLM0/真人财务0/浏览器异常0；三宽目录无溢出。evidence/M2-disclosure存档。前两次harness失败（select可访问名、导航后读取响应体）保留，修交易所aria-label和URL读回后通过；真实登录白色封面已复查。O02已集成b81962f并runtime/policy接线，15目标tests/ruff PASS；独立FTS候选、不改旧fast/Milvus，O03UI进行中。
-
-O03真实HTTP+实际产品UI已PASS isgmzk2o：Midea公开年报第9页派生单页扫描，真实Apple Vision3识别68行/54候选格（17候选行9列），三宽不溢出、GET预览零OCR、显式POST1次、reload只读同artifact；金融0/LLM0/legacy_source_verified=false。evidence/M2-ocr。首轮ayn3q140手机grid撑宽FAIL，主控补grid min-width/minmax/内部scroll后通过，另补大图链接和横向提示。
-
-F01/F02已集成c23c0a8，主控显式真实PDF集3PASS13.31s（fast/不可变证据真实、embed/index假）；4个资产/负债时点候选，未真人确认，正式分析403。F03 UI661f8b4待root审查/接线。M01/M02 backend317d336已集成2db02f8，主控7memory测试及真实BGE语义排序/删除通过，UI未接。新finance owner gate仅私有ASGI marker+当前代trusted header，新增route白名单；共享cost ledger独立于generation。
-
-最新模型配置：用户已完成原仓库.env，授权总费用上限5元人民币。只读4必需项已齐，官方deepseek-flash/api.deepseek.com；密钥不输出/不拷入Git。2026-11-03官方价格峰值cache-miss输入2元/M、输出8元/M作为保守估算，source见provider_budget.py。首个tiny真实probe PASS（input8/output1），不是Agent业务验收；cost ledger data/showcase-cost-control/provider-budget.db，1call保守预留0.004678元，实际账单扣费未观测。所有真实provider验证只由主控统一执行，retry0/max_output<=4096/禁原生SearchFetch，UNKNOWN不退预留，5元到限停止调用但离线研发继续。
-
-主控最新：F03源661f8b4已集成ac69ab5，修正图表按真实日期分组及原始Decimal tooltip；实际三宽Chromium+HTTP+公开部分seed PASS amd4nips。4个真实格力资产/负债候选、两日期、2项待核对review；LLM0/真人确认0，confirmed图正向仍human_pending。evidence/M2-finance。部分只读公开seed含Gree2025真实PDF/1003向量行，complete_product_seed=false，非E03完成。S03已集成14d3994、C01/C02/S01第一组05c7afc，待root运行时接线与真LLM。
-
-M02 UI41401e4/db1cfe1已集成2f56aef/3e968de。root挂载研究区，旧偏好保存/恢复派发更新事件，Dashboard从服务端确认偏好改变默认指标、问题顺序、坐标单位、证据/对比视觉顺序。真实HTTP/BGE跨两会话创建/语义查询/删除及三项偏好生效PASS c4r4b8e_，三宽无溢出，LLM0/财务确认0，seed不变。首轮jrzdneto仅旧偏好select精确可访问名定位超时，补aria-label后通过；证据evidence/M3-memory。
-
-M3核心真实LLM HTTP PASS 5zk9mqeo：same Gree2025固定PDF，single 4model/2tools约14.17s，deep 7model/4tools约26.27s，两真子代理分派/检索/汇合/verifier完成；报告current，保存v1/v2并实际生成PDF（初版17页排版需改良）。费用账本累计33calls、保守预留0.599982元/5元，实际扣费未观测。首轮2个真实function calls被单call限制拒绝；允许最多3个顺序受限工具；unsupported表页须整页跳过而非终止；较长JSON加简明输出合同解决partial。所有旧FAIL保留retained-failures.json。Astra独立a0e331b→bbf098f无复现P0/P1，三P2记录。A03/UI和reportlibrary已集成17e82bb/582f20a，root接线，真实UI当前预填textarea访问名定位失败（paid0增量），补aria-label后重跑。
+未触及本人财务 ACCEPT／SAVE／RESUME、公开部署、main 合并或 force push。源码 feature 分支交付不代表上述授权。当前没有需要用户先授权才能继续的普通研发步骤。

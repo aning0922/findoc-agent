@@ -1,0 +1,11 @@
+{
+  "cap_cny": "5",
+  "calls": 73,
+  "conservative_reserved_cny": "1.354700",
+  "usage_reported_calls": 73,
+  "input_tokens": 66451,
+  "output_tokens": 9048,
+  "unknown_calls": 0,
+  "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+  "actual_billed_cny": "not_observed"
+}

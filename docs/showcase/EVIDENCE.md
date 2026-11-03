@@ -63,3 +63,21 @@ O03 real product isgmzk2o PASS：真实Vision转录/54格与原line/bbox一致�
 5zk9mqeo：真实HTTP单/双Agent→report→不可变v1/v2→实际PDF PASS，4与7个真实调用，约14.17s/26.27s。ybr4pane：实际main UI点击意图、计划批准、任务事件、四类结果、两份报告，三宽无溢出，约9.554s/16.480s；新PDF实际5页（初版17页已排版改良）。整个ybr runner最终在额外seed扫描上传因测试HTTP Origin缺失FAIL，不冒充整个runner PASS；原UI/模型/报告阶段独立已完成，存research-progress.json。派生OCR/演示notes后由complete_public_seed_material.py在同一停止disposable根使用真实Vision/BGE的in-process ASGI补齐（68行54格、LLM0、人签0）；该部分不是外部HTTP UI证据，已有O03公开gateway UI证据独立存在。
 
 共享账本截至ybr：44真实provider calls、38170 input/5674 output reported tokens、保守预留0.803322元/5元；实际扣费not_observed。所有失败/未知保留evidence/M3-research/retained-failures.json。Astra独立M3 review bbf098f：无复现主链P0/P1；3P2保留。报告无财务人工确认输入，已核准财务章节保持缺项，不生成核准图/金额。
+
+
+## M4／M5 最终主控证据（替代前文中“待完成”的当前状态）
+
+业务代码检查点 `9f4993cf3463fa0d3c4520799435f3bf45eefeac`；独立 review `4ef39b5`（源90ac635）仅覆盖该固定 SHA 的源码／离线检查。之后 launcher20/30 TTL 跟进94ad789，6项临时fixture测试通过；未把后续文档与真实运行说成 review 已重复执行。
+
+- **M4 full-reset ouunry1_：PASS**。实际两独立 Chromium 进程、Vite／gateway／OS child、真实 BGE/Milvus、固定完整公开 seed；generation1→2、独立owner授权和二次确认、旧浏览器401与业务卸载、脏企业／会话／笔记删除，恢复KPI2/3/2/2、2历史job、3报告revision、2notes、1conversation和68行OCR同artifact SHA。seed manifest不变。LLM0、人签0。证据[evidence/M4/full-reset/browser-result.json](evidence/M4/full-reset/browser-result.json)。早期rx02aszh输出硬编码synthetic/PDF0的元数据错误保留为旧runner局限，扩展检查并正确标注后重新跑本次。
+- **M4 archive k0nw23vk：PASS**。实际历史卡→原PDF／预置报告实际PDF→恢复OCR54格，三宽、业务POST0/LLM0/人签0。结果及实际PDF见[evidence/M4/archive-ocr](evidence/M4/archive-ocr)。来源历史／预置标签保留。
+- **M4 fixed eval obhe_7ad：partial**。15题固定分母，真实provider intent请求5次，5partial／10skipped／完整层级PASS0。E01-01/06 model_validated；04/07/13 finite fallback，未据此推断详细根因或质量通过。另真实C02创建旧PersistentTemplateService任务到awaiting_human_confirmation，operation GET同task，不执行accept/save/resume。证据[evidence/M4/bounded-eval](evidence/M4/bounded-eval)。
+- **M5 06nyuff2：PASS**。实际产品main UI，真实官方PDF／BGE／HTTP／LLM，单Agent4model/2tools，双子代理7model/4tools，分别明确意图／计划／批准／事件／结果；创建报告v1/v2、source_current、实际5页PDF；另1真实intent经界面交给旧任务等待本人。job830ca1d8-b6f0-4373-9caa-c21d63a1592e及63c772cc-db2d-4a33-b7ed-b2951d3a32a2，report09b65dff-f043-4299-a89b-37d87ad19032 rev2。三宽与真实录屏，浏览器异常0，人签0。证据[evidence/M5/browser-result.json](evidence/M5/browser-result.json)、[PDF](evidence/M5/real-research-report.pdf)、[录屏](evidence/M5/showcase-walkthrough.webm)。前一bzsud77s两研究已完成，但C02入口research_mode被showConversation规范URL抹掉导致第三阶段未完成；修初始快照与deep-link保留后单独重跑，不改旧FAIL。
+- **M5 launcher：PASS**。实际私有本机配置、gateway/main UI、默认wait_only与示意开关、KPI2/3/2/2、1440/1280/390、退出后ready，Ctrl+C停止owned launcher。LLM0，人签0；未输出凭据。结果[evidence/M5/launcher-result.json](evidence/M5/launcher-result.json)。本次截图是实际主入口，不是M0原型14521。
+- **当前费用快照**：[evidence/M5/latest-cost-summary.json](evidence/M5/latest-cost-summary.json)，73物理calls／66451 input／9048 output reported tokens，保守预留1.354700元／5元、UNKNOWN0、actual_billed=not_observed。shared ledger在generation之外，没有重置或另开worker预算。
+
+完整公开seed manifest `efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4`。打包29,355,026bytes，tar SHA `3693670d2369e6bed5f4981108f00a62602686a6a72bc44a64dc997bc28a2afc`，实际解包verify_seed通过；只含公开allowlist，无login/provider/ledger。二进制Git忽略单独本地交付。见[evidence/seed-bundle.json](evidence/seed-bundle.json)及E03固定库存验证。
+
+### 最终检查范围
+
+独立Astra在9f4993c：15+8=23离线PASS，fake/临时fixture，无付费、无人签，不替代真实UI证据。主控较宽回归141PASS／57setup ERROR／5warnings，29.47s；57均为test_d22_reports.py／test_d23_reports.py依赖缺失product/validation/d21-real-research.json，未合成假证明。前端Node24 build/lint通过，chunk及已有lint提示保留；root改动ruff与diff检查通过。测试数量不对应功能数量，完整suite未宣称通过。

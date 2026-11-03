@@ -16,3 +16,12 @@ D011 M0达成后自动M1；无需普通研发许可。正式财务写owner授权
 
 D012 用户明确外部LLM本轮总预算5元人民币；仅主控统一真实调用，shared费用预留ledger不随Demo reset清空。以当日官方DeepSeek峰值cache-miss价格保守预留，UNKNOWN不退，输出token硬限/禁native搜索抓取。probe只是连通证据，不是Agent功能通过。
 D013 OCR当前选择Mac本地Apple Vision真实引擎；派生扫描明确标注，版面grid只needs_review不保证表区/行列/合并正确；旧fast及封面准入保留。
+
+
+## M4／M5 最终冻结补记
+
+- D021：完整公开 seed 独立只读、archive保留原始scope/result/report但不给旧授权；2历史job/2报告3revision、3READY官方PDF与真实OCR，完整双浏览器reset实证。示例note标注预置，不复制财务grants。
+- D022：首页默认可开启明确水印的虚构示意财务图；KPI读取真实库存。没有本人核准时不伪造真实公司series或财务比率。
+- D023：launcher loopback14530、凭据私有本机文件、TTL20/30、默认wait_only。官方DeepSeek验证受既有5元共享账本约束；sibling .env仅同Git common-dir，不继承任意env到前端。预算不随reset补充。
+- D024：报告／研究的来源状态、数据origin、转录审阅、AI解释审阅分别记录。旧任务真人核准不由Agent执行；C02只交给原task等待。
+- D025：完整候选交付接受显式human_pending、eval_partial与旧fixture_unavailable；P2独立记录，不将其变更为生产SaaS发布闸门。M0/B02已完成，两套token中Navy/Blue为最终统一方案，前文阶段性“未完成”不再表示当前状态。

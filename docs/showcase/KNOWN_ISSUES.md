@@ -1,22 +1,31 @@
-# 已知问题与未验证（主控当前状态）
+# 已知限制与验收缺口 · 2026-11-03
 
-2026-11-03。完成范围以 task-board.csv 和各固定 SHA 证据为准。
+当前完整功能候选已集成；以下未因界面存在、单测数量或历史资料而视为关闭。早期过程记录保留在[历史快照](KNOWN_ISSUES_HISTORY.md)，其“当前待完成”文字属于当时状态，以本文与 STATE 为准。
 
-## 当前待完成
+## 必须如实保留的验证缺口
 
-- M1/E03：已经验证登录/接管/旧访客下线/代际复位机制；种子仍为1家虚构企业的机制种子，没有完整产品的PDF/会话/报告/研究历史。不得称最终演示环境已经齐备。
-- M2：D02提供美的/格力2024/2025四份已验证演示目录，不是全市场实时公告搜索。发布日期/更正状态未查证，API为null。D03前端已完成真实UI官方下载/fast/BGE/Milvus验收，O02已集成；O03已完成真实Vision+产品UI预览，F01/F02两新指标候选已真实PDF验证；F03前端集成/财务真人正向路径待验证。
-- OCR：真实Apple Vision（Mac）已跑68行、27/27数字串诊断命中；样本为公开年报真实页的派生扫描，不是原生扫描公告。表格bbox初步聚类分行与原表不全一致，必须needs_review；MinerU/Paddle未安装，Linux可移植执行未验证。
-- M3：意图/综合解释/Multi-Agent研发中；语义研究记忆backend已实现并真实BGE验证，UI/Agent接线进行中；报告v2 backend已交割待主控review及真实job适配。旧V1.2能力不等于新增能力完成。
-- 外部配置已解决：用户配置原仓库.env，授权runtime API总上限5元。tiny连通probe1call通过，保守预留0.004678元/实际扣费未观测；真实Agent业务尚未跑，不可用probe冒充。root共享预算账本在generation外，其他worker不单独调用付费API。
-- human_pending：真实财务ACCEPT/SAVE/RESUME及v2人工签核不能由代理代办；无回执时只展示候选或单独示意数据。未执行财务人工确认、未发布部署、未合main或push。
-- P2：Node构建chunk>500KiB、fast-refresh/effect/ref lint提示，PyMuPDF SWIG弃用提示；真实BGE child退出的resource_tracker semaphore提示保留。没有据此扩大生产容灾/性能工作。
-- 私有测试集、原始PDF/真实数据库保留，不能复制未知隐私资产进seed或Git。所有当前机制测试均全新临时root。
+1. **human_pending**：真实财务 ACCEPT → SAVE → RESUME 及 v2 人工核准没有由本人执行。真实 PDF 候选／review、旧任务进入等待本人已验证；核准图、比率、变化信号正向仅 fake fixture。代理未自动创建财务签核。
+2. **固定评测 partial**：15 题中只 5 条真实 intent 观察，10 skipped；5 条均未满足完整层级。2 次模型提案校验成功，3 次规则回退。单／双 Agent 同问题真实运行不证明多 Agent 更优，不外推覆盖率或语义质量。
+3. **旧报告回归 fixture 缺失**：较宽回归 141 PASS／57 setup ERROR，后者依赖缺失 `product/validation/d21-real-research.json`。不是业务断言失败，也不能算跳过即通过；未伪造旧已完成研究证明。最终独立 23 项离线检查另记。
 
-## 已关闭、保留失败记录
+## 产品与环境的有限范围
 
-- M1 Cookie Path旧P0：a9284b4/5ea5abb曾在/api浏览器失败；7f6f268改Path=/，Astra cf5f881独立真实Chromium/Vite验证login202→operations200→claim200，关闭。详review/M1-auth-followup-review.md（实际目录reviews）。
-- M1 owner grant旧P0：读取body跨5分钟仍转发曾复现；7f6f268读后/转发前重核，独立慢body测试403且upstream0，关闭。
-- D01官方链接Web工具404/timeout历史仍在；直接真实HTTP四PDF200/SHA已验证，D02额外真实格力2025下载/fast READY219页通过，fake embed/index，不把早期失败抹除。
-- UI初稿曾把开发模型切换误做产品设置、成功流/主布局不足；已退回修订。9cdc3d5正式首页新组件、79e7de6跨代提示及同代硬reload恢复已集成。UI_MOCK不等于真实后台；主控另有实际UI双独立Chromium+真实BGE/Milvus机制seed证据。
-- 主控首轮集成UI测试漏重新填写接管共享口令，等待disabled按钮失败；修测试后PASS。实际main样式覆盖Hero白色/导航navy由直接截图发现并修，不将mockfixture通过冒充最终视觉检查。
+- 官方目录仅美的／格力 2024／2025，3 份预置 READY。发布日期／更正状态未知为 null；不宣称全市场实时搜索。下载失败可手动上传。
+- 真实 OCR 为 macOS Apple Vision revision 3，在公开美的 2025 物理第 9 页派生单页扫描执行，68 行／54 候选格，17 候选行／9 列。不是完整原生扫描年报；版式格网有人工复核要求。OCR v2 不自动提升旧来源、Milvus RAG 或财务资格。Linux／其他引擎未验。
+- 首页真实 KPI 与历史库存分开于虚构示意财务曲线；没有当前本人核准事实时，实际核准财务图为空。示意开关及水印必须保留。
+- 当前是 loopback 本地候选，依赖 Node24／Python 已装依赖与 BGE 模型缓存。Git 不含 PDF、DB、权重或配套 seed 二进制；配套 seed bundle 另交付，不是 clone 即有数据。launcher 进程退出后本地入口不继续运行。
+- 阶段事件为持久事件轮询及 SSE 快照重放，不是逐 token 输出；不提供私有思维链。模型解释待人工审阅，引用精确匹配不等于语义正确。
+- provider 预算是按验证价格的保守预留，不是实际账单；真实总费用未观测。账本跨代共享，演示 reset 不能补额度。收尾不再重复付费验证。
+
+## 独立审查保留的 P2
+
+- Dashboard KPI 使用有限列表做聚合，超过 archive20／report100 窗口可能低估；旧任务缺排序时间可能被 v2／archive 记录挤出最近列表。当前 2 项／2 报告种子不触发，不影响财务资格。
+- 历史报告读取时权限拒绝和来源不可用的区分、报告草稿提交与研究记忆 guard 的边界、重复财务读取的失败关闭仍在先前 M3 审查范围内；当前隔离演示未复现跨用户读取或其他 P0/P1，不因此宣称生产授权模型完备。
+- 原生 PyMuPDF 缺独立硬进程 deadline；巨型／恶意文件处理边缘未扩张为生产容灾项目。OCR 有执行期限，不将其当作所有 native 解析超时证明。
+- 构建 chunk >500KiB、现有 React fast-refresh／effect／ref lint 提示、PyMuPDF SWIG 弃用和 BGE 退出 semaphore 提示保留；不为求职候选无限调优。
+
+## 已关闭且保留失败证据
+
+M1 Cookie Path 与 owner grant 慢 body 两个旧 P0 经独立 Astra 实际 HTTP／Chromium 复核关闭。手机 OCR 网格外溢、首页／登录全局 CSS 覆盖、模型返回多工具调用、unsupported 表页终止、长 JSON 截断、研究 deep-link 被 URL 规范化丢失均已修并跑对应真实路径。ybr4pane 整 runner 仍为 FAIL（研究阶段完成后，额外 seed 上传缺 Origin）；seed 后补为停止环境内真实 Vision／BGE in-process ASGI。后来完整 UI `06nyuff2` 独立 PASS，不能倒改旧 runner。
+
+没有公开部署、main 合并、force push、覆盖开发者真实数据库或代签财务。原 PDF／私有测试集／V1.2 独立分支保留。普通独立分支研发权限已覆盖本轮集成，不增加像素确认或逐任务审批。

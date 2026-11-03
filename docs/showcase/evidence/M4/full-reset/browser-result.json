@@ -1,0 +1,34 @@
+{
+  "evidence": "REAL_CHROMIUM_TWO_PROCESSES_REAL_HTTP_REAL_BGE_MILVUS_PINNED_SEED",
+  "checks": [
+    "three-width login/home no overflow",
+    "pending cookie via Vite /api",
+    "legacy mutation envelope",
+    "same verified lease hard reload preserves UNKNOWN hint",
+    "actual CSS hero contrast",
+    "explicit illustrative chart route",
+    "second browser conflict and explicit owner takeover",
+    "new generation restores seed",
+    "old browser HTTP401 and UI unmount",
+    "logout resets"
+  ],
+  "first_generation": 1,
+  "next_generation": 2,
+  "llm_calls": 0,
+  "real_pdfs": 3,
+  "seed_inventory": {
+    "kpis": {
+      "companies": 2,
+      "reports_ready": 3,
+      "research_completed": 2,
+      "reports": 2
+    },
+    "archived_report_revisions": 3,
+    "archived_jobs": 2,
+    "memories": 2,
+    "conversations": 1,
+    "ocr_lines": 68
+  },
+  "human_financial_approvals": 0,
+  "browser_errors": []
+}

@@ -1,0 +1,33 @@
+{
+  "evidence": "REAL_HTTP_PUBLIC_PDF_REAL_BGE_REAL_LLM_INTENT_ONLY",
+  "denominators": {
+    "fixed_cases": 15,
+    "intent_requests": 5,
+    "status_counts": {
+      "pass": 0,
+      "fail": 0,
+      "partial": 5,
+      "unknown": 0,
+      "skipped": 10,
+      "not_run": 0
+    },
+    "required_tier_pass": 0
+  },
+  "handoff": {
+    "schema_version": "research-handoff-v2",
+    "intent_id": "357549ef-2838-4c1d-82c8-4447d22a9ae1",
+    "task_id": "f9568a21-6322-456c-84fd-cd5b194c9865",
+    "href": "/research/tasks/f9568a21-6322-456c-84fd-cd5b194c9865",
+    "task_status": "awaiting_human_confirmation",
+    "actions": [
+      {
+        "kind": "review_facts",
+        "label": "人工核对后分别接受、保存、恢复",
+        "href": "/research?mode=operating"
+      }
+    ],
+    "automatic_confirmation": false,
+    "automatic_resume": false
+  },
+  "human_financial_approvals": 0
+}

@@ -1,0 +1,15 @@
+{
+  "evidence": "REAL_CHROMIUM_FULL_PUBLIC_SEED_ARCHIVE_PDF_OCR",
+  "kpis": {
+    "companies": 2,
+    "reports_ready": 3,
+    "research_completed": 2,
+    "reports": 2
+  },
+  "real_pdfs": 3,
+  "ocr_cells": 54,
+  "business_mutation_posts": 0,
+  "llm_calls": 0,
+  "human_financial_approvals": 0,
+  "browser_errors": []
+}

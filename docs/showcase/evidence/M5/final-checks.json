@@ -1,0 +1,41 @@
+{
+  "source_checkpoint": "9f4993cf3463fa0d3c4520799435f3bf45eefeac",
+  "launcher_ttl_checkpoint": "94ad7890321eda3f69034c977b8f32f54e32ecce",
+  "root_final_launcher_tests": {
+    "command": "python -m pytest -q tests/test_showcase_local_launcher.py",
+    "passed": 6,
+    "duration_seconds": 1.08,
+    "tier": "temporary_fake_config_no_provider"
+  },
+  "independent_review": {
+    "path": "docs/showcase/reviews/FINAL-independent-review.md",
+    "offline_passed": 23,
+    "reproduced_p0_p1": 0,
+    "actual_provider_calls": 0
+  },
+  "broader_regression": {
+    "passed": 141,
+    "setup_errors": 57,
+    "dependency_warnings": 5,
+    "duration_seconds": 29.47,
+    "missing_fixture": "product/validation/d21-real-research.json",
+    "affected_modules": [
+      "tests/test_d22_reports.py",
+      "tests/test_d23_reports.py"
+    ],
+    "full_suite_pass": false
+  },
+  "frontend_build_lint": "passed_at_source_checkpoint_with_existing_warnings",
+  "new_delivery_document_links": "all_exist",
+  "task_board_unique_ids": 36,
+  "exact_private_secret_matches_in_delivery_assets": 0,
+  "seed_manifest_verified": "efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4",
+  "local_launcher_check": {
+    "ttl_minutes": 20,
+    "conflict_policy": "wait_only",
+    "provider": "budgeted-deepseek-flash"
+  },
+  "human_financial_approvals": 0,
+  "public_deployment": false,
+  "merged_main": false
+}
