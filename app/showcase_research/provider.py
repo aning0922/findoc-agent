@@ -8,15 +8,17 @@ from app.showcase_research.models import ResearchError
 
 
 class BoundedSDK:
-    def __init__(self, client, limit):
-        self.client, self.limit = client, limit
+    def __init__(self, client, limit, tool_choice=None):
+        self.client, self.limit, self.tool_choice = client, limit, tool_choice
         self.chat = self.completions = self
 
     def with_options(self, **options):
-        return BoundedSDK(self.client.with_options(**options), self.limit)
+        return BoundedSDK(self.client.with_options(**options), self.limit, self.tool_choice)
 
     def create(self, **kwargs):
         kwargs["max_tokens"] = self.limit
+        if self.tool_choice is not None and kwargs.get("tools"):
+            kwargs["tool_choice"] = self.tool_choice
         return self.client.chat.completions.create(**kwargs)
 
 
@@ -28,7 +30,7 @@ class Provider:
     def configured(self):
         return self.llm is not None
 
-    async def json(self, run_id, agent_id, prompt, *, tools=None):
+    async def json(self, run_id, agent_id, prompt, *, tools=None, tool_choice=None):
         if self.llm is None:
             raise ResearchError("provider_unconfigured", 503)
         count = tokens(prompt)
@@ -42,7 +44,7 @@ class Provider:
         llm = self.llm
         if hasattr(llm, "client"):
             from app.rag.openai_compatible_llm import OpenAICompatibleLLMClient
-            bounded = BoundedSDK(llm.client.with_options(max_retries=0, timeout=remaining), 1024)
+            bounded = BoundedSDK(llm.client.with_options(max_retries=0, timeout=remaining), 1024, tool_choice)
             llm = OpenAICompatibleLLMClient(llm.model, bounded)
         async def invoke():
             if tools is None:
@@ -55,6 +57,9 @@ class Provider:
         if time.time() > deadline:
             raise ResearchError("budget_deadline_exhausted")
         if tools is not None:
+            encoded = json.dumps(result, ensure_ascii=False)
+            if len(encoded) > 12000 or tokens(encoded) > 2048:
+                raise ResearchError("provider_output_too_large")
             return result
         if not isinstance(result, str) or len(result) > 12000 or tokens(result) > 2048:
             raise ResearchError("provider_output_too_large")

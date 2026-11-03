@@ -8,6 +8,15 @@ from app.showcase_research.models import ConfirmedFinancial, ModelInterpretation
 LABELS = {"revenue": "营业收入", "net_profit_parent": "归母净利润", "operating_cash_flow": "经营活动产生的现金流量净额"}
 
 
+def selected_financial_scope(intent):
+    scope = intent["scope"]
+    companies, periods, metrics = set(intent["company_ids"]), set(intent["periods"]), set(intent["metric_keys"])
+    choices = [choice for choice in scope["selected_fact_refs"] if choice["company_id"] in companies
+               and (not periods or choice["period"] in periods)
+               and (choice["metric_key"] in metrics if metrics else choice["metric_key"] in LABELS)]
+    return {**scope, "selected_fact_refs": choices}
+
+
 def unresolved(question, code="evidence_or_confirmation_missing"):
     return UnresolvedQuestion(finding_id=str(uuid4()), kind="unresolved_question", text=question,
         unresolved_question=question, origin="system", data_origin="unresolved", source_status="unresolved",
@@ -20,7 +29,7 @@ def interpretation(text, evidence_refs=()):
     return ModelInterpretation(finding_id=str(uuid4()), kind="model_interpretation", text=text,
         origin="model_draft", data_origin="ai_draft", source_status="current_valid" if evidence_refs else "not_applicable",
         transcription_review_status="not_applicable", interpretation_review_status="ai_unreviewed",
-        evidence_refs=list(evidence_refs), numeric_claim_status="numeric_claim_unverified" if re.search(r"\d|百分之|亿元|万元", text) else "no_numeric_claim").model_dump()
+        evidence_refs=list(evidence_refs), numeric_claim_status="numeric_claim_unverified" if re.search(r"\d|[零〇一二三四五六七八九十百千万亿两半]|百分之|翻番|翻倍", text) else "no_numeric_claim").model_dump()
 
 
 class Findings:

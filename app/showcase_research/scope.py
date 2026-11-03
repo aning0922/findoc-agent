@@ -13,6 +13,8 @@ class Scopes:
     def __init__(self, store, conversations, preparer, sources, *, preferences=None, memory=None):
         self.store, self.conversations, self.preparer, self.sources = store, conversations, preparer, sources
         self.preferences, self.memory = preferences, memory
+        if sources.repository.registry._database_path.resolve() != store.root / "documents.db":
+            raise ValueError("Research source root mismatch")
         if conversations.registry._database_path.resolve() != store.root / "documents.db":
             raise ValueError("Research conversation root mismatch")
         if memory is not None and memory.path.resolve().parent != store.root:
@@ -44,7 +46,7 @@ class Scopes:
         docs = [asdict(doc) for doc in selection.documents]
         companies = await asyncio.to_thread(self.conversations.registry.list, identity.workspace_id)
         allowed_companies = {doc.company_id for doc in selection.documents}
-        notes = [item for item in memories["items"] if
+        notes = [item for item in memories["items"] if item.get("source_status") in ("current", "current_valid") and
                  (not item.get("company_id") or item["company_id"] in allowed_companies) and
                  (not item.get("document_id") or item["document_id"] in selection.document_ids)][:5]
         scope = {"runtime_instance_id": identity.instance_id, "lease_generation": identity.lease_generation,
@@ -91,6 +93,14 @@ class Scopes:
                     raise ResearchError("conversation_scope_changed")
                 if self.preferences:
                     self.conversations.check_generation_in(db, scope["preference_generation"])
+                for note in scope["memory_items"]:
+                    note_cid = note.get("source_conversation_id")
+                    if note_cid:
+                        self.conversations._scope(db, note_cid)
+                        for turn_id in note.get("source_turn_ids", []):
+                            turn, _ = self.conversations._turn(db, note_cid, turn_id)
+                            if turn.status not in ("completed", "refused"):
+                                raise ResearchError("memory_source_turn_changed")
                 for item in scope["history"]:
                     turn, _ = self.conversations._turn(db, scope["conversation_id"], item["turn_id"])
                     if turn.user_text != item["user_text"]:
@@ -103,6 +113,8 @@ class Scopes:
                                      (company["company_id"], scope["workspace_id"])).fetchone()
                     if row is None or Company.model_validate(dict(row)).model_dump(mode="json") != company:
                         raise ResearchError("company_identity_changed")
+                if time.time() >= scope["lease_expires_at"]:
+                    raise ResearchError("lease_expired", 401)
                 yield db
 
     @staticmethod

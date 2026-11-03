@@ -8,20 +8,24 @@ from app.research.task_contracts import StartTaskV2
 from app.showcase_research.findings import Findings
 from app.showcase_research.intent import fallback, validate_proposal
 from app.showcase_research.models import ResearchError
+from app.showcase_research.jobs import ResearchJobs
 from app.showcase_research.provider import Provider
 from app.showcase_research.scope import Scopes
 from app.showcase_research.store import ResearchStore, canonical
 
 
-class ShowcaseResearchService:
+class ShowcaseResearchService(ResearchJobs):
     def __init__(self, runtime_root, *, conversations, preparer, sources, search, facts, task_service,
-                 task_repository, llm_client=None, preferences=None, research_memory=None, local_identity=None):
+                 task_repository, llm_client=None, preferences=None, research_memory=None, local_identity=None, execution_data_origin="fake"):
         self.store = ResearchStore(runtime_root)
         self.scopes = Scopes(self.store, conversations, preparer, sources, preferences=preferences, memory=research_memory)
         self.provider = Provider(self.store, llm_client)
         self.conversations, self.preparer, self.sources, self.search = conversations, preparer, sources, search
         self.facts, self.task_service, self.task_repository = facts, task_service, task_repository
         self.findings, self.local_identity = Findings(sources, facts), local_identity
+        if execution_data_origin not in ("live", "seed", "fake"):
+            raise ValueError("Invalid execution evidence origin")
+        self.execution_data_origin, self.pending_jobs = execution_data_origin, set()
 
     def read(self, record_id, kind, identity):
         value = self.store.get(record_id, kind)
@@ -36,9 +40,11 @@ class ShowcaseResearchService:
             return old
         intent_id = str(uuid4())
         scope = await self.scopes.freeze(identity, request.conversation_id, request.text)
-        self.store.create_budget(intent_id, identity.lease_expires_at)
+        selected_mode = request.requested_mode or fallback(request.text, scope).mode
+        self.store.create_budget(intent_id, identity.lease_expires_at, {"quick": 2, "synthesis": 5, "deep": 10}[selected_mode])
         self.store.event(intent_id, "intent", "恢复固定研究范围", "completed")
         proposal, origin, error = fallback(request.text, scope), "finite_rule_fallback", None
+        proposal = proposal.model_copy(update={"mode": selected_mode})
         if self.provider.configured:
             self.scopes.before_model(scope)
             prompt = ("Return only intent JSON with mode,goal,company_ids,periods,metric_keys,actions,clarifying_question,"
@@ -48,7 +54,7 @@ class ShowcaseResearchService:
                                    "research_notes_untrusted": scope["memory_items"], "safe_fallback": proposal.model_dump()}))
             try:
                 raw = await self.provider.json(intent_id, "intent", prompt)
-                proposal, origin = validate_proposal(raw, request.text, scope), "model_proposal_program_validated"
+                proposal, origin = validate_proposal(raw, request.text, scope, selected_mode), "model_proposal_program_validated"
             except Exception as exc:
                 error = getattr(exc, "code", "provider_unknown_or_invalid")
         else:
@@ -140,8 +146,23 @@ class ShowcaseResearchService:
         if row is None:
             raise ResearchError("operation_not_found", 404)
         result = json.loads(row["result"]) if row["result"] else None
-        if row["kind"] == "intent" and result:
-            self.read(result["intent_id"], "intent", identity)
+        if row["kind"] in ("intent", "plan") and result:
+            key = "intent_id" if row["kind"] == "intent" else "plan_id"
+            self.read(result[key], row["kind"], identity)
+        if row["kind"].startswith("job:") and row["target_id"]:
+            self.job(row["target_id"], identity)
+        if row["kind"] == "handoff":
+            with self.store.tx() as db:
+                handoff = db.execute("SELECT * FROM sr_handoffs WHERE task_operation_id=?", (operation_id,)).fetchone()
+            if handoff:
+                self.read(handoff["intent_id"], "intent", identity)
+                if result is None and self.task_repository is not None:
+                    try:
+                        task = self.task_repository.by_operation(operation_id)
+                        result = {"task_id": task["task_id"], "task_status": task["status"], "href": "/research/tasks/" + task["task_id"],
+                                  "observed_by_read_only_lookup": True}
+                    except Exception:
+                        pass
         return {"operation_id": operation_id, "state": row["state"], "error_code": row["error"], "result": result}
 
     def links(self, conversation_id, identity):

@@ -62,12 +62,12 @@ def fallback(text, scope):
                           requires_confirmed_facts=financial, source_turn_ids=[h["turn_id"] for h in scope["history"]])
 
 
-def validate_proposal(raw, text, scope):
+def validate_proposal(raw, text, scope, requested_mode=None):
     proposal = IntentProposal.model_validate(raw)
     expected = fallback(text, scope)
     allowed = {doc["company_id"] for doc in scope["sources"]}
     # Exact goal and explicit/inferred period selection prevent provider scope drift or hidden instructions.
-    if (proposal.goal != text or set(proposal.company_ids) - allowed or
+    if (proposal.mode != (requested_mode or expected.mode) or proposal.goal != text or set(proposal.company_ids) - allowed or
             set(proposal.company_ids) != set(expected.company_ids) or
             set(proposal.periods) != set(expected.periods) or
             not set(expected.metric_keys).issubset(set(proposal.metric_keys)) or

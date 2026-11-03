@@ -27,6 +27,7 @@ class Operation(Strict):
 class IntentRequest(Operation):
     conversation_id: UUIDText
     text: str = Field(min_length=1, max_length=2000)
+    requested_mode: Literal["quick", "synthesis", "deep"] | None = None
 
 
 class HandoffRequest(Operation):
@@ -122,3 +123,35 @@ class UnresolvedQuestion(FindingBase):
 
 
 ResearchFindingV2 = Annotated[ConfirmedFinancial | SourcedExcerpt | ModelInterpretation | UnresolvedQuestion, Field(discriminator="kind")]
+
+
+class PlanRequest(Operation):
+    intent_id: UUIDText
+
+
+class JobRequest(Operation):
+    approved_plan_id: UUIDText
+    approved_plan_revision: int = Field(ge=1)
+    approved_plan_sha256: Hash
+    confirmed: Literal[True]
+
+    @field_validator("confirmed", mode="before")
+    @classmethod
+    def explicit(cls, value):
+        if value is not True:
+            raise ValueError("Explicit plan confirmation required")
+        return value
+
+
+class AgentInterpretation(Strict):
+    text: str = Field(min_length=1, max_length=2000)
+    evidence_ids: list[str] = Field(default_factory=list, max_length=10)
+
+
+class AgentDraft(Strict):
+    interpretations: list[AgentInterpretation] = Field(default_factory=list, max_length=5)
+
+
+class SupervisorProposal(Strict):
+    roles: list[Literal["evidence", "finance", "risk_operations", "generalist"]] = Field(min_length=1, max_length=2)
+    goal: str = Field(min_length=1, max_length=2000)

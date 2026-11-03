@@ -114,6 +114,7 @@ def test_malicious_model_fallback_unknown_charged_and_findings_numeric_axis(tmp_
     assert "unselected-company" not in result.text
     finding = interpretation("模型声称利润增长50%，尚未核实。")
     assert finding["numeric_claim_status"] == "numeric_claim_unverified" and finding["financial_refs"] == []
+    assert interpretation("模型声称利润翻番，尚未核实。")["numeric_claim_status"] == "numeric_claim_unverified"
     run_id = result.json()["intent_id"]
     scope = service.store.get(run_id, "intent")["scope"]
     source = scope["sources"][0]
