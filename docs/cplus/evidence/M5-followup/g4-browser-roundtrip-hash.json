@@ -1,0 +1,40 @@
+{
+  "tier": "REAL_HTTP_EXACT_SAVED_MODEL_REPORT_AND_CHART_FILES",
+  "budget_before": {
+    "cap_cny": "5",
+    "physical_calls": 104,
+    "conservative_reserved_cny": "2.011446",
+    "unknown": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "human_financial_approvals": 0,
+  "items": [
+    {
+      "name": "chart-draft",
+      "ref": {
+        "domain": "chart_report_v1",
+        "id": "66cc1e38-c21c-4ef4-9ecb-56b4be0b28d4",
+        "revision": 1,
+        "payload_sha256": "121f19082f03977809bccf92460a9f47706651860e26c1122c46bcb48b27305e"
+      },
+      "operation_id": "678aafee-7e92-4509-ab17-963c4354123b",
+      "files": [],
+      "status": 500
+    }
+  ],
+  "result": "FAIL",
+  "error_type": "HTTPStatusError",
+  "safe_reason": "Server error '500 Internal Server Error' for url 'http://127.0.0.1:14542/api/cplus/exports'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500",
+  "budget_after": {
+    "cap_cny": "5",
+    "physical_calls": 104,
+    "conservative_reserved_cny": "2.011446",
+    "unknown": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "zero_new_provider_calls": true,
+  "original_raw_proof": {
+    "path": "data/cplus-g4-exact-exports-v1/result.json",
+    "sha256": "2fd7f4985ab8a1908602b001135edefd63b69c40a1c22ea17cbd81541d13a705"
+  }
+}

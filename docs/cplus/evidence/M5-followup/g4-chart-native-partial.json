@@ -1,0 +1,2442 @@
+{
+  "tier": "REAL_CHROME_HTTP_PUBLIC_PDF_BGE_MILVUS_GUARDED_LLM",
+  "checks": [
+    "same root-owned lease remains active without login/reset",
+    "four actual sources across two companies and years",
+    "real five-metric two-year trend selected",
+    "chart click persists actual version-one report draft",
+    "saved chart references survive immutable reread"
+  ],
+  "template_runs": [],
+  "files": [],
+  "allowed_new_provider_calls": 0,
+  "human_financial_approvals": 0,
+  "page_errors": [],
+  "session": {
+    "schema_version": "demo-session-v1",
+    "state": "active",
+    "expires_at": "2026-11-03T13:07:17.845966+00:00",
+    "server_now": "2026-11-03T12:58:45.825674+00:00",
+    "remaining_seconds": 512,
+    "lease_generation": 10,
+    "seed_version": "showcase-cplus-seed-v3",
+    "can_review": false,
+    "owner_elevated_until": null
+  },
+  "trend": {
+    "id": "14fb68bd-56af-4780-8aeb-6f436c221457",
+    "schema_version": "statement-trend-v3",
+    "ratios": [
+      {
+        "metric_key": "debt_asset_ratio",
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "time": {
+          "kind": "instant",
+          "as_of_date": "2024-12-31"
+        },
+        "percent_decimal": "61.548504",
+        "input_refs": [
+          "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+          "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9"
+        ],
+        "reason": null,
+        "financial_review": "unconfirmed",
+        "formula_version": "debt-assets-v1;decimal;6dp",
+        "authority_basis": "computed_from_selected_cells"
+      },
+      {
+        "metric_key": "debt_asset_ratio",
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "time": {
+          "kind": "instant",
+          "as_of_date": "2025-12-31"
+        },
+        "percent_decimal": "61.726623",
+        "input_refs": [
+          "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+          "95175846-6039-53b1-9288-b33055010518"
+        ],
+        "reason": null,
+        "financial_review": "unconfirmed",
+        "formula_version": "debt-assets-v1;decimal;6dp",
+        "authority_basis": "computed_from_selected_cells"
+      }
+    ],
+    "changes": [
+      {
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "metric_key": "total_assets",
+        "input_refs": [
+          "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+          "52b16db2-2cc8-576b-adc4-b5a42b3ca102"
+        ],
+        "from_time": {
+          "as_of_date": "2024-12-31",
+          "kind": "instant"
+        },
+        "to_time": {
+          "as_of_date": "2025-12-31",
+          "kind": "instant"
+        },
+        "delta_decimal": "23340295296.63",
+        "change_percent_decimal": "6.341925",
+        "reason": null,
+        "formula_version": "positive-base-change-v1;decimal;half-even;6dp",
+        "financial_review": "unconfirmed"
+      },
+      {
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "metric_key": "total_liabilities",
+        "input_refs": [
+          "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9",
+          "95175846-6039-53b1-9288-b33055010518"
+        ],
+        "from_time": {
+          "as_of_date": "2024-12-31",
+          "kind": "instant"
+        },
+        "to_time": {
+          "as_of_date": "2025-12-31",
+          "kind": "instant"
+        },
+        "delta_decimal": "15062709569.90",
+        "change_percent_decimal": "6.649674",
+        "reason": null,
+        "formula_version": "positive-base-change-v1;decimal;half-even;6dp",
+        "financial_review": "unconfirmed"
+      },
+      {
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "metric_key": "revenue",
+        "input_refs": [
+          "4db2ac72-62e8-55f6-ab6b-0a3560d795c6",
+          "97d93920-a0a4-5477-86fc-e73dc67e832d"
+        ],
+        "from_time": {
+          "kind": "duration",
+          "period_end": "2024-12-31",
+          "period_start": "2024-01-01",
+          "period_type": "annual"
+        },
+        "to_time": {
+          "kind": "duration",
+          "period_end": "2025-12-31",
+          "period_start": "2025-01-01",
+          "period_type": "annual"
+        },
+        "delta_decimal": "-18716595531.07",
+        "change_percent_decimal": "-9.894393",
+        "reason": null,
+        "formula_version": "positive-base-change-v1;decimal;half-even;6dp",
+        "financial_review": "unconfirmed"
+      },
+      {
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "metric_key": "net_profit_parent",
+        "input_refs": [
+          "440e741e-59f6-5d98-b083-957a061df4e3",
+          "e18aa49b-1f12-525c-b37b-e030f40c92a1"
+        ],
+        "from_time": {
+          "kind": "duration",
+          "period_end": "2024-12-31",
+          "period_start": "2024-01-01",
+          "period_type": "annual"
+        },
+        "to_time": {
+          "kind": "duration",
+          "period_end": "2025-12-31",
+          "period_start": "2025-01-01",
+          "period_type": "annual"
+        },
+        "delta_decimal": "-3181466960.62",
+        "change_percent_decimal": "-9.885069",
+        "reason": null,
+        "formula_version": "positive-base-change-v1;decimal;half-even;6dp",
+        "financial_review": "unconfirmed"
+      },
+      {
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "metric_key": "operating_cash_flow",
+        "input_refs": [
+          "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a",
+          "068cee83-4694-5bed-8991-191353bcf8c0"
+        ],
+        "from_time": {
+          "kind": "duration",
+          "period_end": "2024-12-31",
+          "period_start": "2024-01-01",
+          "period_type": "annual"
+        },
+        "to_time": {
+          "kind": "duration",
+          "period_end": "2025-12-31",
+          "period_start": "2025-01-01",
+          "period_type": "annual"
+        },
+        "delta_decimal": "17013864183.36",
+        "change_percent_decimal": "57.930876",
+        "reason": null,
+        "formula_version": "positive-base-change-v1;decimal;half-even;6dp",
+        "financial_review": "unconfirmed"
+      }
+    ],
+    "points": [
+      {
+        "basis": "PRC_GAAP",
+        "cell_id": "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+        "cell_revision": 1,
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+        "currency": "CNY",
+        "disclosure_version": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+        "evidence_refs": [
+          {
+            "bbox": [
+              351.4800109863281,
+              758.9140014648438,
+              423.5393981933594,
+              771.3519897460938
+            ],
+            "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "header_words": [
+              [
+                330.239990234375,
+                95.43499755859375,
+                348.2986145019531,
+                107.87300109863281,
+                "2025"
+              ],
+              [
+                350.15899658203125,
+                95.43499755859375,
+                370.4993896484375,
+                107.87300109863281,
+                "年12"
+              ],
+              [
+                372.3590087890625,
+                95.43499755859375,
+                392.69940185546875,
+                107.87300109863281,
+                "月31"
+              ],
+              [
+                394.5589904785156,
+                97.31126403808594,
+                403.5589904785156,
+                106.31126403808594,
+                "日"
+              ]
+            ],
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 86,
+            "raw_label": "资产总计",
+            "raw_value": "391,371,999,819.49",
+            "row_words": [
+              [
+                47.880001068115234,
+                759.9512939453125,
+                83.99954986572266,
+                768.9512939453125,
+                "资产总计"
+              ],
+              [
+                351.4800109863281,
+                758.9140014648438,
+                423.5393981933594,
+                771.3519897460938,
+                "391,371,999,819.49"
+              ],
+              [
+                475.44000244140625,
+                758.9140014648438,
+                547.493408203125,
+                771.3519897460938,
+                "368,031,704,522.86"
+              ]
+            ],
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395"
+          }
+        ],
+        "extraction_status": "candidate",
+        "extraction_version": "pdf-words-columns-v1",
+        "financial_review": "unconfirmed",
+        "interpretation_review": "not_applicable",
+        "limitation_codes": [],
+        "metadata_hash": "3236170179352c7cfbcc7a06fad0ed028de67fcef0db10356ba889870ab20285",
+        "metric_definition_version": "consolidated-statements-v3.1",
+        "metric_key": "total_assets",
+        "normalized_decimal": "391371999819.49",
+        "normalized_unit": "CNY_YUAN",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "payload_sha256": "cf5c97e1ae97e83cc7ec11f7772921fb0e7c069129a301ae6d3f63a00eefd6d7",
+        "raw_decimal": "391371999819.49",
+        "raw_label": "资产总计",
+        "raw_unit": "元",
+        "report_year": 2025,
+        "schema_version": "statement-cell-v3",
+        "scope": "consolidated",
+        "source_kind": "fast_text",
+        "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "statement_kind": "balance_sheet",
+        "time": {
+          "as_of_date": "2025-12-31",
+          "kind": "instant"
+        },
+        "transcription_review": "unreviewed",
+        "source_status": "current",
+        "receipt_ref": null
+      },
+      {
+        "basis": "PRC_GAAP",
+        "cell_id": "95175846-6039-53b1-9288-b33055010518",
+        "cell_revision": 1,
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+        "currency": "CNY",
+        "disclosure_version": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+        "evidence_refs": [
+          {
+            "bbox": [
+              351.9590148925781,
+              541.35498046875,
+              424.0184020996094,
+              553.79296875
+            ],
+            "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "header_words": [
+              [
+                338.0400085449219,
+                93.3949966430664,
+                356.0986328125,
+                105.83300018310547,
+                "2025"
+              ],
+              [
+                357.9590148925781,
+                93.3949966430664,
+                378.29937744140625,
+                105.83300018310547,
+                "年12"
+              ],
+              [
+                380.15899658203125,
+                93.3949966430664,
+                400.4993896484375,
+                105.83300018310547,
+                "月31"
+              ],
+              [
+                402.3590087890625,
+                95.15126037597656,
+                411.3590087890625,
+                104.15126037597656,
+                "日"
+              ]
+            ],
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 87,
+            "raw_label": "负债合计",
+            "raw_value": "241,580,719,144.79",
+            "row_words": [
+              [
+                48,
+                542.51123046875,
+                84.11955261230469,
+                551.5112915039062,
+                "负债合计"
+              ],
+              [
+                351.9590148925781,
+                541.35498046875,
+                424.0184020996094,
+                553.79296875,
+                "241,580,719,144.79"
+              ],
+              [
+                475.44000244140625,
+                541.35498046875,
+                547.493408203125,
+                553.79296875,
+                "226,518,009,574.89"
+              ]
+            ],
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395"
+          }
+        ],
+        "extraction_status": "candidate",
+        "extraction_version": "pdf-words-columns-v1",
+        "financial_review": "unconfirmed",
+        "interpretation_review": "not_applicable",
+        "limitation_codes": [],
+        "metadata_hash": "3236170179352c7cfbcc7a06fad0ed028de67fcef0db10356ba889870ab20285",
+        "metric_definition_version": "consolidated-statements-v3.1",
+        "metric_key": "total_liabilities",
+        "normalized_decimal": "241580719144.79",
+        "normalized_unit": "CNY_YUAN",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "payload_sha256": "5beeec0992d9c8c21c5cfcab656c57deb7fd43ca165fa8a5d1b5c3813d4a519e",
+        "raw_decimal": "241580719144.79",
+        "raw_label": "负债合计",
+        "raw_unit": "元",
+        "report_year": 2025,
+        "schema_version": "statement-cell-v3",
+        "scope": "consolidated",
+        "source_kind": "fast_text",
+        "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "statement_kind": "balance_sheet",
+        "time": {
+          "as_of_date": "2025-12-31",
+          "kind": "instant"
+        },
+        "transcription_review": "unreviewed",
+        "source_status": "current",
+        "receipt_ref": null
+      },
+      {
+        "basis": "PRC_GAAP",
+        "cell_id": "97d93920-a0a4-5477-86fc-e73dc67e832d",
+        "cell_revision": 1,
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+        "currency": "CNY",
+        "disclosure_version": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+        "evidence_refs": [
+          {
+            "bbox": [
+              377.5199890136719,
+              116.93900299072266,
+              449.5732727050781,
+              129.04400634765625
+            ],
+            "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "header_words": [
+              [
+                385.44000244140625,
+                92.07499694824219,
+                403.4986267089844,
+                104.51300048828125,
+                "2025"
+              ],
+              [
+                405.3590087890625,
+                93.95126342773438,
+                423.3590087890625,
+                102.95126342773438,
+                "年度"
+              ]
+            ],
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 88,
+            "raw_label": "其中：营业收入",
+            "raw_value": "170,447,058,533.57",
+            "row_words": [
+              [
+                80.04000091552734,
+                117.95126342773438,
+                143.04000854492188,
+                126.95126342773438,
+                "其中：营业收入"
+              ],
+              [
+                314.3999938964844,
+                116.33900451660156,
+                341.4593811035156,
+                128.44400024414062,
+                "五、54"
+              ],
+              [
+                377.5199890136719,
+                116.93900299072266,
+                449.5732727050781,
+                129.04400634765625,
+                "170,447,058,533.57"
+              ],
+              [
+                461.2799987792969,
+                116.93900299072266,
+                533.3333740234375,
+                129.04400634765625,
+                "189,163,654,064.64"
+              ]
+            ],
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395"
+          }
+        ],
+        "extraction_status": "candidate",
+        "extraction_version": "pdf-words-columns-v1",
+        "financial_review": "unconfirmed",
+        "interpretation_review": "not_applicable",
+        "limitation_codes": [],
+        "metadata_hash": "3236170179352c7cfbcc7a06fad0ed028de67fcef0db10356ba889870ab20285",
+        "metric_definition_version": "consolidated-statements-v3.1",
+        "metric_key": "revenue",
+        "normalized_decimal": "170447058533.57",
+        "normalized_unit": "CNY_YUAN",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "payload_sha256": "f16dd53ddd118a70c448a36e74f03288ea67ab6c222e7ae6baf653b06ba5f7b5",
+        "raw_decimal": "170447058533.57",
+        "raw_label": "其中：营业收入",
+        "raw_unit": "元",
+        "report_year": 2025,
+        "schema_version": "statement-cell-v3",
+        "scope": "consolidated",
+        "source_kind": "fast_text",
+        "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "statement_kind": "income_statement",
+        "time": {
+          "kind": "duration",
+          "period_end": "2025-12-31",
+          "period_start": "2025-01-01",
+          "period_type": "annual"
+        },
+        "transcription_review": "unreviewed",
+        "source_status": "current",
+        "receipt_ref": null
+      },
+      {
+        "basis": "PRC_GAAP",
+        "cell_id": "e18aa49b-1f12-525c-b37b-e030f40c92a1",
+        "cell_revision": 1,
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+        "currency": "CNY",
+        "disclosure_version": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+        "evidence_refs": [
+          {
+            "bbox": [
+              382.32000732421875,
+              489.89898681640625,
+              449.4590148925781,
+              502.0039978027344
+            ],
+            "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "header_words": [
+              [
+                385.44000244140625,
+                92.07499694824219,
+                403.4986267089844,
+                104.51300048828125,
+                "2025"
+              ],
+              [
+                405.3590087890625,
+                93.95126342773438,
+                423.3590087890625,
+                102.95126342773438,
+                "年度"
+              ]
+            ],
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 88,
+            "raw_label": "1、归属于母公司股东的净利润（净亏损以“-”号填列）",
+            "raw_value": "29,003,103,411.66",
+            "row_words": [
+              [
+                71.04000091552734,
+                489.1789855957031,
+                284.52001953125,
+                501.28399658203125,
+                "1、归属于母公司股东的净利润（净亏损以“-”号填列）"
+              ],
+              [
+                382.32000732421875,
+                489.89898681640625,
+                449.4590148925781,
+                502.0039978027344,
+                "29,003,103,411.66"
+              ],
+              [
+                465.7200012207031,
+                489.89898681640625,
+                533.2139892578125,
+                502.0039978027344,
+                "32,184,570,372.28"
+              ]
+            ],
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395"
+          }
+        ],
+        "extraction_status": "candidate",
+        "extraction_version": "pdf-words-columns-v1",
+        "financial_review": "unconfirmed",
+        "interpretation_review": "not_applicable",
+        "limitation_codes": [],
+        "metadata_hash": "3236170179352c7cfbcc7a06fad0ed028de67fcef0db10356ba889870ab20285",
+        "metric_definition_version": "consolidated-statements-v3.1",
+        "metric_key": "net_profit_parent",
+        "normalized_decimal": "29003103411.66",
+        "normalized_unit": "CNY_YUAN",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "payload_sha256": "ce00c572598bab65a4efae704ea30c716c6c5724ec96c88674037794bd82117b",
+        "raw_decimal": "29003103411.66",
+        "raw_label": "1、归属于母公司股东的净利润（净亏损以“-”号填列）",
+        "raw_unit": "元",
+        "report_year": 2025,
+        "schema_version": "statement-cell-v3",
+        "scope": "consolidated",
+        "source_kind": "fast_text",
+        "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "statement_kind": "income_statement",
+        "time": {
+          "kind": "duration",
+          "period_end": "2025-12-31",
+          "period_start": "2025-01-01",
+          "period_type": "annual"
+        },
+        "transcription_review": "unreviewed",
+        "source_status": "current",
+        "receipt_ref": null
+      },
+      {
+        "basis": "PRC_GAAP",
+        "cell_id": "068cee83-4694-5bed-8991-191353bcf8c0",
+        "cell_revision": 1,
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+        "currency": "CNY",
+        "disclosure_version": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+        "evidence_refs": [
+          {
+            "bbox": [
+              379.5589904785156,
+              364.3550109863281,
+              446.69940185546875,
+              376.7929992675781
+            ],
+            "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "header_words": [
+              [
+                389.0400085449219,
+                94.83499908447266,
+                406.9800109863281,
+                107.27300262451172,
+                "2025"
+              ],
+              [
+                408.8399963378906,
+                96.71125793457031,
+                426.8399963378906,
+                105.71125793457031,
+                "年度"
+              ]
+            ],
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 89,
+            "raw_label": "经营活动产生的现金流量净额",
+            "raw_value": "46,383,114,754.02",
+            "row_words": [
+              [
+                101.63999938964844,
+                365.3912658691406,
+                219.1182098388672,
+                374.3912658691406,
+                "经营活动产生的现金流量净额"
+              ],
+              [
+                379.5589904785156,
+                364.3550109863281,
+                446.69940185546875,
+                376.7929992675781,
+                "46,383,114,754.02"
+              ],
+              [
+                471.1199951171875,
+                364.3550109863281,
+                538.614013671875,
+                376.7929992675781,
+                "29,369,250,570.66"
+              ]
+            ],
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395"
+          }
+        ],
+        "extraction_status": "candidate",
+        "extraction_version": "pdf-words-columns-v1",
+        "financial_review": "unconfirmed",
+        "interpretation_review": "not_applicable",
+        "limitation_codes": [],
+        "metadata_hash": "3236170179352c7cfbcc7a06fad0ed028de67fcef0db10356ba889870ab20285",
+        "metric_definition_version": "consolidated-statements-v3.1",
+        "metric_key": "operating_cash_flow",
+        "normalized_decimal": "46383114754.02",
+        "normalized_unit": "CNY_YUAN",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "payload_sha256": "1f8426324a2b73753b36475a8a6f9ba68cb0fd5d945a416cacd9a1414b6d2cbf",
+        "raw_decimal": "46383114754.02",
+        "raw_label": "经营活动产生的现金流量净额",
+        "raw_unit": "元",
+        "report_year": 2025,
+        "schema_version": "statement-cell-v3",
+        "scope": "consolidated",
+        "source_kind": "fast_text",
+        "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "statement_kind": "cash_flow_statement",
+        "time": {
+          "kind": "duration",
+          "period_end": "2025-12-31",
+          "period_start": "2025-01-01",
+          "period_type": "annual"
+        },
+        "transcription_review": "unreviewed",
+        "source_status": "current",
+        "receipt_ref": null
+      },
+      {
+        "basis": "PRC_GAAP",
+        "cell_id": "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+        "cell_revision": 1,
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+        "currency": "CNY",
+        "disclosure_version": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+        "evidence_refs": [
+          {
+            "bbox": [
+              353.95001220703125,
+              760.5809936523438,
+              425.9229736328125,
+              770.5439453125
+            ],
+            "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+            "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+            "header_words": [
+              [
+                331.510009765625,
+                96.88096618652344,
+                349.55499267578125,
+                106.84396362304688,
+                "2024"
+              ],
+              [
+                351.42999267578125,
+                96.88096618652344,
+                371.7699890136719,
+                106.84396362304688,
+                "年12"
+              ],
+              [
+                373.6300048828125,
+                96.88096618652344,
+                393.9700012207031,
+                106.84396362304688,
+                "月31"
+              ],
+              [
+                395.95001220703125,
+                97.16896057128906,
+                404.95001220703125,
+                106.16896057128906,
+                "日"
+              ]
+            ],
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 111,
+            "raw_label": "资产总计",
+            "raw_value": "368,031,704,522.86",
+            "row_words": [
+              [
+                42.599998474121094,
+                760.1489868164062,
+                78.70800018310547,
+                769.1489868164062,
+                "资产总计"
+              ],
+              [
+                353.95001220703125,
+                760.5809936523438,
+                425.9229736328125,
+                770.5439453125,
+                "368,031,704,522.86"
+              ],
+              [
+                480.94000244140625,
+                760.5809936523438,
+                552.9130249023438,
+                770.5439453125,
+                "368,053,902,576.37"
+              ]
+            ],
+            "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52"
+          }
+        ],
+        "extraction_status": "candidate",
+        "extraction_version": "pdf-words-columns-v1",
+        "financial_review": "unconfirmed",
+        "interpretation_review": "not_applicable",
+        "limitation_codes": [],
+        "metadata_hash": "eb9736c0c99a918422fc33c4be6876161d734e7529eb56527adfb33fcb06e2f8",
+        "metric_definition_version": "consolidated-statements-v3.1",
+        "metric_key": "total_assets",
+        "normalized_decimal": "368031704522.86",
+        "normalized_unit": "CNY_YUAN",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "payload_sha256": "c668acde94ddd48bf819fa3e4f48d9b02d7ea75519e6dec2ca234d5519e8edda",
+        "raw_decimal": "368031704522.86",
+        "raw_label": "资产总计",
+        "raw_unit": "元",
+        "report_year": 2024,
+        "schema_version": "statement-cell-v3",
+        "scope": "consolidated",
+        "source_kind": "fast_text",
+        "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "statement_kind": "balance_sheet",
+        "time": {
+          "as_of_date": "2024-12-31",
+          "kind": "instant"
+        },
+        "transcription_review": "unreviewed",
+        "source_status": "current",
+        "receipt_ref": null
+      },
+      {
+        "basis": "PRC_GAAP",
+        "cell_id": "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9",
+        "cell_revision": 1,
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+        "currency": "CNY",
+        "disclosure_version": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+        "evidence_refs": [
+          {
+            "bbox": [
+              353.2300109863281,
+              542.9710083007812,
+              425.2029724121094,
+              552.9339599609375
+            ],
+            "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+            "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+            "header_words": [
+              [
+                331.2699890136719,
+                94.12095642089844,
+                349.3149719238281,
+                104.08395385742188,
+                "2024"
+              ],
+              [
+                351.19000244140625,
+                94.12095642089844,
+                371.5299987792969,
+                104.08395385742188,
+                "年12"
+              ],
+              [
+                373.3900146484375,
+                94.12095642089844,
+                393.7300109863281,
+                104.08395385742188,
+                "月31"
+              ],
+              [
+                395.7099914550781,
+                94.40895080566406,
+                404.7099914550781,
+                103.40895080566406,
+                "日"
+              ]
+            ],
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 112,
+            "raw_label": "负债合计",
+            "raw_value": "226,518,009,574.89",
+            "row_words": [
+              [
+                42.599998474121094,
+                542.5390014648438,
+                78.70800018310547,
+                551.5390014648438,
+                "负债合计"
+              ],
+              [
+                353.2300109863281,
+                542.9710083007812,
+                425.2029724121094,
+                552.9339599609375,
+                "226,518,009,574.89"
+              ],
+              [
+                478.6600036621094,
+                542.9710083007812,
+                550.633056640625,
+                552.9339599609375,
+                "247,407,749,159.93"
+              ]
+            ],
+            "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52"
+          }
+        ],
+        "extraction_status": "candidate",
+        "extraction_version": "pdf-words-columns-v1",
+        "financial_review": "unconfirmed",
+        "interpretation_review": "not_applicable",
+        "limitation_codes": [],
+        "metadata_hash": "eb9736c0c99a918422fc33c4be6876161d734e7529eb56527adfb33fcb06e2f8",
+        "metric_definition_version": "consolidated-statements-v3.1",
+        "metric_key": "total_liabilities",
+        "normalized_decimal": "226518009574.89",
+        "normalized_unit": "CNY_YUAN",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "payload_sha256": "4fe2dcad875660323c1b75d7b2b237ef9532a540e9d68e707d292e5c8ad50d6a",
+        "raw_decimal": "226518009574.89",
+        "raw_label": "负债合计",
+        "raw_unit": "元",
+        "report_year": 2024,
+        "schema_version": "statement-cell-v3",
+        "scope": "consolidated",
+        "source_kind": "fast_text",
+        "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "statement_kind": "balance_sheet",
+        "time": {
+          "as_of_date": "2024-12-31",
+          "kind": "instant"
+        },
+        "transcription_review": "unreviewed",
+        "source_status": "current",
+        "receipt_ref": null
+      },
+      {
+        "basis": "PRC_GAAP",
+        "cell_id": "4db2ac72-62e8-55f6-ab6b-0a3560d795c6",
+        "cell_revision": 1,
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+        "currency": "CNY",
+        "disclosure_version": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+        "evidence_refs": [
+          {
+            "bbox": [
+              380.8299865722656,
+              118.12095642089844,
+              452.8029479980469,
+              128.08395385742188
+            ],
+            "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+            "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+            "header_words": [
+              [
+                387.6700134277344,
+                93.52098083496094,
+                405.7149963378906,
+                103.48397827148438,
+                "2024"
+              ],
+              [
+                407.5899963378906,
+                93.80897521972656,
+                425.7099914550781,
+                102.80897521972656,
+                "年度"
+              ]
+            ],
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 113,
+            "raw_label": "其中：营业收入",
+            "raw_value": "189,163,654,064.64",
+            "row_words": [
+              [
+                74.66400146484375,
+                117.92897033691406,
+                137.66400146484375,
+                126.92897033691406,
+                "其中：营业收入"
+              ],
+              [
+                305.57000732421875,
+                117.64097595214844,
+                332.6499938964844,
+                127.60397338867188,
+                "五、54"
+              ],
+              [
+                380.8299865722656,
+                118.12095642089844,
+                452.8029479980469,
+                128.08395385742188,
+                "189,163,654,064.64"
+              ],
+              [
+                466.6600036621094,
+                118.12095642089844,
+                538.6329956054688,
+                128.08395385742188,
+                "203,979,266,387.09"
+              ]
+            ],
+            "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52"
+          }
+        ],
+        "extraction_status": "candidate",
+        "extraction_version": "pdf-words-columns-v1",
+        "financial_review": "unconfirmed",
+        "interpretation_review": "not_applicable",
+        "limitation_codes": [],
+        "metadata_hash": "eb9736c0c99a918422fc33c4be6876161d734e7529eb56527adfb33fcb06e2f8",
+        "metric_definition_version": "consolidated-statements-v3.1",
+        "metric_key": "revenue",
+        "normalized_decimal": "189163654064.64",
+        "normalized_unit": "CNY_YUAN",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "payload_sha256": "89e181a1d40278e25f21818f40a644537840b2fe4ceef6d7602261945a745b83",
+        "raw_decimal": "189163654064.64",
+        "raw_label": "其中：营业收入",
+        "raw_unit": "元",
+        "report_year": 2024,
+        "schema_version": "statement-cell-v3",
+        "scope": "consolidated",
+        "source_kind": "fast_text",
+        "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "statement_kind": "income_statement",
+        "time": {
+          "kind": "duration",
+          "period_end": "2024-12-31",
+          "period_start": "2024-01-01",
+          "period_type": "annual"
+        },
+        "transcription_review": "unreviewed",
+        "source_status": "current",
+        "receipt_ref": null
+      },
+      {
+        "basis": "PRC_GAAP",
+        "cell_id": "440e741e-59f6-5d98-b083-957a061df4e3",
+        "cell_revision": 1,
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+        "currency": "CNY",
+        "disclosure_version": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+        "evidence_refs": [
+          {
+            "bbox": [
+              385.2699890136719,
+              491.1309509277344,
+              452.8059387207031,
+              501.0939636230469
+            ],
+            "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+            "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+            "header_words": [
+              [
+                387.6700134277344,
+                93.52098083496094,
+                405.7149963378906,
+                103.48397827148438,
+                "2024"
+              ],
+              [
+                407.5899963378906,
+                93.80897521972656,
+                425.7099914550781,
+                102.80897521972656,
+                "年度"
+              ]
+            ],
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 113,
+            "raw_label": "1、归属于母公司股东的净利润（净亏损以“-”号填",
+            "raw_value": "32,184,570,372.28",
+            "row_words": [
+              [
+                65.66400146484375,
+                490.6509704589844,
+                261.16998291015625,
+                500.6139831542969,
+                "1、归属于母公司股东的净利润（净亏损以“-”号填"
+              ],
+              [
+                385.2699890136719,
+                491.1309509277344,
+                452.8059387207031,
+                501.0939636230469,
+                "32,184,570,372.28"
+              ],
+              [
+                471.1000061035156,
+                491.1309509277344,
+                538.6360473632812,
+                501.0939636230469,
+                "29,017,387,604.18"
+              ]
+            ],
+            "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52"
+          }
+        ],
+        "extraction_status": "candidate",
+        "extraction_version": "pdf-words-columns-v1",
+        "financial_review": "unconfirmed",
+        "interpretation_review": "not_applicable",
+        "limitation_codes": [],
+        "metadata_hash": "eb9736c0c99a918422fc33c4be6876161d734e7529eb56527adfb33fcb06e2f8",
+        "metric_definition_version": "consolidated-statements-v3.1",
+        "metric_key": "net_profit_parent",
+        "normalized_decimal": "32184570372.28",
+        "normalized_unit": "CNY_YUAN",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "payload_sha256": "8ea32724f5ba619fba830457e12e15822533b2e9d3c96fa9f4c9893330eb480d",
+        "raw_decimal": "32184570372.28",
+        "raw_label": "1、归属于母公司股东的净利润（净亏损以“-”号填",
+        "raw_unit": "元",
+        "report_year": 2024,
+        "schema_version": "statement-cell-v3",
+        "scope": "consolidated",
+        "source_kind": "fast_text",
+        "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "statement_kind": "income_statement",
+        "time": {
+          "kind": "duration",
+          "period_end": "2024-12-31",
+          "period_start": "2024-01-01",
+          "period_type": "annual"
+        },
+        "transcription_review": "unreviewed",
+        "source_status": "current",
+        "receipt_ref": null
+      },
+      {
+        "basis": "PRC_GAAP",
+        "cell_id": "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a",
+        "cell_revision": 1,
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+        "currency": "CNY",
+        "disclosure_version": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+        "evidence_refs": [
+          {
+            "bbox": [
+              382.0299987792969,
+              365.8309631347656,
+              449.5659484863281,
+              375.7939758300781
+            ],
+            "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+            "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+            "header_words": [
+              [
+                391.510009765625,
+                96.40098571777344,
+                409.55499267578125,
+                106.36398315429688,
+                "2024"
+              ],
+              [
+                411.42999267578125,
+                96.68898010253906,
+                429.54998779296875,
+                105.68898010253906,
+                "年度"
+              ]
+            ],
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 114,
+            "raw_label": "经营活动产生的现金流量净额",
+            "raw_value": "29,369,250,570.66",
+            "row_words": [
+              [
+                101.9000015258789,
+                365.39898681640625,
+                219.33200073242188,
+                374.39898681640625,
+                "经营活动产生的现金流量净额"
+              ],
+              [
+                382.0299987792969,
+                365.8309631347656,
+                449.5659484863281,
+                375.7939758300781,
+                "29,369,250,570.66"
+              ],
+              [
+                471.2200012207031,
+                365.8309631347656,
+                538.7560424804688,
+                375.7939758300781,
+                "56,398,426,354.17"
+              ]
+            ],
+            "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52"
+          }
+        ],
+        "extraction_status": "candidate",
+        "extraction_version": "pdf-words-columns-v1",
+        "financial_review": "unconfirmed",
+        "interpretation_review": "not_applicable",
+        "limitation_codes": [],
+        "metadata_hash": "eb9736c0c99a918422fc33c4be6876161d734e7529eb56527adfb33fcb06e2f8",
+        "metric_definition_version": "consolidated-statements-v3.1",
+        "metric_key": "operating_cash_flow",
+        "normalized_decimal": "29369250570.66",
+        "normalized_unit": "CNY_YUAN",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "payload_sha256": "65678852e44ffca53be370944901b1937ff253c63edbec0be6be6aa720cffaf1",
+        "raw_decimal": "29369250570.66",
+        "raw_label": "经营活动产生的现金流量净额",
+        "raw_unit": "元",
+        "report_year": 2024,
+        "schema_version": "statement-cell-v3",
+        "scope": "consolidated",
+        "source_kind": "fast_text",
+        "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "statement_kind": "cash_flow_statement",
+        "time": {
+          "kind": "duration",
+          "period_end": "2024-12-31",
+          "period_start": "2024-01-01",
+          "period_type": "annual"
+        },
+        "transcription_review": "unreviewed",
+        "source_status": "current",
+        "receipt_ref": null
+      }
+    ],
+    "collection_refs": [
+      {
+        "collection_id": "fb2aed3b-aa0b-42db-9a4c-999232634fed",
+        "cell_ids": [
+          "1e8d8d7d-ffd3-5614-b217-702c64eaac78",
+          "e548646f-b0b3-5cb6-869e-ee422952a7aa",
+          "6c5d5ff5-73fe-5456-93e0-469c9dd96d1e",
+          "e23572fa-fff7-53a6-a474-0f55f012875d",
+          "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+          "c1d8a0dc-86b8-54c4-9600-af5396091791",
+          "95175846-6039-53b1-9288-b33055010518",
+          "97d93920-a0a4-5477-86fc-e73dc67e832d",
+          "aed3073a-2a6c-564b-98b6-6ee88404adb6",
+          "7c3e123f-2d8c-5a29-bec8-3a47b935cf15",
+          "634abb00-261b-5703-abfe-1367df455e1d",
+          "51e6b99c-1794-5d65-98d7-19ea175dd52c",
+          "a4e466e9-11d7-59e7-91f9-3809f802b0ab",
+          "e18aa49b-1f12-525c-b37b-e030f40c92a1",
+          "c491f7d8-0641-5fbe-b825-f0541ce5f281",
+          "38e40e55-267d-55a4-b128-b61ec1228b90",
+          "068cee83-4694-5bed-8991-191353bcf8c0",
+          "83136a25-4208-58d7-8223-25e09e614376",
+          "1b310f5f-1bba-56b5-9c3b-62018bb969d4"
+        ]
+      },
+      {
+        "collection_id": "1b83453a-395a-4762-835f-7e66cede11b5",
+        "cell_ids": [
+          "536c87b7-9669-5215-b7b7-5c1953e394d7",
+          "e0e5b48b-96d1-5cdb-b203-5a65889871e5",
+          "df855db7-bd2f-5bf5-8b84-ebbe96897db1",
+          "3fa17316-b247-5f4d-b374-c380e83e16fd",
+          "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+          "15891682-8177-5abc-99b3-ed40dc341150",
+          "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9",
+          "4db2ac72-62e8-55f6-ab6b-0a3560d795c6",
+          "ffc3f7e6-f58f-5549-839e-565922cf2319",
+          "4b6870ed-4375-5ada-839a-5f9d26a9eef1",
+          "a9cd978a-751f-59ec-bcd1-fca7da3435b8",
+          "3edb078d-9058-5a5d-ae6f-464e8f679531",
+          "90488c6e-06ea-5f62-aa00-c031637efdd5",
+          "440e741e-59f6-5d98-b083-957a061df4e3",
+          "f80d0465-a8ab-57e3-87a2-0d38d298603c",
+          "ac4bf601-329a-58d8-b7cb-249b344c4c6e",
+          "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a",
+          "cc775871-a497-551c-8230-196423e03ebd",
+          "abc65aea-d53d-595b-94ef-ad000be9d8c5"
+        ]
+      }
+    ],
+    "candidate_view": true,
+    "limitations": [
+      "No missing points filled; selected versions only; candidates are unconfirmed."
+    ]
+  },
+  "chart_draft": {
+    "operation_id": "20c0408b-c2c9-47de-b019-8f94515d6c79",
+    "state": "completed",
+    "result": {
+      "chart": {
+        "kind": "line",
+        "metric_keys": [
+          "revenue",
+          "net_profit_parent",
+          "operating_cash_flow",
+          "total_assets",
+          "total_liabilities"
+        ],
+        "record_refs": [
+          {
+            "cell_id": "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+            "cell_revision": 1,
+            "payload_sha256": "cf5c97e1ae97e83cc7ec11f7772921fb0e7c069129a301ae6d3f63a00eefd6d7"
+          },
+          {
+            "cell_id": "95175846-6039-53b1-9288-b33055010518",
+            "cell_revision": 1,
+            "payload_sha256": "5beeec0992d9c8c21c5cfcab656c57deb7fd43ca165fa8a5d1b5c3813d4a519e"
+          },
+          {
+            "cell_id": "97d93920-a0a4-5477-86fc-e73dc67e832d",
+            "cell_revision": 1,
+            "payload_sha256": "f16dd53ddd118a70c448a36e74f03288ea67ab6c222e7ae6baf653b06ba5f7b5"
+          },
+          {
+            "cell_id": "e18aa49b-1f12-525c-b37b-e030f40c92a1",
+            "cell_revision": 1,
+            "payload_sha256": "ce00c572598bab65a4efae704ea30c716c6c5724ec96c88674037794bd82117b"
+          },
+          {
+            "cell_id": "068cee83-4694-5bed-8991-191353bcf8c0",
+            "cell_revision": 1,
+            "payload_sha256": "1f8426324a2b73753b36475a8a6f9ba68cb0fd5d945a416cacd9a1414b6d2cbf"
+          },
+          {
+            "cell_id": "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+            "cell_revision": 1,
+            "payload_sha256": "c668acde94ddd48bf819fa3e4f48d9b02d7ea75519e6dec2ca234d5519e8edda"
+          },
+          {
+            "cell_id": "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9",
+            "cell_revision": 1,
+            "payload_sha256": "4fe2dcad875660323c1b75d7b2b237ef9532a540e9d68e707d292e5c8ad50d6a"
+          },
+          {
+            "cell_id": "4db2ac72-62e8-55f6-ab6b-0a3560d795c6",
+            "cell_revision": 1,
+            "payload_sha256": "89e181a1d40278e25f21818f40a644537840b2fe4ceef6d7602261945a745b83"
+          },
+          {
+            "cell_id": "440e741e-59f6-5d98-b083-957a061df4e3",
+            "cell_revision": 1,
+            "payload_sha256": "8ea32724f5ba619fba830457e12e15822533b2e9d3c96fa9f4c9893330eb480d"
+          },
+          {
+            "cell_id": "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a",
+            "cell_revision": 1,
+            "payload_sha256": "65678852e44ffca53be370944901b1937ff253c63edbec0be6be6aa720cffaf1"
+          }
+        ]
+      },
+      "collection_refs": [
+        {
+          "cell_ids": [
+            "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+            "95175846-6039-53b1-9288-b33055010518",
+            "97d93920-a0a4-5477-86fc-e73dc67e832d",
+            "e18aa49b-1f12-525c-b37b-e030f40c92a1",
+            "068cee83-4694-5bed-8991-191353bcf8c0"
+          ],
+          "collection_id": "fb2aed3b-aa0b-42db-9a4c-999232634fed"
+        },
+        {
+          "cell_ids": [
+            "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+            "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9",
+            "4db2ac72-62e8-55f6-ab6b-0a3560d795c6",
+            "440e741e-59f6-5d98-b083-957a061df4e3",
+            "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a"
+          ],
+          "collection_id": "1b83453a-395a-4762-835f-7e66cede11b5"
+        }
+      ],
+      "created_at": "2026-11-03T12:59:23.618369+00:00",
+      "financial_authority": false,
+      "financial_points": [
+        {
+          "basis": "PRC_GAAP",
+          "cell_id": "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+          "cell_revision": 1,
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+          "currency": "CNY",
+          "disclosure_version": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+          "evidence_refs": [
+            {
+              "bbox": [
+                351.4800109863281,
+                758.9140014648438,
+                423.5393981933594,
+                771.3519897460938
+              ],
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "header_words": [
+                [
+                  330.239990234375,
+                  95.43499755859375,
+                  348.2986145019531,
+                  107.87300109863281,
+                  "2025"
+                ],
+                [
+                  350.15899658203125,
+                  95.43499755859375,
+                  370.4993896484375,
+                  107.87300109863281,
+                  "年12"
+                ],
+                [
+                  372.3590087890625,
+                  95.43499755859375,
+                  392.69940185546875,
+                  107.87300109863281,
+                  "月31"
+                ],
+                [
+                  394.5589904785156,
+                  97.31126403808594,
+                  403.5589904785156,
+                  106.31126403808594,
+                  "日"
+                ]
+              ],
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 86,
+              "raw_label": "资产总计",
+              "raw_value": "391,371,999,819.49",
+              "row_words": [
+                [
+                  47.880001068115234,
+                  759.9512939453125,
+                  83.99954986572266,
+                  768.9512939453125,
+                  "资产总计"
+                ],
+                [
+                  351.4800109863281,
+                  758.9140014648438,
+                  423.5393981933594,
+                  771.3519897460938,
+                  "391,371,999,819.49"
+                ],
+                [
+                  475.44000244140625,
+                  758.9140014648438,
+                  547.493408203125,
+                  771.3519897460938,
+                  "368,031,704,522.86"
+                ]
+              ],
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395"
+            }
+          ],
+          "extraction_status": "candidate",
+          "extraction_version": "pdf-words-columns-v1",
+          "financial_review": "unconfirmed",
+          "interpretation_review": "not_applicable",
+          "limitation_codes": [],
+          "metadata_hash": "3236170179352c7cfbcc7a06fad0ed028de67fcef0db10356ba889870ab20285",
+          "metric_definition_version": "consolidated-statements-v3.1",
+          "metric_key": "total_assets",
+          "normalized_decimal": "391371999819.49",
+          "normalized_unit": "CNY_YUAN",
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "payload_sha256": "cf5c97e1ae97e83cc7ec11f7772921fb0e7c069129a301ae6d3f63a00eefd6d7",
+          "raw_decimal": "391371999819.49",
+          "raw_label": "资产总计",
+          "raw_unit": "元",
+          "receipt_ref": null,
+          "report_year": 2025,
+          "schema_version": "statement-cell-v3",
+          "scope": "consolidated",
+          "source_kind": "fast_text",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "source_status": "current",
+          "statement_kind": "balance_sheet",
+          "time": {
+            "as_of_date": "2025-12-31",
+            "kind": "instant"
+          },
+          "transcription_review": "unreviewed"
+        },
+        {
+          "basis": "PRC_GAAP",
+          "cell_id": "95175846-6039-53b1-9288-b33055010518",
+          "cell_revision": 1,
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+          "currency": "CNY",
+          "disclosure_version": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+          "evidence_refs": [
+            {
+              "bbox": [
+                351.9590148925781,
+                541.35498046875,
+                424.0184020996094,
+                553.79296875
+              ],
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "header_words": [
+                [
+                  338.0400085449219,
+                  93.3949966430664,
+                  356.0986328125,
+                  105.83300018310547,
+                  "2025"
+                ],
+                [
+                  357.9590148925781,
+                  93.3949966430664,
+                  378.29937744140625,
+                  105.83300018310547,
+                  "年12"
+                ],
+                [
+                  380.15899658203125,
+                  93.3949966430664,
+                  400.4993896484375,
+                  105.83300018310547,
+                  "月31"
+                ],
+                [
+                  402.3590087890625,
+                  95.15126037597656,
+                  411.3590087890625,
+                  104.15126037597656,
+                  "日"
+                ]
+              ],
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 87,
+              "raw_label": "负债合计",
+              "raw_value": "241,580,719,144.79",
+              "row_words": [
+                [
+                  48,
+                  542.51123046875,
+                  84.11955261230469,
+                  551.5112915039062,
+                  "负债合计"
+                ],
+                [
+                  351.9590148925781,
+                  541.35498046875,
+                  424.0184020996094,
+                  553.79296875,
+                  "241,580,719,144.79"
+                ],
+                [
+                  475.44000244140625,
+                  541.35498046875,
+                  547.493408203125,
+                  553.79296875,
+                  "226,518,009,574.89"
+                ]
+              ],
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395"
+            }
+          ],
+          "extraction_status": "candidate",
+          "extraction_version": "pdf-words-columns-v1",
+          "financial_review": "unconfirmed",
+          "interpretation_review": "not_applicable",
+          "limitation_codes": [],
+          "metadata_hash": "3236170179352c7cfbcc7a06fad0ed028de67fcef0db10356ba889870ab20285",
+          "metric_definition_version": "consolidated-statements-v3.1",
+          "metric_key": "total_liabilities",
+          "normalized_decimal": "241580719144.79",
+          "normalized_unit": "CNY_YUAN",
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "payload_sha256": "5beeec0992d9c8c21c5cfcab656c57deb7fd43ca165fa8a5d1b5c3813d4a519e",
+          "raw_decimal": "241580719144.79",
+          "raw_label": "负债合计",
+          "raw_unit": "元",
+          "receipt_ref": null,
+          "report_year": 2025,
+          "schema_version": "statement-cell-v3",
+          "scope": "consolidated",
+          "source_kind": "fast_text",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "source_status": "current",
+          "statement_kind": "balance_sheet",
+          "time": {
+            "as_of_date": "2025-12-31",
+            "kind": "instant"
+          },
+          "transcription_review": "unreviewed"
+        },
+        {
+          "basis": "PRC_GAAP",
+          "cell_id": "97d93920-a0a4-5477-86fc-e73dc67e832d",
+          "cell_revision": 1,
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+          "currency": "CNY",
+          "disclosure_version": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+          "evidence_refs": [
+            {
+              "bbox": [
+                377.5199890136719,
+                116.93900299072266,
+                449.5732727050781,
+                129.04400634765625
+              ],
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "header_words": [
+                [
+                  385.44000244140625,
+                  92.07499694824219,
+                  403.4986267089844,
+                  104.51300048828125,
+                  "2025"
+                ],
+                [
+                  405.3590087890625,
+                  93.95126342773438,
+                  423.3590087890625,
+                  102.95126342773438,
+                  "年度"
+                ]
+              ],
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 88,
+              "raw_label": "其中：营业收入",
+              "raw_value": "170,447,058,533.57",
+              "row_words": [
+                [
+                  80.04000091552734,
+                  117.95126342773438,
+                  143.04000854492188,
+                  126.95126342773438,
+                  "其中：营业收入"
+                ],
+                [
+                  314.3999938964844,
+                  116.33900451660156,
+                  341.4593811035156,
+                  128.44400024414062,
+                  "五、54"
+                ],
+                [
+                  377.5199890136719,
+                  116.93900299072266,
+                  449.5732727050781,
+                  129.04400634765625,
+                  "170,447,058,533.57"
+                ],
+                [
+                  461.2799987792969,
+                  116.93900299072266,
+                  533.3333740234375,
+                  129.04400634765625,
+                  "189,163,654,064.64"
+                ]
+              ],
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395"
+            }
+          ],
+          "extraction_status": "candidate",
+          "extraction_version": "pdf-words-columns-v1",
+          "financial_review": "unconfirmed",
+          "interpretation_review": "not_applicable",
+          "limitation_codes": [],
+          "metadata_hash": "3236170179352c7cfbcc7a06fad0ed028de67fcef0db10356ba889870ab20285",
+          "metric_definition_version": "consolidated-statements-v3.1",
+          "metric_key": "revenue",
+          "normalized_decimal": "170447058533.57",
+          "normalized_unit": "CNY_YUAN",
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "payload_sha256": "f16dd53ddd118a70c448a36e74f03288ea67ab6c222e7ae6baf653b06ba5f7b5",
+          "raw_decimal": "170447058533.57",
+          "raw_label": "其中：营业收入",
+          "raw_unit": "元",
+          "receipt_ref": null,
+          "report_year": 2025,
+          "schema_version": "statement-cell-v3",
+          "scope": "consolidated",
+          "source_kind": "fast_text",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "source_status": "current",
+          "statement_kind": "income_statement",
+          "time": {
+            "kind": "duration",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "period_type": "annual"
+          },
+          "transcription_review": "unreviewed"
+        },
+        {
+          "basis": "PRC_GAAP",
+          "cell_id": "e18aa49b-1f12-525c-b37b-e030f40c92a1",
+          "cell_revision": 1,
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+          "currency": "CNY",
+          "disclosure_version": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+          "evidence_refs": [
+            {
+              "bbox": [
+                382.32000732421875,
+                489.89898681640625,
+                449.4590148925781,
+                502.0039978027344
+              ],
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "header_words": [
+                [
+                  385.44000244140625,
+                  92.07499694824219,
+                  403.4986267089844,
+                  104.51300048828125,
+                  "2025"
+                ],
+                [
+                  405.3590087890625,
+                  93.95126342773438,
+                  423.3590087890625,
+                  102.95126342773438,
+                  "年度"
+                ]
+              ],
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 88,
+              "raw_label": "1、归属于母公司股东的净利润（净亏损以“-”号填列）",
+              "raw_value": "29,003,103,411.66",
+              "row_words": [
+                [
+                  71.04000091552734,
+                  489.1789855957031,
+                  284.52001953125,
+                  501.28399658203125,
+                  "1、归属于母公司股东的净利润（净亏损以“-”号填列）"
+                ],
+                [
+                  382.32000732421875,
+                  489.89898681640625,
+                  449.4590148925781,
+                  502.0039978027344,
+                  "29,003,103,411.66"
+                ],
+                [
+                  465.7200012207031,
+                  489.89898681640625,
+                  533.2139892578125,
+                  502.0039978027344,
+                  "32,184,570,372.28"
+                ]
+              ],
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395"
+            }
+          ],
+          "extraction_status": "candidate",
+          "extraction_version": "pdf-words-columns-v1",
+          "financial_review": "unconfirmed",
+          "interpretation_review": "not_applicable",
+          "limitation_codes": [],
+          "metadata_hash": "3236170179352c7cfbcc7a06fad0ed028de67fcef0db10356ba889870ab20285",
+          "metric_definition_version": "consolidated-statements-v3.1",
+          "metric_key": "net_profit_parent",
+          "normalized_decimal": "29003103411.66",
+          "normalized_unit": "CNY_YUAN",
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "payload_sha256": "ce00c572598bab65a4efae704ea30c716c6c5724ec96c88674037794bd82117b",
+          "raw_decimal": "29003103411.66",
+          "raw_label": "1、归属于母公司股东的净利润（净亏损以“-”号填列）",
+          "raw_unit": "元",
+          "receipt_ref": null,
+          "report_year": 2025,
+          "schema_version": "statement-cell-v3",
+          "scope": "consolidated",
+          "source_kind": "fast_text",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "source_status": "current",
+          "statement_kind": "income_statement",
+          "time": {
+            "kind": "duration",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "period_type": "annual"
+          },
+          "transcription_review": "unreviewed"
+        },
+        {
+          "basis": "PRC_GAAP",
+          "cell_id": "068cee83-4694-5bed-8991-191353bcf8c0",
+          "cell_revision": 1,
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+          "currency": "CNY",
+          "disclosure_version": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+          "evidence_refs": [
+            {
+              "bbox": [
+                379.5589904785156,
+                364.3550109863281,
+                446.69940185546875,
+                376.7929992675781
+              ],
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "header_words": [
+                [
+                  389.0400085449219,
+                  94.83499908447266,
+                  406.9800109863281,
+                  107.27300262451172,
+                  "2025"
+                ],
+                [
+                  408.8399963378906,
+                  96.71125793457031,
+                  426.8399963378906,
+                  105.71125793457031,
+                  "年度"
+                ]
+              ],
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 89,
+              "raw_label": "经营活动产生的现金流量净额",
+              "raw_value": "46,383,114,754.02",
+              "row_words": [
+                [
+                  101.63999938964844,
+                  365.3912658691406,
+                  219.1182098388672,
+                  374.3912658691406,
+                  "经营活动产生的现金流量净额"
+                ],
+                [
+                  379.5589904785156,
+                  364.3550109863281,
+                  446.69940185546875,
+                  376.7929992675781,
+                  "46,383,114,754.02"
+                ],
+                [
+                  471.1199951171875,
+                  364.3550109863281,
+                  538.614013671875,
+                  376.7929992675781,
+                  "29,369,250,570.66"
+                ]
+              ],
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395"
+            }
+          ],
+          "extraction_status": "candidate",
+          "extraction_version": "pdf-words-columns-v1",
+          "financial_review": "unconfirmed",
+          "interpretation_review": "not_applicable",
+          "limitation_codes": [],
+          "metadata_hash": "3236170179352c7cfbcc7a06fad0ed028de67fcef0db10356ba889870ab20285",
+          "metric_definition_version": "consolidated-statements-v3.1",
+          "metric_key": "operating_cash_flow",
+          "normalized_decimal": "46383114754.02",
+          "normalized_unit": "CNY_YUAN",
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "payload_sha256": "1f8426324a2b73753b36475a8a6f9ba68cb0fd5d945a416cacd9a1414b6d2cbf",
+          "raw_decimal": "46383114754.02",
+          "raw_label": "经营活动产生的现金流量净额",
+          "raw_unit": "元",
+          "receipt_ref": null,
+          "report_year": 2025,
+          "schema_version": "statement-cell-v3",
+          "scope": "consolidated",
+          "source_kind": "fast_text",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "source_status": "current",
+          "statement_kind": "cash_flow_statement",
+          "time": {
+            "kind": "duration",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "period_type": "annual"
+          },
+          "transcription_review": "unreviewed"
+        },
+        {
+          "basis": "PRC_GAAP",
+          "cell_id": "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+          "cell_revision": 1,
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+          "currency": "CNY",
+          "disclosure_version": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+          "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+          "evidence_refs": [
+            {
+              "bbox": [
+                353.95001220703125,
+                760.5809936523438,
+                425.9229736328125,
+                770.5439453125
+              ],
+              "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+              "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+              "header_words": [
+                [
+                  331.510009765625,
+                  96.88096618652344,
+                  349.55499267578125,
+                  106.84396362304688,
+                  "2024"
+                ],
+                [
+                  351.42999267578125,
+                  96.88096618652344,
+                  371.7699890136719,
+                  106.84396362304688,
+                  "年12"
+                ],
+                [
+                  373.6300048828125,
+                  96.88096618652344,
+                  393.9700012207031,
+                  106.84396362304688,
+                  "月31"
+                ],
+                [
+                  395.95001220703125,
+                  97.16896057128906,
+                  404.95001220703125,
+                  106.16896057128906,
+                  "日"
+                ]
+              ],
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 111,
+              "raw_label": "资产总计",
+              "raw_value": "368,031,704,522.86",
+              "row_words": [
+                [
+                  42.599998474121094,
+                  760.1489868164062,
+                  78.70800018310547,
+                  769.1489868164062,
+                  "资产总计"
+                ],
+                [
+                  353.95001220703125,
+                  760.5809936523438,
+                  425.9229736328125,
+                  770.5439453125,
+                  "368,031,704,522.86"
+                ],
+                [
+                  480.94000244140625,
+                  760.5809936523438,
+                  552.9130249023438,
+                  770.5439453125,
+                  "368,053,902,576.37"
+                ]
+              ],
+              "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52"
+            }
+          ],
+          "extraction_status": "candidate",
+          "extraction_version": "pdf-words-columns-v1",
+          "financial_review": "unconfirmed",
+          "interpretation_review": "not_applicable",
+          "limitation_codes": [],
+          "metadata_hash": "eb9736c0c99a918422fc33c4be6876161d734e7529eb56527adfb33fcb06e2f8",
+          "metric_definition_version": "consolidated-statements-v3.1",
+          "metric_key": "total_assets",
+          "normalized_decimal": "368031704522.86",
+          "normalized_unit": "CNY_YUAN",
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "payload_sha256": "c668acde94ddd48bf819fa3e4f48d9b02d7ea75519e6dec2ca234d5519e8edda",
+          "raw_decimal": "368031704522.86",
+          "raw_label": "资产总计",
+          "raw_unit": "元",
+          "receipt_ref": null,
+          "report_year": 2024,
+          "schema_version": "statement-cell-v3",
+          "scope": "consolidated",
+          "source_kind": "fast_text",
+          "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+          "source_status": "current",
+          "statement_kind": "balance_sheet",
+          "time": {
+            "as_of_date": "2024-12-31",
+            "kind": "instant"
+          },
+          "transcription_review": "unreviewed"
+        },
+        {
+          "basis": "PRC_GAAP",
+          "cell_id": "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9",
+          "cell_revision": 1,
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+          "currency": "CNY",
+          "disclosure_version": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+          "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+          "evidence_refs": [
+            {
+              "bbox": [
+                353.2300109863281,
+                542.9710083007812,
+                425.2029724121094,
+                552.9339599609375
+              ],
+              "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+              "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+              "header_words": [
+                [
+                  331.2699890136719,
+                  94.12095642089844,
+                  349.3149719238281,
+                  104.08395385742188,
+                  "2024"
+                ],
+                [
+                  351.19000244140625,
+                  94.12095642089844,
+                  371.5299987792969,
+                  104.08395385742188,
+                  "年12"
+                ],
+                [
+                  373.3900146484375,
+                  94.12095642089844,
+                  393.7300109863281,
+                  104.08395385742188,
+                  "月31"
+                ],
+                [
+                  395.7099914550781,
+                  94.40895080566406,
+                  404.7099914550781,
+                  103.40895080566406,
+                  "日"
+                ]
+              ],
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 112,
+              "raw_label": "负债合计",
+              "raw_value": "226,518,009,574.89",
+              "row_words": [
+                [
+                  42.599998474121094,
+                  542.5390014648438,
+                  78.70800018310547,
+                  551.5390014648438,
+                  "负债合计"
+                ],
+                [
+                  353.2300109863281,
+                  542.9710083007812,
+                  425.2029724121094,
+                  552.9339599609375,
+                  "226,518,009,574.89"
+                ],
+                [
+                  478.6600036621094,
+                  542.9710083007812,
+                  550.633056640625,
+                  552.9339599609375,
+                  "247,407,749,159.93"
+                ]
+              ],
+              "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52"
+            }
+          ],
+          "extraction_status": "candidate",
+          "extraction_version": "pdf-words-columns-v1",
+          "financial_review": "unconfirmed",
+          "interpretation_review": "not_applicable",
+          "limitation_codes": [],
+          "metadata_hash": "eb9736c0c99a918422fc33c4be6876161d734e7529eb56527adfb33fcb06e2f8",
+          "metric_definition_version": "consolidated-statements-v3.1",
+          "metric_key": "total_liabilities",
+          "normalized_decimal": "226518009574.89",
+          "normalized_unit": "CNY_YUAN",
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "payload_sha256": "4fe2dcad875660323c1b75d7b2b237ef9532a540e9d68e707d292e5c8ad50d6a",
+          "raw_decimal": "226518009574.89",
+          "raw_label": "负债合计",
+          "raw_unit": "元",
+          "receipt_ref": null,
+          "report_year": 2024,
+          "schema_version": "statement-cell-v3",
+          "scope": "consolidated",
+          "source_kind": "fast_text",
+          "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+          "source_status": "current",
+          "statement_kind": "balance_sheet",
+          "time": {
+            "as_of_date": "2024-12-31",
+            "kind": "instant"
+          },
+          "transcription_review": "unreviewed"
+        },
+        {
+          "basis": "PRC_GAAP",
+          "cell_id": "4db2ac72-62e8-55f6-ab6b-0a3560d795c6",
+          "cell_revision": 1,
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+          "currency": "CNY",
+          "disclosure_version": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+          "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+          "evidence_refs": [
+            {
+              "bbox": [
+                380.8299865722656,
+                118.12095642089844,
+                452.8029479980469,
+                128.08395385742188
+              ],
+              "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+              "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+              "header_words": [
+                [
+                  387.6700134277344,
+                  93.52098083496094,
+                  405.7149963378906,
+                  103.48397827148438,
+                  "2024"
+                ],
+                [
+                  407.5899963378906,
+                  93.80897521972656,
+                  425.7099914550781,
+                  102.80897521972656,
+                  "年度"
+                ]
+              ],
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 113,
+              "raw_label": "其中：营业收入",
+              "raw_value": "189,163,654,064.64",
+              "row_words": [
+                [
+                  74.66400146484375,
+                  117.92897033691406,
+                  137.66400146484375,
+                  126.92897033691406,
+                  "其中：营业收入"
+                ],
+                [
+                  305.57000732421875,
+                  117.64097595214844,
+                  332.6499938964844,
+                  127.60397338867188,
+                  "五、54"
+                ],
+                [
+                  380.8299865722656,
+                  118.12095642089844,
+                  452.8029479980469,
+                  128.08395385742188,
+                  "189,163,654,064.64"
+                ],
+                [
+                  466.6600036621094,
+                  118.12095642089844,
+                  538.6329956054688,
+                  128.08395385742188,
+                  "203,979,266,387.09"
+                ]
+              ],
+              "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52"
+            }
+          ],
+          "extraction_status": "candidate",
+          "extraction_version": "pdf-words-columns-v1",
+          "financial_review": "unconfirmed",
+          "interpretation_review": "not_applicable",
+          "limitation_codes": [],
+          "metadata_hash": "eb9736c0c99a918422fc33c4be6876161d734e7529eb56527adfb33fcb06e2f8",
+          "metric_definition_version": "consolidated-statements-v3.1",
+          "metric_key": "revenue",
+          "normalized_decimal": "189163654064.64",
+          "normalized_unit": "CNY_YUAN",
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "payload_sha256": "89e181a1d40278e25f21818f40a644537840b2fe4ceef6d7602261945a745b83",
+          "raw_decimal": "189163654064.64",
+          "raw_label": "其中：营业收入",
+          "raw_unit": "元",
+          "receipt_ref": null,
+          "report_year": 2024,
+          "schema_version": "statement-cell-v3",
+          "scope": "consolidated",
+          "source_kind": "fast_text",
+          "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+          "source_status": "current",
+          "statement_kind": "income_statement",
+          "time": {
+            "kind": "duration",
+            "period_end": "2024-12-31",
+            "period_start": "2024-01-01",
+            "period_type": "annual"
+          },
+          "transcription_review": "unreviewed"
+        },
+        {
+          "basis": "PRC_GAAP",
+          "cell_id": "440e741e-59f6-5d98-b083-957a061df4e3",
+          "cell_revision": 1,
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+          "currency": "CNY",
+          "disclosure_version": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+          "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+          "evidence_refs": [
+            {
+              "bbox": [
+                385.2699890136719,
+                491.1309509277344,
+                452.8059387207031,
+                501.0939636230469
+              ],
+              "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+              "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+              "header_words": [
+                [
+                  387.6700134277344,
+                  93.52098083496094,
+                  405.7149963378906,
+                  103.48397827148438,
+                  "2024"
+                ],
+                [
+                  407.5899963378906,
+                  93.80897521972656,
+                  425.7099914550781,
+                  102.80897521972656,
+                  "年度"
+                ]
+              ],
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 113,
+              "raw_label": "1、归属于母公司股东的净利润（净亏损以“-”号填",
+              "raw_value": "32,184,570,372.28",
+              "row_words": [
+                [
+                  65.66400146484375,
+                  490.6509704589844,
+                  261.16998291015625,
+                  500.6139831542969,
+                  "1、归属于母公司股东的净利润（净亏损以“-”号填"
+                ],
+                [
+                  385.2699890136719,
+                  491.1309509277344,
+                  452.8059387207031,
+                  501.0939636230469,
+                  "32,184,570,372.28"
+                ],
+                [
+                  471.1000061035156,
+                  491.1309509277344,
+                  538.6360473632812,
+                  501.0939636230469,
+                  "29,017,387,604.18"
+                ]
+              ],
+              "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52"
+            }
+          ],
+          "extraction_status": "candidate",
+          "extraction_version": "pdf-words-columns-v1",
+          "financial_review": "unconfirmed",
+          "interpretation_review": "not_applicable",
+          "limitation_codes": [],
+          "metadata_hash": "eb9736c0c99a918422fc33c4be6876161d734e7529eb56527adfb33fcb06e2f8",
+          "metric_definition_version": "consolidated-statements-v3.1",
+          "metric_key": "net_profit_parent",
+          "normalized_decimal": "32184570372.28",
+          "normalized_unit": "CNY_YUAN",
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "payload_sha256": "8ea32724f5ba619fba830457e12e15822533b2e9d3c96fa9f4c9893330eb480d",
+          "raw_decimal": "32184570372.28",
+          "raw_label": "1、归属于母公司股东的净利润（净亏损以“-”号填",
+          "raw_unit": "元",
+          "receipt_ref": null,
+          "report_year": 2024,
+          "schema_version": "statement-cell-v3",
+          "scope": "consolidated",
+          "source_kind": "fast_text",
+          "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+          "source_status": "current",
+          "statement_kind": "income_statement",
+          "time": {
+            "kind": "duration",
+            "period_end": "2024-12-31",
+            "period_start": "2024-01-01",
+            "period_type": "annual"
+          },
+          "transcription_review": "unreviewed"
+        },
+        {
+          "basis": "PRC_GAAP",
+          "cell_id": "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a",
+          "cell_revision": 1,
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+          "currency": "CNY",
+          "disclosure_version": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+          "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+          "evidence_refs": [
+            {
+              "bbox": [
+                382.0299987792969,
+                365.8309631347656,
+                449.5659484863281,
+                375.7939758300781
+              ],
+              "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+              "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+              "header_words": [
+                [
+                  391.510009765625,
+                  96.40098571777344,
+                  409.55499267578125,
+                  106.36398315429688,
+                  "2024"
+                ],
+                [
+                  411.42999267578125,
+                  96.68898010253906,
+                  429.54998779296875,
+                  105.68898010253906,
+                  "年度"
+                ]
+              ],
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 114,
+              "raw_label": "经营活动产生的现金流量净额",
+              "raw_value": "29,369,250,570.66",
+              "row_words": [
+                [
+                  101.9000015258789,
+                  365.39898681640625,
+                  219.33200073242188,
+                  374.39898681640625,
+                  "经营活动产生的现金流量净额"
+                ],
+                [
+                  382.0299987792969,
+                  365.8309631347656,
+                  449.5659484863281,
+                  375.7939758300781,
+                  "29,369,250,570.66"
+                ],
+                [
+                  471.2200012207031,
+                  365.8309631347656,
+                  538.7560424804688,
+                  375.7939758300781,
+                  "56,398,426,354.17"
+                ]
+              ],
+              "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52"
+            }
+          ],
+          "extraction_status": "candidate",
+          "extraction_version": "pdf-words-columns-v1",
+          "financial_review": "unconfirmed",
+          "interpretation_review": "not_applicable",
+          "limitation_codes": [],
+          "metadata_hash": "eb9736c0c99a918422fc33c4be6876161d734e7529eb56527adfb33fcb06e2f8",
+          "metric_definition_version": "consolidated-statements-v3.1",
+          "metric_key": "operating_cash_flow",
+          "normalized_decimal": "29369250570.66",
+          "normalized_unit": "CNY_YUAN",
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "payload_sha256": "65678852e44ffca53be370944901b1937ff253c63edbec0be6be6aa720cffaf1",
+          "raw_decimal": "29369250570.66",
+          "raw_label": "经营活动产生的现金流量净额",
+          "raw_unit": "元",
+          "receipt_ref": null,
+          "report_year": 2024,
+          "schema_version": "statement-cell-v3",
+          "scope": "consolidated",
+          "source_kind": "fast_text",
+          "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+          "source_status": "current",
+          "statement_kind": "cash_flow_statement",
+          "time": {
+            "kind": "duration",
+            "period_end": "2024-12-31",
+            "period_start": "2024-01-01",
+            "period_type": "annual"
+          },
+          "transcription_review": "unreviewed"
+        }
+      ],
+      "limitations": [
+        "这是从明确选择的服务器数据复制的报告草稿版本1；候选金额待核对。"
+      ],
+      "report_id": "66cc1e38-c21c-4ef4-9ecb-56b4be0b28d4",
+      "revision": 1,
+      "schema_version": "chart-report-v1",
+      "selected_sources": [
+        {
+          "artifact_id": null,
+          "artifact_sha256": null,
+          "attempt": 1,
+          "basis": "PRC_GAAP",
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "config_hash": null,
+          "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+          "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+          "enrollment_id": null,
+          "identity_status": "fast_source_verified",
+          "kind": "fast",
+          "metadata_sha256": null,
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "period_end": "2025-12-31",
+          "period_start": "2025-01-01",
+          "report_type": "annual",
+          "report_year": 2025,
+          "selected_pages": [],
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "workspace_id": "demo"
+        },
+        {
+          "artifact_id": null,
+          "artifact_sha256": null,
+          "attempt": 1,
+          "basis": "PRC_GAAP",
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "config_hash": null,
+          "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+          "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+          "enrollment_id": null,
+          "identity_status": "fast_source_verified",
+          "kind": "fast",
+          "metadata_sha256": null,
+          "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+          "period_end": "2024-12-31",
+          "period_start": "2024-01-01",
+          "report_type": "annual",
+          "report_year": 2024,
+          "selected_pages": [],
+          "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+          "workspace_id": "demo"
+        }
+      ],
+      "status": "draft",
+      "trend_id": "14fb68bd-56af-4780-8aeb-6f436c221457"
+    }
+  },
+  "result": "FAIL",
+  "error": "TimeoutError: apiRequestContext.get: Timeout 30000ms exceeded.\n",
+  "visible_text": "演示会话 · 剩余约 7:19 · 财务核对需所有者授权\n退出演示\n所有者授权\n跳到主要内容\nFinDoc.\nANALYST\nDEMO\nF\n财报研究空间\n资料、研究与报告\n工作空间\n首页\nAI 研究助手\n企业与资料\n研究任务\n我的报告\n让每个结论都有据可查\n\n回到原文，核对数据，\n再形成你的研究结论。\n\n研\n本地研究者\n单人研究空间\n工作空间\n我的报告\n财报研究工作台\n导出研究版本\n\n选择已保存的研究版本和格式。打印版可在浏览器中另存为 PDF。\n\n正在读取已保存的版本…\n\n预置报告\n\n预置演示案例 · 历史已保存结果，当前查看没有生成新内容。\n\n正在读取预置案例…\n\n正在核验报告工作空间…\n\n经营研究历史报告（V1.2）\nFinDoc · AI 研究工作台\n年报原文 · 数值核对 · AI 解读",
+  "sensitive_transport_log_removed": true,
+  "original_raw_proof": {
+    "path": "data/cplus-g4-finish-v2/result.json",
+    "bytes": 96117,
+    "sha256": "9d8a85386dab3fc8d1290fdf33359186a74f3f8fd6d9fe9765dbac2e813a52fe"
+  }
+}

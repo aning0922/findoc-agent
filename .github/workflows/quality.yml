@@ -46,7 +46,7 @@ jobs:
         run: |
           npm test
           npm run lint
-          npm run build
+          VITE_FINDOC_DEMO_MODE=1 VITE_FINDOC_CPLUS_MODE=1 VITE_FINDOC_SHOWCASE_PREVIEW_CHARTS=0 npm run build
 
       - name: Install Chromium only
         working-directory: frontend
