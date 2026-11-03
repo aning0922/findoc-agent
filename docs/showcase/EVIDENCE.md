@@ -21,3 +21,7 @@
 
 - U01预填边界：Chromium拦截API的UI_MOCK三宽1440/1280/390 PASS，question进草稿、未选来源发送禁用、零POST/PATCH/DELETE；脚本frontend/e2e/showcase-entry.mjs，截图m1-entry。不能代替真实服务集成。
 - M1 UI首候选171ab87/f14e105/c087b4b已读审：真实接口方向可复用，但正式视觉未延续通过的M0；schema cast、失效时限/晚回epoch等退回Terra/high修订。尚未集成/验收H02/H03/L04。
+
+- H01源a9274f4→集成b5768ee：主控真实读service/api/交接并独立复跑3PASS/ruffPASS（UNIT_FAKE）。runtime_factory唯一接线新增固定代际metadata/已绑定仓储，旧startup/companies/conversation_graph62PASS，14.66s，依赖5warning保留。
+- H01真实重依赖装配：修改后startup spike9.607s ready/9.649s含关闭，真实缓存BGE+Milvus，health/companies/dashboard200；空库四KPI0，generation1，独立sample origin=illustrative；LLM0。这只证明真实装配+空库/示意端点，不是财务真人数据/完整seed/auth通过。原始/tmp/findoc-c-dashboard-startup.log。
+- L01主控静态发现公开/api代理下pending Cookie path=/demo不匹配，已报后端与独审，必须修复并真实浏览器验。内部TestClient通过不代表外部前缀Cookie可用。

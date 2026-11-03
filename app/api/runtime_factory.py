@@ -27,6 +27,7 @@ from app.api.research_runs import create_research_runs_router
 from app.research.repository import ResearchOwner, ResearchRepository
 from app.api.research_qa import create_research_qa_router
 from app.api.runtime_paths import DEFAULT_RUNTIME_ROOT
+from app.dashboard import DashboardService, create_dashboard_router
 from app.chat.service import ChatService
 from app.companies.service import CompanyService
 from app.companies.sqlite_repository import SQLiteCompanyRepository
@@ -185,6 +186,9 @@ def _build_runtime_rag_resources(
 
 def create_runtime_app(
     runtime_root: Path = DEFAULT_RUNTIME_ROOT, *, max_selected_documents: int = 4,
+    showcase_generation: int | None = None,
+    showcase_seed_version: str | None = None,
+    showcase_preset_task_ids: frozenset[str] = frozenset(),
 ) -> FastAPI:
     """组装文档/RAG、Agent 和收入确认服务，复用同一 runtime 检索资源。
 
@@ -200,6 +204,12 @@ def create_runtime_app(
         导入本模块不会调用本函数，
         隔离运行应显式传入已经核验的独立目录。
     """
+    if showcase_generation is not None and (
+        type(showcase_generation) is not int or showcase_generation < 1
+    ):
+        raise ValueError("invalid showcase generation")
+    if showcase_seed_version is not None and not showcase_seed_version.strip():
+        raise ValueError("invalid showcase seed version")
     # 必需LLM配置是启动前置条件：配置不完整时不得触碰模型、磁盘或Milvus。
     llm_client = OpenAICompatibleLLMClient.from_env()
     # BGE可能在首次加载时触发子进程初始化，必须先于Milvus/gRPC客户端。
@@ -337,6 +347,18 @@ def create_runtime_app(
                 app.state.conversation_service = conversation_service
                 app.state.conversation_graph = conversation_graph
                 app.state.memory_service = memory_service
+                dashboard_service = DashboardService(
+                    runtime_root=runtime_root,
+                    workspace_id=DEMO_WORKSPACE_ID,
+                    tasks=task_repository,
+                    facts=revenue_service,
+                    memory=memory_service,
+                    lease_generation=showcase_generation,
+                    seed_version=showcase_seed_version,
+                    preset_task_ids=showcase_preset_task_ids,
+                )
+                app.include_router(create_dashboard_router(dashboard_service))
+                app.state.dashboard_service = dashboard_service
                 app.include_router(create_task_router(task_repository, PersistentTemplateService(template_service, task_repository)))
                 app.state.task_repository = task_repository
                 app.include_router(create_report_router(ReportService(task_repository, source_service)))
