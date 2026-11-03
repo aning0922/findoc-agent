@@ -20,6 +20,7 @@ class Mutation:
 
 SEG = r"[^/]+"
 MUTATIONS = (
+    Mutation("POST", r"/cplus/exports", native_operation=True),
     Mutation("POST", r"/cplus/checkup-explanations", native_operation=True),
     Mutation("POST", r"/cplus/peer-comparisons", native_operation=True),
     Mutation("POST", r"/cplus/batch-plans", native_operation=True),

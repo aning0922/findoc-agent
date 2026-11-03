@@ -126,7 +126,7 @@ def ttl_minutes(config):
     return int(value)
 
 
-def environments(config, provider, seed, control, ledger, origin, backend_port, python, takeover, *, cplus=False):
+def environments(config, provider, seed, control, ledger, origin, backend_port, python, takeover, *, cplus=False,export_python=None):
     from app.demo.config import password_hash
 
     host = {k: os.environ[k] for k in HOST_KEYS if k in os.environ}
@@ -169,6 +169,8 @@ def environments(config, provider, seed, control, ledger, origin, backend_port, 
         backend["FINDOC_CPLUS_ENABLED"] = "1"
         frontend["VITE_FINDOC_CPLUS_MODE"] = "1"
         frontend["VITE_FINDOC_SHOWCASE_PREVIEW_CHARTS"] = "0"
+        if export_python:
+            backend['FINDOC_EXPORT_PYTHON']=str(export_python)
     return backend, frontend
 
 
@@ -215,6 +217,7 @@ def main(argv=None):
     parser.add_argument("--port", type=int)
     parser.add_argument("--gateway-port", type=int, default=0)
     parser.add_argument("--python", default=sys.executable)
+    parser.add_argument('--export-python',type=Path,help='Optional existing Python with openpyxl/python-pptx; server only')
     parser.add_argument("--node", default=shutil.which("node"))
     parser.add_argument(
         "--owner-takeover",
@@ -224,6 +227,9 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.port is None:
         args.port = 14540 if args.cplus else 14530
+    if args.export_python and (not args.export_python.is_absolute() or not args.export_python.is_file()
+                               or not os.access(args.export_python,os.X_OK)):
+        raise ValueError('existing_absolute_export_python_required')
     if args.provider_budget_db is not None and not args.provider_budget_db.is_absolute():
         raise ValueError("shared_budget_requires_explicit_absolute_path")
     if not safe_path(args.config).is_relative_to(safe_path(PROJECT / "data")):
@@ -313,6 +319,7 @@ def main(argv=None):
             python,
             args.owner_takeover,
             cplus=args.cplus,
+            export_python=args.export_python,
         )
         logfd = os.open(
             control / "launcher.log", os.O_CREAT | os.O_APPEND | os.O_WRONLY | os.O_NOFOLLOW, 0o600

@@ -41,3 +41,10 @@ After assembly changes: C+ suite36PASS/3SKIP (opt-inPDF tests); separate explici
 - `evidence/M3-http/result.json`: first actualpaid-path matrix PARTIAL, generic503 failures and 3newUNKNOWN preserved. `diagnostic.json`: one additional12sec bounded SDK ReadTimeout with safe cause chain; no response/usage observed. Samecap5/77calls/1.441018 reserved/4UNKNOWN; billednotobserved.
 - `corrected-no-provider.json`:19actualHTTP executionsPASS with realPDF/BGE/Milvus and rootreadonlymemoryadapter; all5 explanation/answer paths explicitly unconfigured, provider successes0. NaturalOCRquestion retrieved afterboundedFTS terms fix. Not a modelacceptance score. Full raw proof retainedignored with SHA in summary.
 - Independentbd67e29 baseline review1PASS/3XFAIL, --runxfail3FAIL/1PASS retainedreport. Afterrootpatch review rerun3PASS/1FAIL because originalfastfavorite test hardcoded malformedfield; contracttest updated to require422for malformed and200corrected, then targeted8PASS inclmemoryview. Rootsource/parse/memory lock plus forgedquote-tail tests continuepassing. Comparative financialFocus typedserverlookup1PASS verifies report2031 point2030 and rejectsperiod/value/source tamper.
+
+
+## M4 real saved candidate artifacts
+
+`M4-native-exports/result.json` actual11checks, trueReact+gateway+twoactualPDFfinancialcandidates→5metricpeer snapshot→3formats downloads+printedPDF, allsameexplicitref/SHA. CSV exact391371999819.49. Independent86aaca4 confirms textprecision/formulafree/sourcepages/PPTX6renderedpages; provider0/human0. PubliccandidateCSV/XLSX/PPTX committed as deliverables; 21-page initialPDF remainsignoredproof and rootcompactprint adjustment awaitsfreshmeasurement. ActualPDF/sourcebinary/DB/seed/config remainignored.
+
+AllC+current52PASS/3SKIP; standalonefullPDF testsalreadyseparatelyran (Midea1PASS) notmisreportedSKIPaspass. OriginalCcheckoutclean45d55d7. Rootverifiedoriginalv1/newv2/newv3filechecksums+SQLite; rootreadonlyv3candidatefirstscreen remainsassemblycandidateuntilnativeflow.

@@ -18,6 +18,8 @@ def main():
     parser.add_argument('--origin', default='http://127.0.0.1:14540')
     parser.add_argument('--login-config', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--security-code', default='600690')
+    parser.add_argument('--report-year',type=int,default=2025)
     args = parser.parse_args()
     config = dotenv_values(args.login_config, interpolate=False)
     evidence = {'tier': 'REAL_HTTP_PDF_BGE_MILVUS', 'provider_calls': 0,
@@ -64,18 +66,17 @@ def main():
         evidence['session'] = request('GET', '/demo/session')
         companies = request('GET', '/companies')
         result = request('POST', '/cplus/discovery/searches', json={
-            'operation_id': str(uuid4()), 'mode': 'companies', 'query': '600690'})
-        company = next(c for c in result['items'] if c['security_code'] == '600690'
-                       and c['exchange'] == 'SSE')
+            'operation_id': str(uuid4()), 'mode': 'companies', 'query': args.security_code})
+        company = next(c for c in result['items'] if c['security_code'] == args.security_code and c['supported'])
         result = request('POST', '/cplus/discovery/searches', json={
             'operation_id': str(uuid4()), 'mode': 'announcements',
-            'security_id': company['security_id'], 'report_year': 2025,
+            'security_id': company['security_id'], 'report_year': args.report_year,
             'kind': 'annual_fulltext'})
         evidence['announcements'] = result
         report = next(r for r in result['items'] if r['kind'] == 'annual_fulltext'
                       and r['language'] == 'zh')
-        known = next((c for c in companies if c['security_code'] == '600690'
-                      and c['exchange'] == 'SSE'), None)
+        known = next((c for c in companies if c['security_code'] == args.security_code
+                      and c['exchange'] == company['exchange']), None)
         operation_id = str(uuid4())
         imported = request('POST', '/cplus/discovery/imports', json={
             'operation_id': operation_id, 'candidate_id': report['candidate_id'],

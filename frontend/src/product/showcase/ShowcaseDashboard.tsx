@@ -445,7 +445,7 @@ export function ShowcaseDashboard({
             ))}
           </div>
           <div className="sd-grid">
-            <section className="sd-card" style={{ order: evidenceFirst ? 0 : 2 }}>
+            {import.meta.env.VITE_FINDOC_CPLUS_MODE==='1'&&!sample ? <CuratedFinancialCharts companyId={effectiveCompany}/> : <section className="sd-card" style={{ order: evidenceFirst ? 0 : 2 }}>
               <div className="sd-card-head">
                 <div>
                   <h3>财务趋势</h3>
@@ -512,7 +512,7 @@ export function ShowcaseDashboard({
                   </tbody>
                 </table>
               </details>
-            </section>
+            </section>}
             <section className="sd-card" style={{ order: 1 }}>
               <div className="sd-card-head">
                 <div>
@@ -639,3 +639,4 @@ export function ShowcaseDashboard({
     </div>
   );
 }
+import { CuratedFinancialCharts } from '../cplus/dashboard/CuratedFinancialCharts.tsx';

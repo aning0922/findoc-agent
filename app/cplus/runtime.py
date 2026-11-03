@@ -150,7 +150,11 @@ def register_cplus_runtime(app, runtime_root, *, sources, parse_service, prepare
                            for n in ref.selected_pages):
                         raise RetrievalError("artifact_page_changed")
             if payload.get("parent_conversation_id"):
-                conversations._scope(db, payload["parent_conversation_id"])
+                _,parent_documents=conversations._scope(db, payload["parent_conversation_id"])
+                if payload.get('parent_sources') is not None and [d.model_dump() for d in parent_documents]!=payload['parent_sources']:
+                    raise RetrievalError('parent_source_scope_changed')
+            if payload.get('preference_generation') is not None:
+                conversations.check_generation_in(db,payload['preference_generation'])
             validate_identity(identity)
             yield
             validate_identity(identity)
@@ -256,9 +260,15 @@ def register_cplus_runtime(app, runtime_root, *, sources, parse_service, prepare
                      provider_json=checkup_explanation if llm_client.model!='disabled-no-calls' else None,memory=cplus_memory)
     app.include_router(create_checkup_explanation_router(explanations,identity_provider))
     app.state.cplus_checkup_explanation_service=explanations
+    from app.cplus.exports import register_exports
+    register_exports(app,root,hybrid=hybrid,annual=annual,peer=peer,statements=statements,
+                     identity_provider=identity_provider,validate=validate_identity,guard=publication_guard,
+                     conversations=conversations)
     app.state.cplus_retrieval_service = hybrid
     app.state.cplus_statement_service = statements
     app.state.cplus_identity_provider = identity_provider
+    from app.cplus.curated_finance import create_curated_finance_router
+    app.include_router(create_curated_finance_router(root,sources,identity_provider,validate_identity))
     app.state.cplus_publication_guard = publication_guard
     app.state.cplus_provider_once = provider_once
     app.state.cplus_legacy_hybrid_search = LegacyHybridSearch(dense_scope, hybrid)

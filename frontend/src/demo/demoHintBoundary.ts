@@ -10,6 +10,7 @@ const sessionExact = new Set([
   "findoc:cplus-discovery-import",
   "findoc:cplus-peer-operation",
   "findoc:cplus-batch-operation",
+  "findoc:cplus-export-operation",
 ]);
 const sessionPrefixes = [
   "findoc:cplus-finance:",

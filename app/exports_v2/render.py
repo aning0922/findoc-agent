@@ -196,7 +196,7 @@ def pptx(data):
     text = refs[0]["text"] if refs else "快照无带来源页码的原文摘录。"
     excerpt = text[:240] + ("…〔节选，完整原文见表格导出〕" if len(text) > 240 else "")
     box(s, excerpt, 0.9, 1.6, 11.4, 3.9, 23)
-    box(s, "来源引用保持原快照；OCR转录未经人工核对，不能代替财务确认。", 0.9, 5.9, 11.4, 0.7, 17)
+    box(s, "来源引用保持原快照；文字与表格转录仍待核查，不能代替财务确认。", 0.9, 5.9, 11.4, 0.7, 17)
     s = slide("AI解释与审阅状态")
     interpretation = data["snapshot"].get("interpretation")
     if not interpretation:

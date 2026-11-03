@@ -11,3 +11,8 @@ Independent review `reviews/M1-boundary-review.md`: source journal check before 
 ## Current external/model limit
 
 Four C+physical model attempts endedReadTimeout/UNKNOWN; currentprovider response/billing unknown. Sameexisting5cap, norefund/reset/automaticreplay. Models temporarilydisabled to finish actualdata/UI/export paths; AI explanations remainwired but realC+modelacceptance notpassed. HTTPendpointHEAD reachable withoutcredentials doesnot prove authenticatedPOST/providerhealth.
+
+
+## M4 finite limits
+
+Initial generic printPDF21pages; root compact businessprint improvement awaitingnative rerender. PPTX6pages built/rendered; Chinese LibreOffice rendering needs availableChinese fontconfig (not an assertion that client files inherentlygarble). Filedownload revalidates lease/owner and returnsimmutablebytes; old archive exports remaindomainseparate. Fullformat renderer requiresopenpyxl/python-pptx; launcher --export-python selects an existing server-only Python, defaultCSVworks butxlsx/pptx dependencies mustbeinstalled.

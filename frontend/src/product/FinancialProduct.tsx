@@ -24,6 +24,8 @@ import { CompanyDirectory } from "./CompanyDirectory.tsx";
 import { CompanyDiscoveryPanel } from "./cplus/sources/CompanyDiscoveryPanel.tsx";
 import { CPlusCompanyEntry } from "./cplus/profile/CPlusCompanyEntry.tsx";
 import { DocumentResearchPanel } from "./cplus/research/DocumentResearchPanel.tsx";
+import { CPlusExportPanel } from "./cplus/exports/CPlusExportPanel.tsx";
+import { BatchResearchEntry } from "./cplus/batch/BatchResearchEntry.tsx";
 import type { Page } from "./AppShell.tsx";
 import { METRICS } from "../evidence/contracts.ts";
 import {
@@ -134,7 +136,7 @@ export default function FinancialProduct({
         <>{discovery}<CompanyDirectory companies={companies} loading={companiesLoading} /></>
       ) : route.page === 'conversations' ? (
         <Suspense fallback={<p role="status">正在打开研究助手…</p>}>
-          <>{cplus&&<DocumentResearchPanel/>}<Conversations companies={companies} /></>
+          <>{cplus&&<><DocumentResearchPanel/><details className="product-card"><summary>批量研究 · 两家公司 × 两类原文任务</summary><BatchResearchEntry companies={companies}/></details></>}<Conversations companies={companies} /></>
         </Suspense>
       ) : route.page === "research" ? (
         <ResearchWorkbench
@@ -145,7 +147,7 @@ export default function FinancialProduct({
           chooseCompany={(id) => navigate("research", id)}
         />
       ) : route.page === "reports" ? (
-        <><ShowcaseArchivePanel kind="report" /><ShowcaseReportsEntry /><details open={new URLSearchParams(location.search).has("report") || new URLSearchParams(location.search).has("task")}><summary>经营研究历史报告（V1.2）</summary><ReportPreview
+        <>{cplus&&<CPlusExportPanel/>}<ShowcaseArchivePanel kind="report" /><ShowcaseReportsEntry /><details open={new URLSearchParams(location.search).has("report") || new URLSearchParams(location.search).has("task")}><summary>经营研究历史报告（V1.2）</summary><ReportPreview
           key={route.key}
           companies={companies}
           access={access}

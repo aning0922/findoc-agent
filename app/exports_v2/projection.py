@@ -40,6 +40,12 @@ def project(ref, resolved):
 
     def visit(v, path="snapshot"):
         if isinstance(v, dict):
+            if ('text' not in v and all(k in v for k in ('document_id','source_revision','physical_page','raw_label','raw_value'))):
+                evidence.append(dict(path=path,kind='statement_cell_transcription',
+                                     text=f"候选表格单元转录（待核对）：{v['raw_label']} · {v['raw_value']}",
+                                     document_id=v['document_id'],source_revision=v['source_revision'],
+                                     physical_page=v['physical_page'],content_sha256=v.get('content_sha256'),
+                                     transcription_review_status='unreviewed',financial_review='unconfirmed'))
             if "metric_key" in v and any(
                 k in v for k in ("normalized_decimal", "raw_decimal", "value_decimal")
             ):
@@ -63,6 +69,7 @@ def project(ref, resolved):
                                 "unit",
                                 "raw_decimal",
                                 "normalized_decimal",
+                                "normalized_unit",
                                 "value_decimal",
                                 "financial_review",
                                 "receipt_ref",
