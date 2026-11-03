@@ -11,3 +11,8 @@
 
 - B02 worker首候选370e3d0：worker报告build/lint/六张截图+点击流程通过。主控实际读代码并查看Navy1440/Ink1440/Navy390，选择Navy但发现登录/状态流和需求误解，未验收B02。截图路径见reviews交接；原型只是UI_MOCK。
 - 模型动态派工：B02初Terra/medium，独立审查后同会话升级Terra/high并重命名“FinDoc C｜M0 首页与登录原型 · 主控修订”；架构评审Astra/ultra。仅记录工具调用配置，不估计计费金额。
+
+- B02主控独立验证于集成5209c8e+最终8c2c8a7补修：Chromium真实HTTP localhost14521，1440/1280/390登录/首页截图、正常登录转场/搜索预填/模式/占用接管确认重置/过期/被接管全部PASS。仅UI_MOCK，无真实auth。主控修复login固定覆盖层下仍挂载工作区的问题，增加登录下不存在sidebar断言；截图位于 `/Users/aipuli/.codex/visualizations/2026/11/03/01a19f9b-6d5d-77d1-92a6-7df1c95f4c96/m0`。
+- 主控Node24 build/lint通过，4条fast-refresh警告（含原有测试）及既有bundle>500kB警告；未删警告。
+- B01独立评审49e0eba已收取/真实阅读，纳入6项P0合同。不是业务安全验收。
+- Git复制工作包原先受text=auto归一CSV行尾，已加限定gitattributes -text并重新staged逐文件与ZIP比对：0差异；原始ZIP保留Downloads。
