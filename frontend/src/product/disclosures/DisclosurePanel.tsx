@@ -30,15 +30,33 @@ type Operation = {
   error_code: string | null;
   result: unknown;
 };
+type Pending = {
+  company: string;
+  id: string;
+  candidateId?: string;
+  reportYear?: number;
+};
 const key = (company: string) => `findoc:disclosure-import:${company}`;
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 function saved(company: string) {
   const raw = sessionStorage.getItem(key(company));
-  if (!raw) return "";
+  if (!raw) return null;
   const x = JSON.parse(raw);
   if (x?.company !== company || typeof x.id !== "string" || !uuid.test(x.id))
     throw new Error("invalid recovery hint");
-  return x.id as string;
+  const hasCandidate =
+    typeof x.candidateId === "string" &&
+    x.candidateId.length > 0 &&
+    x.candidateId.length <= 200 &&
+    Number.isInteger(x.reportYear) &&
+    x.reportYear >= 1 &&
+    x.reportYear <= 9999;
+  if (
+    !hasCandidate &&
+    (x.candidateId !== undefined || x.reportYear !== undefined)
+  )
+    throw new Error("invalid recovery hint");
+  return x as Pending;
 }
 function url(value: string) {
   try {
@@ -81,7 +99,7 @@ export function DisclosurePanel({
   const [items, setItems] = useState<Candidate[]>([]);
   const [limitations, setLimitations] = useState<string[]>([]);
   const [message, setMessage] = useState("");
-  const [op, setOp] = useState("");
+  const [op, setOp] = useState<Pending | null>(null);
   const [busy, setBusy] = useState(false);
   const [storageBlocked, setStorageBlocked] = useState(false);
   const [searched, setSearched] = useState(false);
@@ -105,7 +123,7 @@ export function DisclosurePanel({
       setMessage(pending ? "发现上次导入待查证，请只读查询原操作。" : "");
     } catch {
       setStorageBlocked(true);
-      setOp("");
+      setOp(null);
       setMessage("本机导入线索无法读取，请先核对资料目录；暂不提交新导入。");
     }
     setBusy(false);
@@ -176,26 +194,47 @@ export function DisclosurePanel({
       }
     }
   }
-  function apply(x: Operation, id: string) {
-    if (!validOperation(x, id))
+  function apply(x: Operation, pending: Pending, httpOK: boolean) {
+    if (!validOperation(x, pending.id))
       throw Error("操作结果无法核验，请只读查询原操作。");
     if (x.state === "completed") {
-      sessionStorage.removeItem(key(company));
-      setOp("");
+      if (
+        !httpOK ||
+        !pending.candidateId ||
+        !pending.reportYear ||
+        !x.result ||
+        typeof x.result !== "object"
+      )
+        throw Error("完成结果缺少可核验的操作线索，请只读查询并核对资料目录。");
+      const result = x.result as {
+        document_id?: unknown;
+        metadata?: { company_id?: unknown; report_year?: unknown };
+        disclosure_import?: { candidate_id?: unknown };
+      };
+      if (
+        typeof result.document_id !== "string" ||
+        !/^[0-9a-f]{64}$/.test(result.document_id) ||
+        result.metadata?.company_id !== pending.company ||
+        result.metadata?.report_year !== pending.reportYear ||
+        result.disclosure_import?.candidate_id !== pending.candidateId
+      )
+        throw Error("完成结果与原操作不匹配，请只读查询并核对资料目录。");
+      sessionStorage.removeItem(key(pending.company));
+      setOp(null);
       setMessage(
         "已完成上传与企业绑定。解析状态请在资料目录另行查看；这不代表财务数据已确认。",
       );
       try {
         onImported?.();
       } catch {
-        /* Existing directory can still be refreshed manually. */
+        /* Existing directory remains available. */
       }
     } else if (x.state === "failed") {
-      sessionStorage.removeItem(key(company));
-      setOp("");
+      sessionStorage.removeItem(key(pending.company));
+      setOp(null);
       setMessage("导入失败，请查看资料目录并使用手动上传或重新选择。");
     } else {
-      setOp(id);
+      setOp(pending);
       setMessage(
         "导入结果未知，服务端可能仍在处理；请只读查询原操作，不要重复导入。",
       );
@@ -210,13 +249,19 @@ export function DisclosurePanel({
     )
       return;
     const id = crypto.randomUUID();
+    const pending: Pending = {
+      company,
+      id,
+      candidateId: candidate.candidate_id,
+      reportYear: candidate.report_year,
+    };
     try {
-      sessionStorage.setItem(key(company), JSON.stringify({ company, id }));
+      sessionStorage.setItem(key(company), JSON.stringify(pending));
     } catch {
       setMessage("无法保存操作身份，未提交导入。");
       return;
     }
-    setOp(id);
+    setOp(pending);
     lock.current = true;
     setBusy(true);
     const n = epoch.current,
@@ -236,7 +281,31 @@ export function DisclosurePanel({
       });
       const x = (await r.json()) as Operation;
       if (n !== epoch.current) return;
-      apply(x, id);
+      if (!r.ok && x?.state === "completed")
+        throw Error("非成功响应不能确认导入完成。");
+      if (!r.ok && !validOperation(x, id)) {
+        const detail = (
+          x as unknown as { detail?: { code?: string; message?: string } }
+        ).detail;
+        const code = detail?.code || "";
+        const safe =
+          (r.status === 422 &&
+            ["invalid_request", "invalid_operation_id"].includes(code)) ||
+          (r.status === 404 && code === "candidate_not_found") ||
+          (r.status === 409 && code === "candidate_company_mismatch");
+        if (safe) {
+          sessionStorage.removeItem(key(company));
+          setOp(null);
+          setMessage("服务端拒绝导入，请核对企业和年报。");
+          return;
+        }
+        if (r.status >= 400 && r.status < 500) {
+          setMessage("服务端拒绝请求；原操作是否执行尚需核对，请只读查询。");
+          return;
+        }
+        throw Error("导入结果未知，请只读查询。");
+      }
+      apply(x, pending, r.ok);
     } catch {
       if (n === epoch.current && !c.signal.aborted)
         setMessage("导入结果未知，服务端可能仍在处理；请只读查询原操作。");
@@ -252,7 +321,8 @@ export function DisclosurePanel({
     if (lock.current || !op) return;
     lock.current = true;
     setBusy(true);
-    const id = op,
+    const pending = op,
+      id = pending.id,
       n = epoch.current,
       c = new AbortController();
     controller.current = c;
@@ -263,7 +333,7 @@ export function DisclosurePanel({
       );
       if (!r.ok) throw Error("暂未查到该操作，请稍后只读查询并核对资料目录。");
       const x = (await r.json()) as Operation;
-      if (n === epoch.current) apply(x, id);
+      if (n === epoch.current) apply(x, pending, r.ok);
     } catch (e) {
       if (n === epoch.current && !c.signal.aborted)
         setMessage((e as Error).message || "只读查询未完成，请稍后重试。");

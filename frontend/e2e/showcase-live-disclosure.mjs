@@ -70,7 +70,11 @@ for (const width of [1440, 1280, 390]) {
           state: "completed",
           phase: "completed",
           error_code: null,
-          result: { document_id: "fake" },
+          result: {
+            document_id: "a".repeat(64),
+            metadata: { company_id: "a", report_year: 2025 },
+            disclosure_import: { candidate_id: "c1" },
+          },
         };
     } else {
       const id = path.split("/").at(-1);
@@ -80,8 +84,28 @@ for (const width of [1440, 1280, 390]) {
         state: "completed",
         phase: "completed",
         error_code: null,
-        result: { document_id: "fake" },
+        result: {
+          document_id: "a".repeat(64),
+          metadata: { company_id: "a", report_year: 2025 },
+          disclosure_import: { candidate_id: "c1" },
+        },
       };
+    }
+    if (path.endsWith("/import") && mode.startsWith("bad-")) {
+      if (mode === "bad-company") data.result.metadata.company_id = "b";
+      if (mode === "bad-year") data.result.metadata.report_year = 2024;
+      if (mode === "bad-candidate")
+        data.result.disclosure_import.candidate_id = "wrong";
+      if (mode === "bad-document") data.result.document_id = "../bad";
+      if (mode === "bad-http") status = 503;
+    }
+    if (path.endsWith("/import") && mode === "rejected") {
+      status = 403;
+      data = { detail: { code: "forbidden", message: "拒绝" } };
+    }
+    if (path.endsWith("/import") && mode === "invalid-request") {
+      status = 422;
+      data = { detail: { code: "invalid_request", message: "无效" } };
     }
     await r.fulfill({
       status,
@@ -97,9 +121,36 @@ for (const width of [1440, 1280, 390]) {
     throw Error("overflow " + width);
   await p.getByRole("button", { name: "明确导入此年报" }).click();
   await p.getByText("已完成上传与企业绑定。", { exact: false }).waitFor();
-  await p.screenshot({path:`${out}/success-${width}.png`,fullPage:true});
+  await p.screenshot({ path: `${out}/success-${width}.png`, fullPage: true });
   if ((await p.locator("#count").innerText()) !== "1")
     throw Error("missing callback");
+  for (const invalid of [
+    "bad-company",
+    "bad-year",
+    "bad-candidate",
+    "bad-document",
+    "bad-http",
+    "rejected",
+  ]) {
+    mode = invalid;
+    const before = Number(await p.locator("#count").innerText());
+    await p.getByRole("button", { name: "明确导入此年报" }).click();
+    await p.getByRole("button", { name: "只读查询原操作" }).waitFor();
+    if (Number(await p.locator("#count").innerText()) !== before)
+      throw Error(invalid + " accepted");
+    if (invalid === "rejected")
+      await p
+        .getByText("服务端拒绝请求；原操作是否执行尚需核对，请只读查询。")
+        .waitFor();
+    await p.getByRole("button", { name: "只读查询原操作" }).click();
+    await p.getByText("已完成上传与企业绑定。", { exact: false }).waitFor();
+  }
+  mode = "invalid-request";
+  await p.getByRole("button", { name: "明确导入此年报" }).click();
+  await p.getByText("服务端拒绝导入，请核对企业和年报。").waitFor();
+  if (await p.getByRole("button", { name: "只读查询原操作" }).count())
+    throw Error("safe rejection retained operation");
+  const expectedPosts = posts + 1;
   mode = "unknown";
   await p.getByRole("button", { name: "明确导入此年报" }).click();
   await p.getByRole("button", { name: "只读查询原操作" }).waitFor();
@@ -107,7 +158,7 @@ for (const width of [1440, 1280, 390]) {
   await p.reload();
   await p.getByRole("button", { name: "只读查询原操作" }).click();
   await p.getByText("已完成上传与企业绑定。", { exact: false }).waitFor();
-  if (posts !== 2) throw Error("POST replay");
+  if (posts !== expectedPosts) throw Error("POST replay");
   mode = "late";
   await p.getByRole("button", { name: "查询目录" }).click();
   await p.waitForTimeout(100);
@@ -120,7 +171,7 @@ for (const width of [1440, 1280, 390]) {
     throw Error("stale response");
   if (errors.length) throw Error(errors.join(";"));
   console.log(
-    `PASS D03 mock ${width}: success, unknown reload/read-only, switch`,
+    `PASS D03 mock ${width}: DTO identity, non-2xx, rejection, unknown reload/read-only, switch`,
   );
   await p.close();
 }
