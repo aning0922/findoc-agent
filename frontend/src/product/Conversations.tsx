@@ -27,7 +27,7 @@ export default function Conversations({ companies }: { companies: Company[] }) {
   const [candidate, setCandidate] = useState<MemoryCandidate | undefined>();
   const [options, setOptions] = useState<ConversationSourceOptions | null>(null);
   const [selected, setSelected] = useState<string[]>([]);
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState(() => new URLSearchParams(location.search).get('company') || '');
   const [sourceError, setSourceError] = useState('');
   const [sourceLoading, setSourceLoading] = useState(true);
   const [sourceReload, setSourceReload] = useState(0);
@@ -37,7 +37,12 @@ export default function Conversations({ companies }: { companies: Company[] }) {
   const [listError, setListError] = useState('');
   const [listBusy, setListBusy] = useState(false);
   const [listReload, setListReload] = useState(0);
-  const [question, setQuestion] = useState('');
+  // Homepage navigation only fills a draft. It never selects source authority,
+  // creates a conversation, or sends a provider request.
+  const [question, setQuestion] = useState(() => {
+    const value = new URLSearchParams(location.search).get('question') || '';
+    return value.length <= 1000 ? value : '';
+  });
   const [busy, setBusy] = useState(false);
   const [conversationNeedsRefresh, setConversationNeedsRefresh] = useState(false);
   const [createNeedsRefresh, setCreateNeedsRefresh] = useState(false);

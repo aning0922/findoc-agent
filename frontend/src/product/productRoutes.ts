@@ -5,7 +5,7 @@ export type ProductRoute = { page: Page; company: string; home: boolean; task: s
 // URLs are read-only navigation intent. Each business component must validate server identity.
 export function readProductRoute(url: URL): ProductRoute {
   const q = url.searchParams;
-  for (const name of ['company', 'task', 'run', 'report', 'revision', 'mode', 'section', 'new', 'return_task', 'draft', 'conversation'])
+  for (const name of ['company', 'task', 'run', 'report', 'revision', 'mode', 'section', 'new', 'return_task', 'draft', 'conversation', 'question'])
     if (q.getAll(name).length > 1) throw new Error('地址身份参数重复，请从我的研究重新进入。');
   const match = url.pathname.match(/^\/companies\/([^/]+)\/(overview|analysis|documents)$/);
   const view = q.get('view');

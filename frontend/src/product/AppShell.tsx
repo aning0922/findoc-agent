@@ -9,9 +9,9 @@ export type { Page } from './productRoutes.ts';
 export { pathFor } from './productRoutes.ts';
 const navigation: { key: string; page: Page; label: string; icon: IconName; href: string }[] = [
   { key: 'home', page: 'home', label: '首页', icon: 'book', href: '/' },
+  { key: 'qa', page: 'conversations', label: 'AI 研究助手', icon: 'quote', href: '/conversations' },
+  { key: 'companies', page: 'companies', label: '企业与资料', icon: 'library', href: '/companies' },
   { key: 'tasks', page: 'tasks', label: '研究任务', icon: 'research', href: '/tasks' },
-  { key: 'companies', page: 'companies', label: '企业与年报', icon: 'library', href: '/companies' },
-  { key: 'qa', page: 'conversations', label: '研究助手', icon: 'quote', href: '/conversations' },
   { key: 'reports', page: 'reports', label: '我的报告', icon: 'file', href: '/reports' },
 ];
 export function AppShell({
@@ -85,13 +85,13 @@ export function AppShell({
             </strong>
             <small>ANALYST</small>
           </span>
-          <span className="version">V1</span>
+          <span className="version">DEMO</span>
         </a>
         <div className="workspace-label">
           <span className="workspace-avatar">F</span>
           <div>
-            <strong>我的研究空间</strong>
-            <span>个人工作空间</span>
+            <strong>财报研究空间</strong>
+            <span>资料、研究与报告</span>
           </div>
         </div>
         <span className="nav-caption">工作空间</span>
@@ -143,7 +143,7 @@ export function AppShell({
             工作空间 <Icon name="chevron" size={13} />
             <span>{navigation.find((n) => n.key === globalPage)?.label}</span>
           </div>
-          <span className="workspace-note">个人研究空间</span>
+          <span className="workspace-note">财报研究工作台</span>
         </header>
         {label && (
           <div className="test-banner" role="status">
@@ -154,8 +154,8 @@ export function AppShell({
           {children}
         </main>
         <footer className="app-footer">
-          <span>FinDoc Analyst V1</span>
-          <span>人民币 · 合并口径 · 原文可追溯</span>
+          <span>FinDoc · AI 研究工作台</span>
+          <span>年报原文 · 数值核对 · AI 解读</span>
         </footer>
       </div>
     </div>

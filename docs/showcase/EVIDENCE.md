@@ -16,3 +16,5 @@
 - 主控Node24 build/lint通过，4条fast-refresh警告（含原有测试）及既有bundle>500kB警告；未删警告。
 - B01独立评审49e0eba已收取/真实阅读，纳入6项P0合同。不是业务安全验收。
 - Git复制工作包原先受text=auto归一CSV行尾，已加限定gitattributes -text并重新staged逐文件与ZIP比对：0差异；原始ZIP保留Downloads。
+
+- M1 U01局部：主控修改AppShell/tokens/shell/productRoutes/Conversations，运行Node24 `productRoutes.test.ts conversationFoundation.test.ts` 6PASS/0skip，旧QA/task/run/report/revision深链保留；预填实际HTTP无POST验证待联调。

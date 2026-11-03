@@ -15,3 +15,5 @@
 M0完成证据：独立审查源49e0eba（集成5feba0c），UI源370e3d0/0ec4a71（集成6c619c0/5209c8e），主控补修8c2c8a7；API_MINIMUM v1.0纳入六项P0合同。主控在集成工作树复跑1440/1280/390 Chromium+主要点击PASS；build/lint PASS（chunk/fast-refresh警告保留）。本地原型 http://127.0.0.1:14521/showcase.html ，仅UI_MOCK。
 
 M1排程：Sol/high负责L01→L02→L03；Dashboard数据H01独立owner；原UI会话转Terra/medium负责H02/H03新组件+L04界面，遇跨身份状态再high。主控唯一接线AppShell/ResearchHome/main/runtime，独立审查每个SHA。完整seed/reset HTTP/进程验证属于L03/L04 owner，不能用空runtime启动spike代替。
+
+U01主控接线进行中：五导航顺序/中文名、Navy全站tokens、question/company URL仅预填Conversations草稿/资料筛选（不选源/不创建/不发模型）；相关route/conversationFoundation 6PASS。Dashboard与Demo模块待worker交割后接入。
