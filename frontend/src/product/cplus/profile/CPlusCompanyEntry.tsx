@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Company } from '../../api.ts';
 import { listDocuments } from '../../documentLibraryApi.ts';
 import { CPlusCompany360 } from './CPlusCompany360.tsx';
+import { ProfileWorkflowPanel } from './ProfileWorkflowPanel.tsx';
 import { AnnualDiffPanel, type AnnualSourceRef } from '../insights/AnnualDiffPanel.tsx';
 import { PeerComparisonPanel, type PeerCollection } from '../comparisons/PeerComparisonPanel.tsx';
 import { SegmentResearchPanel } from '../comparisons/SegmentCandidatesPanel.tsx';
@@ -21,10 +22,11 @@ export function CPlusCompanyEntry({companyId,companies}:{companyId:string;compan
  useEffect(()=>{const controller=new AbortController();void Promise.allSettled(companies.map(async c=>{const r=await fetch(`/api/cplus/companies/${encodeURIComponent(c.company_id)}/statements`,{signal:controller.signal,cache:'no-store'});if(!r.ok)throw Error();return (await r.json()).collections as PeerCollection[]})).then(results=>{if(!controller.signal.aborted)setCollections(results.flatMap(r=>r.status==='fulfilled'?r.value:[]))});return()=>controller.abort()},[companies,refresh]);
  function draft(value:ResearchDraft){const id=crypto.randomUUID();sessionStorage.setItem(`findoc:cplus-research:draft:${id}`,JSON.stringify(value));window.location.assign(`/conversations?${new URLSearchParams({company:value.companyId,question:value.question,cplus_draft:id})}`)}
  return <><CPlusCompany360 companyId={companyId} companies={companies} onResearchDraft={draft}/>
+ <ProfileWorkflowPanel key={companyId} companyId={companyId} sources={sources} onResearchDraft={draft}/>
  <p>{notice} <button onClick={()=>setRefresh(v=>v+1)}>刷新进阶研究资料</button></p>
  <details className="product-card cplus-module-card"><summary>跨年经营变化 · 双侧原文</summary><AnnualDiffPanel companyId={companyId} sources={sources.filter(s=>s.company_id===companyId)}/></details>
  <details className="product-card cplus-module-card"><summary>同行对标 · 明确选择可比数据</summary><p>先在各企业三表中提取候选，再刷新资料。每项选择具体期间，不自动挑最新版本。</p><PeerComparisonPanel companies={companies} collections={collections}/></details>
  <details className="product-card cplus-module-card"><summary>主营业务结构 · 产品与地区</summary><SegmentResearchPanel companyId={companyId} sources={sources.filter(s=>s.company_id===companyId)}/></details>
- <details className="product-card cplus-module-card"><summary>AI 体检解释 · 从程序规则到核查建议</summary><CheckupExplanationPanel companyId={companyId}/></details>
+ <details id="cplus-checkup" className="product-card cplus-module-card"><summary>AI 体检解释 · 从程序规则到核查建议</summary><CheckupExplanationPanel companyId={companyId}/></details>
  <details className="product-card cplus-module-card"><summary>研究模板与指标释义</summary><ResearchTemplatesPanel companyId={companyId} sources={sources.filter(s=>s.company_id===companyId)} onResearchDraft={draft}/></details></>;
 }
