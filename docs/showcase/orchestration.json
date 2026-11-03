@@ -3,38 +3,48 @@
   "integration_branch": "codex/findoc-showcase-c-integration",
   "sessions": [
     {
-      "task": "M01/M02 source-bound semantic research memory",
+      "task": "M02 semantic memory UI and preferences",
       "thread_id": "01a19f9d-6c32-7ba2-a9c5-b8b708440c82",
       "client_thread_id": "client-new-thread:dbd76a05-7cb9-479d-99d1-9b24181cb164",
       "model": "gpt-6.1-terra",
-      "thinking": "high",
-      "branch": "codex/showcase-m01",
+      "thinking": "medium",
+      "branch": "codex/showcase-m02-ui",
       "worktree": "/Users/aipuli/.codex/worktrees/ce18/findoc-agent",
-      "status": "running_contract",
-      "prior_task": "O02 7db1ea6 integratedb81962f"
+      "status": "running",
+      "prior_task": "S03 a08fdc3 delivered, root review pending"
     },
     {
-      "task": "O03 OCR image and candidate grid preview",
+      "task": "A03/C02 unified AI workspace UI",
       "thread_id": "01a19f9d-a871-7520-aed9-dd6d22774d1a",
       "client_thread_id": "client-new-thread:6cde4161-9153-4002-b48f-e39fa83749da",
       "model": "gpt-6.1-terra",
-      "thinking": "medium",
-      "branch": "codex/showcase-o03",
+      "thinking": "high",
+      "branch": "codex/showcase-a03-ui",
       "worktree": "/Users/aipuli/.codex/worktrees/3f05/findoc-agent",
-      "status": "running",
+      "status": "running_contract",
       "reviewed_candidate": "9cdc3d5 integrated4bf1bef",
-      "prior_task": "D03 1333b14 integrated5352471 + real HTTP pass"
+      "prior_task": "F03 661f8b4 delivered root review pending"
     },
     {
-      "task": "F01/F02 extended metrics v2",
+      "task": "C01/C02/S01 then S02/A01/A02 Agent",
       "thread_id": "01a19fa9-6671-7841-9393-46d2bced4e89",
       "client_thread_id": "client-new-thread:e0c54854-e9d1-44d5-9e35-9e9c1a6ccdd3",
       "model": "gpt-6.1-sol",
       "thinking": "high",
-      "branch": "codex/showcase-f01",
+      "branch": "codex/showcase-c01",
       "worktree": "/Users/aipuli/.codex/worktrees/4eab/findoc-agent",
-      "status": "running_contract",
-      "prior_task": "L01-L03 7f6f268 integratedc826a05 + independentcf5f881"
+      "status": "running_group1",
+      "prior_task": "F01/F02 13bdeaf integratedc23c0a8"
     }
-  ]
+  ],
+  "provider_verification": {
+    "budget_cny": "5",
+    "controller_only": true,
+    "config_path": "/Users/aipuli/Documents/Projects/findoc-agent/.env",
+    "model": "deepseek-flash",
+    "provider_host": "api.deepseek.com",
+    "ledger_relative": "data/showcase-cost-control/provider-budget.db",
+    "reserved_cny": "0.004678",
+    "actual_billed": "not_observed"
+  }
 }

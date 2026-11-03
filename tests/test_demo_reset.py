@@ -45,6 +45,21 @@ def test_seed_is_readonly_checked_fresh_and_not_full_product_seed(tmp_path):
         verify_seed(seed, digest)
 
 
+def test_group_permission_probe_requires_independent_exit_evidence(monkeypatch):
+    from types import SimpleNamespace
+    from app.demo import process
+
+    def denied(*_):
+        raise PermissionError("transient OS probe refusal")
+
+    monkeypatch.setattr(process.os, "killpg", denied)
+    monkeypatch.setattr(process.subprocess, "run", lambda *a, **kw: SimpleNamespace(returncode=0, stdout="123\n456\n"))
+    assert process.group_alive(123)
+    assert not process.group_alive(789)
+    monkeypatch.setattr(process.subprocess, "run", lambda *a, **kw: SimpleNamespace(returncode=1, stdout=""))
+    assert process.group_alive(789)  # Unverifiable is not a proof of termination.
+
+
 def test_real_process_fake_engine_secret_readiness_and_fresh_generation(tmp_path, monkeypatch):
     monkeypatch.setenv("DEMO_PASSWORD_HASH", "test-only-placeholder-not-used-for-config")
     seed, manifest, _ = seed_for(tmp_path)

@@ -1,4 +1,6 @@
 .parse-quality {
+  min-width: 0;
+  max-width: 100%;
   background: var(--color-surface, #fff);
   color: var(--color-text, #192b3d);
   border: 1px solid var(--color-border, #e4eaf2);
@@ -38,7 +40,7 @@
 .parse-quality summary {
   min-height: 44px;
 }
-.parse-quality button {
+.parse-quality.parse-quality button {
   background: var(--color-primary, #4878d4);
   border: 0;
   border-radius: 7px;
@@ -86,7 +88,7 @@
 }
 .parse-quality .parse-page-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 16px;
 }
 .parse-quality .parse-image {
@@ -109,6 +111,7 @@
   font-size: 12px;
 }
 .parse-quality .parse-scroll {
+  min-width: 0;
   overflow: auto;
   max-width: 100%;
   border: 1px solid #e1e8ef;

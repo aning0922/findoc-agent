@@ -484,6 +484,9 @@ export function ParseQualityPanel({
                   ) : (
                     <p>来源已变化，历史产物不借用当前原图。</p>
                   )}
+                  {quality.source_status === "current" && <a
+                    href={`/api/documents/${base}/parse-artifacts/${encodeURIComponent(quality.artifact_id)}/pages/${page.physical_page}/image`}
+                    target="_blank" rel="noreferrer">查看原页大图 ↗</a>}
                 </div>
                 <div>
                   <h4>候选转录 · 未核对</h4>
@@ -504,7 +507,8 @@ export function ParseQualityPanel({
                 >
                   <h4>版面候选 · 需人工核对</h4>
                   <p>{table.warning} 跨度未知；行列仅为候选布局。</p>
-                  <div className="parse-scroll">
+                  <p>候选布局 {table.row_count} 行 / {table.column_count} 列 · 左右滚动查看全部列</p>
+                  <div className="parse-scroll" role="region" aria-label="可横向滚动的候选表格" tabIndex={0}>
                     <table>
                       <tbody>
                         {Array.from({ length: table.row_count }, (_, row) => (

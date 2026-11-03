@@ -16,7 +16,7 @@ from scripts.showcase_demo_http_check import free_port, launch, wait_http
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--flow', choices=('demo', 'disclosure'), default='demo')
+    parser.add_argument('--flow', choices=('demo', 'disclosure', 'parsing'), default='demo')
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[2]
     evidence = Path(tempfile.mkdtemp(prefix="findoc-integrated-http-")).resolve()
@@ -45,11 +45,14 @@ def main():
                            "FINDOC_E2E_DISABLE_ENV_FILES": "1", "FINDOC_API_ORIGIN": f"http://127.0.0.1:{backend_port}"}, frontend, log)
             processes.append(vite)
             wait_http(origin, vite)
-            script = 'showcase-integrated-http.mjs' if args.flow == 'demo' else 'showcase-disclosure-http.mjs'
+            script = {'demo': 'showcase-integrated-http.mjs', 'disclosure': 'showcase-disclosure-http.mjs',
+                      'parsing': 'showcase-parsing-http.mjs'}[args.flow]
             result = subprocess.run(["node", str(frontend / 'e2e' / script)], cwd=frontend,
                                     env={**env, "DEMO_CHECK_ORIGIN": origin, "DEMO_CHECK_OUTPUT": str(evidence),
                                          "DEMO_CHECK_USERNAME": username, "DEMO_CHECK_PASSWORD": password,
-                                         "DEMO_CHECK_OWNER_PASSWORD": owner}, capture_output=True, text=True, timeout=360 if args.flow == 'disclosure' else 180)
+                                         "DEMO_CHECK_OWNER_PASSWORD": owner,
+                                         "DEMO_CHECK_SCAN_PATH": str(project / 'data/showcase-ocr-spike-20261103/derived-scan-page-9.pdf')},
+                                    capture_output=True, text=True, timeout=360 if args.flow == 'disclosure' else 180)
             (evidence / "browser.log").write_text(result.stdout + result.stderr)
             if result.returncode:
                 raise RuntimeError("Actual UI HTTP check failed; inspect browser.log")

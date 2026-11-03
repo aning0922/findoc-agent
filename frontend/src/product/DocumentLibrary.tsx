@@ -5,6 +5,7 @@ import { annualMetadata, listDocuments, readUploaded, uploadReport, UploadError 
 import type { DocumentRow, Metadata } from './documentLibraryApi.ts';
 import styles from './ResearchJourney.module.css';
 import { DisclosurePanel } from './disclosures/DisclosurePanel.tsx';
+import { ParseQualityPanel } from './parsing/ParseQualityPanel.tsx';
 
 function savedUpload(company: string): { id: string | null; metadata: Metadata } | null {
   try { const v = JSON.parse(sessionStorage.getItem(`findoc:upload-intent:${company}`) || "null");
@@ -107,6 +108,7 @@ export function DocumentLibrary({ company, companies, onReady, returnHref, focus
     {phase === 'unknown' && <button onClick={() => { rememberUpload(company, null); setPhase('idle'); setFile(null); setChecked(false); setMessage('已结束只读查证。重新选择文件后可显式提交，可能命中重复文件或遗留未绑定资料。'); }}>结束查证，重新选择文件</button>}
     {!error && !visible.length && <p>当前企业还没有年报。可在本页上传，完成后继续研究。</p>}
     {visible.map(r => <article className={styles.documentRow} key={r.document_id}><h3>{r.source_file}</h3><p>{r.metadata ? `${r.metadata.report_year} 年报 · ${r.metadata.period_start} 至 ${r.metadata.period_end}` : '尚未绑定企业与期间 · 不能用于研究'}</p><p>{labels[r.status] || '处理状态待查询'}</p>{r.status === 'ready' && <p>{factsMessage || (savedFacts.filter(f => f.document_id === r.document_id).length ? `已保存财务事实 ${savedFacts.filter(f => f.document_id === r.document_id).length} 项 · 来源已复验` : '财务事实待核对')}</p>}{r.metadata && r.status === 'ready' && <a href={`/evidence?${new URLSearchParams({ company, document: r.document_id })}`}>查看财务记录或开始新核对 →</a>}{r.status === "failed" && <RetryDocument row={r} refresh={() => setReload(n => n + 1)} />}
+    {r.metadata && <ParseQualityPanel documentId={r.document_id} sourceFile={r.source_file} />}
     {!r.metadata && <BindLegacy row={r} company={company} refresh={() => setReload(n => n + 1)} />}</article>)}
   </section></>;
 }

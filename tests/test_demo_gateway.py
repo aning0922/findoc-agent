@@ -100,16 +100,22 @@ def test_all_business_gate_owner_five_routes_idempotency_and_fixed_headers(tmp_p
         attempt(client)
         routes = ["/financial-facts/confirmations", "/financial-facts/persisted",
                   "/financial-facts/acceptances/receipt/revoke", "/revenue-research/confirmations",
-                  "/research/tasks/task/resume"]
+                  "/research/tasks/task/resume", "/financial/extended-confirmations",
+                  "/financial/extended-confirmations/receipt/revoke"]
         for path in routes:
             assert client.post(path, json=op(), headers=HEADERS).status_code == 403
         for path in ("/evaluations/runs", "/unknown-new-write", "/financial-facts/confirmations/"):
             assert client.post(path, json=op(), headers=HEADERS).status_code == 403
         payload = op(name="test")
-        forwarded = {**HEADERS, "X-Findoc-Internal-Secret": "browser-forged", "Authorization": "browser-forged"}
+        forwarded = {**HEADERS, "X-Findoc-Internal-Secret": "browser-forged", "Authorization": "browser-forged",
+                     "X-Findoc-Owner-Authorized": "1", "X-Findoc-Owner-Expires-At": "2099-01-01T00:00:00Z",
+                     "X-Findoc-Lease-Expires-At": "2099-01-01T00:00:00Z"}
         first = client.post("/companies", json=payload, headers=forwarded)
         assert first.status_code == 200, first.text
         assert "operation_id" not in manager.calls[-1][1].content.decode()
+        assert "X-Findoc-Owner-Authorized" not in manager.calls[-1][1].headers
+        assert "X-Findoc-Owner-Expires-At" not in manager.calls[-1][1].headers
+        assert manager.calls[-1][1].headers["X-Findoc-Lease-Expires-At"] != "2099-01-01T00:00:00Z"
         assert client.post("/companies", json=payload, headers=forwarded).json() == first.json()
         assert len(manager.calls) == 1
         assert client.post("/companies", json={**payload, "name": "changed"}, headers=HEADERS).status_code == 409

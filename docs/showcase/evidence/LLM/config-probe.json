@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "model": "deepseek-flash",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 8,
+    "total_tokens": 9,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 8
+  },
+  "budget": {
+    "cap_cny": "5",
+    "calls": 1,
+    "conservative_reserved_cny": "0.004678",
+    "usage_reported_calls": 1,
+    "input_tokens": 8,
+    "output_tokens": 1,
+    "unknown_calls": 0,
+    "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+    "actual_billed_cny": "not_observed"
+  }
+}

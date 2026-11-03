@@ -2,11 +2,13 @@
 
 from collections.abc import Callable
 from dataclasses import dataclass
+from datetime import datetime
 import os
+import sys
 from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Request
 from pymilvus import MilvusClient
 
 from app.agent.run_service import AgentRunService
@@ -29,11 +31,14 @@ from app.api.research_qa import create_research_qa_router
 from app.api.runtime_paths import DEFAULT_RUNTIME_ROOT
 from app.dashboard import DashboardService, create_dashboard_router
 from app.disclosures import DisclosureService, create_disclosure_router
+from app.demo.provider_budget import budgeted_client
 from app.chat.service import ChatService
 from app.companies.service import CompanyService
 from app.companies.sqlite_repository import SQLiteCompanyRepository
 from app.documents.fast_pdf_parser import parse_fast_pdf_bytes
 from app.parsing import ParseV2Service, VisionEngine, create_parse_router
+from app.finance_v2.api import create_finance_v2_router
+from app.finance_v2.service import ExtendedFinanceService, OwnerAuthorization
 from app.documents.in_process_dispatcher import InProcessTaskDispatcher
 from app.documents.local_object_store import LocalObjectStore
 from app.documents.preparation import DocumentTaskPreparer
@@ -58,6 +63,7 @@ from app.conversations.tools import ConversationTools
 from app.memory.api import create_memory_router
 from app.memory.repository import MemoryRepository
 from app.memory.service import MemoryService
+from app.research_memory import ResearchMemoryService, create_research_memory_router
 
 
 RUNTIME_COLLECTION_NAME = "findoc_runtime_documents_v1"
@@ -108,6 +114,15 @@ def _warm_runtime_bge_before_milvus() -> None:
     边界：预热向量不会写入runtime或冻结collection。
     """
     _runtime_bge_embed(["runtime embedding startup check"])
+
+
+def _runtime_bge_version() -> str:
+    # Warmup has already loaded the true runtime model. Metadata lookup must not
+    # initialize another model after Milvus, including under injected test ports.
+    model = getattr(sys.modules.get("app.rag.embed"), "_model", None)
+    config = getattr(getattr(model, "model", None), "config", None)
+    revision = getattr(config, "_commit_hash", None) or "revision-unknown"
+    return f"BAAI/bge-m3:dense1024:{revision}"
 
 
 def _build_runtime_indexer(
@@ -214,6 +229,11 @@ def create_runtime_app(
         raise ValueError("invalid showcase seed version")
     # 必需LLM配置是启动前置条件：配置不完整时不得触碰模型、磁盘或Milvus。
     llm_client = OpenAICompatibleLLMClient.from_env()
+    if budget_path := os.environ.get('FINDOC_PROVIDER_BUDGET_DB'):
+        path = Path(budget_path)
+        if not path.is_absolute() or path.resolve().is_relative_to(runtime_root.resolve()):
+            raise ValueError('Provider budget ledger must live outside reset generations')
+        llm_client = budgeted_client(llm_client, path, os.environ.get('FINDOC_PROVIDER_CAP_CNY', '5'))
     # BGE可能在首次加载时触发子进程初始化，必须先于Milvus/gRPC客户端。
     _warm_runtime_bge_before_milvus()
     repository = SQLiteDocumentRepository(
@@ -294,6 +314,26 @@ def create_runtime_app(
                 runtime_root=runtime_root, documents=document_service,
                 sources=source_service, engine=VisionEngine(),
             )
+            extended_finance = ExtendedFinanceService(runtime_root, source_service)
+
+            def authorize_extended_finance(request: Request) -> OwnerAuthorization:
+                # Only the private per-generation child receives trusted gateway headers.
+                if (
+                    showcase_generation is None
+                    or request.scope.get("findoc_private_identity") != (
+                        str(showcase_generation), request.headers.get("X-Findoc-Instance")
+                    )
+                    or request.headers.get("X-Findoc-Owner-Authorized") != "1"
+                    or request.headers.get("X-Findoc-Generation") != str(showcase_generation)
+                ):
+                    raise HTTPException(403, "owner_authorization_required")
+                try:
+                    expires = datetime.fromisoformat(request.headers["X-Findoc-Owner-Expires-At"])
+                    if expires.tzinfo is None:
+                        raise ValueError("timezone_required")
+                except (KeyError, ValueError):
+                    raise HTTPException(403, "owner_authorization_required") from None
+                return OwnerAuthorization(runtime_root.resolve(), "demo_owner", expires.timestamp())
             selection_preparer = DocumentTaskPreparer(
                 document_service=document_service, sources=source_service,
                 workspace_id=DEMO_WORKSPACE_ID, max_selected_documents=max_selected_documents,
@@ -335,6 +375,11 @@ def create_runtime_app(
             app.state.disclosure_service = disclosure_service
             app.include_router(create_parse_router(parse_service))
             app.state.parse_service = parse_service
+            app.include_router(create_finance_v2_router(
+                extended_finance,
+                owner_authorizer=authorize_extended_finance if showcase_generation is not None else None,
+            ))
+            app.state.extended_finance_service = extended_finance
             app.include_router(create_template_router(template_service))
             app.state.template_service = template_service
             app.include_router(create_research_qa_router(
@@ -349,6 +394,12 @@ def create_runtime_app(
                 conversation_repository = ConversationRepository(registry, DEMO_WORKSPACE_ID)
                 conversation_repository.recover_interrupted()
                 memory_service = MemoryService(MemoryRepository(registry))
+                research_memory = ResearchMemoryService(
+                    runtime_root=runtime_root, workspace_id=DEMO_WORKSPACE_ID,
+                    sources=source_service, conversations=conversation_repository,
+                    embedder=_runtime_bge_embed, embedding_model_version=_runtime_bge_version(),
+                    parse_service=parse_service,
+                )
                 conversation_graph = ConversationGraph(ConversationTools(
                     preparer=selection_preparer, scope=selected_scope_search,
                     rag=rag_resources.rag_service, facts=revenue_service,
@@ -362,6 +413,8 @@ def create_runtime_app(
                 app.state.conversation_service = conversation_service
                 app.state.conversation_graph = conversation_graph
                 app.state.memory_service = memory_service
+                app.include_router(create_research_memory_router(research_memory))
+                app.state.research_memory_service = research_memory
                 dashboard_service = DashboardService(
                     runtime_root=runtime_root,
                     workspace_id=DEMO_WORKSPACE_ID,

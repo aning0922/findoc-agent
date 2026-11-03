@@ -164,6 +164,15 @@ async def proxy(request: Request, controller):
     # Neither browser Authorization/Cookie/Host nor browser internal headers reach runtime.
     headers.update({"X-Findoc-Internal-Secret": handle.secret,
                     "X-Findoc-Generation": str(generation), "X-Findoc-Instance": handle.instance_id})
+    session = controller.session(token)
+    headers["X-Findoc-Lease-Expires-At"] = session["expires_at"]
+    if rule and rule.owner:
+        # Browser copies of these headers are excluded by REQUEST_HEADERS.
+        # The financial service checks this expiry again at its final commit.
+        if not session["can_review"] or not session["owner_elevated_until"]:
+            reject(403, "owner_authorization_required")
+        headers["X-Findoc-Owner-Authorized"] = "1"
+        headers["X-Findoc-Owner-Expires-At"] = session["owner_elevated_until"]
     # handle.client is created once for the captured loopback endpoint, with redirects disabled.
     upstream = None
     try:

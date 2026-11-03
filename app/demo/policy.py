@@ -20,6 +20,14 @@ class Mutation:
 
 SEG = r"[^/]+"
 MUTATIONS = (
+    Mutation("POST", r"/research-memories", native_operation=True),
+    Mutation("PATCH", rf"/research-memories/{SEG}", native_operation=True),
+    Mutation("DELETE", rf"/research-memories/{SEG}", native_operation=True),
+    Mutation("POST", r"/financial/extended-metrics/collect", native_operation=True),
+    Mutation("POST", r"/financial/extended-reviews", native_operation=True),
+    Mutation("POST", r"/financial/extended-confirmations", owner=True, native_operation=True),
+    Mutation("POST", rf"/financial/extended-confirmations/{SEG}/revoke", owner=True, native_operation=True),
+    Mutation("POST", r"/financial/extended-analyses", native_operation=True),
     Mutation("POST", rf"/documents/{SEG}/parse-retry", native_operation=True),
     Mutation("POST", r"/disclosures/import", native_operation=True),
     Mutation("POST", r"/companies"),

@@ -38,6 +38,14 @@ def group_alive(pgid: int) -> bool:
         os.killpg(pgid, 0)
     except ProcessLookupError:
         return False
+    except PermissionError:
+        # macOS can transiently answer EPERM while an owned, terminating group
+        # disappears. Do not infer death from EPERM: independently inspect the
+        # OS group inventory. An unreadable inventory remains alive/fail-closed.
+        result = subprocess.run(["ps", "-axo", "pgid="], capture_output=True, text=True, check=False)
+        if result.returncode:
+            return True
+        return str(pgid) in result.stdout.split()
     return True
 
 
@@ -85,7 +93,13 @@ class ProcessRuntimeManager:
         if current_birth is None:
             # Leader gone with members left: cannot re-establish group identity safely after restart.
             raise RuntimeError("Unverified orphan process group")
-        if os.getpgid(pid) != pgid:
+        try:
+            current_group = os.getpgid(pid)
+        except ProcessLookupError:
+            if not group_alive(pgid):
+                return
+            raise RuntimeError("Unverified orphan process group") from None
+        if current_group != pgid:
             raise RuntimeError("Child process group identity changed")
         try:
             os.killpg(pgid, signal.SIGTERM)

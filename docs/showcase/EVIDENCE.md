@@ -43,3 +43,9 @@ M1 ex46xvoe最终实际HTTP追加验证PASS（79e7de6→89230aa代际提示）�
 `integrated_http_check.py --flow disclosure`，源D03 07fd7c0+1333b14→40f9661+5352471，root接线DocumentLibrary和新OCR工厂/policy，真实Chromium main+Vite+gateway+实际runtime。PASS UI创建准确格力公司、查询目录、明确官方导入、PDFSHA 7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c、219页、真实fast+BGE/Milvus索引READY（40.233s）、原文身份/年、财务not_verified；三宽目录、桌面/手机READY截图，浏览器错误0。LLM0/真人签核0。证据evidence/M2-disclosure，原PDF留隔离runtime不进Git。失败nx68zzy6为交易所控件accessible name含选项导致定位不到（补aria-label），j1i72ajj为导航后DevTools响应body已不可读（改URL身份+GET公司读回），二者没有到下载验收。
 
 O02 root注册后15tests PASS（parse_v2/runtime_startup/demo_gateway/disclosures）、ruff PASS，5SWIG warnings保留；旧源码迁移没改。
+
+## O03 / Finance v2 / Memory / provider budget 主控
+
+O03 real product isgmzk2o PASS：真实Vision转录/54格与原line/bbox一致，原页PNG可读、三宽及reload GET不重做；evidence/M2-ocr。ayn3q140先FAIL390外溢，修CSS grid min-width后PASS。根新原图大图链接/滚动提示为随后小UX修补。F02指定PDF env真实3PASS13.31s，候选非真人；未指定2PASS1SKIP历史保留。finance/gallery/root注册相关12PASS后8auth/resetPASS/ruff；一次实际进程关闭在macOS group killpg(0)临时EPERM+退出竞态FAIL，改用独立OS pgid inventory核实且未知保持alive、getpgid退出后再查组，定点test+真实fake OS复跑PASS，未放宽PID/birth核验。Memory15目标tests PASS，主控真实BGE合成两note非同词语义排序和删除PASS，LLM0。
+
+用户授权5元外部LLM本轮总预算。官方 https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ 2026-11-03峰值2/8元每百万input/output；shared provider_budget.db位于generation之外，先持久最坏费用reserve再物理call，断线UNKNOWN不重试/不退款，禁native web tools，max4096输出/64KiB输入，显式关闭DeepSeek默认thinking（SDKextra_body），价格/模型/host限定，extra_body不能覆盖token/model。预算2代表性fake+startup7PASS，ruff PASS。evidence/LLM/config-probe.json为第一真实调用：deepseek-flash返回OK，8输入1输出，预留0.004678元（非实际账单），未测任何Agent研究业务。密钥只从原仓库Git忽略.env加载进子进程/SDK，不入证据/命令行。

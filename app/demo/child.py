@@ -33,6 +33,7 @@ class InternalBoundary:
             if scope["type"] == "websocket":
                 return await send({"type": "websocket.close", "code": 1008})
             return await JSONResponse({"detail": {"code": "internal_auth_required", "message": "Forbidden"}}, 403)(scope, receive, send)
+        scope = {**scope, "findoc_private_identity": (self.generation, self.instance_id)}
         return await self.app(scope, receive, send)
 
 

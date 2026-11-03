@@ -29,3 +29,9 @@ M1后台候选7f6f268已集成c826a05，Astra独立复核cf5f881→7141ec8正式
 M1最终集成89230aa后实跑通过 ex46xvoe：同代硬reload保留UNKNOWN线索、跨代清理mock、真实CSS Hero白色、显式sample图真实端点（虚构数值有水印）、双独立Chromium真实HTTP/real child再通过，LLM0/真实PDF0/真人财务0。精选首页图与结果存档evidence/M1。查看实际390登录封面发现同类h1深色覆盖，主控demo.css补显式white，下一资料导入真实UI轮次复查；不回报该未复查截图完成。
 
 M2资料完整真实UI链已PASS（57iyclvz）：界面建立格力→查2025官方目录→明确导入→下载SHA一致→真实fast解析219页→真实BGE/Milvus READY约40.233秒，PDF1/LLM0/真人财务0/浏览器异常0；三宽目录无溢出。evidence/M2-disclosure存档。前两次harness失败（select可访问名、导航后读取响应体）保留，修交易所aria-label和URL读回后通过；真实登录白色封面已复查。O02已集成b81962f并runtime/policy接线，15目标tests/ruff PASS；独立FTS候选、不改旧fast/Milvus，O03UI进行中。
+
+O03真实HTTP+实际产品UI已PASS isgmzk2o：Midea公开年报第9页派生单页扫描，真实Apple Vision3识别68行/54候选格（17候选行9列），三宽不溢出、GET预览零OCR、显式POST1次、reload只读同artifact；金融0/LLM0/legacy_source_verified=false。evidence/M2-ocr。首轮ayn3q140手机grid撑宽FAIL，主控补grid min-width/minmax/内部scroll后通过，另补大图链接和横向提示。
+
+F01/F02已集成c23c0a8，主控显式真实PDF集3PASS13.31s（fast/不可变证据真实、embed/index假）；4个资产/负债时点候选，未真人确认，正式分析403。F03 UI661f8b4待root审查/接线。M01/M02 backend317d336已集成2db02f8，主控7memory测试及真实BGE语义排序/删除通过，UI未接。新finance owner gate仅私有ASGI marker+当前代trusted header，新增route白名单；共享cost ledger独立于generation。
+
+最新模型配置：用户已完成原仓库.env，授权总费用上限5元人民币。只读4必需项已齐，官方deepseek-flash/api.deepseek.com；密钥不输出/不拷入Git。2026-11-03官方价格峰值cache-miss输入2元/M、输出8元/M作为保守估算，source见provider_budget.py。首个tiny真实probe PASS（input8/output1），不是Agent业务验收；cost ledger data/showcase-cost-control/provider-budget.db，1call保守预留0.004678元，实际账单扣费未观测。所有真实provider验证只由主控统一执行，retry0/max_output<=4096/禁原生SearchFetch，UNKNOWN不退预留，5元到限停止调用但离线研发继续。
