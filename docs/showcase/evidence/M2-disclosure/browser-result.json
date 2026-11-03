@@ -1,0 +1,17 @@
+{
+  "evidence": "REAL_CHROMIUM_UI_OFFICIAL_HTTP_REAL_FAST_PARSE_BGE_MILVUS",
+  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+  "pdf_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+  "physical_pages": 219,
+  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+  "status": "ready",
+  "elapsed_seconds": 40.233,
+  "llm_calls": 0,
+  "human_financial_approvals": 0,
+  "browser_errors": [],
+  "limitations": [
+    "verified demo catalog only",
+    "publish date/amendment unknown",
+    "financial facts not verified"
+  ]
+}

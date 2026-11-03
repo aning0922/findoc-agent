@@ -1,4 +1,5 @@
 """Disposable, actual UI → Vite → gateway → BGE/Milvus child smoke. No provider calls."""
+import argparse
 import json
 import os
 from pathlib import Path
@@ -14,6 +15,9 @@ from scripts.showcase_demo_http_check import free_port, launch, wait_http
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--flow', choices=('demo', 'disclosure'), default='demo')
+    args = parser.parse_args()
     project = Path(__file__).resolve().parents[2]
     evidence = Path(tempfile.mkdtemp(prefix="findoc-integrated-http-")).resolve()
     seed, control = evidence / "seed", evidence / "control"
@@ -41,10 +45,11 @@ def main():
                            "FINDOC_E2E_DISABLE_ENV_FILES": "1", "FINDOC_API_ORIGIN": f"http://127.0.0.1:{backend_port}"}, frontend, log)
             processes.append(vite)
             wait_http(origin, vite)
-            result = subprocess.run(["node", str(frontend / "e2e/showcase-integrated-http.mjs")], cwd=frontend,
+            script = 'showcase-integrated-http.mjs' if args.flow == 'demo' else 'showcase-disclosure-http.mjs'
+            result = subprocess.run(["node", str(frontend / 'e2e' / script)], cwd=frontend,
                                     env={**env, "DEMO_CHECK_ORIGIN": origin, "DEMO_CHECK_OUTPUT": str(evidence),
                                          "DEMO_CHECK_USERNAME": username, "DEMO_CHECK_PASSWORD": password,
-                                         "DEMO_CHECK_OWNER_PASSWORD": owner}, capture_output=True, text=True, timeout=180)
+                                         "DEMO_CHECK_OWNER_PASSWORD": owner}, capture_output=True, text=True, timeout=360 if args.flow == 'disclosure' else 180)
             (evidence / "browser.log").write_text(result.stdout + result.stderr)
             if result.returncode:
                 raise RuntimeError("Actual UI HTTP check failed; inspect browser.log")

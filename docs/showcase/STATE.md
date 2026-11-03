@@ -27,3 +27,5 @@ M1后台候选7f6f268已集成c826a05，Astra独立复核cf5f881→7141ec8正式
 下一批：原Demo后端会话转Sol/high F01/F02；原review会话转Terra/high O02独立产物；UI Sol/high正在补同代硬reload UNKNOWN提示保留，后转Terra/medium D03。LLM配置当前未知/缺失，已异步询问配置文件路径和小额验证预算，不收聊天密钥；独立研发继续。
 
 M1最终集成89230aa后实跑通过 ex46xvoe：同代硬reload保留UNKNOWN线索、跨代清理mock、真实CSS Hero白色、显式sample图真实端点（虚构数值有水印）、双独立Chromium真实HTTP/real child再通过，LLM0/真实PDF0/真人财务0。精选首页图与结果存档evidence/M1。查看实际390登录封面发现同类h1深色覆盖，主控demo.css补显式white，下一资料导入真实UI轮次复查；不回报该未复查截图完成。
+
+M2资料完整真实UI链已PASS（57iyclvz）：界面建立格力→查2025官方目录→明确导入→下载SHA一致→真实fast解析219页→真实BGE/Milvus READY约40.233秒，PDF1/LLM0/真人财务0/浏览器异常0；三宽目录无溢出。evidence/M2-disclosure存档。前两次harness失败（select可访问名、导航后读取响应体）保留，修交易所aria-label和URL读回后通过；真实登录白色封面已复查。O02已集成b81962f并runtime/policy接线，15目标tests/ruff PASS；独立FTS候选、不改旧fast/Milvus，O03UI进行中。

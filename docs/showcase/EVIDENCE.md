@@ -37,3 +37,9 @@
 后端源7f6f268→c826a05，Astra独立review cf5f881→7141ec8。16个目标auth/gateway/reset/dashboard/disclosures tests PASS，ruff PASS，SWIG5warnings保留。主控新增 integrated_http_check.py + showcase-integrated-http.mjs 使用两个独立Chromium进程、实际产品main、真实Vite/gateway/OS child/缓存BGE+Milvus，合成seed（1虚构公司、PDF0/真实事实0/LLM0/真人财务0），验证三宽、pending cookie、旧DTO网关编号、占用/二次owner接管、旧A401及UI卸载、新代恢复公司1、logout reset、seed SHA不变。证据目录uz81ifdo见STATE。首轮oflnrurn因测试未重新填写共享口令等待disabled按钮失败；没有据此修改产品授权条件，修测试后通过。截图另发现index.css全局h1覆盖Hero白色、旧ResearchDashboard全局nav覆盖；视觉修正后将重新检查。
 
 M1 ex46xvoe最终实际HTTP追加验证PASS（79e7de6→89230aa代际提示）：同有效cookie硬reload保留UNKNOWN、实际Hero contrast、sample_mode真实端点两图；双浏览器协议/owner接管/old401/UI卸载/新代restore/logout再通过。检查和截图evidence/M1；图表虚构1.0/1.2/1.1亿元仅illustrative，KPI仍真实机制库1/0/0/0。查看登录390截图另发现demo-story h1继承全局深色，已补white并加入真实smoke断言，待下一真实UI资料轮次复查。mock完整状态回归14组左右输出PASS，不换算成功能数量。
+
+## M2 官方年报真实产品路径
+
+`integrated_http_check.py --flow disclosure`，源D03 07fd7c0+1333b14→40f9661+5352471，root接线DocumentLibrary和新OCR工厂/policy，真实Chromium main+Vite+gateway+实际runtime。PASS UI创建准确格力公司、查询目录、明确官方导入、PDFSHA 7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c、219页、真实fast+BGE/Milvus索引READY（40.233s）、原文身份/年、财务not_verified；三宽目录、桌面/手机READY截图，浏览器错误0。LLM0/真人签核0。证据evidence/M2-disclosure，原PDF留隔离runtime不进Git。失败nx68zzy6为交易所控件accessible name含选项导致定位不到（补aria-label），j1i72ajj为导航后DevTools响应body已不可读（改URL身份+GET公司读回），二者没有到下载验收。
+
+O02 root注册后15tests PASS（parse_v2/runtime_startup/demo_gateway/disclosures）、ruff PASS，5SWIG warnings保留；旧源码迁移没改。

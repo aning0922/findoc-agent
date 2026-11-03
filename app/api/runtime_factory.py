@@ -33,6 +33,7 @@ from app.chat.service import ChatService
 from app.companies.service import CompanyService
 from app.companies.sqlite_repository import SQLiteCompanyRepository
 from app.documents.fast_pdf_parser import parse_fast_pdf_bytes
+from app.parsing import ParseV2Service, VisionEngine, create_parse_router
 from app.documents.in_process_dispatcher import InProcessTaskDispatcher
 from app.documents.local_object_store import LocalObjectStore
 from app.documents.preparation import DocumentTaskPreparer
@@ -289,6 +290,10 @@ def create_runtime_app(
                 sources=source_service,
                 companies=company_service,
             )
+            parse_service = ParseV2Service(
+                runtime_root=runtime_root, documents=document_service,
+                sources=source_service, engine=VisionEngine(),
+            )
             selection_preparer = DocumentTaskPreparer(
                 document_service=document_service, sources=source_service,
                 workspace_id=DEMO_WORKSPACE_ID, max_selected_documents=max_selected_documents,
@@ -328,6 +333,8 @@ def create_runtime_app(
             )
             app.include_router(create_disclosure_router(disclosure_service))
             app.state.disclosure_service = disclosure_service
+            app.include_router(create_parse_router(parse_service))
+            app.state.parse_service = parse_service
             app.include_router(create_template_router(template_service))
             app.state.template_service = template_service
             app.include_router(create_research_qa_router(

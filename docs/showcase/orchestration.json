@@ -3,27 +3,27 @@
   "integration_branch": "codex/findoc-showcase-c-integration",
   "sessions": [
     {
-      "task": "O02 immutable OCR parse artifacts",
+      "task": "M01/M02 source-bound semantic research memory",
       "thread_id": "01a19f9d-6c32-7ba2-a9c5-b8b708440c82",
       "client_thread_id": "client-new-thread:dbd76a05-7cb9-479d-99d1-9b24181cb164",
       "model": "gpt-6.1-terra",
       "thinking": "high",
-      "branch": "codex/showcase-o02",
+      "branch": "codex/showcase-m01",
       "worktree": "/Users/aipuli/.codex/worktrees/ce18/findoc-agent",
       "status": "running_contract",
-      "prior_task": "Astra auth review cf5f881 complete, both P0 closed"
+      "prior_task": "O02 7db1ea6 integratedb81962f"
     },
     {
-      "task": "D03 official catalog UI",
+      "task": "O03 OCR image and candidate grid preview",
       "thread_id": "01a19f9d-a871-7520-aed9-dd6d22774d1a",
       "client_thread_id": "client-new-thread:6cde4161-9153-4002-b48f-e39fa83749da",
       "model": "gpt-6.1-terra",
-      "thinking": "high",
-      "branch": "codex/showcase-d03",
+      "thinking": "medium",
+      "branch": "codex/showcase-o03",
       "worktree": "/Users/aipuli/.codex/worktrees/3f05/findoc-agent",
-      "status": "running_response_validation",
+      "status": "running",
       "reviewed_candidate": "9cdc3d5 integrated4bf1bef",
-      "prior_task": "M1 hint fix79e7de6 integrated89230aa; D03 medium implementation -> high DTO review"
+      "prior_task": "D03 1333b14 integrated5352471 + real HTTP pass"
     },
     {
       "task": "F01/F02 extended metrics v2",

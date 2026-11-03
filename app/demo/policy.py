@@ -20,6 +20,7 @@ class Mutation:
 
 SEG = r"[^/]+"
 MUTATIONS = (
+    Mutation("POST", rf"/documents/{SEG}/parse-retry", native_operation=True),
     Mutation("POST", r"/disclosures/import", native_operation=True),
     Mutation("POST", r"/companies"),
     Mutation("PATCH", rf"/companies/{SEG}"),
