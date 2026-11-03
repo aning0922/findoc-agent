@@ -60,6 +60,7 @@ def render_print(report):
             + e(status(f["transcription_review_status"]))
             + " · 解释审阅 "
             + e(status(f["interpretation_review_status"]))
+            + (" · 含待核实数字，未构成已核准金额" if f.get("numeric_claim_status") == "numeric_claim_unverified" else "")
             + "</small><p>"
             + " · ".join(refs)
             + "</p></article>"

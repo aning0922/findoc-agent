@@ -20,6 +20,7 @@ class Finding(Strict):
     source_status: Literal["current", "stale", "unavailable"]
     transcription_review_status: str = "unreviewed"
     interpretation_review_status: str = "unreviewed"
+    numeric_claim_status: Literal["no_numeric_claim", "numeric_claim_unverified"] | None = None
 
 
 class VerifiedJobSnapshot(Strict):

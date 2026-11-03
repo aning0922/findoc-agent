@@ -14,6 +14,7 @@ import {
   YAxis,
 } from "recharts";
 import type { Company, DataAccess } from "../api.ts";
+import { validPreference } from "../memoryApi.ts";
 import "./dashboard.css";
 
 type Overview = {
@@ -39,6 +40,7 @@ type Overview = {
   }[];
   suggested_questions: { id: string; text: string; href: string }[];
   companies: { company_id: string; name: string; security_code: string }[];
+  display_preferences?: { analysis_focus: string; display_unit: string; research_habit: string };
   limitations: string[];
 };
 type Point = {
@@ -129,7 +131,10 @@ function validOverview(x: Overview): boolean {
         typeof v.name === "string" &&
         typeof v.security_code === "string",
     ) &&
-    Array.isArray(x.limitations)
+    Array.isArray(x.limitations) &&
+    (x.display_preferences === undefined || !!x.display_preferences &&
+      Object.entries(x.display_preferences).length === 3 &&
+      Object.entries(x.display_preferences).every(([k, v]) => validPreference(k, v)))
   );
 }
 function validChart(
@@ -199,7 +204,7 @@ export function ShowcaseDashboard({
   const [selected, setSelected] = useState(company);
   const [search, setSearch] = useState("");
   const [sample, setSample] = useState(false);
-  const [metric, setMetric] = useState("revenue");
+  const [metricChoice, setMetric] = useState("");
   const [retry, setRetry] = useState(0);
   useEffect(() => {
     const c = new AbortController();
@@ -213,6 +218,19 @@ export function ShowcaseDashboard({
       });
     return () => c.abort();
   }, [retry]);
+  useEffect(() => {
+    const refresh = () => setRetry(x => x + 1);
+    window.addEventListener('findoc-preferences-updated', refresh);
+    return () => window.removeEventListener('findoc-preferences-updated', refresh);
+  }, []);
+  const preferences = overview?.display_preferences;
+  const preferredMetric = { cash_flow: 'operating_cash_flow', profitability: 'net_profit_parent', revenue: 'revenue' }[preferences?.analysis_focus || ''] || 'revenue';
+  const metric = metricChoice || preferredMetric;
+  const displayUnit = preferences?.display_unit || 'CNY_HUNDRED_MILLION';
+  const scale = displayUnit === 'CNY_YUAN' ? 0 : displayUnit === 'CNY_TEN_THOUSAND' ? 4 : 8;
+  const axisUnit = scale === 0 ? '元' : scale === 4 ? '万元' : '亿元';
+  const axisLabel = (v: number) => `${Number(v) / 10 ** scale}${axisUnit}`;
+  const evidenceFirst = preferences?.research_habit !== 'compare_periods_first';
   const effectiveCompany = selected || overview?.companies[0]?.company_id || "";
   useEffect(() => {
     const c = new AbortController();
@@ -284,7 +302,7 @@ export function ShowcaseDashboard({
           <BarChart data={points} margin={{ left: 0, right: 12 }}>
             <CartesianGrid vertical={false} stroke="#edf1f5" />
             <XAxis dataKey="period" />
-            <YAxis tickFormatter={(v) => `${Number(v) / 100000000}亿`} />
+            <YAxis tickFormatter={(v) => axisLabel(Number(v))} />
             <Tooltip
               formatter={(_, __, item) => [
                 item.payload.value_decimal + " " + unit,
@@ -302,7 +320,7 @@ export function ShowcaseDashboard({
           <LineChart data={points} margin={{ left: 0, right: 12 }}>
             <CartesianGrid vertical={false} stroke="#edf1f5" />
             <XAxis dataKey="period" />
-            <YAxis tickFormatter={(v) => `${Number(v) / 100000000}亿`} />
+            <YAxis tickFormatter={(v) => axisLabel(Number(v))} />
             <Tooltip
               formatter={(_, __, item) => [
                 item.payload.value_decimal + " " + unit,
@@ -424,7 +442,7 @@ export function ShowcaseDashboard({
             ))}
           </div>
           <div className="sd-grid">
-            <section className="sd-card">
+            <section className="sd-card" style={{ order: evidenceFirst ? 0 : 2 }}>
               <div className="sd-card-head">
                 <div>
                   <h3>财务趋势</h3>
@@ -434,7 +452,7 @@ export function ShowcaseDashboard({
                       : overview.companies.find(
                           (x) => x.company_id === effectiveCompany,
                         )?.name || "企业财务"}{" "}
-                    · {unit}（坐标以亿元显示）
+                    · {unit}（坐标以{axisUnit}显示）
                   </p>
                 </div>
                 <select
@@ -448,7 +466,7 @@ export function ShowcaseDashboard({
                 </select>
               </div>
               {chartBody()}
-              <details>
+              <details key={String(evidenceFirst)} open={evidenceFirst}>
                 <summary>查看数据与来源</summary>
                 <p>
                   {chart?.origin === "illustrative"
@@ -492,7 +510,7 @@ export function ShowcaseDashboard({
                 </table>
               </details>
             </section>
-            <section className="sd-card">
+            <section className="sd-card" style={{ order: 1 }}>
               <div className="sd-card-head">
                 <div>
                   <h3>任务状态</h3>
@@ -552,18 +570,18 @@ export function ShowcaseDashboard({
                 </table>
               </details>
             </section>
-            <section className="sd-card">
+            <section className="sd-card" style={{ order: evidenceFirst ? 2 : 0 }}>
               <div className="sd-card-head">
                 <div>
                   <h3>各期财务对比</h3>
                   <p>
-                    {title} · {unit}（坐标以亿元显示）
+                    {title} · {unit}（坐标以{axisUnit}显示）
                   </p>
                 </div>
               </div>
               {chartBody(true)}
             </section>
-            <section className="sd-card">
+            <section className="sd-card" style={{ order: 3 }}>
               <div className="sd-card-head">
                 <div>
                   <h3>近期研究</h3>

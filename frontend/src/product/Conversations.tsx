@@ -6,6 +6,7 @@ import { QADialog } from './QADialog.tsx';
 import { ResearchPdfDialog } from './ResearchPdfDialog.tsx';
 import type { PdfCitation } from './ResearchPdfDialog.tsx';
 import { ResearchPreferences } from './ResearchPreferences.tsx';
+import { ResearchMemoryPanel } from './researchMemory/ResearchMemoryPanel.tsx';
 import { preferenceKeys, preferenceValues, validPreference } from './memoryApi.ts';
 import { StatusNotice } from './StatusNotice.tsx';
 import { DiagnosticDetails } from './DiagnosticDetails.tsx';
@@ -331,6 +332,7 @@ export default function Conversations({ companies }: { companies: Company[] }) {
       {pending.map(op => <StatusNotice key={op.operationId} state="unknown" title={`${op.kind === 'create' ? '创建会话' : op.kind === 'delete' ? '删除会话' : '发送问题'}待查证`} action={<button disabled={busy} onClick={() => void recover(op)}>查询本次操作状态</button>}><p>恢复只读取状态，不会再次提交。</p><DiagnosticDetails label="操作身份" fields={{ operation: op.operationId, conversation: op.conversationId }} /></StatusNotice>)}
       {detail && !scopeCurrent && <StatusNotice state="invalidated" title="来源已失效或暂不能核验">保留历史内容供阅读。当前不能发送新问题，请重新读取状态；更换来源需另建会话。</StatusNotice>}
       {initialId.current && !detail && !busy && <p>历史读取不会重新生成回答。<button onClick={() => void loadDetail(initialId.current!)}>重试读取历史</button></p>}
+      <ResearchMemoryPanel conversationId={detail?.conversation_id} companyId={detail && new Set(detail.sources.map(s => s.company_id)).size === 1 ? detail.sources[0]?.company_id : undefined} />
       <div className={styles.messages} aria-label="消息记录">{detail?.next_before_seq && <button disabled={busy} onClick={() => void loadDetail(detail.conversation_id, detail.next_before_seq!)}>读取更早消息</button>}{detail?.turns.map(renderTurn)}{!detail?.turns.length && <><h2>{detail ? '年报范围已确定，可以开始提问' : '从年报原文开始'}</h2><p>示例只填入草稿，不自动发送。</p><div className={styles.examples}>{examples.map(e => <button key={e} onClick={() => { setQuestion(e); input.current?.focus(); }}>{e}</button>)}</div></>}</div>
       <div className={styles.composer}><label htmlFor="conversation-question">研究问题</label><textarea ref={input} id="conversation-question" value={question} onChange={e => setQuestion(e.target.value)} rows={3} maxLength={1000} placeholder="例如：那上一年呢？" aria-describedby="conversation-send-help" />
         <div className={styles.sendRow}><p id="conversation-send-help">{detail ? `已明确选择 ${chosenFacts.length} 项财务事实；发送才会创建新一轮。` : '先创建会话，再明确发送问题。'}</p><button disabled={busy || conversationNeedsRefresh || !detail || !scopeCurrent || !!detail.active_turn_id || localPending || !!storageError || !question.trim()} onClick={() => void send()}>发送</button></div>

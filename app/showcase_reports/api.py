@@ -1,4 +1,6 @@
-from fastapi import APIRouter
+import inspect
+
+from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 from .service import ReportError
@@ -28,8 +30,12 @@ class Revision(Strict):
     notes: str = Field(default="", max_length=8000)
 
 
-def create_showcase_report_router(service):
+def create_showcase_report_router(service, *, reader_for_request=None):
     router = APIRouter(prefix="/showcase-reports", tags=["showcase-reports"])
+
+    async def reader(request):
+        value = reader_for_request(request) if reader_for_request else None
+        return await value if inspect.isawaitable(value) else value
 
     def error(exc):
         return JSONResponse(
@@ -43,9 +49,16 @@ def create_showcase_report_router(service):
         )
 
     @router.post("/drafts")
-    async def draft(payload: Draft):
+    async def draft(payload: Draft, request: Request):
         try:
-            return await service.draft(**payload.model_dump())
+            return await service.draft(**payload.model_dump(), reader=await reader(request))
+        except Exception as exc:
+            return error(exc)
+
+    @router.get("/operations/{operation_id}")
+    async def operation(operation_id: str):
+        try:
+            return service.read_operation(operation_id)
         except Exception as exc:
             return error(exc)
 
@@ -68,17 +81,17 @@ def create_showcase_report_router(service):
             return error(exc)
 
     @router.get("/{report_id}/revisions/{revision}")
-    async def read(report_id: str, revision: int):
+    async def read(report_id: str, revision: int, request: Request):
         try:
-            return await service.revision(report_id, revision)
+            return await service.revision(report_id, revision, reader=await reader(request))
         except Exception as exc:
             return error(exc)
 
     @router.get("/{report_id}/revisions/{revision}/print")
-    async def printing(report_id: str, revision: int):
+    async def printing(report_id: str, revision: int, request: Request):
         try:
             return HTMLResponse(
-                render_print(await service.revision(report_id, revision)),
+                render_print(await service.revision(report_id, revision, reader=await reader(request))),
                 headers={
                     "Cache-Control": "no-store",
                     "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'self'",

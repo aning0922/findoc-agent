@@ -1,0 +1,18 @@
+{
+  "evidence": "REAL_CHROMIUM_HTTP_REAL_LOCAL_BGE",
+  "conversation_ids": [
+    "0c96b4ed-6a66-4c8f-9002-6c3a5ac10c12",
+    "60b365bf-92da-4780-9360-9908ed184613"
+  ],
+  "semantic_query": "现金回收和盈利质量",
+  "semantic_result": "继续研究经营活动现金流与回款质量，比较现金流和利润是否匹配。",
+  "deleted_future_recall": true,
+  "preferences": {
+    "analysis_focus": "cash_flow",
+    "display_unit": "CNY_TEN_THOUSAND",
+    "research_habit": "compare_periods_first"
+  },
+  "llm_calls": 0,
+  "human_financial_approvals": 0,
+  "browser_errors": []
+}

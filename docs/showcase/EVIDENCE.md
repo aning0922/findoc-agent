@@ -53,3 +53,7 @@ O03 real product isgmzk2o PASS：真实Vision转录/54格与原line/bbox一致�
 ## F03 主控实际候选路径
 
 2026-11-03，真实Chromium→DemoGateway→真实BGE/Milvus及Gree2025固定PDF版本，三宽1440/1280/390无溢出。4候选（总资产/总负债、2025-01-01及2025-12-31），显式创建2项待核对review。真人财务确认0、LLM0，核准图/比率正向仍需真人。证据evidence/M2-finance；停止后的临时环境findoc-integrated-http-amd4nips，部分公开seed manifest SHA 372d477d6e3afbb71f41c50edd0a5c79a8d2c336b29607c9398bf158b902d6d0保持不变。
+
+## M02 真实跨会话与偏好
+
+实际Chromium/HTTP、公开部分seed和真实本地BGE。会话A界面保存现金流笔记，会话B以“现金回收和盈利质量”召回、删除后重复语义查询不再召回；三项确认偏好使首页现金流默认/问题排序、万元坐标、对比卡优先生效。1440/1280/390无水平溢出，LLM0/财务确认0/浏览器异常0。evidence/M3-memory。首轮jrzdneto因旧select访问名定位失败，非业务成功；修正aria-label后c4r4b8e_ PASS。

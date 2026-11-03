@@ -30,6 +30,11 @@ from app.research.repository import ResearchOwner, ResearchRepository
 from app.api.research_qa import create_research_qa_router
 from app.api.runtime_paths import DEFAULT_RUNTIME_ROOT
 from app.dashboard import DashboardService, create_dashboard_router
+from app.showcase_research.service import ShowcaseResearchService
+from app.showcase_research.api import create_showcase_research_router
+from app.showcase_research.models import demo_identity
+from app.showcase_reports import ShowcaseReportService, create_showcase_report_router
+from app.showcase_reports.research_adapter import project_verified_job
 from app.disclosures import DisclosureService, create_disclosure_router
 from app.demo.provider_budget import budgeted_client
 from app.chat.service import ChatService
@@ -427,7 +432,36 @@ def create_runtime_app(
                 )
                 app.include_router(create_dashboard_router(dashboard_service))
                 app.state.dashboard_service = dashboard_service
-                app.include_router(create_task_router(task_repository, PersistentTemplateService(template_service, task_repository)))
+                persistent_templates = PersistentTemplateService(template_service, task_repository)
+                showcase_research = ShowcaseResearchService(
+                    runtime_root, conversations=conversation_repository, preparer=selection_preparer,
+                    sources=source_service, search=selected_scope_search, facts=revenue_service,
+                    task_service=persistent_templates, task_repository=task_repository,
+                    llm_client=llm_client, preferences=memory_service, research_memory=research_memory,
+                )
+                showcase_research.execution_data_origin = "live"
+                app.include_router(create_showcase_research_router(showcase_research))
+                app.state.showcase_research_service = showcase_research
+
+                async def unavailable_report_reader(job_id):
+                    raise ValueError("request_identity_required")
+
+                async def report_reader_for_request(request):
+                    identity = demo_identity(request, workspace_id=DEMO_WORKSPACE_ID)
+                    showcase_research.scopes.check_identity(identity)
+                    async def read_verified(job_id):
+                        return project_verified_job(await showcase_research.verified_job(job_id, identity))
+                    return read_verified
+
+                showcase_reports = ShowcaseReportService(
+                    runtime_root, workspace_id=DEMO_WORKSPACE_ID,
+                    verified_job_reader=unavailable_report_reader,
+                )
+                app.include_router(create_showcase_report_router(
+                    showcase_reports, reader_for_request=report_reader_for_request,
+                ))
+                app.state.showcase_report_service = showcase_reports
+                app.include_router(create_task_router(task_repository, persistent_templates))
                 app.state.task_repository = task_repository
                 app.include_router(create_report_router(ReportService(task_repository, source_service)))
                 app.include_router(create_research_runs_router(

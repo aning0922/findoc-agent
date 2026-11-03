@@ -33,6 +33,7 @@ try {
   await panel.getByLabel('选择 总负债 2025-12-31', { exact: true }).check();
   await panel.getByRole('button', { name: '准备两项核对快照', exact: true }).click();
   await panel.getByRole('heading', { name: '真人核对快照 · 尚未接受', exact: true }).waitFor();
+  await page.waitForFunction(() => [...document.querySelectorAll('.finance-v2 button')].some(b => b.textContent.trim() === '只读核验指标' && !b.disabled));
   assert(await panel.getByRole('button', { name: '真人明确接受 v2 核对', exact: true }).isDisabled(), 'human step remains unavailable');
   assert(await panel.getByRole('button', { name: '请求服务端计算资产负债率', exact: true }).isDisabled(), 'unconfirmed ratio disabled');
   for (const width of [1440, 1280, 390]) {

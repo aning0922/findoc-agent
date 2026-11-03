@@ -114,6 +114,7 @@ class DashboardService:
                     review_status="source_recheck_required",
                 )
             )
+        preferences = self._preferences()
         return dict(
             schema_version="dashboard-overview-v1",
             generated_at=stamp["snapshot_at"],
@@ -127,7 +128,8 @@ class DashboardService:
             ),
             task_distribution=[dict(status=s, count=n) for s, n in sorted(counts.items())],
             recent_research=recent,
-            suggested_questions=self._suggestions(),
+            suggested_questions=self._suggestions(preferences),
+            display_preferences=preferences,
             companies=companies,
             limitations=[
                 "研究完成数为已保存历史状态；阅读结果时仍需重新核验来源。",
@@ -135,13 +137,18 @@ class DashboardService:
             ],
         )
 
-    def _suggestions(self):
+    def _preferences(self):
+        values = ({m.key: m.value for m in self.memory.recall_context().items}
+                  if self.memory is not None else {})
+        return {key: values.get(key, default) for key, default in (
+            ("analysis_focus", "balanced"), ("display_unit", "CNY_HUNDRED_MILLION"),
+            ("research_habit", "evidence_first"),
+        )}
+
+    def _suggestions(self, preferences=None):
         order = list(METRICS)
-        if self.memory is not None:
-            focus = next(
-                (m.value for m in self.memory.recall_context().items if m.key == "analysis_focus"),
-                None,
-            )
+        if preferences is not None or self.memory is not None:
+            focus = (preferences or self._preferences())["analysis_focus"]
             preferred = {
                 "cash_flow": "operating_cash_flow",
                 "profitability": "net_profit_parent",

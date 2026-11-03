@@ -58,6 +58,7 @@ def test_snapshot_counts_preferences_and_task_integrity(saved):
     assert result.status_code == 200 and result.headers["cache-control"] == "no-store"
     assert result.json()["suggested_questions"][0]["id"] == "operating_cash_flow"
     assert "question=" in result.json()["suggested_questions"][0]["href"]
+    assert result.json()["display_preferences"] == dict(analysis_focus="cash_flow", display_unit="CNY_HUNDRED_MILLION", research_habit="evidence_first")
     assert h.db.read_bytes() == before  # GET never migrates or writes.
     with closing(h.registry._connect()) as conn, conn:
         conn.execute(

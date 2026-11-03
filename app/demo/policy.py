@@ -20,6 +20,14 @@ class Mutation:
 
 SEG = r"[^/]+"
 MUTATIONS = (
+    Mutation("POST", r"/research/intent", native_operation=True),
+    Mutation("POST", r"/research/handoffs", native_operation=True),
+    Mutation("POST", r"/synthesis/plans", native_operation=True),
+    Mutation("POST", r"/synthesis/jobs", native_operation=True),
+    Mutation("POST", r"/deep-research/jobs", native_operation=True),
+    Mutation("POST", r"/showcase-reports/drafts", native_operation=True),
+    Mutation("POST", r"/showcase-reports", native_operation=True),
+    Mutation("POST", rf"/showcase-reports/{SEG}/revisions", native_operation=True),
     Mutation("POST", r"/research-memories", native_operation=True),
     Mutation("PATCH", rf"/research-memories/{SEG}", native_operation=True),
     Mutation("DELETE", rf"/research-memories/{SEG}", native_operation=True),

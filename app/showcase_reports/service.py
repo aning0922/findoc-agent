@@ -69,8 +69,8 @@ class ShowcaseReportService:
         )
         return result
 
-    async def verified(self, job_id):
-        value = await self.reader(job_id)
+    async def verified(self, job_id, reader=None):
+        value = await (reader or self.reader)(job_id)
         if (
             not isinstance(value, VerifiedJobSnapshot)
             or value.job_id != job_id
@@ -84,13 +84,13 @@ class ShowcaseReportService:
                 raise ReportError("evidence_refs_required", 422)
         return value.model_dump()
 
-    async def draft(self, *, operation_id, job_id):
+    async def draft(self, *, operation_id, job_id, reader=None):
         request = dict(action="draft", job_id=job_id)
         with self.tx() as db:
             _, prior = self.operation(db, operation_id, request)
         if prior:
             return prior
-        snapshot = await self.verified(job_id)
+        snapshot = await self.verified(job_id, reader)
         with self.tx() as db:
             digest, prior = self.operation(db, operation_id, request)
             if prior:
@@ -168,6 +168,18 @@ class ShowcaseReportService:
             )
             return self.record(db, operation_id, digest, payload)
 
+    def read_operation(self, operation_id):
+        try:
+            if str(UUID(operation_id)) != operation_id:
+                raise ValueError()
+        except (TypeError, ValueError, AttributeError):
+            raise ReportError("invalid_operation_id", 422) from None
+        with self.tx() as db:
+            row = db.execute("SELECT result FROM operations WHERE id=? AND workspace=?", (operation_id, self.workspace)).fetchone()
+        if row is None:
+            raise ReportError("operation_not_found", 404)
+        return {"operation_id": operation_id, "state": "completed", "result": json.loads(row[0])}
+
     def list(self):
         with self.tx() as db:
             return [
@@ -178,7 +190,7 @@ class ShowcaseReportService:
                 )
             ]
 
-    async def revision(self, report_id, revision):
+    async def revision(self, report_id, revision, reader=None):
         with self.tx() as db:
             row = db.execute(
                 "SELECT v.payload FROM revisions v JOIN reports r ON r.id=v.report_id WHERE r.workspace=? AND r.id=? AND v.revision=?",
@@ -188,7 +200,7 @@ class ShowcaseReportService:
             raise ReportError("report_not_found", 404)
         payload = json.loads(row[0])
         try:
-            latest = await self.verified(payload["snapshot"]["job_id"])
+            latest = await self.verified(payload["snapshot"]["job_id"], reader)
             statuses = {f["finding_id"]: f["source_status"] for f in latest["findings"]}
             status = (
                 "current"
