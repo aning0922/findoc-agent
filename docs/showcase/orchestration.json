@@ -3,25 +3,37 @@
   "integration_branch": "codex/findoc-showcase-c-integration",
   "sessions": [
     {
-      "task": "B01 independent review",
+      "task": "H01 Dashboard actual data",
       "thread_id": "01a19f9d-6c32-7ba2-a9c5-b8b708440c82",
       "client_thread_id": "client-new-thread:dbd76a05-7cb9-479d-99d1-9b24181cb164",
-      "model": "gpt-6-astra",
-      "thinking": "ultra",
-      "branch": "codex/showcase-b01-review",
+      "model": "gpt-6.1-sol",
+      "thinking": "high",
+      "branch": "codex/showcase-h01",
       "worktree": "/Users/aipuli/.codex/worktrees/ce18/findoc-agent",
-      "status": "running"
+      "status": "running",
+      "prior_task": "B01 independent review completed49e0eba"
     },
     {
-      "task": "B02 prototype owner revision",
+      "task": "H02/H03 Dashboard and L04 UI",
       "thread_id": "01a19f9d-a871-7520-aed9-dd6d22774d1a",
       "client_thread_id": "client-new-thread:6cde4161-9153-4002-b48f-e39fa83749da",
       "model": "gpt-6.1-terra",
-      "thinking": "high",
-      "branch": "codex/showcase-b02-ui",
+      "thinking": "medium",
+      "branch": "codex/showcase-h02",
       "worktree": "/Users/aipuli/.codex/worktrees/3f05/findoc-agent",
-      "status": "running_revision",
-      "reviewed_candidate": "370e3d0e356c982210a8713c8b71fe8b4b80ea60"
+      "status": "running",
+      "reviewed_candidate": "370e3d0e356c982210a8713c8b71fe8b4b80ea60",
+      "prior_task": "B02 completed0ec4a71+root8c2c8a7"
+    },
+    {
+      "task": "L01-L03 Demo controller",
+      "thread_id": "01a19fa9-6671-7841-9393-46d2bced4e89",
+      "client_thread_id": "client-new-thread:e0c54854-e9d1-44d5-9e35-9e9c1a6ccdd3",
+      "model": "gpt-6.1-sol",
+      "thinking": "high",
+      "branch": "codex/showcase-l01",
+      "worktree": "/Users/aipuli/.codex/worktrees/4eab/findoc-agent",
+      "status": "running"
     }
   ]
 }
