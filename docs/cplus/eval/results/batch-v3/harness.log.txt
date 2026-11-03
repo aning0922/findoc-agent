@@ -1,0 +1,7 @@
+POST /demo/login 202
+Traceback (most recent call last):
+  File "/Users/aipuli/.codex/worktrees/ce18/findoc-agent/experiments/cplus/verify_real_batch.py", line 632, in <module>
+    main()
+  File "/Users/aipuli/.codex/worktrees/ce18/findoc-agent/experiments/cplus/verify_real_batch.py", line 374, in main
+    time.sleep(0.3)
+KeyboardInterrupt

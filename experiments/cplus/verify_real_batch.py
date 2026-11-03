@@ -251,8 +251,8 @@ def update_fixed24(output, receipt):
 def diagnostic_hooks():
     # Timing only, in the owned child. Each wrapped function keeps its original
     # arguments/result/errors and no hook changes guards, budgets or source scope.
-    return r"""import os
-if os.environ.get("DEMO_INTERNAL_GENERATION") and os.environ.get("BATCH_TIMING_LOG"):
+    return r"""import os, sys
+if os.environ.get("DEMO_INTERNAL_GENERATION") and os.environ.get("BATCH_TIMING_LOG") and "app.demo.child:create_child_app" in sys.orig_argv:
     import functools, json, threading, time, sys
     lock = threading.Lock()
     def event(name, elapsed, fields=None):

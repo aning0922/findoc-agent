@@ -1,64 +1,79 @@
-# M5: real OS / socket HTTP 2x2 batch and bilateral annual text
+# M5: real four-cell batch timeout repair and socket HTTP verification
 
-Fixed business baseline: `dd8cca72a734c01c4d203af1989ee4af5cb1bb7e` (after the authorized `18a2a98`). Date: 2026-11-03, Asia/Taipei. Owner changes are limited to the new `experiments/cplus/verify_real_batch.py`, `docs/cplus/eval/results/batch*`, and this handoff. No backend/UI/business changes.
+**Targeted backend acceptance passes at fix `35a1922`: four real tool cells complete in one HTTP 200 response in 119.413 seconds; both matrix GETs are identical and add no persisted dispatch/results.** Both companies have all three annual topics with available left/right citations. This is actual OS/controller/child/socket HTTP/PDF/BGE/Milvus evidence, provider disabled and human financial approvals zero. It is a serial pure-tool matrix, not paid MultiAgent or full model-answer acceptance.
 
-**Result: P1 reproduced; full four-cell acceptance is incomplete.** The one corrected batch start returned HTTP 503 `runtime_unavailable` after **260.007 seconds**. Last separate readonly observation of its own database was three cells `completed`, Midea annual cell `dispatching`. The whole start's final effect is **UNKNOWN_NO_REPLAY**; that observation is not a final matrix. No operation was re-sent.
+The original 260.007-second failure/UNKNOWN and stopped harness startup remain unchanged in their own result directories. No original ID was replayed. Final source/receipt commit accompanies the small performance fix; root's business baseline was `dd8cca72a734c01c4d203af1989ee4af5cb1bb7e`, after authorized `18a2a98`. Date: 2026-11-03, Asia/Taipei.
 
-Root-owned issue pointers: `app/demo/process.py:217-218` creates the shared upstream client with a 260-second read timeout; `app/batch_research/service.py:163-215` awaits the complete serial matrix before responding; `app/demo/gateway.py:207-209` treats upstream HTTP errors as runtime failure and marks the slot degraded via `app/demo/controller.py:233-236`. The exact 260.007-second response supports a timeout interaction. This run did not independently capture the internal exception type, so the timeout attribution is an inference from measured timing and these code paths, not a captured stack trace. A final public matrix GET was not performed before harness cleanup; degraded recovery rejection is code-read, not an observed endpoint assertion.
+## Cause and smallest repair
 
-A bounded asynchronous start that durably returns a batch ID and leaves GET read-only, or another explicitly bounded execution design compatible with the gateway deadline, needs root implementation review. Increasing/evading the deadline in this worker would not establish acceptance of the current public gateway. No business files were changed.
+A new bounded diagnostic controller ran one Gree two-year / three-topic annual comparison against the unmodified retrieval leaf. The actual HTTP annual call took **108.605 s**. Timing showed **175 calls to `hybrid.verify`, 96.056 s inclusive**, versus six dense searches at 6.783 s and BGE encoding at 2.340 s. Complete-source `records` reconstruction was called 189 times (95.857 s inclusive); PDF inspection itself was 11.720 s. These nested durations overlap and must not be summed as wall time. No SQL lock exception was observed, and measured work was active CPU/source validation rather than a stuck write lock.
 
-## Method and boundaries
+`HybridRetrievalService.search` formerly exact-verified every lexical/dense candidate before sorting and returning top_k. Each verifier reloads the complete current source's evidence records and runs the original page gate. Most verified candidates were never returned. Serial repetition across two risks plus twelve annual topic sides crossed the unchanged gateway deadline.
 
-The script launches a fresh loopback Uvicorn controller in an owned OS process group, with a new temporary control directory and randomly generated per-run login account/password hash. A minimal environment enables C+, sets `DEMO_CHILD_MODE=real`, offline cached BGE, real Milvus, and `LLM_MODEL=disabled-no-calls`. The generated dummy model endpoint is loopback port 9. There is no inherited root login configuration, dotenv, provider allowance, paid model client activity, root active-runtime access, browser cookie, or owner financial authorization.
+The only business edit is **`app/retrieval_v2/service.py`**: rank with the same RRF/topic/table scores and deterministic tie-break, then run the **original fresh exact verifier** in that order until top_k admitted results are found. Rejected candidates backfill from later ranked candidates. Every returned quote still re-reads current source records and passes the original page gate. There is no source/authority cache, skipped verification for a published quote, weakened stale/OCR/source lock, new model call, changed score threshold, new candidate scope, or larger HTTP timeout. Invalid candidates can still cause bounded backfill work.
 
-The actual public controller login → readiness → claim protocol starts its own real OS child. All business calls traverse a real `httpx.Client` socket connection, controller gateway, private child boundary, actual root assembly, and original guard/commit hooks. There is no TestClient/ASGI marker fixture, mock HTTP route, fake embedding, fake vector store, or null publication guard. The controller owns its child birth/PID/process-group identity and readiness validation.
+The real before-diagnostic Gree annual result and fixed batch Gree annual result have **exactly equal complete topic objects**, including labels and both sides' full EvidenceRefs/text. Only result/operation envelope identity differs. This independently checks preserved result behavior on the real corpus rather than relying on the new unit test alone.
 
-Public immutable seed: `showcase-cplus-seed-v3`, manifest `d96b9340838c1d22619308d5d4492996f99ae03c52bf8a8a17eb6594ca139c3d`. The controller materializes it to its never-before-existing generation directory. The script verifies the seed before and after; neither readonly seed nor root's port 14540 session is mutated. Login secrets/cookies/internal secrets are never included in result files or logs.
+## Actual per-cell times and results
 
-## Harness protocol and stage reached
+| Cell | Child duration | State | Verified returned evidence |
+| --- | --- | --- | --- |
+| Gree risk_excerpt | 7.352 s | completed | 5 exact source-record quotes |
+| Gree annual_changes | 47.824 s | completed | 3 topics × 2 sides × 2 exact quotes |
+| Midea risk_excerpt | 6.877 s | completed | 5 exact source-record quotes |
+| Midea annual_changes | 42.171 s | completed | 3 topics × 2 sides × 2 exact quotes |
 
-1. Login once, wait on the original login operation's GET, claim the ready runtime, read companies/documents/metadata and the four exact source refs through real HTTP. The fifth READY document is outside this selected batch.
-2. Bind Gree and Midea 2024/2025 explicitly; verify downloaded HTTP PDF bytes against each source `content_sha256`, retaining full source_revision/parser/attempt/year/basis identity.
-3. Explicitly POST one FTS build over the four selected refs.
-4. POST a four-cell plan with `preparation_confirmed=true`: two companies × `risk_excerpt` / `annual_changes`, each cell bound to its company's exact two annual sources. Four distinct child operation UUIDs are allocated in the stored plan.
-5. Verify no child operation exists after planning, child retrieval/annual stores are unchanged by preparation, and plan GET leaves all measured domain state unchanged.
-6. Explicitly approve the stored plan ID/revision/hash once with `confirmed=true`, then POST start once. No mutating request is retried or replayed.
-7. **Not reached after start failed.** Intended check: GET the resulting matrix twice. Compare both matrices and complete row-count/content fingerprints of operations, result objects, immutable snapshots, batches and cells in the three owned domain databases before/after GET. This is actual persisted no-dispatch evidence, not inference from HTTP 200 or source inspection.
-8. **Not reached.** Intended check: verify every completed child result binds the saved operation UUID. For each quote, require exact selected SourceRef membership, a current source snapshot, correct physical page/evidence ID, canonical evidence digest, and the complete quoted text as an exact substring of that original source record. Downloaded HTTP PDF SHA and page bounds independently bind it to the actual PDF. Raw page-text and whitespace-only page matching are separately recorded, never substituted for source-record exact verification.
-9. **Not reached.** Intended check: for each annual cell, inspect all three default topics (经营风险、主要业务、研发) and both 2024/2025 sides. Retain missing/insufficient/unknown/partial states as returned; neither completed dispatch nor API success means semantic answer acceptance.
-10. **Question probes not reached.** The fixed-24 inventory is supplemented with actual source availability and the failed batch tier; the exact Midea E01-02/E01-09 provider-disabled excerpt-tool probes remain not completed. E01-03's preceding-turn/pronoun model behavior is not simulated by a standalone query.
+One `POST /cplus/batches` returned HTTP 200 in **119.413 s**; matrix is `completed`, four unique planned child UUIDs are retained, and both repeated GET matrices equal the original start result. Full row-count/content fingerprints for operations, result objects, snapshots, batches and cells in the three owned domain databases are unchanged before/after matrix GET. Plan preparation also creates no child operation; its plan GET leaves domain state unchanged.
 
-`basis=unknown` on Midea 2024 is explicitly retained. Annual text comparisons do not establish comparable financial accounting inputs, ratios, financial approval, causes, or investment conclusions.
+The measured annual service call inside the Gree cell fell from 108.605 s to **46.869 s**; Midea annual service was 41.262 s. The remainder of each cell includes the original scope/guard/admission work. The shared 260-second upstream timeout and gateway implementation were not changed. This verifies the requested four-cell scope; it is not a performance guarantee for every allowed maximum-size batch.
 
-## Result receipts
+Annual physical pages (left=2024, right=2025):
 
-The failed execution and prepared plan are recorded in `docs/cplus/eval/results/batch-v3-corrected/result.json`, including the complete plan, explicit start approval, 260.007-second error receipt, source/PDF hashes, child identities, last live readonly observation, fixed-24 gaps, and cleanup. No final matrix or per-cell payload/quote verification is claimed. Plan GET no-dispatch was actually asserted; final matrix GET no-dispatch was not reached. Full answer model PASS remains zero; this is a serial pure-tool matrix, not paid or multi-agent research.
+| Company/topic | Left pages | Right pages |
+| --- | --- | --- |
+| Gree risk | 44, 43 | 39, 38 |
+| Gree business | 44, 13 | 13, 10 |
+| Gree R&D | 20, 31 | 40, 11 |
+| Midea risk | 57, 57 | 57, 57 |
+| Midea business | 246, 12 | 224, 13 |
+| Midea R&D | 45, 61 | 45, 44 |
 
-The first startup is separately retained in `results/batch-v3/`: preflight found the harness expected an annual payload field `annual_diff_id` while the actual contract is `result_id`. The script was interrupted **before any batch plan/start** (only its login request had been sent), its owned controller/child groups were proven exited, and its scratch directory was removed. That startup is `HARNESS_STOPPED_BEFORE_BATCH_REQUESTS`, not an application failure or batch retry. Its exact script snapshot hash is retained. The corrected run starts a separate controller/account/runtime and never replaces the first receipt.
+All **34 batch quotes** bind to the exact planned SourceRef, current source snapshot, physical page, original evidence ID/digest and complete exact source-record substring. The four actual HTTP PDF downloads match `content_sha256`. Of these quotes, 28 also match the raw PDF page text extraction directly; six use the canonical parsed source-record representation and do not match the raw page extraction even after whitespace removal. Those flags are retained individually, not converted to fuzzy-match PASS. No precise browser highlighter acceptance is claimed here.
 
-No additional failure/UNKNOWN injection or wider boundary sweep is required if the four actual results satisfy the intended tool and bilateral evidence checks. Existing failed/UNKNOWN root provider receipts are untouched and are not reclassified by this run.
+These are available source citations, not human relevance or semantic-change labels. For example, some business-topic candidates are late financial-note pages; all actual page choices remain visible for review. No accuracy, precision, cause, business cancellation, user review, or financial conclusion is inferred from successful dispatch/exact provenance. Midea 2024 retains `basis=unknown`: text-year comparison does not grant financial comparability.
 
-## Reproduce
+## Full venv / BGE initialization check
 
-Use a new empty result directory whose name starts with `batch`; existing results are refused:
+Actual business child Python was `/Users/aipuli/.codex/worktrees/ce18/findoc-agent/.venv/bin/python`, with that venv's `sys.prefix`, distinct base_prefix, and installed FlagEmbedding/torch/pymilvus/pymupdf/httpx/uvicorn modules verified from its site-packages. The same executable is supplied as `DEMO_CHILD_PYTHON`. The real business child's timing events show **one BGE initialization**, not a model reload per query.
+
+Timing-hook limitation is explicit: the executed timing hook was also inherited by a Milvus helper Python process and initialized an extra BGE there at startup. Events in the successful run include PID, so runtime initialization/query counts are filtered by the actual child PID. This hook artifact is not presented as an application repeated-initialization bug. Final hooks are restricted to the exact `app.demo.child:create_child_app` Uvicorn argv, excluding helper processes; a no-model helper guard check verifies that exclusion. The successful four-cell execution is retained exactly as run, with this extra startup overhead; it was not rerun merely to clean up timing instrumentation. Timing wrappers preserve original function arguments, returns, exceptions, guards and query/source scope.
+
+## Real protocol and retained failures
+
+The script generates a new random login account/password hash in a minimal environment, starts its own loopback Uvicorn controller, waits on the original login operation, and claims a real OS child. All business calls pass through real sockets, the actual controller gateway/private boundary, actual root assembly and original commit/publication hooks. There is no TestClient marker, mock route, fake embedding/vector store, null guard, or root session access.
+
+It reads companies/documents/metadata and exact refs for Gree/Midea 2024/2025, downloads/checks the four PDFs, explicitly builds FTS, plans two companies × risk_excerpt/annual_changes, and approves the stored plan ID/revision/hash once. The V3 seed has five READY reports and the existing derived scan; only the specified four fast sources are selected. The seed manifest is **`d96b9340838c1d22619308d5d4492996f99ae03c52bf8a8a17eb6594ca139c3d`**. Before/after seed verification and owned-process/scratch cleanup pass in every retained run. Root port 14540, login/LLM dotenv, original active runtime, passwords and private provider ledger were never read or mutated.
+
+- `results/batch-v3/`: first startup stopped before plan/start when the harness's annual result-id field was found to need `result_id`, not `annual_diff_id`. Only login had been sent; both owned process groups exited and scratch was removed. This is a harness preparation record, not an application failure.
+- `results/batch-v3-corrected/`: original actual start returned HTTP 503 `runtime_unavailable` after **260.007 s**. Last separate readonly observation was three completed cells and Midea annual dispatching, not a final matrix. Effect remains **UNKNOWN_NO_REPLAY**. The executed harness cleaned its owned runtime before capturing full cell payloads, so no final state reconstruction is fabricated. Final failure handling captures available owned states/read-only recovery before cleanup for future runs.
+- The measured 260.007-second response is consistent with `app/demo/process.py:217-218`'s upstream read deadline and gateway `runtime_failed` path. Internal exception type was not captured; attribution to that timeout path is an inference from timing plus code. No provider timeout, refund or retry is inferred.
+- `results/batch-v3-diagnostic/`: new bounded controller / new IDs, one actual annual HTTP call, exact executed source + timing events + complete before-result + cleanup.
+- `results/batch-v3-fixed/`: new controller / new IDs after `35a1922`, complete four-cell HTTP result, matrix GET no-dispatch fingerprints, full per-cell quote checks, timing, before/after equality proof, fixed-24 supplement and cleanup. No further fault/boundary expansion was run after the four cells passed.
+
+## Fixed 24 and validation
+
+The successful run executes the **exact E01-02** Midea 2024/2025 question and **exact E01-09** selected-Midea-2024 question through context/answer HTTP with provider disabled. They return `provider_unconfigured` with five and four exact-verified quotes respectively. Context sources remain exactly selected; no latest source is silently added. These are excerpt-tool components, not model planning, pronoun resolution, refusal semantics or full answer PASS.
+
+`batch-v3-fixed/fixed24-supplement.json` preserves all 24 exact questions and required tiers, distinguishing previous v1 evidence, current real socket executions and remaining gaps. CP-19 has actual bilateral three-topic tool output; CP-21 has this four-cell pure-tool matrix and GET no-dispatch. Neither acquires REAL_LLM acceptance. Partial-failure/UNKNOWN recovery is not inferred from the successful run; the older UNKNOWN remains retained. Human semantic and positive financial axes remain pending.
+
+Targeted tests: **14 passed**, five existing SWIG deprecation warnings. This includes ranked top-k/backfill/all-rejected cases, original fresh source/page gate, stale dense-content rejection, legacy cosine separation, annual service tests, and the independent root SQLite integration review suite. Ruff and compilation pass. Receipt consistency checks verify exact executed-script hashes, same before/after annual topics, all 24 exact IDs/questions, no provider/human approval, unchanged seed and dead owned process groups with removed scratch. No business file beyond the retrieval leaf was edited; runtime_factory, AppShell and gateway timeout are unchanged.
+
+Reproduce with a new empty batch result directory:
 
 ```sh
-PYTHONPATH=. .venv/bin/python experiments/cplus/verify_real_batch.py \
+PYTHONPATH=. .venv/bin/python experiments/cplus/verify_real_batch.py --timing \
   --seed /absolute/path/to/readonly/showcase-cplus-seed-v3 \
   --output docs/cplus/eval/results/batch-new-owned-run
 ```
 
-The script creates its own login configuration in memory and an independent loopback port. It does not accept root login configuration, provider configuration, or an allowance path. It closes only its Popen-owned controller and birth-bound child groups, checks the seed again, and removes its own scratch directory after process exit is proven.
-
-`fixed24-supplement.json` retains all 24 exact questions and required tiers. Prior v1 evidence is labelled separately. Added Midea 2024 text availability closes a missing-fixture prerequisite, while real-model planning, clarification/refusal, causal explanation, paired-agent comparison, partial-failure recovery, browser acceptance and human financial axes retain their actual unverified status.
-
-
-## Retained artifacts and final checks
-
-- `results/batch-v3/result.json`: stopped preflight-startup receipt; only login sent, no plan/start. Owned controller PID 50389 and child group 50391 exited; scratch removed.
-- `results/batch-v3-corrected/result.json`: original corrected execution on loopback port 60203 (see receipt for authoritative origin), plan `770c8a3d-b544-4fd5-b10f-f21c9452e652`, four fixed distinct child operation IDs, HTTP 503 at 260.007 seconds, UNKNOWN effect and cleanup.
-- `results/batch-v3-corrected/fixed24-supplement.json`: 24 exact questions/tiers, no complete model answer PASS; E01-02/E01-09 source prerequisites now present but probes not completed; CP-19/21 explicitly not accepted.
-- Both run directories retain exact executed-script snapshots matching their receipt hashes. Final evaluator corrects the id-field bug and, for future failures, captures available owned SQLite cell/result snapshots plus a bounded readonly matrix recovery attempt before cleanup. Those added failure-capture steps were not executed retroactively; the original failed runtime was already removed, and no result reconstruction is fabricated.
-
-The corrected run's controller and child group are proven exited, owned scratch removed, and V3 seed unchanged. Its business baseline is untouched. Ruff, Python compilation, receipt/hash consistency, 24-case identity preservation, and code ownership checks pass. Provider/model calls and human financial approvals remain zero. This is an actual local public-gateway batch timeout, not a provider ReadTimeout or a paid MultiAgent result. The next full four-cell check requires a root-owned bounded-start/gateway fix; the original start must not be replayed.
+`--diagnose-one-annual` runs only one Gree annual comparison in a new real controller without a batch start. Existing result directories are refused. Credentials stay in memory/environment, no private configuration or allowance path is accepted, and only owned birth-bound process groups and scratch are cleaned.
