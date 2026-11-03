@@ -1,0 +1,8 @@
+{
+  "tier": "READ_ONLY_REAL_PUBLIC_CANDIDATE_ARTIFACT_REVIEW",
+  "report_ref": {"domain":"peer_comparison_v1","id":"3d1d4175-2c06-41f8-9c43-3c6771570a2b","revision":1,"payload_sha256":"3ce574488a9c9081a70982362967ad574d5778205b20092b564535dee925df49"},
+  "sha256": {"csv":"b4d124b31bd2ac6bb72ecd055d3822c387c8ca0c1698ae45ddc14098881b04a8","xlsx":"63551909fde6d740674dd7452efcb2471582bd757c686a4ac83ec990b962e188","pptx":"6a398f7da0c10f2d966d77f5d108a184b086378107ce6dfe13b90e400243801c","pdf":"5f5abafd8b3c33474fecebc3bc9fb798582ae9581e5fbb0e7b71cdac4e1b2576"},
+  "xlsx_target": [{"sheet":"财务数据","cell":"B2","type":"string","value":"391371999819.49"},{"sheet":"财务数据","cell":"C2","type":"string","value":"391371999819.49"}],
+  "xlsx_formulas":0,"csv_rows":11,"csv_target_prefix":"apostrophe","pptx_slides":6,"pdf_pages":21,"source_physical_page":86,"provider_calls":0,"human_approvals":0,
+  "render_note":"Bundled LibreOffice required FONTCONFIG_FILE=/opt/homebrew/etc/fonts/fonts.conf; without it CJK glyphs disappeared."
+}
