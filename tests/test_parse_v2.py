@@ -33,7 +33,10 @@ class Engine:
             raise TimeoutError()
         return {
             "lines": [
-                {"text": "营业收入候选未核对", "bbox": [0.1, 0.1, 0.2, 0.2], "confidence": 0.9}
+                {"text": "营业收入候选未核对", "bbox": [0.1, 0.1, 0.2, 0.11], "confidence": 0.9},
+                {"text": "123", "bbox": [0.6, 0.1, 0.7, 0.11], "confidence": 0.8},
+                {"text": "净利润", "bbox": [0.1, 0.15, 0.2, 0.16], "confidence": 0.9},
+                {"text": "45", "bbox": [0.6, 0.15, 0.7, 0.16], "confidence": 0.8},
             ],
             "request_revision": 3,
             "os_version": "fake",
@@ -47,8 +50,11 @@ def run(coro):
 def fixture(tmp_path):
     h = Harness(tmp_path)
     with pymupdf.open() as pdf:
-        pdf.new_page()
-        pdf.new_page()
+        image = pymupdf.Pixmap(pymupdf.csRGB, pymupdf.IRect(0, 0, 20, 20), False)
+        image.clear_with(128)
+        for _ in range(2):
+            page = pdf.new_page()
+            page.insert_image(page.rect, stream=image.tobytes("png"))
         content = pdf.tobytes()
     result = run(
         h.service.upload(
@@ -88,7 +94,15 @@ def test_complete_replay_search_partial_keeps_active(tmp_path):
     q = run(s.quality(doc))
     assert q["artifact_id"] == r["artifact_id"]
     assert q["source_status"] == "current" and not q["legacy_source_verified"]
-    assert q["pages"][0]["tables"][0]["quality"] == "needs_review"
+    grid = q["pages"][0]["tables"][0]
+    assert grid["quality"] == "needs_review" and grid["row_count"] == 2
+    assert [(c["row"], c["column"], c["text"]) for c in grid["cells"]] == [
+        (0, 0, "营业收入候选未核对"),
+        (0, 1, "123"),
+        (1, 0, "净利润"),
+        (1, 1, "45"),
+    ]
+    assert grid["cells"][1]["bbox"] == [0.6, 0.1, 0.7, 0.11]
     assert q["identity_assessment"]["financial_facts"] == "not_verified"
     assert run(s.search(doc, r["artifact_id"], "营业收入"))["items"][0]["physical_page"] == 1
     assert run(s.image(doc, r["artifact_id"], 1)).startswith(b"\x89PNG")
@@ -162,6 +176,40 @@ def test_fast_text_and_http_contract(tmp_path):
     assert client.get(
         f"/documents/{doc}/parse-artifacts/{artifact}/search", params={"q": "text layer"}
     ).json()["items"]
+    assert (
+        client.get(f"/documents/{doc}/parse-quality").json()["engine"]["name"]
+        == "PyMuPDF text layer"
+    )
+    with pymupdf.open() as pdf:
+        pdf.new_page()
+        page = pdf.new_page()
+        pix = pymupdf.Pixmap(pymupdf.csRGB, pymupdf.IRect(0, 0, 20, 20), False)
+        pix.clear_with(128)
+        page.insert_image(page.rect, stream=pix.tobytes("png"))
+        page.insert_text((40, 40), "Scanned table with a sufficiently long text header.")
+        white_page = pdf.new_page()
+        white = pymupdf.Pixmap(pymupdf.csRGB, pymupdf.IRect(0, 0, 20, 20), False)
+        white.clear_with(255)
+        white_page.insert_image(white_page.rect, stream=white.tobytes("png"))
+        mixed = pdf.tobytes()
+    identity, _ = run(s.snapshot(doc))
+    parsed = s.parse(identity, mixed)
+    assert parsed["state"] == "completed" and parsed["pages_processed"] == 3
+    assert parsed["pages"][0]["method_reason"] == "empty_page"
+    assert (
+        parsed["pages"][1]["method"] == "ocr"
+        and parsed["pages"][1]["method_reason"] == "substantial_image_coverage"
+    )
+    assert parsed["pages"][2]["method_reason"] == "raster_blank_heuristic"
+    assert "blank_page_heuristic" in parsed["pages"][2]["warnings"]
+    assert engine.calls == 1
+    s.max_pages = 1
+    limited = s.parse(identity, mixed)
+    assert (
+        limited["state"] == "partial"
+        and limited["pages_processed"] == 1
+        and limited["page_limit"] == 1
+    )
     assert (
         client.post(f"/documents/{doc}/parse-retry", json={**body, "path": "/etc"}).status_code
         == 422

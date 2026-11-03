@@ -13,6 +13,8 @@ from uuid import UUID, uuid4
 import pymupdf
 
 from app.documents.source_repository import revision_id
+from app.parsing.layout import candidate_grid
+from app.parsing.vision import VisionEngine
 
 
 def canonical(value):
@@ -209,6 +211,8 @@ class ParseV2Service:
     def parse(self, identity, raw):
         config = dict(
             dpi=180,
+            layout_version="bbox-lines-v1",
+            routing_version="image-coverage-blank-v1",
             max_pages=self.max_pages,
             max_seconds=self.max_seconds,
             adapter_version=self.engine.adapter_version,
@@ -222,12 +226,14 @@ class ParseV2Service:
             schema_version="parse-artifact-v2",
             artifact_id=str(uuid4()),
             **identity,
-            engine={"name": self.engine.name, "version": "unknown"},
+            engine={"name": "PyMuPDF text layer", "version": pymupdf.VersionBind},
             adapter_version=self.engine.adapter_version,
             config_hash=digest(canonical(config).encode()),
             model_revision="unknown",
             state="failed",
             pages_total=0,
+            pages_processed=0,
+            page_limit=self.max_pages,
             ocr_pages=0,
             created_at=datetime.now(UTC).isoformat(),
             pages=[],
@@ -262,35 +268,84 @@ class ParseV2Service:
                         break
                     page = pdf[i]
                     text = page.get_text().strip()
+                    area = max(page.rect.width * page.rect.height, 1)
+                    images = page.get_image_info()
+                    image_coverage = min(
+                        1.0,
+                        sum(
+                            max(0, box[2] - box[0]) * max(0, box[3] - box[1]) / area
+                            for box in (item["bbox"] for item in images)
+                        ),
+                    )
+                    drawing_count = len(page.get_drawings()) if not text and not images else 0
+                    raster_blank = False
+                    if not text and images and image_coverage >= 0.30:
+                        if page.rect.width * 0.2 * page.rect.height * 0.2 <= 2_000_000:
+                            thumb = page.get_pixmap(
+                                matrix=pymupdf.Matrix(0.2, 0.2),
+                                colorspace=pymupdf.csGRAY,
+                                alpha=False,
+                            )
+                            samples = thumb.samples
+                            raster_blank = (
+                                bool(samples)
+                                and sum(v < 245 for v in samples) / len(samples) < 0.001
+                            )
+                    blank = not text and ((not images and drawing_count == 0) or raster_blank)
+                    needs_ocr = not blank and (
+                        image_coverage >= 0.30 or (len(text) < 20 and (bool(images) or not text))
+                    )
+                    reason = (
+                        "raster_blank_heuristic"
+                        if raster_blank
+                        else "empty_page"
+                        if blank
+                        else "substantial_image_coverage"
+                        if image_coverage >= 0.30
+                        else "sparse_text_with_image"
+                        if needs_ocr and images
+                        else "no_text_visual_content"
+                        if needs_ocr
+                        else "text_layer"
+                    )
                     p = dict(
                         physical_page=i + 1,
                         method="fast",
+                        method_reason=reason,
+                        image_coverage=round(image_coverage, 4),
                         status="completed",
                         text=text,
                         tables=[],
                         warnings=[],
                     )
-                    if len(text) < 20:
+                    if blank:
+                        p["warnings"].append(
+                            "blank_page_heuristic" if raster_blank else "blank_page"
+                        )
+                    if needs_ocr:
                         p["method"] = "ocr"
                         result["ocr_pages"] += 1
+                        result["engine"] = {"name": self.engine.name, "version": "unknown"}
                         try:
                             if page.rect.width * 2.5 * page.rect.height * 2.5 > 20_000_000:
                                 raise ValueError("page_too_large")
                             pix = page.get_pixmap(matrix=pymupdf.Matrix(2.5, 2.5), alpha=False)
                             if pix.width * pix.height > 20_000_000:
                                 raise ValueError("page_too_large")
-                            output = self.engine.recognize(pix.tobytes("png"))
+                            remaining = self.max_seconds - (time.monotonic() - started)
+                            if remaining <= 0:
+                                raise TimeoutError("parse_deadline_exceeded")
+                            image = pix.tobytes("png")
+                            output = (
+                                self.engine.recognize(image, timeout_seconds=remaining)
+                                if isinstance(self.engine, VisionEngine)
+                                else self.engine.recognize(image)
+                            )
                             p["text"] = "\n".join(line["text"] for line in output["lines"])
                             p["lines"] = output["lines"]
                             p["warnings"].append("ocr_transcription_unreviewed")
-                            p["tables"] = [
-                                dict(
-                                    table_id=f"page-{i + 1}-candidate",
-                                    quality="needs_review",
-                                    cells=[],
-                                    warning="表格结构未核对；请对照原图。",
-                                )
-                            ]
+                            p["tables"] = candidate_grid(output["lines"])
+                            p["warnings"].append("ocr_layout_clustering_not_verified")
                             result["engine"]["version"] = str(
                                 output.get("request_revision", "unknown")
                             )
@@ -301,6 +356,9 @@ class ParseV2Service:
                             p.update(status="failed", text="", lines=[])
                             p["warnings"].append("ocr_failed")
                     result["pages"].append(p)
+            result["pages_processed"] = len(result["pages"])
+            if result["pages_total"] > self.max_pages:
+                result["limitations"].append(f"页数超过上限 {self.max_pages}，未处理页不计为完成。")
             complete = len(result["pages"]) == result["pages_total"] and all(
                 p["status"] == "completed" for p in result["pages"]
             )

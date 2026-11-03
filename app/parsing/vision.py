@@ -16,7 +16,7 @@ class VisionEngine:
         self.timeout_seconds = timeout_seconds
         self.script = Path(__file__).with_name("vision_ocr.swift")
 
-    def recognize(self, image: bytes) -> dict:
+    def recognize(self, image: bytes, *, timeout_seconds=None) -> dict:
         with tempfile.TemporaryDirectory(prefix="findoc-vision-") as directory:
             root = Path(directory)
             (root / "page.png").write_bytes(image)
@@ -24,7 +24,9 @@ class VisionEngine:
             subprocess.run(
                 ["swift", str(self.script), str(root / "page.png"), str(root / "out.json")],
                 check=True,
-                timeout=self.timeout_seconds,
+                timeout=min(self.timeout_seconds, timeout_seconds)
+                if timeout_seconds is not None
+                else self.timeout_seconds,
                 capture_output=True,
             )
             return json.loads((root / "out.json").read_text())
