@@ -1,6 +1,7 @@
 """Public demo HTTP boundary. Legacy app is never mounted in this process."""
 from contextlib import asynccontextmanager
 from collections import defaultdict, deque
+import os
 import time
 from typing import Literal
 from uuid import UUID
@@ -63,7 +64,11 @@ def create_demo_app(config: DemoConfig, manager, *, cookie_name=COOKIE) -> FastA
         try:
             yield
         finally:
-            await controller.close()
+            try:
+                await controller.close()
+            finally:
+                if cache := getattr(app.state, "cplus_public_cache", None):
+                    cache.close()
 
     app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
     app.state.demo_controller = controller
@@ -171,6 +176,10 @@ def create_demo_app(config: DemoConfig, manager, *, cookie_name=COOKIE) -> FastA
     @app.get("/demo/resets/{reset_id}")
     async def reset(reset_id: UUID, request: Request):
         return controller.reset_status(str(reset_id), *cookies(request))
+
+    if os.environ.get("FINDOC_CPLUS_ENABLED") == "1":
+        from app.cplus.controller import register_cplus_controller
+        register_cplus_controller(app, controller)
 
     @app.api_route("/{path:path}", methods=["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
     async def business(request: Request, path: str):

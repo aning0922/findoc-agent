@@ -6,8 +6,12 @@ const sessionExact = new Set([
   "findoc:conversation-operations:v1", // product/conversationState.ts
   "findoc:memory-operation:v1", // product/memoryApi.ts
   "findoc-report-unknown-operation-v1", // product/reportOperation.ts
+  "findoc:cplus-discovery-operation",
+  "findoc:cplus-discovery-import",
 ]);
 const sessionPrefixes = [
+  "findoc:cplus-finance:",
+  "findoc:cplus-research:",
   "findoc:showcase-report-operation:v1:", // product/showcaseReports/ShowcaseReportsPanel.tsx
   "findoc:finance-v2-operation:", // product/financeV2/ExtendedFinancePanel.tsx
   "findoc:research-memory-operation:", // product/researchMemory/ResearchMemoryPanel.tsx

@@ -17,3 +17,11 @@ B03：root从独立物化seed真实BGE/Milvus跑6题top5，evidence/M0-retrieval
 主控基础实现：tests/test_cplus_demo_namespace.py、test_cplus_retired_gc.py、test_cplus_shared_budget.py + existing demo_auth/demo_gateway/showcase_local_launcher/runtime_startup：25PASS/5SWIG warnings，3.96s；root改动ruffPASS。曾ruff发现root新test的unused import和同行semicolon，已修并复跑；没有把该失败写成通过。
 
 experiments/cplus/gc_runtime_check.py实际OS+private HTTP synthetic fakechild三代PASS，evidence/M1-gc-runtime.json；无真实PDF/BGE/LLM/人签。清理仅新owned temp目录，原C14530/controller不动。新launcher--cplus --check与原.env/同一既有ledger只读准入PASS，20分钟/wait_only/14540，provider call0；模型配置只在backend，不印密钥。
+
+
+## M1 root assembly / real HTTP
+
+- Actual proof: `evidence/M1-official-import.json`; official Haier 2025 PDF245pages SHA14186f9f…: cold download then new-generation cache_hit true, current generation READY/source200/metadata200, GET operation recovery and logout. Real HTTP/PDF/BGE/Milvus; provider0/human0.
+- Failure retained: initial script KeyError receipt after completed import; no original operation replay. Launcher restart409 resetting; no accepted operation; fixed read-only startup-status wait. Initial lazy FastAPI `_IncludedRouter.app` assembly failure corrected by final ASGI middleware, 2 boundary fake tests pass.
+- Corrected selected suite: 10PASS/1SKIP, realPDFopt-in unset. Mistyped file path invocation exit4/0tests retained. Ruff PASS; Node24 build PASS with chunk warning.
+- Independent AstraHigh review432824f: two P1 journal/COMMIT timing windows reproduced; assigned fixes. Real source/memory/parse/parent cross-store root guard still under review.

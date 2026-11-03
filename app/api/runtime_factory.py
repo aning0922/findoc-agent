@@ -479,6 +479,17 @@ def create_runtime_app(
                 dashboard_service.archive = archive_service
                 dashboard_service.research = showcase_research
                 dashboard_service.showcase_reports = showcase_reports
+                if cplus_enabled:
+                    from app.cplus.runtime import register_cplus_runtime
+                    register_cplus_runtime(
+                        app, runtime_root, sources=source_service, parse_service=parse_service,
+                        preparer=selection_preparer, dense_scope=selected_scope_search,
+                        memory=research_memory, conversations=conversation_repository,
+                        workspace=DEMO_WORKSPACE_ID, llm_client=llm_client,
+                        owner_authorizer=authorize_extended_finance, generation=showcase_generation,
+                    )
+                    conversation_graph.tools.scope = app.state.cplus_legacy_hybrid_search
+                    showcase_research.search = app.state.cplus_legacy_hybrid_search
                 app.include_router(create_task_router(task_repository, persistent_templates))
                 app.state.task_repository = task_repository
                 app.include_router(create_report_router(ReportService(task_repository, source_service)))

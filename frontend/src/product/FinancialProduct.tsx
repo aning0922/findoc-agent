@@ -21,6 +21,8 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { AppShell, pathFor } from "./AppShell.tsx";
 import { readProductRoute } from "./productRoutes.ts";
 import { CompanyDirectory } from "./CompanyDirectory.tsx";
+import { CompanyDiscoveryPanel } from "./cplus/sources/CompanyDiscoveryPanel.tsx";
+import { CPlusCompany360 } from "./cplus/profile/CPlusCompany360.tsx";
 import type { Page } from "./AppShell.tsx";
 import { METRICS } from "../evidence/contracts.ts";
 import {
@@ -100,6 +102,8 @@ export default function FinancialProduct({
   }
 
   const company = companies.find((c) => c.company_id === route.company);
+  const cplus = import.meta.env.VITE_FINDOC_CPLUS_MODE === '1';
+  const discovery = cplus ? <details className="product-card" open={route.page === 'companies'}><summary>查找上市公司与官方年报</summary><CompanyDiscoveryPanel companies={companies} onImported={(id) => { window.location.assign(pathFor('overview', id)); }} /></details> : null;
   return (
     <AppShell
       key={`${route.key}:${historyEpoch}`}
@@ -117,16 +121,16 @@ export default function FinancialProduct({
           <button onClick={() => setRetry((n) => n + 1)}>重试读取</button>
         </section>
       ) : route.home ? (
-        <ResearchHome
+        <>{discovery}<ResearchHome
           key={route.company}
           companies={companies}
           company={route.company}
           access={access}
-        />
+        /></>
       ) : route.page === "tasks" ? (
         <><ShowcaseArchivePanel kind="job" /><ResearchTasks companies={companies} /></>
       ) : route.page === "companies" ? (
-        <CompanyDirectory companies={companies} loading={companiesLoading} />
+        <>{discovery}<CompanyDirectory companies={companies} loading={companiesLoading} /></>
       ) : route.page === 'conversations' ? (
         <Suspense fallback={<p role="status">正在打开研究助手…</p>}>
           <Conversations companies={companies} />
@@ -152,6 +156,8 @@ export default function FinancialProduct({
           company={route.company}
           companies={companies}
         />
+      ) : cplus && company && route.page === 'overview' ? (
+        <CPlusCompany360 companyId={company.company_id} companies={companies} onResearchDraft={({companyId,question}) => { window.location.assign(`/conversations?${new URLSearchParams({company:companyId,question})}`); }} />
       ) : company ? (
         <CompanySession
           key={route.key}

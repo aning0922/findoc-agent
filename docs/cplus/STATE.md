@@ -12,6 +12,14 @@
 
 ## 当前阶段
 
+**实时进展：M1/M2 后端与正式页面集成中，M3叶子模块并行。** 集成HEAD `5f590dd`（原C基线不变）；D02–D05、R01–R03、F01–F06、A01及正式发现/360组件已集成，但各自验收分层见TASK_BOARD。主控正在提交controller/private-child/旧检索adapter和正式导航接线。
+
+2026-11-03 root真实HTTP新增：独立C+登录/实际BGE+Milvus启动、海尔600690动态搜索与2025年报发现、首次公开下载、下一generation命中相同SHA公开cache、重新建立本代企业与上传/索引、实际READY及source/metadata 200、原operation GET恢复、logout恢复seed。证据 `evidence/M1-official-import.json`。provider0/human0。首次脚本误读回执receipt字段而中断、启动时409 resetting均保留；未重发原导入。当前仅HTTP客户端，不等同双浏览器接管验收。
+
+独立Astra High二次审查 `432824f` 复现2项P1：财务source journal检查先于实际读锁、retrieval外层guard退出晚于innerCOMMIT。已分配Sol High修复及真实SQLite并发回归；不能以nullcontext fake测试认为root完整跨库栅栏已验收。正式360与图表正在Terra High打磨；Sol High继续同行/有限批量。侧边栏名称已按任务更新，调度记录orchestration.json。
+
+root当前精选集成测试10PASS/1SKIP（真实PDF opt-in未设置），RuffPASS，Node24正式前端buildPASS（既有chunk warning）。另一次测试命令误写两个文件名导致0 tests/exit4，已更正，不计通过。原账本未新建，C+新增模型调用仍0。真实财务候选HTTP、typed OCR HTTP/UI、模型回归、三宽正式浏览器、三脚本和导出仍未完成。
+
 M0 FROZEN v1：root已真实读README/00/02/10/12/11/15、data、contracts、其余专项与现关键源码；Astra Ultra审查129d8d4已集成3ae6b43，八项P0修订纳入ADR/API/ports；React6ecb5ee→fc987a4已由root三宽实际复跑；D01 f413803→40ea97d真实官方17请求/全文PDF245页预检通过（不是READY）。
 
 B00/B01/B02/B03达到各自M0层级：SOURCE_REVIEW/CODE_REVIEW/UI_MOCK/REAL_BGE_MILVUS，不能升级成业务完成。旧dense6题已实际运行，历史物理70页委托理财误引用另存且不伪称本轮同题重现。主控不等待普通任务逐项用户许可；M0冻结后进入三条后端并行链及真实UI接线。

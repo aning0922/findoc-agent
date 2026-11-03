@@ -20,6 +20,18 @@ class Mutation:
 
 SEG = r"[^/]+"
 MUTATIONS = (
+    Mutation("POST", r"/cplus/annual-diffs", native_operation=True),
+    Mutation("POST", r"/cplus/retrieval/builds", native_operation=True),
+    Mutation("POST", r"/cplus/retrieval/searches", native_operation=True),
+    Mutation("POST", r"/cplus/research/enrollments", native_operation=True),
+    Mutation("POST", r"/cplus/research/contexts", native_operation=True),
+    Mutation("POST", r"/cplus/research/answers", native_operation=True),
+    Mutation("POST", r"/cplus/financial/collections", native_operation=True),
+    Mutation("POST", r"/cplus/financial/reviews", native_operation=True),
+    Mutation("POST", r"/cplus/financial/confirmations", owner=True, native_operation=True),
+    Mutation("POST", rf"/cplus/financial/confirmations/{SEG}/revoke", owner=True, native_operation=True),
+    Mutation("POST", r"/cplus/financial/trend-projections", native_operation=True),
+    Mutation("POST", r"/cplus/checkups", native_operation=True),
     Mutation("POST", r"/research/intent", native_operation=True),
     Mutation("POST", r"/research/handoffs", native_operation=True),
     Mutation("POST", r"/synthesis/plans", native_operation=True),
