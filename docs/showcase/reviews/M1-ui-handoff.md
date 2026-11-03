@@ -42,8 +42,17 @@ CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' SHOWC
 - sessionStorage 前缀：`findoc:research-draft-v2:`、`findoc:task-reading:`、`findoc:upload-intent:`、`findoc:pending-operation:`、`financial-acceptance-pending-v1:`（含 history）、`financial-facts-pending-v1:`、`embedded-review-session-v1:`。
 - localStorage 精确键：从原模块导入的 `AGENT_RUN_INDEX_KEY`（`findoc.agent-run-index`）；前缀：`findoc:source-intent:`、`findoc:operating-identity:`。
 
-只在服务器 Session 通过 schema、请求序列/epoch/generation 检查后同步清理，成功后才 setSession/挂载 children；首次 Gate 激活也清，隔离经典模式旧线索。同一已挂载 Gate 内同 generation/seed 的 GET refresh 不清理；任一改变则清理并以 generation+seed key 重建 children。首次挂载（包括整页重新加载）采取重新清理策略；没有持久客户端身份 marker，也不依据任何存储值授权。关闭 demo 后再启用会重新隔离。清理存储失败则保持关门，不继续挂载新工作区。无 `storage.clear()`，不匹配的键包括其他 `findoc:` 键均保留。
+只在服务器 Session 通过 schema、请求序列/epoch/generation 检查后同步清理，成功后才 setSession/挂载 children；首次 Gate 激活也清，隔离经典模式旧线索。同一已挂载 Gate 内同 generation/seed 的 GET refresh 不清理；任一改变则清理并以 generation+seed key 重建 children。（此早期行为已由下方硬刷新修订覆盖。）关闭 demo 后再启用会重新隔离。清理存储失败则保持关门，不继续挂载新工作区。无 `storage.clear()`，不匹配的键包括其他 `findoc:` 键均保留。
 
 Chrome mock 验证新增：预置全部 13 类实际键；首次激活清除、同代 GET 保留、跨 generation 清除、仅 seed 改变清除；无关键和不在 allowlist 的 FinDoc 偏好保留。child 首次 render 探针确认旧 pending hint 在新 children 构造前已移除。模拟测试初版 probe 使用了错误 React hook 实例而失败，改为 class mount probe 后通过；等待响应也改为明确等待 session HTTP 与渲染提交，避免读取前次授权消息。
 
 复跑存储窄集：frontend 目录 `SHOWCASE_STORAGE_ONLY=1 CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' node e2e/showcase-live-mock.mjs`，Vite 5180。未编辑 main/installGatewayFetch/产品热点；未开始 D03。
+
+
+## 硬刷新恢复语义修订（覆盖前段首次挂载描述）
+
+sessionStorage 新增 `findoc:demo-hint-boundary:v1`，内容仅为已验证 Session 的 `{lease_generation,seed_version}`。此 housekeeping tuple 不授予身份或权限，Gate 仍先 GET status/session 并通过 schema、epoch/序列与代际检查，才读取 marker 决定是否清业务提示。marker 缺失/不匹配/损坏时清 allowlist 并写入新的 tuple；同一有效 Session 硬刷新与同代 GET 保留 UNKNOWN 恢复线索。401、明确 logout、禁用 Demo 移除 marker，禁用后再启用不能沿用旧边界；存储访问或写入异常不挂载演示业务。没有 localStorage token、凭据或授权 marker。
+
+新增 Chrome mock PASS：同有效 Session 硬 reload 确实重新请求 session，UNKNOWN pending hint 保留并在 child 首次 mount 读到；换 generation 后硬 reload 清理；seed 改变清理；logout/401 移除 marker；marker 读取被浏览器拒绝时 fail closed。既有同代 GET/跨代/无关键保留用例保留。完整模拟套件、build、lint 仍按本地窄预算执行；真实 Cookie/后端联调仍属于主控。
+
+附：本次也按主控发现的真实入口样式冲突，为 `.showcase-dashboard .sd-hero h1` 显式设白色；fixture 加载真实 `index.css`，三宽断言 computed h1 为白色。该样式修改仅限组件 scope。

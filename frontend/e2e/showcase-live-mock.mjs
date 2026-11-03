@@ -86,7 +86,7 @@ async function fixture(width, mode = "normal") {
   await page.route("**/fixture", (r) =>
     r.fulfill({
       contentType: "text/html",
-      body: `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0"><div id="root"></div><script type="module">import RefreshRuntime from '/@react-refresh';RefreshRuntime.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>(type)=>type;window.__vite_plugin_react_preamble_installed__=true;</script><script type="module">import React from '/node_modules/.vite/deps/react.js';import ReactDOM from '/node_modules/.vite/deps/react-dom_client.js';import {DemoGate} from '/src/demo/DemoGate.tsx';import {ShowcaseDashboard} from '/src/product/showcase/ShowcaseDashboard.tsx';import {AppShell} from '/src/product/AppShell.tsx';import '/src/product/tokens.css';import '/src/product/shell.css';import '/src/product/product.css';import '/src/product/foundation.css';const style=document.createElement('style');style.textContent=${JSON.stringify(tokens)};document.head.append(style);class Probe extends React.Component {constructor(props){super(props);this.hint=sessionStorage.getItem('findoc:conversation-operations:v1') || 'none';}render(){return React.createElement('span',{id:'hint-probe','data-hint':this.hint,hidden:true});}}function App(){return React.createElement(React.Fragment,null,React.createElement('div',{style:{background:'#fff0be',textAlign:'center',fontSize:12,padding:8}},'UI_MOCK · 全部为测试示意数据，不是真实财报'),React.createElement(DemoGate,{enabled:true},React.createElement(AppShell,{page:'home',company:'',companies:[],navigate:()=>{}},React.createElement(React.Fragment,null,React.createElement(Probe),React.createElement(ShowcaseDashboard,{companies:[],company:''})))));}ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));</script></body></html>`,
+      body: `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0"><div id="root"></div><script type="module">import RefreshRuntime from '/@react-refresh';RefreshRuntime.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>(type)=>type;window.__vite_plugin_react_preamble_installed__=true;</script><script type="module">import React from '/node_modules/.vite/deps/react.js';import ReactDOM from '/node_modules/.vite/deps/react-dom_client.js';import {DemoGate} from '/src/demo/DemoGate.tsx';import {ShowcaseDashboard} from '/src/product/showcase/ShowcaseDashboard.tsx';import {AppShell} from '/src/product/AppShell.tsx';import '/src/index.css';import '/src/product/tokens.css';import '/src/product/shell.css';import '/src/product/product.css';import '/src/product/foundation.css';const style=document.createElement('style');style.textContent=${JSON.stringify(tokens)};document.head.append(style);class Probe extends React.Component {constructor(props){super(props);this.hint=sessionStorage.getItem('findoc:conversation-operations:v1') || 'none';}render(){return React.createElement('span',{id:'hint-probe','data-hint':this.hint,hidden:true});}}function App(){return React.createElement(React.Fragment,null,React.createElement('div',{style:{background:'#fff0be',textAlign:'center',fontSize:12,padding:8}},'UI_MOCK · 全部为测试示意数据，不是真实财报'),React.createElement(DemoGate,{enabled:true},React.createElement(AppShell,{page:'home',company:'',companies:[],navigate:()=>{}},React.createElement(React.Fragment,null,React.createElement(Probe),React.createElement(ShowcaseDashboard,{companies:[],company:''})))));}ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));</script></body></html>`,
     }),
   );
   await page.route("**/api/**", async (r) => {
@@ -233,6 +233,12 @@ if (!process.env.SHOWCASE_STORAGE_ONLY) {
     await t.login();
     await p.getByRole("heading", { name: "财务趋势", exact: true }).waitFor();
     await p.locator(".sd-card .recharts-wrapper").first().waitFor();
+    assert(
+      (await p
+        .locator(".sd-hero h1")
+        .evaluate((el) => getComputedStyle(el).color)) === "rgb(255, 255, 255)",
+      "global CSS overrode hero heading color",
+    );
     await p.screenshot({ path: `${out}/home-${width}.png`, fullPage: true });
     assert(
       !(await p.evaluate(
@@ -285,7 +291,15 @@ if (!process.env.SHOWCASE_STORAGE_ONLY) {
       "expired dashboard retained",
     );
     assert(t.gets() >= 2, "expiry missing GET verification");
-    console.log("PASS expiry immediate unmount and server verification");
+    assert(
+      (await t.page.evaluate(() =>
+        sessionStorage.getItem("findoc:demo-hint-boundary:v1"),
+      )) === null,
+      "401 left housekeeping marker",
+    );
+    console.log(
+      "PASS expiry immediate unmount and server verification; 401 removes marker",
+    );
     await t.page.close();
   }
   {
@@ -426,8 +440,29 @@ if (!process.env.SHOWCASE_STORAGE_ONLY) {
   console.log(
     "PASS first demo activation isolates classic hints; same generation retains hints; unrelated keys retained",
   );
+  const marker = await p.evaluate(() =>
+    JSON.parse(sessionStorage.getItem("findoc:demo-hint-boundary:v1")),
+  );
+  assert(
+    Object.keys(marker).sort().join(",") === "lease_generation,seed_version",
+    "marker contains more than housekeeping tuple",
+  );
+  const beforeReload = t.gets();
+  await p.reload();
+  await p.locator(".showcase-dashboard").waitFor();
+  await check(false);
+  assert(t.gets() > beforeReload, "reload trusted marker without GET session");
+  assert(
+    (await p.locator("#hint-probe").getAttribute("data-hint")) ===
+      "old-pending",
+    "same-session UNKNOWN hint lost on hard reload",
+  );
+  console.log(
+    "PASS same verified lease hard reload preserves UNKNOWN recovery hints",
+  );
   t.setIdentity(2, "test");
-  await refresh();
+  await p.reload();
+  await p.locator(".showcase-dashboard").waitFor();
   await check(true);
   assert(
     (await p.locator("#hint-probe").getAttribute("data-hint")) === "none",
@@ -444,6 +479,35 @@ if (!process.env.SHOWCASE_STORAGE_ONLY) {
   console.log(
     "PASS new generation and changed seed clear allowlisted hints before children mount",
   );
+  await p.getByRole("button", { name: "退出演示" }).click();
+  await p.getByText("欢迎体验 FinDoc").waitFor();
+  assert(
+    (await p.evaluate(() =>
+      sessionStorage.getItem("findoc:demo-hint-boundary:v1"),
+    )) === null,
+    "logout left housekeeping marker",
+  );
+  console.log("PASS explicit logout removes housekeeping marker");
+  await p.close();
+}
+{
+  const t = await fixture(1280);
+  const p = t.page;
+  await p.evaluate(() => {
+    const original = Storage.prototype.getItem;
+    Storage.prototype.getItem = function (key) {
+      if (key === "findoc:demo-hint-boundary:v1")
+        throw new DOMException("blocked", "SecurityError");
+      return original.call(this, key);
+    };
+  });
+  await t.login();
+  await p.getByRole("button", { name: "查询本次申请" }).waitFor();
+  assert(
+    (await p.locator(".showcase-dashboard").count()) === 0,
+    "storage exception mounted workspace",
+  );
+  console.log("PASS housekeeping storage exception fails closed");
   await p.close();
 }
 await browser.close();

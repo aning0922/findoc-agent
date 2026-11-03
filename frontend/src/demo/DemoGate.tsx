@@ -1,7 +1,10 @@
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import "./demo.css";
-import { clearDemoBusinessHints } from "./demoHintBoundary.ts";
+import {
+  prepareVerifiedDemoHints,
+  invalidateDemoHintMarker,
+} from "./demoHintBoundary.ts";
 
 type Session = {
   schema_version: "demo-session-v1";
@@ -64,7 +67,8 @@ async function request<T>(path: string, body?: object): Promise<T> {
       : {}),
   });
   const data = await response.json().catch(() => ({}));
-  if (!response.ok)
+  if (!response.ok) {
+    if (response.status === 401) invalidateDemoHintMarker();
     throw new ApiError(
       response.status,
       data.detail || {
@@ -72,6 +76,7 @@ async function request<T>(path: string, body?: object): Promise<T> {
         message: `请求失败 (${response.status})`,
       },
     );
+  }
   const obj = data as Record<string, unknown>;
   const validSession = () =>
     obj.schema_version === "demo-session-v1" &&
@@ -144,12 +149,10 @@ export function DemoGate({
   const epoch = useRef(0);
   const sequence = useRef(0);
   const generation = useRef(-1);
-  const hintIdentity = useRef<string | null>(null);
+  const [storageError, setStorageError] = useState("");
   const prepareHints = useCallback((s: Session) => {
-    const identity = JSON.stringify([s.lease_generation, s.seed_version]);
-    if (hintIdentity.current === identity) return;
-    clearDemoBusinessHints();
-    hintIdentity.current = identity;
+    prepareVerifiedDemoHints(s);
+    setStorageError("");
   }, []);
   const [claimUnknown, setClaimUnknown] = useState(false);
   const claimOperation = useRef("");
@@ -193,6 +196,13 @@ export function DemoGate({
       if (current !== epoch.current || serial !== sequence.current) return;
       const err = e as ApiError;
       epoch.current++;
+      if (err.status === 401) {
+        try {
+          invalidateDemoHintMarker();
+        } catch {
+          setStorageError("无法隔离本机操作线索，请恢复浏览器存储后重试。");
+        }
+      }
       setSession(null);
       setStage("login");
       if (err.detail?.code === "expired" || err.detail?.code === "taken_over")
@@ -202,7 +212,12 @@ export function DemoGate({
   }, [prepareHints]);
   useEffect(() => {
     if (!enabled) {
-      hintIdentity.current = null;
+      try {
+        invalidateDemoHintMarker();
+        setStorageError("");
+      } catch {
+        setStorageError("无法隔离本机操作线索，请恢复浏览器存储后重试。");
+      }
       return;
     }
     live.current = true;
@@ -357,6 +372,11 @@ export function DemoGate({
     }
   }
   async function logout() {
+    try {
+      invalidateDemoHintMarker();
+    } catch {
+      setStorageError("无法隔离本机操作线索，请恢复浏览器存储后重试。");
+    }
     epoch.current++;
     setSession(null);
     setStage("login");
@@ -382,7 +402,14 @@ export function DemoGate({
       void refresh();
     }
   }, [enabled, stage, remaining, refresh]);
-  if (!enabled) return <>{children}</>;
+  if (!enabled)
+    return storageError ? (
+      <div className="demo-gate" role="alert">
+        {storageError}
+      </div>
+    ) : (
+      <>{children}</>
+    );
   if (stage === "checking")
     return (
       <div className="demo-gate" role="status">
@@ -457,7 +484,9 @@ export function DemoGate({
         <div className="demo-card">
           <h1>欢迎体验 FinDoc</h1>
           <p>演示时长 {status?.ttl_minutes ?? "—"} 分钟，时间由服务器决定。</p>
-          {message && <p role="alert">{message}</p>}
+          {(storageError || message) && (
+            <p role="alert">{storageError || message}</p>
+          )}
           {(!status || status.service_state !== "ready") && (
             <button onClick={() => window.location.reload()}>
               重新检查服务
@@ -538,7 +567,11 @@ export function DemoGate({
                   required
                 />
               </label>
-              <button disabled={busy || status?.service_state !== "ready"}>
+              <button
+                disabled={
+                  busy || !!storageError || status?.service_state !== "ready"
+                }
+              >
                 进入演示
               </button>
             </form>

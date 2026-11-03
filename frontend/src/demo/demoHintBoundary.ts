@@ -31,7 +31,7 @@ function removeMatching(storage: Storage, matches: (key: string) => boolean) {
 
 /** Only call after a server Session has passed validation and freshness checks.
  * Failure propagates: do not mount a new workspace with stale recoverable hints.
- * No client identity marker is written; the caller keeps a per-Gate memory ref.
+ * This routine never authorizes a session.
  */
 export function clearDemoBusinessHints() {
   removeMatching(
@@ -46,4 +46,23 @@ export function clearDemoBusinessHints() {
       key === AGENT_RUN_INDEX_KEY ||
       localPrefixes.some((prefix) => key.startsWith(prefix)),
   );
+}
+
+// Housekeeping only: never read this before the server verifies a Session and
+// never use it as evidence that a browser has a lease or review permission.
+export const DEMO_HINT_MARKER_KEY = "findoc:demo-hint-boundary:v1";
+export function prepareVerifiedDemoHints(session: {
+  lease_generation: number;
+  seed_version: string;
+}) {
+  const marker = JSON.stringify({
+    lease_generation: session.lease_generation,
+    seed_version: session.seed_version,
+  });
+  if (window.sessionStorage.getItem(DEMO_HINT_MARKER_KEY) === marker) return;
+  clearDemoBusinessHints();
+  window.sessionStorage.setItem(DEMO_HINT_MARKER_KEY, marker);
+}
+export function invalidateDemoHintMarker() {
+  window.sessionStorage.removeItem(DEMO_HINT_MARKER_KEY);
 }

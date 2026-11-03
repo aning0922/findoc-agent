@@ -405,3 +405,7 @@
   width: 16px;
   height: 16px;
 }
+/* Explicit heading color also wins against the legacy global h1 rule. */
+.showcase-dashboard .sd-hero h1 {
+  color: #fff;
+}
