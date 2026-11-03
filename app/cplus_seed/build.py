@@ -34,7 +34,7 @@ FIELDS = {
 }
 
 
-def validate_inputs(items):
+def validate_inputs(items, *, manual_existing_shas=(), existing_companies=()):
     if not isinstance(items, list) or not 1 <= len(items) <= 2:
         raise ValueError("one_or_two_explicit_public_inputs_required")
     verified = []
@@ -63,9 +63,50 @@ def validate_inputs(items):
             language="zh",
             report_year=item["report_year"],
         )
-        resolved = cover_identity(raw, candidate)
-        if resolved["official_name"] != item["official_name"]:
-            raise ValueError("input_cover_name_mismatch")
+        mode = "automatic_cover_code"
+        if item["sha256"] in manual_existing_shas:
+            from app.documents.source_service import inspect_pdf, assess
+            from app.companies.models import ReportMetadataInput
+
+            matches = [
+                c
+                for c in existing_companies
+                if c["security_code"] == item["security_code"]
+                and c["exchange"] == item["exchange"]
+                and c["name"] == item["official_name"]
+                and c["country"] == "CN"
+            ]
+            if len(matches) != 1:
+                raise ValueError("manual_fallback_requires_exact_existing_company")
+            _, cover = inspect_pdf(raw)
+            year = item["report_year"]
+            assessment = assess(
+                cover,
+                item["official_name"],
+                ReportMetadataInput(
+                    company_id=matches[0]["company_id"],
+                    report_year=year,
+                    report_type="annual",
+                    basis="unknown",
+                    period_start=f"{year}-01-01",
+                    period_end=f"{year}-12-31",
+                ),
+            )
+            if any(
+                assessment[k] != "matches_cover" for k in ("company", "report_year", "report_type")
+            ):
+                raise ValueError("manual_fallback_cover_identity_mismatch")
+            mode = "root_approved_existing_company_manual_upload_fallback"
+        else:
+            resolved = cover_identity(raw, candidate)
+            if resolved["official_name"] != item["official_name"]:
+                raise ValueError("input_cover_name_mismatch")
+        item = {
+            **item,
+            "binding_mode": mode,
+            "cover_code_verified": mode == "automatic_cover_code",
+            "financial_authority": False,
+        }
         verified.append((dict(item), raw))
     if len({i["sha256"] for i, _ in verified}) != len(verified):
         raise ValueError("duplicate_addition")
@@ -114,6 +155,7 @@ async def build_additive_seed(
     pipeline_factory=real_pipeline,
     index_probe=probe_index,
     test_mode=False,
+    manual_existing_shas=(),
 ):
     base = Path(base)
     target = Path(destination)
@@ -140,7 +182,18 @@ async def build_additive_seed(
     manifest, base_sha = verify_seed(base, None if test_mode else BASE_MANIFEST_SHA)
     if any(not allowed_file(e["path"]) for e in manifest["files"]):
         raise ValueError("base_file_not_allowlisted")
-    verified = validate_inputs(items)
+    with closing(
+        sqlite3.connect((base.resolve() / "documents.db").as_uri() + "?mode=ro", uri=True)
+    ) as registry:
+        registry.row_factory = sqlite3.Row
+        existing_companies = [
+            dict(r) for r in registry.execute("SELECT * FROM companies WHERE workspace_id='demo'")
+        ]
+    if set(manual_existing_shas) - {i["sha256"] for i in items}:
+        raise ValueError("manual_fallback_sha_not_in_inputs")
+    verified = validate_inputs(
+        items, manual_existing_shas=manual_existing_shas, existing_companies=existing_companies
+    )
     inherited_operations = operation_snapshot(base)
     with closing(
         sqlite3.connect((base.resolve() / "documents.db").as_uri() + "?mode=ro", uri=True)

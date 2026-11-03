@@ -3,6 +3,7 @@
 import asyncio
 from contextlib import contextmanager
 import json
+from pathlib import Path
 import tarfile
 
 import pytest
@@ -156,3 +157,33 @@ def test_bad_inputs_and_live_writer_sidecar_fail_without_destination(tmp_path):
             )
         )
     assert state["closed"] and not (tmp_path / "never-created").exists()
+
+
+def test_manual_fallback_requires_existing_identity_and_explicit_sha(tmp_path):
+    from app.company_discovery.contracts import DiscoveryError
+
+    base, item, _, _, _ = fixture(tmp_path)
+    path = Path(item["path"])
+    path.write_bytes(pdf(code=""))
+    item = {**item, "sha256": sha256(path)}
+    with pytest.raises(DiscoveryError, match="needs_manual_review"):
+        validate_inputs([item])
+    with pytest.raises(ValueError, match="exact_existing_company"):
+        validate_inputs([item], manual_existing_shas=[item["sha256"]])
+    existing = [
+        dict(
+            company_id="EXPLICIT_SYNTHETIC_EXISTING",
+            security_code="600690",
+            exchange="SSE",
+            name="海尔智家股份有限公司",
+            country="CN",
+        )
+    ]
+    verified = validate_inputs(
+        [item], manual_existing_shas=[item["sha256"]], existing_companies=existing
+    )
+    assert verified[0][0]["binding_mode"] == "root_approved_existing_company_manual_upload_fallback"
+    assert (
+        verified[0][0]["cover_code_verified"] is False
+        and verified[0][0]["financial_authority"] is False
+    )

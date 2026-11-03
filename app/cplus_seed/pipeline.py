@@ -79,6 +79,12 @@ def real_pipeline(root):
                 ]
                 if len(matches) > 1 or (matches and matches[0].name != item["official_name"]):
                     raise ValueError("existing_company_identity_conflict")
+                if (
+                    item.get("binding_mode")
+                    == "root_approved_existing_company_manual_upload_fallback"
+                    and len(matches) != 1
+                ):
+                    raise ValueError("manual_fallback_company_missing")
                 company = (
                     matches[0]
                     if matches
