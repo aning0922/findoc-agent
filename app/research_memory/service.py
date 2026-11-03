@@ -108,6 +108,52 @@ class ResearchMemoryService:
             raise MemoryError("memory_context_changed")
         return value
 
+    @contextmanager
+    def publication_guard(self, expected_generation, memory_revisions=None):
+        """Hold a rollback-journal read lock through the caller's final commit.
+
+        memory_revisions, if provided, maps recalled IDs to their revisions.
+        This guards this memory database only; callers must validate sources separately.
+        """
+        if type(expected_generation) is not int or expected_generation < 0:
+            raise MemoryError("invalid_memory_generation", 422)
+        if memory_revisions is not None:
+            if not isinstance(memory_revisions, dict) or len(memory_revisions) > 5:
+                raise MemoryError("invalid_memory_revisions", 422)
+            for memory_id, revision in memory_revisions.items():
+                self.uuid(memory_id)
+                if type(revision) is not int or revision < 1:
+                    raise MemoryError("invalid_memory_revisions", 422)
+        uri = self.path.resolve().as_uri() + "?mode=ro"
+        with closing(sqlite3.connect(uri, uri=True, timeout=5, isolation_level=None)) as db:
+            db.row_factory = sqlite3.Row
+            db.execute("BEGIN")
+            try:
+                generation = self._generation(
+                    db
+                )  # Acquire SHARED lock before checking journal mode.
+                mode = db.execute("PRAGMA journal_mode").fetchone()[0].lower()
+                if mode not in ("delete", "truncate", "persist"):
+                    raise MemoryError("memory_fence_unsupported_journal", 503)
+                if generation != expected_generation:
+                    raise MemoryError("memory_context_changed")
+                for memory_id, revision in (memory_revisions or {}).items():
+                    row = db.execute(
+                        "SELECT revision FROM items WHERE workspace=? AND id=? AND revoked_at IS NULL",
+                        (self.workspace, memory_id),
+                    ).fetchone()
+                    if row is None or row["revision"] != revision:
+                        raise MemoryError("memory_context_changed")
+                yield
+            finally:
+                db.execute("ROLLBACK")
+
+    async def recall_snapshot(self, q, company_id=None):
+        """Return a bounded semantic snapshot and its generation for publication_guard."""
+        if not isinstance(q, str):
+            raise MemoryError("invalid_query", 422)
+        return await self.list(q=q, company_id=company_id)
+
     async def validate_refs(self, refs, *, kind, text):
         cid, tids = refs.get("source_conversation_id"), refs.get("source_turn_ids") or []
         company, doc, revision = (

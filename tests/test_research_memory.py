@@ -181,3 +181,70 @@ def test_router_requires_explicit_confirmation(tmp_path):
     response = client.post("/research-memories", json={**body, "confirmed": True})
     assert response.status_code == 200
     assert client.get("/research-memories").json()["items"][0]["text"] == "synthetic note"
+
+
+def test_publication_guard_serializes_delete(tmp_path):
+    async def run():
+        service = make(Harness(tmp_path))
+        item = await service.mutate(
+            kind="create", operation_id=op(), memory_type="note", text="memory", confirmed=True
+        )
+        snapshot = await service.recall_snapshot("query")
+        assert snapshot["items"][0]["revision"] == 1
+        started, done = threading.Event(), threading.Event()
+        failures = []
+
+        def delete():
+            started.set()
+            try:
+                asyncio.run(
+                    service.mutate(
+                        kind="delete",
+                        operation_id=op(),
+                        memory_id=item["memory_id"],
+                        expected_revision=1,
+                    )
+                )
+            except Exception as exc:
+                failures.append(exc)
+            finally:
+                done.set()
+
+        with service.publication_guard(snapshot["memory_generation"], {item["memory_id"]: 1}):
+            thread = threading.Thread(target=delete)
+            thread.start()
+            assert started.wait(2)
+            assert not done.wait(0.2)
+            with sqlite3.connect(tmp_path / "job.db") as job:
+                job.execute("CREATE TABLE publications (answer TEXT)")
+                job.execute("INSERT INTO publications VALUES (?)", ("published",))
+            assert not done.is_set()
+        assert await asyncio.to_thread(done.wait, 3)
+        thread.join()
+        assert not failures
+        with sqlite3.connect(tmp_path / "job.db") as job:
+            assert job.execute("SELECT answer FROM publications").fetchone()[0] == "published"
+        with pytest.raises(MemoryError, match="memory_context_changed"):
+            with service.publication_guard(snapshot["memory_generation"]):
+                pass
+
+    asyncio.run(run())
+
+
+def test_publication_guard_rejects_wal_and_bad_revisions(tmp_path):
+    async def run():
+        service = make(Harness(tmp_path))
+        item = await service.mutate(
+            kind="create", operation_id=op(), memory_type="note", text="memory", confirmed=True
+        )
+        snapshot = await service.recall_snapshot("query")
+        with pytest.raises(MemoryError, match="memory_context_changed"):
+            with service.publication_guard(snapshot["memory_generation"], {item["memory_id"]: 2}):
+                pass
+        with sqlite3.connect(service.path) as db:
+            assert db.execute("PRAGMA journal_mode=WAL").fetchone()[0] == "wal"
+        with pytest.raises(MemoryError, match="memory_fence_unsupported_journal"):
+            with service.publication_guard(snapshot["memory_generation"]):
+                pass
+
+    asyncio.run(run())
