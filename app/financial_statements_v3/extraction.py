@@ -68,6 +68,7 @@ def extract(source, raw):
                     row.append(w)
             rows = [sorted(r, key=lambda w: w[0]) for r in rows]
             texts = ["".join(w[4] for w in r).replace(" ", "") for r in rows]
+            output.extend(_combined_core_cells(source, page_index + 1, rows, texts))
             headings = [
                 (i, TITLES[re.sub(r"[（(]续[）)]$", "", t)])
                 for i, t in enumerate(texts)
@@ -223,3 +224,180 @@ def extract(source, raw):
                 )
                 c["payload_sha256"] = sha({k: v for k, v in c.items() if k != "payload_sha256"})
     return output
+
+
+# Combined consolidated/parent-company four-column layouts. Core five only.
+def _combined_core_cells(source, physical_page, rows, texts):
+    titles = []
+    for i, text in enumerate(texts):
+        for name, kind in (
+            ("资产负债表", "balance_sheet"),
+            ("利润表", "income_statement"),
+            ("现金流量表", "cash_flow_statement"),
+        ):
+            if re.fullmatch(r"(?:\d{4}年度)?合并及公司" + name + r"(?:[（(]续[）)])?", text):
+                titles.append((i, kind))
+    if len(titles) != 1:
+        return []
+    start, kind = titles[0]
+    scope_rows = [
+        (i, [w for w in row if w[4] in ("合并", "公司")])
+        for i, row in enumerate(rows[start + 1 : start + 15], start + 1)
+    ]
+    scope_rows = [
+        (i, w) for i, w in scope_rows if [v[4] for v in w] == ["合并", "合并", "公司", "公司"]
+    ]
+    if len(scope_rows) != 1:
+        return []
+    scope_index, scope_words = scope_rows[0]
+    units = [
+        u
+        for t in texts[start : scope_index + 1]
+        for u in re.findall(r"(?:单位[：:]|金额单位为)人民币(亿元|万元|千元|元)", t)
+    ]
+    if len(set(units)) != 1:
+        return []
+    unit = units[0]
+    factor = {"元": 1, "千元": 1000, "万元": 10000, "亿元": 100000000}[unit]
+    edges = [w[2] for w in scope_words]
+    gaps = [b - a for a, b in zip(edges, edges[1:])]
+    if min(gaps) < 30 or max(gaps) - min(gaps) > 8:
+        return []
+    columns = []
+    for col, edge in enumerate(edges):
+        header_words = [
+            w
+            for row in rows[start + 1 : scope_index]
+            for w in row
+            if edge - min(gaps) + 3 < w[0] and w[2] <= edge + 3 and w[1] > scope_words[0][1] - 45
+        ]
+        header_text = "".join(
+            w[4] for w in sorted(header_words, key=lambda w: (round(w[1] / 3), w[0]))
+        )
+        pattern = r"(\d{4})年(\d{1,2})月(\d{1,2})日" if kind == "balance_sheet" else r"(\d{4})年度"
+        match = re.fullmatch(pattern, header_text)
+        if match is None:
+            return []
+        year = int(match[1])
+        time = (
+            {"kind": "instant", "as_of_date": f"{year:04d}-{int(match[2]):02d}-{int(match[3]):02d}"}
+            if kind == "balance_sheet"
+            else {
+                "kind": "duration",
+                "period_start": f"{year}-01-01",
+                "period_end": f"{year}-12-31",
+                "period_type": "annual",
+            }
+        )
+        time_adapter.validate_python(time)
+        columns.append((time, header_words))
+    if (
+        columns[0][0] != columns[2][0]
+        or columns[1][0] != columns[3][0]
+        or columns[0][0] == columns[1][0]
+    ):
+        return []
+    core = {
+        "资产总计": "total_assets",
+        "负债合计": "total_liabilities",
+        "其中：营业收入": "revenue",
+        "归属于母公司股东的净利润": "net_profit_parent",
+        "经营活动产生/(使用)的现金流量净额": "operating_cash_flow",
+    }
+    result = []
+    previous_label = ""
+    previous_row = []
+    for row in rows[scope_index + 1 :]:
+        label_words = [w for w in row if w[2] < edges[0] - min(gaps) - 6]
+        label = "".join(w[4] for w in label_words)
+        evidence_row = row
+        if (
+            label == "净利润"
+            and previous_label == "归属于母公司股东的"
+            and row[0][1] - previous_row[0][1] < 20
+        ):
+            label = previous_label + label
+            evidence_row = previous_row + row
+        previous_label, previous_row = label, row
+        key = core.get(label)
+        if (
+            key is None
+            or key
+            not in {
+                "balance_sheet": {"total_assets", "total_liabilities"},
+                "income_statement": {"revenue", "net_profit_parent"},
+                "cash_flow_statement": {"operating_cash_flow"},
+            }[kind]
+        ):
+            continue
+        for col in (0, 1):
+            edge = edges[col]
+            hits = [
+                w
+                for w in row
+                if abs(w[2] - edge) < 3
+                and re.fullmatch(r"-?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?", w[4])
+            ]
+            if len(hits) != 1:
+                continue
+            number = hits[0]
+            value = number[4].replace(",", "")
+            with localcontext() as context:
+                context.prec = max(50, len(value) + 15)
+                normalized = format(Decimal(value) * factor, "f")
+            time, headers = columns[col]
+            ref = {
+                "document_id": source["document_id"],
+                "source_revision": source["source_revision"],
+                "content_sha256": source["content_sha256"],
+                "parser_version": source["parser_version"],
+                "physical_page": physical_page,
+                "raw_label": label,
+                "raw_value": number[4],
+                "bbox": list(number[:4]),
+                "row_words": [list(w[:5]) for w in evidence_row],
+                "header_words": [list(w[:5]) for w in headers + scope_words],
+                "column_index": col,
+                "column_scope": "consolidated",
+            }
+            cell = {
+                "schema_version": "statement-cell-v3",
+                "cell_revision": 1,
+                **{
+                    k: source[k]
+                    for k in (
+                        "company_id",
+                        "document_id",
+                        "source_revision",
+                        "content_sha256",
+                        "parser_version",
+                        "report_year",
+                        "basis",
+                    )
+                },
+                "metadata_hash": sha(source),
+                "disclosure_version": source["source_revision"],
+                "statement_kind": kind,
+                "metric_key": key,
+                "raw_label": label,
+                "time": time,
+                "scope": "consolidated",
+                "currency": "CNY",
+                "raw_decimal": value,
+                "raw_unit": unit,
+                "normalized_unit": "CNY_YUAN",
+                "normalized_decimal": normalized,
+                "evidence_refs": [ref],
+                "source_kind": "fast_text",
+                "extraction_status": "candidate",
+                "financial_review": "unconfirmed",
+                "transcription_review": "unreviewed",
+                "interpretation_review": "not_applicable",
+                "metric_definition_version": "consolidated-statements-v3.1",
+                "extraction_version": "pdf-words-combined-columns-v1",
+                "limitation_codes": [],
+            }
+            cell["cell_id"] = str(uuid5(NAMESPACE_URL, sha(cell)))
+            cell["payload_sha256"] = sha(cell)
+            result.append(cell)
+    return result
