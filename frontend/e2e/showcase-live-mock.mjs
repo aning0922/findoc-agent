@@ -30,7 +30,7 @@ for (const width of [1440, 1280, 390]) {
   await page.route("**/fixture", (r) =>
     r.fulfill({
       contentType: "text/html",
-      body: `<div id="root"></div><script type="module">import RefreshRuntime from "/@react-refresh"; RefreshRuntime.injectIntoGlobalHook(window); window.$RefreshReg$ = () => {}; window.$RefreshSig$ = () => (type) => type; window.__vite_plugin_react_preamble_installed__ = true;</script><script type="module">import React from '/node_modules/.vite/deps/react.js';import ReactDOM from '/node_modules/.vite/deps/react-dom_client.js';import {DemoGate} from '/src/demo/DemoGate.tsx';import {ShowcaseDashboard} from '/src/product/showcase/ShowcaseDashboard.tsx';ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(DemoGate,{enabled:true},React.createElement(ShowcaseDashboard,{companies:[],company:''})));</script>`,
+      body: `<div style="background:#ffedbd;text-align:center;padding:8px">UI_MOCK · 测试模拟数据</div><div id="root"></div><script type="module">import RefreshRuntime from "/@react-refresh"; RefreshRuntime.injectIntoGlobalHook(window); window.$RefreshReg$ = () => {}; window.$RefreshSig$ = () => (type) => type; window.__vite_plugin_react_preamble_installed__ = true;</script><script type="module">import React from '/node_modules/.vite/deps/react.js';import ReactDOM from '/node_modules/.vite/deps/react-dom_client.js';import {DemoGate} from '/src/demo/DemoGate.tsx';import {ShowcaseDashboard} from '/src/product/showcase/ShowcaseDashboard.tsx';ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(DemoGate,{enabled:true},React.createElement(ShowcaseDashboard,{companies:[],company:''})));</script>`,
     }),
   );
   await page.route("**/api/**", async (r) => {
@@ -94,7 +94,9 @@ for (const width of [1440, 1280, 390]) {
         task_distribution: [{ status: "completed", count: 1 }],
         recent_research: [],
         suggested_questions: [],
-        companies: [],
+        companies: [
+          { company_id: "fake", name: "测试企业", security_code: "000000" },
+        ],
         limitations: ["测试模拟数据"],
       };
     else if (path === "/api/dashboard/charts")
@@ -103,7 +105,7 @@ for (const width of [1440, 1280, 390]) {
         company_id: "fake",
         metric_key: "revenue",
         unit: "元",
-        origin: "illustrative",
+        origin: "confirmed_financial",
         points: [
           {
             period: "2024",
@@ -111,8 +113,14 @@ for (const width of [1440, 1280, 390]) {
             value_decimal: "123.45",
             source_revision: "fake",
             document_id: "fake",
-            fact_ref: null,
-            source_state: "illustrative",
+            fact_ref: {
+              fact_set_id: "fake",
+              fact_id: "fake",
+              receipt_id: "fake",
+              disclosure_version: "fake",
+              source_revision: "fake",
+            },
+            source_state: "current",
           },
         ],
         comparison: [],
@@ -130,11 +138,13 @@ for (const width of [1440, 1280, 390]) {
     });
   });
   await page.goto(base + "/fixture");
+  await page.getByText("欢迎体验 FinDoc").waitFor();
+  await page.screenshot({ path: `${out}/login-${width}.png`, fullPage: true });
   await page.getByLabel("账号").fill("example");
   await page.getByLabel("密码").fill("example");
   await page.getByRole("button", { name: "进入演示" }).click();
   await page.getByText("研究图表").waitFor();
-  await page.getByText("来源：illustrative", { exact: false }).waitFor();
+  await page.getByText("来源：已确认财务数据", { exact: false }).waitFor();
   await page.screenshot({ path: `${out}/mock-${width}.png`, fullPage: true });
   if (
     await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)

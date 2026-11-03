@@ -6,3 +6,7 @@
 - `DemoGate` 显式 `enabled`；false 原样渲染 children，true 先检查 status/session，再挂载业务 children。Cookie 请求、pending poll、claim 使用独立 UUID、占用/owner 接管、owner 授权、logout、session 定期核验均为 UI 实现；不存密码或 token 到 localStorage，不自动执行财务步骤。挂载：`<DemoGate enabled={明确的演示开关}><App /></DemoGate>`。开关来源、后端网关强制权限、控制器状态均由主控负责。
 - 验证：Node 24 build/lint PASS；存在组件 effect lint warning 和既有 fast-refresh/build chunk warning。Vite + Chrome headless 的 `frontend/e2e/showcase-live-mock.mjs` 在 1440/1280/390 通过模拟 pending→claim→dashboard→logout，断言 claim UUID 不同于 attempt、无横向溢出。截图目录 `/Users/aipuli/.codex/visualizations/2026/11/03/01a19f9d-a871-7520-aed9-dd6d22774d1a/m1-mock/`；内容均为拦截假数据。先运行 `npm run dev -- --host 127.0.0.1 --port 5180`，再运行 `CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' node e2e/showcase-live-mock.mjs`。
 - 真实 HTTP、双浏览器、失效/接管并发、owner 权限、cookie 丢失、真实种子与业务回归均 SKIP；与并行后端集成后必须执行。默认 npm build 仅编译类型，组件未被产品入口引用，不能声称正式页面已接入。
+
+## 后续视觉与身份修订
+
+新增 Navy Hero 装饰与全屏双栏登录、三种指标选择、来源跳转、DTO 形状和身份基本校验、到期时卸载及重新查询，修正 H01 int period / fact_ref 对象与示意身份。三个宽度的登录与首页截图在 `/Users/aipuli/.codex/visualizations/2026/11/03/01a19f9d-a871-7520-aed9-dd6d22774d1a/m1-revision/`，使用测试拦截数据并标 UI_MOCK。`npm run build`、`npm run lint` 和模拟 pending/claim/logout 浏览器流程通过。真实 AppShell 组合截图、schema 错误负向测试、过期卸载自动化和真实双浏览器仍未完成；样式精细度、所有竞态与权限边界仍须主控审查，不能视为验收。比较图目前是同指标各期，不声称跨企业比较。

@@ -75,3 +75,99 @@
     grid-template-columns: 1fr;
   }
 }
+.showcase-dashboard {
+  gap: 16px;
+  background: var(--color-background, #f5f7fa);
+}
+.showcase-dashboard header {
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+  background: linear-gradient(115deg, #182e51, #284b7a);
+  padding: 34px 40px;
+  box-sizing: border-box;
+}
+.showcase-dashboard header h1 {
+  font-size: 32px;
+  line-height: 1.4;
+  margin: 12px 0;
+}
+.showcase-dashboard header h1 em {
+  color: #a9ccff;
+  font-style: normal;
+}
+.showcase-dashboard header p {
+  color: #c1d2e8;
+}
+.showcase-dashboard header > p:first-child {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #a9ccff;
+}
+.showcase-dashboard header input {
+  border: 0;
+  border-radius: 7px;
+  padding: 14px;
+  width: min(380px, 60%);
+}
+.showcase-dashboard header a {
+  color: #dceaff;
+}
+.showcase-dashboard .sd-orbit {
+  position: absolute;
+  right: 9%;
+  top: 30px;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ffffff25;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.showcase-dashboard .sd-orbit span {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #90b9ff, #3c6fba);
+  font-size: 42px;
+  color: white;
+}
+.showcase-dashboard .sd-kpis article {
+  box-shadow: 0 4px 15px #263f5c08;
+}
+.showcase-dashboard .sd-kpis .sd-icon {
+  display: block;
+  background: #edf3ff;
+  color: #4878d4;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 32px;
+  margin-bottom: 10px;
+}
+.showcase-dashboard section h2 {
+  font-size: 17px;
+}
+.showcase-dashboard section {
+  box-shadow: 0 4px 15px #263f5c08;
+}
+.showcase-dashboard .sd-charts figure {
+  border: 1px solid #edf1f5;
+  border-radius: 10px;
+  padding: 14px;
+  box-sizing: border-box;
+}
+@media (max-width: 700px) {
+  .showcase-dashboard .sd-orbit {
+    display: none;
+  }
+  .showcase-dashboard header {
+    padding: 26px 22px;
+  }
+  .showcase-dashboard header h1 {
+    font-size: 27px;
+  }
+}

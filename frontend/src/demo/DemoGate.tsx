@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import "./demo.css";
 
@@ -70,6 +70,49 @@ async function request<T>(path: string, body?: object): Promise<T> {
         message: `请求失败 (${response.status})`,
       },
     );
+  const obj = data as Record<string, unknown>;
+  const validSession = () =>
+    obj.schema_version === "demo-session-v1" &&
+    obj.state === "active" &&
+    typeof obj.expires_at === "string" &&
+    Number.isFinite(Date.parse(obj.expires_at)) &&
+    typeof obj.server_now === "string" &&
+    Number.isFinite(Date.parse(obj.server_now)) &&
+    typeof obj.remaining_seconds === "number" &&
+    Number.isFinite(obj.remaining_seconds) &&
+    obj.remaining_seconds > 0 &&
+    Number.isInteger(obj.lease_generation) &&
+    typeof obj.seed_version === "string" &&
+    typeof obj.can_review === "boolean" &&
+    (obj.owner_elevated_until === null ||
+      typeof obj.owner_elevated_until === "string");
+  const validAttempt = () =>
+    obj.schema_version === "demo-attempt-v1" &&
+    typeof obj.operation_id === "string" &&
+    ["pending", "ready", "failed", "claimed", "cancelled"].includes(
+      String(obj.state),
+    ) &&
+    typeof obj.reset_id === "string" &&
+    typeof obj.claimable === "boolean";
+  if (
+    path === "/status" &&
+    !(
+      obj.schema_version === "demo-status-v1" &&
+      ["ready", "resetting", "degraded"].includes(String(obj.service_state)) &&
+      [20, 30].includes(Number(obj.ttl_minutes)) &&
+      ["wait_only", "takeover_enabled"].includes(String(obj.conflict_policy))
+    )
+  )
+    throw new Error("演示状态格式无效");
+  if ((path === "/session" || path === "/claim") && !validSession())
+    throw new Error("演示会话格式无效");
+  if (path.startsWith("/operations/") && !validAttempt())
+    throw new Error("申请状态格式无效");
+  if (
+    (path === "/login" || path === "/takeover") &&
+    !(response.status === 202 ? validAttempt() : validSession())
+  )
+    throw new Error("演示响应格式无效");
   return data as T;
 }
 const id = () => crypto.randomUUID();
@@ -152,6 +195,7 @@ export function DemoGate({
     })();
     return () => {
       alive = false;
+      epoch.current++;
     };
   }, [enabled, refresh]);
   useEffect(() => {
@@ -179,6 +223,7 @@ export function DemoGate({
           `/operations/${encodeURIComponent(attempt.operation_id)}`,
         );
         if (cancelled) return;
+        if (a.operation_id !== attempt.operation_id) throw new Error("申请身份不匹配");
         if (a.claimable && a.state === "ready") {
           if (!claimOperation.current) claimOperation.current = id();
           const s = await request<Session>("/claim", {
@@ -213,6 +258,7 @@ export function DemoGate({
     setBusy(true);
     setMessage("");
     const operation_id = id();
+    const current = epoch.current;
     try {
       const body = takeover
         ? {
@@ -228,7 +274,9 @@ export function DemoGate({
         takeover ? "/takeover" : "/login",
         body,
       );
+      if (current !== epoch.current) return;
       if ("claimable" in result) {
+        if (result.operation_id !== operation_id) throw new Error("申请身份不匹配");
         claimOperation.current = "";
         setAttempt(result);
         setPassword("");
@@ -236,11 +284,14 @@ export function DemoGate({
         setStage("pending");
       } else activate(result);
     } catch (e) {
+      if (current !== epoch.current) return;
       const err = e as ApiError;
       if (err.status === 423 && err.detail?.code === "occupied")
         setConflict(err.detail as Conflict);
       else setMessage(err.message || "请求失败，请重试。");
     } finally {
+      setPassword("");
+      setOwner("");
       setBusy(false);
     }
   }
@@ -258,6 +309,7 @@ export function DemoGate({
     } catch (e) {
       setMessage((e as Error).message);
     } finally {
+      setOwner("");
       setBusy(false);
     }
   }
@@ -279,6 +331,14 @@ export function DemoGate({
       setBusy(false);
     }
   }
+  useEffect(() => {
+    if (enabled && stage === "active" && remaining === 0) {
+      epoch.current++;
+      setSession(null);
+      setStage("checking");
+      void refresh();
+    }
+  }, [enabled, stage, remaining, refresh]);
   if (!enabled) return <>{children}</>;
   if (stage === "checking")
     return (
@@ -296,11 +356,41 @@ export function DemoGate({
     );
   if (stage === "login")
     return (
-      <main className="demo-gate">
+      <main className="demo-gate demo-login">
+        <section className="demo-story">
+          <div className="demo-brand">✦ &nbsp; FinDoc.</div>
+          <div>
+            <small>AI-POWERED FINANCIAL INTELLIGENCE</small>
+            <h1>
+              让财报研究，
+              <br />
+              从资料走向<span>洞察。</span>
+            </h1>
+            <p>在一个清晰的工作空间中，探索资料、梳理问题，并组织研究发现。</p>
+            <div className="demo-visual">
+              <b>企业研究工作空间</b>
+              <p>资料探索　 →　研究分析　 →　报告预览</p>
+              <svg viewBox="0 0 500 110">
+                <path
+                  d="M0 100 L100 75 L180 85 L260 48 L340 60 L420 25 L500 5"
+                  fill="none"
+                  stroke="#96beff"
+                  strokeWidth="4"
+                />
+              </svg>
+            </div>
+          </div>
+          <small>FinDoc · AI 研究工作空间</small>
+        </section>
         <div className="demo-card">
           <h1>欢迎体验 FinDoc</h1>
           <p>演示时长 {status?.ttl_minutes ?? "—"} 分钟，时间由服务器决定。</p>
           {message && <p role="alert">{message}</p>}
+          {(!status || status.service_state !== "ready") && (
+            <button onClick={() => window.location.reload()}>
+              重新检查服务
+            </button>
+          )}
           {conflict ? (
             <>
               <h2>演示空间正在使用</h2>
@@ -318,6 +408,14 @@ export function DemoGate({
               {conflict.takeover_available && (
                 <>
                   <label>
+                    共享演示密码
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </label>
+                  <label>
                     所有者口令
                     <input
                       type="password"
@@ -334,7 +432,7 @@ export function DemoGate({
                     我确认结束当前体验并重置演示环境
                   </label>
                   <button
-                    disabled={!confirm || !owner || busy}
+                    disabled={!confirm || !owner || !password || busy}
                     onClick={() => void submit(true)}
                   >
                     确认接管
@@ -402,7 +500,7 @@ export function DemoGate({
         </details>
         {message && <span role="status">{message}</span>}
       </div>
-      {children}
+      <Fragment key={session?.lease_generation}>{children}</Fragment>
     </div>
   );
 }
