@@ -1,0 +1,26 @@
+{
+  "tier": "REAL_CHROME_REACT_SOCKET_HTTP_READONLY_MOBILE",
+  "first": {
+    "heroCount": 1,
+    "rootCount": 1,
+    "bodyHeight": 2766,
+    "viewport": 1000,
+    "overflow": false
+  },
+  "after": {
+    "scrollY": 1000,
+    "heroRect": {
+      "x": 16,
+      "y": -818.203125,
+      "width": 358,
+      "height": 287.59375,
+      "top": -818.203125,
+      "right": 374,
+      "bottom": -530.609375,
+      "left": 16
+    },
+    "heroCount": 1
+  },
+  "provider_calls": 0,
+  "human_approvals": 0
+}

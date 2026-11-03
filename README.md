@@ -1,4 +1,28 @@
-> **C+ 开发分支**：已从固定 C@45d55d7 独立启动 F19–F34，当前 M1/M2 开发中。进度与接口见 [C+ STATE](docs/cplus/STATE.md)、[42项任务](docs/cplus/TASK_BOARD.csv)、[C+本机入口](docs/cplus/RUN_LOCAL.md)。下方为原 C 候选介绍，不能视为 C+ 全部完成。**本轮必须复用原C的同一5元账本，不在新工作树初始化或复制额度。**
+# FinDoc C+ · 有据可查的财报研究演示
+
+当前分支 `codex/findoc-showcase-cplus-integration` 从 **C@45d55d7** 独立研发，面向求职展示。F19–F34均有正式React页面与业务模块；真实公开PDF、程序候选计算、原文研究、批次和文件导出已有可重复路径。**新真实模型解释尚未验成功、本人财务确认仍human_pending，不宣称完整问答或财务验收通过。** 未合并main，未公开部署。
+
+![C+实际企业360，两年真实候选，1440宽](docs/cplus/evidence/M5-finance/company360-1440.png)
+
+截图来自真实React→HTTP→公开年报/BGE/Milvus。格力2024/2025候选由实际报表提取，完整Decimal、期间、单位和原PDF页保留；候选不是人工核准。
+
+[本机运行](docs/cplus/RUN_LOCAL.md) · [当前状态](docs/cplus/STATE.md) · [42项任务](docs/cplus/TASK_BOARD.csv) · [18场景/24题证据边界](docs/cplus/EVAL_RESULTS.md) · [三条面试路线](docs/cplus/INTERVIEW_DEMOS.md) · [交付与截图/录屏](docs/cplus/DELIVERY.md) · [已知限制](docs/cplus/KNOWN_ISSUES.md)
+
+|可操作路径|实际实现与边界|
+|---|---|
+|官网资料|名称/代码/拼音与证券市场消歧→动态巨潮公告→确认下载→受控公开cache→本代企业绑定→真实READY；接口不可用可官网/上传回退|
+|财务研究|企业360、三大表、五核心指标、真实两年趋势、三类体检规则、双年风险/业务/研发、同行候选和产品/地区结构；程序计算与AI待审解释分层|
+|研究工作区|图表比较期由服务端cell复验→来源固定→FTS/BGE/RRF原文检索；真实Vision OCR转录入研究、原图bbox/精确PDF高亮、跨context收藏/查询/删除|
+|批次与报告|2公司×2纯工具任务，显式计划/批准、四格独立状态，UNKNOWN不重放；4模板/5释义；同domain/id/revision/SHA的CSV/XLSX/PPTX和浏览器PDF|
+|演示隔离|20分钟独占、默认wait_only、独立owner密码二次确认接管；旧会话401、完整V3seed恢复；公开PDF cache与私有上传/研究隔离|
+
+本机入口 **http://127.0.0.1:14540**。登录密码由本机被Git忽略配置提供，不在前端/仓库。V3五份READY年报、OCR、归档与本地BGE权重**不随Git分发**，需要校验并提供seed bundle；不承诺clone即完整运行。XLSX/PPTX服务端可使用独立Python依赖，见 `requirements-showcase-exports.txt`。
+
+实际精选回归90PASS/3SKIP（3个opt-in真实PDF未设置），三条原生浏览器路线及三宽检查/两模板/财务/导出分层留证；构建和lint exit0但保留warnings。原同一5元账本77物理调用（原C73+C+4），保守预留1.441018元，C+四次ReadTimeout/UNKNOWN，实际账单未观察。模型disabled演示展示真实原文和程序计算，历史模型归档不冒充新结果。
+
+## 原C候选资料（保留历史快照）
+
+以下是原C介绍与当时的截图/证据，不能替代上述C+验证。旧ResearchRun、v1三指标和v2即时指标合同、ACCEPT→SAVE→RESUME、已应用迁移和所有历史资料保留。
 
 # FinDoc Agent · 财报研究工作台
 

@@ -6,33 +6,33 @@
   "sessions": [
     {
       "thread_id": "01a19f9d-a871-7520-aed9-dd6d22774d1a",
-      "task": "M5 firstfold candidatecharts finalwording",
+      "task": "M5 UX/template evidence handoff",
       "model": "gpt-6.1-terra",
-      "thinking": "high",
+      "thinking": "medium",
       "branch": "codex/cplus-statements-v3",
-      "status": "in_progress",
-      "title": "FinDoc C+｜M2 企业360首屏与图表追问 · Terra High",
-      "commit": "30ff25d"
+      "status": "completed",
+      "title": "FinDoc C+｜已交接 · 360、图表与 UX",
+      "commit": "c7aab3d integrated07d05b0"
     },
     {
       "thread_id": "01a19f9d-6c32-7ba2-a9c5-b8b708440c82",
-      "task": "M5 exactsixqueryretrieval+24caseassessment",
+      "task": "M5 actualOS socket fourcells119s+34exactquotes, local latency fix",
       "model": "gpt-6.1-sol",
       "thinking": "high",
       "branch": "codex/cplus-hybrid-ocr",
-      "status": "in_progress",
-      "commit": "3ef62c1 priorfixverify",
-      "title": "FinDoc C+｜M3 同行对标与有限批量研究 · Sol High"
+      "status": "completed",
+      "commit": "614763e;35a1922;e55506b integrated51b791e/d303a4e",
+      "title": "FinDoc C+｜已交接 · 真实四格批次与检索修复"
     },
     {
       "thread_id": "01a19fa9-6671-7841-9393-46d2bced4e89",
-      "task": "G02 readonly V3 financialcuration complete",
-      "model": "gpt-6.1-sol",
+      "task": "M5 final review + download permission fix independent follow-up",
+      "model": "gpt-6-astra",
       "thinking": "high",
       "branch": "codex/cplus-additive-seed",
       "status": "completed",
-      "title": "FinDoc C+｜P1提交栅栏补修 · Sol High",
-      "commit": "59debe9"
+      "title": "FinDoc C+｜已复核 · 缓存、种子与导出权限",
+      "commit": "e344922;fc1ddd3;841927f integrated"
     }
   ],
   "provider_calls_owner": "root only",
@@ -42,13 +42,13 @@
   "m0_status": "FROZEN_V1",
   "m0_review": "129d8d4 integrated3ae6b43",
   "next_batch": [
-    "V3nativefirstfold+2x2+3routes",
-    "exactsixquerybeforeafter",
-    "README/eval/taskboard/draftPR"
+    "draft PR and final delivery metadata",
+    "real provider success BLOCKED_EXTERNAL; no replay",
+    "financial positive acceptance HUMAN_PENDING"
   ],
   "root_model": "inherited, no claim of self model override",
   "m0_commit": "3c737327198a55b72d02490a981b5259cd164ffa",
-  "controller_title": "FinDoc C+｜主控 · M3回归修复与M4导出集成",
+  "controller_title": "FinDoc C+｜主控 · M5候选交付与草稿PR",
   "provider_state": {
     "calls": 77,
     "reserved_cny": "1.441018",
@@ -56,5 +56,6 @@
     "cap_cny": "5",
     "actual_billed_cny": "not_observed",
     "additional_diagnostics_stopped": true
-  }
+  },
+  "integration_checkpoint": "49330cf"
 }

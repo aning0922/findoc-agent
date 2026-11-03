@@ -1,0 +1,36 @@
+{
+  "tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
+  "provider_calls": 0,
+  "human_financial_approvals": 0,
+  "routes": [
+    {
+      "name": "C-two-year-business-batch",
+      "checks": [
+        "three real bilateral annual themes saved",
+        "actual product/region revenue composition extracted"
+      ],
+      "started_at": "2026-11-03T11:26:32.009Z",
+      "result": "FAIL",
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.cplus-batch').getByRole('button', { name: '准备 2×2 计划', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled>准备 2×2 计划</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    58 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+      "visible_text": "演示会话 · 剩余约 18:38 · 财务核对需所有者授权\n退出演示\n所有者授权\n跳到主要内容\nFinDoc.\nANALYST\nDEMO\nF\n财报研究空间\n资料、研究与报告\n工作空间\n首页\nAI 研究助手\n企业与资料\n研究任务\n我的报告\n让每个结论都有据可查\n\n回到原文，核对数据，\n再形成你的研究结论。\n\n研\n本地研究者\n单人研究空间\n工作空间\nAI 研究助手\n财报研究工作台\n固定资料 · 原文研究\n让每个判断，都能回到原文\n\n选择完整年报或真实 OCR 转录，固定研究范围后提问。解释始终待审，财务核准独立进行。\n\n资料\n选择研究资料\n000651-2025.pdf · 全文就绪\n000651-2024.pdf · 全文就绪\n000333-2025.pdf · 全文就绪\n美的2025_公开原文第9页_派生扫描示例.pdf · 需查看解析质量\n000333-2024.pdf · 全文就绪\n600690-2025.pdf · 全文就绪\n研究方式\n已核验身份的完整年报\nOCR 文件转录 · 身份未核验\n读取资料身份\n研究收藏与跨会话记忆\n批量研究 · 两家公司 × 两类原文任务\n刷新批量研究资料\n\n可用资料核验完成，尚未执行任务。\n\n批量研究矩阵\n\n纯工具模式：两家公司各选两份不同年度报告，比较风险原文与跨年变化；不会调用模型。\n\n选择两家公司\n珠海格力电器股份有限公司 · 000651\n美的集团股份有限公司 · 000333\n海尔智家股份有限公司 · 600690\n珠海格力电器股份有限公司：明确选择两份报告\n2025 · 6086c34f\n2024 · 6947e0bf\n美的集团股份有限公司：明确选择两份报告\n2025 · d690f1e4\n2024 · 1d45495b\n准备 2×2 计划\n财报研究助手\n\n围绕明确选择的年报连续研究，回到原文核对每条回答。\n\n单次原文核验 / 历史问答\n我的会话\n重新读取会话\n新会话\n珠海格力电器股份有限公司 2025\n新建会话\n开始新的研究\n\n先选择 1–4 份年报并创建会话\n\n选择年报\n我的研究偏好\n研究记忆与偏好\n从年报原文开始\n\n示例只填入草稿，不自动发送。\n\n这份年报中的营业收入原文是什么？\n经营活动现金流有哪些说明？\n请找到主要业务风险的原文出处。\n研究问题\n\n先创建会话，再明确发送问题。\n\n发送\n\n本地单人研究空间。必要的问题与证据会发送给所配置的模型供应商；来源资格与计算时验证不代替人工语义审读。\n\nFinDoc · AI 研究工作台\n年报原文 · 数值核对 · AI 解读",
+      "ended_at": "2026-11-03T11:27:49.701Z"
+    },
+    {
+      "name": "D-real-template-workflows",
+      "checks": [
+        "final home actual curve no overflow 1440",
+        "final home actual curve no overflow 1280",
+        "final home actual curve no overflow 390"
+      ],
+      "started_at": "2026-11-03T11:27:49.702Z",
+      "result": "FAIL",
+      "error": "TimeoutError: locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.cplus-templates').getByLabel('模板', { exact: true })\u001b[22m\n",
+      "visible_text": "演示会话 · 剩余约 18:03 · 财务核对需所有者授权\n退出演示\n所有者授权\n跳到主要内容\nFinDoc.\nANALYST\nDEMO\nF\n财报研究空间\n资料、研究与报告\n工作空间\n首页\nAI 研究助手\n企业与资料\n研究任务\n我的报告\n让每个结论都有据可查\n\n回到原文，核对数据，\n再形成你的研究结论。\n\n研\n本地研究者\n单人研究空间\n工作空间\n企业与资料\n财报研究工作台\n\n企业研究 / 财务资料\n\n珠海格力电器股份有限公司\n\n按明确选择的报告与期间查看，候选数值需人工核对。\n\n企业概览\n三大报表\n财报体检\n关键指标与趋势\n营业收入\n\n缺少已选择且可用的数据\n\n归母净利润\n\n缺少已选择且可用的数据\n\n经营现金流\n\n缺少已选择且可用的数据\n\n总资产\n\n缺少已选择且可用的数据\n\n总负债\n\n缺少已选择且可用的数据\n\n准备研究问题\n资料覆盖 · 2 份资料\n\n只读来源核验完成。 刷新进阶研究资料\n\n跨年经营变化 · 双侧原文\n同行对标 · 明确选择可比数据\n主营业务结构 · 产品与地区\nAI 体检解释 · 从程序规则到核查建议\n研究模板与指标释义\n研究模板与指标释义\n\n模板只准备问题草稿；选择范围并到研究助手后再由你明确发送。\n\n模板 \n年度经营概览\n现金流质量\n竞争对标\n经营变化分析\n选择来源（最多两份）\n2025 年报 · 6086c34f\n2024 年报 · 6947e0bf\n问题草稿\n带入研究助手\n常用指标\n营业收入\n归母净利润\n经营现金流\n毛利率\nROE\nFinDoc · AI 研究工作台\n年报原文 · 数值核对 · AI 解读",
+      "ended_at": "2026-11-03T11:28:25.357Z"
+    }
+  ],
+  "page_errors": [],
+  "seed_version": "showcase-cplus-seed-v3",
+  "result": "PARTIAL",
+  "video_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-interview-final/page@8e0913056e3551d9fbcc40b8f4d0cc54.webm"
+}

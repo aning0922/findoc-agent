@@ -1,0 +1,4 @@
+# Optional server-side renderer dependencies; verified versions.
+# Install into a separate export environment, then use --export-python.
+openpyxl==3.1.5
+python-pptx==1.0.2

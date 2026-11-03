@@ -1,0 +1,29 @@
+[
+  {
+    "route": "route-a-official",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-delivery-media/route-a-official.webm",
+    "sha256": "0d43a07d36b3cbf7047bbf06705219db0cf63bb33fdb81ef0cda968282b4ebbf",
+    "bytes": 1262173,
+    "tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
+    "result": "PASS",
+    "notes": "Automated real browser recording; masked login; no provider calls, no human financial signing; see paced interview guide."
+  },
+  {
+    "route": "route-b-chart-memory",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-delivery-media/route-b-chart-memory.webm",
+    "sha256": "a4177989fb85b14e630f5b2763b6ad8c9997470ee89a53e52dd32a5620cb1df0",
+    "bytes": 3196510,
+    "tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
+    "result": "PASS",
+    "notes": "Automated real browser recording; masked login; no provider calls, no human financial signing; see paced interview guide."
+  },
+  {
+    "route": "route-c-annual-batch-templates",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-delivery-media/route-c-annual-batch-templates.webm",
+    "sha256": "660d8ed550ef3c63cf9f05148854a65b91a8b00bd3c9b8b8cf984b228e2c5e32",
+    "bytes": 18972662,
+    "tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
+    "result": "PASS",
+    "notes": "Automated real browser recording; masked login; no provider calls, no human financial signing; see paced interview guide."
+  }
+]

@@ -125,7 +125,7 @@ export default function FinancialProduct({
           <button onClick={() => setRetry((n) => n + 1)}>重试读取</button>
         </section>
       ) : route.home ? (
-        <>{discovery}<ResearchHome
+        <><ResearchHome
           key={route.company}
           companies={companies}
           company={route.company}

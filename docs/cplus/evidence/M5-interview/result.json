@@ -1,0 +1,61 @@
+{
+  "tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
+  "provider_calls": 0,
+  "human_financial_approvals": 0,
+  "routes": [
+    {
+      "name": "C-two-year-business-batch",
+      "checks": [
+        "three real bilateral annual themes saved",
+        "actual product/region revenue composition extracted",
+        "plan prepared without automatic execution",
+        "approved real batch has durable id",
+        "two companies by two templates completed four real tool cells"
+      ],
+      "started_at": "2026-11-03T11:29:38.313Z",
+      "result": "PASS",
+      "ended_at": "2026-11-03T11:32:22.225Z"
+    },
+    {
+      "name": "D-real-template-workflows",
+      "checks": [
+        "final home actual curve no overflow 1440",
+        "final home actual curve no overflow 1280",
+        "final home actual curve no overflow 390",
+        "年度经营概览 real two-source tool research returned exact findings",
+        "年度经营概览 does not fabricate model explanation",
+        "现金流质量 real two-source tool research returned exact findings",
+        "现金流质量 does not fabricate model explanation"
+      ],
+      "started_at": "2026-11-03T11:32:22.229Z",
+      "result": "PASS",
+      "ended_at": "2026-11-03T11:33:02.841Z"
+    }
+  ],
+  "page_errors": [],
+  "seed_version": "showcase-cplus-seed-v3",
+  "result": "PASS",
+  "video_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-interview-final-v2/page@8da16614256eed4415aaafc527cbe152.webm",
+  "batch_summary": {
+    "batch_id": "a58c674c-8f79-42ce-9152-78f72216c0fd",
+    "state": "completed",
+    "cells": [
+      {
+        "cell_key": "d9080344-8c69-4dea-a5d9-51bf84710105:risk",
+        "state": "completed"
+      },
+      {
+        "cell_key": "d9080344-8c69-4dea-a5d9-51bf84710105:annual",
+        "state": "completed"
+      },
+      {
+        "cell_key": "401f7afa-48a5-412c-a23c-724d45d0a90d:risk",
+        "state": "completed"
+      },
+      {
+        "cell_key": "401f7afa-48a5-412c-a23c-724d45d0a90d:annual",
+        "state": "completed"
+      }
+    ]
+  }
+}

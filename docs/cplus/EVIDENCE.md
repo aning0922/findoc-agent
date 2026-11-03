@@ -48,3 +48,15 @@ After assembly changes: C+ suite36PASS/3SKIP (opt-inPDF tests); separate explici
 `M4-native-exports/result.json` actual11checks, trueReact+gateway+twoactualPDFfinancialcandidates→5metricpeer snapshot→3formats downloads+printedPDF, allsameexplicitref/SHA. CSV exact391371999819.49. Independent86aaca4 confirms textprecision/formulafree/sourcepages/PPTX6renderedpages; provider0/human0. PubliccandidateCSV/XLSX/PPTX committed as deliverables; 21-page initialPDF remainsignoredproof and rootcompactprint adjustment awaitsfreshmeasurement. ActualPDF/sourcebinary/DB/seed/config remainignored.
 
 AllC+current52PASS/3SKIP; standalonefullPDF testsalreadyseparatelyran (Midea1PASS) notmisreportedSKIPaspass. OriginalCcheckoutclean45d55d7. Rootverifiedoriginalv1/newv2/newv3filechecksums+SQLite; rootreadonlyv3candidatefirstscreen remainsassemblycandidateuntilnativeflow.
+
+## M5 final integration evidence
+
+- Cache query-identity defect independently reproduced and fixd7b4160; actual Chrome pinyin cold import/READY then newgeneration codequery cache_hit=true/READY to360, V3seed5READY/source-bound5series restored, earlier37/38ownedgenerations removed after OSexit; originalCmanifest unchanged. Evidence `evidence/M5-official-reset`.
+- Actualpoint2025report/2024period -> explicitFTS/context -> fastquote favorite -> newcontext/BGE recall -> UIdelete and absence:8PASS, `evidence/M5-point-memory`.
+- Root actualChrome C annual3topics/segmentsdonut/approvedfourcellmatrix5PASS; D two actualtemplate two-source toolfindings+no fabricatedAI/home3width7PASS. `evidence/M5-interview`. Initial selector/wait mistakes retained `M5-script-attempts`; no originalUNKNOWN replay.
+- Worker realOS/socketHTTP fullbatch119.413s200/fourcellscompleted/GETno dispatch/34sourceexactquotes, old260sUNKNOWN retained. Pure tools, no paidMultiAgent. `eval/results/batch-v3-fixed` and reviewM5-batch-handoff.
+- Actualtwo-year Gree collections+5metrics×2points+threecheckuprules+360/table1440/1280/39011PASS; full-page mobile capture artifacts supplemented with actualviewport390 screenshots. `evidence/M5-finance`.
+- NewAstra P1: savedexport ignoredparentdisplayrevocation; root47e5d23 readerrevalidatesexactdomainversion readpermission, controlledHTTP403/regrant samebytes+ETag/opsunchanged, independent49330cf close. Native3formatdownload/print3width11PASSafterfix `M5-export-permission-native`. NewconcisePDFactual2pages inspected bothrenderedPNGs; former21page artifact preserved.
+- FinalcommandselectedC+ +demo/runtime/launcher90PASS/3SKIP/5SWIGwarnings(20.49s), 3SKIPopt-inrealPDFnotset; Node24 build/lint exit0 butlargechunk/React-hookswarnings retained(40warninglineslatestlog). No modelaccuracy/humanacceptance inferred.
+- Raw real-browser recordings3localwebm, exactbytes/SHA in `recordings.json`, 5–10minute pacedhuman guide `INTERVIEW_DEMOS.md`. Rawprivate/runtime/seeds remainGitignored; PDFs/examples here are publiccandidate artifacts, nofinancialsigning.
+- Samecanonical77physicalcalls/1.441018reservedcap5/UNKNOWN4/actualbillnot_observed unchanged acrossgenerations. C+newrealLLMsuccess0, providerdiagnosticsstopped; finalrepair/rules/retrieval/export0provider.
