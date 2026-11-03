@@ -1,0 +1,53 @@
+.demo-gate {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  background: #111f39;
+  color: #fff;
+  padding: 24px;
+}
+.demo-card {
+  background: white;
+  color: #192b3d;
+  padding: 32px;
+  border-radius: 14px;
+  width: min(420px, 90vw);
+}
+.demo-card label,
+.demo-bar label {
+  display: block;
+  margin: 15px 0;
+}
+.demo-card input:not([type="checkbox"]),
+.demo-bar input {
+  display: block;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.demo-card button,
+.demo-bar button {
+  padding: 9px 14px;
+  cursor: pointer;
+}
+.demo-bar {
+  background: #172d4b;
+  color: white;
+  padding: 10px 20px;
+  font-size: 13px;
+}
+.demo-bar details {
+  display: inline-block;
+  position: relative;
+  margin-left: 15px;
+}
+.demo-bar details[open] {
+  display: block;
+  padding: 10px;
+}
+.demo-bar input {
+  max-width: 300px;
+}
+.demo-active {
+  min-width: 0;
+}
