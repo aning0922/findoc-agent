@@ -1,0 +1,395 @@
+{
+  "seed_root": "/Users/aipuli/.codex/worktrees/findoc-showcase-c-integration/findoc-agent/data/showcase-seed-v1",
+  "manifest_sha256": "efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4",
+  "complete_product_seed": true,
+  "inventory": {
+    "schema_version": "showcase-seed-inventory-v1",
+    "data_origin": "preset_demo",
+    "documents": [
+      {
+        "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+        "sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+        "legacy_status": "ready",
+        "public_provenance": {
+          "origin": "public_official",
+          "id": "gree-2025",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-04-29/1225250396.PDF"
+        }
+      },
+      {
+        "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+        "sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+        "legacy_status": "ready",
+        "public_provenance": {
+          "origin": "public_official",
+          "id": "gree-2024",
+          "url": "https://disc.static.szse.cn/disc/disk03/finalpage/2025-04-25/f3585bca-ade2-42b6-bee3-42bbb839897e.PDF"
+        }
+      },
+      {
+        "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+        "sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+        "legacy_status": "ready",
+        "public_provenance": {
+          "origin": "public_official",
+          "id": "midea-2025",
+          "url": "https://www.midea.com.cn/content/dam/mideacn-aem/%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB/2025%E5%B9%B4%E5%BA%A6%E6%8A%A5%E5%91%8A.pdf.coredownload.inline.pdf"
+        }
+      },
+      {
+        "document_id": "dcf9d2e4b4569ec920e334d6e4978335fb06fd8a3d35e45967d6a2ac09cecfc7",
+        "sha256": "175235d1122aec489a6c943ec8c1f8f9fcb5ffdd0e75f938f5ce6080c8ed163a",
+        "legacy_status": "failed",
+        "public_provenance": {
+          "origin": "derived_public",
+          "id": "midea-2025-derived-scan-page-9",
+          "derived_from_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+          "physical_page": 9
+        }
+      }
+    ],
+    "archived_jobs": [
+      "b97c8435-f2e3-4411-9b1c-72413c693be8",
+      "a91af633-10f8-4ee9-9ff5-9d233956f86a"
+    ],
+    "archived_reports": [
+      "c8202e7b-3576-432f-ab42-571c89389237",
+      "04474472-b64f-4fe2-a83c-2242117f2250"
+    ],
+    "conversation_ids": [
+      "910064b4-668e-42d3-91be-5638937814eb"
+    ],
+    "memory_ids": [
+      "7f30e976-d356-4462-8ae5-1f987c5d708b",
+      "911e6394-6aba-4409-9ade-44c6b110660e"
+    ],
+    "preference_keys": [],
+    "completed_ocr_artifacts": 1,
+    "test_substitutions": [],
+    "financial_grants": 0,
+    "new_model_calls": 0
+  },
+  "archive_items": [
+    {
+      "archive_id": "f7475fed-5df1-51c9-b30a-854ae9dde481",
+      "kind": "job",
+      "revision": 0
+    },
+    {
+      "archive_id": "ca074787-1b58-566b-a943-dc3b1142deb9",
+      "kind": "job",
+      "revision": 0
+    },
+    {
+      "archive_id": "a5499d96-b18b-5b8f-a6b5-1107f1de8bb4",
+      "kind": "report",
+      "revision": 1
+    },
+    {
+      "archive_id": "a5499d96-b18b-5b8f-a6b5-1107f1de8bb4",
+      "kind": "report",
+      "revision": 2
+    },
+    {
+      "archive_id": "e4ff8912-f809-58ea-bc46-201b1cd33746",
+      "kind": "report",
+      "revision": 1
+    }
+  ],
+  "verification": {
+    "verification_tier": "LOCAL_MATERIALIZED_COPY_SERVICE_READS",
+    "materialized_root": "/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-full-seed-verification-sd6_893c/generation",
+    "documents": [
+      {
+        "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+        "legacy_status": "ready",
+        "source_read": "verified"
+      },
+      {
+        "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+        "legacy_status": "ready",
+        "source_read": "verified"
+      },
+      {
+        "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+        "legacy_status": "ready",
+        "source_read": "verified"
+      },
+      {
+        "document_id": "dcf9d2e4b4569ec920e334d6e4978335fb06fd8a3d35e45967d6a2ac09cecfc7",
+        "legacy_status": "failed",
+        "source_read": "not_legacy_verified"
+      }
+    ],
+    "archives": [
+      {
+        "kind": "report",
+        "original_id": "c8202e7b-3576-432f-ab42-571c89389237",
+        "revision": 2,
+        "current_source_status": "current",
+        "original_scope_sha256": "6a571500bab59a93ceedfa4a7f85fcc883dfc744ae87c3104a7c7da514eef63a",
+        "original_result_sha256": "4ccc6e38e6c5f83b551f0776e16da04a639197ae7c7e85937f04ff6d67d5d202",
+        "original_report_payload_sha256": "211ef85f00d1fcc3968c60146abb836219b0a039767b1afd45981e49fff6e666"
+      },
+      {
+        "kind": "report",
+        "original_id": "c8202e7b-3576-432f-ab42-571c89389237",
+        "revision": 1,
+        "current_source_status": "current",
+        "original_scope_sha256": "6a571500bab59a93ceedfa4a7f85fcc883dfc744ae87c3104a7c7da514eef63a",
+        "original_result_sha256": "4ccc6e38e6c5f83b551f0776e16da04a639197ae7c7e85937f04ff6d67d5d202",
+        "original_report_payload_sha256": "2b2191fddba79eb953a113c22e213711f4ed8336cf7b1932f1cc667680f1ec98"
+      },
+      {
+        "kind": "job",
+        "original_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+        "revision": 0,
+        "current_source_status": "current",
+        "original_scope_sha256": "6a571500bab59a93ceedfa4a7f85fcc883dfc744ae87c3104a7c7da514eef63a",
+        "original_result_sha256": "4ccc6e38e6c5f83b551f0776e16da04a639197ae7c7e85937f04ff6d67d5d202",
+        "original_report_payload_sha256": null
+      },
+      {
+        "kind": "report",
+        "original_id": "04474472-b64f-4fe2-a83c-2242117f2250",
+        "revision": 1,
+        "current_source_status": "current",
+        "original_scope_sha256": "6a571500bab59a93ceedfa4a7f85fcc883dfc744ae87c3104a7c7da514eef63a",
+        "original_result_sha256": "db34c67de4036db7709742f42d7510b0f7e90e351fd7dc15e3ad85d8bdbf60fa",
+        "original_report_payload_sha256": "74afc67e02cd4c02c714ab6a05f8c93723ee55af417e9ff2e4ca7fee6412532e"
+      },
+      {
+        "kind": "job",
+        "original_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+        "revision": 0,
+        "current_source_status": "current",
+        "original_scope_sha256": "6a571500bab59a93ceedfa4a7f85fcc883dfc744ae87c3104a7c7da514eef63a",
+        "original_result_sha256": "db34c67de4036db7709742f42d7510b0f7e90e351fd7dc15e3ad85d8bdbf60fa",
+        "original_report_payload_sha256": null
+      }
+    ],
+    "ocr": {
+      "state": "completed",
+      "source_status": "current",
+      "legacy_source_verified": false,
+      "lines": 68,
+      "cells": 54,
+      "output_sha256": "4910fe37923a702a9cccf97231642531a3d78437232a74271d2381a075af2fc0"
+    },
+    "active_notes": 2,
+    "live_execution_databases_absent": true,
+    "source_provenance_exact": true,
+    "new_model_calls": 0,
+    "complete_product_seed": true
+  },
+  "source_files_unchanged": true,
+  "source_files_checked": 34,
+  "original_runner": {
+    "evidence": "REAL_CHROMIUM_HTTP_REAL_PDF_BGE_LLM",
+    "completed": false,
+    "failure": "Error: derived scan binding only"
+  },
+  "material_completion_tier": "REAL_LOCAL_VISION_BGE_IN_PROCESS_ASGI",
+  "human_financial_approvals": 0,
+  "source_tree_sha256": "9cb78011561bbf89942b206189e30a7fdf86270cc678c0f9d18dfd370f972053",
+  "manifest_file_count": 28,
+  "manifest_sqlite": [
+    {
+      "path": "documents.db",
+      "tables": {
+        "documents": 4,
+        "analyst_schema_migrations": 12,
+        "companies": 2,
+        "report_document_metadata": 4,
+        "document_sources": 4,
+        "document_evidence": 1789,
+        "report_source_origins": 4,
+        "report_binding_corrections": 0,
+        "document_evidence_layout": 1789,
+        "financial_fact_sets": 0,
+        "confirmed_financial_facts": 0,
+        "index_publications": 3,
+        "research_runs": 0,
+        "research_cursor_key": 1,
+        "template_tasks": 0,
+        "template_operations": 0,
+        "template_checkpoints": 0,
+        "template_checkpoint_writes": 0,
+        "financial_acceptance_revocations": 0,
+        "reports": 0,
+        "report_revisions": 0,
+        "report_operations": 0,
+        "report_source_refs": 0,
+        "report_fact_refs": 0,
+        "conversations": 1,
+        "conversation_sources": 1,
+        "conversation_operations": 1,
+        "conversation_turns": 0,
+        "conversation_tool_events": 0,
+        "memory_items": 0,
+        "memory_operations": 0,
+        "memory_events": 0,
+        "memory_context_generation": 0,
+        "memory_context_exclusions": 0,
+        "conversation_summaries": 0,
+        "revenue_confirmations": 0,
+        "confirmed_revenue_facts": 0,
+        "financial_acceptance_receipts": 0
+      },
+      "indexes": [
+        "sqlite_autoindex_documents_1",
+        "sqlite_autoindex_documents_2",
+        "sqlite_autoindex_companies_1",
+        "sqlite_autoindex_companies_2",
+        "sqlite_autoindex_companies_3",
+        "d5_document_workspace_id",
+        "sqlite_autoindex_report_document_metadata_1",
+        "d5_reports_by_company",
+        "sqlite_autoindex_document_sources_1",
+        "sqlite_autoindex_document_evidence_1",
+        "d6_evidence_source",
+        "sqlite_autoindex_report_source_origins_1",
+        "sqlite_autoindex_report_binding_corrections_1",
+        "sqlite_autoindex_report_binding_corrections_2",
+        "sqlite_autoindex_document_evidence_layout_1",
+        "sqlite_autoindex_financial_fact_sets_1",
+        "sqlite_autoindex_financial_fact_sets_2",
+        "sqlite_autoindex_confirmed_financial_facts_1",
+        "sqlite_autoindex_confirmed_financial_facts_2",
+        "sqlite_autoindex_confirmed_financial_facts_3",
+        "d10_sets_company_source",
+        "d10_facts_period_metric",
+        "sqlite_autoindex_index_publications_1",
+        "index_one_active",
+        "sqlite_autoindex_research_runs_1",
+        "sqlite_autoindex_research_runs_2",
+        "research_history",
+        "sqlite_autoindex_template_tasks_1",
+        "sqlite_autoindex_template_tasks_2",
+        "sqlite_autoindex_template_operations_1",
+        "sqlite_autoindex_template_checkpoints_1",
+        "sqlite_autoindex_template_checkpoint_writes_1",
+        "sqlite_autoindex_financial_acceptance_revocations_1",
+        "sqlite_autoindex_reports_1",
+        "sqlite_autoindex_report_revisions_1",
+        "sqlite_autoindex_report_revisions_2",
+        "sqlite_autoindex_report_operations_1",
+        "sqlite_autoindex_report_source_refs_1",
+        "sqlite_autoindex_report_fact_refs_1",
+        "d23_reports_history",
+        "d23_revisions_task",
+        "d23_sources_audit",
+        "d23_facts_audit",
+        "sqlite_autoindex_conversations_1",
+        "sqlite_autoindex_conversations_2",
+        "sqlite_autoindex_conversation_sources_1",
+        "sqlite_autoindex_conversation_operations_1",
+        "sqlite_autoindex_conversation_turns_1",
+        "sqlite_autoindex_conversation_turns_2",
+        "sqlite_autoindex_conversation_turns_3",
+        "sqlite_autoindex_conversation_turns_4",
+        "sqlite_autoindex_conversation_tool_events_1",
+        "conversation_history",
+        "conversation_turn_history",
+        "conversation_one_running",
+        "sqlite_autoindex_memory_items_1",
+        "sqlite_autoindex_memory_items_2",
+        "sqlite_autoindex_memory_items_3",
+        "sqlite_autoindex_memory_operations_1",
+        "sqlite_autoindex_memory_events_1",
+        "sqlite_autoindex_memory_events_2",
+        "sqlite_autoindex_memory_context_generation_1",
+        "sqlite_autoindex_memory_context_exclusions_1",
+        "sqlite_autoindex_conversation_summaries_1",
+        "sqlite_autoindex_revenue_confirmations_1",
+        "sqlite_autoindex_revenue_confirmations_2",
+        "sqlite_autoindex_confirmed_revenue_facts_1",
+        "sqlite_autoindex_confirmed_revenue_facts_2",
+        "sqlite_autoindex_financial_acceptance_receipts_1",
+        "sqlite_autoindex_financial_acceptance_receipts_2"
+      ]
+    },
+    {
+      "path": "parse-v2.db",
+      "tables": {
+        "operations": 1,
+        "artifacts": 1,
+        "active": 1,
+        "page_index": 1,
+        "page_index_data": 4,
+        "page_index_idx": 2,
+        "page_index_content": 1,
+        "page_index_docsize": 1,
+        "page_index_config": 1
+      },
+      "indexes": [
+        "sqlite_autoindex_operations_1",
+        "sqlite_autoindex_artifacts_1",
+        "sqlite_autoindex_active_1"
+      ]
+    },
+    {
+      "path": "finance-v2.db",
+      "tables": {
+        "fv2_schema": 1,
+        "fv2_metrics": 0,
+        "fv2_reviews": 0,
+        "fv2_receipts": 0,
+        "fv2_receipt_items": 0,
+        "fv2_revocations": 0,
+        "fv2_analyses": 0,
+        "fv2_operations": 0
+      },
+      "indexes": [
+        "sqlite_autoindex_fv2_metrics_1",
+        "sqlite_autoindex_fv2_reviews_1",
+        "sqlite_autoindex_fv2_receipts_1",
+        "sqlite_autoindex_fv2_receipt_items_1",
+        "sqlite_autoindex_fv2_revocations_1",
+        "sqlite_autoindex_fv2_analyses_1",
+        "sqlite_autoindex_fv2_operations_1",
+        "fv2_metrics_company"
+      ]
+    },
+    {
+      "path": "research-memory.db",
+      "tables": {
+        "generation": 1,
+        "items": 2,
+        "operations": 2
+      },
+      "indexes": [
+        "sqlite_autoindex_generation_1",
+        "sqlite_autoindex_items_1",
+        "sqlite_autoindex_operations_1"
+      ]
+    },
+    {
+      "path": "showcase-archive.db",
+      "tables": {
+        "archive_items": 5
+      },
+      "indexes": [
+        "sqlite_autoindex_archive_items_1"
+      ]
+    }
+  ],
+  "vector_indexes": [
+    {
+      "collection": "fd16_19928fc37ab944689fb761780e085861",
+      "rows": 1122
+    },
+    {
+      "collection": "fd16_4860e071626d44da8aae62767f8ea152",
+      "rows": 1300
+    },
+    {
+      "collection": "fd16_5d77499f4c4a42d6909ec88565b6a83f",
+      "rows": 1003
+    },
+    {
+      "collection": "findoc_runtime_documents_v1",
+      "rows": 0
+    }
+  ]
+}
