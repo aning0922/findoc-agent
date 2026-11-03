@@ -42,13 +42,12 @@
   "m0_status": "FROZEN_V1",
   "m0_review": "129d8d4 integrated3ae6b43",
   "next_batch": [
-    "draft PR and final delivery metadata",
-    "real provider success BLOCKED_EXTERNAL; no replay",
-    "financial positive acceptance HUMAN_PENDING"
+    "BLOCKED_EXTERNAL real C+model success: four ReadTimeout/UNKNOWN preserved, no automatic replay",
+    "HUMAN_PENDING financial positive acceptance and semantic review"
   ],
   "root_model": "inherited, no claim of self model override",
   "m0_commit": "3c737327198a55b72d02490a981b5259cd164ffa",
-  "controller_title": "FinDoc C+｜主控 · M5候选交付与草稿PR",
+  "controller_title": "FinDoc C+｜候选已交付 · 模型/人审待验证",
   "provider_state": {
     "calls": 77,
     "reserved_cny": "1.441018",
@@ -57,5 +56,7 @@
     "actual_billed_cny": "not_observed",
     "additional_diagnostics_stopped": true
   },
-  "integration_checkpoint": "49330cf"
+  "integration_checkpoint": "49330cf",
+  "delivery_commit": "987e0c0712e285c67fbb07d344784b53bd6efcb9",
+  "draft_pr": "https://github.com/aning0922/findoc-agent/pull/3"
 }

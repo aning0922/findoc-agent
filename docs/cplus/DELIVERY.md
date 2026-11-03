@@ -3,10 +3,12 @@
 ## 版本与状态
 
 - BASE：`codex/findoc-showcase-c-integration@45d55d75662f01d9bc78da1a946d845a01a27480`。
-- C+：`codex/findoc-showcase-cplus-integration`，代码审查检查点 `49330cf8e37b971d63af6ce5fa3e191d996b1643`；最终提交由同分支Git HEAD及草稿PR记录，不以文档自指SHA伪造最新状态。
+- C+：`codex/findoc-showcase-cplus-integration`，交付代码与证据检查点 `987e0c0712e285c67fbb07d344784b53bd6efcb9`；最终提交由同分支Git HEAD及草稿PR记录，不以文档自指SHA伪造最新状态。
 - M0合同冻结3c73732；独立Astra Ultra/High审查、root独占热点集成、Sol/Terra/Astra随任务调整。可见chat和设置见orchestration.json。
-- F19–F34均有可操作实现/真实限定样例。当前42任务35VERIFIED、6PARTIAL、1交付收尾（PR创建后更新）；部分为模型/人工语义/财务确认未验，不能写全绿。
+- F19–F34均有可操作实现/真实限定样例。当前42任务36VERIFIED、6PARTIAL；部分为模型/人工语义/财务确认未验，不能写全绿。
 - 本机14540，独立cookie、20分钟、wait_only、modeldisabled；原C14530与原C/V1.2/main保留。未公开部署/自动合main/强推/代签财务。
+
+草稿 PR：[aning0922/findoc-agent#3](https://github.com/aning0922/findoc-agent/pull/3)，base为原C集成分支，draft=true，未合并。
 
 ## 用户能看到的成果
 

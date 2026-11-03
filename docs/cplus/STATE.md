@@ -1,6 +1,6 @@
 # FinDoc C+ 主控状态
 
-更新：2026-11-03，M5演示与交付收尾。独立集成分支 `codex/findoc-showcase-cplus-integration`；当前代码检查点 `49330cf`（文档/演示脚本仍有在途更新）。完整提交链以Git为准，任务证据见[TASK_BOARD](TASK_BOARD.csv)和[EVIDENCE](EVIDENCE.md)。
+更新：2026-11-03，M5演示与交付收尾。独立集成分支 `codex/findoc-showcase-cplus-integration`；当前代码检查点 `987e0c0`（交付与证据提交；随后仅补PR索引）。完整提交链以Git为准，任务证据见[TASK_BOARD](TASK_BOARD.csv)和[EVIDENCE](EVIDENCE.md)。
 
 ## 起点与保护
 
@@ -43,4 +43,6 @@
 
 主控唯一修改runtime_factory/AppShell/routes/controller等热点；root+3可见worker，各自独立分支/SHA。名称与Sol/Terra/Astra、推理设置按任务通过桌面工具动态更新，具体见orchestration.json。
 
-当前：Sol High真实四格耗时修复与精确引用复核；Terra Medium完成UX/模板叶子复核；Astra High做最终独立边界审查。主控已完成native C/D/E路线、三宽截图/原始录屏、18场景证据映射；继续最终权限原生下载与交付README/草稿PR。普通任务自动推进；仅模型供应商真实成功与本人财务核准保留外部/人类缺口。
+当前：Sol High真实四格耗时修复与精确引用复核；Terra Medium完成UX/模板叶子复核；Astra High做最终独立边界审查。主控已完成native C/D/E路线、三宽截图/原始录屏、18场景证据映射、最终权限原生下载、README和草稿PR#3（base原C）。42任务36VERIFIED/6PARTIAL，部分项见明确外部/人工缺口。普通任务自动推进；仅模型供应商真实成功与本人财务核准保留外部/人类缺口。
+
+交付PR：https://github.com/aning0922/findoc-agent/pull/3（draft，未合并）。实际运行入口仍14540；完整新模型问答/本人财务确认未验收，主控不将其标为全阶段无条件完成。
