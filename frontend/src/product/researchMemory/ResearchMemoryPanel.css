@@ -1,0 +1,10 @@
+.findoc-app .research-memory { border:1px solid #d5e3df; border-radius:12px; margin:1rem 0; background:#fff; }
+.findoc-app .research-memory summary { cursor:pointer; padding:1rem; font-weight:700; }
+.findoc-app .research-memory__body { padding:0 1rem 1rem; }
+.findoc-app .research-memory label { display:block; margin:.6rem 0; }
+.findoc-app .research-memory input:not([type=checkbox]), .findoc-app .research-memory textarea, .findoc-app .research-memory select { display:block; width:100%; padding:.6rem; border:1px solid #a5bbb3; border-radius:6px; }
+.findoc-app .research-memory textarea { min-height:6rem; resize:vertical; }
+.findoc-app .research-memory .research-memory__button { display:inline-block; padding:.5rem .8rem; margin:.25rem .4rem .25rem 0; border:1px solid #397b6e; border-radius:6px; color:#164d43; background:#f4faf8; cursor:pointer; }
+.findoc-app .research-memory .research-memory__button:disabled { opacity:.5; cursor:not-allowed; }
+.findoc-app .research-memory article { border-top:1px solid #e0eae6; padding:.8rem 0; overflow-wrap:anywhere; }
+.findoc-app .research-memory article p { white-space:pre-wrap; }
