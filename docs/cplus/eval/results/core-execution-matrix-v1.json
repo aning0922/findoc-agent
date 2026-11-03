@@ -136,6 +136,16 @@
       "path": "data/cplus-g4-exact-exports-v2/result.json",
       "sha256": "624fe862d893fa1776f7a85c13e804c3978e49cdcc8c132ddeb496c93915201f",
       "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "data/cplus-batch-ai-fault-v1/result.json",
+      "sha256": "a75eb9353a25958bd19cd3c9fde91d42d90368dab8148e3211ac379d77802fe5",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "docs/cplus/evidence/M5-followup/batch-ai-controls.json",
+      "sha256": "864a6840e45f7bca44c962ab5cb66c99f3f04db4cd8d6c853adfe7aa45a46869",
+      "read_only_audit_no_new_execution": true
     }
   ],
   "totals": {
@@ -148,7 +158,8 @@
     "real_agent_sdk_calls_scope": "22 counts only Agent v2 plus E01-15 pair; business OCR/checkup/annual model executions are separate archived windows, not added blindly"
   },
   "pending_root_supplements": [
-    "CP-21 actual AI batch fault run final result and core12 audit; do not prefill"
+    "public physical SDK budget verification for CP21 (raw counter null; 3 real AI returned cells observed)",
+    "remaining fixed cases and CP24 same-point highlight/fallback full combination; human review remains pending"
   ],
   "entries": [
     {
@@ -881,24 +892,124 @@
       "fixed_mode": null,
       "source_fixture": null,
       "ground_truth": "独立operation、UNKNOWN不重放",
-      "actual_tier": "PASS_REAL_TOOL_MATRIX",
+      "actual_tier": "REAL_CHROME_SOCKET_HTTP_PUBLIC_PDF_BGE_LIVE_CANCEL_AND_OWNED_FILE_FAULT",
       "status": "partial",
       "exact_case_model_executed": false,
       "observed_mode": null,
-      "actual_provider_calls": 0,
+      "actual_provider_calls": null,
       "full_answer_pass": false,
       "human_semantic_review": "pending",
       "human_financial_acceptance": "pending",
-      "result_and_gap": "真实2×2纯工具四格completed，GET不dispatch；旧260秒UNKNOWN保留。待补AI batch和指定部分失败/恢复，不计REAL_LLM通过。",
+      "result_and_gap": "真实2×2 AI故障批次已执行：三格实际AI返回，一格source_file_missing保持UNKNOWN且未调用provider；原PDF按SHA恢复，GET不重派发且历史可查。另一路纯工具取消仅取消queued3，保留active1结果。程序控制执行通过；解释语义仍未审，精确SDK计数待公开预算回执。",
       "evidence": [
-        "docs/cplus/eval/results/batch-v3-fixed/result.json#matrix"
+        "docs/cplus/eval/results/batch-v3-fixed/result.json#matrix",
+        "data/cplus-batch-ai-fault-v1/result.json",
+        "docs/cplus/evidence/M5-followup/batch-ai-controls.json"
       ],
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
-      "execution_status": "partial_tool_only_required_REAL_LLM_not_yet_verified",
+      "execution_status": "executed_required_REAL_LLM_fault_batch",
       "program_checks": {
-        "whole_case_invariants": "see_result_and_gap"
+        "four_independent_cells": "pass_observed",
+        "three_unaffected_real_AI_results": "pass_observed_saved_payloads",
+        "missing_source_isolated": "one_unknown_source_file_missing",
+        "fault_cell_no_provider": "runner_recorded_pre_provider_source_failure",
+        "same_bytes_restore": "runner_recorded_SHA_restore_check",
+        "GET_no_redispatch": "runner_recorded_check",
+        "history_readable": "runner_recorded_check",
+        "cancel_queued_only_preserve_active": "3_cancelled_1_completed_in_saved_matrix",
+        "human_semantics": "pending"
       },
-      "human_acceptance": "pending"
+      "human_acceptance": "pending",
+      "execution_verdict": "PASS_REAL_AI_PARTIAL_FAILURE_CONTROLS_EXECUTION",
+      "returned_AI_cells": 3,
+      "provider_call_upper_bound": 4,
+      "physical_SDK_count_receipt_status": "raw_and_projected_receipts_record_null; controller_reports_3_new_rows_104_to_107_pending_public_budget_receipt",
+      "prior_failures": [
+        {
+          "evidence": "docs/cplus/eval/results/batch-v3/result.json",
+          "status": "ORIGINAL_260_SECOND_UNKNOWN_RETAINED_NOT_REPLAYED"
+        }
+      ],
+      "fault_receipt": {
+        "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+        "generation": 12,
+        "batch_id": "4a1745c1-a6e9-4650-9b30-0140b807e9ad",
+        "source_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006"
+      },
+      "fault_cells": [
+        {
+          "cell_key": "d9080344-8c69-4dea-a5d9-51bf84710105:risk",
+          "state": "completed",
+          "operation_id": "a50e666f-a42b-4a95-b7b4-049574471a1c",
+          "error_code": null
+        },
+        {
+          "cell_key": "d9080344-8c69-4dea-a5d9-51bf84710105:annual",
+          "state": "unknown",
+          "operation_id": "25f8cf50-6e71-4719-8865-1dee25d1883a",
+          "error_code": "source_file_missing"
+        },
+        {
+          "cell_key": "401f7afa-48a5-412c-a23c-724d45d0a90d:risk",
+          "state": "completed",
+          "operation_id": "02708a4f-41ab-41cc-85bc-84e16c836647",
+          "error_code": null
+        },
+        {
+          "cell_key": "401f7afa-48a5-412c-a23c-724d45d0a90d:annual",
+          "state": "completed",
+          "operation_id": "922d62bd-35b8-4087-a44c-072e5b75d0c1",
+          "error_code": null
+        }
+      ],
+      "real_returned_cells": [
+        {
+          "cell_key": "d9080344-8c69-4dea-a5d9-51bf84710105:risk",
+          "operation_id": "a50e666f-a42b-4a95-b7b4-049574471a1c",
+          "schema_version": "cplus-research-answer-v1",
+          "state": "completed",
+          "provider_outcome": null,
+          "financial_authority": false
+        },
+        {
+          "cell_key": "401f7afa-48a5-412c-a23c-724d45d0a90d:risk",
+          "operation_id": "02708a4f-41ab-41cc-85bc-84e16c836647",
+          "schema_version": "cplus-research-answer-v1",
+          "state": "completed",
+          "provider_outcome": null,
+          "financial_authority": false
+        },
+        {
+          "cell_key": "401f7afa-48a5-412c-a23c-724d45d0a90d:annual",
+          "operation_id": "922d62bd-35b8-4087-a44c-072e5b75d0c1",
+          "schema_version": "annual-diff-v1",
+          "state": null,
+          "provider_outcome": "returned",
+          "financial_authority": false
+        }
+      ],
+      "cancellation_cells": [
+        {
+          "cell_key": "d9080344-8c69-4dea-a5d9-51bf84710105:risk",
+          "state": "completed",
+          "operation_id": "c69b3e37-dc49-4c27-9da5-c4a15cc75fc2"
+        },
+        {
+          "cell_key": "d9080344-8c69-4dea-a5d9-51bf84710105:annual",
+          "state": "cancelled",
+          "operation_id": "d879038b-82c8-4ccc-856a-e577f8972961"
+        },
+        {
+          "cell_key": "401f7afa-48a5-412c-a23c-724d45d0a90d:risk",
+          "state": "cancelled",
+          "operation_id": "2bc91746-8465-46c8-8638-76928209e538"
+        },
+        {
+          "cell_key": "401f7afa-48a5-412c-a23c-724d45d0a90d:annual",
+          "state": "cancelled",
+          "operation_id": "afde6434-8a8a-481b-a69b-ed74ce186b9e"
+        }
+      ]
     },
     {
       "id": "CP-22",
@@ -961,7 +1072,7 @@
       "full_answer_pass": false,
       "human_semantic_review": "pending",
       "human_financial_acceptance": "pending",
-      "result_and_gap": "累计已执行：真实同一report_ref的CSV/XLSX/PPTX下载、独立打开/渲染及浏览器PDF已有档案；本轮只读复核三文件SHA匹配并检验ZIP完整性/CSV可解码。业务新版导出另待根补，不替换原证据。",
+      "result_and_gap": "累计已执行：真实同一report_ref的CSV/XLSX/PPTX下载、独立打开/渲染及浏览器PDF已有档案；本轮只读复核三文件SHA匹配并检验ZIP完整性/CSV可解码。新版已存ref的HTTP导出已单列补证，不等于新原生打开，不替换原证据。",
       "evidence": [
         "docs/cplus/EVAL_RESULTS.md",
         "docs/cplus/reviews/business-export-qa/proof.json",
@@ -1075,20 +1186,36 @@
       "CP-20",
       "CP-22",
       "CP-23",
-      "E01-14"
+      "E01-14",
+      "CP-21"
     ],
-    "cumulative_required_tier_execution_count": 11,
+    "cumulative_required_tier_execution_count": 12,
     "not_claimed_as_full_answer_pass": true,
     "whole_invariants_incomplete_or_deviation_ids": [
       "E01-01",
       "CP-20",
       "CP-24"
     ],
-    "CP21_excluded_reason": "required REAL_LLM AI batch/partial failure recovery not yet verified",
+    "CP21_excluded_reason": null,
     "CP24_excluded_from_full_core_count_reason": "real browser components executed; same-point highlight/fallback complete combination not established",
-    "minimum_12_verdict": "11_REQUIRED_TIER_CASE_EXECUTIONS_CP21_AWAITING_FINAL_RESULT",
+    "minimum_12_verdict": "12_REQUIRED_TIER_EXECUTED_NOT_12_FULL_GOAL_OR_HUMAN_ANSWER_PASSES",
     "human_acceptance_count": 0,
-    "note": "10 is the cumulative required-tier execution inventory, not 10 accepted answers or proof all program axes passed. Prior count2 was the matching complete model-path subset only, not the total real E2E count."
+    "note": "10 is the cumulative required-tier execution inventory, not 10 accepted answers or proof all program axes passed. Prior count2 was the matching complete model-path subset only, not the total real E2E count.",
+    "CP21_required_tier_execution_verified": true,
+    "not_yet_counted_case_ids": [
+      "E01-02",
+      "E01-03",
+      "E01-04",
+      "E01-05",
+      "E01-07",
+      "E01-08",
+      "E01-09",
+      "E01-10",
+      "E01-11",
+      "E01-12",
+      "E01-13",
+      "CP-24"
+    ]
   },
   "supplemental_G4_paths": {
     "not_additional_fixed_cases": true,
