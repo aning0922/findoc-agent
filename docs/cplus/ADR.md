@@ -30,3 +30,11 @@
 - **资源**：root launcher必须显式指向原C既有canonical ledger，先只读校验路径/0600/单link/同Git common-dir/schema/cap5，缺失拒绝；不调用constructor创建新额度。M0无付费，后续真实provider仅root统一执行。
 
 八个review P0已在**合同层**解决，不代表对应业务代码已经完成。实现阶段仍须逐项验收。原包字节保留，CSV使用CRLF在归档目录允许cr-at-eol；主控owned文件diff检查正常，初次归档whitespace告警未冒充PASS。
+
+
+## M1 integration addendum
+
+- Every retrieval/annual/peer/batch/checkup-explanation successful publication now requires synchronous identity/lease check immediately before its own COMMIT, while source/parse/memory/parent read locks remain held. Guard exit is additional checking and cannot roll back a committed result.
+- Executing an OCR scope requires the same currently active artifact as well as fixed bytes/hash/config/metadata/pages. New successful OCR makes old execution context stale; historical saved snapshots may remain read-only and must be marked historical/currentness separately. No silent artifact substitution or legacy READY grant.
+- Root read-only research-source returns the server-derived fast SourceRef; chart/template intent stored only as browser hints, re-read and expectedrevision checked before explicit context creation. Browser hints never authorize.
+- Native21-assertion proof uses model disabled and two Chromium processes; it is not a real-provider or human-confirmed finance acceptance.

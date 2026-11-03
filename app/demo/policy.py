@@ -20,6 +20,12 @@ class Mutation:
 
 SEG = r"[^/]+"
 MUTATIONS = (
+    Mutation("POST", r"/cplus/checkup-explanations", native_operation=True),
+    Mutation("POST", r"/cplus/peer-comparisons", native_operation=True),
+    Mutation("POST", r"/cplus/batch-plans", native_operation=True),
+    Mutation("POST", r"/cplus/batches", native_operation=True),
+    Mutation("POST", rf"/cplus/batches/{SEG}/cancel", native_operation=True),
+    Mutation("POST", r"/cplus/segments", native_operation=True),
     Mutation("POST", r"/cplus/annual-diffs", native_operation=True),
     Mutation("POST", r"/cplus/retrieval/builds", native_operation=True),
     Mutation("POST", r"/cplus/retrieval/searches", native_operation=True),

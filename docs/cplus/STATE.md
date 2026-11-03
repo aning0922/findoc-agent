@@ -69,3 +69,12 @@ M0冻结提交3c737327198a55b72d02490a981b5259cd164ffa。三个可见worker已�
 主控已实现同Git sibling既有ledger只读准入与--provider-budget-db（C+必须显式）、--cplus默认14540/无默认虚构财务曲线；新C+ cookie独立findoc_demo_cplus，避免同host不同port覆盖原C cookie。新C+本机私有登录配置已生成（600/gitignored，不输出），--check已通过且仍原账本73calls，未发provider请求。
 
 D06代码已实现正向退休凭证、退出PID/pgid复核、GC dry-run与保留最近退役代；实际OS/private readiness HTTP假child三代运行删除1、保留2/当前3，seed与publiccache sentinel不变。25项必要边界测试PASS/ruffPASS，均fake或临时fixture；D06仍PARTIAL，等DATA后做真实cache/浏览器接管联合验收，不把fakechild称真实BGE/PDF。
+
+
+## Latest integration checkpoint
+
+Leaf integration through `e60b495`: P1 source/read-lock + before-COMMIT patches, realMidea corefive extractor9899d1f, actualcandidate peer6df6805, AIexplanation7bff253, 360 polish696e04b, templates9c9bef0, batchUI5d35a2b, peer/segment sourcechecks caeb566 and accessiblechartgroup e1b6c9c. Root assembly new F34 evidence/segments/peer/batch/AIexplanation wiring and source-bound multi-source draft navigation ready for next commit.
+
+Actual main-path browser proof now PASS21, full details `evidence/M1-M2-native/result.json`; four previous failed attempts retained. Two independent Chromium processes, two realPDF UIcandidate collections, realVision68lines, typedOCR citation/highlight/favorite, owner-only confirmedtakeover and oldHTTP401. All1440/1280/390 nooverflow; primary1440/390 screenshots copied. Provider0/human0. SelectedC+suite36PASS/3SKIP; explicit publicseed Midea1PASS.
+
+Still needed: realprovider regression with same73-call ledger/cap5; checkup explanatory UI, realannual/peer/segments/batch/newMidea2024fixture; Excel/PPTX service/render and report integration; delete/relevancefixed24questions/three actualscripts+video/curatedC+seed+draftPR. No user input needed; humanfinancial positive remainshuman_pending without blocking candidate path.

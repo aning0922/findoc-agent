@@ -25,3 +25,12 @@ experiments/cplus/gc_runtime_check.py实际OS+private HTTP synthetic fakechild�
 - Failure retained: initial script KeyError receipt after completed import; no original operation replay. Launcher restart409 resetting; no accepted operation; fixed read-only startup-status wait. Initial lazy FastAPI `_IncludedRouter.app` assembly failure corrected by final ASGI middleware, 2 boundary fake tests pass.
 - Corrected selected suite: 10PASS/1SKIP, realPDFopt-in unset. Mistyped file path invocation exit4/0tests retained. Ruff PASS; Node24 build PASS with chunk warning.
 - Independent AstraHigh review432824f: two P1 journal/COMMIT timing windows reproduced; assigned fixes. Real source/memory/parse/parent cross-store root guard still under review.
+
+
+## M1/M2 native main path
+
+`evidence/M1-M2-native/result.json`: 21 PASS assertions, two independent real Chromium processes with actual local HTTP/PDF/BGE/Milvus/Vision. Real UI extracted Gree two years 38 candidate cells each, generated real candidate trend, checked1440/1280/390. This generation reran Vision (68lines), legacy scan remainsFAILED; explicit OCR enrollment/build/context/answer (provider disabled) returned cited OCR lines, actual normalized bbox highlighted original PDF render, saved evidence memory. BrowserB423 conflict/remaining time, separateowner password+confirmation, generation16→17, oldbrowser actualHTTP401, new financialcollections0, logout. No financial human confirmation/provider call.
+
+Four failed runs retained: selector accessible-name mismatch; literal question noOCRhit correctly insufficient; chartgroup label changed during integration; test omitted required re-entry of shared password so takeover remaineddisabled. Corrected run PASS, not hiding failures. Root visually inspected1440home/company360; Hero contrast and compact KPIs fixed; 390 screenshots retained.
+
+After assembly changes: C+ suite36PASS/3SKIP (opt-inPDF tests); separate explicit realpublicseed Midea extractor1PASS proving original Gree2024/2025 payload equality. New generatedPDF highlight/fallback/expiredreader3PASS. Node24 buildPASS; lint exit0 warnings, Swig/chunk warnings retained.

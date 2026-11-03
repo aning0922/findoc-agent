@@ -22,7 +22,8 @@ import { AppShell, pathFor } from "./AppShell.tsx";
 import { readProductRoute } from "./productRoutes.ts";
 import { CompanyDirectory } from "./CompanyDirectory.tsx";
 import { CompanyDiscoveryPanel } from "./cplus/sources/CompanyDiscoveryPanel.tsx";
-import { CPlusCompany360 } from "./cplus/profile/CPlusCompany360.tsx";
+import { CPlusCompanyEntry } from "./cplus/profile/CPlusCompanyEntry.tsx";
+import { DocumentResearchPanel } from "./cplus/research/DocumentResearchPanel.tsx";
 import type { Page } from "./AppShell.tsx";
 import { METRICS } from "../evidence/contracts.ts";
 import {
@@ -133,7 +134,7 @@ export default function FinancialProduct({
         <>{discovery}<CompanyDirectory companies={companies} loading={companiesLoading} /></>
       ) : route.page === 'conversations' ? (
         <Suspense fallback={<p role="status">正在打开研究助手…</p>}>
-          <Conversations companies={companies} />
+          <>{cplus&&<DocumentResearchPanel/>}<Conversations companies={companies} /></>
         </Suspense>
       ) : route.page === "research" ? (
         <ResearchWorkbench
@@ -157,7 +158,7 @@ export default function FinancialProduct({
           companies={companies}
         />
       ) : cplus && company && route.page === 'overview' ? (
-        <CPlusCompany360 companyId={company.company_id} companies={companies} onResearchDraft={({companyId,question}) => { window.location.assign(`/conversations?${new URLSearchParams({company:companyId,question})}`); }} />
+        <CPlusCompanyEntry companyId={company.company_id} companies={companies}/>
       ) : company ? (
         <CompanySession
           key={route.key}

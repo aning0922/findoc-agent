@@ -1,0 +1,109 @@
+{
+  "tier": "REAL_CHROMIUM_HTTP_PDF_BGE_MILVUS_VISION",
+  "provider_calls": 0,
+  "human_financial_approvals": 0,
+  "steps": [
+    {
+      "name": "browser A real login and workspace warm",
+      "status": "PASS"
+    },
+    {
+      "name": "home no horizontal overflow 1440",
+      "status": "PASS"
+    },
+    {
+      "name": "home no horizontal overflow 1280",
+      "status": "PASS"
+    },
+    {
+      "name": "home no horizontal overflow 390",
+      "status": "PASS"
+    },
+    {
+      "name": "real seeded Gree company exists",
+      "status": "PASS"
+    },
+    {
+      "name": "two real annual reports extracted by UI",
+      "status": "PASS"
+    },
+    {
+      "name": "company360 no horizontal overflow 1440",
+      "status": "PASS"
+    },
+    {
+      "name": "company360 no horizontal overflow 1280",
+      "status": "PASS"
+    },
+    {
+      "name": "company360 no horizontal overflow 390",
+      "status": "PASS"
+    },
+    {
+      "name": "real statement cells remain candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "scan keeps legacy failed state",
+      "status": "PASS"
+    },
+    {
+      "name": "real OCR engine completed in this generation",
+      "status": "PASS"
+    },
+    {
+      "name": "OCR does not grant legacy READY",
+      "status": "PASS"
+    },
+    {
+      "name": "typed OCR enrollment build context answer completed through UI",
+      "status": "PASS"
+    },
+    {
+      "name": "real OCR line bbox preview verified",
+      "status": "PASS"
+    },
+    {
+      "name": "real OCR evidence saved to research memory without financial approval",
+      "status": "PASS"
+    },
+    {
+      "name": "browser B conflict displays remaining lease",
+      "status": "PASS"
+    },
+    {
+      "name": "takeover blocked before explicit confirmation",
+      "status": "PASS"
+    }
+  ],
+  "screenshots": [
+    "home-1440.png",
+    "home-1280.png",
+    "home-390.png",
+    "company360-1440.png",
+    "company360-1280.png",
+    "company360-390.png",
+    "ocr-highlight-1440.png"
+  ],
+  "generation_before": 14,
+  "collection_cells": [
+    {
+      "year": 2025,
+      "cells": 38
+    },
+    {
+      "year": 2024,
+      "cells": 38
+    }
+  ],
+  "ocr": {
+    "artifact_id": "16936e79-c3c5-4b5b-b11e-9c0748d52d28",
+    "method": [
+      "ocr"
+    ],
+    "lines": 68
+  },
+  "result": "FAIL",
+  "error": "TimeoutError: locator.click: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '确认接管', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled>确认接管</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    174 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m        - element is not enabled\u001b[22m\n\u001b[2m      - retrying click action\u001b[22m\n\u001b[2m        - waiting 500ms\u001b[22m\n",
+  "visible_page_text": "演示会话 · 剩余约 18:13 · 财务核对需所有者授权\n退出演示\n所有者授权\n跳到主要内容\nFinDoc.\nANALYST\nDEMO\nF\n财报研究空间\n资料、研究与报告\n工作空间\n首页\nAI 研究助手\n企业与资料\n研究任务\n我的报告\n让每个结论都有据可查\n\n回到原文，核对数据，\n再形成你的研究结论。\n\n研\n本地研究者\n单人研究空间\n工作空间\nAI 研究助手\n财报研究工作台\n固定资料 · 原文研究\n让每个判断，都能回到原文\n\n选择完整年报或真实 OCR 转录，固定研究范围后提问。解释始终待审，财务核准独立进行。\n\n证据已收藏；可在下方记忆中查询与删除。\n\n资料\n选择研究资料\n000651-2025.pdf · 全文就绪\n000651-2024.pdf · 全文就绪\n000333-2025.pdf · 全文就绪\n美的2025_公开原文第9页_派生扫描示例.pdf · 需查看解析质量\n研究方式\n已核验身份的完整年报\nOCR 文件转录 · 身份未核验\n读取资料身份\n\n研究范围已固定 · 1 份资料 · OCR转录 · 跨问题保持同一资料版本\n\n研究问题\n提交研究问题 重新选择范围\n主要会计数据\n\n模型未配置 · 展示真实检索原文\n\n资料 1 · 第 1 页 · OCR 转录待核对\n六、主要会计数据和财务指标\n定位原文 收藏这条证据\n原 PDF 第 1 页\n\n已按核验 OCR 行坐标高亮 · 转录待审\n\n关闭原文预览\n研究收藏与跨会话记忆\n财报研究助手\n\n围绕明确选择的年报连续研究，回到原文核对每条回答。\n\n单次原文核验 / 历史问答\n我的会话\n重新读取会话\n新会话\n珠海格力电器股份有限公司 2025\n新建会话\n开始新的研究\n\n先选择 1–4 份年报并创建会话\n\n选择年报\n我的研究偏好\n研究记忆与偏好\n从年报原文开始\n\n示例只填入草稿，不自动发送。\n\n这份年报中的营业收入原文是什么？\n经营活动现金流有哪些说明？\n请找到主要业务风险的原文出处。\n研究问题\n\n先创建会话，再明确发送问题。\n\n发送\n\n本地单人研究空间。必要的问题与证据会发送给所配置的模型供应商；来源资格与计算时验证不代替人工语义审读。\n\nFinDoc · AI 研究工作台\n年报原文 · 数值核对 · AI 解读"
+}
