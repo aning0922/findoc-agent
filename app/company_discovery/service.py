@@ -7,7 +7,13 @@ import sqlite3
 import time
 from uuid import UUID, uuid4
 
-from .contracts import DiscoveryError, TrustedImportIdentity, canonical, digest
+from .contracts import (
+    DiscoveryError,
+    TrustedImportIdentity,
+    announcement_version_digest,
+    canonical,
+    digest,
+)
 
 
 class DiscoveryService:
@@ -153,8 +159,10 @@ class DiscoveryService:
             with self.guard(identity), self.tx() as db:
                 for raw in rows:
                     item = dict(raw)
-                    # Stable public-version key excludes private search token/expiry.
-                    item["version_digest"] = digest(raw)
+                    # Public version excludes query hints; candidate SHA below still covers all fields.
+                    item["version_digest"] = (
+                        announcement_version_digest(raw) if kind == "announcement" else digest(raw)
+                    )
                     item.update(
                         candidate_id=str(uuid4()),
                         checked_at=time.time(),

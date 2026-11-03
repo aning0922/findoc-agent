@@ -127,9 +127,9 @@ def setup(root, *, binder=None, download=None):
     return service, cache, identity, state, TestClient(app)
 
 
-async def candidate(service, identity):
+async def candidate(service, identity, query="hezj"):
     companies = await service.post_search(
-        dict(operation_id=oid(), mode="companies", query="hezj"), identity
+        dict(operation_id=oid(), mode="companies", query=query), identity
     )
     result = await service.post_search(
         dict(
@@ -292,3 +292,103 @@ def test_unknown_binding_phase_never_replays_and_lease_revokes_download(tmp_path
             cache.close()
 
     asyncio.run(run())
+
+
+def test_same_announcement_across_code_pinyin_and_name_reuses_public_bytes(tmp_path):
+    from app.company_discovery.contracts import digest
+
+    async def run():
+        service, cache, identity, state, _ = setup(tmp_path)
+        identity = TrustedImportIdentity(
+            1, identity.instance_id, identity.principal, time.time() + 3600, identity.fence
+        )
+        snapshots = []
+        try:
+            for query, match in (
+                ("600690", "code_exact"),
+                ("hezj", "pinyin_exact"),
+                ("海尔智家", "provider_name_candidate"),
+            ):
+                _, c = await candidate(service, identity, query)
+                assert c["security_identity"]["match_type"] == match
+                assert c["candidate_digest"] == digest(
+                    {k: v for k, v in c.items() if k != "candidate_digest"}
+                )
+                body = dict(
+                    operation_id=oid(),
+                    candidate_id=c["candidate_id"],
+                    candidate_digest=c["candidate_digest"],
+                    create_company=True,
+                    confirmed=True,
+                )
+                bad = await service.post_import(
+                    {**body, "operation_id": oid(), "candidate_digest": "0" * 64}, identity
+                )
+                assert bad["error_code"] == "candidate_digest_mismatch"
+                result = await service.post_import(body, identity)
+                assert result["state"] == "completed"
+                assert result["cache_hit"] is bool(snapshots)
+                snapshots.append(c)
+            assert len({c["version_digest"] for c in snapshots}) == 1
+            assert len({c["candidate_digest"] for c in snapshots}) == 3
+            assert cache.downloader.calls == 1
+            # Each authorized private binding still runs; only public PDF bytes are reused.
+            assert state["bound"] == [1, 1, 1]
+        finally:
+            cache.close()
+
+    asyncio.run(run())
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("announcement_id", "1225038337"),
+        ("pdf_locator", "finalpage/2026-03-28/1225038337.PDF"),
+        ("pdf_url", "https://static.cninfo.com.cn/finalpage/2026-03-28/1225038337.PDF"),
+        ("report_year", 2024),
+        ("language", "en"),
+        ("kind", "summary"),
+        ("title_raw", "2025年年度报告（修订版）"),
+        ("revision_kind", "revised"),
+        ("published_at_ms", 1774656000000),
+        ("supersession_status", "superseded"),
+        ("security_code", "600691"),
+        ("exchange", "SZSE"),
+        ("provider_org_id", "another-org"),
+        ("supported", False),
+    ],
+)
+def test_public_version_preserves_announcement_and_security_changes(field, value):
+    from copy import deepcopy
+    from app.company_discovery.contracts import announcement_version_digest, digest
+
+    raw = dict(
+        provider="cninfo_public_web",
+        announcement_id="1225038336",
+        report_year=2025,
+        language="zh",
+        kind="annual_fulltext",
+        title_raw="2025年年度报告",
+        revision_kind=None,
+        published_at_ms=1774569600000,
+        supersession_status=None,
+        pdf_locator="finalpage/2026-03-27/1225038336.PDF",
+        pdf_url="https://static.cninfo.com.cn/finalpage/2026-03-27/1225038336.PDF",
+        security_identity=dict(
+            security_code="600690",
+            exchange="SSE",
+            provider_org_id="gssh0600690",
+            supported=True,
+            match_type="code_exact",
+            pinyin="hezj",
+        ),
+    )
+    matched = deepcopy(raw)
+    matched["security_identity"].update(match_type="provider_name_candidate", pinyin="alias")
+    assert announcement_version_digest(raw) == announcement_version_digest(matched)
+    assert digest(raw) != digest(matched)
+    changed = deepcopy(raw)
+    target = changed["security_identity"] if field in raw["security_identity"] else changed
+    target[field] = value
+    assert announcement_version_digest(raw) != announcement_version_digest(changed)

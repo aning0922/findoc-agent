@@ -18,6 +18,24 @@ def digest(value):
     return hashlib.sha256(canonical(value).encode()).hexdigest()
 
 
+def announcement_version_digest(raw):
+    """Public announcement version, independent of how its security was found.
+
+    Keep every announcement/identity field except query matching hints. The full
+    immutable candidate is hashed separately, including these hints and tokens.
+    """
+    return digest(
+        {
+            **raw,
+            "security_identity": {
+                k: v
+                for k, v in raw["security_identity"].items()
+                if k not in ("match_type", "pinyin")
+            },
+        }
+    )
+
+
 class DiscoveryError(Exception):
     def __init__(self, code, status=409):
         self.code, self.status = code, status
