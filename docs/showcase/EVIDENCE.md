@@ -31,3 +31,7 @@
 ## 主控 M1 前端接线复跑
 
 集成9cdc3d5→4bf1bef后，main/ResearchHome接线，`SHOWCASE_TEST_URL=http://127.0.0.1:14521 SHOWCASE_TEST_OUTPUT=/tmp/findoc-root-m1-ui node e2e/showcase-live-mock.mjs`：三宽1440/1280/390完整AppShell登录/首页/指标/退出PASS；错误概览、非法Decimal、到期即时卸载+服务器读回、旧refresh不覆盖新session、未知claim保留并GET恢复PASS。实际Chromium，接口拦截UI_MOCK，LLM0/真实PDF0/真人财务0；截图已由主控打开检查。Node24 build/lint成功，保留chunk/effect/ref/fast-refresh提示。真实HTTP和Cookie验证仍待L03及独立review。
+
+## M1 主控真实页面与独立复核
+
+后端源7f6f268→c826a05，Astra独立review cf5f881→7141ec8。16个目标auth/gateway/reset/dashboard/disclosures tests PASS，ruff PASS，SWIG5warnings保留。主控新增 integrated_http_check.py + showcase-integrated-http.mjs 使用两个独立Chromium进程、实际产品main、真实Vite/gateway/OS child/缓存BGE+Milvus，合成seed（1虚构公司、PDF0/真实事实0/LLM0/真人财务0），验证三宽、pending cookie、旧DTO网关编号、占用/二次owner接管、旧A401及UI卸载、新代恢复公司1、logout reset、seed SHA不变。证据目录uz81ifdo见STATE。首轮oflnrurn因测试未重新填写共享口令等待disabled按钮失败；没有据此修改产品授权条件，修测试后通过。截图另发现index.css全局h1覆盖Hero白色、旧ResearchDashboard全局nav覆盖；视觉修正后将重新检查。

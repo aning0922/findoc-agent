@@ -1,6 +1,6 @@
 /* S1: real routes and objects in the shared Astra visual system. */
 .saas-app .nav-item { height: auto; min-height: 48px; font-size: 15px; color: var(--color-nav-muted) !important; }
-.saas-app .nav-item.active { color: white !important; }
+.saas-app .nav-item.active { color: white !important; background: var(--color-nav-active, #263e65); }
 .saas-app .brand-mark { background: var(--color-primary); }
 .saas-app .workspace-label strong, .saas-app .profile strong { font-size: 14px; }
 .saas-app .workspace-label div > span, .saas-app .profile div > span, .saas-app .nav-caption, .saas-app .research-principle :is(strong, p) { font-size: 13px; color: var(--color-nav-muted); }

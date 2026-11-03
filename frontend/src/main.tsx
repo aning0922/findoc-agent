@@ -3,12 +3,15 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { DemoGate } from './demo/DemoGate.tsx'
+import { installGatewayFetch } from './demo/installGatewayFetch.ts'
 // App bootstrap lazily opens the product route; keep the legacy bundle independent.
 // oxlint-disable-next-line react/only-export-components
 const EvidenceWorkbench = lazy(() => import('./evidence/EvidenceWorkbench.tsx'))
 
 // oxlint-disable-next-line react/only-export-components
 const FinancialProduct = lazy(() => import('./product/FinancialProduct.tsx'))
+
+if (import.meta.env.VITE_FINDOC_DEMO_MODE === '1') installGatewayFetch();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
