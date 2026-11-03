@@ -14,7 +14,7 @@
 - login 423 `{detail:{code:occupied,message,remaining_seconds,expires_at,takeover_available,lease_generation}}`；错误凭据统一 401，验证前不能查占用。
 - `POST /demo/takeover`：`{operation_id,username,password,owner_password,confirm:true,expected_generation}`。默认 wait_only 拒绝；takeover_enabled 必须 owner hash 验证+二次明确确认；公共 takeover 此版关闭。expected_generation 是 CAS 查找线索，服务器重验，失败 409；并发只有一个成功者。
 - `POST /demo/logout`：`{operation_id}` 当前 Cookie 验证；撤销、复位，Cookie 清理。Cookie/operation 重复请求可查已完成结果，但不能让撤销 token 访问业务。
-- `GET /demo/operations/{operation_id}`：登录/接管前凭据用安全 POST 查证或当前 Cookie 鉴权；不允许仅凭公开 UUID 重发 token。具体重试响应不可泄漏 secret。
+- `GET /demo/operations/{operation_id}`：登录/接管前凭据用安全 POST 查证或当前 Cookie 鉴权；不允许仅凭公开 UUID 重发 token。原始token不放operation响应；operation UUID不是授权。登录结果恢复必须重新验证凭据并绑定原operation/request hash；若无法恢复cookie则显示明确重新申请，不允许GET公开换发token。
 - `GET /demo/resets/{reset_id}`：脱敏 `state,phase,error_code`，有效当前租约/对应请求所有权才可查询。
 - 503 reset_failed 时状态 degraded，禁止所有业务；新 lease 只在 copy/hash/child health 成功后签发。请求若同步耗时先给 resetting/operation，不假装登录成功。
 
