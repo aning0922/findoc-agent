@@ -52,7 +52,11 @@
   "current_stage": "M5 integrated candidate delivery",
   "task_count": 36,
   "substantive_parallel_worktrees_limit": 3,
-  "next_batch": "none; core candidate ready, human/eval gaps explicitly retained",
+  "next_batch": "CI actual-failure followup only; core candidate delivered; no pending substantive worker batch",
   "source_checkpoint": "9f4993cf3463fa0d3c4520799435f3bf45eefeac",
-  "model_policy": "Astra high/ultra independent design/review; Sol high backend/identity races; Terra medium deterministic UI/docs; each session changes recorded by actual dispatch, no claim controller model switched"
+  "model_policy": "Astra high/ultra independent design/review; Sol high backend/identity races; Terra medium deterministic UI/docs; each session changes recorded by actual dispatch, no claim controller model switched",
+  "draft_pr": "https://github.com/aning0922/findoc-agent/pull/2",
+  "delivered_asset_checkpoint": "6476ad03ce869d315f4b8174fcd0af233e3d4b5d",
+  "local_entry": "http://127.0.0.1:14530",
+  "local_entry_status_at_handover": "HTTP200, unauthenticated ready, wait_only, ttl20"
 }

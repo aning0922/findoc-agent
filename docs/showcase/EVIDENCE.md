@@ -81,3 +81,8 @@ O03 real product isgmzk2o PASS：真实Vision转录/54格与原line/bbox一致�
 ### 最终检查范围
 
 独立Astra在9f4993c：15+8=23离线PASS，fake/临时fixture，无付费、无人签，不替代真实UI证据。主控较宽回归141PASS／57setup ERROR／5warnings，29.47s；57均为test_d22_reports.py／test_d23_reports.py依赖缺失product/validation/d21-real-research.json，未合成假证明。前端Node24 build/lint通过，chunk及已有lint提示保留；root改动ruff与diff检查通过。测试数量不对应功能数量，完整suite未宣称通过。
+
+
+交付核查：Terra/medium只读核对tar精确成员集合、28文件hash与manifest，未检查隐藏未知secret；root另对完整seed扫描当前已配置的API key／登录密码精确字节，0命中，不外推任意未知凭据不存在。见evidence/seed-handover-audit.json。root复跑launcher6PASS1.08s、当前完整seed verify PASS、新交付文档链接存在、36唯一任务、交付资产精确known-secret扫描0命中、git diff --check PASS。
+
+交付资产6476ad03ce869d315f4b8174fcd0af233e3d4b5d正常push并读回一致；草稿PR#2 base=codex/conversation-memory-v12-20261102。14530重新启动后HTTP200，public status ready/20/wait_only，未创建新lease或新模型调用。自动Quality触发，远端结果另见Actions，未以进行中当通过。

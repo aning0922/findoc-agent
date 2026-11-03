@@ -31,3 +31,10 @@ scripts/run_showcase_local.py --llm-config /Users/aipuli/Documents/Projects/find
 原始失败继续留存：早期工具多调用／不支持表页／JSON截断；ybr4pane 研究阶段完成但 runner 在额外 seed 上传缺 Origin 最终 FAIL，后补 seed 材料为真实 Vision／BGE 的 in-process ASGI，不冒充外部 HTTP UI；后来完整 UI runner 06nyuff2 单独 PASS。详见[EVIDENCE](EVIDENCE.md)。
 
 仍待本人：逐项 PDF 核对、独立 ACCEPT／SAVE／RESUME；扩展财务核准图正向和完整固定题层级未获真实验收。OCR 是真实页派生单页而非完整原生扫描公告；目录限两企业两年。P2 与环境限制见[KNOWN_ISSUES](KNOWN_ISSUES.md)。没有公开部署、main 合并或代理代签。
+
+
+## 远端与本机交付
+
+源码及截图／录屏／PDF资产提交 `6476ad03ce869d315f4b8174fcd0af233e3d4b5d` 已正常 push 至 `codex/findoc-showcase-c-integration`，远端 SHA 一致。草稿 [PR #2](https://github.com/aning0922/findoc-agent/pull/2) 目标为 `codex/conversation-memory-v12-20261102`，不是 main。最终交付说明跟进提交以分支 HEAD 为准。没有合并或公开部署。
+
+本机 launcher 已重新启动，HTTP200，`/api/demo/status` 为 ready／20分钟／wait_only，保持未登录供本人使用。费用账本不因重启而补充；原始V1.2工作区tracked clean。远端自动Quality正在执行，结果以Actions及最终汇报为准，不预填PASS。

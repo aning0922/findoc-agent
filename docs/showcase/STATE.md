@@ -34,3 +34,6 @@
 - 用户授权本轮 runtime API 上限 5 元；root 唯一调用，共享 ledger 在 generation 外。最终快照 73 calls、保守预留 **1.354700 元**，UNKNOWN 0，实际账单未观测；不以演示 reset 补额度。不再为收尾重复付费调用。
 
 未触及本人财务 ACCEPT／SAVE／RESUME、公开部署、main 合并或 force push。源码 feature 分支交付不代表上述授权。当前没有需要用户先授权才能继续的普通研发步骤。
+
+
+远端交付：源码／资产6476ad03ce869d315f4b8174fcd0af233e3d4b5d已push；[草稿PR #2](https://github.com/aning0922/findoc-agent/pull/2)以独立V1.2为base。最终文档跟进以HEAD为准。实际本机14530 HTTP200、ready、20分钟、wait_only，未登录；自动Quality已触发，未预填通过。下批没有实质并行任务；仅跟进CI实际失败或用户体验P0。
