@@ -1,0 +1,30 @@
+{
+  "tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
+  "provider_calls": 0,
+  "human_financial_approvals": 0,
+  "routes": [
+    {
+      "name": "E-real-statements-profile-checkup",
+      "checks": [
+        "real 2025 statement candidates collected",
+        "real 2024 statement candidates collected",
+        "five metrics by two real years projected as candidates",
+        "real statements no overflow 1440",
+        "real statements no overflow 1280",
+        "real statements no overflow 390",
+        "three-rule checkup generated from selected real candidates",
+        "real rule checkup no overflow 1440",
+        "real rule checkup no overflow 390",
+        "actual five-KPI company360 no overflow 1440",
+        "actual five-KPI company360 no overflow 390"
+      ],
+      "started_at": "2026-11-03T11:35:16.063Z",
+      "result": "PASS",
+      "ended_at": "2026-11-03T11:35:25.349Z"
+    }
+  ],
+  "page_errors": [],
+  "seed_version": "showcase-cplus-seed-v3",
+  "result": "PASS",
+  "video_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-native-final-finance-v2/page@ed4774ca489aabb7df80a1de8da6d379.webm"
+}

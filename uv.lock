@@ -1258,12 +1258,14 @@ checks = [
     { name = "langchain-text-splitters" },
     { name = "langgraph" },
     { name = "openai" },
+    { name = "openpyxl" },
     { name = "pdfplumber" },
     { name = "pydantic" },
     { name = "pymilvus" },
     { name = "pymupdf" },
     { name = "pytest" },
     { name = "python-multipart" },
+    { name = "python-pptx" },
     { name = "ruff" },
     { name = "tiktoken" },
     { name = "uvicorn", extra = ["standard"] },
@@ -1315,12 +1317,14 @@ checks = [
     { name = "langchain-text-splitters", specifier = ">=1.1.2" },
     { name = "langgraph", specifier = "==1.2.13" },
     { name = "openai" },
+    { name = "openpyxl", specifier = "==3.1.5" },
     { name = "pdfplumber", specifier = ">=0.11.10" },
     { name = "pydantic" },
     { name = "pymilvus", specifier = ">=3.0.0" },
     { name = "pymupdf", specifier = ">=1.27.1" },
     { name = "pytest" },
     { name = "python-multipart" },
+    { name = "python-pptx", specifier = "==1.0.2" },
     { name = "ruff" },
     { name = "tiktoken", specifier = ">=0.13.0" },
     { name = "uvicorn", extras = ["standard"] },
@@ -4615,6 +4619,21 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/5b/42/55c32bb9b12693c092ad250a0e82edb5b31ddeda6eb772de5f308b3804ad/python_multipart-0.0.32.tar.gz", hash = "sha256:be54b7f3fa167bb83e4fcd936b887b708f4e57fe75911c02aebf53efaf8d938e", size = 46881, upload-time = "2026-06-04T16:18:58.647Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e1/04/e8135ebd1ad02c56ec633277529b2602ff99ff634be76cdba5744cf554fd/python_multipart-0.0.32-py3-none-any.whl", hash = "sha256:ff6d3f776f16878c894e52e107296ffc890e913c611b1a4ec6c44e2821fe2e23", size = 30042, upload-time = "2026-06-04T16:18:57.319Z" },
+]
+
+[[package]]
+name = "python-pptx"
+version = "1.0.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "lxml" },
+    { name = "pillow" },
+    { name = "typing-extensions" },
+    { name = "xlsxwriter" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/52/a9/0c0db8d37b2b8a645666f7fd8accea4c6224e013c42b1d5c17c93590cd06/python_pptx-1.0.2.tar.gz", hash = "sha256:479a8af0eaf0f0d76b6f00b0887732874ad2e3188230315290cd1f9dd9cc7095", size = 10109297, upload-time = "2024-08-07T17:33:37.772Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d9/4f/00be2196329ebbff56ce564aa94efb0fbc828d00de250b1980de1a34ab49/python_pptx-1.0.2-py3-none-any.whl", hash = "sha256:160838e0b8565a8b1f67947675886e9fea18aa5e795db7ae531606d68e785cba", size = 472788, upload-time = "2024-08-07T17:33:28.192Z" },
 ]
 
 [[package]]

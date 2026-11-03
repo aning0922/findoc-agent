@@ -1,0 +1,11 @@
+{
+  "snippet": "\nvar pageType = 'cn';    //中文\n\nvar pageNum = -1;       //数据全量查询\n\nvar sortColumn = 'SECCODE'; //排序\n\n$(document).ready(function () {\n\n    //埋点\n    // window.snowplow('trackStructEvent', 'hot', 'click', 'snapshot', pageType+'companyList', '');\n\n    //初始化公司列表\n    queryCompanyList(pageType,pageNum,null);\n\n    // 键盘精灵关键字查询\n    $('#hdy-input').keyup(function (e) {\n        // 当为回车键则查询\n        if (e.keyCode == 13){\n            var $vInputObject = $(this);\n            var keyword = $vInputObject.val();\n            keyword = $.trim(keyword);\n            keyword = CtoH(keyword);\n            var isIllegal ",
+  "scripts": [],
+  "endpoint_context": [
+    "    var stockList = [];",
+    "        stockList = data.records;",
+    "        window.location.href = path+'/snapshot/companyDetailCn?code='+stockList[0].SECCODE;",
+    "        stockList = data.records;",
+    "        $.each(stockList,function (i,item) {"
+  ]
+}

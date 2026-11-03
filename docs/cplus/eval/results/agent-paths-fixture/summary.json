@@ -1,0 +1,88 @@
+{
+  "tier": "CONTROLLED_HTTP_MOCK_PROTOCOL_ONLY",
+  "actual_provider_calls": 0,
+  "actual_socket_requests": 0,
+  "actual_private_config_or_ledger_reads": 0,
+  "source_baseline": "e510876",
+  "script_sha256": "ff8f172e7002256218f42187102186f972399762b41d46e4b41d7753fa2844d8",
+  "scenarios": [
+    {
+      "name": "happy",
+      "execution": "COMPLETED_REQUESTED_HTTP_PATHS_NOT_HUMAN_ANSWER_ACCEPTANCE",
+      "simulated_new_guard_rows": 11,
+      "actual_provider_calls": 0,
+      "post_paths": [
+        "/demo/login",
+        "/demo/claim",
+        "/conversations",
+        "/research/intent",
+        "/synthesis/plans",
+        "/deep-research/jobs",
+        "/showcase-reports/drafts",
+        "/showcase-reports",
+        "/conversations",
+        "/research/intent",
+        "/synthesis/plans",
+        "/synthesis/jobs",
+        "/showcase-reports/drafts",
+        "/showcase-reports"
+      ]
+    },
+    {
+      "name": "intent-unknown-get404",
+      "execution": "STOPPED_WITH_RECEIPTS_NO_REPLAY",
+      "simulated_new_guard_rows": 1,
+      "actual_provider_calls": 0,
+      "post_paths": [
+        "/demo/login",
+        "/demo/claim",
+        "/conversations",
+        "/research/intent"
+      ]
+    },
+    {
+      "name": "ack-unknown-recovered",
+      "execution": "STOPPED_WITH_RECEIPTS_NO_REPLAY",
+      "simulated_new_guard_rows": 7,
+      "actual_provider_calls": 0,
+      "post_paths": [
+        "/demo/login",
+        "/demo/claim",
+        "/conversations",
+        "/research/intent",
+        "/synthesis/plans",
+        "/deep-research/jobs"
+      ]
+    },
+    {
+      "name": "remaining-cap-stop",
+      "execution": "STOPPED_WITH_RECEIPTS_NO_REPLAY",
+      "simulated_new_guard_rows": 7,
+      "actual_provider_calls": 0,
+      "post_paths": [
+        "/demo/login",
+        "/demo/claim",
+        "/conversations",
+        "/research/intent",
+        "/synthesis/plans",
+        "/deep-research/jobs",
+        "/showcase-reports/drafts",
+        "/showcase-reports"
+      ]
+    },
+    {
+      "name": "partial-job",
+      "execution": "STOPPED_WITH_RECEIPTS_NO_REPLAY",
+      "simulated_new_guard_rows": 7,
+      "actual_provider_calls": 0,
+      "post_paths": [
+        "/demo/login",
+        "/demo/claim",
+        "/conversations",
+        "/research/intent",
+        "/synthesis/plans",
+        "/deep-research/jobs"
+      ]
+    }
+  ]
+}

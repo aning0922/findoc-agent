@@ -1,0 +1,593 @@
+{
+  "schema_version": "cplus-real-agent-paths-v1",
+  "tier": "OPERATOR_REAL_HTTP_GUARDED_SDK",
+  "execution": "STOPPED_WITH_RECEIPTS_NO_REPLAY",
+  "max_new_calls": 12,
+  "budget_before": {
+    "cap_cny": "5",
+    "physical_guard_rows": 92,
+    "reserved_cny": "1.765722",
+    "unknown_rows": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "physical_denominator": "new existing guarded SDK reservation/attempt rows; not billed cost or accepted-answer count",
+  "logical_denominator": "sr_budgets.attempts from each final job.usage; tool reservations are separate",
+  "operations": [
+    {
+      "path": "/demo/login",
+      "operation_id": "40cd10d3-987c-4d9d-babc-d30034944446",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 0,
+      "http_status": 202,
+      "result": {
+        "schema_version": "demo-attempt-v1",
+        "state": "pending",
+        "operation_id": "40cd10d3-987c-4d9d-babc-d30034944446",
+        "reset_id": "97b70525-e3cd-40d4-afce-099ec0003976",
+        "claimable": false
+      }
+    },
+    {
+      "path": "/demo/claim",
+      "operation_id": "03c05b5d-245c-4625-97a6-7eb9d8390261",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 0,
+      "http_status": 200,
+      "result": {
+        "schema_version": "demo-session-v1",
+        "state": "active",
+        "expires_at": "2026-11-03T13:07:17.845966+00:00",
+        "server_now": "2026-11-03T12:47:17.846202+00:00",
+        "remaining_seconds": 1199,
+        "lease_generation": 10,
+        "seed_version": "showcase-cplus-seed-v3",
+        "can_review": false,
+        "owner_elevated_until": null
+      }
+    },
+    {
+      "path": "/conversations",
+      "operation_id": "9db895a6-9d37-4a78-afba-9e0be6c3a4c8",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 0,
+      "request_body": {
+        "operation_id": "9db895a6-9d37-4a78-afba-9e0be6c3a4c8",
+        "document_ids": [
+          "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec"
+        ],
+        "title": "C+ E01-15 deep bounded source study"
+      },
+      "request_sha256": "e4a5d548503b7ce8f43887d068901b003bbe398e594f2cb74d35fe6dcc1bafe7",
+      "http_status": 201,
+      "result": {
+        "conversation_id": "6307cc86-255b-4594-b30b-303c0649f4e4",
+        "title": "C+ E01-15 deep bounded source study",
+        "status": "active",
+        "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+        "sources": [
+          {
+            "workspace_id": "demo",
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "report_year": 2025,
+            "report_type": "annual",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "basis": "PRC_GAAP",
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+            "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+            "attempt": 1,
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10"
+          }
+        ],
+        "source_states": [
+          {
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+            "status": "current_at_read"
+          }
+        ],
+        "created_at": "2026-11-03T12:47:18.058800+00:00",
+        "updated_at": "2026-11-03T12:47:18.058800+00:00",
+        "last_turn_seq": 0,
+        "active_turn_id": null,
+        "schema_version": "conversation-v1",
+        "turns": [],
+        "next_before_seq": null
+      }
+    },
+    {
+      "path": "/research/intent",
+      "operation_id": "6593303f-5178-4fef-aa00-7428149cad28",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 1,
+      "request_body": {
+        "operation_id": "6593303f-5178-4fef-aa00-7428149cad28",
+        "conversation_id": "6307cc86-255b-4594-b30b-303c0649f4e4",
+        "text": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+        "requested_mode": "deep"
+      },
+      "request_sha256": "57638070969d435c9cc372a090008daf8fd393a412778b0115349238c9f8919c",
+      "http_status": 200,
+      "result": {
+        "schema_version": "intent-v2",
+        "intent_id": "2a0c5116-0893-474e-b39f-7a1daedc60ae",
+        "conversation_id": "6307cc86-255b-4594-b30b-303c0649f4e4",
+        "mode": "deep",
+        "goal": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [],
+        "metric_keys": [
+          "operating_cash_flow"
+        ],
+        "actions": [
+          "read_evidence"
+        ],
+        "clarifying_question": null,
+        "requires_confirmed_facts": false,
+        "source_turn_ids": [],
+        "proposal_origin": "model_proposal_program_validated",
+        "provider_error": null,
+        "scope": {
+          "scope_hash": "d889656f7e21b48b6515554054daffea31cc2c52b30b449bfacf4194354dec02",
+          "runtime_instance_id": "5634b024-ac3a-4443-a206-887b612cf9ac",
+          "lease_generation": 10,
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 2,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      }
+    },
+    {
+      "path": "/synthesis/plans",
+      "operation_id": "fafc00eb-a7ee-4a53-9bd0-5baffec70bb8",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 1,
+      "request_body": {
+        "operation_id": "fafc00eb-a7ee-4a53-9bd0-5baffec70bb8",
+        "intent_id": "2a0c5116-0893-474e-b39f-7a1daedc60ae"
+      },
+      "request_sha256": "cd1d9c566a3acc225f64bece749db479bd2730d015991141a35e2125f74ac8d1",
+      "http_status": 200,
+      "result": {
+        "schema_version": "research-plan-v2",
+        "plan_id": "0f7cdef1-ac93-4991-a36f-42ea2fa14329",
+        "revision": 1,
+        "intent_id": "2a0c5116-0893-474e-b39f-7a1daedc60ae",
+        "conversation_id": "6307cc86-255b-4594-b30b-303c0649f4e4",
+        "goal": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+        "mode": "deep",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [],
+        "metric_keys": [
+          "operating_cash_flow"
+        ],
+        "roles": [
+          "evidence",
+          "finance"
+        ],
+        "allowed_tools": {
+          "evidence": [
+            "search_evidence",
+            "recall_notes"
+          ],
+          "finance": [
+            "read_confirmed_facts"
+          ]
+        },
+        "limits": {
+          "model_attempts": 10,
+          "tool_calls": 12,
+          "parallel_agents": 2,
+          "execution_seconds": 240,
+          "per_call_output_tokens": 1024,
+          "reserved_input_tokens": 48000,
+          "reserved_output_tokens": 12000
+        },
+        "plan_origin": "supervisor_model_program_validated",
+        "provider_error": null,
+        "requires_explicit_confirmation": true,
+        "plan_sha256": "eee60ddacebfb8011487cd8471749a0d1b7fa6b151c30229a1cb795742f2b289",
+        "scope": {
+          "scope_hash": "d889656f7e21b48b6515554054daffea31cc2c52b30b449bfacf4194354dec02",
+          "runtime_instance_id": "5634b024-ac3a-4443-a206-887b612cf9ac",
+          "lease_generation": 10,
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 2,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      }
+    }
+  ],
+  "reads": [
+    {
+      "path": "/demo/status",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/40cd10d3-987c-4d9d-babc-d30034944446",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/session",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/companies",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/de3575ae4220fd18b64f32ca74a442e63e06b705d9e4f9cda5065e386f357ccc/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/cplus/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/research-source",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/file",
+      "params": {
+        "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105"
+      },
+      "status": 200
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "E01-15",
+      "exact_question": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+      "mode": "deep",
+      "state": "STARTING",
+      "case_upper_model_attempts": 10,
+      "budget_before": {
+        "cap_cny": "5",
+        "physical_guard_rows": 92,
+        "reserved_cny": "1.765722",
+        "unknown_rows": 4,
+        "actual_billed_cny": "not_observed"
+      },
+      "conversation": {
+        "conversation_id": "6307cc86-255b-4594-b30b-303c0649f4e4",
+        "title": "C+ E01-15 deep bounded source study",
+        "status": "active",
+        "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+        "sources": [
+          {
+            "workspace_id": "demo",
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "report_year": 2025,
+            "report_type": "annual",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "basis": "PRC_GAAP",
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+            "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+            "attempt": 1,
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10"
+          }
+        ],
+        "source_states": [
+          {
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+            "status": "current_at_read"
+          }
+        ],
+        "created_at": "2026-11-03T12:47:18.058800+00:00",
+        "updated_at": "2026-11-03T12:47:18.058800+00:00",
+        "last_turn_seq": 0,
+        "active_turn_id": null,
+        "schema_version": "conversation-v1",
+        "turns": [],
+        "next_before_seq": null
+      },
+      "intent": {
+        "schema_version": "intent-v2",
+        "intent_id": "2a0c5116-0893-474e-b39f-7a1daedc60ae",
+        "conversation_id": "6307cc86-255b-4594-b30b-303c0649f4e4",
+        "mode": "deep",
+        "goal": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [],
+        "metric_keys": [
+          "operating_cash_flow"
+        ],
+        "actions": [
+          "read_evidence"
+        ],
+        "clarifying_question": null,
+        "requires_confirmed_facts": false,
+        "source_turn_ids": [],
+        "proposal_origin": "model_proposal_program_validated",
+        "provider_error": null,
+        "scope": {
+          "scope_hash": "d889656f7e21b48b6515554054daffea31cc2c52b30b449bfacf4194354dec02",
+          "runtime_instance_id": "5634b024-ac3a-4443-a206-887b612cf9ac",
+          "lease_generation": 10,
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 2,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      },
+      "plan": {
+        "schema_version": "research-plan-v2",
+        "plan_id": "0f7cdef1-ac93-4991-a36f-42ea2fa14329",
+        "revision": 1,
+        "intent_id": "2a0c5116-0893-474e-b39f-7a1daedc60ae",
+        "conversation_id": "6307cc86-255b-4594-b30b-303c0649f4e4",
+        "goal": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+        "mode": "deep",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [],
+        "metric_keys": [
+          "operating_cash_flow"
+        ],
+        "roles": [
+          "evidence",
+          "finance"
+        ],
+        "allowed_tools": {
+          "evidence": [
+            "search_evidence",
+            "recall_notes"
+          ],
+          "finance": [
+            "read_confirmed_facts"
+          ]
+        },
+        "limits": {
+          "model_attempts": 10,
+          "tool_calls": 12,
+          "parallel_agents": 2,
+          "execution_seconds": 240,
+          "per_call_output_tokens": 1024,
+          "reserved_input_tokens": 48000,
+          "reserved_output_tokens": 12000
+        },
+        "plan_origin": "supervisor_model_program_validated",
+        "provider_error": null,
+        "requires_explicit_confirmation": true,
+        "plan_sha256": "eee60ddacebfb8011487cd8471749a0d1b7fa6b151c30229a1cb795742f2b289",
+        "scope": {
+          "scope_hash": "d889656f7e21b48b6515554054daffea31cc2c52b30b449bfacf4194354dec02",
+          "runtime_instance_id": "5634b024-ac3a-4443-a206-887b612cf9ac",
+          "lease_generation": 10,
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 2,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      }
+    }
+  ],
+  "financial_approvals": 0,
+  "full_human_answer_acceptance": false,
+  "paired_same_question_comparison": false,
+  "original_unknown_policy": "baseline unknown rows retained; never retried/refunded",
+  "readonly_recoveries": [],
+  "budget_after": {
+    "cap_cny": "5",
+    "physical_guard_rows": 94,
+    "reserved_cny": "1.799754",
+    "unknown_rows": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "new_guard_rows": {
+    "7ca5c75a-76e2-4f93-9798-e0fa3f8845fb": {
+      "reserved_cny": "0.020558",
+      "state": "returned",
+      "input_tokens": 1261,
+      "output_tokens": 101
+    },
+    "1e6a0665-5074-4c0c-86cf-19810f268c4d": {
+      "reserved_cny": "0.013474",
+      "state": "returned",
+      "input_tokens": 98,
+      "output_tokens": 31
+    }
+  },
+  "new_guard_rows_count": 2,
+  "old_unknown_state_changes": {},
+  "script_sha256": "5f9d0e991672cbc41093990719d7454e29bee73afd9e5fecf65b666c86765efe",
+  "fixed_cases_sha256": "ce1899994a71f1119464b216c19c5f6fe90fa38ece483b7d616647c505f034f8",
+  "source_contract_baseline": "e510876",
+  "runner_checkout_head": "9b4d647b31a69ee7630dc5b70dc3ebe7f60f5646",
+  "audited_contract_sha256": {
+    "app/showcase_research/api.py": "aecd7a348b17eb333012d0e54b91d80f1068320b67894d61346613e98936d9fe",
+    "app/showcase_research/models.py": "c50a664eedfa95f9b6cf34959b59690360c99027783d47bf83b723fdaf8ed8ac",
+    "app/showcase_research/jobs.py": "00af57b98751e2bc060eeeba452c80a5a75b433d5fcccd0a23b9e1ca0eb7ba09",
+    "app/showcase_research/agents.py": "536e8c6a6b9978194c73256db06ea79a0314676a1bed53d2b855016b5897aaad",
+    "app/showcase_research/provider.py": "2ebd437c7b446d023ba565549b9c9b54bdb81aa599dce3cbfc3654f84c846281",
+    "app/conversations/models.py": "fc4da1cb9b39b527699df083f3c14f6908d98ad956943e457b436e4d29ce8a0a",
+    "app/showcase_reports/api.py": "5232992b8c003da369ac432e7b70a46eae17baf10cfe65575aecc7e6a6c92e06",
+    "app/showcase_reports/research_adapter.py": "09dfcb035ec71481fc70ff429968bb0d12e05f4f28dd92187983bcf92c13cbea"
+  },
+  "origin": "http://127.0.0.1:14542",
+  "session": {
+    "schema_version": "demo-session-v1",
+    "state": "active",
+    "expires_at": "2026-11-03T13:07:17.845966+00:00",
+    "server_now": "2026-11-03T12:47:17.848791+00:00",
+    "remaining_seconds": 1199,
+    "lease_generation": 10,
+    "seed_version": "showcase-cplus-seed-v3",
+    "can_review": false,
+    "owner_elevated_until": null
+  },
+  "private_session_saved_for_owned_browser": true,
+  "source": {
+    "kind": "fast",
+    "workspace_id": "demo",
+    "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+    "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+    "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+    "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+    "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+    "report_year": 2025,
+    "attempt": 1,
+    "report_type": "annual",
+    "basis": "PRC_GAAP",
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "enrollment_id": null,
+    "artifact_id": null,
+    "artifact_sha256": null,
+    "config_hash": null,
+    "metadata_sha256": null,
+    "selected_pages": [],
+    "identity_status": "fast_source_verified"
+  },
+  "http_pdf": {
+    "sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+    "physical_pages": 219
+  },
+  "stop": {
+    "type": "StopRun",
+    "reason": "plan_not_model_validated_or_role_scope_changed"
+  }
+}

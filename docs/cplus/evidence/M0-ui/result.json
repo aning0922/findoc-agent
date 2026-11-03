@@ -1,0 +1,26 @@
+{
+  "tier": "UI_MOCK_NATIVE_REACT_REAL_CHROMIUM",
+  "business_backend_verified": false,
+  "provider_calls": 0,
+  "human_approvals": 0,
+  "results": [
+    {
+      "width": 1440,
+      "eight_view_path": true,
+      "page_errors": [],
+      "horizontal_overflow": false
+    },
+    {
+      "width": 1280,
+      "eight_view_path": true,
+      "page_errors": [],
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "eight_view_path": true,
+      "page_errors": [],
+      "horizontal_overflow": false
+    }
+  ]
+}

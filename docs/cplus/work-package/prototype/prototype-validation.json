@@ -1,0 +1,23 @@
+{
+  "evidence_tier": "UI_MOCK_BROWSER_ONLY",
+  "results": [
+    {
+      "viewport": "1440x900",
+      "page_errors": [],
+      "scroll_width": 1440,
+      "viewport_width": 1440,
+      "overall_no_horizontal_overflow": true,
+      "checks": "passed"
+    },
+    {
+      "viewport": "390x844",
+      "page_errors": [],
+      "scroll_width": 390,
+      "viewport_width": 390,
+      "overall_no_horizontal_overflow": true,
+      "checks": "passed"
+    }
+  ],
+  "contains_real_financial_data": false,
+  "external_api_calls": 0
+}

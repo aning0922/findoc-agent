@@ -1,0 +1,250 @@
+{
+  "evidence_tier": "REAL_CNINFO_HTTPS_CORRECTED_COMPANY_NORMALIZER",
+  "status": "PASS",
+  "queries": [
+    {
+      "query": "600690",
+      "items": [
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:SSE:600690",
+          "security_code": "600690",
+          "exchange": "SSE",
+          "provider_security_type": "shj",
+          "provider_category": "A股",
+          "provider_org_id": "gssh0600690",
+          "display_name": "海尔智家",
+          "official_name": null,
+          "pinyin": "hezj",
+          "delisted_raw": "false",
+          "identity_status": "provider_candidate",
+          "supported": true,
+          "match_type": "code_exact"
+        }
+      ]
+    },
+    {
+      "query": "美的",
+      "items": [
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:SZSE:000333",
+          "security_code": "000333",
+          "exchange": "SZSE",
+          "provider_security_type": "shj",
+          "provider_category": "A股",
+          "provider_org_id": "9900005965",
+          "display_name": "美的集团",
+          "official_name": null,
+          "pinyin": "mdjt",
+          "delisted_raw": "false",
+          "identity_status": "provider_candidate",
+          "supported": true,
+          "match_type": "provider_name_candidate"
+        },
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:hke:00300",
+          "security_code": "00300",
+          "exchange": null,
+          "provider_security_type": "hke",
+          "provider_category": "港股",
+          "provider_org_id": "9900005965",
+          "display_name": "美的集团",
+          "official_name": null,
+          "pinyin": "mdjt",
+          "delisted_raw": "false",
+          "identity_status": "provider_candidate",
+          "supported": false,
+          "match_type": "provider_name_candidate"
+        },
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:hke:03990",
+          "security_code": "03990",
+          "exchange": null,
+          "provider_security_type": "hke",
+          "provider_category": "港股",
+          "provider_org_id": "9900037693",
+          "display_name": "美的置业",
+          "official_name": null,
+          "pinyin": "mdzy",
+          "delisted_raw": "false",
+          "identity_status": "provider_candidate",
+          "supported": false,
+          "match_type": "provider_name_candidate"
+        },
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:bond:139039",
+          "security_code": "139039",
+          "exchange": null,
+          "provider_security_type": "bond",
+          "provider_category": "资产支持证券",
+          "provider_org_id": "GD065121",
+          "display_name": "美的01次",
+          "official_name": null,
+          "pinyin": "md01c",
+          "delisted_raw": "false",
+          "identity_status": "provider_candidate",
+          "supported": false,
+          "match_type": "provider_name_candidate"
+        },
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:bond:114432",
+          "security_code": "114432",
+          "exchange": null,
+          "provider_security_type": "bond",
+          "provider_category": "私募债",
+          "provider_org_id": "9900037181",
+          "display_name": "19美的01",
+          "official_name": null,
+          "pinyin": "19md01",
+          "delisted_raw": "false",
+          "identity_status": "provider_candidate",
+          "supported": false,
+          "match_type": "provider_name_candidate"
+        },
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:SZSE:000527",
+          "security_code": "000527",
+          "exchange": "SZSE",
+          "provider_security_type": "shj",
+          "provider_category": "A股",
+          "provider_org_id": "gssz0000527",
+          "display_name": "美的电器",
+          "official_name": null,
+          "pinyin": "mddq",
+          "delisted_raw": "true",
+          "identity_status": "provider_candidate",
+          "supported": false,
+          "match_type": "provider_name_candidate"
+        }
+      ]
+    },
+    {
+      "query": "gldq",
+      "items": [
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:SZSE:000651",
+          "security_code": "000651",
+          "exchange": "SZSE",
+          "provider_security_type": "shj",
+          "provider_category": "A股",
+          "provider_org_id": "gssz0000651",
+          "display_name": "格力电器",
+          "official_name": null,
+          "pinyin": "gldq",
+          "delisted_raw": "false",
+          "identity_status": "provider_candidate",
+          "supported": true,
+          "match_type": "pinyin_exact"
+        }
+      ]
+    },
+    {
+      "query": "海尔",
+      "items": [
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:SSE:600690",
+          "security_code": "600690",
+          "exchange": "SSE",
+          "provider_security_type": "shj",
+          "provider_category": "A股",
+          "provider_org_id": "gssh0600690",
+          "display_name": "海尔智家",
+          "official_name": null,
+          "pinyin": "hezj",
+          "delisted_raw": "false",
+          "identity_status": "provider_candidate",
+          "supported": true,
+          "match_type": "provider_name_candidate"
+        },
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:SSE:601206",
+          "security_code": "601206",
+          "exchange": "SSE",
+          "provider_security_type": "shj",
+          "provider_category": "A股",
+          "provider_org_id": "9900025271",
+          "display_name": "海尔施",
+          "official_name": null,
+          "pinyin": "hes",
+          "delisted_raw": "false",
+          "identity_status": "provider_candidate",
+          "supported": true,
+          "match_type": "provider_name_candidate"
+        },
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:SSE:688139",
+          "security_code": "688139",
+          "exchange": "SSE",
+          "provider_security_type": "shj",
+          "provider_category": "A股",
+          "provider_org_id": "9900039010",
+          "display_name": "海尔生物",
+          "official_name": null,
+          "pinyin": "hesw",
+          "delisted_raw": "false",
+          "identity_status": "provider_candidate",
+          "supported": true,
+          "match_type": "provider_name_candidate"
+        },
+        {
+          "provider": "cninfo_public_web",
+          "security_id": "cninfo:hke:06690",
+          "security_code": "06690",
+          "exchange": null,
+          "provider_security_type": "hke",
+          "provider_category": "港股",
+          "provider_org_id": "gssh0600690",
+          "display_name": "海尔智家",
+          "official_name": null,
+          "pinyin": "hezj",
+          "delisted_raw": "false",
+          "identity_status": "provider_candidate",
+          "supported": false,
+          "match_type": "provider_name_candidate"
+        }
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+      "status": 200,
+      "bytes": 149,
+      "elapsed_seconds": 0.24701595795340836
+    },
+    {
+      "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+      "status": 200,
+      "bytes": 904,
+      "elapsed_seconds": 0.18720341590233147
+    },
+    {
+      "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+      "status": 200,
+      "bytes": 149,
+      "elapsed_seconds": 0.23269649990834296
+    },
+    {
+      "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+      "status": 200,
+      "bytes": 588,
+      "elapsed_seconds": 0.18016687501221895
+    }
+  ],
+  "requests": 4,
+  "min_start_interval_seconds": 1.1010689735412598,
+  "M1_total_external_requests": 10,
+  "new_pdf_requests_this_correction": 0,
+  "new_llm_calls": 0,
+  "notes": "type=shj retained as provider_security_type, not exchange; A-share category and code namespace determine SSE/SZSE, unsupported others"
+}

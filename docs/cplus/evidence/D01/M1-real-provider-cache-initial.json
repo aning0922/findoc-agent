@@ -1,0 +1,163 @@
+{
+  "evidence_tier": "REAL_CNINFO_HTTPS_PROVIDER_AND_PINNED_UNKNOWN_SHA_PDF_CACHE_WITH_FAKE_BINDER",
+  "queries": [
+    {
+      "query": "600690",
+      "items": [
+        {
+          "security_code": "600690",
+          "exchange": "SSE",
+          "display_name": "海尔智家",
+          "pinyin": "hezj",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "query": "美的",
+      "items": [
+        {
+          "security_code": "000333",
+          "exchange": "SSE",
+          "display_name": "美的集团",
+          "pinyin": "mdjt",
+          "supported": true
+        },
+        {
+          "security_code": "00300",
+          "exchange": null,
+          "display_name": "美的集团",
+          "pinyin": "mdjt",
+          "supported": false
+        },
+        {
+          "security_code": "03990",
+          "exchange": null,
+          "display_name": "美的置业",
+          "pinyin": "mdzy",
+          "supported": false
+        },
+        {
+          "security_code": "139039",
+          "exchange": null,
+          "display_name": "美的01次",
+          "pinyin": "md01c",
+          "supported": false
+        },
+        {
+          "security_code": "114432",
+          "exchange": null,
+          "display_name": "19美的01",
+          "pinyin": "19md01",
+          "supported": false
+        },
+        {
+          "security_code": "000527",
+          "exchange": "SSE",
+          "display_name": "美的电器",
+          "pinyin": "mddq",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "query": "gldq",
+      "items": [
+        {
+          "security_code": "000651",
+          "exchange": "SSE",
+          "display_name": "格力电器",
+          "pinyin": "gldq",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "query": "海尔",
+      "items": [
+        {
+          "security_code": "600690",
+          "exchange": "SSE",
+          "display_name": "海尔智家",
+          "pinyin": "hezj",
+          "supported": true
+        },
+        {
+          "security_code": "601206",
+          "exchange": "SSE",
+          "display_name": "海尔施",
+          "pinyin": "hes",
+          "supported": true
+        },
+        {
+          "security_code": "688139",
+          "exchange": "SSE",
+          "display_name": "海尔生物",
+          "pinyin": "hesw",
+          "supported": true
+        },
+        {
+          "security_code": "06690",
+          "exchange": null,
+          "display_name": "海尔智家",
+          "pinyin": "hezj",
+          "supported": false
+        }
+      ]
+    }
+  ],
+  "announcements": 3,
+  "cold_sha": "14186f9f9b47f687c527ba14825664f3b09e51759d581636cddcc248f26e3660",
+  "cold_cache_hit": false,
+  "warm_cache_hit": true,
+  "provider_requests": 5,
+  "pdf_requests": 1,
+  "total_requests": 6,
+  "min_start_interval_seconds": 1.1009137630462646,
+  "observations": [
+    {
+      "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+      "status": 200,
+      "bytes": 149,
+      "elapsed_seconds": 0.19809108297340572
+    },
+    {
+      "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+      "status": 200,
+      "bytes": 904,
+      "elapsed_seconds": 0.15782529185526073
+    },
+    {
+      "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+      "status": 200,
+      "bytes": 149,
+      "elapsed_seconds": 0.20823549991473556
+    },
+    {
+      "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+      "status": 200,
+      "bytes": 588,
+      "elapsed_seconds": 0.16615137504413724
+    },
+    {
+      "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+      "status": 200,
+      "bytes": 2182,
+      "elapsed_seconds": 0.13308070809580386
+    },
+    {
+      "url": "https://static.cninfo.com.cn/finalpage/2026-03-27/1225038336.PDF",
+      "status": 200,
+      "bytes": 1823191,
+      "sha256": "14186f9f9b47f687c527ba14825664f3b09e51759d581636cddcc248f26e3660",
+      "elapsed_seconds": 0.26980595802888274
+    }
+  ],
+  "binder": "SIMULATED_PHASES_NO_COMPANY_OR_DOCUMENT_WRITES",
+  "ready_verified": false,
+  "new_llm_calls": 0,
+  "cache_root": "/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-cplus-data-real-emmwk6ai",
+  "get_and_replay_new_requests": 0,
+  "status": "PARTIAL_INITIAL_EXCHANGE_MAPPING_FAILED_FOR_SZSE",
+  "failure": "Initial type=shj to SSE mapping incorrectly labeled 000333/000651; retained evidence, normalizer corrected subsequently. Haier PDF/cache checks passed with simulated binder."
+}

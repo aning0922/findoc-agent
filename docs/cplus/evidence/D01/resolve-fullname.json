@@ -1,0 +1,30 @@
+{
+  "snippet": "[{\"code\":\"600690\",\"pinyin\":\"hezj\",\"sjstsBond\":\"false\",\"category\":\"A股\",\"type\":\"shj\",\"delisted\":\"false\",\"orgId\":\"gssh0600690\",\"zwjc\":\"海尔智家\"},{\"code\":\"06690\",\"pinyin\":\"hezj\",\"sjstsBond\":\"false\",\"category\":\"港股\",\"type\":\"hke\",\"delisted\":\"false\",\"orgId\":\"gssh0600690\",\"zwjc\":\"海尔智家\"}]",
+  "scripts": [],
+  "endpoint_context": [
+    "[{\"code\":\"600690\",\"pinyin\":\"hezj\",\"sjstsBond\":\"false\",\"category\":\"A股\",\"type\":\"shj\",\"delisted\":\"false\",\"orgId\":\"gssh0600690\",\"zwjc\":\"海尔智家\"},{\"code\":\"06690\",\"pinyin\":\"hezj\",\"sjs",
+    "tsBond\":\"false\",\"category\":\"港股\",\"type\":\"hke\",\"delisted\":\"false\",\"orgId\":\"gssh0600690\",\"zwjc\":\"海尔智家\"}]"
+  ],
+  "json": [
+    {
+      "code": "600690",
+      "pinyin": "hezj",
+      "sjstsBond": "false",
+      "category": "A股",
+      "type": "shj",
+      "delisted": "false",
+      "orgId": "gssh0600690",
+      "zwjc": "海尔智家"
+    },
+    {
+      "code": "06690",
+      "pinyin": "hezj",
+      "sjstsBond": "false",
+      "category": "港股",
+      "type": "hke",
+      "delisted": "false",
+      "orgId": "gssh0600690",
+      "zwjc": "海尔智家"
+    }
+  ]
+}

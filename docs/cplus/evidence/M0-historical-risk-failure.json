@@ -1,0 +1,25 @@
+{
+  "tier": "RETAINED_REAL_LLM_C_MAIN_UI_RESULT",
+  "origin": "docs/showcase/evidence/M5/browser-result.json at45d55d7",
+  "rerun": false,
+  "examples": [
+    {
+      "job_id": "63c772cc-db2d-4a33-b7ed-b2951d3a32a2",
+      "original_question": "请根据格力2025年报总结主要经营风险，只要原文与解释，不要计算。",
+      "finding_kind": "sourced_excerpt",
+      "evidence_ref": {
+        "chunk_id": "56951f74e5de9999ae0dcf360897dae9ffa1ab9ea07ea23726cfe13ee55ca5a6",
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+        "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+        "evidence_id": "e7caffc1b98d4acb216fb1eb16819aac37b502fa7c5bc0ec843cf2d4e247da81",
+        "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+        "physical_page": 70,
+        "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用"
+      },
+      "diagnosis": "Historically published excerpt includes entrusted financial-management table in a broad operating-risk task; human semantic relevance not yet labelled."
+    }
+  ],
+  "purpose": "Retain actual wrong-class evidence; do not claim fresh dense6 queries reproduced this exact phrase."
+}

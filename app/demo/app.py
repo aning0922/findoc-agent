@@ -1,6 +1,7 @@
 """Public demo HTTP boundary. Legacy app is never mounted in this process."""
 from contextlib import asynccontextmanager
 from collections import defaultdict, deque
+import os
 import time
 from typing import Literal
 from uuid import UUID
@@ -50,8 +51,12 @@ class OwnerAuthorize(Operation):
     confirm: Literal[True]
 
 
-def create_demo_app(config: DemoConfig, manager) -> FastAPI:
+def create_demo_app(config: DemoConfig, manager, *, cookie_name=COOKIE) -> FastAPI:
+    if cookie_name not in (COOKIE, "findoc_demo_cplus"):
+        raise ValueError("unsupported_demo_cookie_namespace")
     controller = DemoController(config, manager)
+    controller.cookie_name = cookie_name
+    active_cookie, pending_cookie = cookie_name, cookie_name + "_pending"
 
     @asynccontextmanager
     async def lifespan(app):
@@ -59,7 +64,11 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
         try:
             yield
         finally:
-            await controller.close()
+            try:
+                await controller.close()
+            finally:
+                if cache := getattr(app.state, "cplus_public_cache", None):
+                    cache.close()
 
     app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
     app.state.demo_controller = controller
@@ -116,15 +125,15 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
     def response(body, status=200, *, active=None, pending=None):
         result = JSONResponse(body, status)
         if active:
-            result.set_cookie(COOKIE, active, httponly=True, secure=config.secure_cookie,
+            result.set_cookie(active_cookie, active, httponly=True, secure=config.secure_cookie,
                               samesite="strict", max_age=config.ttl_minutes * 60, path="/")
         if pending:
-            result.set_cookie(PENDING_COOKIE, pending, httponly=True, secure=config.secure_cookie,
+            result.set_cookie(pending_cookie, pending, httponly=True, secure=config.secure_cookie,
                               samesite="strict", max_age=config.pending_seconds, path="/")
         return result
 
     def cookies(request):
-        return request.cookies.get(COOKIE), request.cookies.get(PENDING_COOKIE)
+        return request.cookies.get(active_cookie), request.cookies.get(pending_cookie)
 
     @app.get("/demo/status")
     async def status():
@@ -142,11 +151,11 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
 
     @app.post("/demo/owner-authorize")
     async def owner_authorize(payload: OwnerAuthorize, request: Request):
-        return controller.owner_authorize(payload.model_dump(), request.cookies.get(COOKIE))
+        return controller.owner_authorize(payload.model_dump(), request.cookies.get(active_cookie))
 
     @app.get("/demo/session")
     async def session(request: Request):
-        return controller.session(request.cookies.get(COOKIE))
+        return controller.session(request.cookies.get(active_cookie))
 
     @app.post("/demo/claim")
     async def claim(payload: Claim, request: Request):
@@ -155,9 +164,9 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
 
     @app.post("/demo/logout")
     async def logout(payload: Operation, request: Request):
-        result = response(controller.logout(payload.operation_id, request.cookies.get(COOKIE)))
-        result.delete_cookie(COOKIE, path="/", secure=config.secure_cookie, httponly=True, samesite="strict")
-        result.delete_cookie(PENDING_COOKIE, path="/", secure=config.secure_cookie, httponly=True, samesite="strict")
+        result = response(controller.logout(payload.operation_id, request.cookies.get(active_cookie)))
+        result.delete_cookie(active_cookie, path="/", secure=config.secure_cookie, httponly=True, samesite="strict")
+        result.delete_cookie(pending_cookie, path="/", secure=config.secure_cookie, httponly=True, samesite="strict")
         return result
 
     @app.get("/demo/operations/{operation_id}")
@@ -167,6 +176,10 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
     @app.get("/demo/resets/{reset_id}")
     async def reset(reset_id: UUID, request: Request):
         return controller.reset_status(str(reset_id), *cookies(request))
+
+    if os.environ.get("FINDOC_CPLUS_ENABLED") == "1":
+        from app.cplus.controller import register_cplus_controller
+        register_cplus_controller(app, controller)
 
     @app.api_route("/{path:path}", methods=["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
     async def business(request: Request, path: str):

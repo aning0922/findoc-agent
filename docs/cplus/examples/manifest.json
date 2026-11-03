@@ -1,0 +1,34 @@
+{
+  "report_ref": {
+    "domain": "template_run_v1",
+    "id": "3f941792-2b7e-41f3-aaec-f6e4ccf775d5",
+    "revision": 1,
+    "payload_sha256": "ca23bab900b8e6a5d1e3bb25fc6c7700bda2f51149eb17cbb0b41bdb973e7f0d"
+  },
+  "source": "Actual native corrected nonnumeric cash template and exact-version server exports",
+  "financial_authority": false,
+  "interpretation_policy": "non_numeric_review_v1",
+  "human_semantic_acceptance": "pending",
+  "files": [
+    {
+      "file": "cash-template-nonnumeric.csv",
+      "bytes": 20485,
+      "sha256": "0da8c0b7096989db51916f9d51b871a076305a0799f84399365abac2268b5e22"
+    },
+    {
+      "file": "cash-template-nonnumeric.xlsx",
+      "bytes": 26921,
+      "sha256": "0b4c3e6f8ca98bd3c9a6a4d95dcff8c523504ab3a296564d3b1b47d38057f475"
+    },
+    {
+      "file": "cash-template-nonnumeric.pptx",
+      "bytes": 83642,
+      "sha256": "14c555a70e62355ba03aabbd60a0f5d4444961393c9994a6d17102dc03afdb81"
+    },
+    {
+      "file": "cash-template-nonnumeric.pdf",
+      "bytes": 568718,
+      "sha256": "09a6029fe865d154af4f670edb323a6b7628686171ac1b084f3c23054301a1d9"
+    }
+  ]
+}

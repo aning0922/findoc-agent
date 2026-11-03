@@ -1,0 +1,5 @@
+{
+  "snippet": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=gb2312\" />\n<title>error-�޳���Ѷ��</title>\n<link href=\"css/index.css\" rel=\"stylesheet\" type=\"text/css\" />\n</head>\n\n<body>\n<table  align=\"center\" width=\"960\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n  <tr>\n    <td width=\"866\"><div align=\"left\"><img src=\"/error.jpg\" width=\"960\" height=\"590\" /></div></td>\n  </tr>\n</table>\n</body>\n</html>\n",
+  "scripts": [],
+  "endpoint_context": []
+}

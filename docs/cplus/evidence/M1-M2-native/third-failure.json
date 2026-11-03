@@ -1,0 +1,40 @@
+{
+  "tier": "REAL_CHROMIUM_HTTP_PDF_BGE_MILVUS_VISION",
+  "provider_calls": 0,
+  "human_financial_approvals": 0,
+  "steps": [
+    {
+      "name": "browser A real login and workspace warm",
+      "status": "PASS"
+    },
+    {
+      "name": "home no horizontal overflow 1440",
+      "status": "PASS"
+    },
+    {
+      "name": "home no horizontal overflow 1280",
+      "status": "PASS"
+    },
+    {
+      "name": "home no horizontal overflow 390",
+      "status": "PASS"
+    },
+    {
+      "name": "real seeded Gree company exists",
+      "status": "PASS"
+    },
+    {
+      "name": "two real annual reports extracted by UI",
+      "status": "PASS"
+    }
+  ],
+  "screenshots": [
+    "home-1440.png",
+    "home-1280.png",
+    "home-390.png"
+  ],
+  "generation_before": 12,
+  "result": "FAIL",
+  "error": "TimeoutError: locator.waitFor: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('所选真实数据趋势', { exact: true }) to be visible\u001b[22m\n",
+  "visible_page_text": "演示会话 · 剩余约 18:18 · 财务核对需所有者授权\n退出演示\n所有者授权\n跳到主要内容\nFinDoc.\nANALYST\nDEMO\nF\n财报研究空间\n资料、研究与报告\n工作空间\n首页\nAI 研究助手\n企业与资料\n研究任务\n我的报告\n让每个结论都有据可查\n\n回到原文，核对数据，\n再形成你的研究结论。\n\n研\n本地研究者\n单人研究空间\n工作空间\n企业与资料\n财报研究工作台\n\n企业研究 / 财务资料\n\n珠海格力电器股份有限公司\n\n按明确选择的报告与期间查看，候选数值需人工核对。\n\n企业概览\n三大报表\n财报体检\n关键指标与趋势\n营业收入\n\n缺少已选择且可用的数据\n\n归母净利润\n\n缺少已选择且可用的数据\n\n经营现金流\n\n缺少已选择且可用的数据\n\n总资产\n\n缺少已选择且可用的数据\n\n总负债\n\n缺少已选择且可用的数据\n\n准备研究问题\n资料覆盖 · 2 份资料\n\n部分资料未通过来源核验，已排除。 刷新进阶研究资料\n\n跨年经营变化 · 双侧原文\n同行对标 · 明确选择可比数据\n主营业务结构 · 产品与地区\n研究模板与指标释义\nFinDoc · AI 研究工作台\n年报原文 · 数值核对 · AI 解读"
+}

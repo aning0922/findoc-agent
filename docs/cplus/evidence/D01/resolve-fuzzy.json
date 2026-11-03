@@ -1,0 +1,51 @@
+{
+  "snippet": "[{\"code\":\"600690\",\"pinyin\":\"hezj\",\"sjstsBond\":\"false\",\"category\":\"A股\",\"type\":\"shj\",\"delisted\":\"false\",\"orgId\":\"gssh0600690\",\"zwjc\":\"海尔智家\"},{\"code\":\"601206\",\"pinyin\":\"hes\",\"sjstsBond\":\"false\",\"category\":\"A股\",\"type\":\"shj\",\"delisted\":\"false\",\"orgId\":\"9900025271\",\"zwjc\":\"海尔施\"},{\"code\":\"688139\",\"pinyin\":\"hesw\",\"sjstsBond\":\"false\",\"category\":\"A股\",\"type\":\"shj\",\"delisted\":\"false\",\"orgId\":\"9900039010\",\"zwjc\":\"海尔生物\"},{\"code\":\"06690\",\"pinyin\":\"hezj\",\"sjstsBond\":\"false\",\"category\":\"港股\",\"type\":\"hke\",\"delisted\":\"false\",\"orgId\":\"gssh0600690\",\"zwjc\":\"海尔智家\"}]",
+  "scripts": [],
+  "endpoint_context": [
+    "[{\"code\":\"600690\",\"pinyin\":\"hezj\",\"sjstsBond\":\"false\",\"category\":\"A股\",\"type\":\"shj\",\"delisted\":\"false\",\"orgId\":\"gssh0600690\",\"zwjc\":\"海尔智家\"},{\"code\":\"601206\",\"pinyin\":\"hes\",\"sjs",
+    "tsBond\":\"false\",\"category\":\"A股\",\"type\":\"shj\",\"delisted\":\"false\",\"orgId\":\"9900025271\",\"zwjc\":\"海尔施\"},{\"code\":\"688139\",\"pinyin\":\"hesw\",\"sjstsBond\":\"false\",\"category\":\"A股\",\"type\":\"shj\",\"delisted\":\"false\",\"orgId\":\"9900039010\"",
+    ",\"zwjc\":\"海尔生物\"},{\"code\":\"06690\",\"pinyin\":\"hezj\",\"sjstsBond\":\"false\",\"category\":\"港股\",\"type\":\"hke\",\"delisted\":\"false\",\"orgId\":\"gssh0600690\",\"zwjc\":\"海尔智家\"}]"
+  ],
+  "json": [
+    {
+      "code": "600690",
+      "pinyin": "hezj",
+      "sjstsBond": "false",
+      "category": "A股",
+      "type": "shj",
+      "delisted": "false",
+      "orgId": "gssh0600690",
+      "zwjc": "海尔智家"
+    },
+    {
+      "code": "601206",
+      "pinyin": "hes",
+      "sjstsBond": "false",
+      "category": "A股",
+      "type": "shj",
+      "delisted": "false",
+      "orgId": "9900025271",
+      "zwjc": "海尔施"
+    },
+    {
+      "code": "688139",
+      "pinyin": "hesw",
+      "sjstsBond": "false",
+      "category": "A股",
+      "type": "shj",
+      "delisted": "false",
+      "orgId": "9900039010",
+      "zwjc": "海尔生物"
+    },
+    {
+      "code": "06690",
+      "pinyin": "hezj",
+      "sjstsBond": "false",
+      "category": "港股",
+      "type": "hke",
+      "delisted": "false",
+      "orgId": "gssh0600690",
+      "zwjc": "海尔智家"
+    }
+  ]
+}

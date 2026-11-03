@@ -1,0 +1,38 @@
+{
+  "tier": "UI_MOCK_ACTUAL_REACT",
+  "cases": [
+    {
+      "kind": "overview",
+      "posts": 1,
+      "recovery": false,
+      "source_count": 1
+    },
+    {
+      "kind": "cash",
+      "posts": 1,
+      "recovery": true,
+      "source_count": 2
+    },
+    {
+      "kind": "peer",
+      "posts": 1,
+      "recovery": false,
+      "source_count": 2
+    },
+    {
+      "kind": "changes",
+      "posts": 1,
+      "recovery": false,
+      "source_count": 2
+    }
+  ],
+  "copy": {
+    "posts": 1,
+    "readonly_recovery": true,
+    "server_identifiers_only": true,
+    "report_domain": "chart_report_v1"
+  },
+  "storage_blocked_first_writes": 2,
+  "provider_calls": 0,
+  "financial_confirmations": 0
+}

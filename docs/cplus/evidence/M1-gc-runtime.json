@@ -1,0 +1,30 @@
+{
+  "tier": "REAL_OS_PRIVATE_HTTP_FAKE_CHILD_SYNTHETIC_SEED",
+  "owned_root": "/private/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-cplus-gc-proof-gjl7vm2m",
+  "generations_started": [
+    1,
+    2,
+    3
+  ],
+  "retired_process_groups_exited": true,
+  "deleted_generations": [
+    1
+  ],
+  "kept_retired_generation": 2,
+  "current_generation": 3,
+  "dry_run": {
+    "dry_run": true,
+    "kept_retired_count": 0,
+    "eligible": [
+      2
+    ],
+    "deleted": [],
+    "skipped": []
+  },
+  "seed_unchanged": true,
+  "public_cache_sentinel_unchanged": true,
+  "provider_calls": 0,
+  "real_pdfs": 0,
+  "human_financial_approvals": 0,
+  "limits": "Not browser login/takeover or real BGE/cache-import proof; exercised child readiness HTTP and real OS retirement only."
+}

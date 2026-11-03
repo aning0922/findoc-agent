@@ -1,0 +1,163 @@
+{
+  "tier": "REAL_PDF_BGE_MILVUS_AND_EXISTING_VISION_ARTIFACT",
+  "llm_calls": 0,
+  "financial_approvals": 0,
+  "seed_manifest_sha256": "efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4",
+  "results": [
+    {
+      "case_id": "risk-general",
+      "query": "2025年报主要经营风险有哪些",
+      "pages": [
+        98,
+        70
+      ],
+      "scores": [
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.01639344262295082,
+          "rerank_score": 0.02439344262295082
+        },
+        {
+          "dense_cosine": 0.5471553802490234,
+          "fusion_score": 0.014925373134328358,
+          "rerank_score": -0.02507462686567164
+        }
+      ]
+    },
+    {
+      "case_id": "risk-material",
+      "query": "年报中如何描述原材料价格波动风险",
+      "pages": [
+        39,
+        199,
+        10,
+        108,
+        57
+      ],
+      "scores": [
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015625,
+          "rerank_score": 0.048625
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.01639344262295082,
+          "rerank_score": 0.02439344262295082
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015384615384615385,
+          "rerank_score": 0.023384615384615386
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014705882352941176,
+          "rerank_score": 0.022705882352941176
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014492753623188406,
+          "rerank_score": 0.022492753623188408
+        }
+      ]
+    },
+    {
+      "case_id": "risk-competition",
+      "query": "公司面临的市场竞争风险",
+      "pages": [
+        27,
+        27,
+        39,
+        37,
+        38
+      ],
+      "scores": [
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.01639344262295082,
+          "rerank_score": 0.049393442622950826
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.016129032258064516,
+          "rerank_score": 0.04912903225806452
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015625,
+          "rerank_score": 0.048625
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015384615384615385,
+          "rerank_score": 0.04838461538461539
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014925373134328358,
+          "rerank_score": 0.04792537313432836
+        }
+      ]
+    },
+    {
+      "case_id": "risk-overseas",
+      "query": "海外市场与汇率波动风险",
+      "pages": [],
+      "scores": []
+    },
+    {
+      "case_id": "business",
+      "query": "公司主要业务和主要产品",
+      "pages": [],
+      "scores": []
+    },
+    {
+      "case_id": "cashflow",
+      "query": "摘录经营活动产生的现金流量净额原文",
+      "pages": [
+        126,
+        158,
+        149,
+        149,
+        158
+      ],
+      "scores": [
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.016129032258064516,
+          "rerank_score": 0.024129032258064516
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015384615384615385,
+          "rerank_score": 0.023384615384615386
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014925373134328358,
+          "rerank_score": 0.02292537313432836
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014705882352941176,
+          "rerank_score": 0.022705882352941176
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014285714285714285,
+          "rerank_score": 0.022285714285714284
+        }
+      ]
+    }
+  ],
+  "ocr_indexed": 68,
+  "ocr_hits": 1,
+  "ocr_legacy_ready": false,
+  "model_revision": "unknown",
+  "limitations": [
+    "No model answer execution",
+    "Ranking/page diagnostics are not human semantic precision",
+    "Historical entrusted-finance failure is a separate run"
+  ]
+}

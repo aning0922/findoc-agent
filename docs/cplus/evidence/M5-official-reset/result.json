@@ -1,0 +1,103 @@
+{
+  "tier": "REAL_CHROME_SOCKET_HTTP_PUBLIC_PDF_BGE_MILVUS_V3_RESET_AND_OS_RETIREMENT",
+  "first_import": {
+    "cache_hit": false,
+    "error_code": null,
+    "items": [],
+    "operation_id": "05f06200-5d6c-4e17-bb52-c526676580b3",
+    "phase": "uploaded",
+    "schema_version": "cplus-import-v1",
+    "sha256": "14186f9f9b47f687c527ba14825664f3b09e51759d581636cddcc248f26e3660",
+    "state": "completed",
+    "ticket_id": "6ac104d5-b67f-47f8-861f-5eac08927d91",
+    "document_id": "de3575ae4220fd18b64f32ca74a442e63e06b705d9e4f9cda5065e386f357ccc",
+    "company_id": "e345c2ec-3193-4c9d-8f9d-915a14c0ca3f",
+    "document_state": "ready"
+  },
+  "next_generation_cross_query_import": {
+    "cache_hit": true,
+    "error_code": null,
+    "items": [],
+    "operation_id": "d28eec6b-04c9-4473-b3ac-95bac2f5a226",
+    "phase": "uploaded",
+    "schema_version": "cplus-import-v1",
+    "sha256": "14186f9f9b47f687c527ba14825664f3b09e51759d581636cddcc248f26e3660",
+    "state": "completed",
+    "ticket_id": "7f221645-ee02-4769-9193-60c00b4252c4",
+    "document_id": "de3575ae4220fd18b64f32ca74a442e63e06b705d9e4f9cda5065e386f357ccc",
+    "company_id": "e345c2ec-3193-4c9d-8f9d-915a14c0ca3f",
+    "document_state": "ready"
+  },
+  "home_and_READY_routes": [
+    {
+      "name": "A-company-discovery",
+      "checks": [
+        "new seed has five actual READY PDFs",
+        "manifest-bound five candidate series verified against sources",
+        "home displays actual two-year candidate curve before screenshots",
+        "V3 real homepage no overflow 1440",
+        "V3 real homepage no overflow 1280",
+        "V3 real homepage no overflow 390",
+        "explicit official candidate creates current-generation binding",
+        "READY official document enters real company360"
+      ],
+      "started_at": "2026-11-03T11:23:30.734Z",
+      "result": "PASS",
+      "ended_at": "2026-11-03T11:23:35.641Z"
+    },
+    {
+      "name": "A-company-discovery",
+      "checks": [
+        "new seed has five actual READY PDFs",
+        "manifest-bound five candidate series verified against sources",
+        "home displays actual two-year candidate curve before screenshots",
+        "V3 real homepage no overflow 1440",
+        "V3 real homepage no overflow 1280",
+        "V3 real homepage no overflow 390",
+        "explicit official candidate creates current-generation binding",
+        "new generation reuses public PDF cache across a different company query",
+        "READY official document enters real company360"
+      ],
+      "started_at": "2026-11-03T11:24:04.897Z",
+      "result": "PASS",
+      "ended_at": "2026-11-03T11:24:08.689Z"
+    }
+  ],
+  "seed_manifest_sha256": "d96b9340838c1d22619308d5d4492996f99ae03c52bf8a8a17eb6594ca139c3d",
+  "old_C_v1_manifest_sha256": "efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4",
+  "current_active_directory_names": [
+    "39",
+    "40",
+    "41"
+  ],
+  "observed_previous_generations": [
+    37,
+    38
+  ],
+  "previous_generations_absent": true,
+  "retired_processes": [
+    {
+      "generation": 40,
+      "process_birth_absent": true,
+      "process_group_exited": true,
+      "proof": "verified_process_group_exited"
+    },
+    {
+      "generation": 39,
+      "process_birth_absent": true,
+      "process_group_exited": true,
+      "proof": "verified_process_group_exited"
+    }
+  ],
+  "public_pdf_sha256": "14186f9f9b47f687c527ba14825664f3b09e51759d581636cddcc248f26e3660",
+  "ledger": {
+    "physical_calls": 77,
+    "reserved_cny": "1.441018",
+    "unknown_calls": 4,
+    "cap_cny": "5",
+    "actual_bill": "not_observed"
+  },
+  "provider_calls_this_run": 0,
+  "human_financial_approvals": 0,
+  "limits": "Owner-takeover oldHTTP401 is separate M1-M2-native proof; this run exercises logout reset, actual readonly seed restoration, cross-query public cache and automatic retirement GC."
+}

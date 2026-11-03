@@ -1,0 +1,45 @@
+{
+  "tier": "UI_MOCK_ACTUAL_REACT_ISOLATED_BROWSER",
+  "source_sha256": "b66a2fbea0f2174c0796e08c574eceb6e53ed38685a8ed3e4edce1ba19c82fb9",
+  "cases": [
+    {
+      "name": "saved_ai",
+      "result": "PASS",
+      "actual_checked": true,
+      "approval_disabled": false,
+      "expected_approval_enabled": true,
+      "confirmation_text": "确认计划\n\n共 4 项，使用 1 份来源。串行执行；最多 4 次 AI 解释，共享配置预算；不请求财务核准。\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\n批准并开始",
+      "approval_sent": true
+    },
+    {
+      "name": "missing_ai_limits",
+      "result": "PASS",
+      "actual_checked": false,
+      "approval_disabled": true,
+      "expected_approval_enabled": false,
+      "confirmation_text": "确认计划\n\n共 4 项，使用 1 份来源。串行执行；计划调用元数据无法核验，请查询原计划；禁止批准；不请求财务核准。\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\n批准并开始",
+      "approval_sent": false
+    },
+    {
+      "name": "conflicting_mode",
+      "result": "PASS",
+      "actual_checked": false,
+      "approval_disabled": true,
+      "expected_approval_enabled": false,
+      "confirmation_text": "确认计划\n\n共 4 项，使用 1 份来源。串行执行；计划调用元数据无法核验，请查询原计划；禁止批准；不请求财务核准。\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\n批准并开始",
+      "approval_sent": false
+    },
+    {
+      "name": "legacy_pure",
+      "result": "FAIL",
+      "actual_checked": false,
+      "approval_disabled": true,
+      "expected_approval_enabled": true,
+      "confirmation_text": "确认计划\n\n共 4 项，使用 1 份来源。串行执行；计划调用元数据无法核验，请查询原计划；禁止批准；不请求财务核准。\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\n批准并开始",
+      "approval_sent": false
+    }
+  ],
+  "real_provider_calls": 0,
+  "real_backend_requests": 0,
+  "original_reproduction_preserved": true
+}

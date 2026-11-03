@@ -1,0 +1,105 @@
+{
+  "notice": "illustrative domain schema for M0, not Pydantic or OpenAPI committed source",
+  "enums": {
+    "period_kind": [
+      "instant",
+      "duration"
+    ],
+    "authority": [
+      "verified_original",
+      "ocr_unreviewed",
+      "candidate",
+      "human_confirmed",
+      "ai_draft",
+      "illustrative",
+      "preset_demo"
+    ],
+    "source_status": [
+      "current",
+      "stale",
+      "unavailable",
+      "unknown"
+    ]
+  },
+  "StatementCell": {
+    "company_id": "string",
+    "document_id": "string",
+    "source_revision": "sha256",
+    "pdf_sha256": "sha256",
+    "statement_kind": "balance_sheet|income_statement|cash_flow_statement",
+    "metric_key": "stable_key",
+    "raw_label": "source text",
+    "period_kind": "instant|duration",
+    "as_of_date": "ISO date or null",
+    "period_start": "ISO date or null",
+    "period_end": "ISO date or null",
+    "report_year": "int",
+    "currency": "CNY",
+    "unit": "source unit",
+    "value_decimal": "decimal string or null",
+    "scope": "consolidated|parent",
+    "basis": "PRC_GAAP or actual",
+    "physical_page": "int",
+    "evidence_ref": "exact ref",
+    "parser_version": "string",
+    "authority": "candidate|human_confirmed",
+    "receipt_ref": "id or null"
+  },
+  "CompanyMatch": {
+    "security_code": "str",
+    "market": "SZSE|SSE|BSE|...",
+    "official_name": "str",
+    "display_name": "str",
+    "aliases": "list",
+    "matched_by": "code|name|alias|pinyin",
+    "provider": "str",
+    "identity_verified": "bool"
+  },
+  "Announcement": {
+    "announcement_id": "str",
+    "company_code": "str",
+    "title": "str",
+    "report_year": "int",
+    "kind": "annual_full|annual_summary|amendment|other",
+    "published_at": "nullable timestamp",
+    "official_page_url": "str",
+    "pdf_url": "nullable HTTPS",
+    "verification_state": "verified|needs_review|unavailable"
+  },
+  "CheckupFinding": {
+    "rule_id": "str",
+    "rule_version": "str",
+    "status": "observed|insufficient|unreviewed",
+    "finding_text": "str",
+    "metric_refs": "list",
+    "evidence_refs": "list",
+    "formula_id": "nullable str",
+    "interpretation_status": "ai_unreviewed|not_generated",
+    "reason_codes": "list"
+  },
+  "AnnualDiff": {
+    "topic": "str",
+    "left_source": "SourceRef",
+    "right_source": "SourceRef",
+    "left_evidence": "list",
+    "right_evidence": "list",
+    "change_kind": "new_disclosure|changed_wording|continued|insufficient_evidence",
+    "ai_review_state": "ai_unreviewed"
+  },
+  "BatchCell": {
+    "company_id": "str",
+    "period": "year/int",
+    "question_key": "str",
+    "job_id": "nullable",
+    "status": "queued|running|completed|partial|refused|failed|interrupted",
+    "findings": "list",
+    "cost_observed": "nullable",
+    "model_attempts": "int"
+  },
+  "DataOrigin": {
+    "data_origin": "confirmed_financial|candidate_unreviewed|preset_demo|illustrative|ai_draft",
+    "transcription_review": "human_reviewed|ocr_unreviewed|exact_original",
+    "source_status": "current|stale|unavailable"
+  },
+  "user_consent": "finance receipt is explicit user action; model proposal never an approval"
+}

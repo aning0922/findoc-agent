@@ -1,0 +1,42 @@
+import os
+if os.environ.get("DEMO_INTERNAL_GENERATION") and os.environ.get("BATCH_TIMING_LOG"):
+    import functools, json, threading, time, sys
+    lock = threading.Lock()
+    def event(name, elapsed, fields=None):
+        row = {"name":name,"seconds":elapsed,"pid":os.getpid(),**(fields or {})}
+        with lock, open(os.environ["BATCH_TIMING_LOG"],"a") as out:
+            out.write(json.dumps(row,ensure_ascii=False)+"\n")
+    event("child_python",0,{"executable":sys.executable,"prefix":sys.prefix,"base_prefix":sys.base_prefix})
+    def sync(obj,name,label=None):
+        original=getattr(obj,name)
+        @functools.wraps(original)
+        def wrapped(*args,**kwargs):
+            begin=time.perf_counter()
+            try:return original(*args,**kwargs)
+            finally:event(label or name,time.perf_counter()-begin)
+        setattr(obj,name,wrapped)
+    def asynchronous(obj,name,label=None):
+        original=getattr(obj,name)
+        @functools.wraps(original)
+        async def wrapped(*args,**kwargs):
+            begin=time.perf_counter()
+            try:return await original(*args,**kwargs)
+            finally:event(label or name,time.perf_counter()-begin,{"cell_key":args[1]["cell_key"]} if label=="batch.cell" else None)
+        setattr(obj,name,wrapped)
+    from FlagEmbedding import BGEM3FlagModel
+    sync(BGEM3FlagModel,"__init__","BGE.model_init")
+    import app.rag.embed as embedding
+    sync(embedding,"embed","BGE.embed")
+    import app.documents.source_service as sources
+    sync(sources,"inspect_pdf","source.inspect_pdf")
+    asynchronous(sources.DocumentSourceService,"_checked","source.checked")
+    from app.retrieval_v2.service import HybridRetrievalService
+    for name in ("records","verify","search"):
+        asynchronous(HybridRetrievalService,name,"hybrid."+name)
+    from app.rag.selected_scope import SelectedScopeSearch
+    asynchronous(SelectedScopeSearch,"search","dense.search")
+    from app.batch_research.tools import ExistingToolAdapter
+    asynchronous(ExistingToolAdapter,"execute_cell","batch.cell")
+    from app.annual_diff.service import AnnualDiffService
+    for name in ("side","create"):
+        asynchronous(AnnualDiffService,name,"annual."+name)

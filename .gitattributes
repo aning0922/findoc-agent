@@ -6,3 +6,7 @@ demo/site/** -text -whitespace
 
 # Preserve the supplied showcase work package and its checksums byte for byte.
 docs/showcase/work-package/** -text
+
+docs/cplus/work-package/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/cplus/evidence/M4-native-exports/*.csv -text
+docs/cplus/examples/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

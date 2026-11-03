@@ -1,0 +1,87 @@
+{
+  "tier": "REAL_CHROMIUM_HTTP_PDF_BGE_MILVUS_VISION",
+  "provider_calls": 0,
+  "human_financial_approvals": 0,
+  "steps": [
+    {
+      "name": "browser A real login and workspace warm",
+      "status": "PASS"
+    },
+    {
+      "name": "home no horizontal overflow 1440",
+      "status": "PASS"
+    },
+    {
+      "name": "home no horizontal overflow 1280",
+      "status": "PASS"
+    },
+    {
+      "name": "home no horizontal overflow 390",
+      "status": "PASS"
+    },
+    {
+      "name": "real seeded Gree company exists",
+      "status": "PASS"
+    },
+    {
+      "name": "two real annual reports extracted by UI",
+      "status": "PASS"
+    },
+    {
+      "name": "company360 no horizontal overflow 1440",
+      "status": "PASS"
+    },
+    {
+      "name": "company360 no horizontal overflow 1280",
+      "status": "PASS"
+    },
+    {
+      "name": "company360 no horizontal overflow 390",
+      "status": "PASS"
+    },
+    {
+      "name": "real statement cells remain candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "scan keeps legacy failed state",
+      "status": "PASS"
+    },
+    {
+      "name": "real OCR engine completed in this generation",
+      "status": "PASS"
+    },
+    {
+      "name": "OCR does not grant legacy READY",
+      "status": "PASS"
+    }
+  ],
+  "screenshots": [
+    "home-1440.png",
+    "home-1280.png",
+    "home-390.png",
+    "company360-1440.png",
+    "company360-1280.png",
+    "company360-390.png"
+  ],
+  "generation_before": 8,
+  "collection_cells": [
+    {
+      "year": 2025,
+      "cells": 38
+    },
+    {
+      "year": 2024,
+      "cells": 38
+    }
+  ],
+  "ocr": {
+    "artifact_id": "e922d8d3-6814-4dda-b6a9-70c7541b45e9",
+    "method": [
+      "ocr"
+    ],
+    "lines": 68
+  },
+  "result": "FAIL",
+  "error": "TimeoutError: locator.selectOption: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('原文与OCR研究', { exact: true }).getByLabel('资料', { exact: true })\u001b[22m\n"
+}

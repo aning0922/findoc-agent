@@ -1,0 +1,55 @@
+{
+  "schema_version": "cplus-batch-performance-v1",
+  "fix_commit": "35a19222fab34f8a9d515c4dc76888a5f2d2e1cc",
+  "original_gateway_start": {
+    "status": 503,
+    "seconds": 260.007,
+    "effect": "UNKNOWN_NO_REPLAY"
+  },
+  "before_one_gree_annual_seconds": 108.605,
+  "before_verify_calls": 175,
+  "before_verify_inclusive_seconds": 96.056,
+  "before_dense_search_inclusive_seconds": 6.783,
+  "after_batch_start_seconds": 119.413,
+  "after_batch_status": 200,
+  "after_cells": [
+    {
+      "cell_key": "000651:risk_excerpt",
+      "seconds": 7.351990417111665
+    },
+    {
+      "cell_key": "000651:annual_changes",
+      "seconds": 47.82438433310017
+    },
+    {
+      "cell_key": "000333:risk_excerpt",
+      "seconds": 6.8769773750100285
+    },
+    {
+      "cell_key": "000333:annual_changes",
+      "seconds": 42.171125209191814
+    }
+  ],
+  "after_annual_seconds": [
+    46.869289124850184,
+    41.26222787494771
+  ],
+  "gree_all_three_topics_and_exact_refs_equal_to_before": true,
+  "batch_exact_verified_quotes": 34,
+  "batch_raw_pdf_exact_quotes": 28,
+  "batch_whitespace_only_match_quotes": 28,
+  "matrix_get_no_dispatch": true,
+  "runtime_python": {
+    "name": "child_python",
+    "seconds": 0,
+    "pid": 56147,
+    "executable": "/Users/aipuli/.codex/worktrees/ce18/findoc-agent/.venv/bin/python",
+    "prefix": "/Users/aipuli/.codex/worktrees/ce18/findoc-agent/.venv",
+    "base_prefix": "/Users/aipuli/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none"
+  },
+  "runtime_BGE_initializations": 1,
+  "model_calls": 0,
+  "human_approvals": 0,
+  "timing_hook_limitation": "Executed hooks also ran in a Milvus helper Python process and initialized an extra BGE there. Runtime init count is filtered by actual child PID. Final hooks are restricted to exact uvicorn child argv; this startup instrumentation side effect is retained, not interpreted as runtime repeated BGE init. Query functions/guards/scopes/results were unchanged by timing wrappers.",
+  "inclusive_timing_note": "Nested method durations overlap; do not sum them as total elapsed time."
+}

@@ -1,0 +1,139 @@
+{
+  "tier": "REAL_REACT_HTTP_PUBLIC_PDF_CANDIDATE",
+  "provider_calls": 0,
+  "human_financial_approvals": 0,
+  "checks": [
+    {
+      "name": "two READY Gree report sources",
+      "result": "PASS"
+    },
+    {
+      "name": "collection 2025",
+      "result": "PASS"
+    },
+    {
+      "name": "collection 2024",
+      "result": "PASS"
+    },
+    {
+      "name": "statement provenance labels",
+      "result": "PASS"
+    },
+    {
+      "name": "real Decimal ratio response",
+      "result": "PASS"
+    },
+    {
+      "name": "five KPI cards",
+      "result": "PASS"
+    },
+    {
+      "name": "ratio candidate status",
+      "result": "PASS"
+    },
+    {
+      "name": "header identity coverage and ready count",
+      "result": "PASS"
+    },
+    {
+      "name": "overview no overflow 1440",
+      "result": "PASS"
+    },
+    {
+      "name": "overview no overflow 1280",
+      "result": "PASS"
+    },
+    {
+      "name": "overview no overflow 390",
+      "result": "PASS"
+    },
+    {
+      "name": "three real checkup rules",
+      "result": "PASS"
+    },
+    {
+      "name": "three rules rendered",
+      "result": "PASS"
+    },
+    {
+      "name": "rule PDF links",
+      "result": "PASS"
+    },
+    {
+      "name": "rule source-bound draft available",
+      "result": "PASS"
+    },
+    {
+      "name": "rule actual period and formula",
+      "result": "PASS"
+    },
+    {
+      "name": "checkup no overflow 1440",
+      "result": "PASS"
+    },
+    {
+      "name": "checkup no overflow 1280",
+      "result": "PASS"
+    },
+    {
+      "name": "checkup no overflow 390",
+      "result": "PASS"
+    },
+    {
+      "name": "rule draft navigates to research",
+      "result": "PASS"
+    },
+    {
+      "name": "existing saved checkup exposes export link",
+      "result": "PASS"
+    },
+    {
+      "name": "real insufficient rule result",
+      "result": "PASS"
+    },
+    {
+      "name": "insufficient status visible",
+      "result": "PASS"
+    },
+    {
+      "name": "missing ratio from real single input",
+      "result": "PASS"
+    },
+    {
+      "name": "missing ratio displayed as unavailable",
+      "result": "PASS"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-profile-native/overview-1440.png",
+      "sha256": "0aa851e620a8f559b74575e46bf05ea90e21021e76f80a72425d09e134da2d1e"
+    },
+    {
+      "path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-profile-native/overview-1280.png",
+      "sha256": "1e9816310be926de6c43b9f3864531a71df8a0b5850e1d7af0481485a13aca37"
+    },
+    {
+      "path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-profile-native/overview-390.png",
+      "sha256": "867aeddb307ae087131900fe1ee63fabc1798a61214ff948a1eac82be6be5596"
+    },
+    {
+      "path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-profile-native/checkup-1440.png",
+      "sha256": "80a824fdd6145602493429ae2612cf03a9906807e22cec7689df4e7a6fd85375"
+    },
+    {
+      "path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-profile-native/checkup-1280.png",
+      "sha256": "9f0d4b96acdb4544d18f629018155b2af0637681cad02b074ef0768c6a14c650"
+    },
+    {
+      "path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-profile-native/checkup-390.png",
+      "sha256": "59945a44b9795e9d6b38d707eb3530cf324083ca6ada91c0508b88fdc0b898cc"
+    },
+    {
+      "path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-profile-native/insufficient-1440.png",
+      "sha256": "f1455468663af2ab0f30978437d3323ba57012fd3df888696bfd61037de5b972"
+    }
+  ],
+  "failures": [],
+  "unknown_basis": "NOT TESTED: no authorized real unknown-basis candidate available"
+}

@@ -1,0 +1,27 @@
+POST /demo/login 202
+POST /demo/claim 200
+GET /demo/session 200
+GET /companies 200
+GET /documents 200
+GET /documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/metadata 200
+GET /cplus/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/research-source 200
+GET /documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/metadata 200
+GET /cplus/documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/research-source 200
+GET /documents/d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92/metadata 200
+GET /cplus/documents/d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92/research-source 200
+GET /documents/1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f/metadata 200
+GET /cplus/documents/1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f/research-source 200
+GET /documents/de3575ae4220fd18b64f32ca74a442e63e06b705d9e4f9cda5065e386f357ccc/metadata 200
+POST /cplus/retrieval/builds 200
+POST /cplus/batch-plans 200
+GET /cplus/batch-plans/770c8a3d-b544-4fd5-b10f-f21c9452e652 200
+POST /cplus/batches 503
+Traceback (most recent call last):
+  File "/Users/aipuli/.codex/worktrees/ce18/findoc-agent/experiments/cplus/verify_real_batch.py", line 632, in <module>
+    main()
+  File "/Users/aipuli/.codex/worktrees/ce18/findoc-agent/experiments/cplus/verify_real_batch.py", line 456, in main
+    started = request("POST", "/cplus/batches", proof["explicit_start_approval"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aipuli/.codex/worktrees/ce18/findoc-agent/experiments/cplus/verify_real_batch.py", line 341, in request
+    raise RuntimeError(f"{method} {path}: HTTP {response.status_code}")
+RuntimeError: POST /cplus/batches: HTTP 503

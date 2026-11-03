@@ -235,11 +235,18 @@ def create_runtime_app(
     if showcase_seed_version is not None and not showcase_seed_version.strip():
         raise ValueError("invalid showcase seed version")
     # 必需LLM配置是启动前置条件：配置不完整时不得触碰模型、磁盘或Milvus。
+    cplus_enabled = os.environ.get("FINDOC_CPLUS_ENABLED") == "1"
+    budget_path = os.environ.get("FINDOC_PROVIDER_BUDGET_DB")
+    if cplus_enabled and os.environ.get("LLM_MODEL") != "disabled-no-calls" and not budget_path:
+        raise ValueError("C+ provider execution requires the existing shared allowance")
     llm_client = OpenAICompatibleLLMClient.from_env()
-    if budget_path := os.environ.get('FINDOC_PROVIDER_BUDGET_DB'):
+    if budget_path:
         path = Path(budget_path)
         if not path.is_absolute() or path.resolve().is_relative_to(runtime_root.resolve()):
             raise ValueError('Provider budget ledger must live outside reset generations')
+        if cplus_enabled:
+            from app.demo.shared_budget import existing_shared_budget
+            existing_shared_budget(path, Path(__file__).resolve().parents[2], forbidden_roots=(runtime_root,))
         llm_client = budgeted_client(llm_client, path, os.environ.get('FINDOC_PROVIDER_CAP_CNY', '5'))
     # BGE可能在首次加载时触发子进程初始化，必须先于Milvus/gRPC客户端。
     _warm_runtime_bge_before_milvus()
@@ -472,6 +479,17 @@ def create_runtime_app(
                 dashboard_service.archive = archive_service
                 dashboard_service.research = showcase_research
                 dashboard_service.showcase_reports = showcase_reports
+                if cplus_enabled:
+                    from app.cplus.runtime import register_cplus_runtime
+                    register_cplus_runtime(
+                        app, runtime_root, sources=source_service, parse_service=parse_service,
+                        preparer=selection_preparer, dense_scope=selected_scope_search,
+                        memory=research_memory, conversations=conversation_repository,
+                        workspace=DEMO_WORKSPACE_ID, llm_client=llm_client,
+                        owner_authorizer=authorize_extended_finance, generation=showcase_generation,
+                    )
+                    conversation_graph.tools.scope = app.state.cplus_legacy_hybrid_search
+                    showcase_research.search = app.state.cplus_legacy_hybrid_search
                 app.include_router(create_task_router(task_repository, persistent_templates))
                 app.state.task_repository = task_repository
                 app.include_router(create_report_router(ReportService(task_repository, source_service)))

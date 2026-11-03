@@ -1,0 +1,92 @@
+[
+  {
+    "route": "route-a-official",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-delivery-media/route-a-official.webm",
+    "sha256": "0d43a07d36b3cbf7047bbf06705219db0cf63bb33fdb81ef0cda968282b4ebbf",
+    "bytes": 1262173,
+    "tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
+    "result": "PASS",
+    "notes": "Automated real browser recording; masked login; no provider calls, no human financial signing; see paced interview guide."
+  },
+  {
+    "route": "route-b-chart-memory",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-delivery-media/route-b-chart-memory.webm",
+    "sha256": "a4177989fb85b14e630f5b2763b6ad8c9997470ee89a53e52dd32a5620cb1df0",
+    "bytes": 3196510,
+    "tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
+    "result": "PASS",
+    "notes": "Automated real browser recording; masked login; no provider calls, no human financial signing; see paced interview guide."
+  },
+  {
+    "route": "route-c-annual-batch-templates",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-delivery-media/route-c-annual-batch-templates.webm",
+    "sha256": "660d8ed550ef3c63cf9f05148854a65b91a8b00bd3c9b8b8cf984b228e2c5e32",
+    "bytes": 18972662,
+    "tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
+    "result": "PASS",
+    "notes": "Automated real browser recording; masked login; no provider calls, no human financial signing; see paced interview guide."
+  },
+  {
+    "route": "four-template-native-subpaths",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-g4-live-v1/page@5af12416b73b078ae0c4923909e5998d.webm",
+    "sha256": "a2809ed04137b45c568d44ee423f1f7411713c5e00bd551209d9e7d7f116902d",
+    "bytes": 112299,
+    "tier": "REAL_PDF_NATIVE_ONE_LLM",
+    "result": "PARTIAL_LATER_SELECTOR_FAILURE",
+    "notes": "Original browser recording. Not human semantic/financial acceptance. Numeric-error cash sample is preserved, not the corrected candidate."
+  },
+  {
+    "route": "four-template-native-subpaths",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-g4-live-v1/page@fd436c0b54dc5f2556c921d009ac7732.webm",
+    "sha256": "4e7c7f5f8c1aa8478583ccf3efc2a93d933827300c842faa70fbeba0dc89cf00",
+    "bytes": 24247939,
+    "tier": "REAL_PDF_NATIVE_ONE_LLM",
+    "result": "PARTIAL_LATER_SELECTOR_FAILURE",
+    "notes": "Original browser recording. Not human semantic/financial acceptance. Numeric-error cash sample is preserved, not the corrected candidate."
+  },
+  {
+    "route": "two-year-ai-cash-and-agent-exports",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-final-business-native-v1/page@8a779592dc77821d99471513605d9665.webm",
+    "sha256": "5afde28ca97eedaa8250f18dd6889eb5729839f657cc5e9eeb2d30746a584c7d",
+    "bytes": 139657,
+    "tier": "REAL_PDF_NATIVE_ONE_LLM",
+    "result": "EXECUTION_PASS_AI_NUMERIC_ORDER_ERROR_REVIEWED",
+    "notes": "Original browser recording. Not human semantic/financial acceptance. Numeric-error cash sample is preserved, not the corrected candidate."
+  },
+  {
+    "route": "two-year-ai-cash-and-agent-exports",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-final-business-native-v1/page@b3c843df6bb7bc0974d3542c69c10329.webm",
+    "sha256": "8e27616482724b1dc4e2a8d30bba9cbaec6cd7644ea2dbdb2bfb632e09259a69",
+    "bytes": 6727988,
+    "tier": "REAL_PDF_NATIVE_ONE_LLM",
+    "result": "EXECUTION_PASS_AI_NUMERIC_ORDER_ERROR_REVIEWED",
+    "notes": "Original browser recording. Not human semantic/financial acceptance. Numeric-error cash sample is preserved, not the corrected candidate."
+  },
+  {
+    "route": "same-point-location-memory-delete",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-final-point-memory-v1/page@e5aec99cc4e3edb3cf29c161f6482f89.webm",
+    "sha256": "75699aa83a9e883d17b0e4b66a1e4a1343593b3558bfde284128b15a888afed9",
+    "bytes": 4552305,
+    "tier": "REAL_PDF_NATIVE_BGE_ONE_LLM",
+    "result": "PASS_PAGE_FALLBACK",
+    "notes": "Original browser recording. Not human semantic/financial acceptance. Numeric-error cash sample is preserved, not the corrected candidate."
+  },
+  {
+    "route": "cash-nonnumeric-policy-corrected-native",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-final-business-native-corrected-v1/page@1554798796adc2e158cb5aa287aa9fa0.webm",
+    "sha256": "d7b013a9b87745c8db21f8f69a93b380d804208a25be6c3f23b6f512e888d048",
+    "bytes": 4579609,
+    "tier": "REAL_REACT_HTTP_PUBLIC_PDF_GUARDED_MODEL",
+    "result": "PASS_NATIVE_NON_NUMERIC_AI_UNREVIEWED",
+    "notes": "Corrected candidate,1 new SDK call. Full original recording; financial authority false. Human semantic pending."
+  },
+  {
+    "route": "cash-nonnumeric-policy-corrected-native",
+    "absolute_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-final-business-native-corrected-v1/page@9d4a8dcad1146f1d7ae268c19b0671d2.webm",
+    "sha256": "16c71747cdef7de7c3ef9e48d33d310ca77d8e02cd4ba9d017e617e89b24819c",
+    "bytes": 118563,
+    "tier": "REAL_REACT_HTTP_PUBLIC_PDF_GUARDED_MODEL",
+    "result": "PASS_NATIVE_NON_NUMERIC_AI_UNREVIEWED",
+    "notes": "Corrected candidate,1 new SDK call. Full original recording; financial authority false. Human semantic pending."
+  }
+]

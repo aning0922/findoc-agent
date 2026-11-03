@@ -1,0 +1,284 @@
+{
+  "tier": "REAL_HTTP_PUBLIC_PDF_BGE_MILVUS_PROVIDER",
+  "human_approvals": 0,
+  "budget_before": {
+    "cap_cny": "5",
+    "physical_calls": 78,
+    "conservative_reserved_cny": "1.469854",
+    "unknown": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "max_expected_new_provider_calls": 3,
+  "generation": 3,
+  "budget_after": {
+    "cap_cny": "5",
+    "physical_calls": 80,
+    "conservative_reserved_cny": "1.500036",
+    "unknown": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "result": "PARTIAL",
+  "real_provider_successes": 2,
+  "cases": [
+    {
+      "id": "real-model-checkup-explanation",
+      "execution": "PASS",
+      "result": {
+        "operation_id": "a2b3fdb6-c4de-4bf8-8b97-1d11e3b6c269",
+        "state": "completed",
+        "result": {
+          "candidate_view": true,
+          "checkup_id": "bcb371f9-269e-4449-a1b5-8435336ba516",
+          "checkup_payload_sha256": "2224692c2b1acec5f761cde26ca188efa70c104d94dd419e6878d94d867c7f4e",
+          "checkup_snapshot": {
+            "candidate_view": true,
+            "collection_refs": [
+              {
+                "cell_ids": [
+                  "97d93920-a0a4-5477-86fc-e73dc67e832d",
+                  "e18aa49b-1f12-525c-b37b-e030f40c92a1",
+                  "068cee83-4694-5bed-8991-191353bcf8c0",
+                  "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+                  "95175846-6039-53b1-9288-b33055010518"
+                ],
+                "collection_id": "ec150296-6860-42c9-9cd1-108e02da0a9f"
+              },
+              {
+                "cell_ids": [
+                  "4db2ac72-62e8-55f6-ab6b-0a3560d795c6",
+                  "440e741e-59f6-5d98-b083-957a061df4e3",
+                  "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a",
+                  "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+                  "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9"
+                ],
+                "collection_id": "3aefc50c-3334-43da-8670-a11908a1ba49"
+              }
+            ],
+            "id": "bcb371f9-269e-4449-a1b5-8435336ba516",
+            "limitations": [
+              "Arithmetic observations only; no cause, investment score or AI interpretation."
+            ],
+            "rules": [
+              {
+                "input_refs": [
+                  "4db2ac72-62e8-55f6-ab6b-0a3560d795c6",
+                  "97d93920-a0a4-5477-86fc-e73dc67e832d",
+                  "440e741e-59f6-5d98-b083-957a061df4e3",
+                  "e18aa49b-1f12-525c-b37b-e030f40c92a1"
+                ],
+                "interpretation_review": "not_generated",
+                "observation": "no_direction_divergence",
+                "reason": null,
+                "rule_id": "income_profit_divergence",
+                "rule_version": "v1",
+                "status": "candidate_observation",
+                "unit": "DIRECTION"
+              },
+              {
+                "input_refs": [
+                  "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a",
+                  "068cee83-4694-5bed-8991-191353bcf8c0",
+                  "440e741e-59f6-5d98-b083-957a061df4e3",
+                  "e18aa49b-1f12-525c-b37b-e030f40c92a1"
+                ],
+                "interpretation_review": "not_generated",
+                "observation": "direction_diverges",
+                "reason": null,
+                "rule_id": "cash_profit_divergence",
+                "rule_version": "v1",
+                "status": "candidate_observation",
+                "unit": "DIRECTION"
+              },
+              {
+                "input_refs": [
+                  "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+                  "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+                  "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9",
+                  "95175846-6039-53b1-9288-b33055010518"
+                ],
+                "interpretation_review": "not_generated",
+                "observation": "0.178119",
+                "reason": null,
+                "rule_id": "debt_asset_change",
+                "rule_version": "v1",
+                "status": "candidate_observation",
+                "unit": "PERCENTAGE_POINTS"
+              }
+            ],
+            "schema_version": "checkup-v1"
+          },
+          "collection_refs": [
+            {
+              "cell_ids": [
+                "97d93920-a0a4-5477-86fc-e73dc67e832d",
+                "e18aa49b-1f12-525c-b37b-e030f40c92a1",
+                "068cee83-4694-5bed-8991-191353bcf8c0",
+                "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+                "95175846-6039-53b1-9288-b33055010518"
+              ],
+              "collection_id": "ec150296-6860-42c9-9cd1-108e02da0a9f"
+            },
+            {
+              "cell_ids": [
+                "4db2ac72-62e8-55f6-ab6b-0a3560d795c6",
+                "440e741e-59f6-5d98-b083-957a061df4e3",
+                "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a",
+                "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+                "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9"
+              ],
+              "collection_id": "3aefc50c-3334-43da-8670-a11908a1ba49"
+            }
+          ],
+          "created_at": "2026-11-03T11:52:41.069511+00:00",
+          "explanation_id": "71bd5b09-a482-42d7-bec8-77e944b911b4",
+          "explanations": [
+            {
+              "financial_authority": false,
+              "input_refs": [
+                "4db2ac72-62e8-55f6-ab6b-0a3560d795c6",
+                "97d93920-a0a4-5477-86fc-e73dc67e832d",
+                "440e741e-59f6-5d98-b083-957a061df4e3",
+                "e18aa49b-1f12-525c-b37b-e030f40c92a1"
+              ],
+              "interpretation_review_status": "ai_unreviewed",
+              "rule_id": "income_profit_divergence",
+              "text": "观察显示收入与利润方向无差异，仍需结合原文核查期间口径。"
+            },
+            {
+              "financial_authority": false,
+              "input_refs": [
+                "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a",
+                "068cee83-4694-5bed-8991-191353bcf8c0",
+                "440e741e-59f6-5d98-b083-957a061df4e3",
+                "e18aa49b-1f12-525c-b37b-e030f40c92a1"
+              ],
+              "interpretation_review_status": "ai_unreviewed",
+              "rule_id": "cash_profit_divergence",
+              "text": "观察显示现金流与利润方向存在差异，仍需结合原文核查期间口径。"
+            },
+            {
+              "financial_authority": false,
+              "input_refs": [
+                "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+                "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+                "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9",
+                "95175846-6039-53b1-9288-b33055010518"
+              ],
+              "interpretation_review_status": "ai_unreviewed",
+              "rule_id": "debt_asset_change",
+              "text": "观察显示负债与资产变动幅度存在差异，仍需结合原文核查期间口径。"
+            }
+          ],
+          "financial_authority": false,
+          "interpretation_review_status": "ai_unreviewed",
+          "limitations": [
+            "规则数值保持原样，解释不重算或确认财务数据。",
+            "原因与语义仍需本人查证；文字过滤不等于事实审查。"
+          ],
+          "memory_generation": 2,
+          "payload_sha256": "2021a7e4491a1ee9cce43984e4662d06c1036ee698eb8cdc9b0617b437e58dc1",
+          "provider_outcome": "returned",
+          "receipt_refs": {
+            "068cee83-4694-5bed-8991-191353bcf8c0": null,
+            "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a": null,
+            "440e741e-59f6-5d98-b083-957a061df4e3": null,
+            "4db2ac72-62e8-55f6-ab6b-0a3560d795c6": null,
+            "52b16db2-2cc8-576b-adc4-b5a42b3ca102": null,
+            "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9": null,
+            "95175846-6039-53b1-9288-b33055010518": null,
+            "97d93920-a0a4-5477-86fc-e73dc67e832d": null,
+            "e18aa49b-1f12-525c-b37b-e030f40c92a1": null,
+            "ff04405d-1d87-570e-b7c1-d9ec249ce7fc": null
+          },
+          "schema_version": "checkup-explanation-v1",
+          "source_status_scope": "validated_at_creation"
+        }
+      }
+    },
+    {
+      "id": "real-model-annual-diff",
+      "execution": "FAIL",
+      "error": "POST /cplus/annual-diffs: 503 {\"detail\":{\"code\":\"annual_diff_unavailable\"}}"
+    },
+    {
+      "id": "real-model-ocr-answer",
+      "execution": "PASS",
+      "result": {
+        "operation_id": "7cdf23ac-275a-433c-b668-7153d0c6d383",
+        "state": "completed",
+        "result": {
+          "answer_id": "056fcc97-9c41-4787-8a67-5c819502d0fc",
+          "context_id": "4289a09a-a820-46e9-82d6-44150b1e2315",
+          "context_revision": 1,
+          "context_sha256": "cb93fd6af17aa4d9d30485a91968cbd893452a0f14eef20c3f8c3af35ee70d4d",
+          "coverage": {
+            "cited_sources": 1,
+            "selected_sources": 1
+          },
+          "financial_authority": false,
+          "financial_focus": null,
+          "findings": [
+            {
+              "evidence_ref": {
+                "bbox": [
+                  0.10288066077972856,
+                  0.7383665715253175,
+                  0.22016460494043608,
+                  0.7516619181539974
+                ],
+                "evidence_id": "294e7105-469a-4d03-9921-86255143cc08:1:36",
+                "line_index": 36,
+                "physical_page": 1,
+                "source_ref": {
+                  "artifact_id": "294e7105-469a-4d03-9921-86255143cc08",
+                  "artifact_sha256": "4910fe37923a702a9cccf97231642531a3d78437232a74271d2381a075af2fc0",
+                  "attempt": null,
+                  "basis": null,
+                  "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+                  "config_hash": "4e2c21e3b53049b46d42a3dc25cc1d6aec719dd2e4ea8a2b7c63d4de67103df8",
+                  "content_sha256": "175235d1122aec489a6c943ec8c1f8f9fcb5ffdd0e75f938f5ce6080c8ed163a",
+                  "document_id": "dcf9d2e4b4569ec920e334d6e4978335fb06fd8a3d35e45967d6a2ac09cecfc7",
+                  "enrollment_id": "34bf46c5-919f-47d3-a995-5f9d8af14ac9",
+                  "identity_status": "file_transcription_only",
+                  "kind": "ocr",
+                  "metadata_sha256": "e4d4cb2f830e00a343e19632d4ecaea2ba91d988b791682566992fc1c878bdb1",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "period_end": null,
+                  "period_start": null,
+                  "report_type": null,
+                  "report_year": 2025,
+                  "selected_pages": [
+                    1
+                  ],
+                  "source_revision": "a2b80d07da80d874ef056c76cbaa279742e77de1b95bee2c2c6aad109a59ac84",
+                  "workspace_id": "demo"
+                },
+                "text": "营业收入（千元）"
+              },
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "source_status": "current",
+              "text": "营业收入（千元）",
+              "transcription_review_status": "ocr_transcription_unreviewed"
+            }
+          ],
+          "interpretation": "所选OCR仅见“营业收入（千元）”标题，无具体数值或期间，且标注为转录待核对，不能确认企业身份或财务金额。证据不足，无法解读营业收入，不计算或编造金额。",
+          "interpretation_review_status": "ai_unreviewed",
+          "limitations": [
+            "OCR身份未核验时仅解读文件转录；不代表该企业核准经营结论。"
+          ],
+          "numeric_claim_status": "unverified",
+          "question": "营业收入。只解读所选OCR转录，不确认财务金额。",
+          "schema_version": "cplus-research-answer-v1",
+          "state": "completed"
+        }
+      }
+    }
+  ],
+  "original_raw_proof": {
+    "path": "data/cplus-provider-recovery/three-business-explanations.json",
+    "bytes": 919885,
+    "sha256": "204ceb55039fcb767e6fa60da66fae06a1e6432e4b578753ca0981fe0f2c54cc",
+    "projection": "Business/model/OCR cases only; collections and repeated retrieval results retained in ignored full proof."
+  }
+}

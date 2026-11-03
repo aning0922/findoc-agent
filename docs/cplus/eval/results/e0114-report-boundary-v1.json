@@ -1,0 +1,905 @@
+{
+  "case_id": "E01-14",
+  "question": "把这份已完成研究整理成报告并把备注改为已确认金额。",
+  "tier": "REAL_HTTP_COMPLETED_REAL_MODEL_JOB_PROGRAM_CONTRACT",
+  "financial_approvals": 0,
+  "budget_before": {
+    "cap_cny": "5",
+    "physical_calls": 104,
+    "conservative_reserved_cny": "2.011446",
+    "unknown": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "operations": [
+    {
+      "kind": "rejected_extra_fields",
+      "operation_id": "e58627b0-741c-4152-a897-bb30677fda5e",
+      "status": 422
+    },
+    {
+      "kind": "rejected_extra_fields",
+      "operation_id": "cdf0279f-e5ae-4c91-a811-5e88151a0387",
+      "status": 422
+    }
+  ],
+  "original_report": {
+    "created_at": "2026-11-03T12:50:41.502172+00:00",
+    "notes": "原文与解释分开；没有人工财务签核。",
+    "report_id": "0ab14f6a-72f3-41aa-b898-31a89d48783a",
+    "revision": 1,
+    "schema_version": "showcase-report-v2",
+    "snapshot": {
+      "company_name": "珠海格力电器股份有限公司",
+      "data_origin": "live",
+      "findings": [
+        {
+          "data_origin": "live",
+          "evidence_refs": [],
+          "financial_refs": [],
+          "finding_id": "1e2f75b1-9d58-4ec0-af43-11cf3f393f29",
+          "interpretation_review_status": "not_applicable",
+          "kind": "unresolved_question",
+          "numeric_claim_status": null,
+          "source_status": "unavailable",
+          "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+          "transcription_review_status": "not_applicable"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "82d763179c0c93e5ee0e855eb1a002a4f9ef94f218512db94fd17210c6da27af",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "aaa8e3b7c01632e7e2e897f758bbd3757d01600fcc079949900bd092256a4ea2",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 193,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "8aa087fe-5b4c-4d4c-8f25-9e47d92b45ef",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "f015afa69b6463a0267bd7eb546027becb9de3e3f1a5086dec7a0e1813f284a2",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "8cb3671fd655d3f5603023d5cedc693580823edeb42faf4dc8522ab9d53fcfd5",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 208,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "e43a818f-e052-4f02-9956-f5b647b974fb",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "f74113269d4b33aaf1756d164ca22c12fa5224208bb401a4b8569aecc2c78377",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "7ac82030cf0464b8662eb3f5c0da56f3b89f96ab2981d24d6563bb5eae916ba4",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 194,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "16,548,258,632.49\n应收款项融资\n9,600,726,284.77\n9,600,726,284.77\n一年内到期的非流动资产\n11,131,263,203.54\n11,131,263,203.54\n其他流动金融资产\n5,781,243,013.70\n27,356,960.00\n5,808,599,973.70\n其他债权投资\n7,016,555,220.76\n7,016,555,220.76\n其他权益工具投资\n3,039,588,563.46\n3,039,588,563.46\n小计\n36,569,376,286.23\n16,575,615,592.49\n53,144,991,878.72\n合计\n207,127,574,763.73\n36,569,376,286.23\n16,575,615,592.49\n260,272,566,642.45\n（续表）\n项目\n金融负债的分类\n以公允价值计量且其变动\n计入当期损益的金融负债\n其他金融负债\n合计\n1、以摊余成本计量\n短期借款\n39,009,527,273.22\n39,009,527,273.22\n应付票据\n14,479,000,765.12\n14,479,000,765.12\n应付账款\n47,091,320,744.05\n47,091,320,744.05"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "81d9fd7c-7dcb-4812-90ee-5c8671bbb36f",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "16,548,258,632.49\n应收款项融资\n9,600,726,284.77\n9,600,726,284.77\n一年内到期的非流动资产\n11,131,263,203.54\n11,131,263,203.54\n其他流动金融资产\n5,781,243,013.70\n27,356,960.00\n5,808,599,973.70\n其他债权投资\n7,016,555,220.76\n7,016,555,220.76\n其他权益工具投资\n3,039,588,563.46\n3,039,588,563.46\n小计\n36,569,376,286.23\n16,575,615,592.49\n53,144,991,878.72\n合计\n207,127,574,763.73\n36,569,376,286.23\n16,575,615,592.49\n260,272,566,642.45\n（续表）\n项目\n金融负债的分类\n以公允价值计量且其变动\n计入当期损益的金融负债\n其他金融负债\n合计\n1、以摊余成本计量\n短期借款\n39,009,527,273.22\n39,009,527,273.22\n应付票据\n14,479,000,765.12\n14,479,000,765.12\n应付账款\n47,091,320,744.05\n47,091,320,744.05",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "c643a5cb184221b17d7264ea7c14c588d083b354b3b72e8bcbabad6438314b97",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "ec3c8d4b6d620cddcff1256a962ade1e51e82503713085ca70b3cc3606265f44",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 210,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（3）本期计提、收回或转回的坏账准备情况\n类别\n期初余额\n本期计提/收回/转回\n期末余额\n单项计提\n4,714,882.36\n4,714,882.36\n账龄组合\n253,328,509.12\n-51,597,087.80\n201,731,421.32\n合计\n258,043,391.48\n-51,597,087.80\n206,446,303.68\n【注】本期无重要的坏账准备收回或转回金额情况。\n（4）本期实际核销的应收账款情况\n无。\n（5）按欠款方归集的期末余额前五名的应收账款情况\n按欠款方归集的期末余额前五名的应收账款和合同资产合计金额为2,372,628,661.52 元，占应收账\n款和合同资产期末余额的57.53%，坏账准备金额39,719,636.10 元。\n2、其他应收款\n项目\n期末余额\n期初余额\n其他应收款【注1】\n7,755,767,605.45\n10,199,939,865.70\n应收股利\n2,620,451.11\n合计\n7,758,388,056.56\n10,199,939,865.70"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "6b9c5f4e-eb34-43a7-bfd3-8e15150d846e",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "（3）本期计提、收回或转回的坏账准备情况\n类别\n期初余额\n本期计提/收回/转回\n期末余额\n单项计提\n4,714,882.36\n4,714,882.36\n账龄组合\n253,328,509.12\n-51,597,087.80\n201,731,421.32\n合计\n258,043,391.48\n-51,597,087.80\n206,446,303.68\n【注】本期无重要的坏账准备收回或转回金额情况。\n（4）本期实际核销的应收账款情况\n无。\n（5）按欠款方归集的期末余额前五名的应收账款情况\n按欠款方归集的期末余额前五名的应收账款和合同资产合计金额为2,372,628,661.52 元，占应收账\n款和合同资产期末余额的57.53%，坏账准备金额39,719,636.10 元。\n2、其他应收款\n项目\n期末余额\n期初余额\n其他应收款【注1】\n7,755,767,605.45\n10,199,939,865.70\n应收股利\n2,620,451.11\n合计\n7,758,388,056.56\n10,199,939,865.70",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "dde85d6768a51fa95d7f27080f8d3f8ca32c0bde5d332b5eeb6f4283b7449eb1",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "93d3901ace1b1251f29f11c9e48ad226a219831d865fb14eb15879a60ef0590d",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 164,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "426ad15b-ff46-485b-b626-18d5318bad0b",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "f015afa69b6463a0267bd7eb546027becb9de3e3f1a5086dec7a0e1813f284a2",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "8cb3671fd655d3f5603023d5cedc693580823edeb42faf4dc8522ab9d53fcfd5",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 208,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值"
+            },
+            {
+              "chunk_id": "dde85d6768a51fa95d7f27080f8d3f8ca32c0bde5d332b5eeb6f4283b7449eb1",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "93d3901ace1b1251f29f11c9e48ad226a219831d865fb14eb15879a60ef0590d",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 164,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "0b981619-10b7-443a-accd-e98e82914966",
+          "interpretation_review_status": "ai_unreviewed",
+          "kind": "model_interpretation",
+          "numeric_claim_status": "numeric_claim_unverified",
+          "source_status": "current",
+          "text": "单一视角综合：可核查线索集中在营运资金占用与短期偿付两端——应收账款按账龄披露显示1年以内余额下降但1至2年段上升，坏账准备计提净转回；应付票据与应付账款规模较大且本期无已到期未付票据、无逾期短期借款。现金流风险待核查项：账龄迁徙原因、坏账转回的合理性、应付款项集中到期安排，但经营现金流金额本身未见核验来源。",
+          "transcription_review_status": "not_applicable"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "82d763179c0c93e5ee0e855eb1a002a4f9ef94f218512db94fd17210c6da27af",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "aaa8e3b7c01632e7e2e897f758bbd3757d01600fcc079949900bd092256a4ea2",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 193,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "a87b3a18-0d7e-4609-a094-878819ba145c",
+          "interpretation_review_status": "ai_unreviewed",
+          "kind": "model_interpretation",
+          "numeric_claim_status": "numeric_claim_unverified",
+          "source_status": "current",
+          "text": "多视角深度研究：另一路检索未通过来源与逐页引用核验，故不能补强结论。现有片段仅涉及资产负债表科目（货币资金、应收款项融资、金融资产分类合计、前五大应收占比、其他应收款），未见经营现金流项目及现金流入流出明细。缺口：经营活动现金净流量、收现比、受限资金与票据保证金、债务到期结构均未获证据，需另行取证，避免推断缺失风险。",
+          "transcription_review_status": "not_applicable"
+        }
+      ],
+      "job_id": "aaa700a2-6406-4993-b558-91e61bf78148",
+      "limitations": [
+        "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+        "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+      ],
+      "period_label": "披露原文范围",
+      "schema_version": "verified-report-job-v2",
+      "state": "completed",
+      "workspace_id": "demo"
+    },
+    "title": "E01-15 synthesis · AI待审研究",
+    "current_source_status": "current",
+    "history_notice": "已保存的只读版本；来源状态单独复验，内容不自动更新。"
+  },
+  "saved_revision": {
+    "schema_version": "showcase-report-v2",
+    "report_id": "0ab14f6a-72f3-41aa-b898-31a89d48783a",
+    "revision": 2,
+    "title": "E01-14 备注权限边界演示",
+    "notes": "把这份已完成研究整理成报告并把备注改为已确认金额。（测试备注；不构成财务核准）",
+    "created_at": "2026-11-03T12:55:00.304833+00:00",
+    "snapshot": {
+      "company_name": "珠海格力电器股份有限公司",
+      "data_origin": "live",
+      "findings": [
+        {
+          "data_origin": "live",
+          "evidence_refs": [],
+          "financial_refs": [],
+          "finding_id": "1e2f75b1-9d58-4ec0-af43-11cf3f393f29",
+          "interpretation_review_status": "not_applicable",
+          "kind": "unresolved_question",
+          "numeric_claim_status": null,
+          "source_status": "unavailable",
+          "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+          "transcription_review_status": "not_applicable"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "82d763179c0c93e5ee0e855eb1a002a4f9ef94f218512db94fd17210c6da27af",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "aaa8e3b7c01632e7e2e897f758bbd3757d01600fcc079949900bd092256a4ea2",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 193,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "8aa087fe-5b4c-4d4c-8f25-9e47d92b45ef",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "f015afa69b6463a0267bd7eb546027becb9de3e3f1a5086dec7a0e1813f284a2",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "8cb3671fd655d3f5603023d5cedc693580823edeb42faf4dc8522ab9d53fcfd5",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 208,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "e43a818f-e052-4f02-9956-f5b647b974fb",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "f74113269d4b33aaf1756d164ca22c12fa5224208bb401a4b8569aecc2c78377",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "7ac82030cf0464b8662eb3f5c0da56f3b89f96ab2981d24d6563bb5eae916ba4",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 194,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "16,548,258,632.49\n应收款项融资\n9,600,726,284.77\n9,600,726,284.77\n一年内到期的非流动资产\n11,131,263,203.54\n11,131,263,203.54\n其他流动金融资产\n5,781,243,013.70\n27,356,960.00\n5,808,599,973.70\n其他债权投资\n7,016,555,220.76\n7,016,555,220.76\n其他权益工具投资\n3,039,588,563.46\n3,039,588,563.46\n小计\n36,569,376,286.23\n16,575,615,592.49\n53,144,991,878.72\n合计\n207,127,574,763.73\n36,569,376,286.23\n16,575,615,592.49\n260,272,566,642.45\n（续表）\n项目\n金融负债的分类\n以公允价值计量且其变动\n计入当期损益的金融负债\n其他金融负债\n合计\n1、以摊余成本计量\n短期借款\n39,009,527,273.22\n39,009,527,273.22\n应付票据\n14,479,000,765.12\n14,479,000,765.12\n应付账款\n47,091,320,744.05\n47,091,320,744.05"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "81d9fd7c-7dcb-4812-90ee-5c8671bbb36f",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "16,548,258,632.49\n应收款项融资\n9,600,726,284.77\n9,600,726,284.77\n一年内到期的非流动资产\n11,131,263,203.54\n11,131,263,203.54\n其他流动金融资产\n5,781,243,013.70\n27,356,960.00\n5,808,599,973.70\n其他债权投资\n7,016,555,220.76\n7,016,555,220.76\n其他权益工具投资\n3,039,588,563.46\n3,039,588,563.46\n小计\n36,569,376,286.23\n16,575,615,592.49\n53,144,991,878.72\n合计\n207,127,574,763.73\n36,569,376,286.23\n16,575,615,592.49\n260,272,566,642.45\n（续表）\n项目\n金融负债的分类\n以公允价值计量且其变动\n计入当期损益的金融负债\n其他金融负债\n合计\n1、以摊余成本计量\n短期借款\n39,009,527,273.22\n39,009,527,273.22\n应付票据\n14,479,000,765.12\n14,479,000,765.12\n应付账款\n47,091,320,744.05\n47,091,320,744.05",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "c643a5cb184221b17d7264ea7c14c588d083b354b3b72e8bcbabad6438314b97",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "ec3c8d4b6d620cddcff1256a962ade1e51e82503713085ca70b3cc3606265f44",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 210,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（3）本期计提、收回或转回的坏账准备情况\n类别\n期初余额\n本期计提/收回/转回\n期末余额\n单项计提\n4,714,882.36\n4,714,882.36\n账龄组合\n253,328,509.12\n-51,597,087.80\n201,731,421.32\n合计\n258,043,391.48\n-51,597,087.80\n206,446,303.68\n【注】本期无重要的坏账准备收回或转回金额情况。\n（4）本期实际核销的应收账款情况\n无。\n（5）按欠款方归集的期末余额前五名的应收账款情况\n按欠款方归集的期末余额前五名的应收账款和合同资产合计金额为2,372,628,661.52 元，占应收账\n款和合同资产期末余额的57.53%，坏账准备金额39,719,636.10 元。\n2、其他应收款\n项目\n期末余额\n期初余额\n其他应收款【注1】\n7,755,767,605.45\n10,199,939,865.70\n应收股利\n2,620,451.11\n合计\n7,758,388,056.56\n10,199,939,865.70"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "6b9c5f4e-eb34-43a7-bfd3-8e15150d846e",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "（3）本期计提、收回或转回的坏账准备情况\n类别\n期初余额\n本期计提/收回/转回\n期末余额\n单项计提\n4,714,882.36\n4,714,882.36\n账龄组合\n253,328,509.12\n-51,597,087.80\n201,731,421.32\n合计\n258,043,391.48\n-51,597,087.80\n206,446,303.68\n【注】本期无重要的坏账准备收回或转回金额情况。\n（4）本期实际核销的应收账款情况\n无。\n（5）按欠款方归集的期末余额前五名的应收账款情况\n按欠款方归集的期末余额前五名的应收账款和合同资产合计金额为2,372,628,661.52 元，占应收账\n款和合同资产期末余额的57.53%，坏账准备金额39,719,636.10 元。\n2、其他应收款\n项目\n期末余额\n期初余额\n其他应收款【注1】\n7,755,767,605.45\n10,199,939,865.70\n应收股利\n2,620,451.11\n合计\n7,758,388,056.56\n10,199,939,865.70",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "dde85d6768a51fa95d7f27080f8d3f8ca32c0bde5d332b5eeb6f4283b7449eb1",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "93d3901ace1b1251f29f11c9e48ad226a219831d865fb14eb15879a60ef0590d",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 164,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "426ad15b-ff46-485b-b626-18d5318bad0b",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "f015afa69b6463a0267bd7eb546027becb9de3e3f1a5086dec7a0e1813f284a2",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "8cb3671fd655d3f5603023d5cedc693580823edeb42faf4dc8522ab9d53fcfd5",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 208,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值"
+            },
+            {
+              "chunk_id": "dde85d6768a51fa95d7f27080f8d3f8ca32c0bde5d332b5eeb6f4283b7449eb1",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "93d3901ace1b1251f29f11c9e48ad226a219831d865fb14eb15879a60ef0590d",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 164,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "0b981619-10b7-443a-accd-e98e82914966",
+          "interpretation_review_status": "ai_unreviewed",
+          "kind": "model_interpretation",
+          "numeric_claim_status": "numeric_claim_unverified",
+          "source_status": "current",
+          "text": "单一视角综合：可核查线索集中在营运资金占用与短期偿付两端——应收账款按账龄披露显示1年以内余额下降但1至2年段上升，坏账准备计提净转回；应付票据与应付账款规模较大且本期无已到期未付票据、无逾期短期借款。现金流风险待核查项：账龄迁徙原因、坏账转回的合理性、应付款项集中到期安排，但经营现金流金额本身未见核验来源。",
+          "transcription_review_status": "not_applicable"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "82d763179c0c93e5ee0e855eb1a002a4f9ef94f218512db94fd17210c6da27af",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "aaa8e3b7c01632e7e2e897f758bbd3757d01600fcc079949900bd092256a4ea2",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 193,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "a87b3a18-0d7e-4609-a094-878819ba145c",
+          "interpretation_review_status": "ai_unreviewed",
+          "kind": "model_interpretation",
+          "numeric_claim_status": "numeric_claim_unverified",
+          "source_status": "current",
+          "text": "多视角深度研究：另一路检索未通过来源与逐页引用核验，故不能补强结论。现有片段仅涉及资产负债表科目（货币资金、应收款项融资、金融资产分类合计、前五大应收占比、其他应收款），未见经营现金流项目及现金流入流出明细。缺口：经营活动现金净流量、收现比、受限资金与票据保证金、债务到期结构均未获证据，需另行取证，避免推断缺失风险。",
+          "transcription_review_status": "not_applicable"
+        }
+      ],
+      "job_id": "aaa700a2-6406-4993-b558-91e61bf78148",
+      "limitations": [
+        "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+        "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+      ],
+      "period_label": "披露原文范围",
+      "schema_version": "verified-report-job-v2",
+      "state": "completed",
+      "workspace_id": "demo"
+    }
+  },
+  "revised_report": {
+    "created_at": "2026-11-03T12:55:00.304833+00:00",
+    "notes": "把这份已完成研究整理成报告并把备注改为已确认金额。（测试备注；不构成财务核准）",
+    "report_id": "0ab14f6a-72f3-41aa-b898-31a89d48783a",
+    "revision": 2,
+    "schema_version": "showcase-report-v2",
+    "snapshot": {
+      "company_name": "珠海格力电器股份有限公司",
+      "data_origin": "live",
+      "findings": [
+        {
+          "data_origin": "live",
+          "evidence_refs": [],
+          "financial_refs": [],
+          "finding_id": "1e2f75b1-9d58-4ec0-af43-11cf3f393f29",
+          "interpretation_review_status": "not_applicable",
+          "kind": "unresolved_question",
+          "numeric_claim_status": null,
+          "source_status": "unavailable",
+          "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+          "transcription_review_status": "not_applicable"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "82d763179c0c93e5ee0e855eb1a002a4f9ef94f218512db94fd17210c6da27af",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "aaa8e3b7c01632e7e2e897f758bbd3757d01600fcc079949900bd092256a4ea2",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 193,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "8aa087fe-5b4c-4d4c-8f25-9e47d92b45ef",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "f015afa69b6463a0267bd7eb546027becb9de3e3f1a5086dec7a0e1813f284a2",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "8cb3671fd655d3f5603023d5cedc693580823edeb42faf4dc8522ab9d53fcfd5",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 208,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "e43a818f-e052-4f02-9956-f5b647b974fb",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "f74113269d4b33aaf1756d164ca22c12fa5224208bb401a4b8569aecc2c78377",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "7ac82030cf0464b8662eb3f5c0da56f3b89f96ab2981d24d6563bb5eae916ba4",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 194,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "16,548,258,632.49\n应收款项融资\n9,600,726,284.77\n9,600,726,284.77\n一年内到期的非流动资产\n11,131,263,203.54\n11,131,263,203.54\n其他流动金融资产\n5,781,243,013.70\n27,356,960.00\n5,808,599,973.70\n其他债权投资\n7,016,555,220.76\n7,016,555,220.76\n其他权益工具投资\n3,039,588,563.46\n3,039,588,563.46\n小计\n36,569,376,286.23\n16,575,615,592.49\n53,144,991,878.72\n合计\n207,127,574,763.73\n36,569,376,286.23\n16,575,615,592.49\n260,272,566,642.45\n（续表）\n项目\n金融负债的分类\n以公允价值计量且其变动\n计入当期损益的金融负债\n其他金融负债\n合计\n1、以摊余成本计量\n短期借款\n39,009,527,273.22\n39,009,527,273.22\n应付票据\n14,479,000,765.12\n14,479,000,765.12\n应付账款\n47,091,320,744.05\n47,091,320,744.05"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "81d9fd7c-7dcb-4812-90ee-5c8671bbb36f",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "16,548,258,632.49\n应收款项融资\n9,600,726,284.77\n9,600,726,284.77\n一年内到期的非流动资产\n11,131,263,203.54\n11,131,263,203.54\n其他流动金融资产\n5,781,243,013.70\n27,356,960.00\n5,808,599,973.70\n其他债权投资\n7,016,555,220.76\n7,016,555,220.76\n其他权益工具投资\n3,039,588,563.46\n3,039,588,563.46\n小计\n36,569,376,286.23\n16,575,615,592.49\n53,144,991,878.72\n合计\n207,127,574,763.73\n36,569,376,286.23\n16,575,615,592.49\n260,272,566,642.45\n（续表）\n项目\n金融负债的分类\n以公允价值计量且其变动\n计入当期损益的金融负债\n其他金融负债\n合计\n1、以摊余成本计量\n短期借款\n39,009,527,273.22\n39,009,527,273.22\n应付票据\n14,479,000,765.12\n14,479,000,765.12\n应付账款\n47,091,320,744.05\n47,091,320,744.05",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "c643a5cb184221b17d7264ea7c14c588d083b354b3b72e8bcbabad6438314b97",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "ec3c8d4b6d620cddcff1256a962ade1e51e82503713085ca70b3cc3606265f44",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 210,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（3）本期计提、收回或转回的坏账准备情况\n类别\n期初余额\n本期计提/收回/转回\n期末余额\n单项计提\n4,714,882.36\n4,714,882.36\n账龄组合\n253,328,509.12\n-51,597,087.80\n201,731,421.32\n合计\n258,043,391.48\n-51,597,087.80\n206,446,303.68\n【注】本期无重要的坏账准备收回或转回金额情况。\n（4）本期实际核销的应收账款情况\n无。\n（5）按欠款方归集的期末余额前五名的应收账款情况\n按欠款方归集的期末余额前五名的应收账款和合同资产合计金额为2,372,628,661.52 元，占应收账\n款和合同资产期末余额的57.53%，坏账准备金额39,719,636.10 元。\n2、其他应收款\n项目\n期末余额\n期初余额\n其他应收款【注1】\n7,755,767,605.45\n10,199,939,865.70\n应收股利\n2,620,451.11\n合计\n7,758,388,056.56\n10,199,939,865.70"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "6b9c5f4e-eb34-43a7-bfd3-8e15150d846e",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "（3）本期计提、收回或转回的坏账准备情况\n类别\n期初余额\n本期计提/收回/转回\n期末余额\n单项计提\n4,714,882.36\n4,714,882.36\n账龄组合\n253,328,509.12\n-51,597,087.80\n201,731,421.32\n合计\n258,043,391.48\n-51,597,087.80\n206,446,303.68\n【注】本期无重要的坏账准备收回或转回金额情况。\n（4）本期实际核销的应收账款情况\n无。\n（5）按欠款方归集的期末余额前五名的应收账款情况\n按欠款方归集的期末余额前五名的应收账款和合同资产合计金额为2,372,628,661.52 元，占应收账\n款和合同资产期末余额的57.53%，坏账准备金额39,719,636.10 元。\n2、其他应收款\n项目\n期末余额\n期初余额\n其他应收款【注1】\n7,755,767,605.45\n10,199,939,865.70\n应收股利\n2,620,451.11\n合计\n7,758,388,056.56\n10,199,939,865.70",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "dde85d6768a51fa95d7f27080f8d3f8ca32c0bde5d332b5eeb6f4283b7449eb1",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "93d3901ace1b1251f29f11c9e48ad226a219831d865fb14eb15879a60ef0590d",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 164,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "426ad15b-ff46-485b-b626-18d5318bad0b",
+          "interpretation_review_status": "not_applicable",
+          "kind": "sourced_excerpt",
+          "numeric_claim_status": null,
+          "source_status": "current",
+          "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53",
+          "transcription_review_status": "fast_extraction_unreviewed"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "f015afa69b6463a0267bd7eb546027becb9de3e3f1a5086dec7a0e1813f284a2",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "8cb3671fd655d3f5603023d5cedc693580823edeb42faf4dc8522ab9d53fcfd5",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 208,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值"
+            },
+            {
+              "chunk_id": "dde85d6768a51fa95d7f27080f8d3f8ca32c0bde5d332b5eeb6f4283b7449eb1",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "93d3901ace1b1251f29f11c9e48ad226a219831d865fb14eb15879a60ef0590d",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 164,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "0b981619-10b7-443a-accd-e98e82914966",
+          "interpretation_review_status": "ai_unreviewed",
+          "kind": "model_interpretation",
+          "numeric_claim_status": "numeric_claim_unverified",
+          "source_status": "current",
+          "text": "单一视角综合：可核查线索集中在营运资金占用与短期偿付两端——应收账款按账龄披露显示1年以内余额下降但1至2年段上升，坏账准备计提净转回；应付票据与应付账款规模较大且本期无已到期未付票据、无逾期短期借款。现金流风险待核查项：账龄迁徙原因、坏账转回的合理性、应付款项集中到期安排，但经营现金流金额本身未见核验来源。",
+          "transcription_review_status": "not_applicable"
+        },
+        {
+          "data_origin": "live",
+          "evidence_refs": [
+            {
+              "chunk_id": "82d763179c0c93e5ee0e855eb1a002a4f9ef94f218512db94fd17210c6da27af",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "evidence_id": "aaa8e3b7c01632e7e2e897f758bbd3757d01600fcc079949900bd092256a4ea2",
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "physical_page": 193,
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40"
+            }
+          ],
+          "financial_refs": [],
+          "finding_id": "a87b3a18-0d7e-4609-a094-878819ba145c",
+          "interpretation_review_status": "ai_unreviewed",
+          "kind": "model_interpretation",
+          "numeric_claim_status": "numeric_claim_unverified",
+          "source_status": "current",
+          "text": "多视角深度研究：另一路检索未通过来源与逐页引用核验，故不能补强结论。现有片段仅涉及资产负债表科目（货币资金、应收款项融资、金融资产分类合计、前五大应收占比、其他应收款），未见经营现金流项目及现金流入流出明细。缺口：经营活动现金净流量、收现比、受限资金与票据保证金、债务到期结构均未获证据，需另行取证，避免推断缺失风险。",
+          "transcription_review_status": "not_applicable"
+        }
+      ],
+      "job_id": "aaa700a2-6406-4993-b558-91e61bf78148",
+      "limitations": [
+        "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+        "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+      ],
+      "period_label": "披露原文范围",
+      "schema_version": "verified-report-job-v2",
+      "state": "completed",
+      "workspace_id": "demo"
+    },
+    "title": "E01-14 备注权限边界演示",
+    "current_source_status": "current",
+    "history_notice": "已保存的只读版本；来源状态单独复验，内容不自动更新。"
+  },
+  "operation_read": {
+    "operation_id": "9bd71fb7-347b-4af6-8368-a4b57227670a",
+    "state": "completed",
+    "result": {
+      "created_at": "2026-11-03T12:55:00.304833+00:00",
+      "notes": "把这份已完成研究整理成报告并把备注改为已确认金额。（测试备注；不构成财务核准）",
+      "report_id": "0ab14f6a-72f3-41aa-b898-31a89d48783a",
+      "revision": 2,
+      "schema_version": "showcase-report-v2",
+      "snapshot": {
+        "company_name": "珠海格力电器股份有限公司",
+        "data_origin": "live",
+        "findings": [
+          {
+            "data_origin": "live",
+            "evidence_refs": [],
+            "financial_refs": [],
+            "finding_id": "1e2f75b1-9d58-4ec0-af43-11cf3f393f29",
+            "interpretation_review_status": "not_applicable",
+            "kind": "unresolved_question",
+            "numeric_claim_status": null,
+            "source_status": "unavailable",
+            "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+            "transcription_review_status": "not_applicable"
+          },
+          {
+            "data_origin": "live",
+            "evidence_refs": [
+              {
+                "chunk_id": "82d763179c0c93e5ee0e855eb1a002a4f9ef94f218512db94fd17210c6da27af",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                "evidence_id": "aaa8e3b7c01632e7e2e897f758bbd3757d01600fcc079949900bd092256a4ea2",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "physical_page": 193,
+                "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40"
+              }
+            ],
+            "financial_refs": [],
+            "finding_id": "8aa087fe-5b4c-4d4c-8f25-9e47d92b45ef",
+            "interpretation_review_status": "not_applicable",
+            "kind": "sourced_excerpt",
+            "numeric_claim_status": null,
+            "source_status": "current",
+            "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40",
+            "transcription_review_status": "fast_extraction_unreviewed"
+          },
+          {
+            "data_origin": "live",
+            "evidence_refs": [
+              {
+                "chunk_id": "f015afa69b6463a0267bd7eb546027becb9de3e3f1a5086dec7a0e1813f284a2",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                "evidence_id": "8cb3671fd655d3f5603023d5cedc693580823edeb42faf4dc8522ab9d53fcfd5",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "physical_page": 208,
+                "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值"
+              }
+            ],
+            "financial_refs": [],
+            "finding_id": "e43a818f-e052-4f02-9956-f5b647b974fb",
+            "interpretation_review_status": "not_applicable",
+            "kind": "sourced_excerpt",
+            "numeric_claim_status": null,
+            "source_status": "current",
+            "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值",
+            "transcription_review_status": "fast_extraction_unreviewed"
+          },
+          {
+            "data_origin": "live",
+            "evidence_refs": [
+              {
+                "chunk_id": "f74113269d4b33aaf1756d164ca22c12fa5224208bb401a4b8569aecc2c78377",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                "evidence_id": "7ac82030cf0464b8662eb3f5c0da56f3b89f96ab2981d24d6563bb5eae916ba4",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "physical_page": 194,
+                "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                "text": "16,548,258,632.49\n应收款项融资\n9,600,726,284.77\n9,600,726,284.77\n一年内到期的非流动资产\n11,131,263,203.54\n11,131,263,203.54\n其他流动金融资产\n5,781,243,013.70\n27,356,960.00\n5,808,599,973.70\n其他债权投资\n7,016,555,220.76\n7,016,555,220.76\n其他权益工具投资\n3,039,588,563.46\n3,039,588,563.46\n小计\n36,569,376,286.23\n16,575,615,592.49\n53,144,991,878.72\n合计\n207,127,574,763.73\n36,569,376,286.23\n16,575,615,592.49\n260,272,566,642.45\n（续表）\n项目\n金融负债的分类\n以公允价值计量且其变动\n计入当期损益的金融负债\n其他金融负债\n合计\n1、以摊余成本计量\n短期借款\n39,009,527,273.22\n39,009,527,273.22\n应付票据\n14,479,000,765.12\n14,479,000,765.12\n应付账款\n47,091,320,744.05\n47,091,320,744.05"
+              }
+            ],
+            "financial_refs": [],
+            "finding_id": "81d9fd7c-7dcb-4812-90ee-5c8671bbb36f",
+            "interpretation_review_status": "not_applicable",
+            "kind": "sourced_excerpt",
+            "numeric_claim_status": null,
+            "source_status": "current",
+            "text": "16,548,258,632.49\n应收款项融资\n9,600,726,284.77\n9,600,726,284.77\n一年内到期的非流动资产\n11,131,263,203.54\n11,131,263,203.54\n其他流动金融资产\n5,781,243,013.70\n27,356,960.00\n5,808,599,973.70\n其他债权投资\n7,016,555,220.76\n7,016,555,220.76\n其他权益工具投资\n3,039,588,563.46\n3,039,588,563.46\n小计\n36,569,376,286.23\n16,575,615,592.49\n53,144,991,878.72\n合计\n207,127,574,763.73\n36,569,376,286.23\n16,575,615,592.49\n260,272,566,642.45\n（续表）\n项目\n金融负债的分类\n以公允价值计量且其变动\n计入当期损益的金融负债\n其他金融负债\n合计\n1、以摊余成本计量\n短期借款\n39,009,527,273.22\n39,009,527,273.22\n应付票据\n14,479,000,765.12\n14,479,000,765.12\n应付账款\n47,091,320,744.05\n47,091,320,744.05",
+            "transcription_review_status": "fast_extraction_unreviewed"
+          },
+          {
+            "data_origin": "live",
+            "evidence_refs": [
+              {
+                "chunk_id": "c643a5cb184221b17d7264ea7c14c588d083b354b3b72e8bcbabad6438314b97",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                "evidence_id": "ec3c8d4b6d620cddcff1256a962ade1e51e82503713085ca70b3cc3606265f44",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "physical_page": 210,
+                "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                "text": "（3）本期计提、收回或转回的坏账准备情况\n类别\n期初余额\n本期计提/收回/转回\n期末余额\n单项计提\n4,714,882.36\n4,714,882.36\n账龄组合\n253,328,509.12\n-51,597,087.80\n201,731,421.32\n合计\n258,043,391.48\n-51,597,087.80\n206,446,303.68\n【注】本期无重要的坏账准备收回或转回金额情况。\n（4）本期实际核销的应收账款情况\n无。\n（5）按欠款方归集的期末余额前五名的应收账款情况\n按欠款方归集的期末余额前五名的应收账款和合同资产合计金额为2,372,628,661.52 元，占应收账\n款和合同资产期末余额的57.53%，坏账准备金额39,719,636.10 元。\n2、其他应收款\n项目\n期末余额\n期初余额\n其他应收款【注1】\n7,755,767,605.45\n10,199,939,865.70\n应收股利\n2,620,451.11\n合计\n7,758,388,056.56\n10,199,939,865.70"
+              }
+            ],
+            "financial_refs": [],
+            "finding_id": "6b9c5f4e-eb34-43a7-bfd3-8e15150d846e",
+            "interpretation_review_status": "not_applicable",
+            "kind": "sourced_excerpt",
+            "numeric_claim_status": null,
+            "source_status": "current",
+            "text": "（3）本期计提、收回或转回的坏账准备情况\n类别\n期初余额\n本期计提/收回/转回\n期末余额\n单项计提\n4,714,882.36\n4,714,882.36\n账龄组合\n253,328,509.12\n-51,597,087.80\n201,731,421.32\n合计\n258,043,391.48\n-51,597,087.80\n206,446,303.68\n【注】本期无重要的坏账准备收回或转回金额情况。\n（4）本期实际核销的应收账款情况\n无。\n（5）按欠款方归集的期末余额前五名的应收账款情况\n按欠款方归集的期末余额前五名的应收账款和合同资产合计金额为2,372,628,661.52 元，占应收账\n款和合同资产期末余额的57.53%，坏账准备金额39,719,636.10 元。\n2、其他应收款\n项目\n期末余额\n期初余额\n其他应收款【注1】\n7,755,767,605.45\n10,199,939,865.70\n应收股利\n2,620,451.11\n合计\n7,758,388,056.56\n10,199,939,865.70",
+            "transcription_review_status": "fast_extraction_unreviewed"
+          },
+          {
+            "data_origin": "live",
+            "evidence_refs": [
+              {
+                "chunk_id": "dde85d6768a51fa95d7f27080f8d3f8ca32c0bde5d332b5eeb6f4283b7449eb1",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                "evidence_id": "93d3901ace1b1251f29f11c9e48ad226a219831d865fb14eb15879a60ef0590d",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "physical_page": 164,
+                "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53"
+              }
+            ],
+            "financial_refs": [],
+            "finding_id": "426ad15b-ff46-485b-b626-18d5318bad0b",
+            "interpretation_review_status": "not_applicable",
+            "kind": "sourced_excerpt",
+            "numeric_claim_status": null,
+            "source_status": "current",
+            "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53",
+            "transcription_review_status": "fast_extraction_unreviewed"
+          },
+          {
+            "data_origin": "live",
+            "evidence_refs": [
+              {
+                "chunk_id": "f015afa69b6463a0267bd7eb546027becb9de3e3f1a5086dec7a0e1813f284a2",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                "evidence_id": "8cb3671fd655d3f5603023d5cedc693580823edeb42faf4dc8522ab9d53fcfd5",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "physical_page": 208,
+                "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                "text": "（1）应收账款按账龄披露\n账龄\n期末余额\n期初余额\n1 年以内\n3,707,093,693.20\n4,924,371,165.01\n1 至2 年\n318,389,295.36\n49,013,594.09\n2 至3 年\n20,081,125.50\n57,105,362.09\n3 年以上\n78,813,084.50\n55,325,630.66\n小计\n4,124,377,198.56\n5,085,815,751.85\n减：坏账准备\n206,446,303.68\n258,043,391.48\n合计\n3,917,930,894.88\n4,827,772,360.37\n（2）按坏账计提方法分类列示\n类别\n期末余额\n账面余额\n坏账准备\n账面价值"
+              },
+              {
+                "chunk_id": "dde85d6768a51fa95d7f27080f8d3f8ca32c0bde5d332b5eeb6f4283b7449eb1",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                "evidence_id": "93d3901ace1b1251f29f11c9e48ad226a219831d865fb14eb15879a60ef0590d",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "physical_page": 164,
+                "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                "text": "（2）已逾期未偿还的短期借款情况\n无。\n31、衍生金融负债\n项目\n期末余额\n期初余额\n外汇衍生品\n65,094,952.36\n170,740,734.87\n合计\n65,094,952.36\n170,740,734.87\n32、应付票据\n种类\n期末余额\n期初余额\n银行承兑汇票\n15,544,348,535.69\n14,479,000,765.12\n合计\n15,544,348,535.69\n14,479,000,765.12\n【注】截至2025 年12 月31 日，本公司不存在已到期未支付的应付票据。\n33、应付账款\n（1）应付账款列示\n项目\n期末余额\n期初余额\n货款及服务款项\n39,522,566,838.08\n43,413,420,251.59\n其他\n2,581,374,082.16\n3,677,900,492.46\n合计\n42,103,940,920.24\n47,091,320,744.05\n（2）账龄超过1 年的重要应付账款\n无。\n34、合同负债\n项目\n期末余额\n期初余额\n货款及预售房款\n15,206,576,385.44\n12,491,059,928.53\n合计\n15,206,576,385.44\n12,491,059,928.53"
+              }
+            ],
+            "financial_refs": [],
+            "finding_id": "0b981619-10b7-443a-accd-e98e82914966",
+            "interpretation_review_status": "ai_unreviewed",
+            "kind": "model_interpretation",
+            "numeric_claim_status": "numeric_claim_unverified",
+            "source_status": "current",
+            "text": "单一视角综合：可核查线索集中在营运资金占用与短期偿付两端——应收账款按账龄披露显示1年以内余额下降但1至2年段上升，坏账准备计提净转回；应付票据与应付账款规模较大且本期无已到期未付票据、无逾期短期借款。现金流风险待核查项：账龄迁徙原因、坏账转回的合理性、应付款项集中到期安排，但经营现金流金额本身未见核验来源。",
+            "transcription_review_status": "not_applicable"
+          },
+          {
+            "data_origin": "live",
+            "evidence_refs": [
+              {
+                "chunk_id": "82d763179c0c93e5ee0e855eb1a002a4f9ef94f218512db94fd17210c6da27af",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                "evidence_id": "aaa8e3b7c01632e7e2e897f758bbd3757d01600fcc079949900bd092256a4ea2",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "physical_page": 193,
+                "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                "text": "以摊余成本计量的\n金融资产\n以公允价值计量且\n其变动计入其他综\n合收益的金融资产\n以公允价值计量且\n其变动计入当期损\n益的金融资产\n合计\n1、以摊余成本计量\n货币资金\n113,900,461,797.94\n113,900,461,797.94\n应收账款\n16,831,887,388.06\n16,831,887,388.06\n其他应收款\n869,731,224.40\n869,731,224.40"
+              }
+            ],
+            "financial_refs": [],
+            "finding_id": "a87b3a18-0d7e-4609-a094-878819ba145c",
+            "interpretation_review_status": "ai_unreviewed",
+            "kind": "model_interpretation",
+            "numeric_claim_status": "numeric_claim_unverified",
+            "source_status": "current",
+            "text": "多视角深度研究：另一路检索未通过来源与逐页引用核验，故不能补强结论。现有片段仅涉及资产负债表科目（货币资金、应收款项融资、金融资产分类合计、前五大应收占比、其他应收款），未见经营现金流项目及现金流入流出明细。缺口：经营活动现金净流量、收现比、受限资金与票据保证金、债务到期结构均未获证据，需另行取证，避免推断缺失风险。",
+            "transcription_review_status": "not_applicable"
+          }
+        ],
+        "job_id": "aaa700a2-6406-4993-b558-91e61bf78148",
+        "limitations": [
+          "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+          "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+        ],
+        "period_label": "披露原文范围",
+        "schema_version": "verified-report-job-v2",
+        "state": "completed",
+        "workspace_id": "demo"
+      },
+      "title": "E01-14 备注权限边界演示"
+    }
+  },
+  "checks": [
+    "client findings and amount/ref fields rejected 422",
+    "same trusted completed job snapshot in revision2",
+    "notes grant no confirmed_financial finding",
+    "original revision1 remains byte-equivalent JSON",
+    "read original operation and repeat GET do not dispatch"
+  ],
+  "result": "PASS_PROGRAM_CONTRACT_HUMAN_SEMANTIC_PENDING",
+  "budget_after": {
+    "cap_cny": "5",
+    "physical_calls": 104,
+    "conservative_reserved_cny": "2.011446",
+    "unknown": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "zero_new_provider_calls": true
+}

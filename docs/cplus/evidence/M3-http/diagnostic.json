@@ -1,0 +1,45 @@
+{
+  "kind": "ONE_BOUNDED_DIAGNOSTIC_REAL_PROVIDER",
+  "budget_before": {
+    "cap_cny": "5",
+    "calls": 76,
+    "conservative_reserved_cny": "1.436016",
+    "usage_reported_calls": 73,
+    "input_tokens": 66451,
+    "output_tokens": 9048,
+    "unknown_calls": 3,
+    "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+    "actual_billed_cny": "not_observed"
+  },
+  "result": "FAILED",
+  "safe_cause_chain": [
+    {
+      "type": "TimeoutError",
+      "http_status": null
+    },
+    {
+      "type": "APITimeoutError",
+      "http_status": null
+    },
+    {
+      "type": "ReadTimeout",
+      "http_status": null
+    },
+    {
+      "type": "ReadTimeout",
+      "http_status": null
+    }
+  ],
+  "elapsed_seconds": 12.38,
+  "budget_after": {
+    "cap_cny": "5",
+    "calls": 77,
+    "conservative_reserved_cny": "1.441018",
+    "usage_reported_calls": 73,
+    "input_tokens": 66451,
+    "output_tokens": 9048,
+    "unknown_calls": 4,
+    "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+    "actual_billed_cny": "not_observed"
+  }
+}

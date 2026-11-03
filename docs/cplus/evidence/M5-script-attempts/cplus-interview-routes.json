@@ -1,0 +1,48 @@
+{
+  "tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
+  "provider_calls": 0,
+  "human_financial_approvals": 0,
+  "routes": [
+    {
+      "name": "A-company-discovery",
+      "checks": [
+        "new seed has five actual READY PDFs",
+        "manifest-bound five candidate series verified against sources",
+        "V3 real homepage no overflow 1440",
+        "V3 real homepage no overflow 1280",
+        "V3 real homepage no overflow 390"
+      ],
+      "started_at": "2026-11-03T11:11:01.815Z",
+      "result": "FAIL",
+      "error": "Error: explicit official candidate reuses public cache with current binding",
+      "visible_text": "演示会话 · 剩余约 19:52 · 财务核对需所有者授权\n退出演示\n所有者授权\n跳到主要内容\nFinDoc.\nANALYST\nDEMO\nF\n财报研究空间\n资料、研究与报告\n工作空间\n首页\nAI 研究助手\n企业与资料\n研究任务\n我的报告\n让每个结论都有据可查\n\n回到原文，核对数据，\n再形成你的研究结论。\n\n研\n本地研究者\n单人研究空间\n工作空间\n企业与资料\n财报研究工作台\n查找上市公司与官方年报\n\n企业与资料\n\n查找并导入年报\n\n选择证券和公告后再导入；候选信息不等于财务核准。\n\n导入已登记，正在只读查询资料处理状态。\n\n1 · 查找企业\n代码、简称或拼音\n搜索企业\n海尔智家 · 600690\nSSE\n法定全称待封面核验\n海尔智家 · 06690\n港股 · 暂不支持导入\n法定全称待封面核验\n2 · 选择公告\n\n已选 海尔智家 · 600690 · SSE。\n\n报告年度\n公告类型\n年度报告全文\n摘要\n查找公告\n海尔智家股份有限公司2025年年度报告（英文版）\n2025 · 全文 · 英文 · 更正状态未知\n海尔智家股份有限公司2025年年度报告\n2025 · 全文 · 中文 · 更正状态未知\n3 · 确认导入\n\n已选：海尔智家股份有限公司2025年年度报告\n\n将导入已有企业 海尔智家股份有限公司。\n\n确认下载并导入\n\n查看官方公告\n\n等待处理状态\n\n文件处理就绪不代表财务数据已确认。\n\n前往官方站查询 · 手动上传资料\n\nCOMPANIES & DOCUMENTS\n\n企业与资料\n\n选择企业查看年报、核对财务数据，或开展新的研究。\n\n我的企业\n珠海格力电器股份有限公司\n\n000651 · SZSE\n\n企业概览\n财报资料\n财务分析\n原文问答\n美的集团股份有限公司\n\n000333 · SZSE\n\n企业概览\n财报资料\n财务分析\n原文问答\n海尔智家股份有限公司\n\n600690 · SSE\n\n企业概览\n财报资料\n财务分析\n原文问答\n目录中没有要研究的企业？建立企业\nFinDoc · AI 研究工作台\n年报原文 · 数值核对 · AI 解读",
+      "ended_at": "2026-11-03T11:11:05.803Z"
+    },
+    {
+      "name": "B-point-memory-evidence",
+      "checks": [
+        "one 2025 filing contains exact 2024 and 2025 revenue periods",
+        "real comparative candidate trend created",
+        "server-resolved focus preserves comparative period and refuses finance authority"
+      ],
+      "started_at": "2026-11-03T11:11:05.803Z",
+      "result": "FAIL",
+      "error": "TimeoutError: locator.waitFor: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('原文与OCR研究', { exact: true }).getByRole('button', { name: '收藏这条证据', exact: true }).first() to be visible\u001b[22m\n",
+      "visible_text": "演示会话 · 剩余约 18:16 · 财务核对需所有者授权\n退出演示\n所有者授权\n跳到主要内容\nFinDoc.\nANALYST\nDEMO\nF\n财报研究空间\n资料、研究与报告\n工作空间\n首页\nAI 研究助手\n企业与资料\n研究任务\n我的报告\n让每个结论都有据可查\n\n回到原文，核对数据，\n再形成你的研究结论。\n\n研\n本地研究者\n单人研究空间\n工作空间\nAI 研究助手\n财报研究工作台\n固定资料 · 原文研究\n让每个判断，都能回到原文\n\n选择完整年报或真实 OCR 转录，固定研究范围后提问。解释始终待审，财务核准独立进行。\n\n资料\n选择研究资料\n000651-2025.pdf · 全文就绪\n000651-2024.pdf · 全文就绪\n000333-2025.pdf · 全文就绪\n美的2025_公开原文第9页_派生扫描示例.pdf · 需查看解析质量\n000333-2024.pdf · 全文就绪\n600690-2025.pdf · 全文就绪\n研究方式\n已核验身份的完整年报\nOCR 文件转录 · 身份未核验\n读取资料身份\n\n已核验图表焦点：revenue · 2024-01-01 至 2024-12-31 · 待核对\n\n研究范围已固定 · 1 份资料 · 完整年报 · 跨问题保持同一资料版本\n\n研究问题\n提交研究问题 重新选择范围\n请结合所选年报原文，说明2024-01-01 至 2024-12-31的营业收入相关披露。 研究焦点：revenue，实际期间 2024-01-01 至 2024-12-31。图中数据是待核对观察，不代表财务核准。\n\n证据不足 · 未强行生成\n\n研究收藏与跨会话记忆\n批量研究 · 两家公司 × 两类原文任务\n财报研究助手\n\n围绕明确选择的年报连续研究，回到原文核对每条回答。\n\n单次原文核验 / 历史问答\n我的会话\n重新读取会话\n新会话\n珠海格力电器股份有限公司 2025\n新建会话\n开始新的研究\n\n先选择 1–4 份年报并创建会话\n\n选择年报\n我的研究偏好\n研究记忆与偏好\n从年报原文开始\n\n示例只填入草稿，不自动发送。\n\n这份年报中的营业收入原文是什么？\n经营活动现金流有哪些说明？\n请找到主要业务风险的原文出处。\n研究问题\n\n先创建会话，再明确发送问题。\n\n发送\n\n本地单人研究空间。必要的问题与证据会发送给所配置的模型供应商；来源资格与计算时验证不代替人工语义审读。\n\nFinDoc · AI 研究工作台\n年报原文 · 数值核对 · AI 解读",
+      "ended_at": "2026-11-03T11:12:41.151Z"
+    },
+    {
+      "name": "C-two-year-business-batch",
+      "checks": [],
+      "started_at": "2026-11-03T11:12:41.152Z",
+      "result": "FAIL",
+      "error": "TimeoutError: page.waitForResponse: Timeout 30000ms exceeded while waiting for event \"response\"",
+      "visible_text": "演示会话 · 剩余约 17:43 · 财务核对需所有者授权\n退出演示\n所有者授权\n跳到主要内容\nFinDoc.\nANALYST\nDEMO\nF\n财报研究空间\n资料、研究与报告\n工作空间\n首页\nAI 研究助手\n企业与资料\n研究任务\n我的报告\n让每个结论都有据可查\n\n回到原文，核对数据，\n再形成你的研究结论。\n\n研\n本地研究者\n单人研究空间\n工作空间\n企业与资料\n财报研究工作台\n\n企业研究 / 财务资料\n\n珠海格力电器股份有限公司\n\n按明确选择的报告与期间查看，候选数值需人工核对。\n\n企业概览\n三大报表\n财报体检\n关键指标与趋势\n营业收入\n\n缺少已选择且可用的数据\n\n归母净利润\n\n缺少已选择且可用的数据\n\n经营现金流\n\n缺少已选择且可用的数据\n\n总资产\n\n缺少已选择且可用的数据\n\n总负债\n\n缺少已选择且可用的数据\n\n准备研究问题\n资料覆盖 · 2 份资料\n\n只读来源核验完成。 刷新进阶研究资料\n\n跨年经营变化 · 双侧原文\n跨年经营变化\n\n选择同一企业的两份固定版本报告，分别查看原文；检索不到不代表未披露。\n\n存在待核对操作。查询原操作\n\n左侧报告\n请选择\n2025 年报 · 6086c34f\n2024 年报 · 6947e0bf\n右侧报告\n请选择\n2025 年报 · 6086c34f\n2024 年报 · 6947e0bf\n比较主题\n经营风险\n主要业务\n研发\n开始对比\n\n本次只检索和对照原文，不请求 AI 解释。\n\n同行对标 · 明确选择可比数据\n主营业务结构 · 产品与地区\nAI 体检解释 · 从程序规则到核查建议\n研究模板与指标释义\nFinDoc · AI 研究工作台\n年报原文 · 数值核对 · AI 解读",
+      "ended_at": "2026-11-03T11:13:14.335Z"
+    }
+  ],
+  "page_errors": [],
+  "seed_version": "showcase-cplus-seed-v3",
+  "result": "PARTIAL",
+  "video_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-interview-routes/page@47836513253b1dc4f77db2450776306d.webm"
+}

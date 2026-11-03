@@ -1,0 +1,246 @@
+{
+  "implementation_sha256": "a412be0fb9f84bbe5eb895be3e849eff78713d452f2500e01dfebe75328974b9",
+  "tier": "REAL_PDF_BGE_MILVUS_AND_EXISTING_VISION_ARTIFACT",
+  "llm_calls": 0,
+  "financial_approvals": 0,
+  "seed_manifest_sha256": "efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4",
+  "results": [
+    {
+      "case_id": "risk-general",
+      "query": "2025年报主要经营风险有哪些",
+      "pages": [
+        38,
+        39,
+        121,
+        27,
+        27
+      ],
+      "scores": [
+        {
+          "dense_cosine": 0.6085245609283447,
+          "fusion_score": 0.03252247488101534,
+          "rerank_score": 0.08152247488101534
+        },
+        {
+          "dense_cosine": 0.5411956310272217,
+          "fusion_score": 0.030886196246139225,
+          "rerank_score": 0.07988619624613923
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015625,
+          "rerank_score": 0.048625
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015151515151515152,
+          "rerank_score": 0.048151515151515153
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014925373134328358,
+          "rerank_score": 0.04792537313432836
+        }
+      ]
+    },
+    {
+      "case_id": "risk-material",
+      "query": "年报中如何描述原材料价格波动风险",
+      "pages": [
+        39,
+        38,
+        121,
+        27,
+        27
+      ],
+      "scores": [
+        {
+          "dense_cosine": 0.543123722076416,
+          "fusion_score": 0.02921395544346364,
+          "rerank_score": 0.08621395544346364
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015873015873015872,
+          "rerank_score": 0.06487301587301587
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015384615384615385,
+          "rerank_score": 0.04838461538461539
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014925373134328358,
+          "rerank_score": 0.04792537313432836
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014492753623188406,
+          "rerank_score": 0.04749275362318841
+        }
+      ]
+    },
+    {
+      "case_id": "risk-competition",
+      "query": "公司面临的市场竞争风险",
+      "pages": [
+        39,
+        38,
+        121,
+        27,
+        27
+      ],
+      "scores": [
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.01639344262295082,
+          "rerank_score": 0.06539344262295083
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.016129032258064516,
+          "rerank_score": 0.06512903225806452
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015625,
+          "rerank_score": 0.048625
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015384615384615385,
+          "rerank_score": 0.04838461538461539
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015151515151515152,
+          "rerank_score": 0.048151515151515153
+        }
+      ]
+    },
+    {
+      "case_id": "risk-overseas",
+      "query": "海外市场与汇率波动风险",
+      "pages": [
+        39,
+        38,
+        121,
+        27,
+        27
+      ],
+      "scores": [
+        {
+          "dense_cosine": 0.572533130645752,
+          "fusion_score": 0.03047794966520434,
+          "rerank_score": 0.07947794966520434
+        },
+        {
+          "dense_cosine": 0.533783495426178,
+          "fusion_score": 0.029116045245077504,
+          "rerank_score": 0.07811604524507751
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015625,
+          "rerank_score": 0.048625
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015384615384615385,
+          "rerank_score": 0.04838461538461539
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015151515151515152,
+          "rerank_score": 0.048151515151515153
+        }
+      ]
+    },
+    {
+      "case_id": "business",
+      "query": "公司主要业务和主要产品",
+      "pages": [
+        49,
+        121,
+        31,
+        44,
+        178
+      ],
+      "scores": [
+        {
+          "dense_cosine": 0.424923300743103,
+          "fusion_score": 0.01639344262295082,
+          "rerank_score": 0.01639344262295082
+        },
+        {
+          "dense_cosine": 0.41037172079086304,
+          "fusion_score": 0.015151515151515152,
+          "rerank_score": 0.015151515151515152
+        },
+        {
+          "dense_cosine": 0.40755927562713623,
+          "fusion_score": 0.014925373134328358,
+          "rerank_score": 0.014925373134328358
+        },
+        {
+          "dense_cosine": 0.4058094620704651,
+          "fusion_score": 0.014492753623188406,
+          "rerank_score": 0.014492753623188406
+        },
+        {
+          "dense_cosine": 0.4053535461425781,
+          "fusion_score": 0.014285714285714285,
+          "rerank_score": 0.014285714285714285
+        }
+      ]
+    },
+    {
+      "case_id": "cashflow",
+      "query": "摘录经营活动产生的现金流量净额原文",
+      "pages": [
+        126,
+        158,
+        149,
+        149,
+        158
+      ],
+      "scores": [
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.016129032258064516,
+          "rerank_score": 0.024129032258064516
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.015384615384615385,
+          "rerank_score": 0.023384615384615386
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014925373134328358,
+          "rerank_score": 0.02292537313432836
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014705882352941176,
+          "rerank_score": 0.022705882352941176
+        },
+        {
+          "dense_cosine": null,
+          "fusion_score": 0.014285714285714285,
+          "rerank_score": 0.022285714285714284
+        }
+      ]
+    }
+  ],
+  "ocr_indexed": 68,
+  "ocr_hits": 1,
+  "ocr_legacy_ready": false,
+  "model_revision": "unknown",
+  "limitations": [
+    "No model answer execution",
+    "Ranking/page diagnostics are not human semantic precision",
+    "Historical entrusted-finance failure is a separate run"
+  ]
+}

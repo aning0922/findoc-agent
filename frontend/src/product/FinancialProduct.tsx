@@ -21,6 +21,11 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { AppShell, pathFor } from "./AppShell.tsx";
 import { readProductRoute } from "./productRoutes.ts";
 import { CompanyDirectory } from "./CompanyDirectory.tsx";
+import { CompanyDiscoveryPanel } from "./cplus/sources/CompanyDiscoveryPanel.tsx";
+import { CPlusCompanyEntry } from "./cplus/profile/CPlusCompanyEntry.tsx";
+import { DocumentResearchPanel } from "./cplus/research/DocumentResearchPanel.tsx";
+import { CPlusExportPanel } from "./cplus/exports/CPlusExportPanel.tsx";
+import { BatchResearchEntry } from "./cplus/batch/BatchResearchEntry.tsx";
 import type { Page } from "./AppShell.tsx";
 import { METRICS } from "../evidence/contracts.ts";
 import {
@@ -47,6 +52,7 @@ import "./tokens.css";
 import "./shell.css";
 import "./product.css";
 import './foundation.css';
+import './cplus/modules.css';
 const FinancialChart = lazy(() => import("./FinancialChart.tsx"));
 const Conversations = lazy(() => import('./Conversations.tsx'));
 function readRoute() {
@@ -100,6 +106,8 @@ export default function FinancialProduct({
   }
 
   const company = companies.find((c) => c.company_id === route.company);
+  const cplus = import.meta.env.VITE_FINDOC_CPLUS_MODE === '1';
+  const discovery = cplus ? <details className="product-card cplus-module-card" open={route.page === 'companies'}><summary>查找上市公司与官方年报</summary><CompanyDiscoveryPanel companies={companies} onImported={(id) => { window.location.assign(pathFor('overview', id)); }} /></details> : null;
   return (
     <AppShell
       key={`${route.key}:${historyEpoch}`}
@@ -117,19 +125,19 @@ export default function FinancialProduct({
           <button onClick={() => setRetry((n) => n + 1)}>重试读取</button>
         </section>
       ) : route.home ? (
-        <ResearchHome
+        <><ResearchHome
           key={route.company}
           companies={companies}
           company={route.company}
           access={access}
-        />
+        /></>
       ) : route.page === "tasks" ? (
         <><ShowcaseArchivePanel kind="job" /><ResearchTasks companies={companies} /></>
       ) : route.page === "companies" ? (
-        <CompanyDirectory companies={companies} loading={companiesLoading} />
+        <>{discovery}<CompanyDirectory companies={companies} loading={companiesLoading} /></>
       ) : route.page === 'conversations' ? (
         <Suspense fallback={<p role="status">正在打开研究助手…</p>}>
-          <Conversations companies={companies} />
+          <>{cplus&&<><DocumentResearchPanel/><details className="product-card cplus-module-card"><summary>批量研究 · 两家公司 × 两类原文任务</summary><BatchResearchEntry companies={companies}/></details></>}<Conversations companies={companies} /></>
         </Suspense>
       ) : route.page === "research" ? (
         <ResearchWorkbench
@@ -140,7 +148,7 @@ export default function FinancialProduct({
           chooseCompany={(id) => navigate("research", id)}
         />
       ) : route.page === "reports" ? (
-        <><ShowcaseArchivePanel kind="report" /><ShowcaseReportsEntry /><details open={new URLSearchParams(location.search).has("report") || new URLSearchParams(location.search).has("task")}><summary>经营研究历史报告（V1.2）</summary><ReportPreview
+        <>{cplus&&<CPlusExportPanel/>}<ShowcaseArchivePanel kind="report" /><ShowcaseReportsEntry /><details open={new URLSearchParams(location.search).has("report") || new URLSearchParams(location.search).has("task")}><summary>经营研究历史报告（V1.2）</summary><ReportPreview
           key={route.key}
           companies={companies}
           access={access}
@@ -152,6 +160,8 @@ export default function FinancialProduct({
           company={route.company}
           companies={companies}
         />
+      ) : cplus && company && route.page === 'overview' ? (
+        <CPlusCompanyEntry companyId={company.company_id} companies={companies}/>
       ) : company ? (
         <CompanySession
           key={route.key}

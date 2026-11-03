@@ -1,0 +1,58 @@
+{
+  "schema_version": "cplus-real-agent-paths-v1",
+  "tier": "OPERATOR_REAL_HTTP_GUARDED_SDK",
+  "execution": "STOPPED_WITH_RECEIPTS_NO_REPLAY",
+  "max_new_calls": 12,
+  "budget_before": {
+    "cap_cny": "5",
+    "physical_guard_rows": 81,
+    "reserved_cny": "1.547636",
+    "unknown_rows": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "physical_denominator": "new existing guarded SDK reservation/attempt rows; not billed cost or accepted-answer count",
+  "logical_denominator": "sr_budgets.attempts from each final job.usage; tool reservations are separate",
+  "operations": [],
+  "reads": [
+    {
+      "path": "/demo/status",
+      "params": null,
+      "status": 200
+    }
+  ],
+  "cases": [],
+  "financial_approvals": 0,
+  "full_human_answer_acceptance": false,
+  "paired_same_question_comparison": false,
+  "original_unknown_policy": "baseline unknown rows retained; never retried/refunded",
+  "readonly_recoveries": [],
+  "budget_after": {
+    "cap_cny": "5",
+    "physical_guard_rows": 81,
+    "reserved_cny": "1.547636",
+    "unknown_rows": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "new_guard_rows": {},
+  "new_guard_rows_count": 0,
+  "old_unknown_state_changes": {},
+  "script_sha256": "ff8f172e7002256218f42187102186f972399762b41d46e4b41d7753fa2844d8",
+  "fixed_cases_sha256": "ce1899994a71f1119464b216c19c5f6fe90fa38ece483b7d616647c505f034f8",
+  "source_contract_baseline": "e510876",
+  "runner_checkout_head": "2f71d39a5a2aacf59d017a17bfc60e80309c5dca",
+  "audited_contract_sha256": {
+    "app/showcase_research/api.py": "aecd7a348b17eb333012d0e54b91d80f1068320b67894d61346613e98936d9fe",
+    "app/showcase_research/models.py": "c50a664eedfa95f9b6cf34959b59690360c99027783d47bf83b723fdaf8ed8ac",
+    "app/showcase_research/jobs.py": "00af57b98751e2bc060eeeba452c80a5a75b433d5fcccd0a23b9e1ca0eb7ba09",
+    "app/showcase_research/agents.py": "536e8c6a6b9978194c73256db06ea79a0314676a1bed53d2b855016b5897aaad",
+    "app/showcase_research/provider.py": "2ebd437c7b446d023ba565549b9c9b54bdb81aa599dce3cbfc3654f84c846281",
+    "app/conversations/models.py": "fc4da1cb9b39b527699df083f3c14f6908d98ad956943e457b436e4d29ce8a0a",
+    "app/showcase_reports/api.py": "5232992b8c003da369ac432e7b70a46eae17baf10cfe65575aecc7e6a6c92e06",
+    "app/showcase_reports/research_adapter.py": "09dfcb035ec71481fc70ff429968bb0d12e05f4f28dd92187983bcf92c13cbea"
+  },
+  "origin": "http://127.0.0.1:14542",
+  "stop": {
+    "type": "JSONDecodeError",
+    "reason": "Expecting value: line 1 column 1 (char 0)"
+  }
+}

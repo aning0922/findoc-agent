@@ -1,0 +1,43 @@
+{
+  "tier": "REAL_REACT_HTTP_PUBLIC_PDF_CANDIDATE_FILES",
+  "provider_calls": 0,
+  "human_approvals": 0,
+  "checks": [
+    "real two-company candidate comparison saved",
+    "explicit export produced all three artifact links",
+    "domain and exact saved version resolved",
+    "actual csv downloaded",
+    "real Decimal survives CSV export",
+    "actual xlsx downloaded",
+    "actual pptx downloaded",
+    "actual browser print generated PDF from same saved ref",
+    "real report center no overflow 1440",
+    "real report center no overflow 1280",
+    "real report center no overflow 390"
+  ],
+  "peer_result_id": "3d1d4175-2c06-41f8-9c43-3c6771570a2b",
+  "report_ref": {
+    "domain": "peer_comparison_v1",
+    "id": "3d1d4175-2c06-41f8-9c43-3c6771570a2b",
+    "revision": 1,
+    "payload_sha256": "3ce574488a9c9081a70982362967ad574d5778205b20092b564535dee925df49"
+  },
+  "files": [
+    {
+      "format": "csv",
+      "bytes": 19906,
+      "sha256": "b4d124b31bd2ac6bb72ecd055d3822c387c8ca0c1698ae45ddc14098881b04a8"
+    },
+    {
+      "format": "xlsx",
+      "bytes": 14574,
+      "sha256": "63551909fde6d740674dd7452efcb2471582bd757c686a4ac83ec990b962e188"
+    },
+    {
+      "format": "pptx",
+      "bytes": 53065,
+      "sha256": "6a398f7da0c10f2d966d77f5d108a184b086378107ce6dfe13b90e400243801c"
+    }
+  ],
+  "result": "PASS"
+}

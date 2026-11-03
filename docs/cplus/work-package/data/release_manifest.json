@@ -1,0 +1,190 @@
+{
+  "name": "FinDoc C+ Job-seeking Agent Work Package",
+  "type": "planning_not_implementation",
+  "created_at": "2026-11-03",
+  "baseline_repo": "aning0922/findoc-agent",
+  "baseline_branch": "codex/findoc-showcase-c-integration",
+  "baseline_sha": "45d55d75662f01d9bc78da1a946d845a01a27480",
+  "feature_count": 16,
+  "task_count": 42,
+  "prototype_evidence_tier": "UI_MOCK_BROWSER_ONLY",
+  "includes_real_pdf_or_seed": false,
+  "contains_credentials": false,
+  "files": [
+    {
+      "path": "00_BASELINE_AND_DECISIONS.md",
+      "size_bytes": 4474,
+      "sha256": "f2405d088f32740c09b6f1dde669d8005decdcc2cee510a97953339654161db7"
+    },
+    {
+      "path": "01_PRODUCT_VISION_JOURNEYS.md",
+      "size_bytes": 4154,
+      "sha256": "66d3949c8351c65f395974f1fca7c08a92c4e34145e6be38c194e04896a6c7d9"
+    },
+    {
+      "path": "02_FEATURE_SPEC_F19_F34.md",
+      "size_bytes": 8639,
+      "sha256": "1509873636e6a0bbde1b6a10a181d1724df7344e39231b56b86f6331cb9b2f23"
+    },
+    {
+      "path": "03_DISCOVERY_DOWNLOAD_CACHE.md",
+      "size_bytes": 5298,
+      "sha256": "97818e3e9979c9bb4f65f0e872a8e206460e89f64d7f50e87ad365d5a9021796"
+    },
+    {
+      "path": "04_FINANCIAL_STATEMENTS.md",
+      "size_bytes": 4642,
+      "sha256": "d5dcf9288e1edc0b83e8788cb38a8b92c134309802be3a37bc867ff139b7e63a"
+    },
+    {
+      "path": "05_COMPANY_360_DASHBOARD_UX.md",
+      "size_bytes": 3699,
+      "sha256": "a88695371bcb33f0801efa6df8d4fa6f871fb6675297b83bbb788e51a35a183d"
+    },
+    {
+      "path": "06_AI_CHECKUP_ANNUAL_DIFF_PEERS.md",
+      "size_bytes": 3785,
+      "sha256": "2f627c13dec5c7f5959530b590a0666cf503e2533c8e26d4a5482f2dbec53cc5"
+    },
+    {
+      "path": "07_BATCH_RESEARCH_AND_ACTIONS.md",
+      "size_bytes": 3383,
+      "sha256": "ddcd8e7a0093ea53ddc7663ac283c4704668b10c9bf4b21f401c54707a76e726"
+    },
+    {
+      "path": "08_RAG_OCR_RELEVANCE.md",
+      "size_bytes": 3480,
+      "sha256": "9bcdaf332494709299c26f4fbf3da5ccd559f74e6240e338c20afb16be39257b"
+    },
+    {
+      "path": "09_EXPORTS_AND_REPORTS.md",
+      "size_bytes": 2699,
+      "sha256": "2a519f161fc61b10640b892b016de2de29c424b079b5102653cf16030e807d07"
+    },
+    {
+      "path": "10_ARCHITECTURE_API_CONTRACTS.md",
+      "size_bytes": 5782,
+      "sha256": "1ccf838076e6bc5cf1f65bf311f8d6d36a7ede4d8ec930f13e73c6267105334b"
+    },
+    {
+      "path": "11_QA_EVAL_DEMO.md",
+      "size_bytes": 5828,
+      "sha256": "4970a7452a8477fe6665565da04e49567b6930fd6e9abc18a5f15ebf34e899af"
+    },
+    {
+      "path": "12_MILESTONES_AND_OWNERSHIP.md",
+      "size_bytes": 5098,
+      "sha256": "8087e1b0b7a1215298eeb5c8be32fdb2b62c7d9212b72e4833d4ea985b117709"
+    },
+    {
+      "path": "13_RISKS_COSTS_SCOPE.md",
+      "size_bytes": 3367,
+      "sha256": "baf18eaef3e645d3f3d0f1929366514996f9b7d49bc8988ff370db83ae307a7e"
+    },
+    {
+      "path": "14_CODE_MAP_AND_REFERENCES.md",
+      "size_bytes": 3787,
+      "sha256": "a541a5bc2bb012009d610922c57c472191b27925d8fdd8e2df9b4250a2cb64cc"
+    },
+    {
+      "path": "15_CPLUS_READINESS_GATE.md",
+      "size_bytes": 2040,
+      "sha256": "495f72ece513e87a58aa1b2beb23c142776ecea4dbc6938f956b48ff8cdd6742"
+    },
+    {
+      "path": "16_CODEX_MASTER_PROMPT.md",
+      "size_bytes": 5574,
+      "sha256": "7d5674a8a8ee2b945d13c9496e9f5b4d38c6c3cf653f989a5bb62e02caca9cd6"
+    },
+    {
+      "path": "17_WORKER_AND_REVIEW_PROMPTS.md",
+      "size_bytes": 2440,
+      "sha256": "e9d542d7b33ba39eb40bd85e1c17ea8e258402af9827c9c87dee59383091a42d"
+    },
+    {
+      "path": "CODEX_START_HERE.txt",
+      "size_bytes": 887,
+      "sha256": "e4e830f52913f4711f4e0b8620f72472bbd134c413c1b0d115b1aeae89c57367"
+    },
+    {
+      "path": "FinDoc_CPlus_单文件总方案.md",
+      "size_bytes": 84312,
+      "sha256": "7282ddbab18d8a53ddb0f13550272cd6ec3a6fa156afd47c143939030e2e474d"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 4206,
+      "sha256": "bab3a42e325a556356eac0c1de218181b66785fe3ad4caa3f381a74cfb3fae15"
+    },
+    {
+      "path": "contracts/CPlus_API_SKETCH.json",
+      "size_bytes": 3191,
+      "sha256": "778795e52c8142fee191713db3f7a605f10ca887e5e4daf8b3bdc5c1fff47118"
+    },
+    {
+      "path": "contracts/CPlus_DOMAIN_SKETCH.json",
+      "size_bytes": 3124,
+      "sha256": "25cec457114afeabb7ce68095d32c571cf00ab813b50786d5e3e685b1a78077a"
+    },
+    {
+      "path": "data/feature_matrix.csv",
+      "size_bytes": 1780,
+      "sha256": "c8fc734e7ba6d322868e7f0890ac0d72ce992298e55a3ddf7d89c72ebbb92c65"
+    },
+    {
+      "path": "data/task_board.csv",
+      "size_bytes": 9561,
+      "sha256": "3bf7533a8be5aec8187b07d7dfce1bfbe7185fc4d9c923e8d8844624a70837d3"
+    },
+    {
+      "path": "prototype/README.md",
+      "size_bytes": 920,
+      "sha256": "da9ca6bc85e53eac5d4c0e9f246c02800e6264b29d88eeb2b9cff92329b49523"
+    },
+    {
+      "path": "prototype/desktop-preview.png",
+      "size_bytes": 445704,
+      "sha256": "5e594a76f5ebaefd1dc06b6156fb84777a7a3581c971e57773d4fb23cdcd4546"
+    },
+    {
+      "path": "prototype/index.html",
+      "size_bytes": 36821,
+      "sha256": "0c707c6a0ae0b53cf589cfd990fd1bf792f76cd5daa56ca9663d5fd58fcd7d99"
+    },
+    {
+      "path": "prototype/mobile-preview.png",
+      "size_bytes": 235488,
+      "sha256": "dfc4ebb5b191453d53ffdd2b3a16f8f8a574ea2af122840c2ebfcc04bac5336e"
+    },
+    {
+      "path": "prototype/prototype-validation.json",
+      "size_bytes": 523,
+      "sha256": "4fde30edab0a6f9538f0ec442a7942bc543b35fc8984e760852b40d4d47acb9b"
+    },
+    {
+      "path": "scripts/verify_package.py",
+      "size_bytes": 1823,
+      "sha256": "036df18aa1527232c73621f431632e3b7cd4dec83701e1dd8d2b02f006f8effb"
+    },
+    {
+      "path": "templates/EVIDENCE_TEMPLATE.md",
+      "size_bytes": 322,
+      "sha256": "26b2c8a628f4aea0e89c7ad68b5dddbdc8342916c697a0802337d4fd5914bf9a"
+    },
+    {
+      "path": "templates/KNOWN_ISSUES_TEMPLATE.md",
+      "size_bytes": 208,
+      "sha256": "3f3150033e4dcdad00e91205a6fb5bb060010eaa6120fe79640de703c464a53b"
+    },
+    {
+      "path": "templates/STATE_TEMPLATE.md",
+      "size_bytes": 213,
+      "sha256": "e26dddcd6702e2efb8f4e4c9128e04183d3e4fe0ab6572c9857fa96892cfd954"
+    },
+    {
+      "path": "templates/TASK_HANDOFF_TEMPLATE.md",
+      "size_bytes": 199,
+      "sha256": "0ce92c96e9ce30086dad69449a08b3e79b645d8855b88230e504bc144aa042a7"
+    }
+  ]
+}

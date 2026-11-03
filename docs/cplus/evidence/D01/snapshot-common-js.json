@@ -1,0 +1,11 @@
+{
+  "snippet": "var eh = 8 * 60 * 60 * 1000;\n\n//点击“？”\n$(document).on('click','.right-float-question',function () {\n    $('body').css('overflow','hidden');\n    $('#overloadContainer').css('display','block');\n    $('.dialogBackground').css('display','block');\n});\n\n//点击弹框关闭按钮\n$(document).on('click','.dialog-close-btn',function () {\n    $('body').css('overflow','auto');\n    $('#overloadContainer').css('display','none');\n    $('.dialogBackground').css('display','none');\n});\n\n//下载excel\n$(document).on('click','.excel-download',function () {\n    if(code !=null && code !=''&& code !=undefined){\n        // window.snowp",
+  "scripts": [],
+  "endpoint_context": [
+    "        url: cninfo_data_url+\"/yellowpages/getFlag\",",
+    "        url:  path+\"/Kaptcha2.do?Math.floor(Math.random() * 100)\",",
+    "            url: cninfo_data_url+\"/yellowpages/verifyKaptcha\",",
+    "        url:cninfo_data_url + '/yellowpages/pdfdata',",
+    "            url: me.url,"
+  ]
+}

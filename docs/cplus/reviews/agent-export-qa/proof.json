@@ -1,0 +1,91 @@
+{
+  "tier": "LOCAL_RENDER_OF_SAVED_REAL_LLM_REPORTS",
+  "source_file_sha256": "b088c924c295555168c8c6ac1656238ef5d9d60117405014b886311fe8175bc6",
+  "provider_calls_this_run": 0,
+  "human_approvals": 0,
+  "artifacts": [
+    {
+      "case_id": "E01-06",
+      "mode": "deep",
+      "report_ref": {
+        "domain": "showcase_report_v2",
+        "id": "cca24d35-15a4-4c19-82a7-e6588bbddd70",
+        "revision": 1,
+        "payload_sha256": "c47fdd2a86ab9015f10dfc9d4e25147123f41816245b29a34d28f6c30439c0e2"
+      },
+      "path": "/Users/aipuli/.codex/worktrees/findoc-business-exports/data/business-export-agent-qa/deep.pptx",
+      "sha256": "3d038f5fd07e33205f576c065ab29c7194ffdde81337e16e8663cef795a8344e",
+      "saved_interpretations": 6,
+      "slides": 7
+    },
+    {
+      "case_id": "E01-01",
+      "mode": "synthesis",
+      "report_ref": {
+        "domain": "showcase_report_v2",
+        "id": "be8e51f6-23f4-40b1-8c4a-1efe088ee732",
+        "revision": 1,
+        "payload_sha256": "5cc318b879ded3188f47f5eb740b67baf7979727b813d140ee3d43547371c3bd"
+      },
+      "path": "/Users/aipuli/.codex/worktrees/findoc-business-exports/data/business-export-agent-qa/synthesis.pptx",
+      "sha256": "e43b88db363242070a95a9ff4991d31d97a9863dacf626943768743c01339f3c",
+      "saved_interpretations": 2,
+      "slides": 6
+    }
+  ],
+  "review": "All 13 LibreOffice-rendered pages inspected; actual saved model text preserved; no new provider or financial approval.",
+  "screenshots": [
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/deep-1.png",
+      "sha256": "f126d488da0dfb198a09a917f8d5081278fbc0d31f9f26b42652655b45c6849d"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/deep-2.png",
+      "sha256": "72ac26f943b63d28f12ead535e2a7bd34b2eb35ec2a2843d68d4125018c861fd"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/deep-3.png",
+      "sha256": "ae5a9644b6f052ac22b515ee005fdea5802bb928d3dafa7ba4ddd13d32f6c98d"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/deep-4.png",
+      "sha256": "a64d1bba98dedbf2bd08dc1c8bfe7177aefc19283da1b67bd1573402a57646a3"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/deep-5.png",
+      "sha256": "b9abde56d167c6f9b7761b0b9c529bf2bb8eedd4c4c0520fac0d385a3c2397f0"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/deep-6.png",
+      "sha256": "f6c44f30d0c078bb4a4441166485e10b2a95632d006b3ecdb5d0b24649a49801"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/deep-7.png",
+      "sha256": "b3f5c7669b9da918035a17cdf4b4ecb0909a70ce3125a19aa9256a46436d079f"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/synthesis-1.png",
+      "sha256": "98c713df068891c010106ae87eff6569fa8e82a6d3939b9653572a68aa21d2c1"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/synthesis-2.png",
+      "sha256": "93e5763b3c12ac44dfb20870cc7ef840a2e6939e54795bca32835f9f229b59ee"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/synthesis-3.png",
+      "sha256": "0c85c5759f13e6f3020f3dfa2a623924a38935148df0019ecf0897bfd01656a7"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/synthesis-4.png",
+      "sha256": "41d5d8c9a8a5706821f4ee9641f7124ac91a4ad7b7e42d2c8b61097d058ed95f"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/synthesis-5.png",
+      "sha256": "ecd6938a619bc2a840f4c5ac192ce16f0b496cffe2c630d65004d5a16eef76ab"
+    },
+    {
+      "path": "docs/cplus/reviews/agent-export-qa/synthesis-6.png",
+      "sha256": "e1aa7d08341886098a52eaaecb4a2634f94f1c1abf5d9588bfc2758b4add877f"
+    }
+  ]
+}

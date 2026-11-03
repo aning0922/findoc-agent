@@ -1,0 +1,101 @@
+{
+  "tier": "REAL_PDF_EXTRACTION_LOCAL_NO_LLM",
+  "seed_manifest_sha256": "efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4",
+  "inventory": [
+    {
+      "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+      "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+      "candidate_cells": 7,
+      "metrics": [
+        "accounts_receivable",
+        "cash",
+        "current_assets",
+        "current_liabilities",
+        "inventory",
+        "total_assets",
+        "total_liabilities"
+      ]
+    },
+    {
+      "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+      "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+      "candidate_cells": 2,
+      "metrics": [
+        "total_assets",
+        "total_liabilities"
+      ]
+    }
+  ],
+  "comparison": [
+    {
+      "metric_key": "cash",
+      "state": "incomparable",
+      "reason": "missing_or_ambiguous_period_selection",
+      "differences": []
+    },
+    {
+      "metric_key": "accounts_receivable",
+      "state": "incomparable",
+      "reason": "missing_or_ambiguous_period_selection",
+      "differences": []
+    },
+    {
+      "metric_key": "inventory",
+      "state": "incomparable",
+      "reason": "missing_or_ambiguous_period_selection",
+      "differences": []
+    },
+    {
+      "metric_key": "current_assets",
+      "state": "incomparable",
+      "reason": "missing_or_ambiguous_period_selection",
+      "differences": []
+    },
+    {
+      "metric_key": "total_assets",
+      "state": "candidate_observation",
+      "reason": null,
+      "differences": [
+        {
+          "delta_decimal": "217419766180.51",
+          "formula_version": "peer-difference-decimal-v1",
+          "input_cell_ids": [
+            "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+            "19c6201f-176a-5ca2-b98d-d59d69284f43"
+          ],
+          "left_company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "right_company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d"
+        }
+      ]
+    },
+    {
+      "metric_key": "current_liabilities",
+      "state": "incomparable",
+      "reason": "missing_or_ambiguous_period_selection",
+      "differences": []
+    },
+    {
+      "metric_key": "total_liabilities",
+      "state": "candidate_observation",
+      "reason": null,
+      "differences": [
+        {
+          "delta_decimal": "130786823855.21",
+          "formula_version": "peer-difference-decimal-v1",
+          "input_cell_ids": [
+            "95175846-6039-53b1-9288-b33055010518",
+            "66ce9591-4bcd-5611-810d-a750704e2933"
+          ],
+          "left_company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "right_company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d"
+        }
+      ]
+    }
+  ],
+  "llm_calls": 0,
+  "human_approvals": 0,
+  "limitations": [
+    "nullcontext guard does not verify integrated final fencing",
+    "candidates are not confirmed financial facts"
+  ]
+}

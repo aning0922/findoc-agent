@@ -355,14 +355,14 @@ export function ShowcaseDashboard({
           <p>从财报资料到研究洞察，在一个工作空间里清晰探索。</p>
           <div className="sd-search">
             <input
-              aria-label="搜索本地企业"
+              aria-label={import.meta.env.VITE_FINDOC_CPLUS_MODE==='1'?'搜索上市公司':'搜索本地企业'}
               value={search}
               placeholder="输入企业名称或代码，开启研究"
               onChange={(e) => setSearch(e.target.value)}
             />
             <a
               className="sd-primary"
-              href={`/conversations?${new URLSearchParams({ ...(effectiveCompany ? { company: effectiveCompany } : {}), question: search || "帮我开始一项企业研究" })}`}
+              href={import.meta.env.VITE_FINDOC_CPLUS_MODE==='1'&&search.trim()?`/companies?${new URLSearchParams({discover:search.trim()})}`:`/conversations?${new URLSearchParams({ ...(effectiveCompany ? { company: effectiveCompany } : {}), question: search || "帮我开始一项企业研究" })}`}
             >
               开始研究 →
             </a>
@@ -445,7 +445,7 @@ export function ShowcaseDashboard({
             ))}
           </div>
           <div className="sd-grid">
-            <section className="sd-card" style={{ order: evidenceFirst ? 0 : 2 }}>
+            {import.meta.env.VITE_FINDOC_CPLUS_MODE==='1'&&!sample ? <CuratedFinancialCharts companyId={selected||undefined}/> : <section className="sd-card" style={{ order: evidenceFirst ? 0 : 2 }}>
               <div className="sd-card-head">
                 <div>
                   <h3>财务趋势</h3>
@@ -512,7 +512,7 @@ export function ShowcaseDashboard({
                   </tbody>
                 </table>
               </details>
-            </section>
+            </section>}
             <section className="sd-card" style={{ order: 1 }}>
               <div className="sd-card-head">
                 <div>
@@ -639,3 +639,4 @@ export function ShowcaseDashboard({
     </div>
   );
 }
+import { CuratedFinancialCharts } from '../cplus/dashboard/CuratedFinancialCharts.tsx';

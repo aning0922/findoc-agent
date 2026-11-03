@@ -1,0 +1,853 @@
+{
+  "app/api/runtime_factory.py": [
+    {
+      "name": "RuntimeRAGResources",
+      "line": 86,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "_runtime_bge_embed",
+      "line": 102,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "_warm_runtime_bge_before_milvus",
+      "line": 115,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "_runtime_bge_version",
+      "line": 126,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "_build_runtime_indexer",
+      "line": 135,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "_build_runtime_rag_resources",
+      "line": 168,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "create_runtime_app",
+      "line": 211,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "create_isolated_runtime_app_from_env",
+      "line": 508,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "index_document",
+      "line": 149,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "authorize_extended_finance",
+      "line": 326,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "unavailable_report_reader",
+      "line": 454,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "report_reader_for_request",
+      "line": 457,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "read_verified",
+      "line": 460,
+      "kind": "AsyncFunctionDef"
+    }
+  ],
+  "app/demo/process.py": [
+    {
+      "name": "RuntimeHandle",
+      "line": 21,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "process_birth",
+      "line": 30,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "group_alive",
+      "line": 36,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "ProcessRuntimeManager",
+      "line": 52,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "__init__",
+      "line": 53,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "recover",
+      "line": 72,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "_retire_record",
+      "line": 81,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "_stop",
+      "line": 132,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "reset",
+      "line": 146,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "close",
+      "line": 224,
+      "kind": "AsyncFunctionDef"
+    }
+  ],
+  "app/demo/gateway.py": [
+    {
+      "name": "GatewayLedger",
+      "line": 24,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "FencedResponse",
+      "line": 68,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "bounded_body",
+      "line": 98,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "operation_key",
+      "line": 108,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "proxy",
+      "line": 133,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "fenced",
+      "line": 214,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "GuardedResponse",
+      "line": 219,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "guarded_chunks",
+      "line": 229,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "stream_events",
+      "line": 251,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "__init__",
+      "line": 26,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "connect",
+      "line": 34,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "reserve",
+      "line": 39,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "complete",
+      "line": 54,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "state",
+      "line": 60,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "__init__",
+      "line": 70,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "__call__",
+      "line": 74,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "__init__",
+      "line": 220,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "__call__",
+      "line": 225,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "fenced_send",
+      "line": 77,
+      "kind": "AsyncFunctionDef"
+    }
+  ],
+  "app/disclosures/service.py": [
+    {
+      "name": "DisclosureService",
+      "line": 18,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "__init__",
+      "line": 19,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "_tx",
+      "line": 43,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "search",
+      "line": 50,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "_uuid",
+      "line": 71,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "operation",
+      "line": 78,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "import_candidate",
+      "line": 95,
+      "kind": "AsyncFunctionDef"
+    }
+  ],
+  "app/disclosures/download.py": [
+    {
+      "name": "DisclosureError",
+      "line": 15,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "resolve_public",
+      "line": 21,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "SafeDownloader",
+      "line": 26,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "__init__",
+      "line": 16,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "__init__",
+      "line": 27,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "download",
+      "line": 45,
+      "kind": "AsyncFunctionDef"
+    }
+  ],
+  "app/documents/source_service.py": [
+    {
+      "name": "inspect_pdf",
+      "line": 23,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "assess",
+      "line": 37,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "DocumentSourceService",
+      "line": 78,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "__init__",
+      "line": 79,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "capture",
+      "line": 96,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "upload",
+      "line": 102,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "_checked",
+      "line": 133,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "source",
+      "line": 203,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "verify_selection",
+      "line": 216,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "file",
+      "line": 220,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "evidence",
+      "line": 226,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "parsed_evidence",
+      "line": 247,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "correct",
+      "line": 257,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "page_context",
+      "line": 278,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "reindex",
+      "line": 291,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "history",
+      "line": 299,
+      "kind": "AsyncFunctionDef"
+    }
+  ],
+  "app/parsing/service.py": [
+    {
+      "name": "canonical",
+      "line": 20,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "digest",
+      "line": 24,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "ParseError",
+      "line": 28,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "ParseV2Service",
+      "line": 34,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "__init__",
+      "line": 29,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "__init__",
+      "line": 35,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "tx",
+      "line": 76,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "snapshot",
+      "line": 83,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "validate_uuid",
+      "line": 103,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "operation",
+      "line": 110,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "retry",
+      "line": 130,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "parse",
+      "line": 211,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "quality",
+      "line": 373,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "image",
+      "line": 402,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "file",
+      "line": 428,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "search",
+      "line": 437,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "render",
+      "line": 412,
+      "kind": "FunctionDef"
+    }
+  ],
+  "app/finance_v2/service.py": [
+    {
+      "name": "OwnerAuthorization",
+      "line": 21,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "now",
+      "line": 28,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "ExtendedFinanceService",
+      "line": 32,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "__init__",
+      "line": 33,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "_owner",
+      "line": 49,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "_perform",
+      "line": 54,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "_read",
+      "line": 71,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "_guard",
+      "line": 76,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "collect",
+      "line": 108,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "_selected",
+      "line": 127,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "_receipt",
+      "line": 146,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "list_metrics",
+      "line": 162,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "signals",
+      "line": 187,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "review",
+      "line": 211,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "confirm",
+      "line": 224,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "revoke",
+      "line": 249,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "analyse",
+      "line": 266,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "operation",
+      "line": 301,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "work",
+      "line": 109,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "work",
+      "line": 212,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "work",
+      "line": 226,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "work",
+      "line": 251,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "work",
+      "line": 273,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "replay_check",
+      "line": 290,
+      "kind": "FunctionDef"
+    }
+  ],
+  "app/showcase_research/jobs.py": [
+    {
+      "name": "ResearchJobs",
+      "line": 13,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "plan",
+      "line": 14,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "create_job",
+      "line": 57,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "_execute",
+      "line": 85,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "_interrupt",
+      "line": 166,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "job",
+      "line": 175,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "jobs",
+      "line": 194,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "verified_job",
+      "line": 203,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "close",
+      "line": 234,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "run",
+      "line": 93,
+      "kind": "AsyncFunctionDef"
+    }
+  ],
+  "app/showcase_research/agents.py": [
+    {
+      "name": "AgentRunner",
+      "line": 27,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "__init__",
+      "line": 28,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "tool",
+      "line": 31,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "run",
+      "line": 79,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "execute",
+      "line": 43,
+      "kind": "AsyncFunctionDef"
+    }
+  ],
+  "app/showcase_reports/service.py": [
+    {
+      "name": "ReportError",
+      "line": 12,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "encode",
+      "line": 18,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "ShowcaseReportService",
+      "line": 22,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "__init__",
+      "line": 13,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "__init__",
+      "line": 23,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "tx",
+      "line": 42,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "operation",
+      "line": 52,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "record",
+      "line": 66,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "verified",
+      "line": 72,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "draft",
+      "line": 87,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "save",
+      "line": 102,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "read_operation",
+      "line": 171,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "list",
+      "line": 183,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "revision",
+      "line": 193,
+      "kind": "AsyncFunctionDef"
+    }
+  ],
+  "app/research_memory/service.py": [
+    {
+      "name": "canonical",
+      "line": 16,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "now",
+      "line": 22,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "MemoryError",
+      "line": 26,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "ResearchMemoryService",
+      "line": 32,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "__init__",
+      "line": 27,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "__init__",
+      "line": 33,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "tx",
+      "line": 84,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "uuid",
+      "line": 92,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "_generation",
+      "line": 99,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "check_generation",
+      "line": 104,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "publication_guard",
+      "line": 112,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "recall_snapshot",
+      "line": 151,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "validate_refs",
+      "line": 157,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "_projection",
+      "line": 242,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "operation",
+      "line": 266,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "mutate",
+      "line": 278,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "_source_status",
+      "line": 429,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "list",
+      "line": 447,
+      "kind": "AsyncFunctionDef"
+    }
+  ],
+  "app/rag/selected_scope.py": [
+    {
+      "name": "SelectedScopeSearch",
+      "line": 10,
+      "kind": "ClassDef"
+    },
+    {
+      "name": "__init__",
+      "line": 11,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "table_context",
+      "line": 15,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "revalidate",
+      "line": 39,
+      "kind": "AsyncFunctionDef"
+    },
+    {
+      "name": "retrieval_query",
+      "line": 43,
+      "kind": "FunctionDef"
+    },
+    {
+      "name": "search",
+      "line": 60,
+      "kind": "AsyncFunctionDef"
+    }
+  ]
+}

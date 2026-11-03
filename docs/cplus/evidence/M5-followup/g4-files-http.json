@@ -1,0 +1,267 @@
+{
+  "tier": "REAL_HTTP_EXACT_SAVED_MODEL_REPORT_AND_CHART_FILES",
+  "budget_before": {
+    "cap_cny": "5",
+    "physical_calls": 104,
+    "conservative_reserved_cny": "2.011446",
+    "unknown": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "human_financial_approvals": 0,
+  "items": [
+    {
+      "name": "chart-draft",
+      "ref": {
+        "domain": "chart_report_v1",
+        "id": "66cc1e38-c21c-4ef4-9ecb-56b4be0b28d4",
+        "revision": 1,
+        "payload_sha256": "84258aa6192fb609915d70c1bafcdce23a6f7bba9b1763876009c33191d0faf8"
+      },
+      "operation_id": "fb2b8728-a1c2-41cd-950d-26dbbc2d88af",
+      "files": [
+        {
+          "bytes": 20485,
+          "format": "csv",
+          "href": "/cplus/exports/53dcca53-942a-44cc-9eff-eb0488f42985/files/csv",
+          "sha256": "e0b0b614d0ff0fb1cf37a6e312b9a830623b6ab1871d5dd739bae3ed494ce0da"
+        },
+        {
+          "bytes": 15901,
+          "format": "xlsx",
+          "href": "/cplus/exports/53dcca53-942a-44cc-9eff-eb0488f42985/files/xlsx",
+          "sha256": "0f18f2b6a3d7f2165341c974af6c4d67293b3aeda6298901d7f249bb135ef239"
+        },
+        {
+          "bytes": 60836,
+          "format": "pptx",
+          "href": "/cplus/exports/53dcca53-942a-44cc-9eff-eb0488f42985/files/pptx",
+          "sha256": "49b747d9da096df8dc1d49a20fe989db485a901b8b563a435549811947c048fb"
+        }
+      ],
+      "status": 200,
+      "receipt": {
+        "operation_id": "fb2b8728-a1c2-41cd-950d-26dbbc2d88af",
+        "state": "completed",
+        "result": {
+          "created_at": "2026-11-03T13:04:08.861697+00:00",
+          "display_companies": {
+            "d9080344-8c69-4dea-a5d9-51bf84710105": {
+              "exchange": "SZSE",
+              "name": "珠海格力电器股份有限公司",
+              "security_code": "000651"
+            }
+          },
+          "display_companies_sha256": "901b71666cb15e115e93b49bce69759c1c7a08c4eeea32591dca425ba32384bf",
+          "display_status": "current",
+          "export_id": "53dcca53-942a-44cc-9eff-eb0488f42985",
+          "export_profile_version": "research-v1",
+          "files": [
+            {
+              "bytes": 20485,
+              "format": "csv",
+              "href": "/cplus/exports/53dcca53-942a-44cc-9eff-eb0488f42985/files/csv",
+              "sha256": "e0b0b614d0ff0fb1cf37a6e312b9a830623b6ab1871d5dd739bae3ed494ce0da"
+            },
+            {
+              "bytes": 15901,
+              "format": "xlsx",
+              "href": "/cplus/exports/53dcca53-942a-44cc-9eff-eb0488f42985/files/xlsx",
+              "sha256": "0f18f2b6a3d7f2165341c974af6c4d67293b3aeda6298901d7f249bb135ef239"
+            },
+            {
+              "bytes": 60836,
+              "format": "pptx",
+              "href": "/cplus/exports/53dcca53-942a-44cc-9eff-eb0488f42985/files/pptx",
+              "sha256": "49b747d9da096df8dc1d49a20fe989db485a901b8b563a435549811947c048fb"
+            }
+          ],
+          "historical_snapshot": false,
+          "projection_version": "business-v2",
+          "report_ref": {
+            "domain": "chart_report_v1",
+            "id": "66cc1e38-c21c-4ef4-9ecb-56b4be0b28d4",
+            "payload_sha256": "84258aa6192fb609915d70c1bafcdce23a6f7bba9b1763876009c33191d0faf8",
+            "revision": 1
+          },
+          "schema_version": "cplus-export-manifest-v1",
+          "snapshot_sha256": "84258aa6192fb609915d70c1bafcdce23a6f7bba9b1763876009c33191d0faf8"
+        }
+      },
+      "print_status": 200
+    },
+    {
+      "name": "paired-deep",
+      "ref": {
+        "domain": "showcase_report_v2",
+        "id": "2a7971ff-3e68-4d60-a9ec-9d3f7e354e7c",
+        "revision": 1,
+        "payload_sha256": "e3b3097a61f0c8dd71167eae5b8c7bc94a68a8502054ec6c2775c16f1408c1c3"
+      },
+      "operation_id": "68623531-b46a-4a2d-a6cb-c5e0362a1cdd",
+      "files": [
+        {
+          "bytes": 28689,
+          "format": "csv",
+          "href": "/cplus/exports/39af2398-7f7f-474e-b57c-b2f5e4f43a30/files/csv",
+          "sha256": "29dbf5247379ccb9dc8af89652adf8ace8f9da05c4cfc76050bbbdb1f62b278d"
+        },
+        {
+          "bytes": 16263,
+          "format": "xlsx",
+          "href": "/cplus/exports/39af2398-7f7f-474e-b57c-b2f5e4f43a30/files/xlsx",
+          "sha256": "5f30be443a722a4f7ae2a7f49a66e528e33216a9df4b18538a63e506333a9fc4"
+        },
+        {
+          "bytes": 69358,
+          "format": "pptx",
+          "href": "/cplus/exports/39af2398-7f7f-474e-b57c-b2f5e4f43a30/files/pptx",
+          "sha256": "a543af1be5e59541f57f573af6db5403c680fd64566720024de0cb716ba23a53"
+        }
+      ],
+      "status": 200,
+      "receipt": {
+        "operation_id": "68623531-b46a-4a2d-a6cb-c5e0362a1cdd",
+        "state": "completed",
+        "result": {
+          "created_at": "2026-11-03T13:04:17.512431+00:00",
+          "display_companies": {
+            "d9080344-8c69-4dea-a5d9-51bf84710105": {
+              "exchange": "SZSE",
+              "name": "珠海格力电器股份有限公司",
+              "security_code": "000651"
+            }
+          },
+          "display_companies_sha256": "901b71666cb15e115e93b49bce69759c1c7a08c4eeea32591dca425ba32384bf",
+          "display_status": "current",
+          "export_id": "39af2398-7f7f-474e-b57c-b2f5e4f43a30",
+          "export_profile_version": "research-v1",
+          "files": [
+            {
+              "bytes": 28689,
+              "format": "csv",
+              "href": "/cplus/exports/39af2398-7f7f-474e-b57c-b2f5e4f43a30/files/csv",
+              "sha256": "29dbf5247379ccb9dc8af89652adf8ace8f9da05c4cfc76050bbbdb1f62b278d"
+            },
+            {
+              "bytes": 16263,
+              "format": "xlsx",
+              "href": "/cplus/exports/39af2398-7f7f-474e-b57c-b2f5e4f43a30/files/xlsx",
+              "sha256": "5f30be443a722a4f7ae2a7f49a66e528e33216a9df4b18538a63e506333a9fc4"
+            },
+            {
+              "bytes": 69358,
+              "format": "pptx",
+              "href": "/cplus/exports/39af2398-7f7f-474e-b57c-b2f5e4f43a30/files/pptx",
+              "sha256": "a543af1be5e59541f57f573af6db5403c680fd64566720024de0cb716ba23a53"
+            }
+          ],
+          "historical_snapshot": false,
+          "projection_version": "business-v2",
+          "report_ref": {
+            "domain": "showcase_report_v2",
+            "id": "2a7971ff-3e68-4d60-a9ec-9d3f7e354e7c",
+            "payload_sha256": "e3b3097a61f0c8dd71167eae5b8c7bc94a68a8502054ec6c2775c16f1408c1c3",
+            "revision": 1
+          },
+          "schema_version": "cplus-export-manifest-v1",
+          "snapshot_sha256": "e3b3097a61f0c8dd71167eae5b8c7bc94a68a8502054ec6c2775c16f1408c1c3"
+        }
+      },
+      "print_status": 200
+    },
+    {
+      "name": "paired-synthesis",
+      "ref": {
+        "domain": "showcase_report_v2",
+        "id": "0ab14f6a-72f3-41aa-b898-31a89d48783a",
+        "revision": 1,
+        "payload_sha256": "5b4bbd913d394ea577fc942c94f15b5b2dea0b65bc68cb5c58ca3e170d315088"
+      },
+      "operation_id": "c654f045-a1b5-4b12-9fb6-640e4e6943a7",
+      "files": [
+        {
+          "bytes": 17945,
+          "format": "csv",
+          "href": "/cplus/exports/49b58d12-0c7d-42f9-839b-3301a521d082/files/csv",
+          "sha256": "3c1c5ffa3a939606661803b7d9b44d53ee993505242b25c431b16ca12fad537c"
+        },
+        {
+          "bytes": 14411,
+          "format": "xlsx",
+          "href": "/cplus/exports/49b58d12-0c7d-42f9-839b-3301a521d082/files/xlsx",
+          "sha256": "0ff1f71bc7b58d51c05b853d98a04d24ff1eb4119e0d19b13dcbd9702c7a17ca"
+        },
+        {
+          "bytes": 63105,
+          "format": "pptx",
+          "href": "/cplus/exports/49b58d12-0c7d-42f9-839b-3301a521d082/files/pptx",
+          "sha256": "65cb8c2a3ef42227498a986cd4500b283473484836b52048465439af9e2a3f80"
+        }
+      ],
+      "status": 200,
+      "receipt": {
+        "operation_id": "c654f045-a1b5-4b12-9fb6-640e4e6943a7",
+        "state": "completed",
+        "result": {
+          "created_at": "2026-11-03T13:04:23.483852+00:00",
+          "display_companies": {
+            "d9080344-8c69-4dea-a5d9-51bf84710105": {
+              "exchange": "SZSE",
+              "name": "珠海格力电器股份有限公司",
+              "security_code": "000651"
+            }
+          },
+          "display_companies_sha256": "901b71666cb15e115e93b49bce69759c1c7a08c4eeea32591dca425ba32384bf",
+          "display_status": "current",
+          "export_id": "49b58d12-0c7d-42f9-839b-3301a521d082",
+          "export_profile_version": "research-v1",
+          "files": [
+            {
+              "bytes": 17945,
+              "format": "csv",
+              "href": "/cplus/exports/49b58d12-0c7d-42f9-839b-3301a521d082/files/csv",
+              "sha256": "3c1c5ffa3a939606661803b7d9b44d53ee993505242b25c431b16ca12fad537c"
+            },
+            {
+              "bytes": 14411,
+              "format": "xlsx",
+              "href": "/cplus/exports/49b58d12-0c7d-42f9-839b-3301a521d082/files/xlsx",
+              "sha256": "0ff1f71bc7b58d51c05b853d98a04d24ff1eb4119e0d19b13dcbd9702c7a17ca"
+            },
+            {
+              "bytes": 63105,
+              "format": "pptx",
+              "href": "/cplus/exports/49b58d12-0c7d-42f9-839b-3301a521d082/files/pptx",
+              "sha256": "65cb8c2a3ef42227498a986cd4500b283473484836b52048465439af9e2a3f80"
+            }
+          ],
+          "historical_snapshot": false,
+          "projection_version": "business-v2",
+          "report_ref": {
+            "domain": "showcase_report_v2",
+            "id": "0ab14f6a-72f3-41aa-b898-31a89d48783a",
+            "payload_sha256": "5b4bbd913d394ea577fc942c94f15b5b2dea0b65bc68cb5c58ca3e170d315088",
+            "revision": 1
+          },
+          "schema_version": "cplus-export-manifest-v1",
+          "snapshot_sha256": "5b4bbd913d394ea577fc942c94f15b5b2dea0b65bc68cb5c58ca3e170d315088"
+        }
+      },
+      "print_status": 200
+    }
+  ],
+  "result": "PASS",
+  "budget_after": {
+    "cap_cny": "5",
+    "physical_calls": 104,
+    "conservative_reserved_cny": "2.011446",
+    "unknown": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "zero_new_provider_calls": true,
+  "original_raw_proof": {
+    "path": "data/cplus-g4-exact-exports-v2/result.json",
+    "bytes": 10159,
+    "sha256": "624fe862d893fa1776f7a85c13e804c3978e49cdcc8c132ddeb496c93915201f"
+  }
+}

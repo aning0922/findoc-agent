@@ -1,0 +1,64 @@
+{
+  "controller_thread": "01a19f9b-6d5d-77d1-92a6-7df1c95f4c96",
+  "integration_branch": "codex/findoc-showcase-cplus-integration",
+  "baseline": "45d55d75662f01d9bc78da1a946d845a01a27480",
+  "max_concurrent_substantive_workers": 3,
+  "sessions": [
+    {
+      "thread_id": "01a19f9d-a871-7520-aed9-dd6d22774d1a",
+      "task": "Native profile/checkup and exact-version exports;root executed one-call cash script",
+      "model": "gpt-6.1-terra",
+      "thinking": "high",
+      "branch": "codex/cplus-statements-v3",
+      "status": "idle_delivered",
+      "title": "FinDoc C+｜界面与导出 · 原生闭环已交付",
+      "commit": "66a28b9 integrated068c102"
+    },
+    {
+      "thread_id": "01a19f9d-6c32-7ba2-a9c5-b8b708440c82",
+      "task": "13 executed fixed cases metadata, priorHigh numeric gate implementation",
+      "model": "gpt-6.1-sol",
+      "thinking": "medium",
+      "branch": "codex/cplus-hybrid-ocr",
+      "status": "idle_delivered",
+      "commit": "0eb549d integrateda6294b0",
+      "title": "FinDoc C+｜评测与记忆 · 13项真实执行已归档"
+    },
+    {
+      "thread_id": "01a19fa9-6671-7841-9393-46d2bced4e89",
+      "task": "Independent bounded permission and known output findings closure;priorTerraMedium file QA",
+      "model": "gpt-6-astra",
+      "thinking": "high",
+      "branch": "codex/cplus-additive-seed",
+      "status": "idle_delivered",
+      "title": "FinDoc C+｜独立审查 · 已知P1关闭与人审待办",
+      "commit": "3d9cce6 integratedf96895f;69d5a15 integrated3d1ae2b"
+    }
+  ],
+  "provider_calls_owner": "root only",
+  "provider_ledger": "/Users/aipuli/.codex/worktrees/findoc-showcase-c-integration/findoc-agent/data/showcase-cost-control/provider-budget.db",
+  "provider_cap_cny": "5",
+  "new_budget_created": false,
+  "m0_status": "FROZEN_V1",
+  "m0_review": "129d8d4 integrated3ae6b43",
+  "next_batch": [
+    "normal push / draftPR3 exactHEAD CI observation",
+    "HUMAN_PENDING financial approval and semantic relevance labels only"
+  ],
+  "root_model": "inherited, no claim of self model override",
+  "m0_commit": "3c737327198a55b72d02490a981b5259cd164ffa",
+  "controller_title": "FinDoc C+｜主控 · 最终真实演示与交付收口",
+  "provider_state": {
+    "calls": 123,
+    "reserved_cny": "2.468274",
+    "unknown": 4,
+    "cap_cny": "5",
+    "actual_billed_cny": "not_observed",
+    "provider_recovered": true,
+    "initial_unknowns_never_replayed": true
+  },
+  "integration_checkpoint": "daa9173",
+  "delivery_commit": "987e0c0712e285c67fbb07d344784b53bd6efcb9",
+  "draft_pr": "https://github.com/aning0922/findoc-agent/pull/3",
+  "delivery_checkpoint": "f657917;4aeef44"
+}
