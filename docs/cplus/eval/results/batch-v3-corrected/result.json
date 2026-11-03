@@ -1,0 +1,938 @@
+{
+  "schema_version": "cplus-real-batch-v1",
+  "generated_at": "2026-11-03T11:07:30.602008+00:00",
+  "baseline": "dd8cca72a734c01c4d203af1989ee4af5cb1bb7e",
+  "script_sha256": "e130fcf37414aa6c2bde3c05570556be1f87e1d8c801acbda59bbdcb1e234a5a",
+  "tier": "REAL_OS_CONTROLLER_CHILD_SOCKET_HTTP_PDF_BGE_MILVUS",
+  "origin": "http://127.0.0.1:60203",
+  "seed_manifest_sha256": "d96b9340838c1d22619308d5d4492996f99ae03c52bf8a8a17eb6594ca139c3d",
+  "seed_version": "showcase-cplus-seed-v3",
+  "seed_vector_indexes": [
+    {
+      "collection": "fd16_19928fc37ab944689fb761780e085861",
+      "rows": 1122
+    },
+    {
+      "collection": "fd16_4860e071626d44da8aae62767f8ea152",
+      "rows": 1300
+    },
+    {
+      "collection": "fd16_5d77499f4c4a42d6909ec88565b6a83f",
+      "rows": 1003
+    },
+    {
+      "collection": "fd16_87aeb94cfee8471c99458825aaa52fec",
+      "rows": 1102
+    },
+    {
+      "collection": "fd16_ada3ca3c4b634bb28618e056a006a01c",
+      "rows": 1138
+    },
+    {
+      "collection": "findoc_runtime_documents_v1",
+      "rows": 0
+    }
+  ],
+  "owned_scratch": "/private/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-cplus-real-batch-bah6lvuj",
+  "provider_calls": 0,
+  "financial_approvals": 0,
+  "paid_multi_agent": false,
+  "model": "disabled-no-calls",
+  "login_config": "generated per run, credentials not persisted",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/demo/login",
+      "status": 202,
+      "elapsed_seconds": 0.078
+    },
+    {
+      "method": "POST",
+      "path": "/demo/claim",
+      "status": 200,
+      "elapsed_seconds": 0.006
+    },
+    {
+      "method": "GET",
+      "path": "/demo/session",
+      "status": 200,
+      "elapsed_seconds": 0.002
+    },
+    {
+      "method": "GET",
+      "path": "/companies",
+      "status": 200,
+      "elapsed_seconds": 0.017
+    },
+    {
+      "method": "GET",
+      "path": "/documents",
+      "status": 200,
+      "elapsed_seconds": 0.008
+    },
+    {
+      "method": "GET",
+      "path": "/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/metadata",
+      "status": 200,
+      "elapsed_seconds": 0.006
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/research-source",
+      "status": 200,
+      "elapsed_seconds": 0.042
+    },
+    {
+      "method": "GET",
+      "path": "/documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/metadata",
+      "status": 200,
+      "elapsed_seconds": 0.005
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/research-source",
+      "status": 200,
+      "elapsed_seconds": 0.042
+    },
+    {
+      "method": "GET",
+      "path": "/documents/d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92/metadata",
+      "status": 200,
+      "elapsed_seconds": 0.004
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/documents/d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92/research-source",
+      "status": 200,
+      "elapsed_seconds": 0.041
+    },
+    {
+      "method": "GET",
+      "path": "/documents/1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f/metadata",
+      "status": 200,
+      "elapsed_seconds": 0.005
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/documents/1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f/research-source",
+      "status": 200,
+      "elapsed_seconds": 0.036
+    },
+    {
+      "method": "GET",
+      "path": "/documents/de3575ae4220fd18b64f32ca74a442e63e06b705d9e4f9cda5065e386f357ccc/metadata",
+      "status": 200,
+      "elapsed_seconds": 0.004
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/retrieval/builds",
+      "status": 200,
+      "elapsed_seconds": 2.156
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/batch-plans",
+      "status": 200,
+      "elapsed_seconds": 10.568
+    },
+    {
+      "method": "GET",
+      "path": "/cplus/batch-plans/770c8a3d-b544-4fd5-b10f-f21c9452e652",
+      "status": 200,
+      "elapsed_seconds": 0.005
+    },
+    {
+      "method": "POST",
+      "path": "/cplus/batches",
+      "status": 503,
+      "elapsed_seconds": 260.007,
+      "safe_business_error": {
+        "detail": {
+          "code": "runtime_unavailable",
+          "message": "runtime unavailable"
+        }
+      }
+    }
+  ],
+  "operations": [
+    {
+      "operation_id": "e0cfeb12-aaba-452a-a77e-42481a6d0cc4",
+      "method": "POST",
+      "path": "/demo/login",
+      "state": "HTTP_RESPONSE_RECEIVED",
+      "status": 202
+    },
+    {
+      "operation_id": "3d6ccf01-4ff5-470a-959b-e9271a113d3b",
+      "method": "POST",
+      "path": "/demo/claim",
+      "state": "HTTP_RESPONSE_RECEIVED",
+      "status": 200
+    },
+    {
+      "operation_id": "b25fafd3-2eb1-4a38-aebc-c29643e458bf",
+      "method": "POST",
+      "path": "/cplus/retrieval/builds",
+      "state": "HTTP_RESPONSE_RECEIVED",
+      "request_body": {
+        "operation_id": "b25fafd3-2eb1-4a38-aebc-c29643e458bf",
+        "sources": [
+          {
+            "kind": "fast",
+            "workspace_id": "demo",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+            "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "report_year": 2025,
+            "attempt": 1,
+            "report_type": "annual",
+            "basis": "PRC_GAAP",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "enrollment_id": null,
+            "artifact_id": null,
+            "artifact_sha256": null,
+            "config_hash": null,
+            "metadata_sha256": null,
+            "selected_pages": [],
+            "identity_status": "fast_source_verified"
+          },
+          {
+            "kind": "fast",
+            "workspace_id": "demo",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+            "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+            "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "report_year": 2024,
+            "attempt": 1,
+            "report_type": "annual",
+            "basis": "PRC_GAAP",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "enrollment_id": null,
+            "artifact_id": null,
+            "artifact_sha256": null,
+            "config_hash": null,
+            "metadata_sha256": null,
+            "selected_pages": [],
+            "identity_status": "fast_source_verified"
+          },
+          {
+            "kind": "fast",
+            "workspace_id": "demo",
+            "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+            "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+            "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+            "content_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "report_year": 2025,
+            "attempt": 1,
+            "report_type": "annual",
+            "basis": "PRC_GAAP",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "enrollment_id": null,
+            "artifact_id": null,
+            "artifact_sha256": null,
+            "config_hash": null,
+            "metadata_sha256": null,
+            "selected_pages": [],
+            "identity_status": "fast_source_verified"
+          },
+          {
+            "kind": "fast",
+            "workspace_id": "demo",
+            "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+            "document_id": "1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f",
+            "source_revision": "1371f7afff0af99756b6cf30ff7985b070ee77becb3b1602843578a93719ee7e",
+            "content_sha256": "b17a9b9b84bca1d2a4e4a3cadc5dd5ba5c85e3f1fd2d758acd3315b5b040ecd9",
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "report_year": 2024,
+            "attempt": 1,
+            "report_type": "annual",
+            "basis": "unknown",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "enrollment_id": null,
+            "artifact_id": null,
+            "artifact_sha256": null,
+            "config_hash": null,
+            "metadata_sha256": null,
+            "selected_pages": [],
+            "identity_status": "fast_source_verified"
+          }
+        ]
+      },
+      "status": 200
+    },
+    {
+      "operation_id": "2a99e97b-5343-464a-a015-2a0949a824e5",
+      "method": "POST",
+      "path": "/cplus/batch-plans",
+      "state": "HTTP_RESPONSE_RECEIVED",
+      "request_body": {
+        "operation_id": "2a99e97b-5343-464a-a015-2a0949a824e5",
+        "cells": [
+          {
+            "cell_key": "000651:risk_excerpt",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "template": "risk_excerpt",
+            "sources": [
+              {
+                "kind": "fast",
+                "workspace_id": "demo",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "report_year": 2024,
+                "attempt": 1,
+                "report_type": "annual",
+                "basis": "PRC_GAAP",
+                "period_start": "2024-01-01",
+                "period_end": "2024-12-31",
+                "enrollment_id": null,
+                "artifact_id": null,
+                "artifact_sha256": null,
+                "config_hash": null,
+                "metadata_sha256": null,
+                "selected_pages": [],
+                "identity_status": "fast_source_verified"
+              },
+              {
+                "kind": "fast",
+                "workspace_id": "demo",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "report_year": 2025,
+                "attempt": 1,
+                "report_type": "annual",
+                "basis": "PRC_GAAP",
+                "period_start": "2025-01-01",
+                "period_end": "2025-12-31",
+                "enrollment_id": null,
+                "artifact_id": null,
+                "artifact_sha256": null,
+                "config_hash": null,
+                "metadata_sha256": null,
+                "selected_pages": [],
+                "identity_status": "fast_source_verified"
+              }
+            ]
+          },
+          {
+            "cell_key": "000651:annual_changes",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "template": "annual_changes",
+            "sources": [
+              {
+                "kind": "fast",
+                "workspace_id": "demo",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "report_year": 2024,
+                "attempt": 1,
+                "report_type": "annual",
+                "basis": "PRC_GAAP",
+                "period_start": "2024-01-01",
+                "period_end": "2024-12-31",
+                "enrollment_id": null,
+                "artifact_id": null,
+                "artifact_sha256": null,
+                "config_hash": null,
+                "metadata_sha256": null,
+                "selected_pages": [],
+                "identity_status": "fast_source_verified"
+              },
+              {
+                "kind": "fast",
+                "workspace_id": "demo",
+                "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "report_year": 2025,
+                "attempt": 1,
+                "report_type": "annual",
+                "basis": "PRC_GAAP",
+                "period_start": "2025-01-01",
+                "period_end": "2025-12-31",
+                "enrollment_id": null,
+                "artifact_id": null,
+                "artifact_sha256": null,
+                "config_hash": null,
+                "metadata_sha256": null,
+                "selected_pages": [],
+                "identity_status": "fast_source_verified"
+              }
+            ]
+          },
+          {
+            "cell_key": "000333:risk_excerpt",
+            "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+            "template": "risk_excerpt",
+            "sources": [
+              {
+                "kind": "fast",
+                "workspace_id": "demo",
+                "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+                "document_id": "1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f",
+                "source_revision": "1371f7afff0af99756b6cf30ff7985b070ee77becb3b1602843578a93719ee7e",
+                "content_sha256": "b17a9b9b84bca1d2a4e4a3cadc5dd5ba5c85e3f1fd2d758acd3315b5b040ecd9",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "report_year": 2024,
+                "attempt": 1,
+                "report_type": "annual",
+                "basis": "unknown",
+                "period_start": "2024-01-01",
+                "period_end": "2024-12-31",
+                "enrollment_id": null,
+                "artifact_id": null,
+                "artifact_sha256": null,
+                "config_hash": null,
+                "metadata_sha256": null,
+                "selected_pages": [],
+                "identity_status": "fast_source_verified"
+              },
+              {
+                "kind": "fast",
+                "workspace_id": "demo",
+                "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+                "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+                "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+                "content_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "report_year": 2025,
+                "attempt": 1,
+                "report_type": "annual",
+                "basis": "PRC_GAAP",
+                "period_start": "2025-01-01",
+                "period_end": "2025-12-31",
+                "enrollment_id": null,
+                "artifact_id": null,
+                "artifact_sha256": null,
+                "config_hash": null,
+                "metadata_sha256": null,
+                "selected_pages": [],
+                "identity_status": "fast_source_verified"
+              }
+            ]
+          },
+          {
+            "cell_key": "000333:annual_changes",
+            "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+            "template": "annual_changes",
+            "sources": [
+              {
+                "kind": "fast",
+                "workspace_id": "demo",
+                "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+                "document_id": "1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f",
+                "source_revision": "1371f7afff0af99756b6cf30ff7985b070ee77becb3b1602843578a93719ee7e",
+                "content_sha256": "b17a9b9b84bca1d2a4e4a3cadc5dd5ba5c85e3f1fd2d758acd3315b5b040ecd9",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "report_year": 2024,
+                "attempt": 1,
+                "report_type": "annual",
+                "basis": "unknown",
+                "period_start": "2024-01-01",
+                "period_end": "2024-12-31",
+                "enrollment_id": null,
+                "artifact_id": null,
+                "artifact_sha256": null,
+                "config_hash": null,
+                "metadata_sha256": null,
+                "selected_pages": [],
+                "identity_status": "fast_source_verified"
+              },
+              {
+                "kind": "fast",
+                "workspace_id": "demo",
+                "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+                "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+                "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+                "content_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+                "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                "report_year": 2025,
+                "attempt": 1,
+                "report_type": "annual",
+                "basis": "PRC_GAAP",
+                "period_start": "2025-01-01",
+                "period_end": "2025-12-31",
+                "enrollment_id": null,
+                "artifact_id": null,
+                "artifact_sha256": null,
+                "config_hash": null,
+                "metadata_sha256": null,
+                "selected_pages": [],
+                "identity_status": "fast_source_verified"
+              }
+            ]
+          }
+        ],
+        "preparation_confirmed": true
+      },
+      "status": 200
+    },
+    {
+      "operation_id": "2c137ca3-f392-4543-9f0b-fbd85e20df6a",
+      "method": "POST",
+      "path": "/cplus/batches",
+      "state": "HTTP_RESPONSE_RECEIVED",
+      "request_body": {
+        "operation_id": "2c137ca3-f392-4543-9f0b-fbd85e20df6a",
+        "confirmed": true,
+        "batch_plan_id": "770c8a3d-b544-4fd5-b10f-f21c9452e652",
+        "batch_plan_revision": 1,
+        "batch_plan_sha256": "2ce22f021eb3a3435bc9ad22408bbd56e5450039f43a62c2f9da4045136183d6"
+      },
+      "status": 503
+    }
+  ],
+  "child_processes": [
+    {
+      "pid": 50579,
+      "pgid": 50579,
+      "birth": "Tue Nov  3 19:07:31 2026",
+      "generation": 1
+    }
+  ],
+  "execution": "FAILED_RETAINED_NO_REPLAY",
+  "controller": {
+    "pid": 50576,
+    "pgid": 50576,
+    "birth": "Tue Nov  3 19:07:30 2026"
+  },
+  "session": {
+    "schema_version": "demo-session-v1",
+    "state": "active",
+    "expires_at": "2026-11-03T11:37:39.867215+00:00",
+    "server_now": "2026-11-03T11:07:39.870738+00:00",
+    "remaining_seconds": 1799,
+    "lease_generation": 1,
+    "seed_version": "showcase-cplus-seed-v3",
+    "can_review": false,
+    "owner_elevated_until": null
+  },
+  "owned_active_root": "/private/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-cplus-real-batch-bah6lvuj/control/active/1",
+  "document_status_counts": {
+    "failed": 1,
+    "ready": 5
+  },
+  "sources": {
+    "000651-2025": {
+      "kind": "fast",
+      "workspace_id": "demo",
+      "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+      "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+      "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+      "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+      "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+      "report_year": 2025,
+      "attempt": 1,
+      "report_type": "annual",
+      "basis": "PRC_GAAP",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "enrollment_id": null,
+      "artifact_id": null,
+      "artifact_sha256": null,
+      "config_hash": null,
+      "metadata_sha256": null,
+      "selected_pages": [],
+      "identity_status": "fast_source_verified"
+    },
+    "000651-2024": {
+      "kind": "fast",
+      "workspace_id": "demo",
+      "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+      "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+      "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+      "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+      "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+      "report_year": 2024,
+      "attempt": 1,
+      "report_type": "annual",
+      "basis": "PRC_GAAP",
+      "period_start": "2024-01-01",
+      "period_end": "2024-12-31",
+      "enrollment_id": null,
+      "artifact_id": null,
+      "artifact_sha256": null,
+      "config_hash": null,
+      "metadata_sha256": null,
+      "selected_pages": [],
+      "identity_status": "fast_source_verified"
+    },
+    "000333-2025": {
+      "kind": "fast",
+      "workspace_id": "demo",
+      "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+      "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+      "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+      "content_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+      "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+      "report_year": 2025,
+      "attempt": 1,
+      "report_type": "annual",
+      "basis": "PRC_GAAP",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "enrollment_id": null,
+      "artifact_id": null,
+      "artifact_sha256": null,
+      "config_hash": null,
+      "metadata_sha256": null,
+      "selected_pages": [],
+      "identity_status": "fast_source_verified"
+    },
+    "000333-2024": {
+      "kind": "fast",
+      "workspace_id": "demo",
+      "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+      "document_id": "1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f",
+      "source_revision": "1371f7afff0af99756b6cf30ff7985b070ee77becb3b1602843578a93719ee7e",
+      "content_sha256": "b17a9b9b84bca1d2a4e4a3cadc5dd5ba5c85e3f1fd2d758acd3315b5b040ecd9",
+      "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+      "report_year": 2024,
+      "attempt": 1,
+      "report_type": "annual",
+      "basis": "unknown",
+      "period_start": "2024-01-01",
+      "period_end": "2024-12-31",
+      "enrollment_id": null,
+      "artifact_id": null,
+      "artifact_sha256": null,
+      "config_hash": null,
+      "metadata_sha256": null,
+      "selected_pages": [],
+      "identity_status": "fast_source_verified"
+    }
+  },
+  "http_pdf_sha_verified_documents": [
+    "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+    "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+    "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+    "1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f"
+  ],
+  "build": {
+    "operation_id": "b25fafd3-2eb1-4a38-aebc-c29643e458bf",
+    "state": "completed",
+    "result": {
+      "embedding_model_version": "unknown",
+      "indexed_passages": 2223,
+      "state": "completed"
+    }
+  },
+  "plan": {
+    "approval_required": true,
+    "batch_plan_id": "770c8a3d-b544-4fd5-b10f-f21c9452e652",
+    "batch_plan_sha256": "2ce22f021eb3a3435bc9ad22408bbd56e5450039f43a62c2f9da4045136183d6",
+    "cells": [
+      {
+        "cell_key": "000651:risk_excerpt",
+        "child_operation_id": "3b04a3f5-8444-4bc1-871c-b8868ca67dc1",
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "prepared": {
+          "memory_generation": 2,
+          "selected_sources": [
+            {
+              "artifact_id": null,
+              "artifact_sha256": null,
+              "attempt": 1,
+              "basis": "PRC_GAAP",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "config_hash": null,
+              "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+              "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+              "enrollment_id": null,
+              "identity_status": "fast_source_verified",
+              "kind": "fast",
+              "metadata_sha256": null,
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "period_end": "2024-12-31",
+              "period_start": "2024-01-01",
+              "report_type": "annual",
+              "report_year": 2024,
+              "selected_pages": [],
+              "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+              "workspace_id": "demo"
+            },
+            {
+              "artifact_id": null,
+              "artifact_sha256": null,
+              "attempt": 1,
+              "basis": "PRC_GAAP",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "config_hash": null,
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "enrollment_id": null,
+              "identity_status": "fast_source_verified",
+              "kind": "fast",
+              "metadata_sha256": null,
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "period_end": "2025-12-31",
+              "period_start": "2025-01-01",
+              "report_type": "annual",
+              "report_year": 2025,
+              "selected_pages": [],
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "workspace_id": "demo"
+            }
+          ],
+          "source_scope_sha256": "9a60b233d46e5f45ae0e64ecec11ff7ec4e7f608eb9782dd0f1a154f69d25777"
+        },
+        "question": "摘录主要经营风险并给出处",
+        "template": "risk_excerpt"
+      },
+      {
+        "cell_key": "000651:annual_changes",
+        "child_operation_id": "e97a92ab-aa0e-4452-a459-75e7bda6b1dd",
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+        "prepared": {
+          "memory_generation": 2,
+          "selected_sources": [
+            {
+              "artifact_id": null,
+              "artifact_sha256": null,
+              "attempt": 1,
+              "basis": "PRC_GAAP",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "config_hash": null,
+              "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+              "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+              "enrollment_id": null,
+              "identity_status": "fast_source_verified",
+              "kind": "fast",
+              "metadata_sha256": null,
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "period_end": "2024-12-31",
+              "period_start": "2024-01-01",
+              "report_type": "annual",
+              "report_year": 2024,
+              "selected_pages": [],
+              "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+              "workspace_id": "demo"
+            },
+            {
+              "artifact_id": null,
+              "artifact_sha256": null,
+              "attempt": 1,
+              "basis": "PRC_GAAP",
+              "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+              "config_hash": null,
+              "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+              "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+              "enrollment_id": null,
+              "identity_status": "fast_source_verified",
+              "kind": "fast",
+              "metadata_sha256": null,
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "period_end": "2025-12-31",
+              "period_start": "2025-01-01",
+              "report_type": "annual",
+              "report_year": 2025,
+              "selected_pages": [],
+              "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+              "workspace_id": "demo"
+            }
+          ],
+          "source_scope_sha256": "9a60b233d46e5f45ae0e64ecec11ff7ec4e7f608eb9782dd0f1a154f69d25777"
+        },
+        "question": "比较两年经营风险、主要业务与研发原文",
+        "template": "annual_changes"
+      },
+      {
+        "cell_key": "000333:risk_excerpt",
+        "child_operation_id": "06e914cf-4b7a-48c0-801e-d313bee480ba",
+        "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+        "prepared": {
+          "memory_generation": 2,
+          "selected_sources": [
+            {
+              "artifact_id": null,
+              "artifact_sha256": null,
+              "attempt": 1,
+              "basis": "unknown",
+              "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+              "config_hash": null,
+              "content_sha256": "b17a9b9b84bca1d2a4e4a3cadc5dd5ba5c85e3f1fd2d758acd3315b5b040ecd9",
+              "document_id": "1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f",
+              "enrollment_id": null,
+              "identity_status": "fast_source_verified",
+              "kind": "fast",
+              "metadata_sha256": null,
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "period_end": "2024-12-31",
+              "period_start": "2024-01-01",
+              "report_type": "annual",
+              "report_year": 2024,
+              "selected_pages": [],
+              "source_revision": "1371f7afff0af99756b6cf30ff7985b070ee77becb3b1602843578a93719ee7e",
+              "workspace_id": "demo"
+            },
+            {
+              "artifact_id": null,
+              "artifact_sha256": null,
+              "attempt": 1,
+              "basis": "PRC_GAAP",
+              "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+              "config_hash": null,
+              "content_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+              "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+              "enrollment_id": null,
+              "identity_status": "fast_source_verified",
+              "kind": "fast",
+              "metadata_sha256": null,
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "period_end": "2025-12-31",
+              "period_start": "2025-01-01",
+              "report_type": "annual",
+              "report_year": 2025,
+              "selected_pages": [],
+              "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+              "workspace_id": "demo"
+            }
+          ],
+          "source_scope_sha256": "1542a018e2e9732fb6b46ddea9cd428a5be94c9b07d9d1d0ae1719e33a17ed70"
+        },
+        "question": "摘录主要经营风险并给出处",
+        "template": "risk_excerpt"
+      },
+      {
+        "cell_key": "000333:annual_changes",
+        "child_operation_id": "5dd343d3-edae-4e03-9ebc-ad129acc28b3",
+        "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+        "prepared": {
+          "memory_generation": 2,
+          "selected_sources": [
+            {
+              "artifact_id": null,
+              "artifact_sha256": null,
+              "attempt": 1,
+              "basis": "unknown",
+              "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+              "config_hash": null,
+              "content_sha256": "b17a9b9b84bca1d2a4e4a3cadc5dd5ba5c85e3f1fd2d758acd3315b5b040ecd9",
+              "document_id": "1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f",
+              "enrollment_id": null,
+              "identity_status": "fast_source_verified",
+              "kind": "fast",
+              "metadata_sha256": null,
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "period_end": "2024-12-31",
+              "period_start": "2024-01-01",
+              "report_type": "annual",
+              "report_year": 2024,
+              "selected_pages": [],
+              "source_revision": "1371f7afff0af99756b6cf30ff7985b070ee77becb3b1602843578a93719ee7e",
+              "workspace_id": "demo"
+            },
+            {
+              "artifact_id": null,
+              "artifact_sha256": null,
+              "attempt": 1,
+              "basis": "PRC_GAAP",
+              "company_id": "401f7afa-48a5-412c-a23c-724d45d0a90d",
+              "config_hash": null,
+              "content_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+              "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+              "enrollment_id": null,
+              "identity_status": "fast_source_verified",
+              "kind": "fast",
+              "metadata_sha256": null,
+              "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+              "period_end": "2025-12-31",
+              "period_start": "2025-01-01",
+              "report_type": "annual",
+              "report_year": 2025,
+              "selected_pages": [],
+              "source_revision": "88268121f5bb74897cfb4ba22575c536fd7b81406b9e4d5be24cfb75bb40fe24",
+              "workspace_id": "demo"
+            }
+          ],
+          "source_scope_sha256": "1542a018e2e9732fb6b46ddea9cd428a5be94c9b07d9d1d0ae1719e33a17ed70"
+        },
+        "question": "比较两年经营风险、主要业务与研发原文",
+        "template": "annual_changes"
+      }
+    ],
+    "limits": {
+      "max_cells": 12,
+      "parallel_cells": 1,
+      "provider_calls_by_service": 0,
+      "templates": [
+        "risk_excerpt",
+        "annual_changes"
+      ]
+    },
+    "revision": 1,
+    "schema_version": "prepared-batch-v1"
+  },
+  "plan_no_child_dispatch": true,
+  "explicit_start_approval": {
+    "confirmed": true,
+    "batch_plan_id": "770c8a3d-b544-4fd5-b10f-f21c9452e652",
+    "batch_plan_revision": 1,
+    "batch_plan_sha256": "2ce22f021eb3a3435bc9ad22408bbd56e5450039f43a62c2f9da4045136183d6"
+  },
+  "error": {
+    "type": "RuntimeError",
+    "message": "POST /cplus/batches: HTTP 503"
+  },
+  "cleanup": {
+    "controller_exited": true,
+    "children": [
+      {
+        "pid": 50579,
+        "pgid": 50579,
+        "birth": "Tue Nov  3 19:07:31 2026",
+        "generation": 1,
+        "group_alive_after_cleanup": false
+      }
+    ]
+  },
+  "seed_unchanged": true,
+  "owned_scratch_removed": true,
+  "start_effect": "UNKNOWN_NO_REPLAY",
+  "last_live_readonly_observation": {
+    "provenance": "separate tool read of this owned SQLite during the original request, before 503; not a final matrix",
+    "cells": [
+      {
+        "cell_key": "000651:risk_excerpt",
+        "state": "completed",
+        "error": null
+      },
+      {
+        "cell_key": "000651:annual_changes",
+        "state": "completed",
+        "error": null
+      },
+      {
+        "cell_key": "000333:risk_excerpt",
+        "state": "completed",
+        "error": null
+      },
+      {
+        "cell_key": "000333:annual_changes",
+        "state": "dispatching",
+        "error": null
+      }
+    ]
+  },
+  "failure_snapshot_limitation": "The executed harness exited on start HTTP503 and cleaned its runtime before capturing full cell payloads/final matrix. No final child-state inference is made. Final evaluator now captures owned state before cleanup; no original operation was replayed."
+}

@@ -131,7 +131,16 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
             yield
         validate(identity)
 
-    def reader(identity,manifest):
+    async def reader(identity,manifest):
+        # Revalidate the exact saved domain version's display permission. A
+        # stale source can remain historical; a revoked parent cannot.
+        validate(identity)
+        ref=manifest['report_ref']
+        try:
+            await resolve(ref['domain'],ref['id'],ref['revision'],ref['payload_sha256'],identity)
+        except Exception as exc:
+            from app.exports_v2.service import ExportError
+            raise ExportError('display_permission_denied',403) from exc
         validate(identity)
         return True
 

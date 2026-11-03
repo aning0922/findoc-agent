@@ -1,0 +1,88 @@
+{
+  "schema_version": "cplus-real-batch-v1",
+  "generated_at": "2026-11-03T11:06:20.652835+00:00",
+  "baseline": "dd8cca72a734c01c4d203af1989ee4af5cb1bb7e",
+  "script_sha256": "920d875b7b8c2c3c7c5a86517518133102d79df0b8cdf85fc42c86455331ecb4",
+  "tier": "REAL_OS_CONTROLLER_CHILD_SOCKET_HTTP_PDF_BGE_MILVUS",
+  "origin": "http://127.0.0.1:60080",
+  "seed_manifest_sha256": "d96b9340838c1d22619308d5d4492996f99ae03c52bf8a8a17eb6594ca139c3d",
+  "seed_version": "showcase-cplus-seed-v3",
+  "seed_vector_indexes": [
+    {
+      "collection": "fd16_19928fc37ab944689fb761780e085861",
+      "rows": 1122
+    },
+    {
+      "collection": "fd16_4860e071626d44da8aae62767f8ea152",
+      "rows": 1300
+    },
+    {
+      "collection": "fd16_5d77499f4c4a42d6909ec88565b6a83f",
+      "rows": 1003
+    },
+    {
+      "collection": "fd16_87aeb94cfee8471c99458825aaa52fec",
+      "rows": 1102
+    },
+    {
+      "collection": "fd16_ada3ca3c4b634bb28618e056a006a01c",
+      "rows": 1138
+    },
+    {
+      "collection": "findoc_runtime_documents_v1",
+      "rows": 0
+    }
+  ],
+  "owned_scratch": "/private/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-cplus-real-batch-bgz9ukeh",
+  "provider_calls": 0,
+  "financial_approvals": 0,
+  "paid_multi_agent": false,
+  "model": "disabled-no-calls",
+  "login_config": "generated per run, credentials not persisted",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/demo/login",
+      "status": 202,
+      "elapsed_seconds": 0.065
+    }
+  ],
+  "operations": [
+    {
+      "operation_id": "3be983cd-ade6-4d43-a476-2dd34feac93b",
+      "method": "POST",
+      "path": "/demo/login",
+      "state": "HTTP_RESPONSE_RECEIVED",
+      "status": 202
+    }
+  ],
+  "child_processes": [
+    {
+      "pid": 50391,
+      "pgid": 50391,
+      "birth": "Tue Nov  3 19:06:21 2026",
+      "generation": 1
+    }
+  ],
+  "execution": "HARNESS_STOPPED_BEFORE_BATCH_REQUESTS",
+  "controller": {
+    "pid": 50389,
+    "pgid": 50389,
+    "birth": "Tue Nov  3 19:06:20 2026"
+  },
+  "cleanup": {
+    "controller_exited": true,
+    "children": [
+      {
+        "pid": 50391,
+        "pgid": 50391,
+        "birth": "Tue Nov  3 19:06:21 2026",
+        "generation": 1,
+        "group_alive_after_cleanup": false
+      }
+    ]
+  },
+  "seed_unchanged": true,
+  "owned_scratch_removed": true,
+  "harness_note": "Preflight found annual payload id key must be result_id; stopped before plan/start, no batch or child operation dispatched."
+}
