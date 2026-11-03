@@ -1,0 +1,11 @@
+{
+  "tier": "UI_MOCK_ACTUAL_REACT_ISOLATED_BROWSER",
+  "saved_plan_mode": "ai_review",
+  "saved_plan_upper_calls": 4,
+  "displayed_checkbox": false,
+  "displayed_checkbox_disabled": true,
+  "confirmation_text": "确认计划\n\n共 4 项，使用 1 份来源。串行执行；模型调用为零；不请求财务核准。\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\ncompany · 风险原文 · fixture question\n\n批准并开始",
+  "approval_sent_for_same_ai_plan": true,
+  "real_provider_calls": 0,
+  "real_backend_requests": 0
+}

@@ -1,0 +1,11 @@
+{
+  "tier": "READ_ONLY_WIP_SOURCE_PLUS_TEMP_SQLITE_AND_UI_MOCK",
+  "files": {
+    "app/batch_research/service.py": "b3445ac5af7e51bdc01630f21ffc956d8b389952edd99e9dee30e3375b144a69",
+    "app/batch_research/api.py": "7d92a2a6f904b9f146486fa3fa20b195157b0c4f08f102f2b37312c53032c4aa",
+    "app/batch_research/tools.py": "9d7db49a1a6746759b26fc83539ede0ebd874decfdc491f24a5da6bee75a1d77",
+    "frontend/src/product/cplus/batch/BatchResearchPanel.tsx": "d1b576351e0f6c329eaf982157360a9e770b9176d2741cd8a77a6d21982665da"
+  },
+  "controlled_tests": "7 passed",
+  "provider_calls": 0
+}
