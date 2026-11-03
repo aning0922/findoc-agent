@@ -1,0 +1,118 @@
+{
+  "tier": "REAL_PDF_BGE_MILVUS_LOCAL_NO_LLM",
+  "seed_manifest_sha256": "efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4",
+  "implementation_sha256": "953ce92d0579a2a47f1bb1207d72ddd743dd98646228da7aff14a01fb19a8c41",
+  "sources": [
+    {
+      "kind": "fast",
+      "workspace_id": "demo",
+      "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+      "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+      "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+      "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+      "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+      "report_year": 2024,
+      "attempt": 1,
+      "report_type": "annual",
+      "basis": "PRC_GAAP",
+      "period_start": "2024-01-01",
+      "period_end": "2024-12-31",
+      "enrollment_id": null,
+      "artifact_id": null,
+      "artifact_sha256": null,
+      "config_hash": null,
+      "metadata_sha256": null,
+      "selected_pages": [],
+      "identity_status": "fast_source_verified"
+    },
+    {
+      "kind": "fast",
+      "workspace_id": "demo",
+      "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+      "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+      "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+      "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+      "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+      "report_year": 2025,
+      "attempt": 1,
+      "report_type": "annual",
+      "basis": "PRC_GAAP",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "enrollment_id": null,
+      "artifact_id": null,
+      "artifact_sha256": null,
+      "config_hash": null,
+      "metadata_sha256": null,
+      "selected_pages": [],
+      "identity_status": "fast_source_verified"
+    }
+  ],
+  "topics": [
+    {
+      "topic": "经营风险",
+      "program_label": "comparison_required",
+      "left": {
+        "state": "available",
+        "pages": [
+          44,
+          43
+        ]
+      },
+      "right": {
+        "state": "available",
+        "pages": [
+          39,
+          38
+        ]
+      },
+      "interpretation_review_status": "not_generated"
+    },
+    {
+      "topic": "主要业务",
+      "program_label": "comparison_required",
+      "left": {
+        "state": "available",
+        "pages": [
+          13,
+          44
+        ]
+      },
+      "right": {
+        "state": "available",
+        "pages": [
+          6,
+          6
+        ]
+      },
+      "interpretation_review_status": "not_generated"
+    },
+    {
+      "topic": "研发",
+      "program_label": "comparison_required",
+      "left": {
+        "state": "available",
+        "pages": [
+          20,
+          31
+        ]
+      },
+      "right": {
+        "state": "available",
+        "pages": [
+          40,
+          11
+        ]
+      },
+      "interpretation_review_status": "not_generated"
+    }
+  ],
+  "provider_outcome": "not_requested",
+  "llm_calls": 0,
+  "human_financial_approvals": 0,
+  "limitations": [
+    "Local nullcontext guard does not verify root lease/source concurrency wiring",
+    "Topic markers/ranking do not establish semantic comparison accuracy",
+    "No AI change/new-disclosure labels generated"
+  ]
+}
