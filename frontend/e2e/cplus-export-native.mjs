@@ -2,7 +2,7 @@
 import {chromium} from 'playwright';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {randomUUID,createHash} from 'node:crypto';
-const origin='http://127.0.0.1:14540';const out=new URL('../../data/cplus-export-native/',import.meta.url);await mkdir(out,{recursive:true});
+const origin='http://127.0.0.1:14540';const out=new URL(`../../data/${process.env.CPLUS_EXPORT_OUT||'cplus-export-native'}/`,import.meta.url);await mkdir(out,{recursive:true});
 const config=Object.fromEntries((await readFile(new URL('../../data/showcase-local.env',import.meta.url),'utf8')).split('\n').filter(x=>x&&!x.startsWith('#')).map(x=>{const i=x.indexOf('=');return[x.slice(0,i),x.slice(i+1)];}));
 const browser=await chromium.launch({channel:'chrome',headless:true});const page=await browser.newPage({viewport:{width:1440,height:1000}});page.setDefaultTimeout(45000);
 const proof={tier:'REAL_REACT_HTTP_PUBLIC_PDF_CANDIDATE_FILES',provider_calls:0,human_approvals:0,checks:[]};
@@ -11,8 +11,8 @@ async function api(method,path,body){const r=await page.request.fetch(origin+'/a
 try{
  for(let n=0;n<180;n++){const r=await page.request.get(origin+'/api/demo/status');if((await r.json()).service_state==='ready')break;await page.waitForTimeout(500)}
  await page.goto(origin);await page.getByLabel('账号',{exact:true}).fill(config.DEMO_USERNAME);await page.getByLabel('密码',{exact:true}).fill(config.DEMO_PASSWORD);await page.getByRole('button',{name:'进入演示',exact:true}).click();await page.getByRole('heading',{name:'研究概览',exact:true}).waitFor({timeout:90000});
- const docs=await api('GET','/documents');const core=['total_assets','total_liabilities','revenue','net_profit_parent','operating_cash_flow'];const collections=[];
- for(const d of docs.filter(d=>d.status==='ready')){const ref=await api('GET',`/cplus/documents/${d.document_id}/research-source`);if(ref.report_year!==2025)continue;collections.push(await api('POST','/cplus/financial/collections',{operation_id:randomUUID(),document_id:d.document_id,expected_source_revision:ref.source_revision}))}
+ const docs=await api('GET','/documents');const companyIds=(await api('GET','/companies')).filter(c=>['000651','000333'].includes(c.security_code)).map(c=>c.company_id);const core=['total_assets','total_liabilities','revenue','net_profit_parent','operating_cash_flow'];const collections=[];
+ for(const d of docs.filter(d=>d.status==='ready')){const ref=await api('GET',`/cplus/documents/${d.document_id}/research-source`);if(ref.report_year!==2025||!companyIds.includes(ref.company_id))continue;collections.push(await api('POST','/cplus/financial/collections',{operation_id:randomUUID(),document_id:d.document_id,expected_source_revision:ref.source_revision}))}
  const refs=collections.map(c=>({collection_id:c.id,cell_ids:core.flatMap(metric=>{const values=c.cells.filter(v=>v.metric_key===metric&&v.extraction_status==='candidate'&&((v.time.kind==='instant'&&v.time.as_of_date==='2025-12-31')||(v.time.kind==='duration'&&v.time.period_start==='2025-01-01'&&v.time.period_end==='2025-12-31')));return values.length===1?[values[0].cell_id]:[]})}));
  const peer=await api('POST','/cplus/peer-comparisons',{operation_id:randomUUID(),company_ids:collections.map(c=>c.source.company_id),collection_refs:refs,candidate_view:true});assert(peer.state==='completed','real two-company candidate comparison saved');proof.peer_result_id=peer.result.result_id;
  await page.goto(origin+`/reports?${new URLSearchParams({cplus_domain:'peer_comparison_v1',cplus_result:peer.result.result_id})}`);const panel=page.locator('.cplus-export');await panel.getByRole('button',{name:'生成导出文件',exact:true}).waitFor();await page.waitForFunction(()=>document.querySelector('.cplus-export select')?.value);

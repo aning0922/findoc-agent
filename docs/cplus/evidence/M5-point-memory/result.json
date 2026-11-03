@@ -1,0 +1,27 @@
+{
+  "tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED",
+  "provider_calls": 0,
+  "human_financial_approvals": 0,
+  "routes": [
+    {
+      "name": "B-point-memory-evidence",
+      "checks": [
+        "one 2025 filing contains exact 2024 and 2025 revenue periods",
+        "real comparative candidate trend created",
+        "explicit full-text index build completed",
+        "server-resolved focus preserves comparative period and refuses finance authority",
+        "actual fast quote favorite uses valid fast reference fields",
+        "new research context after memory update is explicit",
+        "real BGE recall finds saved quote across research contexts",
+        "deleted evidence is absent from subsequent real semantic recall"
+      ],
+      "started_at": "2026-11-03T11:18:24.053Z",
+      "result": "PASS",
+      "ended_at": "2026-11-03T11:18:44.831Z"
+    }
+  ],
+  "page_errors": [],
+  "seed_version": "showcase-cplus-seed-v3",
+  "result": "PASS",
+  "video_path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-interview-v2/page@81961cc22f8172b775aca2673671c7db.webm"
+}

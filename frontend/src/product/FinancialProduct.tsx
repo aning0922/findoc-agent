@@ -52,6 +52,7 @@ import "./tokens.css";
 import "./shell.css";
 import "./product.css";
 import './foundation.css';
+import './cplus/modules.css';
 const FinancialChart = lazy(() => import("./FinancialChart.tsx"));
 const Conversations = lazy(() => import('./Conversations.tsx'));
 function readRoute() {
@@ -106,7 +107,7 @@ export default function FinancialProduct({
 
   const company = companies.find((c) => c.company_id === route.company);
   const cplus = import.meta.env.VITE_FINDOC_CPLUS_MODE === '1';
-  const discovery = cplus ? <details className="product-card" open={route.page === 'companies'}><summary>查找上市公司与官方年报</summary><CompanyDiscoveryPanel companies={companies} onImported={(id) => { window.location.assign(pathFor('overview', id)); }} /></details> : null;
+  const discovery = cplus ? <details className="product-card cplus-module-card" open={route.page === 'companies'}><summary>查找上市公司与官方年报</summary><CompanyDiscoveryPanel companies={companies} onImported={(id) => { window.location.assign(pathFor('overview', id)); }} /></details> : null;
   return (
     <AppShell
       key={`${route.key}:${historyEpoch}`}
@@ -136,7 +137,7 @@ export default function FinancialProduct({
         <>{discovery}<CompanyDirectory companies={companies} loading={companiesLoading} /></>
       ) : route.page === 'conversations' ? (
         <Suspense fallback={<p role="status">正在打开研究助手…</p>}>
-          <>{cplus&&<><DocumentResearchPanel/><details className="product-card"><summary>批量研究 · 两家公司 × 两类原文任务</summary><BatchResearchEntry companies={companies}/></details></>}<Conversations companies={companies} /></>
+          <>{cplus&&<><DocumentResearchPanel/><details className="product-card cplus-module-card"><summary>批量研究 · 两家公司 × 两类原文任务</summary><BatchResearchEntry companies={companies}/></details></>}<Conversations companies={companies} /></>
         </Suspense>
       ) : route.page === "research" ? (
         <ResearchWorkbench

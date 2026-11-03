@@ -14,7 +14,7 @@ function official(url:string){try{const u=new URL(url);return u.protocol==='http
 function parsePending():Pending|null{try{const v=JSON.parse(sessionStorage.getItem(opKey)||'null');if(v===null)return null;if(!uuid.test(v.id)||!['search','import'].includes(v.kind)||(v.kind==='search'&&!['companies','announcements'].includes(v.mode)))throw Error();return v}catch{return {id:'',kind:'import'}}}
 function parseImport():Imported|null{try{const v=JSON.parse(sessionStorage.getItem(importKey)||'null');return v&&typeof v.companyId==='string'&&typeof v.documentId==='string'?{...v,state:'unknown'}:null}catch{return null}}
 export function CompanyDiscoveryPanel({companies=[],onImported}:{companies?:Company[];onImported?:(companyId:string,documentId:string)=>void}){
- const [query,setQuery]=useState(''),[year,setYear]=useState('2025'),[kind,setKind]=useState<'annual_fulltext'|'summary'>('annual_fulltext');
+ const [query,setQuery]=useState(()=>new URLSearchParams(window.location.search).get('discover')?.slice(0,80)||''),[year,setYear]=useState('2025'),[kind,setKind]=useState<'annual_fulltext'|'summary'>('annual_fulltext');
  const [securities,setSecurities]=useState<Security[]>([]),[security,setSecurity]=useState<Security|null>(null),[announcements,setAnnouncements]=useState<Announcement[]>([]),[chosen,setChosen]=useState<Announcement|null>(null);
  const [pending,setPending]=useState<Pending|null>(parsePending),[imported,setImported]=useState<Imported|null>(parseImport),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[partial,setPartial]=useState(false);
  const active=useRef(true), request=useRef(0), locked=useRef(false);
