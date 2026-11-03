@@ -1,0 +1,9 @@
+.showcase-archive { color: #203532; overflow-wrap: anywhere; }
+.showcase-archive__list { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,220px),1fr)); gap: .75rem; }
+.showcase-archive__list button { text-align:left; min-height: 68px; padding: 1rem; background: #f4faf8; border: 1px solid #c8dcd6; border-radius: 10px; cursor: pointer; color: inherit; }
+.showcase-archive__list span { display:block; color:#526c65; margin-top:.4rem; }
+.showcase-archive__detail { margin-top:1rem; padding:1rem; border:1px solid #d0ded9; border-radius:10px; }
+.showcase-archive__finding { padding:.7rem 0; border-top:1px solid #dce8e4; }
+.showcase-archive__finding h4, .showcase-archive__finding p { margin:.45rem 0; }
+.showcase-archive small { color:#526c65; }
+.showcase-archive pre { white-space:pre-wrap; overflow-wrap:anywhere; max-height:24rem; overflow:auto; }
