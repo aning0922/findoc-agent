@@ -8,3 +8,13 @@
 - 写入、更新、删除使用 operation_id；PATCH/DELETE expected_revision，confirmed 明示。GET `/research-memories/operations/{operation_id}` 只查已登记状态；GET不调用 LLM。embedding_model_version 由服务端注入，不可从请求设置。列表/语义接口最多20条已保存笔记，超限拒绝；语义召回不产财务 facts。
 
 source 失效的引用收藏不可召回；普通 note 无来源时仍可用，带来源后来源失效标 stale 并排除当前召回。对话被删时 source turn 不再通过校验；已发布历史回答不自动删除。以上是实现中合同，真实BGE/删除和竞态验证未完成。
+
+## 实现与验证（2026-11-03）
+
+分支 `codex/showcase-m01` 基于 `b81962f`。新增 `app/research_memory/`，没有接入 runtime、gateway、Graph 或 UI。注入同一 runtime root/workspace 的 source service 和 conversation repository；可选 parse service 必须指向同一 root 和相同 source service。来源字段为 `source_conversation_id` 与 `source_turn_ids`（最多 8 个）、`company_id`、`document_id`、`source_revision`、`evidence_id` 或 `artifact_id`（后者还需 `physical_page` 与 `source_line_index`）。artifact 引文读取 parse quality 中的指定行并标记 `ocr_candidate_unreviewed`；该分支没有实测该路径，接线前仍需独立验证。引用与来源分别存在独立数据库，来源变化在校验后、返回前的跨库竞态未原子关闭。
+
+`completed` 表示记忆与操作记录已持久提交，不保证向量已生成；列表的 `embedding_revision=null` 表示暂不可用于语义召回。嵌入失败不会凭空生成结果，也尚无自动重试任务。需要后续集成的控制器处理向量重建、删除记忆与 conversation 最终落库之间的跨库原子 fencing、来源变更竞态和查询/投喂预算。删除请求通过 DELETE 行为表达确认，不另要求 confirmed 字段；create/PATCH 必须明确为布尔 true。
+
+- `.venv/bin/pytest -q tests/test_research_memory.py`：5 passed；合成来源 PDF，涵盖确认、重放、版本/代际、来源失效、查询和删除竞态、迟到向量及 router 基本请求。
+- `HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 .venv/bin/python -m tests.real_research_memory_bge`：通过；两条合成笔记、一次中文语义排序与删除后不召回。使用本地 `BAAI/bge-m3`，模型具体 revision 未知；没有 LLM 调用。不构成真实财务数据或召回质量验收。
+- `ruff check`：新增代码和上述测试通过。未运行全量测试，也未进行集成、push、部署或真实数据验收。
