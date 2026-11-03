@@ -20,3 +20,7 @@ init只创建 `data/showcase-local.env`（必须git check-ignore成功），600�
 前端子进程只允许基础OS环境和明确Vite/proxy flags，禁止继承任意LLM/DEMO/password/provider变量并关闭envDir。网关和Vite日志放600的control/launcher.log，控制台仅输出无secret摘要。端口占用失败不杀进程；同control launcher.lock防双启动；Ctrl+C/TERM按逆序终止本次Popen自建进程组并等待，gateway正常lifespan负责独立child退出。若需要强杀gateway，子代可能需已有registry恢复机制处理；本脚本不扫描或杀未知进程。loopback限制是本地使用，不构成生产部署或RBAC验收。
 
 证据：`--help`通过；`pytest -q tests/test_showcase_local_launcher.py` 4 passed：临时Git忽略配置权限/拒绝覆盖和symlink、dotenv及前端环境隔离、占用端口、临时合成seed --check。Ruff通过。本worker未读取真实.env、未init真实配置、未启动真实预览或付费请求。正式本地启动/退出/已有seed与共享账本路径由root另验。
+
+## 同仓库LLM配置窄修
+
+显式--llm-config现允许同一Git common-dir的另一worktree/原checkout文件。通过文件父目录的实际git show-toplevel和绝对git-common-dir核验所属仓库，并在owner根执行check-ignore；拒绝外部repo、未忽略/链接/非600文件。Git发现与忽略检查剥离环境GIT_*覆盖。DEMO配置在main入口额外限制当前checkout data内。临时Git+linked worktree测试覆盖允许与拒绝边界；全组5 passed。未读取用户真实.env或运行付费服务。

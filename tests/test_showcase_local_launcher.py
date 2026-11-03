@@ -120,3 +120,53 @@ def test_check_uses_temporary_seed_without_spawning(tmp_path, monkeypatch, capsy
     assert '"llm": "disabled"' in output
     assert "DEMO_PASSWORD" not in output
     assert not (tmp_path / "data/showcase-local-controller-v1").exists()
+
+
+def test_provider_config_from_same_common_worktree_only(tmp_path):
+    original = tmp_path / "original"
+    original.mkdir()
+    path = repo(original)
+    subprocess.run(["git", "-C", str(original), "add", ".gitignore"], check=True)
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(original),
+            "-c",
+            "user.name=Fixture",
+            "-c",
+            "user.email=fixture@example.invalid",
+            "commit",
+            "-qm",
+            "fixture",
+        ],
+        check=True,
+    )
+    worktree = tmp_path / "integration"
+    subprocess.run(
+        ["git", "-C", str(original), "worktree", "add", "-qb", "integration", str(worktree)],
+        check=True,
+    )
+    path.write_text(
+        "LLM_API_KEY=offline-fixture\nLLM_MODEL=deepseek-flash\nLLM_BASE_URL=https://api.deepseek.com/v1\nLLM_TIMEOUT_SECONDS=30\n"
+    )
+    path.chmod(0o600)
+    assert provider_values(path, worktree)["LLM_API_KEY"] == "offline-fixture"
+    # The primary DEMO config helper remains restricted to its checkout.
+    with pytest.raises(ValueError, match="in_checkout"):
+        private_values(path, worktree)
+    other = tmp_path / "unrelated"
+    other.mkdir()
+    unrelated = repo(other)
+    unrelated.write_bytes(path.read_bytes())
+    unrelated.chmod(0o600)
+    with pytest.raises(ValueError, match="same_git_common_dir"):
+        provider_values(unrelated, worktree)
+    public = original / "not-ignored.env"
+    public.write_bytes(path.read_bytes())
+    public.chmod(0o600)
+    with pytest.raises(ValueError, match="ignored"):
+        provider_values(public, worktree)
+    path.chmod(0o644)
+    with pytest.raises(ValueError, match="600"):
+        provider_values(path, worktree)

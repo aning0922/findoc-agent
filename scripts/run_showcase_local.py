@@ -39,6 +39,7 @@ def ignored(path, project=PROJECT):
     r = subprocess.run(
         ["git", "check-ignore", "-q", "--", str(path)],
         cwd=project,
+        env={k: v for k, v in os.environ.items() if not k.startswith("GIT_")},
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
@@ -75,8 +76,30 @@ def private_values(path, project=PROJECT):
     return dotenv_values(path, interpolate=False)
 
 
+def git_identity(directory):
+    # Do not let ambient Git overrides redirect discovery to another repository.
+    env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+
+    def read(*args):
+        result = subprocess.run(
+            ["git", "-C", str(directory), "rev-parse", *args],
+            env=env,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        return Path(result.stdout.strip()).resolve()
+
+    return read("--show-toplevel"), read("--path-format=absolute", "--git-common-dir")
+
+
 def provider_values(path, project=PROJECT):
-    values = private_values(path, project)
+    path = safe_path(path)
+    owner, common = git_identity(path.parent)
+    _, project_common = git_identity(project)
+    if common != project_common:
+        raise ValueError("provider_config_requires_same_git_common_dir")
+    values = private_values(path, owner)
     if any(not values.get(k) for k in LLM_KEYS):
         raise ValueError("missing_provider_configuration")
     url = urlsplit(values["LLM_BASE_URL"])
@@ -186,6 +209,8 @@ def main(argv=None):
         help="Enable takeover only with separate owner password",
     )
     args = parser.parse_args(argv)
+    if not safe_path(args.config).is_relative_to(safe_path(PROJECT / "data")):
+        raise ValueError("login_config_requires_integration_data")
     if args.init_config:
         init_config(args.config, PROJECT)
         print("Private local config created; inspect it locally. Credentials are not printed.")
