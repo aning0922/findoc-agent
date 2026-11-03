@@ -7,39 +7,47 @@ type Item = { memory_id: string; revision: number; type: string; text: string; s
 type Result = { items: Item[]; memory_generation: number };
 type Receipt = { operation_id: string; memory_id: string; revision: number; state: string };
 type Pending = { id: string; kind: 'create' | 'patch' | 'delete'; target?: string };
-const key = 'findoc:research-memory-operation:v1';
-function pendingFromStorage(): Pending | null {
+function pendingFromStorage(key: string): Pending | null {
   const raw = sessionStorage.getItem(key); if (!raw) return null;
   const p: unknown = JSON.parse(raw);
   if (!p || typeof p !== 'object' || !('id' in p) || typeof p.id !== 'string' || !('kind' in p) || !['create', 'patch', 'delete'].includes(String(p.kind))) throw Error('invalid');
   return p as Pending;
 }
-export function ResearchMemoryPanel({ companyId }: { companyId?: string; conversationId?: string }) {
+export function ResearchMemoryPanel(props: { companyId?: string; conversationId?: string }) {
+  const scope = JSON.stringify([props.companyId ?? null, props.conversationId ?? null]);
+  return <ScopedPanel key={scope} companyId={props.companyId} scope={scope} />;
+}
+function ScopedPanel({ companyId, scope }: { companyId?: string; scope: string }) {
+  const key = `findoc:research-memory-operation:v1:${encodeURIComponent(scope)}`;
+  const epoch = useRef(0); const alive = useRef(true);
   const [items, setItems] = useState<Item[]>([]); const [loaded, setLoaded] = useState(false);
   const [query, setQuery] = useState(''); const [text, setText] = useState(''); const [kind, setKind] = useState('note');
   const [editing, setEditing] = useState<Item | null>(null); const [deleting, setDeleting] = useState<Item | null>(null);
   const [confirmed, setConfirmed] = useState(false); const [busy, setBusy] = useState(false); const [error, setError] = useState(''); const [notice, setNotice] = useState('');
-  const [initial] = useState(() => { try { return { pending: pendingFromStorage(), error: false }; } catch { return { pending: null, error: true }; } });
+  const [initial] = useState(() => { try { return { pending: pendingFromStorage(key), error: false }; } catch { return { pending: null, error: true }; } });
   const [storageError, setStorageError] = useState(initial.error); const [pending, setPending] = useState<Pending | null>(initial.pending); const lock = useRef(false);
+  useEffect(() => { alive.current = true; return () => { alive.current = false; epoch.current++; }; }, []);
   async function load(q = '') {
+    const request = ++epoch.current;
     setBusy(true); setError(''); setItems([]); setLoaded(false);
     try {
       const params = new URLSearchParams(); if (q.trim()) params.set('q', q.trim()); if (companyId) params.set('company_id', companyId);
       const result = await conversationJSON<Result>(`/research-memories${params.size ? `?${params}` : ''}`, new AbortController().signal);
       if (!Array.isArray(result.items) || !Number.isSafeInteger(result.memory_generation) || !result.items.every(i => typeof i.memory_id === 'string' && Number.isSafeInteger(i.revision) && typeof i.text === 'string')) throw Error('invalid');
-      setItems(result.items); setLoaded(true);
-    } catch { setError('记忆读取失败，请稍后重试。'); } finally { setBusy(false); }
+      if (request === epoch.current) { setItems(result.items); setLoaded(true); }
+    } catch { if (request === epoch.current) setError('记忆读取失败，请稍后重试。'); } finally { if (request === epoch.current) setBusy(false); }
   }
   useEffect(() => { void load(); }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
   async function recover() {
     if (!pending || busy) return; setBusy(true); setError('');
     try {
       const r = await conversationJSON<Receipt>(`/research-memories/operations/${encodeURIComponent(pending.id)}`, new AbortController().signal);
+      if (!alive.current) return;
       if (r.operation_id !== pending.id || r.state !== 'completed' || typeof r.memory_id !== 'string' || !Number.isSafeInteger(r.revision)) throw Error('unknown');
       if (pending.kind === 'delete') setItems(old => old.filter(i => i.memory_id !== r.memory_id));
       sessionStorage.removeItem(key); setPending(null); setEditing(null); setDeleting(null); setText(''); setConfirmed(false); setNotice('操作已确认，正在刷新记忆。');
       await load(query);
-    } catch { setError('结果尚未确认，请查询操作状态；不会重复提交。'); } finally { setBusy(false); }
+    } catch { if (alive.current) setError('结果尚未确认，请查询操作状态；不会重复提交。'); } finally { if (alive.current) setBusy(false); }
   }
   async function write(action: Pending['kind']) {
     if (lock.current || busy || pending || storageError || (action !== 'delete' && (!confirmed || !text.trim()))) return;
@@ -50,10 +58,11 @@ export function ResearchMemoryPanel({ companyId }: { companyId?: string; convers
     try {
       const body = action === 'create' ? { operation_id: p.id, type: kind, text: text.trim(), confirmed: true, ...(companyId ? { company_id: companyId } : {}) } : action === 'patch' ? { operation_id: p.id, expected_revision: target!.revision, text: text.trim(), confirmed: true } : { operation_id: p.id, expected_revision: target!.revision };
       const r = await conversationJSON<Receipt>(action === 'create' ? '/research-memories' : `/research-memories/${encodeURIComponent(target!.memory_id)}`, new AbortController().signal, action === 'create' ? 'POST' : action === 'patch' ? 'PATCH' : 'DELETE', body);
+      if (!alive.current) return;
       if (r.operation_id !== p.id || r.state !== 'completed' || (target && r.memory_id !== target.memory_id)) throw Error('unknown');
       if (action === 'delete') setItems(old => old.filter(i => i.memory_id !== target!.memory_id));
       sessionStorage.removeItem(key); setPending(null); setEditing(null); setDeleting(null); setText(''); setConfirmed(false); setNotice('记忆操作已保存。'); await load(query);
-    } catch { setError('结果尚未确认，请查询操作状态；不会重复提交。'); } finally { lock.current = false; setBusy(false); }
+    } catch { if (alive.current) setError('结果尚未确认，请查询操作状态；不会重复提交。'); } finally { lock.current = false; if (alive.current) setBusy(false); }
   }
   return <details className="research-memory"><summary>研究记忆与偏好</summary><div className="research-memory__body">
     <p>保存你确认的研究问题或笔记，供以后研究参考；笔记不是财务签核。删除后不再用于未来召回。</p>
