@@ -1,0 +1,168 @@
+{
+  "tier": "LOCAL_RENDER_FROM_REAL_SAVED_PUBLIC_SNAPSHOTS",
+  "provider_calls": 0,
+  "human_approvals": 0,
+  "artifacts": [
+    {
+      "name": "peer",
+      "report_ref": {
+        "domain": "peer_comparison_v1",
+        "id": "e584cb8f-c464-4d80-b820-246fbe2bf3ea",
+        "revision": 1,
+        "payload_sha256": "e5498bef7ec866c632076ebba3431dd58b9154668e8945e9d8b014249df37c1c"
+      },
+      "display_companies": {
+        "d9080344-8c69-4dea-a5d9-51bf84710105": {
+          "name": "珠海格力电器股份有限公司",
+          "security_code": "000651",
+          "exchange": "SZSE"
+        },
+        "401f7afa-48a5-412c-a23c-724d45d0a90d": {
+          "name": "美的集团股份有限公司",
+          "security_code": "000333",
+          "exchange": "SZSE"
+        }
+      },
+      "display_status": "stale",
+      "chart_kind": "bar",
+      "financial_rows": 10,
+      "files": [
+        {
+          "format": "csv",
+          "path": "/Users/aipuli/.codex/worktrees/findoc-business-exports/data/business-export-qa/peer.csv",
+          "sha256": "4e4e57fc9f1f313abf9018d9aa78abc43dec62496f835783acd09fcbcf0e75ca"
+        },
+        {
+          "format": "xlsx",
+          "path": "/Users/aipuli/.codex/worktrees/findoc-business-exports/data/business-export-qa/peer.xlsx",
+          "sha256": "be4f2ad1ed7323ecaa1cfad49dfd00ec0b2f15e5a6227cabcecf51cfebc12d6a"
+        },
+        {
+          "format": "pptx",
+          "path": "/Users/aipuli/.codex/worktrees/findoc-business-exports/data/business-export-qa/peer.pptx",
+          "sha256": "a0291c594d7ac468efb689b27986b4e341238b86de03f7dfab81754d35ea3361"
+        }
+      ]
+    },
+    {
+      "name": "annual",
+      "report_ref": {
+        "domain": "annual_diff_v1",
+        "id": "f5c7b0eb-7a22-46d2-8cf9-c805f4515db9",
+        "revision": 1,
+        "payload_sha256": "23dbafc0d08f8ab22af96a07382ec0077445e3a6a232d47f332bfbaa2c031106"
+      },
+      "display_companies": {
+        "d9080344-8c69-4dea-a5d9-51bf84710105": {
+          "name": "珠海格力电器股份有限公司",
+          "security_code": "000651",
+          "exchange": "SZSE"
+        }
+      },
+      "display_status": "stale",
+      "chart_kind": null,
+      "financial_rows": 0,
+      "files": [
+        {
+          "format": "csv",
+          "path": "/Users/aipuli/.codex/worktrees/findoc-business-exports/data/business-export-qa/annual.csv",
+          "sha256": "6b3decf4ff2cd48ac5451bffd2d147c3605fc4434b770d17996745684d979995"
+        },
+        {
+          "format": "xlsx",
+          "path": "/Users/aipuli/.codex/worktrees/findoc-business-exports/data/business-export-qa/annual.xlsx",
+          "sha256": "e65abf188b27588b07499a8ff02edb57d6b7789114bd6ac4d6c0a71546ed8326"
+        },
+        {
+          "format": "pptx",
+          "path": "/Users/aipuli/.codex/worktrees/findoc-business-exports/data/business-export-qa/annual.pptx",
+          "sha256": "541110072540d3c6c12a184f6e75ffa65de57b43bddb9efb3d71607526fa6878"
+        }
+      ]
+    }
+  ],
+  "pptx_pages": {
+    "peer": 6,
+    "annual": 7
+  },
+  "visual_qa": "All 13 Impress-rendered slides individually inspected; each workbook first page per sheet inspected. No claim of PowerPoint desktop or all Calc print pages.",
+  "renderer": "LibreOffice with explicit system fontconfig",
+  "screenshots": [
+    {
+      "path": "docs/cplus/reviews/business-export-qa/annual-1.png",
+      "sha256": "407c7d97130780a076d913732bb7fa727de691ed9609ebd3651fd52ad185690d"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/annual-2.png",
+      "sha256": "0c29fb4a77a094faa204a3886d951858079c67b10f8ceb5b9adc3dac692bd182"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/annual-3.png",
+      "sha256": "fcc0fb95b3d92faf1679222021fa195657460113e16fbac4b85ed4845333e78e"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/annual-4.png",
+      "sha256": "aefc7501899f762a09b8ae2438cc0313f35497e69853552ec0a83a15b59a9c46"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/annual-5.png",
+      "sha256": "43841c4bd12579d6880294937a249f75a5178377ac14150687668b328a505c53"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/annual-6.png",
+      "sha256": "8cd07a61d74417c41cb67da0202cb8db1f988ea23d50a4d573dedced7c9ccca4"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/annual-7.png",
+      "sha256": "f4316fc400be8c92a9948a5c71fcf81be871f47000d3bff29946e80e502a32a5"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/annual-sheet-1.png",
+      "sha256": "22bc15a8afacf1f89186ecee04429c965febff22fb1176d62b863e049dfdfb74"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/annual-sheet-2.png",
+      "sha256": "f4a49555b348141c3b9cc8bbdca1edb57082a882e0c5631e1100791c13f00c56"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/annual-sheet-3.png",
+      "sha256": "4c9850236eb8370cc1dcc63144b875c81890afdea7f0396456134cce0a7da645"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/peer-1.png",
+      "sha256": "70bbf7df08f4de4a8a3355ab542081d511e89b59d9b08ec376f9ab1a18dbadd7"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/peer-2.png",
+      "sha256": "59691015af7c88159aeb3d5527202ee88c65f77d058b223cddf84ab319ef378e"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/peer-3.png",
+      "sha256": "77f9b914208502a2fdfe30f2c7d344b78912a8875bba3cc525acaca046990ddd"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/peer-4.png",
+      "sha256": "731894acfea8c8dab39266ce662c6c87fd057e5c263699c2986865719c9c6194"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/peer-5.png",
+      "sha256": "2e62df43d171274d3a3b0cb4f9a4342f0f892b3639b69e5d43cb9d4bccffb0a2"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/peer-6.png",
+      "sha256": "9169c0592a2aa9bab682e8988b17f7860c8c0097f66de1fb406ab77a19c2b424"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/peer-sheet-1.png",
+      "sha256": "4317a52399c127cf6bef3c10a523733e5b55d2ff1761c5632ada19d7a3aea423"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/peer-sheet-2.png",
+      "sha256": "522c2440586c077d6600b3c21e0564db779e5d864cc8b14b96142d52d9677e1d"
+    },
+    {
+      "path": "docs/cplus/reviews/business-export-qa/peer-sheet-3.png",
+      "sha256": "37907f0b188e7d2be7cd9c05a359675f0fc9e46373b95cd0613adf252c69196a"
+    }
+  ]
+}

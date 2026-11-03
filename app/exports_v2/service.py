@@ -129,6 +129,9 @@ class ExportService:
         resolved = await self.resolver(
             ref["domain"], ref["id"], ref["revision"], ref["payload_sha256"], identity
         )
+        display_companies = json.loads(canonical(resolved.get("display_companies") or {}))
+        created_at = datetime.now(timezone.utc).isoformat()
+        resolved = {**resolved, "display_companies": display_companies, "generated_at": created_at}
         projection = project(ref, resolved)
         common = dict(
             domain=ref["domain"],
@@ -136,6 +139,7 @@ class ExportService:
             revision=ref["revision"],
             snapshot_sha256=ref["payload_sha256"],
             current_source_status=resolved["display_status"],
+            generated_at=created_at,
         )
         for name in ("financial", "evidence"):
             projection[name] = [{**common, **row} for row in projection[name]]
@@ -201,12 +205,13 @@ class ExportService:
         if (
             canonical(current["snapshot"]) != canonical(resolved["snapshot"])
             or current["display_status"] != resolved["display_status"]
+            or canonical(current.get("display_companies") or {}) != canonical(display_companies)
         ):
             raise ExportError("export_snapshot_or_status_changed")
         eid = str(uuid4())
         manifest = dict(
             schema_version="cplus-export-manifest-v1",
-            created_at=datetime.now(timezone.utc).isoformat(),
+            created_at=created_at,
             export_id=eid,
             report_ref=ref,
             export_profile_version=body["export_profile_version"],
@@ -222,6 +227,9 @@ class ExportService:
                 for f, v in files.items()
             ],
             snapshot_sha256=ref["payload_sha256"],
+            projection_version="business-v2",
+            display_companies=display_companies,
+            display_companies_sha256=digest(display_companies),
         )
         with self.guard(identity, current), self.tx(identity) as db:
             for fmt, content in files.items():

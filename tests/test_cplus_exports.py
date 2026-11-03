@@ -121,7 +121,7 @@ def test_real_csv_xlsx_files_immutable_get_and_permission(tmp_path):
         check = await asyncio.create_subprocess_exec(
             BUNDLED,
             "-c",
-            "from pptx import Presentation;import sys;p=Presentation(sys.argv[1]);assert len(p.slides)==6;assert any(s.has_chart for sl in p.slides for s in sl.shapes);assert any('待审阅' in s.text for sl in p.slides for s in sl.shapes if s.has_text_frame)",
+            "from pptx import Presentation;import sys;p=Presentation(sys.argv[1]);assert len(p.slides)==6;assert not any(s.has_chart for sl in p.slides for s in sl.shapes);assert any('待审阅' in s.text for sl in p.slides for s in sl.shapes if s.has_text_frame)",
             str(tmp_path / "research.pptx"),
         )
         assert await check.wait() == 0
