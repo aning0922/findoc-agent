@@ -1,0 +1,60 @@
+{
+  "manifest": "/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-c-official-sources-lksbr8xh/preflight.json",
+  "results": [
+    {
+      "id": "midea-2025",
+      "url": "https://www.midea.com.cn/content/dam/mideacn-aem/%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB/2025%E5%B9%B4%E5%BA%A6%E6%8A%A5%E5%91%8A.pdf.coredownload.inline.pdf",
+      "status": "downloaded",
+      "http_status": 200,
+      "pages": 276,
+      "cover_identity_match": true,
+      "sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+      "bytes": 5941636,
+      "matches_historical_sha": true,
+      "local_file": "data/showcase-source-preflight-20261103/midea-2025.pdf",
+      "elapsed_seconds": 0.667
+    },
+    {
+      "id": "gree-2025",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-29/1225250396.PDF",
+      "status": "downloaded",
+      "http_status": 200,
+      "pages": 219,
+      "cover_identity_match": true,
+      "sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+      "bytes": 2350012,
+      "matches_historical_sha": true,
+      "local_file": "data/showcase-source-preflight-20261103/gree-2025.pdf",
+      "elapsed_seconds": 0.531
+    },
+    {
+      "id": "gree-2024",
+      "url": "https://disc.static.szse.cn/disc/disk03/finalpage/2025-04-25/f3585bca-ade2-42b6-bee3-42bbb839897e.PDF",
+      "status": "downloaded",
+      "http_status": 200,
+      "pages": 248,
+      "cover_identity_match": true,
+      "sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+      "bytes": 5087621,
+      "matches_historical_sha": true,
+      "local_file": "data/showcase-source-preflight-20261103/gree-2024.pdf",
+      "elapsed_seconds": 0.588
+    },
+    {
+      "id": "midea-2024",
+      "url": "https://www.midea.com.cn/content/dam/mideacn-aem/%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB/%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB%E6%96%87%E4%BB%B6%E6%80%BB%E8%A7%88/2024%E6%96%87%E4%BB%B6/%E7%BE%8E%E7%9A%84%E9%9B%86%E5%9B%A2-2024%E5%B9%B4%E5%B9%B4%E5%BA%A6%E6%8A%A5%E5%91%8A.PDF.coredownload.inline.pdf",
+      "status": "downloaded",
+      "http_status": 200,
+      "pages": 295,
+      "cover_identity_match": true,
+      "sha256": "bc82a1be9e09101ed2c2772844a44b8a356c87a4dbdc0fa44a55eeeabaf94455",
+      "bytes": 6615254,
+      "matches_historical_sha": true,
+      "local_file": "data/showcase-source-preflight-20261103/midea-2024.pdf",
+      "elapsed_seconds": 0.429
+    }
+  ],
+  "data_level": "PUBLIC_OFFICIAL_PDF_HTTP_NO_LLM",
+  "source_scope": "Four existing issuer/disclosure PDFs revalidated; no live general announcement search API claimed.",
+  "human_financial_approvals": 0
+}

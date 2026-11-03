@@ -25,3 +25,5 @@
 - H01源a9274f4→集成b5768ee：主控真实读service/api/交接并独立复跑3PASS/ruffPASS（UNIT_FAKE）。runtime_factory唯一接线新增固定代际metadata/已绑定仓储，旧startup/companies/conversation_graph62PASS，14.66s，依赖5warning保留。
 - H01真实重依赖装配：修改后startup spike9.607s ready/9.649s含关闭，真实缓存BGE+Milvus，health/companies/dashboard200；空库四KPI0，generation1，独立sample origin=illustrative；LLM0。这只证明真实装配+空库/示意端点，不是财务真人数据/完整seed/auth通过。原始/tmp/findoc-c-dashboard-startup.log。
 - L01主控静态发现公开/api代理下pending Cookie path=/demo不匹配，已报后端与独审，必须修复并真实浏览器验。内部TestClient通过不代表外部前缀Cookie可用。
+
+- D01真实公开HTTP预检：四份官方PDF均200，SHA与既有来源manifest一致（美的2024/2025、格力2024/2025），276/219/248/295页；程序封面身份匹配。新副本单独Git忽略目录data/showcase-source-preflight-20261103，无旧数据覆盖/模型调用/真人核准。以前web404/timeout保留，本次直接httpx成功。详情D01_SOURCE_PREFLIGHT.json，不宣称全市场查询/实际导入完成。
