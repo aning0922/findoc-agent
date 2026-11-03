@@ -1,3 +1,5 @@
+from .explanations import CheckupExplanationService, create_checkup_explanation_router
+
 from decimal import Decimal, localcontext
 from uuid import uuid4
 from app.finance_v2.contracts import FinanceError
@@ -132,3 +134,11 @@ def create_checkup_router(service):
         return {**value, "historical_snapshot": True, "current_source_status": status}
 
     return router
+
+
+__all__ = [
+    "CheckupService",
+    "create_checkup_router",
+    "CheckupExplanationService",
+    "create_checkup_explanation_router",
+]
