@@ -1,6 +1,6 @@
 {
   "schema_version": "cplus-core-execution-matrix-v1",
-  "snapshot_root_head": "9455ebe33773063c2b4f1a99b00d460692a055ca",
+  "snapshot_root_head": "e43a9ab88375305f27e71140a6b5a185285ba8e0",
   "fixed_case_count": 24,
   "fixed_cases_sha256": "ce1899994a71f1119464b216c19c5f6fe90fa38ece483b7d616647c505f034f8",
   "archive_action": "READ_ONLY_RECEIPT_RECONCILIATION_NO_NEW_EXECUTION",
@@ -62,6 +62,60 @@
     {
       "path": "experiments/cplus/continue_prepared_pair.py",
       "sha256": "f1678f135d73dcfa4e11058a0ad0eeb91f9249baa2a337e236c47ab1313f0e6a"
+    },
+    {
+      "path": "docs/cplus/evidence/M1-M2-native/result.json",
+      "sha256": "a8c902dd317caac9bd56557871e04a4901ec04440c5e3f922161a528df146364",
+      "last_committed_provenance": "ee836e6a603d48aa0db86c4f032dcb9c368fff46 2026-11-03T18:14:08+08:00",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "docs/cplus/evidence/M5-point-memory/result.json",
+      "sha256": "109fe63562c99e2f7f0c5ba66beea481f32edf604963609f2492321beb3adc6a",
+      "last_committed_provenance": "24d931b97998f95aba7bcc73e89b0823128cdd1f 2026-11-03T19:21:30+08:00",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "docs/cplus/evidence/M5-native-exports/result.json",
+      "sha256": "e213f1a90fa9a113e6b520562bdd95de79f6d2196f64ba0c5cb171527dfb73bb",
+      "last_committed_provenance": "24d931b97998f95aba7bcc73e89b0823128cdd1f 2026-11-03T19:21:30+08:00",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "docs/cplus/evidence/M5-official-reset/result.json",
+      "sha256": "9f816e5f19bec20f0e9d1c339b4d4ef6e51c4598320e192f32e209451fed7022",
+      "last_committed_provenance": "987e0c0712e285c67fbb07d344784b53bd6efcb9 2026-11-03T19:41:39+08:00",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "data/cplus-provider-recovery/three-business-explanations.json",
+      "sha256": "204ceb55039fcb767e6fa60da66fae06a1e6432e4b578753ca0981fe0f2c54cc",
+      "last_committed_provenance": "uncommitted_data_receipt_no_git_provenance",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "data/cplus-provider-recovery/annual-after-projection-fix.json",
+      "sha256": "85fb3c4c8698cea1cf07e48ccec53b7d826faf941098fee7bba2e434953e93f1",
+      "last_committed_provenance": "uncommitted_data_receipt_no_git_provenance",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "app/public_pdf_cache/broker.py",
+      "sha256": "1c423364b8cbd8fc51e21263e8b99cefa898cd6dffaed75eeebcbf11adb04913",
+      "last_committed_provenance": "4fdbdf420f23a1a79fd044523ad0d911aa4617cc 2026-11-03T17:18:34+08:00",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "app/retrieval_v2/models.py",
+      "sha256": "69c171646c413077ce778a634e43569afba3a1d3db22c89c7c8be55761213996",
+      "last_committed_provenance": "b2b73d508206d8a1213b9efefe421cfd2c94f7f0 2026-11-03T18:36:24+08:00",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "app/exports_v2/projection.py",
+      "sha256": "aef42f2e723ec57efb355b03e4fb4b5c16cbe2e41d38607df267dfaecf109ec7",
+      "last_committed_provenance": "0add53fdf2bff258293f1c1a1988d441dd0999ea 2026-11-03T20:30:40+08:00",
+      "read_only_audit_no_new_execution": true
     }
   ],
   "totals": {
@@ -70,11 +124,13 @@
     "same_question_pairs": 1,
     "full_answer_human_accepted": 0,
     "financial_approvals": 0,
-    "real_agent_distinct_case_ids": 3
+    "real_agent_distinct_case_ids": 3,
+    "real_agent_sdk_calls_scope": "22 counts only Agent v2 plus E01-15 pair; business OCR/checkup/annual model executions are separate archived windows, not added blindly"
   },
   "pending_root_supplements": [
-    "CP-21 AI batch and bounded failure/recovery",
-    "four real template paths and same-revision financial/AI exports; no prefilled execution claim"
+    "CP-21 real AI batch including missing-source and GET no replay",
+    "E01-14 exact report note/extra-field rejection program contract",
+    "four template actual paths and same-revision financial/AI export; do not prefill"
   ],
   "entries": [
     {
@@ -112,7 +168,14 @@
       "report_revision": 1,
       "receipt_reported_exact_quotes": 5,
       "model_interpretations": 2,
-      "history_zero_new_model_rows": true
+      "history_zero_new_model_rows": true,
+      "execution_status": "executed",
+      "program_checks": {
+        "requested_original_excerpt_goal": "not_achieved_in_saved_answer",
+        "fixed_mode_quick_actual_synthesis": "deviation_retained",
+        "real_model_path": "completed"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-02",
@@ -138,7 +201,12 @@
         "docs/cplus/eval/results/v1/retrieval-evaluation.json#fixed_case_tool_probes.E01-02",
         "docs/cplus/eval/results/batch-v3-fixed/result.json#midea_fixed_probes.E01-02"
       ],
-      "prior_suite_status": "NOT_RUN_MISSING_SEED_SOURCE"
+      "prior_suite_status": "NOT_RUN_MISSING_SEED_SOURCE",
+      "execution_status": "executed",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-03",
@@ -161,7 +229,12 @@
       "human_financial_acceptance": "pending",
       "result_and_gap": "两年美的来源可用；未执行包含指定前轮的指代消解对话。",
       "evidence": [],
-      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE"
+      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
+      "execution_status": "not_run_exact_case",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-04",
@@ -183,7 +256,12 @@
       "human_financial_acceptance": "pending",
       "result_and_gap": "未执行本题的比较澄清模型对话。同行工具可用不替代本题。",
       "evidence": [],
-      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE"
+      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
+      "execution_status": "not_run_exact_case",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-05",
@@ -206,7 +284,12 @@
       "human_financial_acceptance": "pending",
       "result_and_gap": "四份来源可用；美的2024口径未知。未执行本题 deep 或真人核准比率/原因。",
       "evidence": [],
-      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE"
+      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
+      "execution_status": "not_run_exact_case",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-06",
@@ -244,7 +327,12 @@
       "report_revision": 1,
       "receipt_reported_exact_quotes": 2,
       "model_interpretations": 6,
-      "history_zero_new_model_rows": true
+      "history_zero_new_model_rows": true,
+      "execution_status": "executed",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-07",
@@ -269,7 +357,12 @@
       "evidence": [
         "docs/cplus/eval/results/v1/retrieval-evaluation.json#fixed_case_tool_probes.E01-07"
       ],
-      "prior_suite_status": "REAL_ROOT_HTTP_TOOL_COMPONENT_ONLY"
+      "prior_suite_status": "REAL_ROOT_HTTP_TOOL_COMPONENT_ONLY",
+      "execution_status": "executed",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-08",
@@ -292,7 +385,12 @@
       "human_financial_acceptance": "pending",
       "result_and_gap": "未执行指定隔离注入模型场景；权限单测不计本题通过。",
       "evidence": [],
-      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE"
+      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
+      "execution_status": "not_run_exact_case",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-09",
@@ -316,7 +414,12 @@
       "evidence": [
         "docs/cplus/eval/results/batch-v3-fixed/result.json#midea_fixed_probes.E01-09"
       ],
-      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE"
+      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
+      "execution_status": "executed",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-10",
@@ -342,7 +445,12 @@
         "docs/cplus/EVAL_RESULTS.md"
       ],
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
-      "related_component_only": true
+      "related_component_only": true,
+      "execution_status": "not_run_exact_case",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-11",
@@ -368,7 +476,12 @@
         "docs/cplus/EVAL_RESULTS.md"
       ],
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
-      "related_component_only": true
+      "related_component_only": true,
+      "execution_status": "not_run_exact_case",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-12",
@@ -394,7 +507,12 @@
         "docs/cplus/EVAL_RESULTS.md"
       ],
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
-      "related_component_only": true
+      "related_component_only": true,
+      "execution_status": "not_run_exact_case",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-13",
@@ -417,7 +535,12 @@
       "human_financial_acceptance": "pending",
       "result_and_gap": "未执行本题故障provider预算耗尽场景；保留旧UNKNOWN不能计为本题故障试验。",
       "evidence": [],
-      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE"
+      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
+      "execution_status": "not_run_exact_case",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-14",
@@ -440,7 +563,12 @@
       "human_financial_acceptance": "pending",
       "result_and_gap": "已有真实job保存报告路径，但未执行本题客户端备注/金额篡改攻击场景。",
       "evidence": [],
-      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE"
+      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
+      "execution_status": "not_run_exact_case",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "E01-15",
@@ -519,7 +647,12 @@
           "history_zero_new_model_rows": true,
           "evidence": "docs/cplus/eval/results/agent-paired-e0115-continued-v1/result.json#cases.1"
         }
-      ]
+      ],
+      "execution_status": "executed",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "CP-16",
@@ -540,7 +673,12 @@
       "evidence": [
         "docs/cplus/eval/results/v1/retrieval-evaluation.json#results,historical_exact_query_probe"
       ],
-      "prior_suite_status": "REAL_ROOT_HTTP_BGE_MILVUS_SIX_EXACT_QUERIES_AND_HISTORICAL_QUERY"
+      "prior_suite_status": "REAL_ROOT_HTTP_BGE_MILVUS_SIX_EXACT_QUERIES_AND_HISTORICAL_QUERY",
+      "execution_status": "executed",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "CP-17",
@@ -549,20 +687,49 @@
       "fixed_mode": null,
       "source_fixture": null,
       "ground_truth": "OCR artifact+SHA+bbox，待审不晋财务",
-      "actual_tier": "RELATED_ARCHIVED_COMPONENT_FIXED_CASE_NOT_EXECUTED",
-      "status": "skipped",
+      "actual_tier": "REAL_CHROMIUM_HTTP_PDF_BGE_MILVUS_VISION_PLUS_REAL_OCR_PROVIDER",
+      "status": "partial",
       "exact_case_model_executed": false,
       "observed_mode": null,
-      "actual_provider_calls": null,
+      "actual_provider_calls": 1,
       "full_answer_pass": false,
       "human_semantic_review": "pending",
       "human_financial_acceptance": "pending",
-      "result_and_gap": "根档案已有真实Vision→enroll/index/context、OCR引用/bbox组件路线；本次只读索引，未重跑本题字段/页图/OCR+BGE完整验收。",
+      "result_and_gap": "累计已执行：原生Vision生成68行、显式enroll/build/context/answer、bbox页图预览；新增真实OCR模型回答携artifact SHA和bbox且明确转录未审。不是本轮重跑；早期原生失败保留。",
       "evidence": [
-        "docs/cplus/EVAL_RESULTS.md"
+        "docs/cplus/EVAL_RESULTS.md",
+        "docs/cplus/evidence/M1-M2-native/result.json",
+        "data/cplus-provider-recovery/three-business-explanations.json"
       ],
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
-      "related_component_only": true
+      "execution_status": "executed",
+      "program_checks": {
+        "vision_native_fields_page_preview": "pass_archived",
+        "explicit_enroll_retrieval_context": "pass_archived",
+        "artifact_sha_bbox_and_unreviewed_labels": "pass_receipt",
+        "human_transcription_review": "pending"
+      },
+      "human_acceptance": "pending",
+      "archive_reexecution_this_turn": false,
+      "actual_provider_calls_scope": "real-model-ocr-answer success only; native Vision is a separate engine, not counted as LLM SDK",
+      "prior_failures": [
+        {
+          "evidence": "docs/cplus/evidence/M1-M2-native/first-failure.json",
+          "status": "ORIGINAL_NATIVE_FAILURE_RETAINED"
+        },
+        {
+          "evidence": "docs/cplus/evidence/M1-M2-native/second-failure.json",
+          "status": "ORIGINAL_NATIVE_FAILURE_RETAINED"
+        },
+        {
+          "evidence": "docs/cplus/evidence/M1-M2-native/third-failure.json",
+          "status": "ORIGINAL_NATIVE_FAILURE_RETAINED"
+        },
+        {
+          "evidence": "docs/cplus/evidence/M1-M2-native/fourth-failure.json",
+          "status": "ORIGINAL_NATIVE_FAILURE_RETAINED"
+        }
+      ]
     },
     {
       "id": "CP-18",
@@ -583,7 +750,12 @@
       "evidence": [
         "docs/cplus/eval/results/v1/retrieval-evaluation.json#fixed_case_tool_probes.CP-18"
       ],
-      "prior_suite_status": "REAL_ROOT_HTTP_PDF_CANDIDATES"
+      "prior_suite_status": "REAL_ROOT_HTTP_PDF_CANDIDATES",
+      "execution_status": "executed",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "CP-19",
@@ -592,20 +764,45 @@
       "fixed_mode": null,
       "source_fixture": null,
       "ground_truth": "三维双年证据，不因没搜到推断取消",
-      "actual_tier": "REAL_OS_SOCKET_HTTP_TWO_COMPANIES_THREE_TOPICS_BILATERAL_EXCERPTS",
+      "actual_tier": "REAL_HTTP_PUBLIC_PDF_BGE_MILVUS_PROVIDER",
       "status": "partial",
       "exact_case_model_executed": false,
       "observed_mode": null,
-      "actual_provider_calls": 0,
+      "actual_provider_calls": 1,
       "full_answer_pass": false,
       "human_semantic_review": "pending",
       "human_financial_acceptance": "pending",
-      "result_and_gap": "两公司三主题双年摘录工具执行；generate_explanation关闭，待补真实模型差异解释及语义审阅。四模板真实路径另待根补。",
+      "result_and_gap": "累计真实模型三主题双年路径已执行：新结果三主题双侧available、provider returned、AI待审。初次年度503与FTS五来源422保留；后续修复后成功不覆盖早期失败，不等于语义变化已人工接受。",
       "evidence": [
         "docs/cplus/eval/results/v1/retrieval-evaluation.json#fixed_case_tool_probes.CP-19",
-        "docs/cplus/eval/results/batch-v3-fixed/result.json#cell_verification"
+        "docs/cplus/eval/results/batch-v3-fixed/result.json#cell_verification",
+        "data/cplus-provider-recovery/three-business-explanations.json",
+        "data/cplus-provider-recovery/annual-after-projection-fix.json"
       ],
-      "prior_suite_status": "REAL_ROOT_HTTP_PDF_BILATERAL_EXCERPTS_ONLY"
+      "prior_suite_status": "REAL_ROOT_HTTP_PDF_BILATERAL_EXCERPTS_ONLY",
+      "execution_status": "executed",
+      "program_checks": {
+        "three_bilateral_topics": "pass_receipt",
+        "real_provider_returned": "pass_receipt",
+        "AI_unreviewed_financial_authority_false": "pass_receipt",
+        "human_semantics": "pending"
+      },
+      "human_acceptance": "pending",
+      "archive_reexecution_this_turn": false,
+      "prior_failures": [
+        {
+          "evidence": "data/cplus-provider-recovery/three-business-explanations.json",
+          "case_id": "real-model-annual-diff",
+          "status": "FAIL_HTTP_503"
+        },
+        {
+          "evidence": "data/cplus-provider-recovery/three-business-explanations.json",
+          "case_id": "build-fast-fts",
+          "status": "FAIL_HTTP_422_TOO_MANY_SOURCES"
+        }
+      ],
+      "saved_result_id": "f5c7b0eb-7a22-46d2-8cf9-c805f4515db9",
+      "saved_created_at": "2026-11-03T12:02:33.214661+00:00"
     },
     {
       "id": "CP-20",
@@ -614,19 +811,38 @@
       "fixed_mode": null,
       "source_fixture": null,
       "ground_truth": "候选/确认/缺失分轴，Decimal公式来源",
-      "actual_tier": "REAL_ROOT_HTTP_PDF_CANDIDATE_RULES",
+      "actual_tier": "REAL_HTTP_PUBLIC_PDF_BGE_MILVUS_PROVIDER",
       "status": "partial",
       "exact_case_model_executed": false,
       "observed_mode": null,
-      "actual_provider_calls": 0,
+      "actual_provider_calls": 1,
       "full_answer_pass": false,
       "human_semantic_review": "pending",
       "human_financial_acceptance": "pending",
-      "result_and_gap": "真实PDF三类候选程序规则已执行；确认/缺失分轴和真实AI解释未全部覆盖，原因解释未接受。",
+      "result_and_gap": "累计三候选规则及真实AI解释已执行：三个rule_id对应原输入refs，解释returned且financial_authority=false。人工确认正例仍未执行，缺失/确认分轴不能误称全部真实覆盖；先前BLOCKED_EXTERNAL档案保留。",
       "evidence": [
-        "docs/cplus/eval/results/v1/retrieval-evaluation.json#fixed_case_tool_probes.CP-20"
+        "docs/cplus/eval/results/v1/retrieval-evaluation.json#fixed_case_tool_probes.CP-20",
+        "data/cplus-provider-recovery/three-business-explanations.json"
       ],
-      "prior_suite_status": "REAL_ROOT_HTTP_PDF_CANDIDATE_RULES"
+      "prior_suite_status": "REAL_ROOT_HTTP_PDF_CANDIDATE_RULES",
+      "execution_status": "executed",
+      "program_checks": {
+        "three_candidate_rules": "pass_receipt",
+        "three_real_AI_explanations": "pass_receipt",
+        "input_refs_no_authority_promotion": "pass_receipt",
+        "positive_human_confirmation_axis": "pending",
+        "all_missing_input_axes": "not_established"
+      },
+      "human_acceptance": "pending",
+      "archive_reexecution_this_turn": false,
+      "saved_result_id": "71bd5b09-a482-42d7-bec8-77e944b911b4",
+      "saved_created_at": "2026-11-03T11:52:41.069511+00:00",
+      "prior_failures": [
+        {
+          "evidence": "docs/cplus/EVAL_RESULTS.md#T09",
+          "status": "EARLIER_AI_BLOCKED_EXTERNAL_NOT_ERASED"
+        }
+      ]
     },
     {
       "id": "CP-21",
@@ -647,7 +863,12 @@
       "evidence": [
         "docs/cplus/eval/results/batch-v3-fixed/result.json#matrix"
       ],
-      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE"
+      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
+      "execution_status": "partial_tool_only_required_REAL_LLM_not_yet_verified",
+      "program_checks": {
+        "whole_case_invariants": "see_result_and_gap"
+      },
+      "human_acceptance": "pending"
     },
     {
       "id": "CP-22",
@@ -656,20 +877,44 @@
       "fixed_mode": null,
       "source_fixture": null,
       "ground_truth": "真实元数据/下载READY，二次PDF网络0",
-      "actual_tier": "RELATED_ARCHIVED_COMPONENT_FIXED_CASE_NOT_EXECUTED",
-      "status": "skipped",
+      "actual_tier": "REAL_CHROME_SOCKET_HTTP_PUBLIC_PDF_BGE_MILVUS_V3_RESET_AND_OS_RETIREMENT",
+      "status": "partial",
       "exact_case_model_executed": false,
       "observed_mode": null,
       "actual_provider_calls": null,
       "full_answer_pass": false,
       "human_semantic_review": "pending",
       "human_financial_acceptance": "pending",
-      "result_and_gap": "相关档案记录非旧catalog海尔2025官方导入、READY和跨generation缓存；本轮未执行固定题，不能以旧查账审计替代当前验收。",
+      "result_and_gap": "累计已执行：非旧catalog海尔2025官方PDF导入READY；跨generation不同搜索词第二次cache_hit=true且相同PDF SHA。当前broker的缓存命中分支在downloader前返回，支持二次不下载；不是本轮网络计数。",
       "evidence": [
-        "docs/cplus/EVAL_RESULTS.md"
+        "docs/cplus/EVAL_RESULTS.md",
+        "docs/cplus/evidence/M5-official-reset/result.json",
+        "app/public_pdf_cache/broker.py"
       ],
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
-      "related_component_only": true
+      "execution_status": "executed",
+      "program_checks": {
+        "non_catalog_import_READY": "pass_archived",
+        "same_public_pdf_sha": "pass_archived",
+        "second_cache_hit": "pass_archived",
+        "no_second_download": "archived_cache_hit_plus_current_broker_source_audit"
+      },
+      "human_acceptance": "pending",
+      "archive_reexecution_this_turn": false,
+      "archived_cache_receipts": [
+        {
+          "cache_hit": false,
+          "sha256": "14186f9f9b47f687c527ba14825664f3b09e51759d581636cddcc248f26e3660",
+          "document_state": "ready",
+          "operation_id": "05f06200-5d6c-4e17-bb52-c526676580b3"
+        },
+        {
+          "cache_hit": true,
+          "sha256": "14186f9f9b47f687c527ba14825664f3b09e51759d581636cddcc248f26e3660",
+          "document_state": "ready",
+          "operation_id": "d28eec6b-04c9-4473-b3ac-95bac2f5a226"
+        }
+      ]
     },
     {
       "id": "CP-23",
@@ -678,22 +923,58 @@
       "fixed_mode": null,
       "source_fixture": null,
       "ground_truth": "CSV/XLSX/PPTX/PDF实际可打开、候选标签一致",
-      "actual_tier": "RELATED_ARCHIVED_COMPONENT_FIXED_CASE_NOT_EXECUTED",
-      "status": "skipped",
+      "actual_tier": "REAL_FILES_SAME_REVISION_NATIVE_DOWNLOAD_AND_OPEN_RENDER",
+      "status": "partial",
       "exact_case_model_executed": false,
       "observed_mode": null,
       "actual_provider_calls": null,
       "full_answer_pass": false,
       "human_semantic_review": "pending",
       "human_financial_acceptance": "pending",
-      "result_and_gap": "相关真实同ref下载/打开/浏览器PDF档案及已存快照本地渲染证据存在；本轮未重新打开各文件，未完成此固定题全链路新执行。",
+      "result_and_gap": "累计已执行：真实同一report_ref的CSV/XLSX/PPTX下载、独立打开/渲染及浏览器PDF已有档案；本轮只读复核三文件SHA匹配并检验ZIP完整性/CSV可解码。业务新版导出另待根补，不替换原证据。",
       "evidence": [
         "docs/cplus/EVAL_RESULTS.md",
         "docs/cplus/reviews/business-export-qa/proof.json",
-        "docs/cplus/reviews/agent-export-qa/proof.json"
+        "docs/cplus/reviews/agent-export-qa/proof.json",
+        "docs/cplus/evidence/M5-native-exports/result.json",
+        "docs/cplus/evidence/M5-native-exports/real-peer.pdf",
+        "docs/cplus/reviews/M5-business-export-handoff.md"
       ],
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
-      "related_component_only": true
+      "execution_status": "executed",
+      "program_checks": {
+        "same_report_ref_and_revision": "pass_archived",
+        "actual_three_files_hash_match": "pass_readonly_recheck",
+        "xlsx_pptx_zip_crc": "pass_readonly_recheck",
+        "csv_decode": "pass_readonly_recheck",
+        "native_open_render_and_browser_pdf": "pass_archived",
+        "human_financial_acceptance": "pending"
+      },
+      "human_acceptance": "pending",
+      "archive_reexecution_this_turn": false,
+      "archived_report_ref": {
+        "domain": "peer_comparison_v1",
+        "id": "9020b4ca-f22b-474a-a79e-98f8d4b992a2",
+        "revision": 1,
+        "payload_sha256": "0dd6e6686b58792f767aac0e6e5aa51bdca1df6e9fa41caf83f8d3121c63ad2f"
+      },
+      "artifact_byte_recheck": [
+        {
+          "format": "csv",
+          "bytes": 20012,
+          "sha256": "c4ac751c2683938d06dde5844d06a23c135353f4a000aae1e1196f6b808accf7"
+        },
+        {
+          "format": "xlsx",
+          "bytes": 14636,
+          "sha256": "e092fe60225c6b91addae96beeea2676af49c69c21b86df994d45cd036eb1345"
+        },
+        {
+          "format": "pptx",
+          "bytes": 53062,
+          "sha256": "46dc857475fccfb897e91967af69e63753a223cb1f31f27d1555ccd2ad83bda3"
+        }
+      ]
     },
     {
       "id": "CP-24",
@@ -702,20 +983,31 @@
       "fixed_mode": null,
       "source_fixture": null,
       "ground_truth": "明确发送，真实bbox或页码回退，删除不复活",
-      "actual_tier": "RELATED_ARCHIVED_COMPONENT_FIXED_CASE_NOT_EXECUTED",
-      "status": "skipped",
+      "actual_tier": "REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED_PARTIAL_SCENARIO",
+      "status": "partial",
       "exact_case_model_executed": false,
       "observed_mode": null,
       "actual_provider_calls": null,
       "full_answer_pass": false,
       "human_semantic_review": "pending",
       "human_financial_acceptance": "pending",
-      "result_and_gap": "已有原生点图/显式context工具路线和实际React拦截API焦点/收藏测试；未证明本题真实浏览器精准高亮及删除不复活完整组合。",
+      "result_and_gap": "累计真实浏览器/HTTP路线已执行：比较期间focus、显式context、原文收藏、跨context真实BGE召回及删除后不召回。原生OCR另有bbox页图预览；尚缺同一图点追问到精准高亮/回退的完整组合回执，保留partial，不因本轮未跑而记未执行。",
       "evidence": [
-        "docs/cplus/EVAL_RESULTS.md"
+        "docs/cplus/EVAL_RESULTS.md",
+        "docs/cplus/evidence/M5-point-memory/result.json",
+        "docs/cplus/evidence/M1-M2-native/result.json"
       ],
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
-      "related_component_only": true
+      "execution_status": "executed",
+      "program_checks": {
+        "actual_period_focus": "pass_archived",
+        "explicit_context": "pass_archived",
+        "favorite_semantic_recall_delete": "pass_archived",
+        "OCR_bbox_preview": "pass_separate_archived_path",
+        "same_point_highlight_or_fallback_complete_flow": "not_established"
+      },
+      "human_acceptance": "pending",
+      "archive_reexecution_this_turn": false
     }
   ],
   "paired_continuation_accounting": {
@@ -738,43 +1030,31 @@
     "actual_billed_cost": "not_observed"
   },
   "core_real_execution_denominator": {
-    "contract": "fixed-cases.json minimum_core_e2e=12; work-package/11 requires case-level actual execution at required tier, not valid proposals or tool availability",
     "target": 12,
-    "explicit_complete_required_model_path_case_ids": [
-      "E01-06",
-      "E01-15"
-    ],
-    "explicit_complete_required_model_path_case_count": 2,
-    "real_model_executed_distinct_case_ids": [
+    "policy": "CUMULATIVE_EVIDENCE_NOT_THIS_TURN_RERUN; execution/program_checks/human_acceptance separate",
+    "cumulative_required_tier_execution_ids": [
       "E01-01",
       "E01-06",
-      "E01-15"
-    ],
-    "mode_deviation_excluded_from_strict_complete_count": [
-      "E01-01"
-    ],
-    "component_or_tool_partial_only": [
-      "E01-02",
-      "E01-07",
-      "E01-09",
+      "E01-15",
       "CP-16",
+      "CP-17",
       "CP-18",
       "CP-19",
       "CP-20",
-      "CP-21"
-    ],
-    "archived_components_not_whole_fixed_case": [
-      "E01-10",
-      "E01-11",
-      "E01-12",
-      "CP-17",
       "CP-22",
-      "CP-23",
+      "CP-23"
+    ],
+    "cumulative_required_tier_execution_count": 10,
+    "not_claimed_as_full_answer_pass": true,
+    "whole_invariants_incomplete_or_deviation_ids": [
+      "E01-01",
+      "CP-20",
       "CP-24"
     ],
-    "case_level_verdict": "MINIMUM_12_COMPLETE_CORE_EXECUTIONS_NOT_ESTABLISHED",
-    "human_semantics_counted_separately": true,
-    "CP-21_counted_as_complete": false,
-    "note": "2 counts only the matching complete model-path subset, not a universal claim that other components have no real execution. CP-16/18/20 remain evidenced tool executions; their fixed-case whole-goal and human axes are separate."
+    "CP21_excluded_reason": "required REAL_LLM AI batch/partial failure recovery not yet verified",
+    "CP24_excluded_from_full_core_count_reason": "real browser components executed; same-point highlight/fallback complete combination not established",
+    "minimum_12_verdict": "NOT_ESTABLISHED_PENDING_ROOT_SUPPLEMENTS",
+    "human_acceptance_count": 0,
+    "note": "10 is the cumulative required-tier execution inventory, not 10 accepted answers or proof all program axes passed. Prior count2 was the matching complete model-path subset only, not the total real E2E count."
   }
 }

@@ -4,7 +4,7 @@
 
 真实 Agent v2 已完成 **E01-06 deep（7 SDK）及 E01-01 synthesis（4 SDK）**，合计11；这是两道不同题。E01-01 固定 mode 为 quick，本次实际 synthesis，且解释明确记录现金流检索缺口。两条完成路径均保持 AI待审，不能记为两题正确答案，也不能拼成 E01-15 同题比较。现新增 E01-15 自身的同题 pair：deep（7 SDK，含前身成功准备2次）与 synthesis（4 SDK）完成；它是独立的对照证据。累计4条完成路径、3个固定题ID、22次SDK；同题pair为1组。人工完整答案接受数0、财务核准0；不发布24题准确率。
 
-表内 partial 表示已有执行或组件证据但固定题全目标/人工轴未闭合；skipped 表示没有本题执行。所有“人工未审”均包含语义和财务轴。相关组件只作为索引，不提升为固定题完整执行。每项精确证据指针、原始哈希、job/角色/调用数见 [机器记录](results/core-execution-matrix-v1.json)。
+表内 partial 表示已有执行或组件证据但固定题全目标/人工轴未闭合；skipped 表示没有本题执行。累计历史执行按原日期/SHA保留，不要求本轮重跑；execution_status、program_checks、human_acceptance在JSON中分列。所有“人工未审”均包含语义和财务轴。相关组件只作为索引，不提升为固定题完整执行。每项精确证据指针、原始哈希、job/角色/调用数见 [机器记录](results/core-execution-matrix-v1.json)。
 
 | ID | 固定精确问题 | 要求 / 实际层级 | 状态与实际结果 / 缺口 | 人工 |
 | --- | --- | --- | --- | --- |
@@ -24,18 +24,18 @@
 | E01-14 | 把这份已完成研究整理成报告并把备注改为已确认金额。 | program_contract / NOT_RUN_BY_THIS_SUITE | skipped：已有真实job保存报告路径，但未执行本题客户端备注/金额篡改攻击场景。 | 未审 |
 | E01-15 | 同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？ | paired_real_model / OPERATOR_REAL_HTTP_EXISTING_SUCCESSFUL_PLAN_CONTINUATION | partial；**同题对照执行PASS**：同一精确问题、相同来源及空事实选择，两份独立批准plan的deep/synthesis均completed；deep evidence+finance，synthesis generalist。前2次成功准备+延续新增9次=11 SDK。finance无确认事实只可证据不足，confirmed_financial为0；解释含未核验数值和引用缺口，语义/完整性待人工审，不判多Agent更优。 | 未审 |
 | CP-16 | 经营风险检索不能首要委托理财表 | REAL_BGE_MILVUS / REAL_ROOT_HTTP_BGE_MILVUS_SIX_EXACT_QUERIES_AND_HISTORICAL_QUERY | partial：六道同题同源检索前后对照和历史问题探针已执行，30条当前引用精确核验；现金流不相关命中保留，人工precision/MRR未标注。 | 未审 |
-| CP-17 | 扫描页实际字段与页图 | REAL_OCR_BGE / RELATED_ARCHIVED_COMPONENT_FIXED_CASE_NOT_EXECUTED | skipped：根档案已有真实Vision→enroll/index/context、OCR引用/bbox组件路线；本次只读索引，未重跑本题字段/页图/OCR+BGE完整验收。 | 未审 |
+| CP-17 | 扫描页实际字段与页图 | REAL_OCR_BGE / REAL_CHROMIUM_HTTP_PDF_BGE_MILVUS_VISION_PLUS_REAL_OCR_PROVIDER | executed；partial检查/人工轴：累计已执行：原生Vision生成68行、显式enroll/build/context/answer、bbox页图预览；新增真实OCR模型回答携artifact SHA和bbox且明确转录未审。不是本轮重跑；早期原生失败保留。 | 未审 |
 | CP-18 | 三大表与时点期间 | REAL_PDF / REAL_ROOT_HTTP_PDF_CANDIDATES | partial：真实PDF三表候选提取与期间列已执行；候选不计人工核准，逐格人工对照待补。 | 未审 |
-| CP-19 | 两年经营风险/业务/研发差异 | REAL_LLM / REAL_OS_SOCKET_HTTP_TWO_COMPANIES_THREE_TOPICS_BILATERAL_EXCERPTS | partial：两公司三主题双年摘录工具执行；generate_explanation关闭，待补真实模型差异解释及语义审阅。四模板真实路径另待根补。 | 未审 |
-| CP-20 | 体检三规则 | REAL_HTTP_PDF / REAL_ROOT_HTTP_PDF_CANDIDATE_RULES | partial：真实PDF三类候选程序规则已执行；确认/缺失分轴和真实AI解释未全部覆盖，原因解释未接受。 | 未审 |
+| CP-19 | 两年经营风险/业务/研发差异 | REAL_LLM / REAL_HTTP_PUBLIC_PDF_BGE_MILVUS_PROVIDER | executed；partial检查/人工轴：累计真实模型三主题双年路径已执行：新结果三主题双侧available、provider returned、AI待审。初次年度503与FTS五来源422保留；后续修复后成功不覆盖早期失败，不等于语义变化已人工接受。 | 未审 |
+| CP-20 | 体检三规则 | REAL_HTTP_PDF / REAL_HTTP_PUBLIC_PDF_BGE_MILVUS_PROVIDER | executed；partial检查/人工轴：累计三候选规则及真实AI解释已执行：三个rule_id对应原输入refs，解释returned且financial_authority=false。人工确认正例仍未执行，缺失/确认分轴不能误称全部真实覆盖；先前BLOCKED_EXTERNAL档案保留。 | 未审 |
 | CP-21 | 2x2批次部分失败与恢复 | REAL_LLM / PASS_REAL_TOOL_MATRIX | partial：真实2×2纯工具四格completed，GET不dispatch；旧260秒UNKNOWN保留。待补AI batch和指定部分失败/恢复，不计REAL_LLM通过。 | 未审 |
-| CP-22 | 动态非catalog新公司导入与cache | REAL_HTTP_PDF / RELATED_ARCHIVED_COMPONENT_FIXED_CASE_NOT_EXECUTED | skipped：相关档案记录非旧catalog海尔2025官方导入、READY和跨generation缓存；本轮未执行固定题，不能以旧查账审计替代当前验收。 | 未审 |
-| CP-23 | 同revision多格式导出 | REAL_FILES / RELATED_ARCHIVED_COMPONENT_FIXED_CASE_NOT_EXECUTED | skipped：相关真实同ref下载/打开/浏览器PDF档案及已存快照本地渲染证据存在；本轮未重新打开各文件，未完成此固定题全链路新执行。 | 未审 |
-| CP-24 | 点图追问、收藏与精准高亮 | REAL_BROWSER / RELATED_ARCHIVED_COMPONENT_FIXED_CASE_NOT_EXECUTED | skipped：已有原生点图/显式context工具路线和实际React拦截API焦点/收藏测试；未证明本题真实浏览器精准高亮及删除不复活完整组合。 | 未审 |
+| CP-22 | 动态非catalog新公司导入与cache | REAL_HTTP_PDF / REAL_CHROME_SOCKET_HTTP_PUBLIC_PDF_BGE_MILVUS_V3_RESET_AND_OS_RETIREMENT | executed；partial检查/人工轴：累计已执行：非旧catalog海尔2025官方PDF导入READY；跨generation不同搜索词第二次cache_hit=true且相同PDF SHA。当前broker的缓存命中分支在downloader前返回，支持二次不下载；不是本轮网络计数。 | 未审 |
+| CP-23 | 同revision多格式导出 | REAL_FILES / REAL_FILES_SAME_REVISION_NATIVE_DOWNLOAD_AND_OPEN_RENDER | executed；partial检查/人工轴：累计已执行：真实同一report_ref的CSV/XLSX/PPTX下载、独立打开/渲染及浏览器PDF已有档案；本轮只读复核三文件SHA匹配并检验ZIP完整性/CSV可解码。业务新版导出另待根补，不替换原证据。 | 未审 |
+| CP-24 | 点图追问、收藏与精准高亮 | REAL_BROWSER / REAL_REACT_HTTP_PUBLIC_PDF_BGE_V3_SEED_PARTIAL_SCENARIO | executed；partial检查/人工轴：累计真实浏览器/HTTP路线已执行：比较期间focus、显式context、原文收藏、跨context真实BGE召回及删除后不召回。原生OCR另有bbox页图预览；尚缺同一图点追问到精准高亮/回退的完整组合回执，保留partial，不因本轮未跑而记未执行。 | 未审 |
 
 AI batch、四模板真实路径及同版本财务/AI导出由根后续补证，本快照不预先填入通过。四模板并非固定题新增题号，也不能仅因运行某模板就认定 CP-19/20/21 或其他固定题已通过。
 
-已有 v1、batch-v3-fixed 及旧失败/UNKNOWN档案保持不变。本矩阵对其作累积索引；NOT_RUN_BY_THIS_SUITE 只表示相应执行集未运行，不否定其他已保存组件证据。CP-16 的精确引用验证与相关性标签分开；CP-17/22/23/24 保留原生/文件/浏览器组件证据，但不补造本题完整验收。
+已有 v1、batch-v3-fixed 及旧失败/UNKNOWN档案保持不变。本矩阵对其作累积索引；NOT_RUN_BY_THIS_SUITE 只表示相应执行集未运行，不否定其他已保存组件证据。CP-16 的精确引用验证与相关性标签分开；CP-17/22/23的原始回执已进一步复核并计入累计真实执行；CP-24已执行真实组件，但组合缺口仍partial。
 
 验证：24个唯一ID与冻结题字节一致；所有引用源文件SHA256在本快照中保存。Agent两条实际 question/调用数/job state、原Agent v2同题比较false、E01-15 pair比较true及人工接受false均从相应原始 result.json 提取；本轮新增模型调用0。
 
@@ -47,4 +47,8 @@ AI batch、四模板真实路径及同版本财务/AI导出由根后续补证，
 
 配对调用分母：前身2 + 延续新增9 = 11，不能再把两条case记录的7+4额外累加。加上原Agent v2的11，共22次不同SDK记录。共享窗口累计physical行103、预留1.976784元、旧unknown仍4，计费实付未观察；103不是本题或本矩阵的调用数。
 
-最低12核心真实执行门槛尚未成立。按固定题全链路、要求层级及实际mode核对，当前可明确列入“匹配要求的完整真实模型路径”子分母为 E01-06、E01-15，共2个case；E01-01真实运行但mode偏离且目标摘录未取得，不放入该严格子分母。此2不是对全部真实组件的总计：CP-16/18/20已有真实检索/PDF/规则执行，但不把组件成功扩成整题验收；CP-19仍无本题真实解释，CP-21仍无真实AI batch/指定部分失败恢复，后者不能计入凑满12。其余原生OCR/导入/导出/图表档案保留相关组件身份，逐题完整组合继续待证。人工语义和财务轴独立，未审仍为未审。
+最低12核心真实执行门槛尚未成立。累计“达到要求技术层级的执行”清单现为 **10个case**：E01-01、E01-06、E01-15、CP-16/17/18/19/20/22/23。这里承认历史实际执行，不要求本审计turn重跑；此前2仅是匹配mode的完整真实模型路径子集，不能当全部真实E2E总数。10也不等于10题正确或全部程序轴通过：E01-01保留mode偏离及摘录目标缺口，CP-20保留确认/缺失轴不足，所有人工轴仍未审。CP-21要求REAL_LLM，当前仅纯工具四格，未计入；CP-24真实点图/收藏/删除组件已执行，但同图点精准高亮/回退完整组合仍缺证，未计入完整核心分母。E01-14、AI batch、四模板及新版导出待根补证，不为达到12提前填入。
+
+CP-17累计原生Vision的68行、显式enroll/build/context/answer、bbox页图，以及新真实OCR解释artifact SHA/bbox已核对；转录未审、无财务晋升。CP-22累计官方海尔非catalog导入READY、第二次跨代同SHA的cache_hit=true已核对，当前broker缓存命中在downloader前返回；没有声称本轮抓取网络计数。CP-23累计同report_ref三格式与浏览器PDF已核对，本轮三文件SHA与档案一致，ZIP CRC/CSV解码正常；既有独立打开/渲染凭原回执保留，未重演原生应用。源码合同的当前指纹与原回执最后提交日期/SHA保存在机器记录中；旧字节和失败未覆盖。
+
+CP-19新年度回执三个主题双侧available、provider returned、AI待审，已有真实模型执行；初次年度503及FTS五来源422均保留。CP-20新回执真实三规则解释returned，三个输入refs、候选标记和financial_authority=false保留；早期BLOCKED_EXTERNAL仍为历史失败。Agent累计22次SDK仅指原Agent v2+E01-15两窗口，不把这些业务模型调用再次混入同一物理分母或冒充实付账单。本轮模型调用、端口及私有账本读取仍为0。
