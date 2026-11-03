@@ -1,0 +1,140 @@
+{
+  "notice": "C+ planned examples, not existing API contracts; Codex M0 shall freeze against source code",
+  "version": "cplus-contract-sketch-20261103",
+  "source_base": "codex/findoc-showcase-c-integration@45d55d75662f01d9bc78da1a946d845a01a27480",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/discovery/companies",
+      "query": [
+        "q"
+      ],
+      "response": "CompanyMatchList",
+      "write": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/discovery/announcements",
+      "query": [
+        "security_code",
+        "market",
+        "year",
+        "kind"
+      ],
+      "response": "AnnouncementList",
+      "write": false
+    },
+    {
+      "method": "POST",
+      "path": "/api/discovery/imports",
+      "body": [
+        "operation_id",
+        "candidate_id",
+        "company_id"
+      ],
+      "response": "ImportReceipt",
+      "write": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/discovery/imports/{operation_id}",
+      "response": "ImportReceipt",
+      "write": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/companies/{company_id}/profile-v2",
+      "response": "Company360",
+      "write": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/companies/{company_id}/statements",
+      "query": [
+        "kind",
+        "year",
+        "scope"
+      ],
+      "response": "StatementPage",
+      "write": false
+    },
+    {
+      "method": "POST",
+      "path": "/api/companies/{company_id}/statement-reviews",
+      "body": [
+        "operation_id",
+        "selection",
+        "confirmation"
+      ],
+      "response": "ReviewReceipt",
+      "write": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/companies/{company_id}/trends",
+      "query": [
+        "metric_keys",
+        "years"
+      ],
+      "response": "TrendList",
+      "write": false
+    },
+    {
+      "method": "POST",
+      "path": "/api/research/checkups",
+      "body": [
+        "operation_id",
+        "source_scope"
+      ],
+      "response": "CheckupReceipt",
+      "write": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/research/annual-diffs",
+      "body": [
+        "operation_id",
+        "left_source",
+        "right_source",
+        "topics"
+      ],
+      "response": "AnnualDiffReceipt",
+      "write": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/research/batches",
+      "body": [
+        "operation_id",
+        "plan",
+        "explicit_confirm"
+      ],
+      "response": "BatchReceipt",
+      "write": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/research/batches/{batch_id}",
+      "response": "BatchProgress",
+      "write": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/reports/{report_id}/revisions/{revision}/export",
+      "query": [
+        "format"
+      ],
+      "response": "binary export",
+      "write": false
+    }
+  ],
+  "shared_rules": {
+    "writes_idempotent": true,
+    "gets_must_be_read_only": true,
+    "source_scope_frozen": true,
+    "demo_generation_fenced": true,
+    "model_cannot_confirm_financial": true,
+    "unreviewed_ocr_not_confirmed": true,
+    "ui_mock_data_never_actual": true
+  }
+}

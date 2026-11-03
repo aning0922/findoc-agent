@@ -1,0 +1,17 @@
+﻿feature_id,title,target_stage,priority,technical_domain,minimum_demo
+F19,智能企业模糊搜索,M1,P0,company discovery / company resolver,代码、全称、简称、拼音缩写查主体
+F20,巨潮动态年报发现及下载,M1,P0,announcements + import coordinator,非静态官方年报可选、校验、下载、READY
+F21,公开 PDF 缓存及代际隔离,M1,P0,content addressed cache / safe GC,同 SHA 不重复网络传输，旧用户不能读取新代
+F22,企业360°研究画像,M2,P0,company profile / React pages,真实来源与图表、一键研究、两宽适配
+F23,三大财务报表中心,M2,P0,financial_statements_v3,利润期间/资产时点/现金流期间，原文可查
+F24,真实财务趋势与比率,M2,P0,financial charts,已核准/候选/虚构数据严格分层
+F25,AI 财报体检,M2,P0,deterministic checkup + explanation,3类规则，有来源/缺失/人审状态
+F26,跨年经营文本变化,M3,P0,annual diff,两年来源可查，3个主题差异
+F27,同行公司对标,M3,P1,peer compare,同年同口径两公司，缺失不可比
+F28,主营业务收入结构,M3,P1,segment analysis,真实分类表提取，环形图/残差提示
+F29,图表联动 AI 追问,M3,P1,chart action / conversation,数据点预填并用户明确发送
+F30,OCR正式检索+混合检索,M1,P0,lexical+dense+rerank,OCR可检索、风险相关性before/after
+F31,批量研究矩阵,M4,P1,batch orchestrator,2x2独立任务、状态和预算
+F32,CSV/XLSX/PPTX研究导出,M4,P1,export service,实际可打开文件，来源/状态完整
+F33,指标释义+模板+转图表,M4,P1,templates/chart suggestion,4模板、5释义、已验证数据才画图
+F34,笔记收藏与PDF精准高亮,M4,P1,research memory/PDF overlay,真实高亮/降级及跨会话删除

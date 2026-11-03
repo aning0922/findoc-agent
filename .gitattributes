@@ -6,3 +6,5 @@ demo/site/** -text -whitespace
 
 # Preserve the supplied showcase work package and its checksums byte for byte.
 docs/showcase/work-package/** -text
+
+docs/cplus/work-package/** -text

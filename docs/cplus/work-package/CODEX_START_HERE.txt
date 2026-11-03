@@ -1,0 +1,12 @@
+FinDoc C+｜企业研究与财报深度分析增强版｜2026-11-03
+
+这份工作包是“求职作品目标”的下一轮完整规划，未实施代码；不要误用旧版 C 工作包重新开始。
+
+1. 解压完整 ZIP 文件夹。
+2. 在 Codex 新建主控会话，上传本 ZIP 或提供本文件夹绝对路径。
+3. 粘贴 16_CODEX_MASTER_PROMPT.md 全文。
+4. 让主控先核验仓库 origin/codex/findoc-showcase-c-integration 与 SHA 45d55d75662f01d9bc78da1a946d845a01a27480；若有更新记录 diff。
+5. M0 冻结合同之后自动推进 M1–M5；使用 data/task_board.csv 42项任务、data/feature_matrix.csv 16项新功能。
+6. prototype/index.html 可直接打开查看离线交互原型，注意 UI_MOCK 数据不真实。
+
+绝不从 main 作为 C+ 的直接代码基线；不删除 C 旧种子数据、不自动重置模型预算、不代替用户签核财务。
