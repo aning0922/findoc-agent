@@ -4,14 +4,16 @@ import asyncio
 from contextlib import contextmanager
 import hashlib
 import json
+import os
+from pathlib import Path
+import sys
 from uuid import uuid4
 import pytest
 from app.exports_v2 import ExportService, ExportError
 from app.exports_v2.projection import digest
 
-BUNDLED = (
-    "/Users/aipuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3"
-)
+_LOCAL_RENDERER = Path("/Users/aipuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3")
+BUNDLED = os.environ.get("FINDOC_EXPORT_PYTHON", str(_LOCAL_RENDERER) if _LOCAL_RENDERER.is_file() else sys.executable)
 
 
 def sample():
