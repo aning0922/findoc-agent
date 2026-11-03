@@ -1,5 +1,6 @@
 """Immutable two-year source comparison. No financial authority or provider construction."""
 
+import inspect
 from contextlib import closing, contextmanager
 from datetime import UTC, datetime
 import json
@@ -35,6 +36,7 @@ class AnnualDiffService:
         publication_guard,
         provider_json=None,
         memory=None,
+        commit_check=None,
     ):
         self.root = Path(runtime_root).resolve()
         if (
@@ -49,6 +51,7 @@ class AnnualDiffService:
             publication_guard,
             provider_json,
         )
+        self.commit_check = commit_check
         self.memory = memory if memory is not None else hybrid.memory
         self.path = self.root / "annual-diff.db"
         with self.tx() as db:
@@ -67,12 +70,14 @@ class AnnualDiffService:
         self.path.chmod(0o600)
 
     @contextmanager
-    def tx(self):
+    def tx(self, before_commit=None):
         with closing(sqlite3.connect(self.path, timeout=5)) as db:
             db.row_factory = sqlite3.Row
             db.execute("BEGIN IMMEDIATE")
             with db:
                 yield db
+                if before_commit is not None:
+                    before_commit()
 
     async def owner(self, identity):
         if (
@@ -183,6 +188,17 @@ class AnnualDiffService:
             semantic_review_status="human_pending",
         )
 
+    def before_commit(self, identity, fence):
+        if identity.expires_at <= time.time():
+            raise AnnualDiffError("identity_expired_before_commit", 403)
+        value = self.commit_check(identity, fence)
+        if inspect.isawaitable(value):
+            if inspect.iscoroutine(value):
+                value.close()
+            raise AnnualDiffError("synchronous_commit_check_required", 503)
+        if value is False or identity.expires_at <= time.time():
+            raise AnnualDiffError("identity_rejected_before_commit", 403)
+
     async def create(self, request: AnnualDiffRequest, identity):
         owner = await self.owner(identity)
         try:
@@ -207,7 +223,7 @@ class AnnualDiffService:
         if row:
             return self.operation_record(request.operation_id, owner)
         try:
-            if self.guard is None:
+            if self.guard is None or self.commit_check is None:
                 raise AnnualDiffError("publication_guard_required", 503)
             if len(set(request.topics)) != len(request.topics):
                 raise AnnualDiffError("duplicate_topics", 422)
@@ -337,7 +353,7 @@ class AnnualDiffService:
             )
             result["payload_sha256"] = sha(result)
             with self.guard(identity, fence):
-                with self.tx() as db:
+                with self.tx(before_commit=lambda: self.before_commit(identity, fence)) as db:
                     db.execute(
                         "INSERT INTO results VALUES (?,?,?)",
                         (result["result_id"], owner, canonical(result)),

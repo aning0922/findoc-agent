@@ -41,3 +41,5 @@ identity_validator(identity)同步/异步、抛错或False拒绝；owner以完�
 最终真实检索输出：经营风险2024物理44/43、2025物理39/38；主要业务2024物理13/44、2025物理6/6；研发2024物理20/31、2025物理40/11。3维左右均取得候选，但program_label全部comparison_required、provider_outcome=not_requested、解释not_generated；主要业务页6等候选仍需人工检查主题贴合，不能据此宣称准确对齐。seed manifest校验前后相同。公开JSON的implementation_sha256与最终service源码相符。
 
 哈希说明：payload_sha256是创建时完整持久payload去掉payload_sha256本字段后的canonical SHA；read追加的current_source_status不计入旧payload hash。报告adapter应按持久快照范围验证，不因只读freshness投影而改写原hash。
+
+P1提交时序修订：构造器新增必需同步 `commit_check(identity,fence)`（不传则写拒绝），在自己的annual-diff.db事务实际COMMIT之前调用，并在钩子前后检查expiry。异步钩子拒绝，不能把外层contextmanager的退出检查当成内层已提交结果的最终检查。外层source/memory guard继续持锁跨此COMMIT；测试证明外层guard可进入但内层commit_check返回False仍不保存结果。既有真实公开检索proof来自此hook修订前的无模型检索阶段，不冒充最终生产fence已验收。

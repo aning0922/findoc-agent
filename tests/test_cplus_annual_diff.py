@@ -66,6 +66,7 @@ def setup(root, provider=None):
         sources=sources,
         identity_validator=lambda i: None,
         publication_guard=lambda i, f: nullcontext(),
+        commit_check=lambda i, f: None,
         provider_json=provider,
     )
     identity = TrustedIdentity(
@@ -127,6 +128,11 @@ def test_cross_company_rejected_and_guard_final_change(tmp_path):
 
         s.guard = reject
         with pytest.raises(AnnualDiffError, match="lease_changed"):
+            await s.create(r.model_copy(update={"operation_id": str(uuid4())}), i)
+        assert not sqlite3.connect(s.path).execute("SELECT * FROM results").fetchall()
+        s.guard = lambda i, f: nullcontext()
+        s.commit_check = lambda i, f: False
+        with pytest.raises(AnnualDiffError, match="before_commit"):
             await s.create(r.model_copy(update={"operation_id": str(uuid4())}), i)
         assert not sqlite3.connect(s.path).execute("SELECT * FROM results").fetchall()
 
