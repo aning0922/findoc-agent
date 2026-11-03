@@ -1,23 +1,862 @@
-import { useState } from 'react'
-import { createRoot } from 'react-dom/client'
-import { ResponsiveContainer, LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts'
-import './style.css'
+import { useState } from "react";
+import { createRoot } from "react-dom/client";
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+} from "recharts";
+import "./style.css";
 
-type Page = '首页' | '研究助手' | '企业与年报' | '研究任务' | '研究报告'
-type Gate = 'none' | 'login' | 'busy' | 'confirm' | 'resetting' | 'expired' | 'taken'
-const nav: [Page,string][] = [['首页','◫'],['研究助手','✦'],['企业与年报','▤'],['研究任务','◷'],['研究报告','▧']]
-const trend = [{year:'2022',value:320},{year:'2023',value:375},{year:'2024',value:424},{year:'2025',value:492}]
-const compare = [{name:'示例 A',value:492},{name:'示例 B',value:380},{name:'示例 C',value:286}]
-const statuses = [{name:'已完成',value:6},{name:'进行中',value:2},{name:'待处理',value:1}]
-const sessions = [{name:'现金流变化分析',model:'标准研究模型'}, {name:'年度经营表现梳理',model:'深度研究模型'}]
-const questions = ['近三年现金流有什么变化？','哪些经营风险值得关注？','帮我梳理年度经营表现']
-function App(){
- const [theme,setTheme]=useState<'navy'|'ink'>('navy'); const [page,setPage]=useState<Page>('首页'); const [gate,setGate]=useState<Gate>('none'); const [query,setQuery]=useState(''); const [prompt,setPrompt]=useState(''); const [active,setActive]=useState(0); const [models,setModels]=useState(sessions.map(x=>x.model)); const [names,setNames]=useState(sessions.map(x=>x.name)); const [empty,setEmpty]=useState(false); const [menu,setMenu]=useState(false)
- const go=(p:Page)=>{setPage(p);setMenu(false);window.scrollTo(0,0)}
- const prefill=(s:string)=>{setPrompt(s);go('研究助手')}
- const reset=()=>{setGate('resetting');window.setTimeout(()=>setGate('expired'),1000)}
- return <div className={`app ${theme}`}><aside className={menu?'sidebar open':'sidebar'}><div className="brand"><span className="brand-icon">✦</span><div><strong>FinDoc<span>.</span></strong><small>AI RESEARCH WORKSPACE</small></div></div><div className="workspace"><span>F</span><div><b>研究工作空间</b><small>界面演示模式</small></div><i>⌄</i></div><div className="side-label">工作空间</div><nav aria-label="主导航">{nav.map(([p,icon])=><button key={p} className={page===p?'nav active':'nav'} onClick={()=>go(p)}><span>{icon}</span>{p}<i>{page===p?'•':''}</i></button>)}</nav><div className="side-label conversations">最近会话 <button onClick={()=>{setActive(0);prefill('')}} aria-label="打开最近会话">＋</button></div>{sessions.map((s,i)=><button className={`session ${page==='研究助手'&&active===i?'selected':''}`} key={s.name} onClick={()=>{setActive(i);go('研究助手')}}><span>◌</span><div>{names[i]}<small>{models[i]}</small></div></button>)}<div className="side-bottom"><div className="principle">✧ <b>让研究更有依据</b><p>从资料到洞察，让每一步清晰可见。</p></div><button className="profile" onClick={()=>setGate('login')}><span>研</span><div><b>演示访客</b><small>查看演示入口</small></div><i>↗</i></button></div></aside><div className="body"><header className="topbar"><button className="menu" onClick={()=>setMenu(!menu)} aria-label="打开导航">☰</button><div>工作空间 <span className="muted"> / </span><b>{page}</b></div><div className="top-actions"><button className="theme-toggle" onClick={()=>setTheme(theme==='navy'?'ink':'navy')}>◐ {theme==='navy'?'Navy / Blue':'Ink / Teal'}</button><button className="login-link" onClick={()=>setGate('login')}>演示登录 ↗</button></div></header><div className="mock-banner">UI_MOCK · 界面示意数据 · 不连接认证、财报或模型服务</div><main>{page==='首页'?<><section className="hero"><div className="hero-content"><div className="eyebrow light">✦ &nbsp; YOUR AI RESEARCH COMPANION</div><h1>让每一次研究，<br/><em>都更有依据。</em></h1><p>从财报资料到研究洞察，在一个工作空间里，<br className="desktop"/>更清晰地探索企业价值。</p><form className="search" onSubmit={e=>{e.preventDefault();prefill(query?`研究 ${query} 的经营表现`:'帮我开始一项企业研究')}}><span>⌕</span><input aria-label="搜索企业" placeholder="输入企业名称或代码，开启研究" value={query} onChange={e=>setQuery(e.target.value)}/><button>开始研究 <span>→</span></button></form><div className="hero-tags">试试搜索 <button onClick={()=>{setQuery('示例企业 A');prefill('研究示例企业 A 的经营表现')}}>示例企业 A ↗</button><button onClick={()=>prefill('帮我分析近三年现金流')}>近三年现金流 ↗</button></div></div><div className="hero-art"><div className="orbit o1"></div><div className="orbit o2"></div><div className="orb">✦</div><div className="float f1">⌁ <span>RESEARCH<br/><b>从资料到洞察</b></span></div><div className="float f2">▥ <span>INSIGHT<br/><b>清晰呈现研究脉络</b></span></div></div></section><div className="section-heading"><div><div className="eyebrow">WORKSPACE OVERVIEW</div><h2>研究概览 <small>你的工作空间，一目了然</small></h2></div><button className="text-button" onClick={()=>setEmpty(!empty)}>{empty?'恢复示意数据':'查看空态'} ↗</button></div>{empty?<div className="card empty"><b>这里还没有研究记录</b><p>开始一项研究，相关信息会在这里展示。</p><button className="primary" onClick={()=>prefill('帮我开始一项企业研究')}>开始研究 →</button></div>:<><div className="kpis">{[['▦','跟踪企业','3','家'],['▤','已准备年报','8','份'],['◷','研究任务','9','项'],['▧','研究报告','4','份']].map(([icon,label,n,unit],i)=><button className="card kpi" key={label} onClick={()=>go((['企业与年报','企业与年报','研究任务','研究报告'] as Page[])[i])}><div><span className="kpi-icon">{icon}</span><span className="kpi-arrow">↗</span></div><p>{label}</p><strong>{n}</strong><small> {unit}</small><div className="subtle">示意数据</div></button>)}</div><div className="charts"><Chart title="收入趋势" subtitle="示例企业 A · 2022—2025 · 亿元" rows={trend.map(x=>[x.year,String(x.value)])}><ResponsiveContainer width="100%" height={220}><LineChart data={trend} margin={{left:-20,right:12,top:10}}><CartesianGrid vertical={false} stroke="#e9eef2"/><XAxis dataKey="year" tickLine={false} axisLine={false}/><YAxis tickLine={false} axisLine={false}/><Tooltip formatter={v=>[`${v} 亿元（示意）`,'收入']}/><Line isAnimationActive={false} type="monotone" dataKey="value" stroke="var(--accent)" strokeWidth={3} dot={{r:4}}/></LineChart></ResponsiveContainer></Chart><Chart title="企业对比" subtitle="2025 年示意收入 · 亿元" rows={compare.map(x=>[x.name,String(x.value)])}><ResponsiveContainer width="100%" height={220}><BarChart data={compare} margin={{left:-20,right:10,top:10}}><CartesianGrid vertical={false} stroke="#e9eef2"/><XAxis dataKey="name" tickLine={false} axisLine={false}/><YAxis tickLine={false} axisLine={false}/><Tooltip formatter={v=>[`${v} 亿元（示意）`,'收入']}/><Bar isAnimationActive={false} dataKey="value" fill="var(--accent)" radius={[5,5,0,0]}/></BarChart></ResponsiveContainer></Chart><Chart title="任务状态" subtitle="示意任务分布 · 共 9 项" rows={statuses.map(x=>[x.name,`${x.value} 项`])}><div className="donut"><ResponsiveContainer width="100%" height={160}><PieChart><Pie isAnimationActive={false} data={statuses} dataKey="value" nameKey="name" innerRadius={46} outerRadius={68} paddingAngle={3}>{statuses.map((x,i)=><Cell key={x.name} fill={['var(--accent)','#87b7c6','#e7b96a'][i]}/>)}</Pie><Tooltip formatter={v=>[`${v} 项（示意）`,'任务']}/></PieChart></ResponsiveContainer><div className="donut-center"><b>9</b><small>示意任务</small></div></div><div className="legend">{statuses.map((s,i)=><span key={s.name}><i style={{background:['var(--accent)','#87b7c6','#e7b96a'][i]}}/>{s.name} {s.value}</span>)}</div></Chart></div><div className="lower"><section className="card panel"><div className="panel-heading"><div><h3>近期研究</h3><p>继续探索你的研究记录</p></div><button className="text-button" onClick={()=>go('研究任务')}>查看全部 →</button></div>{sessions.map((s,i)=><button className="research-row" key={s.name} onClick={()=>{setActive(i);go('研究任务')}}><span className="row-icon">▧</span><span><b>{s.name}</b><small>示例企业 {i?'B':'A'} · 界面示意</small></span><span className="badge">{i?'进行中':'已完成'}</span><span>›</span></button>)}</section><section className="card panel"><div className="panel-heading"><div><h3>推荐问题</h3><p>从一个问题开始探索</p></div><span>✦</span></div>{questions.map(q=><button className="question" key={q} onClick={()=>prefill(q)}><span>✧</span>{q}<i>↗</i></button>)}</section></div></>}</>:<section className="detail"><div className="eyebrow">{page==='研究助手'?'AI RESEARCH':page==='研究报告'?'REPORT CENTER':'WORKSPACE'}</div><h1>{page}</h1><p className="intro">{page==='研究助手'?'围绕资料提出问题，梳理下一步研究方向。':'在这里预览工作流程与示意内容。'}</p>{page==='研究助手'?<div className="detail-grid"><div className="card conversation"><div className="panel-heading"><div><h3>{names[active]}</h3><p>本地会话示意 · 不调用模型</p></div><span className="badge">UI_MOCK</span></div><div className="message">✦ <div><b>从一个问题开始</b><p>输入研究问题，或选择首页推荐问题。此处仅演示输入与页面流转。</p></div></div><label>研究问题<textarea value={prompt} onChange={e=>setPrompt(e.target.value)} placeholder="例如：帮我梳理现金流变化"/></label><button className="primary" onClick={()=>setPrompt(prompt||'帮我梳理现金流变化')}>预填问题 <span>→</span></button><p className="subtle">不会发送请求或生成真实回答。</p></div><div className="card panel settings"><h3>当前会话设置</h3><label>会话名称<input value={names[active]} onChange={e=>setNames(names.map((x,i)=>i===active?e.target.value:x))}/></label><label>研究模型<select value={models[active]} onChange={e=>setModels(models.map((x,i)=>i===active?e.target.value:x))}><option>标准研究模型</option><option>深度研究模型</option><option>快速问答模型</option></select></label><p className="subtle">仅切换当前会话的界面标签，不选择或调用真实模型。</p></div></div>:<div className="card panel preview"><div className="badge">界面示意 · 非真实财报</div><h2>{page==='研究报告'?'示例企业 A · 经营研究报告':page==='研究任务'?'示例企业 A · 经营研究':'示例企业 A · 年度资料'}</h2><p>{page==='研究报告'?'报告预览：摘要、财务趋势、风险与来源将在此组织。示例内容不构成财务结论。':page==='研究任务'?'研究流程预览：资料准备 → 研究分析 → 报告整理。状态仅为示意。':'示例资料列表与年报选择区域。当前未接入真实资料。'}</p><div className="preview-actions"><button className="primary" onClick={()=>page==='研究报告'?go('研究任务'):page==='研究任务'?go('研究报告'):prefill('研究示例企业 A 的经营表现')}>{page==='研究报告'?'查看研究任务':page==='研究任务'?'查看报告预览':'进入研究助手'} →</button><button className="secondary" onClick={()=>go('首页')}>返回首页</button></div></div>}</section>}</main><footer>FinDoc AI Research <span>UI_MOCK · 所有数字与内容仅为界面示意</span></footer></div>{gate!=='none'&&<div className="overlay" role="presentation"><div className="modal" role="dialog" aria-modal="true" aria-labelledby="gate-title"><button className="close" onClick={()=>setGate('none')} aria-label="关闭">×</button><span className="modal-icon">✦</span><div className="eyebrow">INTERACTION PREVIEW</div><h2 id="gate-title">{{login:'进入演示空间',busy:'演示空间正在使用',confirm:'确认模拟所有者接管？',resetting:'正在模拟重置',expired:'演示状态已结束',taken:'演示空间已被接管',none:''}[gate]}</h2><p>{ {login:'此表单仅用于原型转场。任意输入均不会进行身份认证。',busy:'当前为模拟占用状态。你可以等待，或体验所有者接管流程。',confirm:'此操作仅切换本地原型状态，不会验证身份或接管真实会话。',resetting:'正在展示重置状态，不会修改任何数据。',expired:'这是模拟的会话到期状态，可重新查看演示入口。',taken:'这是模拟的被接管提示，未发生真实会话变更。',none:''}[gate]}</p>{gate==='login'&&<><label>演示账号<input placeholder="任意输入，仅用于原型"/></label><label>演示口令<input type="password" placeholder="任意输入，请勿使用真实密码"/></label><button className="primary full" onClick={()=>setGate('busy')}>模拟继续 →</button><button className="secondary full" onClick={()=>setGate('none')}>先浏览首页</button></>}{gate==='busy'&&<><div className="notice">◷ &nbsp; 模拟剩余时间 12:30</div><button className="primary full" onClick={()=>setGate('confirm')}>模拟所有者接管</button><button className="secondary full" onClick={()=>setGate('none')}>等待并浏览</button></>}{gate==='confirm'&&<><button className="primary full" onClick={reset}>确认模拟接管</button><button className="secondary full" onClick={()=>setGate('busy')}>返回等待</button></>}{gate==='resetting'&&<div className="notice">◌ &nbsp; 模拟重置中…</div>}{gate==='expired'&&<><button className="primary full" onClick={()=>setGate('taken')}>查看被接管状态</button><button className="secondary full" onClick={()=>setGate('login')}>返回演示入口</button></>}{gate==='taken'&&<button className="primary full" onClick={()=>setGate('login')}>返回演示入口</button>}</div></div>}</div>
+type Page = "首页" | "研究助手" | "企业与年报" | "研究任务" | "研究报告";
+type Gate =
+  "none" | "login" | "busy" | "confirm" | "resetting" | "expired" | "taken";
+const nav: [Page, string][] = [
+  ["首页", "◫"],
+  ["研究助手", "✦"],
+  ["企业与年报", "▤"],
+  ["研究任务", "◷"],
+  ["研究报告", "▧"],
+];
+const trend = [
+  { year: "2022", value: 320 },
+  { year: "2023", value: 375 },
+  { year: "2024", value: 424 },
+  { year: "2025", value: 492 },
+];
+const compare = [
+  { name: "示例 A", value: 492 },
+  { name: "示例 B", value: 380 },
+  { name: "示例 C", value: 286 },
+];
+const statuses = [
+  { name: "已完成", value: 6 },
+  { name: "进行中", value: 2 },
+  { name: "待处理", value: 1 },
+];
+const sessions = [{ name: "现金流变化分析" }, { name: "年度经营表现梳理" }];
+const questions = [
+  "近三年现金流有什么变化？",
+  "哪些经营风险值得关注？",
+  "帮我梳理年度经营表现",
+];
+function App() {
+  const [theme, setTheme] = useState<"navy" | "ink">("navy");
+  const [page, setPage] = useState<Page>("首页");
+  const [gate, setGate] = useState<Gate>("login");
+  const [query, setQuery] = useState("");
+  const [prompt, setPrompt] = useState("");
+  const [active, setActive] = useState(0);
+  const names = sessions.map((x) => x.name);
+  const [empty, setEmpty] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const go = (p: Page) => {
+    setPage(p);
+    setMenu(false);
+    window.scrollTo(0, 0);
+  };
+  const prefill = (s: string) => {
+    setPrompt(s);
+    go("研究助手");
+  };
+  const reset = () => {
+    setGate("resetting");
+    window.setTimeout(() => {
+      setPage("首页");
+      setGate("none");
+    }, 1000);
+  };
+  return (
+    <div className={`app ${theme}`}>
+      <aside className={menu ? "sidebar open" : "sidebar"}>
+        <div className="brand">
+          <span className="brand-icon">✦</span>
+          <div>
+            <strong>
+              FinDoc<span>.</span>
+            </strong>
+            <small>AI RESEARCH WORKSPACE</small>
+          </div>
+        </div>
+        <div className="workspace">
+          <span>F</span>
+          <div>
+            <b>研究工作空间</b>
+            <small>界面演示模式</small>
+          </div>
+          <i>⌄</i>
+        </div>
+        <div className="side-label">工作空间</div>
+        <nav aria-label="主导航">
+          {nav.map(([p, icon]) => (
+            <button
+              key={p}
+              className={page === p ? "nav active" : "nav"}
+              onClick={() => go(p)}
+            >
+              <span>{icon}</span>
+              {p}
+              <i>{page === p ? "•" : ""}</i>
+            </button>
+          ))}
+        </nav>
+        <div className="side-label conversations">
+          最近会话{" "}
+          <button
+            onClick={() => {
+              setActive(0);
+              prefill("");
+            }}
+            aria-label="打开最近会话"
+          >
+            ＋
+          </button>
+        </div>
+        {sessions.map((s, i) => (
+          <button
+            className={`session ${page === "研究助手" && active === i ? "selected" : ""}`}
+            key={s.name}
+            onClick={() => {
+              setActive(i);
+              go("研究助手");
+            }}
+          >
+            <span>◌</span>
+            <div>
+              {names[i]}
+              <small>示例企业 {i ? "B" : "A"} · 示意</small>
+            </div>
+          </button>
+        ))}
+        <div className="side-bottom">
+          <div className="principle">
+            ✧ <b>让研究更有依据</b>
+            <p>从资料到洞察，让每一步清晰可见。</p>
+          </div>
+          <button className="profile" onClick={() => setGate("login")}>
+            <span>研</span>
+            <div>
+              <b>演示访客</b>
+              <small>查看演示入口</small>
+            </div>
+            <i>↗</i>
+          </button>
+        </div>
+      </aside>
+      <div className="body">
+        <header className="topbar">
+          <button
+            className="menu"
+            onClick={() => setMenu(!menu)}
+            aria-label="打开导航"
+          >
+            ☰
+          </button>
+          <div>
+            工作空间 <span className="muted"> / </span>
+            <b>{page}</b>
+          </div>
+          <div className="top-actions">
+            <button
+              className="theme-toggle"
+              onClick={() => setTheme(theme === "navy" ? "ink" : "navy")}
+            >
+              ◐ {theme === "navy" ? "Navy / Blue" : "Ink / Teal"}
+            </button>
+            <select
+              aria-label="原型状态"
+              onChange={(e) => {
+                if (e.target.value) setGate(e.target.value as Gate);
+                e.target.value = "";
+              }}
+              defaultValue=""
+            >
+              <option value="">原型状态</option>
+              <option value="login">登录封面</option>
+              <option value="busy">占用等待</option>
+              <option value="expired">到期</option>
+              <option value="taken">被接管</option>
+            </select>
+          </div>
+        </header>
+        <div className="mock-banner">
+          UI_MOCK · 界面示意数据 · 不连接认证、财报或模型服务
+        </div>
+        <main>
+          {page === "首页" ? (
+            <>
+              <section className="hero">
+                <div className="hero-content">
+                  <div className="eyebrow light">
+                    ✦ &nbsp; YOUR AI RESEARCH COMPANION
+                  </div>
+                  <h1>
+                    让每一次研究，
+                    <br />
+                    <em>都更有依据。</em>
+                  </h1>
+                  <p>
+                    从财报资料到研究洞察，在一个工作空间里，
+                    <br className="desktop" />
+                    更清晰地探索企业价值。
+                  </p>
+                  <form
+                    className="search"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      prefill(
+                        query
+                          ? `研究 ${query} 的经营表现`
+                          : "帮我开始一项企业研究",
+                      );
+                    }}
+                  >
+                    <span>⌕</span>
+                    <input
+                      aria-label="搜索企业"
+                      placeholder="输入企业名称或代码，开启研究"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
+                    <button>
+                      开始研究 <span>→</span>
+                    </button>
+                  </form>
+                  <div className="hero-tags">
+                    试试搜索{" "}
+                    <button
+                      onClick={() => {
+                        setQuery("示例企业 A");
+                        prefill("研究示例企业 A 的经营表现");
+                      }}
+                    >
+                      示例企业 A ↗
+                    </button>
+                    <button onClick={() => prefill("帮我分析近三年现金流")}>
+                      近三年现金流 ↗
+                    </button>
+                  </div>
+                </div>
+                <div className="hero-art">
+                  <div className="orbit o1"></div>
+                  <div className="orbit o2"></div>
+                  <div className="orb">✦</div>
+                  <div className="float f1">
+                    ⌁{" "}
+                    <span>
+                      RESEARCH
+                      <br />
+                      <b>从资料到洞察</b>
+                    </span>
+                  </div>
+                  <div className="float f2">
+                    ▥{" "}
+                    <span>
+                      INSIGHT
+                      <br />
+                      <b>清晰呈现研究脉络</b>
+                    </span>
+                  </div>
+                </div>
+              </section>
+              <div className="section-heading">
+                <div>
+                  <div className="eyebrow">WORKSPACE OVERVIEW</div>
+                  <h2>
+                    研究概览 <small>你的工作空间，一目了然</small>
+                  </h2>
+                </div>
+                <button
+                  className="text-button"
+                  onClick={() => setEmpty(!empty)}
+                >
+                  {empty ? "恢复示意数据" : "查看空态"} ↗
+                </button>
+              </div>
+              {empty ? (
+                <div className="card empty">
+                  <b>这里还没有研究记录</b>
+                  <p>开始一项研究，相关信息会在这里展示。</p>
+                  <button
+                    className="primary"
+                    onClick={() => prefill("帮我开始一项企业研究")}
+                  >
+                    开始研究 →
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="kpis">
+                    {[
+                      ["▦", "跟踪企业", "3", "家"],
+                      ["▤", "已准备年报", "8", "份"],
+                      ["◷", "研究任务", "9", "项"],
+                      ["▧", "研究报告", "4", "份"],
+                    ].map(([icon, label, n, unit], i) => (
+                      <button
+                        className="card kpi"
+                        key={label}
+                        onClick={() =>
+                          go(
+                            (
+                              [
+                                "企业与年报",
+                                "企业与年报",
+                                "研究任务",
+                                "研究报告",
+                              ] as Page[]
+                            )[i],
+                          )
+                        }
+                      >
+                        <div>
+                          <span className="kpi-icon">{icon}</span>
+                          <span className="kpi-arrow">↗</span>
+                        </div>
+                        <p>{label}</p>
+                        <strong>{n}</strong>
+                        <small> {unit}</small>
+                        <div className="subtle">示意数据</div>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="charts">
+                    <Chart
+                      title="收入趋势"
+                      subtitle="示例企业 A · 2022—2025 · 亿元"
+                      rows={trend.map((x) => [x.year, String(x.value)])}
+                    >
+                      <ResponsiveContainer width="100%" height={220}>
+                        <LineChart
+                          data={trend}
+                          margin={{ left: -20, right: 12, top: 10 }}
+                        >
+                          <CartesianGrid vertical={false} stroke="#e9eef2" />
+                          <XAxis
+                            dataKey="year"
+                            tickLine={false}
+                            axisLine={false}
+                          />
+                          <YAxis tickLine={false} axisLine={false} />
+                          <Tooltip
+                            formatter={(v) => [`${v} 亿元（示意）`, "收入"]}
+                          />
+                          <Line
+                            isAnimationActive={false}
+                            type="monotone"
+                            dataKey="value"
+                            stroke="var(--accent)"
+                            strokeWidth={3}
+                            dot={{ r: 4 }}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </Chart>
+                    <Chart
+                      title="企业对比"
+                      subtitle="2025 年示意收入 · 亿元"
+                      rows={compare.map((x) => [x.name, String(x.value)])}
+                    >
+                      <ResponsiveContainer width="100%" height={220}>
+                        <BarChart
+                          data={compare}
+                          margin={{ left: -20, right: 10, top: 10 }}
+                        >
+                          <CartesianGrid vertical={false} stroke="#e9eef2" />
+                          <XAxis
+                            dataKey="name"
+                            tickLine={false}
+                            axisLine={false}
+                          />
+                          <YAxis tickLine={false} axisLine={false} />
+                          <Tooltip
+                            formatter={(v) => [`${v} 亿元（示意）`, "收入"]}
+                          />
+                          <Bar
+                            isAnimationActive={false}
+                            dataKey="value"
+                            fill="var(--accent)"
+                            radius={[5, 5, 0, 0]}
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </Chart>
+                    <Chart
+                      title="任务状态"
+                      subtitle="示意任务分布 · 共 9 项"
+                      rows={statuses.map((x) => [x.name, `${x.value} 项`])}
+                    >
+                      <div className="donut">
+                        <ResponsiveContainer width="100%" height={160}>
+                          <PieChart>
+                            <Pie
+                              isAnimationActive={false}
+                              data={statuses}
+                              dataKey="value"
+                              nameKey="name"
+                              innerRadius={46}
+                              outerRadius={68}
+                              paddingAngle={3}
+                            >
+                              {statuses.map((x, i) => (
+                                <Cell
+                                  key={x.name}
+                                  fill={
+                                    ["var(--accent)", "#87b7c6", "#e7b96a"][i]
+                                  }
+                                />
+                              ))}
+                            </Pie>
+                            <Tooltip
+                              formatter={(v) => [`${v} 项（示意）`, "任务"]}
+                            />
+                          </PieChart>
+                        </ResponsiveContainer>
+                        <div className="donut-center">
+                          <b>9</b>
+                          <small>示意任务</small>
+                        </div>
+                      </div>
+                      <div className="legend">
+                        {statuses.map((s, i) => (
+                          <span key={s.name}>
+                            <i
+                              style={{
+                                background: [
+                                  "var(--accent)",
+                                  "#87b7c6",
+                                  "#e7b96a",
+                                ][i],
+                              }}
+                            />
+                            {s.name} {s.value}
+                          </span>
+                        ))}
+                      </div>
+                    </Chart>
+                  </div>
+                  <div className="lower">
+                    <section className="card panel">
+                      <div className="panel-heading">
+                        <div>
+                          <h3>近期研究</h3>
+                          <p>继续探索你的研究记录</p>
+                        </div>
+                        <button
+                          className="text-button"
+                          onClick={() => go("研究任务")}
+                        >
+                          查看全部 →
+                        </button>
+                      </div>
+                      {sessions.map((s, i) => (
+                        <button
+                          className="research-row"
+                          key={s.name}
+                          onClick={() => {
+                            setActive(i);
+                            go("研究任务");
+                          }}
+                        >
+                          <span className="row-icon">▧</span>
+                          <span>
+                            <b>{s.name}</b>
+                            <small>示例企业 {i ? "B" : "A"} · 界面示意</small>
+                          </span>
+                          <span className="badge">
+                            {i ? "进行中" : "已完成"}
+                          </span>
+                          <span>›</span>
+                        </button>
+                      ))}
+                    </section>
+                    <section className="card panel">
+                      <div className="panel-heading">
+                        <div>
+                          <h3>推荐问题</h3>
+                          <p>从一个问题开始探索</p>
+                        </div>
+                        <span>✦</span>
+                      </div>
+                      {questions.map((q) => (
+                        <button
+                          className="question"
+                          key={q}
+                          onClick={() => prefill(q)}
+                        >
+                          <span>✧</span>
+                          {q}
+                          <i>↗</i>
+                        </button>
+                      ))}
+                    </section>
+                  </div>
+                </>
+              )}
+            </>
+          ) : (
+            <section className="detail">
+              <div className="eyebrow">
+                {page === "研究助手"
+                  ? "AI RESEARCH"
+                  : page === "研究报告"
+                    ? "REPORT CENTER"
+                    : "WORKSPACE"}
+              </div>
+              <h1>{page}</h1>
+              <p className="intro">
+                {page === "研究助手"
+                  ? "围绕资料提出问题，梳理下一步研究方向。"
+                  : "在这里预览工作流程与示意内容。"}
+              </p>
+              {page === "研究助手" ? (
+                <div className="detail-grid">
+                  <div className="card conversation">
+                    <div className="panel-heading">
+                      <div>
+                        <h3>{names[active]}</h3>
+                        <p>本地会话示意 · 不调用模型</p>
+                      </div>
+                      <span className="badge">UI_MOCK</span>
+                    </div>
+                    <div className="message">
+                      ✦{" "}
+                      <div>
+                        <b>从一个问题开始</b>
+                        <p>
+                          输入研究问题，或选择首页推荐问题。此处仅演示输入与页面流转。
+                        </p>
+                      </div>
+                    </div>
+                    <label>
+                      研究问题
+                      <textarea
+                        value={prompt}
+                        onChange={(e) => setPrompt(e.target.value)}
+                        placeholder="例如：帮我梳理现金流变化"
+                      />
+                    </label>
+                    <button
+                      className="primary"
+                      onClick={() => setPrompt(prompt || "帮我梳理现金流变化")}
+                    >
+                      预填问题 <span>→</span>
+                    </button>
+                    <p className="subtle">不会发送请求或生成真实回答。</p>
+                  </div>
+                  <div className="card panel settings">
+                    <h3>研究上下文</h3>
+                    <p>企业：示例企业 A</p>
+                    <p>资料：示例年度资料</p>
+                    <p>证据：界面示意，未接入来源</p>
+                    <label>
+                      研究模式
+                      <select>
+                        <option>快速研究</option>
+                        <option>深度研究</option>
+                      </select>
+                    </label>
+                    <p className="subtle">仅切换界面模式，不调用模型。</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="card panel preview">
+                  <div className="badge">界面示意 · 非真实财报</div>
+                  <h2>
+                    {page === "研究报告"
+                      ? "示例企业 A · 经营研究报告"
+                      : page === "研究任务"
+                        ? "示例企业 A · 经营研究"
+                        : "示例企业 A · 年度资料"}
+                  </h2>
+                  <p>
+                    {page === "研究报告"
+                      ? "报告预览：摘要、财务趋势、风险与来源将在此组织。示例内容不构成财务结论。"
+                      : page === "研究任务"
+                        ? "研究流程预览：资料准备 → 研究分析 → 报告整理。状态仅为示意。"
+                        : "示例资料列表与年报选择区域。当前未接入真实资料。"}
+                  </p>
+                  <div className="preview-actions">
+                    <button
+                      className="primary"
+                      onClick={() =>
+                        page === "研究报告"
+                          ? go("研究任务")
+                          : page === "研究任务"
+                            ? go("研究报告")
+                            : prefill("研究示例企业 A 的经营表现")
+                      }
+                    >
+                      {page === "研究报告"
+                        ? "查看研究任务"
+                        : page === "研究任务"
+                          ? "查看报告预览"
+                          : "进入研究助手"}{" "}
+                      →
+                    </button>
+                    <button className="secondary" onClick={() => go("首页")}>
+                      返回首页
+                    </button>
+                  </div>
+                </div>
+              )}
+            </section>
+          )}
+        </main>
+        <footer>
+          FinDoc AI Research <span>UI_MOCK · 所有数字与内容仅为界面示意</span>
+        </footer>
+      </div>
+      {gate === "login" && (
+        <Login onEnter={() => setGate("none")} onBusy={() => setGate("busy")} />
+      )}
+      {gate !== "none" && gate !== "login" && (
+        <div className="overlay" role="presentation">
+          <div
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="gate-title"
+          >
+            <button
+              className="close"
+              onClick={() => setGate("none")}
+              aria-label="关闭"
+            >
+              ×
+            </button>
+            <span className="modal-icon">✦</span>
+            <div className="eyebrow">INTERACTION PREVIEW</div>
+            <h2 id="gate-title">
+              {
+                {
+                  login: "进入演示空间",
+                  busy: "演示空间正在使用",
+                  confirm: "确认模拟所有者接管？",
+                  resetting: "正在模拟重置",
+                  expired: "演示状态已结束",
+                  taken: "演示空间已被接管",
+                  none: "",
+                }[gate]
+              }
+            </h2>
+            <p>
+              {
+                {
+                  login: "此表单仅用于原型转场。任意输入均不会进行身份认证。",
+                  busy: "当前为模拟占用状态。你可以等待，或体验所有者接管流程。",
+                  confirm:
+                    "此操作仅切换本地原型状态，不会验证身份或接管真实会话。",
+                  resetting: "正在展示重置状态，不会修改任何数据。",
+                  expired: "这是模拟的会话到期状态，可重新查看演示入口。",
+                  taken: "这是模拟的被接管提示，未发生真实会话变更。",
+                  none: "",
+                }[gate]
+              }
+            </p>
+            {gate === "busy" && (
+              <>
+                <div className="notice">◷ &nbsp; 模拟剩余时间 12:30</div>
+                <button
+                  className="primary full"
+                  onClick={() => setGate("confirm")}
+                >
+                  模拟所有者接管
+                </button>
+                <button
+                  className="secondary full"
+                  onClick={() => setGate("none")}
+                >
+                  等待并浏览
+                </button>
+              </>
+            )}
+            {gate === "confirm" && (
+              <>
+                <button className="primary full" onClick={reset}>
+                  确认模拟接管
+                </button>
+                <button
+                  className="secondary full"
+                  onClick={() => setGate("busy")}
+                >
+                  返回等待
+                </button>
+              </>
+            )}
+            {gate === "resetting" && (
+              <div className="notice">◌ &nbsp; 模拟重置中…</div>
+            )}
+            {gate === "expired" && (
+              <>
+                <button
+                  className="primary full"
+                  onClick={() => setGate("taken")}
+                >
+                  查看被接管状态
+                </button>
+                <button
+                  className="secondary full"
+                  onClick={() => setGate("login")}
+                >
+                  返回演示入口
+                </button>
+              </>
+            )}
+            {gate === "taken" && (
+              <button className="primary full" onClick={() => setGate("login")}>
+                返回演示入口
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
-function Chart({title,subtitle,rows,children}:{title:string;subtitle:string;rows:string[][];children:React.ReactNode}){return <section className="card chart"><div className="panel-heading"><div><h3>{title}</h3><p>{subtitle}</p></div><span className="subtle">示意</span></div>{children}<details><summary>查看数据表</summary><table><thead><tr><th>项目</th><th>数值</th></tr></thead><tbody>{rows.map(r=><tr key={r[0]}><td>{r[0]}</td><td>{r[1]}</td></tr>)}</tbody></table></details></section>}
+function Login({
+  onEnter,
+  onBusy,
+}: {
+  onEnter: () => void;
+  onBusy: () => void;
+}) {
+  return (
+    <div className="login-cover">
+      <section className="login-story">
+        <div className="login-brand">
+          ✦ &nbsp; FinDoc<span>.</span> <small>AI RESEARCH</small>
+        </div>
+        <div className="login-copy">
+          <div className="eyebrow light">AI-POWERED FINANCIAL INTELLIGENCE</div>
+          <h1>
+            让财报研究，
+            <br />
+            从资料走向<span>洞察。</span>
+          </h1>
+          <p>在一个清晰的工作空间中，探索资料、梳理问题，并组织研究发现。</p>
+          <div className="login-pills">
+            <span>资料与年报</span>
+            <span>研究工作台</span>
+            <span>来源与证据</span>
+          </div>
+          <div className="login-chart">
+            <b>企业经营趋势 · 界面示意</b>
+            <span>UI_MOCK</span>
+            <svg viewBox="0 0 500 120" aria-label="示意趋势图">
+              <path
+                d="M0 105 L90 85 L180 91 L260 57 L345 64 L420 31 L500 10"
+                fill="none"
+                stroke="#86b9ff"
+                strokeWidth="4"
+              />
+            </svg>
+            <div>
+              资料探索 <strong>→</strong> 研究分析 <strong>→</strong> 报告预览
+            </div>
+          </div>
+        </div>
+        <small>FinDoc · 界面原型</small>
+      </section>
+      <section className="login-form">
+        <div>
+          <div className="modal-icon">✦</div>
+          <div className="eyebrow">DEMO WORKSPACE</div>
+          <h2>欢迎体验 FinDoc</h2>
+          <p>
+            演示访问 · 20 分钟提示。这里仅展示设计流程，不提供真实会话或认证。
+          </p>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              onEnter();
+            }}
+          >
+            <label>
+              演示账号
+              <input
+                required
+                placeholder="任意输入，仅用于原型"
+                autoComplete="off"
+              />
+            </label>
+            <label>
+              演示密码
+              <input
+                required
+                type="password"
+                placeholder="请勿输入真实密码"
+                autoComplete="off"
+              />
+            </label>
+            <button className="primary full">进入演示工作台 →</button>
+          </form>
+          <p className="login-disclaimer">
+            UI_MOCK · 输入不会验证身份或传输至服务端，所有数据均为界面示意。
+          </p>
+          <div className="login-actions">
+            <button className="secondary" onClick={onBusy}>
+              预览占用状态
+            </button>
+            <button className="secondary" onClick={onEnter}>
+              只读预览首页
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+function Chart({
+  title,
+  subtitle,
+  rows,
+  children,
+}: {
+  title: string;
+  subtitle: string;
+  rows: string[][];
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="card chart">
+      <div className="panel-heading">
+        <div>
+          <h3>{title}</h3>
+          <p>{subtitle}</p>
+        </div>
+        <span className="subtle">示意</span>
+      </div>
+      {children}
+      <details>
+        <summary>查看数据表</summary>
+        <table>
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数值</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r[0]}>
+                <td>{r[0]}</td>
+                <td>{r[1]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </details>
+    </section>
+  );
+}
 
-createRoot(document.getElementById('root')!).render(<App/>)
+createRoot(document.getElementById("root")!).render(<App />);

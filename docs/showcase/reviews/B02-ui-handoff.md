@@ -15,3 +15,11 @@
 - SKIP：真实双浏览器租约、后端/API、真实财务数据、生产部署、全量测试。原型未实现上述能力，不能据此宣称已验收。
 - 截图目录：`/Users/aipuli/.codex/visualizations/2026/11/03/01a19f9d-a871-7520-aed9-dd6d22774d1a/b02/`；文件为 `navy-1440.png`、`navy-1280.png`、`navy-390.png`、`ink-1440.png`、`ink-1280.png`、`ink-390.png`。
 - 已知限制：配色状态、会话修改和输入仅存内存；移动端会话位于菜单抽屉；表格替代展示静态示意值；目前截图及关键流程验证并非完整无障碍审计。
+
+## 主控视觉评审后的修订（覆盖上方对应描述）
+
+- 主控选定 Navy / Blue 为正式方向；原型保留 Ink / Teal 对照。先前误将 Codex 开发会话设置理解为产品需求，已移除会话改名、模型选择及相关标签；研究助手改为展示企业、资料、证据上下文和快速/深度研究模式，均为示意。
+- 新增全屏登录封面和账号/密码输入。输入只用于本地转场，不验证、不发送；独立的“预览占用状态”进入冲突，模拟接管经确认、重置后回首页；到期、被接管可由原型状态菜单单独查看。此前每次登录均进入冲突、接管后进入到期状态的问题已修复。
+- 手机隐藏 Hero 装饰图；桌面收紧 Hero 和 KPI。JSX/CSS 已格式化，登录、图表抽为组件。
+- 本次 PASS：Node 24 `npm run build`、`npm run lint`（保留 fast-refresh warnings 和构建 chunk 提示）；Vite + 本机 Chrome headless 1440/1280/390 登录与 Navy 首页截图，以及 1440 Ink 首页对照；无横向溢出和页面 JS 异常。登录、搜索预填、上下文模式、占用→确认→重置→首页、到期与被接管状态自动点击通过。截图目录：`/Users/aipuli/.codex/visualizations/2026/11/03/01a19f9d-a871-7520-aed9-dd6d22774d1a/b02-revision/`。
+- 可复跑脚本 `frontend/e2e/showcase-prototype.mjs`：先启动 Vite，再运行 `SHOWCASE_URL=http://127.0.0.1:5173/showcase.html CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' node e2e/showcase-prototype.mjs`；截图目录可通过 `SHOWCASE_SCREENSHOTS` 指定。未运行真实认证、会话隔离或全量测试。
