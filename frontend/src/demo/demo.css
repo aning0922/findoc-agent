@@ -134,3 +134,76 @@
     padding: 32px 24px;
   }
 }
+.demo-login .demo-card {
+  border: 1px solid #e8edf4;
+  border-radius: 16px;
+  padding: 35px;
+  box-shadow: 0 10px 40px #172e4b08;
+}
+.demo-login .demo-card form > button {
+  width: 100%;
+  margin-top: 12px;
+  min-height: 48px;
+}
+.demo-login .demo-card input:not([type="checkbox"]) {
+  min-height: 48px;
+}
+.demo-gate button,
+.demo-bar button,
+.demo-bar summary {
+  min-height: 44px;
+}
+.demo-login .demo-card button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+@media (max-width: 700px) {
+  .demo-login .demo-card {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+.demo-bar {
+  position: relative;
+  z-index: 50;
+  margin-left: 224px;
+  border-bottom: 1px solid #ffffff15;
+}
+.demo-bar button {
+  border: 1px solid #ffffff30;
+  border-radius: 7px;
+  background: #ffffff10;
+  color: white;
+}
+.demo-bar summary {
+  cursor: pointer;
+}
+.demo-bar details[open] {
+  background: #172d4b;
+}
+.demo-bar input {
+  color: #192b3d;
+  border: 1px solid #dbe4ee;
+  border-radius: 7px;
+}
+@media (max-width: 1099px) {
+  .demo-bar {
+    margin-left: 0;
+  }
+}
+.demo-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  min-height: 52px;
+}
+.demo-bar details[open] {
+  width: 100%;
+}
+.demo-bar details[open] summary {
+  min-height: 44px;
+}

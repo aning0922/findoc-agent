@@ -1,12 +1,35 @@
-# M1 UI 组件交接
+# M1 UI 组件交接（最终修订）
 
-基线 d6ccca07（包含 8c2c8a7），分支 codex/showcase-h02。H02 初稿 171ab87，修订 f14e105；后续提交包含 L04 与本记录。组件未接现有入口，主控负责装配。
+基线 `d6ccca07`（包含 `8c2c8a7`），分支 `codex/showcase-h02`。前序 171ab87/f14e105/c087b4b/88b94bc 保留；本次修订覆盖早期草稿的视觉与验证缺口。主控唯一装配，不修改业务热点或锁文件。
 
-- `ShowcaseDashboard` 接收 `{companies, company, access?}`；自身读取 overview/charts。失败显示错误，不回退数字；独立示意状态有水印。建议问题只接收同源 `/conversations?question=...` 预填链接，搜索选择后提供相同路线的 CTA。默认 revenue，图表表格保留 Decimal 原字符串和来源。柱图是同指标各期对比：H01 当前 comparison 为 `[]`，尚未实现多企业比较；来源清单和 limitations 由 DTO 展示。overview/chart 的 runtime schema 目前未校验；不得把本草稿视作已审计。
-- `DemoGate` 显式 `enabled`；false 原样渲染 children，true 先检查 status/session，再挂载业务 children。Cookie 请求、pending poll、claim 使用独立 UUID、占用/owner 接管、owner 授权、logout、session 定期核验均为 UI 实现；不存密码或 token 到 localStorage，不自动执行财务步骤。挂载：`<DemoGate enabled={明确的演示开关}><App /></DemoGate>`。开关来源、后端网关强制权限、控制器状态均由主控负责。
-- 验证：Node 24 build/lint PASS；存在组件 effect lint warning 和既有 fast-refresh/build chunk warning。Vite + Chrome headless 的 `frontend/e2e/showcase-live-mock.mjs` 在 1440/1280/390 通过模拟 pending→claim→dashboard→logout，断言 claim UUID 不同于 attempt、无横向溢出。截图目录 `/Users/aipuli/.codex/visualizations/2026/11/03/01a19f9d-a871-7520-aed9-dd6d22774d1a/m1-mock/`；内容均为拦截假数据。先运行 `npm run dev -- --host 127.0.0.1 --port 5180`，再运行 `CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' node e2e/showcase-live-mock.mjs`。
-- 真实 HTTP、双浏览器、失效/接管并发、owner 权限、cookie 丢失、真实种子与业务回归均 SKIP；与并行后端集成后必须执行。默认 npm build 仅编译类型，组件未被产品入口引用，不能声称正式页面已接入。
+## 接线
 
-## 后续视觉与身份修订
+- `ShowcaseDashboard` 接收 `{companies, company, access?}`，读取 `/api/dashboard/overview` 和 `/api/dashboard/charts?company_id=&metric_key=&sample_mode=`。主控在 ResearchHome 引用即可。显式企业优先；无企业时待 overview 首企业，无目录则显示引导，不请求空公司。
+- `DemoGate enabled={显式开关}` 包现有产品；disabled 原样渲染 children。启用时先检查服务与会话，登录/等待/未知申请期间不挂载产品。业务 children 按 `lease_generation` key 重建。前端保护不能替代网关鉴权。
+- 正式入口仍未接线；默认 build 包含类型检查但不会把未引用组件打入产品 bundle。真实 HTTP/Cookie/双浏览器权限与 seed 验证留主控接线后的集成阶段。
 
-新增 Navy Hero 装饰与全屏双栏登录、三种指标选择、来源跳转、DTO 形状和身份基本校验、到期时卸载及重新查询，修正 H01 int period / fact_ref 对象与示意身份。三个宽度的登录与首页截图在 `/Users/aipuli/.codex/visualizations/2026/11/03/01a19f9d-a871-7520-aed9-dd6d22774d1a/m1-revision/`，使用测试拦截数据并标 UI_MOCK。`npm run build`、`npm run lint` 和模拟 pending/claim/logout 浏览器流程通过。真实 AppShell 组合截图、schema 错误负向测试、过期卸载自动化和真实双浏览器仍未完成；样式精细度、所有竞态与权限边界仍须主控审查，不能视为验收。比较图目前是同指标各期，不声称跨企业比较。
+## 布局与数据
+
+沿用 M0 Navy：Hero 装饰、搜索主 CTA、导入年报/查看研究、四张可点 KPI；2:1 首排趋势/任务环，第二排各期柱图/近期研究，底部推荐。环图 Cell 分色、中心总数与中文状态图例，三图均有表格替代。44px 控件，移动端单列、无装饰图穿正文。
+
+按 H01 a9274f4 对齐：period 为 int，金额有限 Decimal 字符串，真实 fact_ref 对象、revision 与 period 匹配；sample 固定 illustrative-company-a、null source refs 且无 fact_ref。拒绝未知 origin、错误 company/metric/金额形状，不过滤非法点伪装完整序列；不因请求失败切样本或补零。三指标切换；技术标识折叠，来源可进入对应企业资料页。柱图使用同指标各期 points，不冒称跨企业比较。搜索和建议链接只去 `/conversations?company=&question=` 预填。
+
+Gate 校验 status/session/attempt schema 与申请 identity；refresh 用单调请求序列与 generation guard，submit/claim 绑定 epoch，卸载后不接受旧结果。余时到零立即不渲染产品并 GET 核验。claim UUID 与 attempt 不同；未知领取保留原 operation，显式“查询本次申请”仅 GET operations/session，不自动 POST。共享密码与 owner 口令请求后清理；接管重新输入共享密码并确认。财务授权只开放真人核对入口，不自动 ACCEPT/SAVE/RESUME。
+
+## 检查与截图
+
+Node 24 build/lint PASS（已有 fast-refresh、大 chunk 提示及 effect/ref lint warning 保留）。真实 Vite + 本机 Chrome headless，fixture **真正导入 AppShell**，HTTP 全部 Playwright 拦截；meta charset UTF-8，所有截图顶端明确 UI_MOCK。模拟 2 企业/3 年大额数据/3 状态/2 近期/3 推荐，不是真实财报。
+
+PASS：三宽登录+组合首页、指标切换、退出；错误 overview 拒绝 KPI；非法 Decimal 拒绝整图；1 秒到期立即卸载并 GET 核验；旧 refresh 晚回不能覆盖更新 generation；claim 未知不自动重发且只读查询可恢复。截图使用集成分支已选 Navy tokens，未修改本分支旧 shell。已主动 view_image 检查 1440/390 登录和首页。
+
+截图绝对目录：`/Users/aipuli/.codex/visualizations/2026/11/03/01a19f9d-a871-7520-aed9-dd6d22774d1a/m1-final/`，文件 `login-{1440,1280,390}.png`、`home-{1440,1280,390}.png`。
+
+复跑（frontend 目录，先启动 Vite 5180）：
+
+```sh
+PATH=/Users/aipuli/.nvm/versions/node/v24.19.0/bin:$PATH npm run dev -- --host 127.0.0.1 --port 5180
+# 另一终端；SHOWCASE_TOKENS 可指向待集成版本的 tokens.css，省略则用当前分支样式
+CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' SHOWCASE_TOKENS=/Users/aipuli/.codex/worktrees/findoc-showcase-c-integration/findoc-agent/frontend/src/product/tokens.css node e2e/showcase-live-mock.mjs
+```
+
+未运行真实后端鉴权、双浏览器 Cookie、真实 seed/财报/模型、真人财务签核、全量套件或部署。以上 PASS 仅证明组件与模拟合同交互，不是后端权限验收。

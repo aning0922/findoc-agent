@@ -53,6 +53,7 @@ async function request<T>(path: string, body?: object): Promise<T> {
   const response = await fetch(`/api/demo${path}`, {
     credentials: "same-origin",
     cache: "no-store",
+    signal: AbortSignal.timeout(20000),
     ...(body
       ? {
           method: "POST",
@@ -82,6 +83,7 @@ async function request<T>(path: string, body?: object): Promise<T> {
     Number.isFinite(obj.remaining_seconds) &&
     obj.remaining_seconds > 0 &&
     Number.isInteger(obj.lease_generation) &&
+    Number(obj.lease_generation) >= 0 &&
     typeof obj.seed_version === "string" &&
     typeof obj.can_review === "boolean" &&
     (obj.owner_elevated_until === null ||
@@ -99,7 +101,8 @@ async function request<T>(path: string, body?: object): Promise<T> {
     !(
       obj.schema_version === "demo-status-v1" &&
       ["ready", "resetting", "degraded"].includes(String(obj.service_state)) &&
-      [20, 30].includes(Number(obj.ttl_minutes)) &&
+      typeof obj.ttl_minutes === "number" &&
+      [20, 30].includes(obj.ttl_minutes) &&
       ["wait_only", "takeover_enabled"].includes(String(obj.conflict_policy))
     )
   )
@@ -136,10 +139,18 @@ export function DemoGate({
   const [confirm, setConfirm] = useState(false);
   const [busy, setBusy] = useState(false);
   const [remaining, setRemaining] = useState(0);
+  const live = useRef(false);
   const epoch = useRef(0);
+  const sequence = useRef(0);
+  const generation = useRef(-1);
+  const [claimUnknown, setClaimUnknown] = useState(false);
   const claimOperation = useRef("");
   const [attempt, setAttempt] = useState<Attempt | null>(null);
   const activate = useCallback((s: Session) => {
+    if (!live.current) return;
+    if (s.lease_generation < generation.current) return;
+    generation.current = s.lease_generation;
+    sequence.current++;
     setSession(s);
     setRemaining(s.remaining_seconds);
     setStage("active");
@@ -151,14 +162,22 @@ export function DemoGate({
   }, []);
   const refresh = useCallback(async () => {
     const current = epoch.current;
+    const serial = ++sequence.current;
     try {
       const s = await request<Session>("/session");
-      if (current !== epoch.current) return;
+      if (
+        !live.current ||
+        current !== epoch.current ||
+        serial !== sequence.current ||
+        s.lease_generation < generation.current
+      )
+        return;
+      generation.current = s.lease_generation;
       setSession(s);
       setRemaining(s.remaining_seconds);
       setStage("active");
     } catch (e) {
-      if (current !== epoch.current) return;
+      if (current !== epoch.current || serial !== sequence.current) return;
       const err = e as ApiError;
       epoch.current++;
       setSession(null);
@@ -170,6 +189,7 @@ export function DemoGate({
   }, []);
   useEffect(() => {
     if (!enabled) return;
+    live.current = true;
     let alive = true;
     (async () => {
       try {
@@ -195,6 +215,7 @@ export function DemoGate({
     })();
     return () => {
       alive = false;
+      live.current = false;
       epoch.current++;
     };
   }, [enabled, refresh]);
@@ -214,23 +235,25 @@ export function DemoGate({
     return () => clearInterval(timer);
   }, [enabled, stage]);
   useEffect(() => {
-    if (!enabled || stage !== "pending" || !attempt) return;
+    if (!enabled || stage !== "pending" || !attempt || claimUnknown) return;
     let cancelled = false;
+    const current = epoch.current;
     let timer = 0;
     const poll = async () => {
       try {
         const a = await request<Attempt>(
           `/operations/${encodeURIComponent(attempt.operation_id)}`,
         );
-        if (cancelled) return;
-        if (a.operation_id !== attempt.operation_id) throw new Error("申请身份不匹配");
+        if (cancelled || current !== epoch.current) return;
+        if (a.operation_id !== attempt.operation_id)
+          throw new Error("申请身份不匹配");
         if (a.claimable && a.state === "ready") {
           if (!claimOperation.current) claimOperation.current = id();
           const s = await request<Session>("/claim", {
             operation_id: claimOperation.current,
             attempt_operation_id: a.operation_id,
           });
-          if (!cancelled) activate(s);
+          if (!cancelled && current === epoch.current) activate(s);
           return;
         }
         if (["failed", "cancelled", "claimed"].includes(a.state)) {
@@ -243,8 +266,8 @@ export function DemoGate({
         timer = window.setTimeout(poll, 1500);
       } catch {
         if (!cancelled) {
-          setStage("login");
-          setMessage("无法恢复申请状态；请等待或联系演示所有者，勿重复申请。");
+          setClaimUnknown(true);
+          setMessage("申请结果暂时未知，请查询本次申请或联系演示所有者。");
         }
       }
     };
@@ -253,12 +276,13 @@ export function DemoGate({
       cancelled = true;
       window.clearTimeout(timer);
     };
-  }, [enabled, stage, attempt, activate]);
+  }, [enabled, stage, attempt, activate, claimUnknown]);
   async function submit(takeover = false) {
     setBusy(true);
     setMessage("");
     const operation_id = id();
-    const current = epoch.current;
+    const current = ++epoch.current;
+    sequence.current++;
     try {
       const body = takeover
         ? {
@@ -274,9 +298,10 @@ export function DemoGate({
         takeover ? "/takeover" : "/login",
         body,
       );
-      if (current !== epoch.current) return;
+      if (!live.current || current !== epoch.current) return;
       if ("claimable" in result) {
-        if (result.operation_id !== operation_id) throw new Error("申请身份不匹配");
+        if (result.operation_id !== operation_id)
+          throw new Error("申请身份不匹配");
         claimOperation.current = "";
         setAttempt(result);
         setPassword("");
@@ -284,7 +309,7 @@ export function DemoGate({
         setStage("pending");
       } else activate(result);
     } catch (e) {
-      if (current !== epoch.current) return;
+      if (!live.current || current !== epoch.current) return;
       const err = e as ApiError;
       if (err.status === 423 && err.detail?.code === "occupied")
         setConflict(err.detail as Conflict);
@@ -296,6 +321,7 @@ export function DemoGate({
     }
   }
   async function authorize() {
+    const current = epoch.current;
     setBusy(true);
     try {
       await request("/owner-authorize", {
@@ -304,6 +330,7 @@ export function DemoGate({
         confirm: true,
       });
       setOwner("");
+      if (!live.current || current !== epoch.current) return;
       await refresh();
       setMessage("已授权人工核对入口；财务确认仍需真人逐步操作。");
     } catch (e) {
@@ -352,6 +379,35 @@ export function DemoGate({
         <h1>正在准备演示环境</h1>
         <p>等待恢复完成并领取会话，期间不能进入工作区。</p>
         <p>{message}</p>
+        {claimUnknown && (
+          <button
+            onClick={async () => {
+              const current = epoch.current;
+              try {
+                const a = await request<Attempt>(
+                  `/operations/${encodeURIComponent(attempt!.operation_id)}`,
+                );
+                if (
+                  !live.current ||
+                  current !== epoch.current ||
+                  a.operation_id !== attempt!.operation_id
+                )
+                  return;
+                setMessage("已查询本次申请，正在核验会话。");
+                const verified = await request<Session>("/session");
+                if (live.current && current === epoch.current)
+                  activate(verified);
+              } catch {
+                if (live.current && current === epoch.current)
+                  setMessage(
+                    "本次申请仍无法查证，已保留原申请，请稍后查询或联系演示所有者。",
+                  );
+              }
+            }}
+          >
+            查询本次申请
+          </button>
+        )}
       </div>
     );
   if (stage === "login")
@@ -360,7 +416,7 @@ export function DemoGate({
         <section className="demo-story">
           <div className="demo-brand">✦ &nbsp; FinDoc.</div>
           <div>
-            <small>AI-POWERED FINANCIAL INTELLIGENCE</small>
+            <small>让资料与研究清晰相连</small>
             <h1>
               让财报研究，
               <br />
@@ -473,6 +529,12 @@ export function DemoGate({
           )}
         </div>
       </main>
+    );
+  if (!session || remaining === 0)
+    return (
+      <div className="demo-gate" role="status">
+        正在核验会话有效期…
+      </div>
     );
   return (
     <div className="demo-active">

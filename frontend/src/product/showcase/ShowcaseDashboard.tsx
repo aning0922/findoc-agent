@@ -3,6 +3,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   Line,
   LineChart,
   Pie,
@@ -47,6 +48,7 @@ type Point = {
   source_revision: string | null;
   document_id: string | null;
   fact_ref?: {
+    period: number;
     fact_set_id: string;
     fact_id: string;
     receipt_id: string;
@@ -87,6 +89,9 @@ function validOverview(x: Overview): boolean {
   return (
     x?.schema_version === "dashboard-overview-v1" &&
     ["local_runtime", "preset_demo"].includes(x.data_origin) &&
+    (x.lease_generation === null || Number.isInteger(x.lease_generation)) &&
+    typeof x.snapshot_at === "string" &&
+    (x.seed_version === null || typeof x.seed_version === "string") &&
     !!x.kpis &&
     ["companies", "reports_ready", "research_completed", "reports"].every(
       (k) =>
@@ -105,7 +110,10 @@ function validOverview(x: Overview): boolean {
       (v) =>
         typeof v.id === "string" &&
         typeof v.title === "string" &&
-        typeof v.href === "string",
+        typeof v.href === "string" &&
+        ["local_runtime", "preset_demo"].includes(v.origin) &&
+        typeof v.status === "string" &&
+        typeof v.review_status === "string",
     ) &&
     Array.isArray(x.suggested_questions) &&
     x.suggested_questions.every(
@@ -136,23 +144,28 @@ function validChart(
     (sample
       ? x.origin === "illustrative" && x.company_id === "illustrative-company-a"
       : x.origin === "confirmed_financial" && x.company_id === company) &&
-    typeof x.unit === "string" &&
+    x.unit === "CNY_YUAN" &&
     Array.isArray(x.comparison) &&
     Array.isArray(x.limitations) &&
     Array.isArray(x.points) &&
     x.points.every(
       (p) =>
-        (typeof p.period === "string" || Number.isInteger(p.period)) &&
+        Number.isInteger(p.period) &&
         Number.isInteger(p.report_year) &&
         typeof p.value_decimal === "string" &&
         /^-?\d+(\.\d+)?$/.test(p.value_decimal) &&
         Number.isFinite(Number(p.value_decimal)) &&
         typeof p.source_state === "string" &&
         (sample
-          ? p.source_state === "illustrative" && !p.fact_ref
+          ? p.source_state === "illustrative" &&
+            p.source_revision === null &&
+            p.document_id === null &&
+            !p.fact_ref
           : typeof p.document_id === "string" &&
             typeof p.source_revision === "string" &&
             !!p.fact_ref &&
+            p.fact_ref.period === p.period &&
+            p.fact_ref.source_revision === p.source_revision &&
             [
               "fact_set_id",
               "fact_id",
@@ -193,7 +206,7 @@ export function ShowcaseDashboard({
     get<Overview>("/api/dashboard/overview", c.signal)
       .then((x) => {
         if (!validOverview(x)) throw new Error("概览数据格式无效");
-        setOverview(x);
+        if (!c.signal.aborted) setOverview(x);
       })
       .catch((e) => {
         if (!c.signal.aborted) setError(String(e));
@@ -218,7 +231,7 @@ export function ShowcaseDashboard({
       .then((x) => {
         if (!validChart(x, effectiveCompany, metric, sample))
           throw new Error("图表数据身份或格式无效");
-        setChart(x);
+        if (!c.signal.aborted) setChart(x);
       })
       .catch((e) => {
         if (!c.signal.aborted) setChartError(String(e));
@@ -228,43 +241,118 @@ export function ShowcaseDashboard({
   const points =
     chart?.points.map((p) => ({ ...p, coordinate: Number(p.value_decimal) })) ??
     [];
+  const labels: Record<string, string> = {
+    completed: "已完成",
+    running: "进行中",
+    waiting: "待处理",
+    waiting_confirmation: "待核对",
+    failed: "失败",
+    refused: "已拒绝",
+    created: "待开始",
+    cancelled: "已取消",
+  };
+  const unit = chart?.unit === "CNY_YUAN" ? "元" : chart?.unit || "元";
+  const colors = ["#4878d4", "#75b5c0", "#e4b665", "#ba829b"];
+  const distribution =
+    overview?.task_distribution.map((x) => ({
+      ...x,
+      label: labels[x.status] || "其他状态",
+    })) || [];
+  const total = distribution.reduce((n, x) => n + x.count, 0);
+  const title = {
+    revenue: "营业收入",
+    net_profit_parent: "归母净利润",
+    operating_cash_flow: "经营现金流",
+  }[metric];
+  const chartBody = (bar = false) =>
+    chartError ? (
+      <div role="alert" className="sd-empty">
+        图表读取失败：{chartError}
+        <button onClick={() => setRetry((x) => x + 1)}>重试</button>
+      </div>
+    ) : !chart ? (
+      <p className="sd-empty" role="status">
+        {!effectiveCompany && !sample
+          ? "添加企业与年报后，可查看财务图表。"
+          : "正在读取图表…"}
+      </p>
+    ) : !points.length ? (
+      <p className="sd-empty">暂无可展示的已确认数据</p>
+    ) : (
+      <ResponsiveContainer width="100%" height={205}>
+        {bar ? (
+          <BarChart data={points} margin={{ left: 0, right: 12 }}>
+            <CartesianGrid vertical={false} stroke="#edf1f5" />
+            <XAxis dataKey="period" />
+            <YAxis tickFormatter={(v) => `${Number(v) / 100000000}亿`} />
+            <Tooltip
+              formatter={(_, __, item) => [
+                item.payload.value_decimal + " " + unit,
+                title,
+              ]}
+            />
+            <Bar
+              dataKey="coordinate"
+              fill="#4878d4"
+              radius={[5, 5, 0, 0]}
+              isAnimationActive={false}
+            />
+          </BarChart>
+        ) : (
+          <LineChart data={points} margin={{ left: 0, right: 12 }}>
+            <CartesianGrid vertical={false} stroke="#edf1f5" />
+            <XAxis dataKey="period" />
+            <YAxis tickFormatter={(v) => `${Number(v) / 100000000}亿`} />
+            <Tooltip
+              formatter={(_, __, item) => [
+                item.payload.value_decimal + " " + unit,
+                title,
+              ]}
+            />
+            <Line
+              type="monotone"
+              dataKey="coordinate"
+              stroke="#4878d4"
+              strokeWidth={3}
+              dot={{ r: 4 }}
+              isAnimationActive={false}
+            />
+          </LineChart>
+        )}
+      </ResponsiveContainer>
+    );
   return (
     <div className="showcase-dashboard">
-      <header>
-        <p>FINANCIAL RESEARCH WORKSPACE</p>
-        <h1>
-          让每一次研究，
-          <br />
-          <em>都更有依据。</em>
-        </h1>
-        <div className="sd-orbit" aria-hidden="true">
-          <span>✦</span>
-        </div>
-        <p>从资料到洞察，探索你的研究工作空间。</p>
-        <label>
-          搜索本地企业{" "}
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="企业名称或代码"
-          />
-        </label>
-        {selected && (
-          <p>
+      <header className="sd-hero">
+        <div className="sd-hero-copy">
+          <p className="sd-eyebrow">AI 财报研究工作空间</p>
+          <h1>
+            让每一次研究，
+            <br />
+            <em>都更有依据。</em>
+          </h1>
+          <p>从财报资料到研究洞察，在一个工作空间里清晰探索。</p>
+          <div className="sd-search">
+            <input
+              aria-label="搜索本地企业"
+              value={search}
+              placeholder="输入企业名称或代码，开启研究"
+              onChange={(e) => setSearch(e.target.value)}
+            />
             <a
-              href={`/conversations?${new URLSearchParams({ company: selected, question: "帮我开始研究这家企业" })}`}
+              className="sd-primary"
+              href={`/conversations?${new URLSearchParams({ ...(effectiveCompany ? { company: effectiveCompany } : {}), question: search || "帮我开始一项企业研究" })}`}
             >
-              进入研究助手 →
+              开始研究 →
             </a>
-          </p>
-        )}
-        {search && (
-          <ul>
-            {overview?.companies
-              .filter((c) => `${c.name} ${c.security_code}`.includes(search))
-              .map((c) => (
-                <li key={c.company_id}>
+          </div>
+          {search && (
+            <div className="sd-results">
+              {overview?.companies
+                .filter((c) => (c.name + c.security_code).includes(search))
+                .map((c) => (
                   <button
+                    key={c.company_id}
                     onClick={() => {
                       setSelected(c.company_id);
                       setSearch("");
@@ -272,14 +360,39 @@ export function ShowcaseDashboard({
                   >
                     {c.name} {c.security_code}
                   </button>
-                </li>
-              ))}
-          </ul>
-        )}
+                ))}
+            </div>
+          )}
+          <div className="sd-secondary">
+            <a href="/companies">导入年报 ↗</a>
+            <a href="/tasks">查看研究 ↗</a>
+          </div>
+        </div>
+        <div className="sd-orbit" aria-hidden="true">
+          <span>✦</span>
+          <small>从资料到洞察</small>
+        </div>
       </header>
+      <div className="sd-section-title">
+        <div>
+          <small>你的研究工作空间</small>
+          <h2>研究概览</h2>
+        </div>
+        <label>
+          <input
+            type="checkbox"
+            checked={sample}
+            onChange={(e) => setSample(e.target.checked)}
+          />{" "}
+          界面示意数据
+        </label>
+      </div>
+      {sample && (
+        <p className="sd-watermark">界面示意数据 · 虚构企业与财务数字</p>
+      )}
       {error ? (
-        <p role="alert">
-          概览读取失败：{error}{" "}
+        <div role="alert">
+          概览读取失败：{error}
           <button
             onClick={() => {
               setError("");
@@ -288,237 +401,218 @@ export function ShowcaseDashboard({
           >
             重试
           </button>
-        </p>
+        </div>
       ) : !overview ? (
         <p role="status">正在读取概览…</p>
       ) : (
         <>
-          <p>
-            数据来源：
-            {overview.data_origin === "local_runtime"
-              ? "本地研究空间"
-              : "预置演示"}{" "}
-            · {overview.limitations.join("；")}
-          </p>
-          <section className="sd-kpis">
-            {Object.entries(overview.kpis).map(([key, value]) => (
-              <article key={key}>
-                <span className="sd-icon">✧</span>
-                <span>
-                  {(
-                    {
-                      companies: "跟踪企业",
-                      reports_ready: "已准备年报",
-                      research_completed: "已完成研究",
-                      reports: "研究报告",
-                    } as Record<string, string>
-                  )[key] || key}
-                </span>
-                <strong>{value}</strong>
-              </article>
+          <div className="sd-kpis">
+            {(
+              [
+                ["companies", "跟踪企业", "▦", "/companies"],
+                ["reports_ready", "已准备年报", "▤", "/companies"],
+                ["research_completed", "已完成研究", "◷", "/tasks"],
+                ["reports", "研究报告", "▧", "/reports"],
+              ] as const
+            ).map(([key, label, icon, href]) => (
+              <a key={key} href={href}>
+                <span className="sd-icon">{icon}</span>
+                <span>{label}</span>
+                <strong>{overview.kpis[key]}</strong>
+                <small>查看详情 ↗</small>
+              </a>
             ))}
-          </section>
-          <section>
-            <h2>研究图表</h2>
-            <label>
-              指标{" "}
-              <select
-                value={metric}
-                onChange={(e) => setMetric(e.target.value)}
-              >
-                <option value="revenue">营业收入</option>
-                <option value="net_profit_parent">归母净利润</option>
-                <option value="operating_cash_flow">经营现金流</option>
-              </select>
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                checked={sample}
-                onChange={(e) => setSample(e.target.checked)}
-              />{" "}
-              查看独立示意数据
-            </label>
-            {(sample || chart?.origin === "illustrative") && (
-              <p className="sd-watermark">界面示意数据 · 不是真实财报</p>
-            )}
-            {chartError ? (
-              <p role="alert">
-                图表读取失败：{chartError}{" "}
-                <button onClick={() => setRetry((x) => x + 1)}>重试</button>
-              </p>
-            ) : !chart ? (
-              <p role="status">
-                {!effectiveCompany && !sample
-                  ? "暂无企业，请添加企业或选择界面示意数据。"
-                  : "正在读取图表…"}
-              </p>
-            ) : (
-              <>
+          </div>
+          <div className="sd-grid">
+            <section className="sd-card">
+              <div className="sd-card-head">
+                <div>
+                  <h3>财务趋势</h3>
+                  <p>
+                    {sample
+                      ? "虚构企业 A"
+                      : overview.companies.find(
+                          (x) => x.company_id === effectiveCompany,
+                        )?.name || "企业财务"}{" "}
+                    · {unit}（坐标以亿元显示）
+                  </p>
+                </div>
+                <select
+                  aria-label="财务指标"
+                  value={metric}
+                  onChange={(e) => setMetric(e.target.value)}
+                >
+                  <option value="revenue">营业收入</option>
+                  <option value="net_profit_parent">归母净利润</option>
+                  <option value="operating_cash_flow">经营现金流</option>
+                </select>
+              </div>
+              {chartBody()}
+              <details>
+                <summary>查看数据与来源</summary>
                 <p>
-                  来源：
-                  {chart.origin === "illustrative"
+                  {chart?.origin === "illustrative"
                     ? "界面示意"
                     : "已确认财务数据"}{" "}
-                  · 指标：
-                  {
-                    (
-                      {
-                        revenue: "营业收入",
-                        net_profit_parent: "归母净利润",
-                        operating_cash_flow: "经营现金流",
-                      } as Record<string, string>
-                    )[chart.metric_key]
-                  }{" "}
-                  · 单位：
-                  {chart.unit}
+                  · {chart?.limitations.join("；")}
                 </p>
-                {chart.limitations.map((x) => (
-                  <p key={x}>{x}</p>
-                ))}
-                {points.length ? (
-                  <div className="sd-charts">
-                    <figure>
-                      <figcaption>趋势 · {chart.unit}</figcaption>
-                      <ResponsiveContainer width="100%" height={220}>
-                        <LineChart data={points}>
-                          <CartesianGrid />
-                          <XAxis dataKey="period" />
-                          <YAxis />
-                          <Tooltip
-                            formatter={(_, __, item) => [
-                              item.payload.value_decimal + " " + chart.unit,
-                              "数值",
-                            ]}
-                          />
-                          <Line
-                            dataKey="coordinate"
-                            stroke="#4878d4"
-                            isAnimationActive={false}
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </figure>
-                    <figure>
-                      <figcaption>各期对比 · {chart.unit}</figcaption>
-                      <ResponsiveContainer width="100%" height={220}>
-                        <BarChart data={points}>
-                          <XAxis dataKey="period" />
-                          <YAxis />
-                          <Tooltip
-                            formatter={(_, __, item) => [
-                              item.payload.value_decimal + " " + chart.unit,
-                              "数值",
-                            ]}
-                          />
-                          <Bar
-                            dataKey="coordinate"
-                            fill="#4878d4"
-                            isAnimationActive={false}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </figure>
-                  </div>
-                ) : (
-                  <p>{chart.empty_reason || "暂无可展示数据"}</p>
-                )}
-                <details>
-                  <summary>查看图表数据及来源</summary>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>期间</th>
-                        <th>报告年</th>
-                        <th>数值（{chart.unit}）</th>
-                        <th>来源</th>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>期间</th>
+                      <th>报告年</th>
+                      <th>数值（{unit}）</th>
+                      <th>来源</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {chart?.points.map((p, i) => (
+                      <tr key={i}>
+                        <td>{p.period}</td>
+                        <td>{p.report_year}</td>
+                        <td>{p.value_decimal}</td>
+                        <td>
+                          {p.document_id ? (
+                            <a
+                              href={`/companies/${encodeURIComponent(effectiveCompany)}/documents`}
+                            >
+                              查看资料
+                            </a>
+                          ) : (
+                            "界面示意"
+                          )}
+                          <details>
+                            <summary>技术标识</summary>
+                            {p.source_revision} / {p.fact_ref?.fact_id}
+                          </details>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {chart.points.map((p, i) => (
-                        <tr key={i}>
-                          <td>{p.period}</td>
-                          <td>{p.report_year}</td>
-                          <td>{p.value_decimal}</td>
-                          <td>
-                            {p.document_id ? (
-                              <a
-                                href={`/companies/${encodeURIComponent(effectiveCompany)}/documents`}
-                              >
-                                {p.document_id}
-                              </a>
-                            ) : (
-                              "示意"
-                            )}{" "}
-                            / {p.source_revision} / {p.source_state} /{" "}
-                            {p.fact_ref?.fact_id || "无事实引用"}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </details>
-              </>
-            )}
-          </section>
-          <section>
-            <h2>任务状态</h2>
-            {overview.task_distribution.length ? (
-              <>
-                <ResponsiveContainer width="100%" height={200}>
-                  <PieChart>
-                    <Pie
-                      data={overview.task_distribution}
-                      dataKey="count"
-                      innerRadius={45}
-                      outerRadius={70}
-                      nameKey="status"
-                      fill="#4878d4"
-                      isAnimationActive={false}
-                    />
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
+                    ))}
+                  </tbody>
+                </table>
+              </details>
+            </section>
+            <section className="sd-card">
+              <div className="sd-card-head">
+                <div>
+                  <h3>任务状态</h3>
+                  <p>当前工作空间 · 共 {total} 项</p>
+                </div>
+              </div>
+              {total ? (
+                <div className="sd-donut">
+                  <ResponsiveContainer width="100%" height={185}>
+                    <PieChart>
+                      <Pie
+                        data={distribution}
+                        dataKey="count"
+                        nameKey="label"
+                        innerRadius={53}
+                        outerRadius={76}
+                        paddingAngle={3}
+                        isAnimationActive={false}
+                      >
+                        {distribution.map((x, i) => (
+                          <Cell
+                            key={x.status}
+                            fill={colors[i % colors.length]}
+                          />
+                        ))}
+                      </Pie>
+                      <Tooltip formatter={(v) => [`${v} 项`, "任务"]} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div className="sd-donut-total">
+                    <b>{total}</b>
+                    <span>全部任务</span>
+                  </div>
+                </div>
+              ) : (
+                <p className="sd-empty">暂无任务</p>
+              )}
+              <div className="sd-legend">
+                {distribution.map((x, i) => (
+                  <span key={x.status}>
+                    <i style={{ background: colors[i % colors.length] }} />
+                    {x.label} {x.count}
+                  </span>
+                ))}
+              </div>
+              <details>
+                <summary>任务数据表</summary>
                 <table>
                   <tbody>
-                    {overview.task_distribution.map((x) => (
+                    {distribution.map((x) => (
                       <tr key={x.status}>
-                        <td>{x.status}</td>
+                        <td>{x.label}</td>
                         <td>{x.count} 项</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-              </>
-            ) : (
-              <p>暂无任务</p>
-            )}
+              </details>
+            </section>
+            <section className="sd-card">
+              <div className="sd-card-head">
+                <div>
+                  <h3>各期财务对比</h3>
+                  <p>
+                    {title} · {unit}（坐标以亿元显示）
+                  </p>
+                </div>
+              </div>
+              {chartBody(true)}
+            </section>
+            <section className="sd-card">
+              <div className="sd-card-head">
+                <div>
+                  <h3>近期研究</h3>
+                  <p>继续探索你的研究记录</p>
+                </div>
+                <a href="/tasks">全部 →</a>
+              </div>
+              {overview.recent_research.length ? (
+                overview.recent_research.map((r) => (
+                  <a className="sd-recent" key={r.id} href={safeHref(r.href)}>
+                    <span className="sd-icon">▧</span>
+                    <div>
+                      <b>{r.title}</b>
+                      <small>历史研究 · 打开后重新核验来源</small>
+                    </div>
+                    <span className="sd-badge">
+                      {labels[r.status] || "待处理"}
+                    </span>
+                  </a>
+                ))
+              ) : (
+                <p className="sd-empty">暂无研究记录</p>
+              )}
+            </section>
+          </div>
+          <section className="sd-card sd-suggestions">
+            <div className="sd-card-head">
+              <div>
+                <h3>推荐问题</h3>
+                <p>从一个问题开始探索 · 点击仅预填</p>
+              </div>
+              <span>✦</span>
+            </div>
+            <div>
+              {overview.suggested_questions.map((q) => (
+                <a key={q.id} href={questionHref(q.href)}>
+                  ✧　{q.text}
+                  <span>↗</span>
+                </a>
+              ))}
+            </div>
           </section>
-          <section>
-            <h2>近期研究</h2>
-            {overview.recent_research.length ? (
-              overview.recent_research.map((r) => (
-                <p key={r.id}>
-                  <a href={safeHref(r.href)}>{r.title}</a> · {r.status} ·{" "}
-                  {r.origin} · {r.review_status}
-                </p>
-              ))
-            ) : (
-              <p>暂无研究记录</p>
-            )}
-          </section>
-          <section>
-            <h2>建议问题</h2>
-            {overview.suggested_questions.length ? (
-              overview.suggested_questions.map((q) => (
-                <p key={q.id}>
-                  <a href={questionHref(q.href)}>{q.text}</a>
-                </p>
-              ))
-            ) : (
-              <p>暂无建议问题</p>
-            )}
-          </section>
+          <details className="sd-meta">
+            <summary>数据来源与限制</summary>
+            <p>本地研究空间 · {overview.limitations.join("；")}</p>
+            <p>
+              快照 {overview.snapshot_at} · 代际 {overview.lease_generation}
+            </p>
+          </details>
         </>
       )}
     </div>
