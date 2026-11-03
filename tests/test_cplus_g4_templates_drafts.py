@@ -13,12 +13,6 @@ import pytest
 from app.companies.models import CompanyCreate
 from app.documents.models import DocumentStatus
 from app.documents.preparation import DocumentTaskPreparer
-from app.research_templates_v1 import (
-    TemplateRunService,
-    create_template_run_router,
-)
-from app.chart_report_drafts import ChartReportDraftService, create_chart_report_draft_router
-from app.checkup import CheckupService
 from app.cplus.runtime import fast_ref
 from app.retrieval_v2 import TrustedIdentity
 from tests.test_document_sources import Harness, metadata
@@ -99,24 +93,10 @@ def rig(tmp_path, monkeypatch):
     )
     app, client, memory = root_app(h, None, tmp_path, monkeypatch, preparer)
     state = app.state
-    hybrid = state.cplus_retrieval_service
-    kwargs = dict(
-        statements=state.cplus_statement_service,
-        identity_validator=hybrid.identity_validator,
-        publication_guard=state.cplus_publication_guard,
-        commit_check=lambda i, f: hybrid.commit_check(i),
-    )
-    templates = TemplateRunService(
-        tmp_path,
-        checkups=CheckupService(kwargs["statements"]),
-        annual_diff=state.cplus_annual_diff_service,
-        peers=state.cplus_peer_service,
-        hybrid=hybrid,
-        **kwargs,
-    )
-    drafts = ChartReportDraftService(tmp_path, **kwargs)
-    app.include_router(create_template_run_router(templates, state.cplus_identity_provider))
-    app.include_router(create_chart_report_draft_router(drafts, state.cplus_identity_provider))
+    templates = state.cplus_template_service
+    drafts = state.cplus_chart_report_service
+    assert templates.statements is state.cplus_statement_service
+    assert drafts.statements is state.cplus_statement_service
     refs = []
     for source in sources:
         selection = asyncio.run(
