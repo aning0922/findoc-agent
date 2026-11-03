@@ -50,7 +50,8 @@ def group_alive(pgid: int) -> bool:
 
 
 class ProcessRuntimeManager:
-    def __init__(self, config, *, child_mode="real", python=sys.executable, startup_timeout=90, stop_timeout=4):
+    def __init__(self, config, *, child_mode="real", python=sys.executable, startup_timeout=90, stop_timeout=4,
+                 retired_gc=False):
         if child_mode not in ("real", "fake"):
             raise ValueError("Invalid child mode")
         self.config, self.child_mode, self.python = config, child_mode, python
@@ -68,12 +69,34 @@ class ProcessRuntimeManager:
             self.manifest, self.manifest_sha, self.seed_error = None, None, exc
         self._reset_lock = asyncio.Lock()
         self.last_readiness = None
+        self.retired_gc = retired_gc
+        self.last_gc_report = None
+
+    def _remember_retired(self, record):
+        if self.retired_gc:
+            from app.demo.retired_gc import remember_retired
+            remember_retired(self.config.control_root, record, self.manifest_sha)
+
+    async def gc_retired_generations(self, *, dry_run=True, keep=1):
+        async with self._reset_lock:
+            return await self._gc_retired(dry_run=dry_run, keep=keep)
+
+    async def _gc_retired(self, *, dry_run=True, keep=1):
+        from app.demo.retired_gc import collect_retired
+        current = self.handle.root if self.handle else None
+        report = await asyncio.to_thread(
+            collect_retired, self.config.control_root, self.config.seed_root, current,
+            process_birth=process_birth, group_alive=group_alive, dry_run=dry_run, keep=keep,
+        )
+        self.last_gc_report = report
+        return report
 
     async def recover(self):
         # Registry stores PID + birth identity, no reusable auth secret; old endpoint is not reused.
         if self.registry.exists():
             record = json.loads(self.registry.read_text())
             await self._retire_record(record)
+            self._remember_retired(record)
             self.registry.unlink()
         if self.seed_error:
             raise RuntimeError("Invalid seed; remain degraded until repaired and restarted") from self.seed_error
@@ -134,7 +157,9 @@ class ProcessRuntimeManager:
         self.handle = None
         try:
             if self.registry.exists():
-                await self._retire_record(json.loads(self.registry.read_text()))
+                record = json.loads(self.registry.read_text())
+                await self._retire_record(record)
+                self._remember_retired(record)
                 self.registry.unlink()
             if self.process:
                 self.process.poll()
@@ -211,6 +236,12 @@ class ProcessRuntimeManager:
                                 raise RuntimeError("Child readiness identity/probe mismatch")
                             self.last_readiness = ready
                             self.handle = handle
+                            if self.retired_gc:
+                                try:
+                                    await self._gc_retired(dry_run=False, keep=1)
+                                except (OSError, ValueError):
+                                    # Cleanup may fail closed without invalidating a ready runtime.
+                                    self.last_gc_report = {"dry_run": False, "deleted": [], "error": "gc_refused"}
                             return handle
                     except httpx.HTTPError:
                         pass

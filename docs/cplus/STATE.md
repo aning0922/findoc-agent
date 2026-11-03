@@ -52,3 +52,12 @@ B00→B01/B02/B03→(DATA D02–D05 ∥ FINANCE F01–F06 ∥ RETRIEVAL R01–R0
 目前没有用户输入阻断。需要真人核准时先准备单页原PDF/指标/期间/单位/页码清单，由用户本人操作；候选路线可继续。官方动态源不可用则blocked_external+官网/上传回退，其余并行。现C OCR legacy failed不允许伪造READY，新typed OCR enrollment/context/单次有界answer已冻结，旧legacy READY合同保持。
 
 下一个出口：自动启动M1 DATA/RETRIEVAL与M2财务纯提取并行；root接controller/private child、同账本launcher及业务UI。不购买服务、不增加预算、不合main/强推/公开部署。
+
+
+## M1/M2当前批次
+
+M0冻结提交3c737327198a55b72d02490a981b5259cd164ffa。三个可见worker已新建独立C+任务分支，实际模型切到Sol/high：DATA codex/cplus-discovery-cache、FINANCE codex/cplus-statements-v3、RETRIEVAL codex/cplus-hybrid-ocr。原C/Astra审查/UI分支均保留，未增加第四worker。
+
+主控已实现同Git sibling既有ledger只读准入与--provider-budget-db（C+必须显式）、--cplus默认14540/无默认虚构财务曲线；新C+ cookie独立findoc_demo_cplus，避免同host不同port覆盖原C cookie。新C+本机私有登录配置已生成（600/gitignored，不输出），--check已通过且仍原账本73calls，未发provider请求。
+
+D06代码已实现正向退休凭证、退出PID/pgid复核、GC dry-run与保留最近退役代；实际OS/private readiness HTTP假child三代运行删除1、保留2/当前3，seed与publiccache sentinel不变。25项必要边界测试PASS/ruffPASS，均fake或临时fixture；D06仍PARTIAL，等DATA后做真实cache/浏览器接管联合验收，不把fakechild称真实BGE/PDF。

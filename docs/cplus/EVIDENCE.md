@@ -12,3 +12,8 @@ B02源6ecb5ee→fc987a4：root在集成树独立启动14541/cplus.html，实际C
 B03：root从独立物化seed真实BGE/Milvus跑6题top5，evidence/M0-retrieval-before.json；无LLM，seed SHA不变。旧C真实结果的经营风险→物理70页委托理财表见M0-historical-risk-failure.json，此旧失败与本轮6题不同，不合并假称重现。三PDF实际SHA与三表标题候选页另存M0-statement-page-map.json，候选位置不是财务确认。
 
 初次原包CSV CRLF触发diff whitespace告警，原字节保留并为immutable archive配置cr-at-eol；随后整baseline diff --check PASS。原包verify35files/16features/42tasks仍PASS，root42唯一任务及24题清单可读。M0付费call0、真人财务0、未动原Ccontroller14530/seed/ledger额度。
+
+
+主控基础实现：tests/test_cplus_demo_namespace.py、test_cplus_retired_gc.py、test_cplus_shared_budget.py + existing demo_auth/demo_gateway/showcase_local_launcher/runtime_startup：25PASS/5SWIG warnings，3.96s；root改动ruffPASS。曾ruff发现root新test的unused import和同行semicolon，已修并复跑；没有把该失败写成通过。
+
+experiments/cplus/gc_runtime_check.py实际OS+private HTTP synthetic fakechild三代PASS，evidence/M1-gc-runtime.json；无真实PDF/BGE/LLM/人签。清理仅新owned temp目录，原C14530/controller不动。新launcher--cplus --check与原.env/同一既有ledger只读准入PASS，20分钟/wait_only/14540，provider call0；模型配置只在backend，不印密钥。

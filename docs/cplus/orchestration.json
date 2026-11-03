@@ -6,28 +6,28 @@
   "sessions": [
     {
       "thread_id": "01a19f9d-a871-7520-aed9-dd6d22774d1a",
-      "task": "B01 M0 independent review",
-      "model": "gpt-6-astra",
-      "thinking": "ultra",
-      "branch": "codex/cplus-m0-review",
-      "status": "running"
+      "task": "M2 F01-F06 statements/profile/checkup",
+      "model": "gpt-6.1-sol",
+      "thinking": "high",
+      "branch": "codex/cplus-statements-v3",
+      "status": "in_progress"
     },
     {
       "thread_id": "01a19f9d-6c32-7ba2-a9c5-b8b708440c82",
-      "task": "B02 native React clickable UI",
-      "model": "gpt-6.1-terra",
+      "task": "M1 R01-R03 hybrid/OCR context/answer",
+      "model": "gpt-6.1-sol",
       "thinking": "high",
-      "branch": "codex/cplus-m0-ui",
-      "status": "candidate",
+      "branch": "codex/cplus-hybrid-ocr",
+      "status": "in_progress",
       "commit": "6ecb5ee"
     },
     {
       "thread_id": "01a19fa9-6671-7841-9393-46d2bced4e89",
-      "task": "D01 official access spike",
+      "task": "M1 D02-D05 dynamic discovery/public cache",
       "model": "gpt-6.1-sol",
       "thinking": "high",
-      "branch": "codex/cplus-source-spike",
-      "status": "running"
+      "branch": "codex/cplus-discovery-cache",
+      "status": "in_progress"
     }
   ],
   "provider_calls_owner": "root only",
@@ -41,5 +41,6 @@
     "FINANCE F01-F06",
     "RETRIEVAL R01-R03"
   ],
-  "root_model": "inherited, no claim of self model override"
+  "root_model": "inherited, no claim of self model override",
+  "m0_commit": "3c737327198a55b72d02490a981b5259cd164ffa"
 }

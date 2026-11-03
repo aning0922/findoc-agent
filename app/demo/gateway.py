@@ -141,8 +141,9 @@ async def proxy(request: Request, controller):
     mutating = request.method not in ("GET", "HEAD")
     rule = mutation_for(request.method, path) if mutating else None
     # Authenticate before revealing route registration or owner requirements.
-    handle = controller.capture(request.cookies.get("findoc_demo"), owner=bool(rule and rule.owner))
-    token, generation = request.cookies.get("findoc_demo"), handle.generation
+    cookie_name = getattr(controller, "cookie_name", "findoc_demo")
+    handle = controller.capture(request.cookies.get(cookie_name), owner=bool(rule and rule.owner))
+    token, generation = request.cookies.get(cookie_name), handle.generation
     if mutating and rule is None:
         reject(403, "mutation_not_allowed")
     body = await bounded_body(request)

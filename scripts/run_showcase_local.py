@@ -13,7 +13,6 @@ import secrets
 import shutil
 import signal
 import socket
-import sqlite3
 import stat
 import subprocess
 import sys
@@ -127,7 +126,7 @@ def ttl_minutes(config):
     return int(value)
 
 
-def environments(config, provider, seed, control, ledger, origin, backend_port, python, takeover):
+def environments(config, provider, seed, control, ledger, origin, backend_port, python, takeover, *, cplus=False):
     from app.demo.config import password_hash
 
     host = {k: os.environ[k] for k in HOST_KEYS if k in os.environ}
@@ -166,6 +165,10 @@ def environments(config, provider, seed, control, ledger, origin, backend_port, 
         "FINDOC_E2E_DISABLE_ENV_FILES": "1",
         "FINDOC_API_ORIGIN": f"http://127.0.0.1:{backend_port}",
     }
+    if cplus:
+        backend["FINDOC_CPLUS_ENABLED"] = "1"
+        frontend["VITE_FINDOC_CPLUS_MODE"] = "1"
+        frontend["VITE_FINDOC_SHOWCASE_PREVIEW_CHARTS"] = "0"
     return backend, frontend
 
 
@@ -197,6 +200,8 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--init-config", action="store_true")
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--cplus", action="store_true", help="Enable C+ modules without illustrative financial defaults")
+    parser.add_argument("--provider-budget-db", type=Path, help="Existing same-Git shared ledger; never creates an allowance")
     parser.add_argument("--config", type=Path, default=PROJECT / "data/showcase-local.env")
     parser.add_argument(
         "--llm-config",
@@ -207,7 +212,7 @@ def main(argv=None):
     parser.add_argument(
         "--control", type=Path, default=PROJECT / "data/showcase-local-controller-v1"
     )
-    parser.add_argument("--port", type=int, default=14530)
+    parser.add_argument("--port", type=int)
     parser.add_argument("--gateway-port", type=int, default=0)
     parser.add_argument("--python", default=sys.executable)
     parser.add_argument("--node", default=shutil.which("node"))
@@ -217,6 +222,10 @@ def main(argv=None):
         help="Enable takeover only with separate owner password",
     )
     args = parser.parse_args(argv)
+    if args.port is None:
+        args.port = 14540 if args.cplus else 14530
+    if args.provider_budget_db is not None and not args.provider_budget_db.is_absolute():
+        raise ValueError("shared_budget_requires_explicit_absolute_path")
     if not safe_path(args.config).is_relative_to(safe_path(PROJECT / "data")):
         raise ValueError("login_config_requires_integration_data")
     if args.init_config:
@@ -227,7 +236,7 @@ def main(argv=None):
 
     seed, control = safe_path(args.seed), safe_path(args.control)
     data = safe_path(PROJECT / "data")
-    ledger = safe_path(data / "showcase-cost-control/provider-budget.db")
+    ledger = safe_path(args.provider_budget_db or data / "showcase-cost-control/provider-budget.db")
     if (
         not seed.is_relative_to(data)
         or not control.is_relative_to(data)
@@ -249,12 +258,11 @@ def main(argv=None):
         raise ValueError("distinct_owner_password_required")
     provider = provider_values(args.llm_config, PROJECT) if args.llm_config else {}
     if provider:
-        # This entry consumes an existing root allowance, never creates a fresh budget.
-        if not ledger.is_file() or ledger.stat().st_nlink != 1:
-            raise ValueError("existing_shared_budget_required")
-        with sqlite3.connect(ledger.as_uri() + "?mode=ro", uri=True) as db:
-            if db.execute("SELECT cap FROM config WHERE id=1").fetchone() != ("5",):
-                raise ValueError("shared_budget_cap_mismatch")
+        from app.demo.shared_budget import existing_shared_budget
+
+        if args.cplus and args.provider_budget_db is None:
+            raise ValueError("cplus_requires_explicit_existing_shared_budget")
+        existing_shared_budget(ledger, PROJECT, forbidden_roots=(seed, control))
     manifest, digest = verify_seed(seed)
     python, node = shutil.which(args.python), shutil.which(args.node or "")
     if not python or not node or not (PROJECT / "frontend/node_modules/vite/bin/vite.js").is_file():
@@ -271,6 +279,7 @@ def main(argv=None):
         manifest_sha256=digest,
         llm="budgeted-deepseek-flash" if provider else "disabled",
         conflict_policy="owner-password-only" if args.owner_takeover else "wait_only",
+        cplus=args.cplus,
     )
     if args.check:
         print(json.dumps(summary))
@@ -303,6 +312,7 @@ def main(argv=None):
             gateway_port,
             python,
             args.owner_takeover,
+            cplus=args.cplus,
         )
         logfd = os.open(
             control / "launcher.log", os.O_CREAT | os.O_APPEND | os.O_WRONLY | os.O_NOFOLLOW, 0o600

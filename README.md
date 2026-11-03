@@ -1,3 +1,5 @@
+> **C+ 开发分支**：已从固定 C@45d55d7 独立启动 F19–F34，当前 M1/M2 开发中。进度与接口见 [C+ STATE](docs/cplus/STATE.md)、[42项任务](docs/cplus/TASK_BOARD.csv)、[C+本机入口](docs/cplus/RUN_LOCAL.md)。下方为原 C 候选介绍，不能视为 C+ 全部完成。**本轮必须复用原C的同一5元账本，不在新工作树初始化或复制额度。**
+
 # FinDoc Agent · 财报研究工作台
 
 **从企业年报到有来源的研究结论。** 选择资料、核对原文、确认研究计划，查看 Agent 分工，并将结果保存为版本报告。
@@ -78,7 +80,7 @@ uv run python scripts/run_showcase_local.py
 部署者首次明确采用本轮 5 元上限时，建立独立共享账本；同一路径已有账本不会清零或补充额度。以后直接复用，演示 reset 也不会补额度。
 
 ```bash
-uv run python -c 'from pathlib import Path; from app.demo.provider_budget import ProviderBudget; ProviderBudget(Path("data/showcase-cost-control/provider-budget.db").resolve(), "5")'
+# C+：禁止在新工作树创建另一份额度；按上方 C+ RUN_LOCAL.md 显式引用原账本。
 uv run python scripts/run_showcase_local.py --check --llm-config /绝对路径/.env
 uv run python scripts/run_showcase_local.py --llm-config /绝对路径/.env
 ```
