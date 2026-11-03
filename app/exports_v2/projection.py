@@ -12,6 +12,8 @@ SCHEMAS = {
     "checkup_v1": ("checkup-v1", "id"),
     "peer_comparison_v1": ("peer-comparison-v1", "result_id"),
     "research_answer_v1": ("cplus-research-answer-v1", "answer_id"),
+    "chart_report_v1": ("chart-report-v1", "report_id"),
+    "template_run_v1": ("template-run-v1", "run_id"),
 }
 
 
@@ -28,7 +30,14 @@ def project(ref, resolved):
     schema, id_key = SCHEMAS[ref["domain"]]
     if payload.get("schema_version") != schema or payload.get(id_key) != ref["id"]:
         raise ValueError("resolved_domain_or_id_mismatch")
-    if (payload.get("revision") if ref["domain"] == "showcase_report_v2" else 1) != ref["revision"]:
+    saved_revision = (
+        payload.get("revision", 1)
+        if ref["domain"] == "chart_report_v1"
+        else payload.get("revision")
+        if ref["domain"] == "showcase_report_v2"
+        else 1
+    )
+    if saved_revision != ref["revision"]:
         raise ValueError("resolved_revision_mismatch")
     if digest(payload) != ref["payload_sha256"]:
         raise ValueError("resolved_payload_hash_mismatch")
@@ -265,7 +274,8 @@ def project(ref, resolved):
             historical_snapshot=status != "current",
             saved_source_status=payload.get("source_status"),
             interpretation="\n".join(interpretations) or "未生成额外AI解释",
-            limitations=payload.get("limitations", []),
+            limitations=payload.get("limitations")
+            or (payload.get("snapshot") or {}).get("limitations", []),
             precision_policy="原始Decimal保持文本；缺值留空；不推断确认状态",
             workbook_view="右侧分组可展开技术列；长原文按excerpt_part拆行，CSV保留完整条目。",
             generated_at=generated_at,

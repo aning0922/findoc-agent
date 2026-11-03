@@ -198,7 +198,7 @@ def pptx(data):
     refs = list(unique.values())
 
     def cut(value, count):
-        text = str(value or "")
+        text = " ".join(str(value or "").split())
         return text if len(text) <= count else text[:count] + "…〔节选〕"
 
     def company(row):
@@ -287,6 +287,8 @@ def pptx(data):
         "checkup_v1": "财报体检",
         "research_answer_v1": "年报研究",
         "showcase_report_v2": "综合研究报告",
+        "chart_report_v1": "财务图表报告",
+        "template_run_v1": "研究模板结果",
     }
     s = slide(domain_titles.get(data["ref"]["domain"], "已保存研究"))
     names = " / ".join(v.get("name") or "企业名称未载明" for v in companies.values())
@@ -312,7 +314,12 @@ def pptx(data):
 
     chart_spec = data.get("chart")
     topics = payload.get("topics") or []
-    rules = payload.get("rules") or (payload.get("checkup") or {}).get("rules") or []
+    rules = (
+        payload.get("rules")
+        or payload.get("checkup_rules")
+        or (payload.get("checkup") or {}).get("rules")
+        or []
+    )
     if chart_spec:
         points = chart_spec["points"]
         s = slide(
@@ -413,7 +420,7 @@ def pptx(data):
             0.35,
             13,
         )
-        s = slide("可比范围与待核查事项")
+        s = slide("财报体检与待核查事项" if rules else "可比范围与待核查事项")
         lines = [
             f"{labels.get(c['metric_key'], c['metric_key'])}："
             + (
@@ -426,6 +433,26 @@ def pptx(data):
             + (f"（{c['reason']}）" if c.get("reason") else "")
             for c in payload.get("comparisons", [])
         ]
+        if rules:
+            lines = [
+                f"{rules_labels.get(r['rule_id'], r['rule_id'])}："
+                + (
+                    {
+                        "direction_diverges": "变化方向不同",
+                        "no_direction_divergence": "未发现方向分化",
+                    }.get(
+                        r.get("observation"),
+                        str(r["observation"]) if r.get("observation") is not None else "数据不足",
+                    )
+                )
+                + (
+                    " 个百分点"
+                    if r.get("unit") == "PERCENTAGE_POINTS" and r.get("observation") is not None
+                    else ""
+                )
+                + f"\n状态：{r.get('status')} · {r.get('reason') or '见所选输入'}\n"
+                for r in rules[:3]
+            ]
         box(
             s,
             "\n".join(lines[:6])
@@ -519,7 +546,7 @@ def pptx(data):
             1.6,
             23,
         )
-        s = slide("财报体检规则" if rules else "已保存研究发现")
+        s = slide("财报体检规则" if rules else "已保存原文发现 · 节选")
         if rules:
             lines = []
             for r in rules[:3]:
@@ -542,14 +569,25 @@ def pptx(data):
             findings = (
                 payload.get("findings") or (payload.get("snapshot") or {}).get("findings") or []
             )
+            excerpts = [f for f in findings if f.get("kind") != "model_interpretation"]
             box(
                 s,
-                "\n\n".join(cut(f.get("text"), 150) for f in findings[:3]) or "快照未附研究发现。",
+                "\n\n".join(cut(f.get("text"), 180) for f in excerpts[:2])
+                or "快照未附原文发现；已保存解释见后续页。",
                 0.8,
                 1.5,
                 11.6,
-                4.7,
+                4.4,
                 21,
+            )
+            box(
+                s,
+                f"展示 {min(2, len(excerpts))} / {len(excerpts)} 条原文发现；完整内容见保存报告和表格导出。",
+                0.8,
+                6.15,
+                11.6,
+                0.3,
+                12,
             )
         s = slide("原文证据与转录状态")
         box(
@@ -563,7 +601,6 @@ def pptx(data):
             22,
         )
 
-    s = slide("已保存的 AI 解释 · 待审阅")
     explanations = []
     if payload.get("interpretation"):
         explanations.append(payload["interpretation"])
@@ -577,19 +614,41 @@ def pptx(data):
     explanations.extend(
         f["text"] for f in findings if f.get("kind") == "model_interpretation" and f.get("text")
     )
-    box(
-        s,
-        "\n\n".join(cut(t, 150 if len(explanations) > 1 else 450) for t in explanations[:3])
-        or "该快照没有已保存的 AI 解释。\n本次导出没有调用模型或补充推断。",
-        0.8,
-        1.55,
-        11.6,
-        4.8,
-        21,
-    )
+    pages = [explanations[i : i + 3] for i in range(0, len(explanations), 3)] or [[]]
+    pages = pages[: max(1, 7 - len(prs.slides))]  # Reserve the eighth slide for sources.
+    for index, entries in enumerate(pages):
+        s = slide(
+            "已保存的 AI 解释 · 待审阅"
+            + (f"（{index + 1}/{len(pages)}）" if len(pages) > 1 else "")
+        )
+        box(
+            s,
+            "\n\n".join(cut(t, 150 if len(entries) > 1 else 450) for t in entries)
+            or "该快照没有已保存的 AI 解释。\n本次导出没有调用模型或补充推断。",
+            0.8,
+            1.55,
+            11.6,
+            4.55,
+            21,
+        )
+        if len(explanations) > sum(len(p) for p in pages):
+            box(
+                s,
+                f"求职版展示 {sum(len(p) for p in pages)} / {len(explanations)} 条解释；完整内容见保存报告及表格导出。",
+                0.8,
+                6.2,
+                11.6,
+                0.35,
+                12,
+            )
     s = slide("来源与后续核查")
     source_lines = [source_text([e]) for e in refs[:5]]
-    limitations = [cut(x, 90) for x in payload.get("limitations", [])[:2]]
+    limitations = [
+        cut(x, 150)
+        for x in (
+            payload.get("limitations") or (payload.get("snapshot") or {}).get("limitations", [])
+        )[:2]
+    ]
     box(
         s,
         "\n".join(source_lines + limitations) or "此快照未附具体来源；请回到研究结果核查。",

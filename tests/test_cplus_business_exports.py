@@ -186,7 +186,8 @@ def test_native_business_chart_and_annual_explanation(tmp_path):
     )
 
 
-def test_checkup_rules_and_saved_findings_present_without_financial_invention(tmp_path):
+@pytest.mark.parametrize("domain", ["checkup_v1", "template_run_v1"])
+def test_checkup_rules_and_saved_findings_present_without_financial_invention(tmp_path, domain):
     from pathlib import Path
 
     payload = dict(
@@ -203,7 +204,11 @@ def test_checkup_rules_and_saved_findings_present_without_financial_invention(tm
         ],
         findings=[dict(kind="model_interpretation", text="保存时的待审解释，不产生新结论。")],
     )
-    ref = dict(domain="checkup_v1", id="checkup", revision=1, payload_sha256=digest(payload))
+    if domain == "template_run_v1":
+        payload["schema_version"] = "template-run-v1"
+        payload["run_id"] = payload.pop("id")
+        payload["checkup_rules"] = payload.pop("rules")
+    ref = dict(domain=domain, id="checkup", revision=1, payload_sha256=digest(payload))
     data = project(ref, dict(snapshot=payload, display_status="stale"))
     assert data["chart"] is None
     assert len([e for e in data["evidence"] if e.get("kind") == "saved_checkup_rule"]) == 3
@@ -238,3 +243,41 @@ def test_year_trend_does_not_mix_quarter_and_full_year():
     assert project(ref, resolved)["chart"]["kind"] == "line"
     points[1]["time"]["period_end"] = "2024-03-31"
     assert project({**ref, "payload_sha256": digest(payload)}, resolved)["chart"] is None
+
+
+@pytest.mark.parametrize(
+    "domain,schema,id_key",
+    [
+        ("chart_report_v1", "chart-report-v1", "report_id"),
+        ("template_run_v1", "template-run-v1", "run_id"),
+    ],
+)
+def test_chart_and_template_domain_contract(domain, schema, id_key):
+    resolved, _ = fixture()
+    points = deepcopy(resolved["snapshot"]["comparisons"][0]["points"])
+    points[1]["company_id"] = "a"
+    points[1]["time"] = dict(kind="duration", period_start="2024-01-01", period_end="2024-12-31")
+    payload = dict(
+        schema_version=schema,
+        financial_points=points,
+        selected_sources=[],
+        checkup_rules=[
+            dict(rule_id="cash_profit_divergence", observation=None, status="insufficient")
+        ],
+        findings=[],
+        interpretation="已保存待审解释",
+        **{id_key: "new-domain"},
+    )
+    resolved["snapshot"] = payload
+    ref = dict(domain=domain, id="new-domain", revision=1, payload_sha256=digest(payload))
+    result = project(ref, resolved)
+    assert len(result["financial"]) == 2 and result["chart"]["kind"] == "line"
+    assert any(e.get("kind") == "saved_checkup_rule" for e in result["evidence"])
+    assert (
+        next(r["value"] for r in result["overview"] if r["field"] == "interpretation")
+        == "已保存待审解释"
+    )
+    with pytest.raises(ValueError, match="resolved_revision_mismatch"):
+        project({**ref, "revision": 2}, resolved)
+    with pytest.raises(ValueError, match="resolved_domain_or_id_mismatch"):
+        project({**ref, "id": "other"}, resolved)
