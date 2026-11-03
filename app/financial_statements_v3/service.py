@@ -41,9 +41,12 @@ class StatementService:
                     "ATTACH DATABASE ? AS source_db",
                     ((self.root / "documents.db").as_uri() + "?mode=ro",),
                 )
+            db.execute("BEGIN" if source else "BEGIN IMMEDIATE")
+            if source:
+                # BEGIN alone holds no source SHARED lock. Read before checking journal.
+                db.execute("SELECT name FROM source_db.sqlite_master LIMIT 1").fetchall()
                 if db.execute("PRAGMA source_db.journal_mode").fetchone()[0].lower() == "wal":
                     raise FinanceError("wal_source_fence_unsupported", 503)
-            db.execute("BEGIN" if source else "BEGIN IMMEDIATE")
             yield db
             if authorization is not None:
                 self.owner(authorization)

@@ -38,6 +38,7 @@ class HybridRetrievalService:
         identity_validator=None,
         publication_guard=None,
         parent_validator=None,
+        before_commit=None,
     ):
         self.root = Path(runtime_root).resolve()
         if sources.documents._repository._database_path.resolve() != self.root / "documents.db":
@@ -58,6 +59,7 @@ class HybridRetrievalService:
             publication_guard,
             parent_validator,
         )
+        self.before_commit = before_commit
         self.path = self.root / "cplus-research.db"
         with self.tx() as db:
             db.executescript("""CREATE TABLE IF NOT EXISTS objects(id TEXT PRIMARY KEY,kind TEXT,owner TEXT,payload TEXT);
@@ -69,15 +71,31 @@ class HybridRetrievalService:
         self.path.chmod(0o600)
 
     @contextmanager
-    def tx(self):
+    def tx(self, *, before_commit=None):
         db = sqlite3.connect(self.path, timeout=5)
         db.row_factory = sqlite3.Row
         try:
             db.execute("BEGIN IMMEDIATE")
             with db:
                 yield db
+                if before_commit is not None:
+                    before_commit()
         finally:
             db.close()
+
+    def commit_check(self, identity):
+        """Synchronous controller identity check inside our write transaction, before COMMIT."""
+        if self.before_commit is None:
+            raise RetrievalError("before_commit_required", 503)
+        if identity.expires_at <= time.time():
+            raise RetrievalError("lease_expired", 401)
+        value = self.before_commit(identity)
+        if inspect.isawaitable(value):
+            if inspect.iscoroutine(value):
+                value.close()
+            raise RetrievalError("synchronous_commit_check_required", 503)
+        if value is False or identity.expires_at <= time.time():
+            raise RetrievalError("identity_rejected_at_commit", 403)
 
     async def authorize(self, identity):
         if self.identity_validator is None or identity.expires_at <= time.time():
@@ -186,28 +204,43 @@ class HybridRetrievalService:
             )
         return evidence
 
-    async def build(self, refs):
+    async def prepare_build(self, refs):
         if not 1 <= len(refs) <= 4:
             raise RetrievalError("source_limit", 422)
         batches = [(r, await self.records(r)) for r in refs]
         if sum(len(v) for _, v in batches) > 6000:
             raise RetrievalError("index_budget_exceeded", 422)
-        with self.tx() as db:
-            for r, records in batches:
-                key = sha(r.model_dump())
-                db.execute("DELETE FROM passages WHERE source_key=?", (key,))
-                db.executemany(
-                    "INSERT INTO passages VALUES (?,?,?)",
-                    [(key, e.model_dump_json(), e.text) for e in records],
-                )
-                db.execute(
-                    "INSERT OR REPLACE INTO manifests VALUES (?,?)", (key, r.model_dump_json())
-                )
+        return batches
+
+    def write_build(self, db, batches):
+        for ref, records in batches:
+            key = sha(ref.model_dump())
+            db.execute("DELETE FROM passages WHERE source_key=?", (key,))
+            db.executemany(
+                "INSERT INTO passages VALUES (?,?,?)",
+                [(key, e.model_dump_json(), e.text) for e in records],
+            )
+            db.execute(
+                "INSERT OR REPLACE INTO manifests VALUES (?,?)", (key, ref.model_dump_json())
+            )
+
+    def build_result(self, batches):
         return dict(
             state="completed",
             indexed_passages=sum(len(v) for _, v in batches),
             embedding_model_version=self.model_version,
         )
+
+    async def build(self, refs, *, identity):
+        await self.authorize(identity)
+        self.commit_check(identity)
+        if self.guard is None:
+            raise RetrievalError("publication_guard_required", 503)
+        batches = await self.prepare_build(refs)
+        with self.guard(identity, dict(selected_sources=[r.model_dump() for r in refs])):
+            with self.tx(before_commit=lambda: self.commit_check(identity)) as db:
+                self.write_build(db, batches)
+        return self.build_result(batches)
 
     async def search(self, refs, query, top_k=5, *, _legacy=False):
         if not 1 <= len(refs) <= 4 or not query.strip() or len(query) > 2000 or not 1 <= top_k <= 5:
@@ -358,13 +391,13 @@ class HybridRetrievalService:
             result=json.loads(row["result"]) if row["result"] else None,
         )
 
-    def reserve(self, op, owner, body):
+    def reserve(self, op, owner, body, *, before_commit):
         try:
             if str(UUID(op)) != op:
                 raise ValueError()
         except (TypeError, ValueError, AttributeError):
             raise RetrievalError("invalid_operation", 422) from None
-        with self.tx() as db:
+        with self.tx(before_commit=before_commit) as db:
             old = db.execute("SELECT * FROM operations WHERE id=?", (op,)).fetchone()
             if old:
                 if old["owner"] != owner or old["digest"] != sha(body):
@@ -393,12 +426,19 @@ class HybridRetrievalService:
 
     async def mutate(self, kind, body, identity):
         owner = await self.authorize(identity)
-        if not self.reserve(body["operation_id"], owner, dict(kind=kind, **body)):
+        self.commit_check(identity)
+        if not self.reserve(
+            body["operation_id"],
+            owner,
+            dict(kind=kind, **body),
+            before_commit=lambda: self.commit_check(identity),
+        ):
             return self.operation(body["operation_id"], owner)
         if self.guard is None:
             raise RetrievalError("publication_guard_required", 503)
         identifier = str(uuid4())
         context = None
+        build_batches = None
         if kind == "enrollment":
             if body["confirmed"] is not True:
                 raise RetrievalError("explicit_confirmation_required", 422)
@@ -523,11 +563,11 @@ class HybridRetrievalService:
             )
         elif kind in ("build", "search"):
             refs = [SourceRef.model_validate(r) for r in body["sources"]]
-            payload = (
-                await self.build(refs)
-                if kind == "build"
-                else await self.search(refs, body["query"], body["top_k"])
-            )
+            if kind == "build":
+                build_batches = await self.prepare_build(refs)
+                payload = self.build_result(build_batches)
+            else:
+                payload = await self.search(refs, body["query"], body["top_k"])
             payload.pop("_raw", None)
         else:
             raise RetrievalError("unknown_action", 422)
@@ -538,7 +578,9 @@ class HybridRetrievalService:
             or body.get("sources", [])
         )
         with self.guard(identity, fence):
-            with self.tx() as db:
+            with self.tx(before_commit=lambda: self.commit_check(identity)) as db:
+                if build_batches is not None:
+                    self.write_build(db, build_batches)
                 db.execute(
                     "INSERT INTO objects VALUES (?,?,?,?)",
                     (identifier, kind, owner, canonical(payload)),

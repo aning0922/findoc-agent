@@ -1,4 +1,7 @@
 import asyncio
+import time
+from contextlib import nullcontext
+from app.retrieval_v2 import TrustedIdentity
 from app.retrieval_v2 import HybridRetrievalService, SourceRef
 from tests.test_document_sources import Harness
 from app.rag.retriever import SearchHit
@@ -29,8 +32,23 @@ def test_lexical_only_never_fakes_cosine(tmp_path):
                 )
             },
         )
-        service = HybridRetrievalService(tmp_path, h.service, None, None)
-        await service.build([ref])
+        service = HybridRetrievalService(
+            tmp_path,
+            h.service,
+            None,
+            None,
+            identity_validator=lambda i: None,
+            publication_guard=lambda i, c: nullcontext(),
+            before_commit=lambda i: None,
+        )
+        identity = TrustedIdentity(
+            workspace_id="demo",
+            instance_id="test",
+            generation=1,
+            principal_id="test",
+            expires_at=time.time() + 100,
+        )
+        await service.build([ref], identity=identity)
         r = await service.search([ref], "Example report")
         assert r["items"] and all(c["dense_cosine"] is None for c in r["items"])
         assert await service.legacy_fast_adapter([ref], "Example report") == ()

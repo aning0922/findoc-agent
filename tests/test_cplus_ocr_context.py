@@ -32,6 +32,7 @@ def test_ocr_enrollment_context_immutable_answer_and_parent_delete(tmp_path):
         provider_once=provider,
         identity_validator=lambda i: None,
         publication_guard=lambda i, c: nullcontext(),
+        before_commit=lambda i: None,
         parent_validator=parent,
     )
     identity = TrustedIdentity(
@@ -73,7 +74,7 @@ def test_ocr_enrollment_context_immutable_answer_and_parent_delete(tmp_path):
         )["result"]
         from app.retrieval_v2.models import SourceRef
 
-        await service.build([SourceRef.model_validate(ref)])
+        await service.build([SourceRef.model_validate(ref)], identity=identity)
         body = dict(
             operation_id=str(uuid4()),
             context_id=context["context_id"],
@@ -112,6 +113,7 @@ def test_provider_unknown_is_not_replayed(tmp_path):
         provider_once=provider,
         identity_validator=lambda i: None,
         publication_guard=lambda i, c: nullcontext(),
+        before_commit=lambda i: None,
     )
     identity = TrustedIdentity(
         workspace_id="demo",
@@ -146,7 +148,7 @@ def test_provider_unknown_is_not_replayed(tmp_path):
         )["result"]
         from app.retrieval_v2 import SourceRef
 
-        await service.build([SourceRef.model_validate(e["source_ref"])])
+        await service.build([SourceRef.model_validate(e["source_ref"])], identity=identity)
         b = dict(
             operation_id=str(uuid4()),
             context_id=c["context_id"],
