@@ -32,6 +32,15 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
                                                 'parser_version','report_year','attempt','report_type',
                                                 'basis','period_start','period_end')}).model_dump()
 
+    def intermediate_template_answer(identifier,owner):
+        templates=getattr(app.state,'cplus_template_service',None)
+        if templates is None:
+            return False
+        return bool(rows(templates.store.path,
+            "SELECT 1 FROM children c JOIN operations o ON o.id=c.parent "
+            "WHERE o.owner=? AND c.label='explanation-once' AND c.state='completed' AND c.result_ref=?",
+            (owner,identifier)))
+
     async def resolve(domain,identifier,revision,expected_sha,identity):
         validate(identity)
         owner=await hybrid.authorize(identity)
@@ -70,6 +79,8 @@ def register_exports(app,root,*,hybrid,annual,peer,statements,identity_provider,
             fence={'selected_sources':snapshot['selected_sources'],
                    'memory_generation':snapshot.get('memory_generation')}
         elif domain=='research_answer_v1':
+            if intermediate_template_answer(identifier,owner):
+                raise RetrievalError('template_child_is_not_report',409)
             if revision!=1:
                 raise RetrievalError('export_revision_mismatch')
             snapshot=hybrid.read('answer',identifier,owner)
