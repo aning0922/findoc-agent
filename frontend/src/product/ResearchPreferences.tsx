@@ -40,6 +40,7 @@ export function ResearchPreferences({ candidate }: { candidate?: MemoryCandidate
       if (c.signal.aborted) return;
       storePendingMemory(sessionStorage, null); setPending(null); setEditing(null); setDeleting(null);
       setNotice(memoryOperationNotice(receipt));
+      window.dispatchEvent(new Event('findoc-preferences-updated'));
       // A tombstone never carries a value. Remove any stale list/editor before
       // reading current items, so a failed list GET cannot revive old content.
       if (receipt.resource_deleted) { setItems(old => old.filter(i => i.memory_id !== receipt.memory_id)); setLoaded(false); }
@@ -73,6 +74,7 @@ export function ResearchPreferences({ candidate }: { candidate?: MemoryCandidate
       if (c.signal.aborted) return;
       storePendingMemory(sessionStorage, null); setPending(null); setEditing(null); setDeleting(null);
       setNotice(completedReceipt.resource_deleted ? memoryOperationNotice(completedReceipt) : '研究偏好已明确保存。');
+      window.dispatchEvent(new Event('findoc-preferences-updated'));
       if (completedReceipt.resource_deleted) { setItems(old => old.filter(i => i.memory_id !== completedReceipt.memory_id)); setLoaded(false); }
       const v = await listMemories(c.signal); if (!c.signal.aborted) { setItems(v.items); setLoaded(true); }
     } catch (e) {
@@ -100,8 +102,8 @@ export function ResearchPreferences({ candidate }: { candidate?: MemoryCandidate
         <button disabled={busy || !!pending} onClick={() => { setDeleting(item); setEditing(null); }}>删除{preferenceKeys[item.key]}</button></div></section>)}
     {deleting ? <section><p>确认删除“{preferenceKeys[deleting.key]}：{preferenceValues[deleting.key][deleting.value]}”？</p><button disabled={busy || !!pending} onClick={() => void write('delete_memory')}>确认删除偏好</button><button disabled={busy} onClick={() => setDeleting(null)}>取消删除</button></section>
       : loaded && <fieldset disabled={busy || !!pending}><legend>{editing ? '修改研究偏好' : candidate ? '确认建议的研究偏好' : '新增研究偏好'}</legend>
-        <label className={styles.filter}>偏好类型<select value={key} disabled={!!editing} onChange={e => { const k = e.target.value as MemoryKey; setKey(k); setValue(Object.keys(preferenceValues[k])[0]); }}>{Object.entries(preferenceKeys).map(([k, label]) => <option key={k} value={k}>{label}</option>)}</select></label>
-        <label className={styles.filter}>偏好内容<select value={value} onChange={e => setValue(e.target.value)}>{Object.entries(preferenceValues[key]).map(([v, label]) => <option key={v} value={v}>{label}</option>)}</select></label>
+        <label className={styles.filter}>偏好类型<select aria-label="偏好类型" value={key} disabled={!!editing} onChange={e => { const k = e.target.value as MemoryKey; setKey(k); setValue(Object.keys(preferenceValues[k])[0]); }}>{Object.entries(preferenceKeys).map(([k, label]) => <option key={k} value={k}>{label}</option>)}</select></label>
+        <label className={styles.filter}>偏好内容<select aria-label="偏好内容" value={value} onChange={e => setValue(e.target.value)}>{Object.entries(preferenceValues[key]).map(([v, label]) => <option key={v} value={v}>{label}</option>)}</select></label>
         <button disabled={!validPreference(key, value) || !editing && items.some(i => i.key === key)} onClick={() => void write(editing ? 'update_memory' : 'create_memory')}>{editing ? '确认修改偏好' : '保存偏好'}</button>
         {editing && <button onClick={() => setEditing(null)}>取消编辑</button>}
         {!editing && items.some(i => i.key === key) && <p>此类偏好已存在，请使用对应条目的编辑入口。</p>}

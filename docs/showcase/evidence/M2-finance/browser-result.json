@@ -1,0 +1,18 @@
+{
+  "evidence": "REAL_CHROMIUM_HTTP_REAL_OFFICIAL_PDF_STORED_FAST_EVIDENCE",
+  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+  "candidate_count": 4,
+  "metrics": [
+    "total_assets",
+    "total_liabilities"
+  ],
+  "as_of_dates": [
+    "2025-01-01",
+    "2025-12-31"
+  ],
+  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+  "human_financial_approvals": 0,
+  "llm_calls": 0,
+  "browser_errors": [],
+  "confirmed_chart_positive_path": "human_pending"
+}

@@ -192,6 +192,7 @@
 }
 .upload {
   display: grid;
+  min-width: 0;
   gap: 16px;
   background: #fff;
   border: 1px solid #dce4ef;
@@ -225,6 +226,7 @@
   gap: 16px;
 }
 .documentRow {
+  min-width: 0;
   border-top: 1px solid #e3e9f0;
   padding: 16px 0;
   overflow-wrap: anywhere;

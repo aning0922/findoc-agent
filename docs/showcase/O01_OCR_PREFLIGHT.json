@@ -1,0 +1,33 @@
+{
+  "status": "real_ocr_executed",
+  "engine": "Apple Vision VNRecognizeTextRequest",
+  "request_revision": 3,
+  "model_revision": "not_exposed_by_framework",
+  "os_version": "Version 26.6.2 (Build 25G83)",
+  "elapsed_seconds": 0.740697979927063,
+  "line_count": 68,
+  "table_line_count": 35,
+  "derived_row_count": 8,
+  "financial_approval": "candidate_only_no_human_receipt",
+  "source_pdf_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+  "source_physical_page": 9,
+  "source_display_page": 8,
+  "input_derivation": "Public text PDF page rasterized at180DPI into an image-only PDF; not an original scanned filing. OCR receives only rendered image.",
+  "image_sha256": "fc44b9496197870a1695e667b8aae2533b280fe0992d7fac45aace8b0fc0cc20",
+  "scan_pdf_sha256": "175235d1122aec489a6c943ec8c1f8f9fcb5ffdd0e75f938f5ce6080c8ed163a",
+  "scan_text_layer_characters": 0,
+  "table_bounds_points": [
+    57.03458836499382,
+    592.8624877929688,
+    537.8702430725098,
+    763.4699935913086
+  ],
+  "table_numeric_string_matches": 27,
+  "table_numeric_string_total": 27,
+  "limitations": [
+    "Apple Vision macOS-only, portable OCR worker still required for Linux.",
+    "Rows from OCR bbox clustering are preview candidates; merged cells/financial correctness not accepted.",
+    "Programmatically extracted PDF text used only after OCR for diagnostic comparison, never passed to engine.",
+    "OCR bbox clustering produced 8 preview rows; multiline labels are not a verified table grid. Do not claim table-structure acceptance."
+  ]
+}

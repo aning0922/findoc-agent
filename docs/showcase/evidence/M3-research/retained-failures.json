@@ -1,0 +1,111 @@
+[
+  {
+    "environment": "findoc-integrated-http-itpvuafs",
+    "status": "FAIL_RETAINED",
+    "failure": "Error: synthesis must publish verified completed job; partial/null",
+    "cost": {
+      "cap_cny": "5",
+      "calls": 4,
+      "conservative_reserved_cny": "0.050812",
+      "usage_reported_calls": 4,
+      "input_tokens": 1329,
+      "output_tokens": 216,
+      "unknown_calls": 0,
+      "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+      "actual_billed_cny": "not_observed"
+    },
+    "job_states": [
+      [
+        "synthesis",
+        "partial"
+      ]
+    ]
+  },
+  {
+    "environment": "findoc-integrated-http-a9fzhdpi",
+    "status": "FAIL_RETAINED",
+    "failure": "Error: synthesis must publish verified completed job; partial/null",
+    "cost": {
+      "cap_cny": "5",
+      "calls": 7,
+      "conservative_reserved_cny": "0.096946",
+      "usage_reported_calls": 7,
+      "input_tokens": 2650,
+      "output_tokens": 431,
+      "unknown_calls": 0,
+      "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+      "actual_billed_cny": "not_observed"
+    },
+    "job_states": [
+      [
+        "synthesis",
+        "partial"
+      ]
+    ]
+  },
+  {
+    "environment": "findoc-integrated-http-xbmgu4zf",
+    "status": "FAIL_RETAINED",
+    "failure": "Error: synthesis must publish verified completed job; partial/null",
+    "cost": {
+      "cap_cny": "5",
+      "calls": 12,
+      "conservative_reserved_cny": "0.168192",
+      "usage_reported_calls": 12,
+      "input_tokens": 4962,
+      "output_tokens": 775,
+      "unknown_calls": 0,
+      "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+      "actual_billed_cny": "not_observed"
+    },
+    "job_states": [
+      [
+        "synthesis",
+        "partial"
+      ]
+    ]
+  },
+  {
+    "environment": "findoc-integrated-http-mt2qfoxp",
+    "status": "FAIL_RETAINED",
+    "failure": "Error: deep must publish verified completed job; partial/null",
+    "cost": {
+      "cap_cny": "5",
+      "calls": 22,
+      "conservative_reserved_cny": "0.361208",
+      "usage_reported_calls": 22,
+      "input_tokens": 14974,
+      "output_tokens": 2929,
+      "unknown_calls": 0,
+      "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+      "actual_billed_cny": "not_observed"
+    },
+    "job_states": [
+      [
+        "synthesis",
+        "completed"
+      ],
+      [
+        "deep",
+        "partial"
+      ]
+    ]
+  },
+  {
+    "environment": "findoc-integrated-http-dz3qer91",
+    "status": "FAIL_RETAINED",
+    "failure": "TimeoutError: locator.fill: Timeout 45000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.sr-workflow').getByLabel('研究问题', { exact: true })\u001b[22m\n",
+    "cost": {
+      "cap_cny": "5",
+      "calls": 33,
+      "conservative_reserved_cny": "0.599982",
+      "usage_reported_calls": 33,
+      "input_tokens": 28820,
+      "output_tokens": 4281,
+      "unknown_calls": 0,
+      "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+      "actual_billed_cny": "not_observed"
+    },
+    "job_states": []
+  }
+]

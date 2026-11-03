@@ -1,0 +1,21 @@
+{
+  "evidence": "REAL_CHROMIUM_TWO_PROCESSES_REAL_HTTP_REAL_BGE_MILVUS_SYNTHETIC_SEED",
+  "checks": [
+    "three-width login/home no overflow",
+    "pending cookie via Vite /api",
+    "legacy mutation envelope",
+    "same verified lease hard reload preserves UNKNOWN hint",
+    "actual CSS hero contrast",
+    "explicit illustrative chart route",
+    "second browser conflict and explicit owner takeover",
+    "new generation restores seed",
+    "old browser HTTP401 and UI unmount",
+    "logout resets"
+  ],
+  "first_generation": 1,
+  "next_generation": 2,
+  "llm_calls": 0,
+  "real_pdfs": 0,
+  "human_financial_approvals": 0,
+  "browser_errors": []
+}

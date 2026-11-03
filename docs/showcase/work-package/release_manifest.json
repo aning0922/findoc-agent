@@ -1,0 +1,172 @@
+{
+  "package": "FinDoc Agent C / Interview Showcase Complete",
+  "date": "2026-11-03",
+  "repo": "aning0922/findoc-agent",
+  "base_branch": "codex/conversation-memory-v12-20261102",
+  "base_sha_at_review": "c8be30808a3ac8c6d13daa5fd9d43c0ea1212c78",
+  "replacement_of": "FinDoc_C_方案_托管开发完整工作包_20261103.zip",
+  "deliverables": {
+    "features": 18,
+    "tasks": 36,
+    "docs": 15,
+    "html_prototype": true,
+    "prototype_is_mock": true
+  },
+  "files": [
+    {
+      "path": "00_目标_基线_边界.md",
+      "bytes": 4967,
+      "sha256": "07cbc5806d209d4a2a1893090cbbb82dbd33673e0bb86b8612b6ff0bd94ef969"
+    },
+    {
+      "path": "01_功能全景_完整规格.md",
+      "bytes": 10978,
+      "sha256": "2b63ad06a797f1cba8397e23540c82639d1ea91248df24509d9c7e9bd9599886"
+    },
+    {
+      "path": "02_首页_视觉系统_图表.md",
+      "bytes": 8428,
+      "sha256": "8c6d88d6e1a07c21bb7a323cd3c407d00d347d11f319fe0dfc31086fbad25de8"
+    },
+    {
+      "path": "03_演示登录_独占接管_重置.md",
+      "bytes": 9908,
+      "sha256": "171149cbe566eed5b55654530684afcae945292d0515560f0c0b32a99ab6bead"
+    },
+    {
+      "path": "04_信息架构_页面流程.md",
+      "bytes": 6170,
+      "sha256": "7e0807f29512369c704a7e565f4fba7f19bcb4c1a2407916d177a28cb9ef3cd7"
+    },
+    {
+      "path": "05_AI对话_多Agent_记忆_研究.md",
+      "bytes": 8894,
+      "sha256": "53c4ac8b6e995ea3ac383cfbe8562b822bbe270056b93aff3b03bc038ea5c12a"
+    },
+    {
+      "path": "06_财报获取_OCR_财务_报告.md",
+      "bytes": 6453,
+      "sha256": "f264a6cb7d7d878cd9da86ec84205bf188464c36adfa8b1495d07cb93a149d72"
+    },
+    {
+      "path": "07_架构_数据结构_API合同.md",
+      "bytes": 8031,
+      "sha256": "d05df129bf16adbad43f982f50566dad0705662232106de1eb4cbb57bb9bc5ea"
+    },
+    {
+      "path": "08_任务WBS_依赖与交付.md",
+      "bytes": 35002,
+      "sha256": "e4b94502d02a0913d5c6ad72d375c60d4118db7277ba7be71dbcb871d833128b"
+    },
+    {
+      "path": "09_里程碑_托管并行.md",
+      "bytes": 6762,
+      "sha256": "0ac8108460586b65e6ef35de262308cd311385511fa17eb55d39f47b6419e46b"
+    },
+    {
+      "path": "10_演示种子_测试_验收.md",
+      "bytes": 6859,
+      "sha256": "24e60a3fe8b5d2774117ee810aae4d1b5641cd6f7dd20af159fe0e967c5d737b"
+    },
+    {
+      "path": "11_求职展示_演示脚本.md",
+      "bytes": 3971,
+      "sha256": "76bab30ad9f7793d0098af4b7a269faf1caba0af4c7cd717f1b47c3d496417ec"
+    },
+    {
+      "path": "12_风险_降级_资源.md",
+      "bytes": 4350,
+      "sha256": "05798453efb4c2d22a6ab6d3b6b1627e33c872c43ed0bf799b662d4ab95ee94f"
+    },
+    {
+      "path": "13_Codex主控开场指令.md",
+      "bytes": 7624,
+      "sha256": "c76f238d94dce2f46f2fb54f5f3e829a373a902220889ddc65d20cf1c24c8da8"
+    },
+    {
+      "path": "14_源代码映射_核验资料.md",
+      "bytes": 4379,
+      "sha256": "b15f12bfd3bf19647d8f865e8642d0c6c2e9a99921d15e566685c6a164c51bca"
+    },
+    {
+      "path": "CODEX_START_HERE.txt",
+      "bytes": 824,
+      "sha256": "84f33c6ab21ae779a12230f657427af1363c06c0e750a12af406ecac18fe9621"
+    },
+    {
+      "path": "FinDoc_C_完整工作包_单文件版.md",
+      "bytes": 133898,
+      "sha256": "6941c83eaf0a9196bab566025a0a2c2d75d556a96f63ed9db7ba3ae1010b2b30"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3656,
+      "sha256": "f341fe79eb9f7c115149434ee55a4f2c5c80cf67182cbe55ac46343b64f107a1"
+    },
+    {
+      "path": "data/feature_inventory.csv",
+      "bytes": 920,
+      "sha256": "39f9c089f8333a50d37ca12c7f483b10949aa6026182350d0161b11473f73257"
+    },
+    {
+      "path": "data/prototype_validation.json",
+      "bytes": 950,
+      "sha256": "05e7e5f1f8d6c3545d5628c1e13ab88b3f8f22c3296a5de8cc86c3f57df41181"
+    },
+    {
+      "path": "data/task_board.csv",
+      "bytes": 10771,
+      "sha256": "f70dbe4e5b5ea23c2a32fc7024d9b6b5bed613ccbe395290ac2591362f995fe0"
+    },
+    {
+      "path": "templates/DECISION_LOG_TEMPLATE.md",
+      "bytes": 268,
+      "sha256": "7e277ff602c3db15ffe70a714e4a1b0955d468a6d90500fba57d619bb30ec8a2"
+    },
+    {
+      "path": "templates/EVIDENCE_TEMPLATE.md",
+      "bytes": 388,
+      "sha256": "966a465b1c3649a1a56c2fd5eafecbf023fdb614447f3d1b4e2326e98288acf1"
+    },
+    {
+      "path": "templates/KNOWN_ISSUES_TEMPLATE.md",
+      "bytes": 278,
+      "sha256": "e18f827b62aa3270a319285ed8c6d5c5bc6cd6c9ee980b3170563eb598ff1f02"
+    },
+    {
+      "path": "templates/STATE_TEMPLATE.md",
+      "bytes": 406,
+      "sha256": "4c7cad55569525efcd1637206884ecc8899fd41a7f84890765fe01a0a82ff378"
+    },
+    {
+      "path": "templates/TASK_HANDOFF_TEMPLATE.md",
+      "bytes": 522,
+      "sha256": "aabd6385b74fdc7f6374d27ff41b56e87461d91973afbd59d53478629da9df9e"
+    },
+    {
+      "path": "原型/README.md",
+      "bytes": 1109,
+      "sha256": "5de953e258927be37e2966cbe8eefc71a245538ae065e294318abee884111536"
+    },
+    {
+      "path": "原型/dashboard-preview.png",
+      "bytes": 391152,
+      "sha256": "f8d11edc788dda332269807087f49101d91ee6cbf1f819aaca3a9395daa24500"
+    },
+    {
+      "path": "原型/index.html",
+      "bytes": 44182,
+      "sha256": "fa33a374c813c0a303263d2649f36ff68ccee764452f0c655a01ab438d7eec65"
+    },
+    {
+      "path": "原型/login-preview.png",
+      "bytes": 431262,
+      "sha256": "13edc367de2661c6c7ba5ae7be7a126067242bb0f7cc1570c36a2dc1cec637ef"
+    },
+    {
+      "path": "原型/mobile-preview.png",
+      "bytes": 242843,
+      "sha256": "7840137733158c2c62050277dd552f415c107c01075c1792b13daa3f432830cb"
+    }
+  ]
+}

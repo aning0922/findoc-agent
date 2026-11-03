@@ -181,14 +181,14 @@ button:disabled {
   background: #ffffff08;
 }
 .nav-item.active {
-  background: #25465A;
+  background: #243d66;
   color: #fff !important;
 }
 .nav-active-dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #76B5AB;
+  background: #8cb5ff;
   margin-left: auto;
 }
 .sidebar-bottom {

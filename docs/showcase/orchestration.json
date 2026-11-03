@@ -1,0 +1,62 @@
+{
+  "controller_thread": "01a19f9b-6d5d-77d1-92a6-7df1c95f4c96",
+  "integration_branch": "codex/findoc-showcase-c-integration",
+  "sessions": [
+    {
+      "task": "M5 private local launcher/TTL",
+      "thread_id": "01a19f9d-6c32-7ba2-a9c5-b8b708440c82",
+      "client_thread_id": "client-new-thread:dbd76a05-7cb9-479d-99d1-9b24181cb164",
+      "model": "gpt-6.1-sol",
+      "thinking": "medium",
+      "branch": "codex/showcase-m5-local",
+      "worktree": "/Users/aipuli/.codex/worktrees/ce18/findoc-agent",
+      "status": "delivered_idle",
+      "prior_task": "0fe3adb/245a05e/e51654c integratede650e8d/4498458/94ad789"
+    },
+    {
+      "task": "M5 independent final review",
+      "thread_id": "01a19f9d-a871-7520-aed9-dd6d22774d1a",
+      "client_thread_id": "client-new-thread:6cde4161-9153-4002-b48f-e39fa83749da",
+      "model": "gpt-6-astra",
+      "thinking": "high",
+      "branch": "codex/showcase-final-review",
+      "worktree": "/Users/aipuli/.codex/worktrees/3f05/findoc-agent",
+      "status": "delivered_idle",
+      "reviewed_candidate": "9cdc3d5 integrated4bf1bef",
+      "prior_task": "90ac635 integrated4ef39b5; reviewed fixed9f4993c;23offline PASS"
+    },
+    {
+      "task": "M5 public seed/evidence handover audit",
+      "thread_id": "01a19fa9-6671-7841-9393-46d2bced4e89",
+      "client_thread_id": "client-new-thread:e0c54854-e9d1-44d5-9e35-9e9c1a6ccdd3",
+      "model": "gpt-6.1-terra",
+      "thinking": "medium",
+      "branch": "codex/showcase-e03",
+      "worktree": "/Users/aipuli/.codex/worktrees/4eab/findoc-agent",
+      "status": "delivered_idle",
+      "prior_task": "2ac59a0/9c3390f delivered, root integrated a7954ae/0fd1eee; Terra medium read-only seed handover audit completed"
+    }
+  ],
+  "provider_verification": {
+    "budget_cny": "5",
+    "controller_only": true,
+    "config_path": "/Users/aipuli/Documents/Projects/findoc-agent/.env",
+    "model": "deepseek-flash",
+    "provider_host": "api.deepseek.com",
+    "ledger_relative": "data/showcase-cost-control/provider-budget.db",
+    "reserved_cny": "1.354700",
+    "actual_billed": "not_observed",
+    "physical_calls": 73,
+    "unknown_calls": 0
+  },
+  "current_stage": "M5 integrated candidate delivery",
+  "task_count": 36,
+  "substantive_parallel_worktrees_limit": 3,
+  "next_batch": "CI actual-failure followup only; core candidate delivered; no pending substantive worker batch",
+  "source_checkpoint": "9f4993cf3463fa0d3c4520799435f3bf45eefeac",
+  "model_policy": "Astra high/ultra independent design/review; Sol high backend/identity races; Terra medium deterministic UI/docs; each session changes recorded by actual dispatch, no claim controller model switched",
+  "draft_pr": "https://github.com/aning0922/findoc-agent/pull/2",
+  "delivered_asset_checkpoint": "6476ad03ce869d315f4b8174fcd0af233e3d4b5d",
+  "local_entry": "http://127.0.0.1:14530",
+  "local_entry_status_at_handover": "HTTP200, unauthenticated ready, wait_only, ttl20"
+}

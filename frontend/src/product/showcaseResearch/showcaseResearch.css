@@ -1,0 +1,173 @@
+.showcase-research {
+  border: 1px solid var(--color-border, #e1e8f2);
+  background: var(--color-surface, #fff);
+  border-radius: 14px;
+  padding: 24px;
+  color: var(--color-text, #1e3046);
+}
+.showcase-research * {
+  box-sizing: border-box;
+}
+.showcase-research .sr-heading span {
+  font-size: 11px;
+  color: var(--color-primary, #4878d4);
+}
+.showcase-research h2 {
+  font-size: 21px;
+  margin: 6px 0;
+}
+.showcase-research h3 {
+  font-size: 15px;
+  margin: 0;
+}
+.showcase-research p,
+.showcase-research label {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-text-secondary, #708297);
+}
+.showcase-research .sr-modes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+.showcase-research.showcase-research button {
+  min-height: 44px;
+  border: 1px solid var(--color-border, #dfe7ef);
+  background: white;
+  color: var(--color-text, #263a50);
+  border-radius: 8px;
+  padding: 11px 14px;
+  cursor: pointer;
+}
+.showcase-research.showcase-research button.selected {
+  border-color: var(--color-primary, #4878d4);
+  background: var(--color-primary-soft, #edf3ff);
+}
+.showcase-research.showcase-research button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.showcase-research .sr-modes button {
+  text-align: left;
+}
+.showcase-research small {
+  display: block;
+  font-size: 11px;
+  color: #8191a3;
+  margin-top: 5px;
+}
+.showcase-research .sr-card {
+  border: 1px solid var(--color-border, #e1e8f2);
+  border-radius: 10px;
+  padding: 18px;
+  background: #f9fbfe;
+}
+.showcase-research textarea {
+  display: block;
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid #dce5ee;
+  border-radius: 8px;
+  padding: 12px;
+  font: inherit;
+  resize: vertical;
+  margin: 8px 0;
+}
+.showcase-research .sr-history {
+  margin-top: 20px;
+}
+.showcase-research .sr-history > div,
+.showcase-research article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.showcase-research article {
+  padding: 14px 0;
+  border-top: 1px solid #edf1f5;
+}
+.showcase-research a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-primary, #4878d4);
+  font-size: 12px;
+}
+.showcase-research .sr-note {
+  font-size: 12px;
+}
+.showcase-research :focus-visible {
+  outline: 3px solid #dba350;
+  outline-offset: 2px;
+}
+@media (max-width: 650px) {
+  .showcase-research {
+    padding: 16px;
+  }
+  .showcase-research .sr-modes {
+    grid-template-columns: 1fr;
+  }
+  .showcase-research article {
+    align-items: start;
+    flex-direction: column;
+  }
+}
+.showcase-research .sr-workflow section {
+  border-top: 1px solid var(--color-border, #e6edf4);
+  padding: 18px 0;
+  margin-top: 14px;
+}
+.showcase-research .sr-workflow button {
+  margin: 4px 8px 4px 0;
+}
+.showcase-research .sr-workflow input:not([type="checkbox"]) {
+  display: block;
+  min-height: 44px;
+  width: 100%;
+  border: 1px solid #dce5ee;
+  border-radius: 7px;
+  padding: 10px;
+}
+.showcase-research .sr-workflow input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 12px;
+}
+.showcase-research .sr-workflow label {
+  display: block;
+}
+.showcase-research .sr-workflow summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.showcase-research .sr-workflow article {
+  display: block;
+  background: white;
+  border: 1px solid #e9eef5;
+  border-radius: 8px;
+  margin-top: 10px;
+  padding: 14px;
+}
+.showcase-research .sr-workflow .sr-notice {
+  background: #fff4da;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 10px;
+}
+.showcase-research .sr-workflow ol {
+  font-size: 12px;
+  line-height: 2;
+  color: #61758b;
+}
+
+.showcase-research { min-width: 0; max-width: 100%; }
+.showcase-research p { overflow-wrap: anywhere; }
+.showcase-research .sr-result-summary { margin-top: 16px; }
+.showcase-research .sr-result-summary article { background: #f0f5ff; border-color: #dae5fb; }
+.showcase-research .sr-result-summary p { color: #334969; font-size: 14px; }
+.showcase-research .sr-result-summary a { margin-right: 14px; }

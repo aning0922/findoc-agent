@@ -1,0 +1,88 @@
+# 验证证据
+
+- 2026-11-03 B00：真实 git fetch 成功；本地与远端 V1.2 一致 c8be308；main 1f0a3d4；原工作树无改动。
+- 新 ZIP SHA256：143b5d4e04f067ab4ccfa216aeafb0a2be0207c64e051d9a24db0639336c505e。解压资料与 ZIP 逐文件比对结果由启动输出保存；包是任务说明与 UI_MOCK，不是已完成功能。
+- 已真实读取 README、00/01/02/03/04/07/08/09/10/12，及 05/06/14；检查 runtime_factory/paths、AppShell、ResearchHome、productRoutes、package.json。
+- 本轮功能测试尚未运行；历史 V1.2 测试数量不得用于 C 方案验收。
+- 未执行任何真实模型研究/财务人工接受/OCR/公开部署；未采购外部服务。调度模型费用由账户计费，未取得实际价格不推算金额。
+
+- B00本轮基础 smoke：`tests/test_parse.py tests/test_demo_pdf.py` 3 PASS/5依赖弃用警告，1.69s（本地Python依赖环境，非真实模型/OCR）。
+- M0真实启动spike：`experiments/showcase/runtime_startup_spike.py`，临时全新空runtime、真实缓存 BGE/Milvus，ready 8.682s、health/companies HTTP200、含shutdown总8.704s，LLM调用0。不是完整seed复制或公网性能证据。原始输出 `/tmp/findoc-c-startup-spike.log`。
+
+- B02 worker首候选370e3d0：worker报告build/lint/六张截图+点击流程通过。主控实际读代码并查看Navy1440/Ink1440/Navy390，选择Navy但发现登录/状态流和需求误解，未验收B02。截图路径见reviews交接；原型只是UI_MOCK。
+- 模型动态派工：B02初Terra/medium，独立审查后同会话升级Terra/high并重命名“FinDoc C｜M0 首页与登录原型 · 主控修订”；架构评审Astra/ultra。仅记录工具调用配置，不估计计费金额。
+
+- B02主控独立验证于集成5209c8e+最终8c2c8a7补修：Chromium真实HTTP localhost14521，1440/1280/390登录/首页截图、正常登录转场/搜索预填/模式/占用接管确认重置/过期/被接管全部PASS。仅UI_MOCK，无真实auth。主控修复login固定覆盖层下仍挂载工作区的问题，增加登录下不存在sidebar断言；截图位于 `/Users/aipuli/.codex/visualizations/2026/11/03/01a19f9b-6d5d-77d1-92a6-7df1c95f4c96/m0`。
+- 主控Node24 build/lint通过，4条fast-refresh警告（含原有测试）及既有bundle>500kB警告；未删警告。
+- B01独立评审49e0eba已收取/真实阅读，纳入6项P0合同。不是业务安全验收。
+- Git复制工作包原先受text=auto归一CSV行尾，已加限定gitattributes -text并重新staged逐文件与ZIP比对：0差异；原始ZIP保留Downloads。
+
+- M1 U01局部：主控修改AppShell/tokens/shell/productRoutes/Conversations，运行Node24 `productRoutes.test.ts conversationFoundation.test.ts` 6PASS/0skip，旧QA/task/run/report/revision深链保留；预填实际HTTP无POST验证待联调。
+
+- U01预填边界：Chromium拦截API的UI_MOCK三宽1440/1280/390 PASS，question进草稿、未选来源发送禁用、零POST/PATCH/DELETE；脚本frontend/e2e/showcase-entry.mjs，截图m1-entry。不能代替真实服务集成。
+- M1 UI首候选171ab87/f14e105/c087b4b已读审：真实接口方向可复用，但正式视觉未延续通过的M0；schema cast、失效时限/晚回epoch等退回Terra/high修订。尚未集成/验收H02/H03/L04。
+
+- H01源a9274f4→集成b5768ee：主控真实读service/api/交接并独立复跑3PASS/ruffPASS（UNIT_FAKE）。runtime_factory唯一接线新增固定代际metadata/已绑定仓储，旧startup/companies/conversation_graph62PASS，14.66s，依赖5warning保留。
+- H01真实重依赖装配：修改后startup spike9.607s ready/9.649s含关闭，真实缓存BGE+Milvus，health/companies/dashboard200；空库四KPI0，generation1，独立sample origin=illustrative；LLM0。这只证明真实装配+空库/示意端点，不是财务真人数据/完整seed/auth通过。原始/tmp/findoc-c-dashboard-startup.log。
+- L01主控静态发现公开/api代理下pending Cookie path=/demo不匹配，已报后端与独审，必须修复并真实浏览器验。内部TestClient通过不代表外部前缀Cookie可用。
+
+- D01真实公开HTTP预检：四份官方PDF均200，SHA与既有来源manifest一致（美的2024/2025、格力2024/2025），276/219/248/295页；程序封面身份匹配。新副本单独Git忽略目录data/showcase-source-preflight-20261103，无旧数据覆盖/模型调用/真人核准。以前web404/timeout保留，本次直接httpx成功。详情D01_SOURCE_PREFLIGHT.json，不宣称全市场查询/实际导入完成。
+
+## 主控 M1 前端接线复跑
+
+集成9cdc3d5→4bf1bef后，main/ResearchHome接线，`SHOWCASE_TEST_URL=http://127.0.0.1:14521 SHOWCASE_TEST_OUTPUT=/tmp/findoc-root-m1-ui node e2e/showcase-live-mock.mjs`：三宽1440/1280/390完整AppShell登录/首页/指标/退出PASS；错误概览、非法Decimal、到期即时卸载+服务器读回、旧refresh不覆盖新session、未知claim保留并GET恢复PASS。实际Chromium，接口拦截UI_MOCK，LLM0/真实PDF0/真人财务0；截图已由主控打开检查。Node24 build/lint成功，保留chunk/effect/ref/fast-refresh提示。真实HTTP和Cookie验证仍待L03及独立review。
+
+## M1 主控真实页面与独立复核
+
+后端源7f6f268→c826a05，Astra独立review cf5f881→7141ec8。16个目标auth/gateway/reset/dashboard/disclosures tests PASS，ruff PASS，SWIG5warnings保留。主控新增 integrated_http_check.py + showcase-integrated-http.mjs 使用两个独立Chromium进程、实际产品main、真实Vite/gateway/OS child/缓存BGE+Milvus，合成seed（1虚构公司、PDF0/真实事实0/LLM0/真人财务0），验证三宽、pending cookie、旧DTO网关编号、占用/二次owner接管、旧A401及UI卸载、新代恢复公司1、logout reset、seed SHA不变。证据目录uz81ifdo见STATE。首轮oflnrurn因测试未重新填写共享口令等待disabled按钮失败；没有据此修改产品授权条件，修测试后通过。截图另发现index.css全局h1覆盖Hero白色、旧ResearchDashboard全局nav覆盖；视觉修正后将重新检查。
+
+M1 ex46xvoe最终实际HTTP追加验证PASS（79e7de6→89230aa代际提示）：同有效cookie硬reload保留UNKNOWN、实际Hero contrast、sample_mode真实端点两图；双浏览器协议/owner接管/old401/UI卸载/新代restore/logout再通过。检查和截图evidence/M1；图表虚构1.0/1.2/1.1亿元仅illustrative，KPI仍真实机制库1/0/0/0。查看登录390截图另发现demo-story h1继承全局深色，已补white并加入真实smoke断言，待下一真实UI资料轮次复查。mock完整状态回归14组左右输出PASS，不换算成功能数量。
+
+## M2 官方年报真实产品路径
+
+`integrated_http_check.py --flow disclosure`，源D03 07fd7c0+1333b14→40f9661+5352471，root接线DocumentLibrary和新OCR工厂/policy，真实Chromium main+Vite+gateway+实际runtime。PASS UI创建准确格力公司、查询目录、明确官方导入、PDFSHA 7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c、219页、真实fast+BGE/Milvus索引READY（40.233s）、原文身份/年、财务not_verified；三宽目录、桌面/手机READY截图，浏览器错误0。LLM0/真人签核0。证据evidence/M2-disclosure，原PDF留隔离runtime不进Git。失败nx68zzy6为交易所控件accessible name含选项导致定位不到（补aria-label），j1i72ajj为导航后DevTools响应body已不可读（改URL身份+GET公司读回），二者没有到下载验收。
+
+O02 root注册后15tests PASS（parse_v2/runtime_startup/demo_gateway/disclosures）、ruff PASS，5SWIG warnings保留；旧源码迁移没改。
+
+## O03 / Finance v2 / Memory / provider budget 主控
+
+O03 real product isgmzk2o PASS：真实Vision转录/54格与原line/bbox一致，原页PNG可读、三宽及reload GET不重做；evidence/M2-ocr。ayn3q140先FAIL390外溢，修CSS grid min-width后PASS。根新原图大图链接/滚动提示为随后小UX修补。F02指定PDF env真实3PASS13.31s，候选非真人；未指定2PASS1SKIP历史保留。finance/gallery/root注册相关12PASS后8auth/resetPASS/ruff；一次实际进程关闭在macOS group killpg(0)临时EPERM+退出竞态FAIL，改用独立OS pgid inventory核实且未知保持alive、getpgid退出后再查组，定点test+真实fake OS复跑PASS，未放宽PID/birth核验。Memory15目标tests PASS，主控真实BGE合成两note非同词语义排序和删除PASS，LLM0。
+
+用户授权5元外部LLM本轮总预算。官方 https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ 2026-11-03峰值2/8元每百万input/output；shared provider_budget.db位于generation之外，先持久最坏费用reserve再物理call，断线UNKNOWN不重试/不退款，禁native web tools，max4096输出/64KiB输入，显式关闭DeepSeek默认thinking（SDKextra_body），价格/模型/host限定，extra_body不能覆盖token/model。预算2代表性fake+startup7PASS，ruff PASS。evidence/LLM/config-probe.json为第一真实调用：deepseek-flash返回OK，8输入1输出，预留0.004678元（非实际账单），未测任何Agent研究业务。密钥只从原仓库Git忽略.env加载进子进程/SDK，不入证据/命令行。
+
+## F03 主控实际候选路径
+
+2026-11-03，真实Chromium→DemoGateway→真实BGE/Milvus及Gree2025固定PDF版本，三宽1440/1280/390无溢出。4候选（总资产/总负债、2025-01-01及2025-12-31），显式创建2项待核对review。真人财务确认0、LLM0，核准图/比率正向仍需真人。证据evidence/M2-finance；停止后的临时环境findoc-integrated-http-amd4nips，部分公开seed manifest SHA 372d477d6e3afbb71f41c50edd0a5c79a8d2c336b29607c9398bf158b902d6d0保持不变。
+
+## M02 真实跨会话与偏好
+
+实际Chromium/HTTP、公开部分seed和真实本地BGE。会话A界面保存现金流笔记，会话B以“现金回收和盈利质量”召回、删除后重复语义查询不再召回；三项确认偏好使首页现金流默认/问题排序、万元坐标、对比卡优先生效。1440/1280/390无水平溢出，LLM0/财务确认0/浏览器异常0。evidence/M3-memory。首轮jrzdneto因旧select访问名定位失败，非业务成功；修正aria-label后c4r4b8e_ PASS。
+
+## M3 真实模型与真实工作区
+
+5zk9mqeo：真实HTTP单/双Agent→report→不可变v1/v2→实际PDF PASS，4与7个真实调用，约14.17s/26.27s。ybr4pane：实际main UI点击意图、计划批准、任务事件、四类结果、两份报告，三宽无溢出，约9.554s/16.480s；新PDF实际5页（初版17页已排版改良）。整个ybr runner最终在额外seed扫描上传因测试HTTP Origin缺失FAIL，不冒充整个runner PASS；原UI/模型/报告阶段独立已完成，存research-progress.json。派生OCR/演示notes后由complete_public_seed_material.py在同一停止disposable根使用真实Vision/BGE的in-process ASGI补齐（68行54格、LLM0、人签0）；该部分不是外部HTTP UI证据，已有O03公开gateway UI证据独立存在。
+
+共享账本截至ybr：44真实provider calls、38170 input/5674 output reported tokens、保守预留0.803322元/5元；实际扣费not_observed。所有失败/未知保留evidence/M3-research/retained-failures.json。Astra独立M3 review bbf098f：无复现主链P0/P1；3P2保留。报告无财务人工确认输入，已核准财务章节保持缺项，不生成核准图/金额。
+
+
+## M4／M5 最终主控证据（替代前文中“待完成”的当前状态）
+
+业务代码检查点 `9f4993cf3463fa0d3c4520799435f3bf45eefeac`；独立 review `4ef39b5`（源90ac635）仅覆盖该固定 SHA 的源码／离线检查。之后 launcher20/30 TTL 跟进94ad789，6项临时fixture测试通过；未把后续文档与真实运行说成 review 已重复执行。
+
+- **M4 full-reset ouunry1_：PASS**。实际两独立 Chromium 进程、Vite／gateway／OS child、真实 BGE/Milvus、固定完整公开 seed；generation1→2、独立owner授权和二次确认、旧浏览器401与业务卸载、脏企业／会话／笔记删除，恢复KPI2/3/2/2、2历史job、3报告revision、2notes、1conversation和68行OCR同artifact SHA。seed manifest不变。LLM0、人签0。证据[evidence/M4/full-reset/browser-result.json](evidence/M4/full-reset/browser-result.json)。早期rx02aszh输出硬编码synthetic/PDF0的元数据错误保留为旧runner局限，扩展检查并正确标注后重新跑本次。
+- **M4 archive k0nw23vk：PASS**。实际历史卡→原PDF／预置报告实际PDF→恢复OCR54格，三宽、业务POST0/LLM0/人签0。结果及实际PDF见[evidence/M4/archive-ocr](evidence/M4/archive-ocr)。来源历史／预置标签保留。
+- **M4 fixed eval obhe_7ad：partial**。15题固定分母，真实provider intent请求5次，5partial／10skipped／完整层级PASS0。E01-01/06 model_validated；04/07/13 finite fallback，未据此推断详细根因或质量通过。另真实C02创建旧PersistentTemplateService任务到awaiting_human_confirmation，operation GET同task，不执行accept/save/resume。证据[evidence/M4/bounded-eval](evidence/M4/bounded-eval)。
+- **M5 06nyuff2：PASS**。实际产品main UI，真实官方PDF／BGE／HTTP／LLM，单Agent4model/2tools，双子代理7model/4tools，分别明确意图／计划／批准／事件／结果；创建报告v1/v2、source_current、实际5页PDF；另1真实intent经界面交给旧任务等待本人。job830ca1d8-b6f0-4373-9caa-c21d63a1592e及63c772cc-db2d-4a33-b7ed-b2951d3a32a2，report09b65dff-f043-4299-a89b-37d87ad19032 rev2。三宽与真实录屏，浏览器异常0，人签0。证据[evidence/M5/browser-result.json](evidence/M5/browser-result.json)、[PDF](evidence/M5/real-research-report.pdf)、[录屏](evidence/M5/showcase-walkthrough.webm)。前一bzsud77s两研究已完成，但C02入口research_mode被showConversation规范URL抹掉导致第三阶段未完成；修初始快照与deep-link保留后单独重跑，不改旧FAIL。
+- **M5 launcher：PASS**。实际私有本机配置、gateway/main UI、默认wait_only与示意开关、KPI2/3/2/2、1440/1280/390、退出后ready，Ctrl+C停止owned launcher。LLM0，人签0；未输出凭据。结果[evidence/M5/launcher-result.json](evidence/M5/launcher-result.json)。本次截图是实际主入口，不是M0原型14521。
+- **当前费用快照**：[evidence/M5/latest-cost-summary.json](evidence/M5/latest-cost-summary.json)，73物理calls／66451 input／9048 output reported tokens，保守预留1.354700元／5元、UNKNOWN0、actual_billed=not_observed。shared ledger在generation之外，没有重置或另开worker预算。
+
+完整公开seed manifest `efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4`。打包29,355,026bytes，tar SHA `3693670d2369e6bed5f4981108f00a62602686a6a72bc44a64dc997bc28a2afc`，实际解包verify_seed通过；只含公开allowlist，无login/provider/ledger。二进制Git忽略单独本地交付。见[evidence/seed-bundle.json](evidence/seed-bundle.json)及E03固定库存验证。
+
+### 最终检查范围
+
+独立Astra在9f4993c：15+8=23离线PASS，fake/临时fixture，无付费、无人签，不替代真实UI证据。主控较宽回归141PASS／57setup ERROR／5warnings，29.47s；57均为test_d22_reports.py／test_d23_reports.py依赖缺失product/validation/d21-real-research.json，未合成假证明。前端Node24 build/lint通过，chunk及已有lint提示保留；root改动ruff与diff检查通过。测试数量不对应功能数量，完整suite未宣称通过。
+
+
+交付核查：Terra/medium只读核对tar精确成员集合、28文件hash与manifest，未检查隐藏未知secret；root另对完整seed扫描当前已配置的API key／登录密码精确字节，0命中，不外推任意未知凭据不存在。见evidence/seed-handover-audit.json。root复跑launcher6PASS1.08s、当前完整seed verify PASS、新交付文档链接存在、36唯一任务、交付资产精确known-secret扫描0命中、git diff --check PASS。
+
+交付资产6476ad03ce869d315f4b8174fcd0af233e3d4b5d正常push并读回一致；草稿PR#2 base=codex/conversation-memory-v12-20261102。14530重新启动后HTTP200，public status ready/20/wait_only，未创建新lease或新模型调用。自动Quality触发，远端结果另见Actions，未以进行中当通过。

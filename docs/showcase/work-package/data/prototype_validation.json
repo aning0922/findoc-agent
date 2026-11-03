@@ -1,0 +1,31 @@
+{
+  "test_type": "Playwright Chromium via page.set_content (offline HTML, not actual file URL navigation)",
+  "browser": "/usr/bin/chromium",
+  "viewport_tested": [
+    390,
+    1280,
+    1440
+  ],
+  "js_page_errors": 0,
+  "horizontal_document_overflow": {
+    "390": false,
+    "1280": false,
+    "1440": false
+  },
+  "interactions_tested": [
+    "login with nonempty inputs",
+    "dashboard open",
+    "line-chart metric switching",
+    "simulate kicked session",
+    "occupancy conflict prompt",
+    "takeover double confirmation",
+    "reset to initial dashboard"
+  ],
+  "important_limitations": [
+    "authentication is mock, any nonempty credentials accepted",
+    "takeover/reset are client-side visual simulations only",
+    "all chart numbers and financial data are fictional UI illustrations",
+    "real official PDF, OCR, model, financial calculation and database API not part of standalone prototype"
+  ],
+  "verified_at": "2026-11-03"
+}

@@ -1,0 +1,1472 @@
+{
+  "evidence": "REAL_CHROMIUM_HTTP_REAL_PDF_BGE_LLM",
+  "jobs": [
+    {
+      "mode": "synthesis",
+      "intent": {
+        "schema_version": "intent-v2",
+        "intent_id": "683d5d2a-2001-461e-bce9-7707bbb7f6ed",
+        "conversation_id": "910064b4-668e-42d3-91be-5638937814eb",
+        "mode": "synthesis",
+        "goal": "请根据格力2025年报总结主要经营风险，只要原文与解释，不要计算。",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [
+          2025
+        ],
+        "metric_keys": [],
+        "actions": [
+          "read_evidence"
+        ],
+        "clarifying_question": null,
+        "requires_confirmed_facts": false,
+        "source_turn_ids": [],
+        "proposal_origin": "model_proposal_program_validated",
+        "provider_error": null,
+        "scope": {
+          "scope_hash": "ec0ae1cef70573a6a86a25136532c0d28e21bfda20d9b39e5c23bc938b16a65f",
+          "runtime_instance_id": "55233c0a-0ef3-4787-80f2-98f22dc5fe63",
+          "lease_generation": 1,
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 0,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      },
+      "plan": {
+        "schema_version": "research-plan-v2",
+        "plan_id": "18a10d83-35f2-4c48-9c2d-f32e3cec29fa",
+        "revision": 1,
+        "intent_id": "683d5d2a-2001-461e-bce9-7707bbb7f6ed",
+        "conversation_id": "910064b4-668e-42d3-91be-5638937814eb",
+        "goal": "请根据格力2025年报总结主要经营风险，只要原文与解释，不要计算。",
+        "mode": "synthesis",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [
+          2025
+        ],
+        "metric_keys": [],
+        "roles": [
+          "generalist"
+        ],
+        "allowed_tools": {
+          "generalist": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        },
+        "limits": {
+          "model_attempts": 5,
+          "tool_calls": 12,
+          "parallel_agents": 2,
+          "execution_seconds": 240,
+          "per_call_output_tokens": 1024,
+          "reserved_input_tokens": 48000,
+          "reserved_output_tokens": 12000
+        },
+        "plan_origin": "supervisor_model_program_validated",
+        "provider_error": null,
+        "requires_explicit_confirmation": true,
+        "plan_sha256": "6b26ccb32424415de6396e045653f658c8c509915add71f01a58fc2cb533cd86",
+        "scope": {
+          "scope_hash": "ec0ae1cef70573a6a86a25136532c0d28e21bfda20d9b39e5c23bc938b16a65f",
+          "runtime_instance_id": "55233c0a-0ef3-4787-80f2-98f22dc5fe63",
+          "lease_generation": 1,
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 0,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      },
+      "job": {
+        "schema_version": "showcase-job-v2",
+        "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+        "plan_id": "18a10d83-35f2-4c48-9c2d-f32e3cec29fa",
+        "conversation_id": "910064b4-668e-42d3-91be-5638937814eb",
+        "mode": "synthesis",
+        "state": "completed",
+        "created_at": "2026-11-03T06:20:45.732660+00:00",
+        "ended_at": "2026-11-03T06:20:51.314834+00:00",
+        "error_code": null,
+        "scope": {
+          "scope_hash": "ec0ae1cef70573a6a86a25136532c0d28e21bfda20d9b39e5c23bc938b16a65f",
+          "runtime_instance_id": "55233c0a-0ef3-4787-80f2-98f22dc5fe63",
+          "lease_generation": 1,
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 0,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        },
+        "usage": {
+          "id": "683d5d2a-2001-461e-bce9-7707bbb7f6ed",
+          "deadline": 1793687085.732841,
+          "max_attempts": 5,
+          "attempts": 4,
+          "tools": 2,
+          "input_tokens": 2039,
+          "output_tokens": 4096,
+          "unknown_attempts": 0,
+          "provider_tokens_actual": null
+        },
+        "steps": [
+          {
+            "step_id": "fb44af3e-4f8e-46dd-8ea3-9a41352bd4c0",
+            "agent_id": "generalist",
+            "state": "completed",
+            "tools": [
+              "search_evidence",
+              "search_evidence"
+            ]
+          }
+        ],
+        "result": {
+          "agents": [
+            {
+              "agent_id": "generalist",
+              "state": "completed"
+            }
+          ],
+          "data_origin": "live",
+          "findings": [
+            {
+              "actions": [
+                {
+                  "href": "/research?mode=operating",
+                  "kind": "review_sources",
+                  "label": "核对来源及明确选择已确认事实"
+                },
+                {
+                  "href": "/sources",
+                  "kind": "reason",
+                  "label": "evidence_or_confirmation_missing"
+                }
+              ],
+              "data_origin": "unresolved",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "c016e28a-e76a-4fdc-9942-d99b89abddde",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "origin": "system",
+              "schema_version": "research-finding-v2",
+              "source_status": "unresolved",
+              "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+              "transcription_review_status": "not_applicable",
+              "unresolved_question": "检索结果没有通过固定来源和逐页精确引用核验。"
+            },
+            {
+              "data_origin": "local_runtime",
+              "evidence_refs": [
+                {
+                  "chunk_id": "56951f74e5de9999ae0dcf360897dae9ffa1ab9ea07ea23726cfe13ee55ca5a6",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "e7caffc1b98d4acb216fb1eb16819aac37b502fa7c5bc0ec843cf2d4e247da81",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 70,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "c587afbf-4d75-4197-8f88-e175e3048ae3",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "origin": "verified_source",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [
+                {
+                  "chunk_id": "56951f74e5de9999ae0dcf360897dae9ffa1ab9ea07ea23726cfe13ee55ca5a6",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "e7caffc1b98d4acb216fb1eb16819aac37b502fa7c5bc0ec843cf2d4e247da81",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 70,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "b6d067ac-f03b-4cb5-bfad-e2aa3fe83c49",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "检索未通过固定来源与逐页精确引用核验，故无法据现有结果总结2025年报披露的主要经营风险原文。仅能确认一处与理财相关的披露：委托理财余额按银行理财、信托理财、券商理财分类列示，风险特征均标为中低风险，且无逾期未收回金额；未见高风险委托理财具体情况说明。经营风险的完整原文仍待核验后补充。",
+              "transcription_review_status": "not_applicable"
+            }
+          ],
+          "goal": "请根据格力2025年报总结主要经营风险，只要原文与解释，不要计算。",
+          "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+          "limitations": [
+            "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+            "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+          ],
+          "mode": "synthesis",
+          "schema_version": "showcase-research-result-v2",
+          "scope_hash": "ec0ae1cef70573a6a86a25136532c0d28e21bfda20d9b39e5c23bc938b16a65f"
+        }
+      },
+      "events": {
+        "schema_version": "execution-events-v1",
+        "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+        "events": [
+          {
+            "agent_id": "controller",
+            "event_seq": 1,
+            "event_type": "phase",
+            "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+            "label": "批准计划已登记",
+            "public_summary": "批准计划已登记",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:20:45.733420+00:00"
+          },
+          {
+            "agent_id": "supervisor",
+            "event_seq": 2,
+            "event_type": "phase",
+            "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+            "label": "按计划分派只读子任务",
+            "public_summary": "按计划分派只读子任务",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:45.734760+00:00"
+          },
+          {
+            "agent_id": "generalist",
+            "event_seq": 3,
+            "event_type": "phase",
+            "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+            "label": "子任务开始",
+            "public_summary": "子任务开始",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:45.735728+00:00"
+          },
+          {
+            "agent_id": "generalist",
+            "event_seq": 4,
+            "event_type": "tool",
+            "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:46.868667+00:00"
+          },
+          {
+            "agent_id": "generalist",
+            "event_seq": 5,
+            "event_type": "tool",
+            "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:20:48.209021+00:00"
+          },
+          {
+            "agent_id": "generalist",
+            "event_seq": 6,
+            "event_type": "tool",
+            "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:48.211162+00:00"
+          },
+          {
+            "agent_id": "generalist",
+            "event_seq": 7,
+            "event_type": "tool",
+            "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:20:49.396808+00:00"
+          },
+          {
+            "agent_id": "generalist",
+            "event_seq": 8,
+            "event_type": "phase",
+            "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+            "label": "子任务已交接",
+            "public_summary": "子任务已交接",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:20:51.000342+00:00"
+          },
+          {
+            "agent_id": "verifier",
+            "event_seq": 9,
+            "event_type": "phase",
+            "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+            "label": "复核引用与财务资格",
+            "public_summary": "复核引用与财务资格",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:51.001023+00:00"
+          },
+          {
+            "agent_id": "verifier",
+            "event_seq": 10,
+            "event_type": "phase",
+            "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+            "label": "结果核验完成，准备保存",
+            "public_summary": "结果核验完成，准备保存",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:20:51.311780+00:00"
+          },
+          {
+            "agent_id": "controller",
+            "event_seq": 11,
+            "event_type": "phase",
+            "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+            "label": "结果已保存",
+            "public_summary": "结果已保存",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:20:51.315563+00:00"
+          }
+        ],
+        "next_after_seq": 11
+      },
+      "elapsed_ms": 9554,
+      "report": {
+        "schema_version": "showcase-report-v2",
+        "report_id": "04474472-b64f-4fe2-a83c-2242117f2250",
+        "revision": 1,
+        "title": "格力2025经营风险 · 单 Agent真实研究",
+        "notes": "公开年报实际模型运行。AI解释待审，无财务真人确认。",
+        "created_at": "2026-11-03T06:20:53.058405+00:00",
+        "snapshot": {
+          "company_name": "珠海格力电器股份有限公司",
+          "data_origin": "live",
+          "findings": [
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "c016e28a-e76a-4fdc-9942-d99b89abddde",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "numeric_claim_status": null,
+              "source_status": "unavailable",
+              "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "56951f74e5de9999ae0dcf360897dae9ffa1ab9ea07ea23726cfe13ee55ca5a6",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "e7caffc1b98d4acb216fb1eb16819aac37b502fa7c5bc0ec843cf2d4e247da81",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 70,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "c587afbf-4d75-4197-8f88-e175e3048ae3",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "numeric_claim_status": null,
+              "source_status": "current",
+              "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "56951f74e5de9999ae0dcf360897dae9ffa1ab9ea07ea23726cfe13ee55ca5a6",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "e7caffc1b98d4acb216fb1eb16819aac37b502fa7c5bc0ec843cf2d4e247da81",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 70,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "b6d067ac-f03b-4cb5-bfad-e2aa3fe83c49",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "source_status": "current",
+              "text": "检索未通过固定来源与逐页精确引用核验，故无法据现有结果总结2025年报披露的主要经营风险原文。仅能确认一处与理财相关的披露：委托理财余额按银行理财、信托理财、券商理财分类列示，风险特征均标为中低风险，且无逾期未收回金额；未见高风险委托理财具体情况说明。经营风险的完整原文仍待核验后补充。",
+              "transcription_review_status": "not_applicable"
+            }
+          ],
+          "job_id": "b97c8435-f2e3-4411-9b1c-72413c693be8",
+          "limitations": [
+            "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+            "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+          ],
+          "period_label": "2025",
+          "schema_version": "verified-report-job-v2",
+          "state": "completed",
+          "workspace_id": "demo"
+        }
+      }
+    },
+    {
+      "mode": "deep",
+      "intent": {
+        "schema_version": "intent-v2",
+        "intent_id": "718f981b-ad4b-434f-8f9d-a51e46ad2df0",
+        "conversation_id": "910064b4-668e-42d3-91be-5638937814eb",
+        "mode": "deep",
+        "goal": "请根据格力2025年报总结主要经营风险，只要原文与解释，不要计算。",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [
+          2025
+        ],
+        "metric_keys": [],
+        "actions": [
+          "read_evidence"
+        ],
+        "clarifying_question": null,
+        "requires_confirmed_facts": false,
+        "source_turn_ids": [],
+        "proposal_origin": "model_proposal_program_validated",
+        "provider_error": null,
+        "scope": {
+          "scope_hash": "ec0ae1cef70573a6a86a25136532c0d28e21bfda20d9b39e5c23bc938b16a65f",
+          "runtime_instance_id": "55233c0a-0ef3-4787-80f2-98f22dc5fe63",
+          "lease_generation": 1,
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 0,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      },
+      "plan": {
+        "schema_version": "research-plan-v2",
+        "plan_id": "86175a11-b485-4484-af13-c296da9df0a1",
+        "revision": 1,
+        "intent_id": "718f981b-ad4b-434f-8f9d-a51e46ad2df0",
+        "conversation_id": "910064b4-668e-42d3-91be-5638937814eb",
+        "goal": "请根据格力2025年报总结主要经营风险，只要原文与解释，不要计算。",
+        "mode": "deep",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [
+          2025
+        ],
+        "metric_keys": [],
+        "roles": [
+          "evidence",
+          "risk_operations"
+        ],
+        "allowed_tools": {
+          "evidence": [
+            "search_evidence",
+            "recall_notes"
+          ],
+          "risk_operations": [
+            "search_evidence",
+            "recall_notes"
+          ]
+        },
+        "limits": {
+          "model_attempts": 10,
+          "tool_calls": 12,
+          "parallel_agents": 2,
+          "execution_seconds": 240,
+          "per_call_output_tokens": 1024,
+          "reserved_input_tokens": 48000,
+          "reserved_output_tokens": 12000
+        },
+        "plan_origin": "supervisor_model_program_validated",
+        "provider_error": null,
+        "requires_explicit_confirmation": true,
+        "plan_sha256": "7b84b86e28194db2d8019a1be743933a49af9836a13a2c429c41cc943c42f020",
+        "scope": {
+          "scope_hash": "ec0ae1cef70573a6a86a25136532c0d28e21bfda20d9b39e5c23bc938b16a65f",
+          "runtime_instance_id": "55233c0a-0ef3-4787-80f2-98f22dc5fe63",
+          "lease_generation": 1,
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 0,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      },
+      "job": {
+        "schema_version": "showcase-job-v2",
+        "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+        "plan_id": "86175a11-b485-4484-af13-c296da9df0a1",
+        "conversation_id": "910064b4-668e-42d3-91be-5638937814eb",
+        "mode": "deep",
+        "state": "completed",
+        "created_at": "2026-11-03T06:20:55.306869+00:00",
+        "ended_at": "2026-11-03T06:21:09.410558+00:00",
+        "error_code": null,
+        "scope": {
+          "scope_hash": "ec0ae1cef70573a6a86a25136532c0d28e21bfda20d9b39e5c23bc938b16a65f",
+          "runtime_instance_id": "55233c0a-0ef3-4787-80f2-98f22dc5fe63",
+          "lease_generation": 1,
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 0,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        },
+        "usage": {
+          "id": "718f981b-ad4b-434f-8f9d-a51e46ad2df0",
+          "deadline": 1793687095.30706,
+          "max_attempts": 10,
+          "attempts": 7,
+          "tools": 4,
+          "input_tokens": 7902,
+          "output_tokens": 7168,
+          "unknown_attempts": 0,
+          "provider_tokens_actual": null
+        },
+        "steps": [
+          {
+            "step_id": "fb7df9ee-a596-44d0-98a9-0e40440b4f07",
+            "agent_id": "evidence",
+            "state": "completed",
+            "tools": [
+              "search_evidence",
+              "search_evidence"
+            ]
+          },
+          {
+            "step_id": "2d6aa268-429f-452f-af47-2fef77a53d78",
+            "agent_id": "risk_operations",
+            "state": "completed",
+            "tools": [
+              "search_evidence",
+              "search_evidence"
+            ]
+          }
+        ],
+        "result": {
+          "agents": [
+            {
+              "agent_id": "evidence",
+              "state": "completed"
+            },
+            {
+              "agent_id": "risk_operations",
+              "state": "completed"
+            }
+          ],
+          "data_origin": "live",
+          "findings": [
+            {
+              "data_origin": "local_runtime",
+              "evidence_refs": [
+                {
+                  "chunk_id": "56951f74e5de9999ae0dcf360897dae9ffa1ab9ea07ea23726cfe13ee55ca5a6",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "e7caffc1b98d4acb216fb1eb16819aac37b502fa7c5bc0ec843cf2d4e247da81",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 70,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "7dd08176-e7e9-4500-8239-d5f32c3b183b",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "origin": "verified_source",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "local_runtime",
+              "evidence_refs": [
+                {
+                  "chunk_id": "06062b6ccf098995cc3c12c09a598521ed37f13d3f1894b29ae0514cd04dddc9",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险\n家用电器领域市场竞争充分，市场参与者涵盖国内头部企业、跨界新势力及国际品牌，行业竞争持续升温。若公司不\n能持续巩固和扩大竞争优势，将面临市场份额损失的风险。公司将继续加大研发投入，通过持续的技术创新和品质引领巩\n固品牌影响力和市场地位。\n（4）海外市场风险\n近年来全球局势复杂多变，风险可能持续上升，对公司海外市场业务开展带来不利影响。公司将继续加大海外市场拓\n展力度，优化海外市场布局，着力开拓新兴市场。同时，海外市场人文环境、文化宗教、法律体系、市场需求差异显著，"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "bc6a3502-c18b-42e2-9199-a46728057942",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "origin": "verified_source",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险\n家用电器领域市场竞争充分，市场参与者涵盖国内头部企业、跨界新势力及国际品牌，行业竞争持续升温。若公司不\n能持续巩固和扩大竞争优势，将面临市场份额损失的风险。公司将继续加大研发投入，通过持续的技术创新和品质引领巩\n固品牌影响力和市场地位。\n（4）海外市场风险\n近年来全球局势复杂多变，风险可能持续上升，对公司海外市场业务开展带来不利影响。公司将继续加大海外市场拓\n展力度，优化海外市场布局，着力开拓新兴市场。同时，海外市场人文环境、文化宗教、法律体系、市场需求差异显著，",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "local_runtime",
+              "evidence_refs": [
+                {
+                  "chunk_id": "c2199257bd48cbed48e88bcbc9ecc3bff2c5d65cfd7aeac8f9f0523d9704ded4",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、工艺\n降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "c63f5fd4-b047-42b0-bd84-be056526a99c",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "origin": "verified_source",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、工艺\n降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "local_runtime",
+              "evidence_refs": [
+                {
+                  "chunk_id": "00dfc54d7f8e6fd552cf73181b83e26ea3e3b00c82713bc345691af5af185543",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "市场拓展挑战重重，公司将持续推进品牌自主化和运营本土化战略，强化风险管控，提升全球运营能力。\n（5）汇率波动风险\n若人民币汇率短期内出现大幅波动，可能产生汇兑损益，对公司盈利水平与海外业务竞争力造成影响。公司将持续加\n强汇率走势研判与风险敞口管理，提升出口产品定价与议价能力，合理运用远期结售汇、外汇期权等金融工具，有效规避\n汇率波动风险，降低汇兑损失。\n十二、报告期内接待调研、沟通、采访等活动\n适用□不适用\n接待时间\n接待地点\n接待方\n式\n接待对\n象类型\n接待\n对象\n谈论的主\n要内容及\n提供的资\n料\n调研的基本情况索引\n2025 年07\n月21 日\n1.参观公司总部科技展\n厅、珠海格力绿控科技\n有限公司、珠海格力电\n子元器件有限公司\n2.公司总部五楼会议室\n交流"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "e9715664-5d7a-48d2-bb33-368504482dfc",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "origin": "verified_source",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "市场拓展挑战重重，公司将持续推进品牌自主化和运营本土化战略，强化风险管控，提升全球运营能力。\n（5）汇率波动风险\n若人民币汇率短期内出现大幅波动，可能产生汇兑损益，对公司盈利水平与海外业务竞争力造成影响。公司将持续加\n强汇率走势研判与风险敞口管理，提升出口产品定价与议价能力，合理运用远期结售汇、外汇期权等金融工具，有效规避\n汇率波动风险，降低汇兑损失。\n十二、报告期内接待调研、沟通、采访等活动\n适用□不适用\n接待时间\n接待地点\n接待方\n式\n接待对\n象类型\n接待\n对象\n谈论的主\n要内容及\n提供的资\n料\n调研的基本情况索引\n2025 年07\n月21 日\n1.参观公司总部科技展\n厅、珠海格力绿控科技\n有限公司、珠海格力电\n子元器件有限公司\n2.公司总部五楼会议室\n交流",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [
+                {
+                  "chunk_id": "c2199257bd48cbed48e88bcbc9ecc3bff2c5d65cfd7aeac8f9f0523d9704ded4",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、工艺\n降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险"
+                },
+                {
+                  "chunk_id": "06062b6ccf098995cc3c12c09a598521ed37f13d3f1894b29ae0514cd04dddc9",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险\n家用电器领域市场竞争充分，市场参与者涵盖国内头部企业、跨界新势力及国际品牌，行业竞争持续升温。若公司不\n能持续巩固和扩大竞争优势，将面临市场份额损失的风险。公司将继续加大研发投入，通过持续的技术创新和品质引领巩\n固品牌影响力和市场地位。\n（4）海外市场风险\n近年来全球局势复杂多变，风险可能持续上升，对公司海外市场业务开展带来不利影响。公司将继续加大海外市场拓\n展力度，优化海外市场布局，着力开拓新兴市场。同时，海外市场人文环境、文化宗教、法律体系、市场需求差异显著，"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "1bcb09ee-8c63-4e8a-b892-a7319d2a51b6",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "年报披露的经营风险包括：宏观经济增速放缓与外部不确定性影响消费需求；铜、铝等原材料价格上涨压缩盈利空间；家电市场竞争加剧，参与者含国内头部、跨界新势力及国际品牌；海外局势与人文法律差异带来海外市场风险；人民币汇率大幅波动产生汇兑损益。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [
+                {
+                  "chunk_id": "00dfc54d7f8e6fd552cf73181b83e26ea3e3b00c82713bc345691af5af185543",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "市场拓展挑战重重，公司将持续推进品牌自主化和运营本土化战略，强化风险管控，提升全球运营能力。\n（5）汇率波动风险\n若人民币汇率短期内出现大幅波动，可能产生汇兑损益，对公司盈利水平与海外业务竞争力造成影响。公司将持续加\n强汇率走势研判与风险敞口管理，提升出口产品定价与议价能力，合理运用远期结售汇、外汇期权等金融工具，有效规避\n汇率波动风险，降低汇兑损失。\n十二、报告期内接待调研、沟通、采访等活动\n适用□不适用\n接待时间\n接待地点\n接待方\n式\n接待对\n象类型\n接待\n对象\n谈论的主\n要内容及\n提供的资\n料\n调研的基本情况索引\n2025 年07\n月21 日\n1.参观公司总部科技展\n厅、珠海格力绿控科技\n有限公司、珠海格力电\n子元器件有限公司\n2.公司总部五楼会议室\n交流"
+                },
+                {
+                  "chunk_id": "56951f74e5de9999ae0dcf360897dae9ffa1ab9ea07ea23726cfe13ee55ca5a6",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "e7caffc1b98d4acb216fb1eb16819aac37b502fa7c5bc0ec843cf2d4e247da81",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 70,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "2da66cec-7a0a-447a-aea2-30326f53c8b9",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "另有汇率风险应对措施披露（远期结售汇、外汇期权）；委托理财余额列示于报告中，但属资金运用信息，不构成本节经营风险的原文表述。证据仅覆盖上述段落，未见完整风险清单，可能存在未捕获章节。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "actions": [
+                {
+                  "href": "/research?mode=operating",
+                  "kind": "review_sources",
+                  "label": "核对来源及明确选择已确认事实"
+                },
+                {
+                  "href": "/sources",
+                  "kind": "reason",
+                  "label": "evidence_or_confirmation_missing"
+                }
+              ],
+              "data_origin": "unresolved",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "3a837a6c-b2eb-4282-9c93-dec7a168b493",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "origin": "system",
+              "schema_version": "research-finding-v2",
+              "source_status": "unresolved",
+              "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+              "transcription_review_status": "not_applicable",
+              "unresolved_question": "检索结果没有通过固定来源和逐页精确引用核验。"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [
+                {
+                  "chunk_id": "c2199257bd48cbed48e88bcbc9ecc3bff2c5d65cfd7aeac8f9f0523d9704ded4",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、工艺\n降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险"
+                },
+                {
+                  "chunk_id": "06062b6ccf098995cc3c12c09a598521ed37f13d3f1894b29ae0514cd04dddc9",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险\n家用电器领域市场竞争充分，市场参与者涵盖国内头部企业、跨界新势力及国际品牌，行业竞争持续升温。若公司不\n能持续巩固和扩大竞争优势，将面临市场份额损失的风险。公司将继续加大研发投入，通过持续的技术创新和品质引领巩\n固品牌影响力和市场地位。\n（4）海外市场风险\n近年来全球局势复杂多变，风险可能持续上升，对公司海外市场业务开展带来不利影响。公司将继续加大海外市场拓\n展力度，优化海外市场布局，着力开拓新兴市场。同时，海外市场人文环境、文化宗教、法律体系、市场需求差异显著，"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "1233b4a7-bd02-4b54-b04f-d030b847901e",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "年报披露的主要经营风险包括：宏观经济增速放缓与外部不确定性导致需求及购买力承压；铜、钢、铝、塑料等原材料价格上涨压缩盈利空间；家电行业竞争加剧可能造成份额流失；海外市场受全球局势及人文法律差异影响；人民币汇率大幅波动带来汇兑损益。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [
+                {
+                  "chunk_id": "00dfc54d7f8e6fd552cf73181b83e26ea3e3b00c82713bc345691af5af185543",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "市场拓展挑战重重，公司将持续推进品牌自主化和运营本土化战略，强化风险管控，提升全球运营能力。\n（5）汇率波动风险\n若人民币汇率短期内出现大幅波动，可能产生汇兑损益，对公司盈利水平与海外业务竞争力造成影响。公司将持续加\n强汇率走势研判与风险敞口管理，提升出口产品定价与议价能力，合理运用远期结售汇、外汇期权等金融工具，有效规避\n汇率波动风险，降低汇兑损失。\n十二、报告期内接待调研、沟通、采访等活动\n适用□不适用\n接待时间\n接待地点\n接待方\n式\n接待对\n象类型\n接待\n对象\n谈论的主\n要内容及\n提供的资\n料\n调研的基本情况索引\n2025 年07\n月21 日\n1.参观公司总部科技展\n厅、珠海格力绿控科技\n有限公司、珠海格力电\n子元器件有限公司\n2.公司总部五楼会议室\n交流"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "e92b3541-9801-4721-a402-7dbc62d47417",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "证据缺口：现有片段仅覆盖宏观经济、要素价格、竞争、海外与汇率五类风险及公司应对措施，未涵盖其他章节可能披露的风险（如质量、环保、供应链等）；且一次检索未通过核验，风险清单完整性无法确认，相关数值与影响程度均未验证。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [
+                {
+                  "chunk_id": "c2199257bd48cbed48e88bcbc9ecc3bff2c5d65cfd7aeac8f9f0523d9704ded4",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、工艺\n降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险"
+                },
+                {
+                  "chunk_id": "06062b6ccf098995cc3c12c09a598521ed37f13d3f1894b29ae0514cd04dddc9",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险\n家用电器领域市场竞争充分，市场参与者涵盖国内头部企业、跨界新势力及国际品牌，行业竞争持续升温。若公司不\n能持续巩固和扩大竞争优势，将面临市场份额损失的风险。公司将继续加大研发投入，通过持续的技术创新和品质引领巩\n固品牌影响力和市场地位。\n（4）海外市场风险\n近年来全球局势复杂多变，风险可能持续上升，对公司海外市场业务开展带来不利影响。公司将继续加大海外市场拓\n展力度，优化海外市场布局，着力开拓新兴市场。同时，海外市场人文环境、文化宗教、法律体系、市场需求差异显著，"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "731f5e14-9f03-4359-8dea-c8ac87d6a075",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "年报披露的主要经营风险包括：宏观经济增速放缓与外部不确定性导致消费需求与购买力承压；铜、钢、铝、塑料等原材料价格上涨压缩盈利空间；家电行业竞争加剧，参与者涵盖国内头部企业、跨界新势力及国际品牌，可能造成份额流失；海外市场受全球局势及人文法律差异影响；人民币汇率大幅波动带来汇兑损益。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [
+                {
+                  "chunk_id": "00dfc54d7f8e6fd552cf73181b83e26ea3e3b00c82713bc345691af5af185543",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "市场拓展挑战重重，公司将持续推进品牌自主化和运营本土化战略，强化风险管控，提升全球运营能力。\n（5）汇率波动风险\n若人民币汇率短期内出现大幅波动，可能产生汇兑损益，对公司盈利水平与海外业务竞争力造成影响。公司将持续加\n强汇率走势研判与风险敞口管理，提升出口产品定价与议价能力，合理运用远期结售汇、外汇期权等金融工具，有效规避\n汇率波动风险，降低汇兑损失。\n十二、报告期内接待调研、沟通、采访等活动\n适用□不适用\n接待时间\n接待地点\n接待方\n式\n接待对\n象类型\n接待\n对象\n谈论的主\n要内容及\n提供的资\n料\n调研的基本情况索引\n2025 年07\n月21 日\n1.参观公司总部科技展\n厅、珠海格力绿控科技\n有限公司、珠海格力电\n子元器件有限公司\n2.公司总部五楼会议室\n交流"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "fecce8f5-1a42-4e10-a73d-5c404e328b86",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "公司对上述风险披露了应对措施，如套期保值、战略备货、加大研发投入、优化海外布局、运用远期结售汇与外汇期权等。但现有证据仅覆盖宏观经济、要素价格、竞争、海外与汇率五类风险，未涵盖其他章节可能披露的风险，风险清单完整性无法确认。",
+              "transcription_review_status": "not_applicable"
+            }
+          ],
+          "goal": "请根据格力2025年报总结主要经营风险，只要原文与解释，不要计算。",
+          "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+          "limitations": [
+            "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+            "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+          ],
+          "mode": "deep",
+          "schema_version": "showcase-research-result-v2",
+          "scope_hash": "ec0ae1cef70573a6a86a25136532c0d28e21bfda20d9b39e5c23bc938b16a65f"
+        }
+      },
+      "events": {
+        "schema_version": "execution-events-v1",
+        "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+        "events": [
+          {
+            "agent_id": "controller",
+            "event_seq": 1,
+            "event_type": "phase",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "批准计划已登记",
+            "public_summary": "批准计划已登记",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:20:55.307731+00:00"
+          },
+          {
+            "agent_id": "supervisor",
+            "event_seq": 2,
+            "event_type": "phase",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "按计划分派只读子任务",
+            "public_summary": "按计划分派只读子任务",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:55.308924+00:00"
+          },
+          {
+            "agent_id": "evidence",
+            "event_seq": 3,
+            "event_type": "phase",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "子任务开始",
+            "public_summary": "子任务开始",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:55.309948+00:00"
+          },
+          {
+            "agent_id": "risk_operations",
+            "event_seq": 4,
+            "event_type": "phase",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "子任务开始",
+            "public_summary": "子任务开始",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:55.313861+00:00"
+          },
+          {
+            "agent_id": "evidence",
+            "event_seq": 5,
+            "event_type": "tool",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:56.249838+00:00"
+          },
+          {
+            "agent_id": "risk_operations",
+            "event_seq": 6,
+            "event_type": "tool",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:56.253513+00:00"
+          },
+          {
+            "agent_id": "risk_operations",
+            "event_seq": 7,
+            "event_type": "tool",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:20:57.873839+00:00"
+          },
+          {
+            "agent_id": "risk_operations",
+            "event_seq": 8,
+            "event_type": "tool",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:57.876462+00:00"
+          },
+          {
+            "agent_id": "evidence",
+            "event_seq": 9,
+            "event_type": "tool",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:20:59.521903+00:00"
+          },
+          {
+            "agent_id": "evidence",
+            "event_seq": 10,
+            "event_type": "tool",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:20:59.525060+00:00"
+          },
+          {
+            "agent_id": "risk_operations",
+            "event_seq": 11,
+            "event_type": "tool",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:21:02.748555+00:00"
+          },
+          {
+            "agent_id": "evidence",
+            "event_seq": 12,
+            "event_type": "tool",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "search_evidence",
+            "public_summary": "search_evidence",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:21:03.088946+00:00"
+          },
+          {
+            "agent_id": "risk_operations",
+            "event_seq": 13,
+            "event_type": "phase",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "子任务已交接",
+            "public_summary": "子任务已交接",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:21:04.750896+00:00"
+          },
+          {
+            "agent_id": "evidence",
+            "event_seq": 14,
+            "event_type": "phase",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "子任务已交接",
+            "public_summary": "子任务已交接",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:21:05.484547+00:00"
+          },
+          {
+            "agent_id": "verifier",
+            "event_seq": 15,
+            "event_type": "phase",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "复核引用与财务资格",
+            "public_summary": "复核引用与财务资格",
+            "schema_version": "execution-event-v1",
+            "state": "running",
+            "timestamp": "2026-11-03T06:21:05.485975+00:00"
+          },
+          {
+            "agent_id": "verifier",
+            "event_seq": 16,
+            "event_type": "phase",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "结果核验完成，准备保存",
+            "public_summary": "结果核验完成，准备保存",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:21:09.407656+00:00"
+          },
+          {
+            "agent_id": "controller",
+            "event_seq": 17,
+            "event_type": "phase",
+            "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+            "label": "结果已保存",
+            "public_summary": "结果已保存",
+            "schema_version": "execution-event-v1",
+            "state": "completed",
+            "timestamp": "2026-11-03T06:21:09.411244+00:00"
+          }
+        ],
+        "next_after_seq": 17
+      },
+      "elapsed_ms": 16480,
+      "report": {
+        "schema_version": "showcase-report-v2",
+        "report_id": "c8202e7b-3576-432f-ab42-571c89389237",
+        "revision": 1,
+        "title": "格力2025经营风险 · 双 Agent真实研究",
+        "notes": "公开年报实际模型运行。AI解释待审，无财务真人确认。",
+        "created_at": "2026-11-03T06:21:13.102542+00:00",
+        "snapshot": {
+          "company_name": "珠海格力电器股份有限公司",
+          "data_origin": "live",
+          "findings": [
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "56951f74e5de9999ae0dcf360897dae9ffa1ab9ea07ea23726cfe13ee55ca5a6",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "e7caffc1b98d4acb216fb1eb16819aac37b502fa7c5bc0ec843cf2d4e247da81",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 70,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "7dd08176-e7e9-4500-8239-d5f32c3b183b",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "numeric_claim_status": null,
+              "source_status": "current",
+              "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "06062b6ccf098995cc3c12c09a598521ed37f13d3f1894b29ae0514cd04dddc9",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险\n家用电器领域市场竞争充分，市场参与者涵盖国内头部企业、跨界新势力及国际品牌，行业竞争持续升温。若公司不\n能持续巩固和扩大竞争优势，将面临市场份额损失的风险。公司将继续加大研发投入，通过持续的技术创新和品质引领巩\n固品牌影响力和市场地位。\n（4）海外市场风险\n近年来全球局势复杂多变，风险可能持续上升，对公司海外市场业务开展带来不利影响。公司将继续加大海外市场拓\n展力度，优化海外市场布局，着力开拓新兴市场。同时，海外市场人文环境、文化宗教、法律体系、市场需求差异显著，"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "bc6a3502-c18b-42e2-9199-a46728057942",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "numeric_claim_status": null,
+              "source_status": "current",
+              "text": "降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险\n家用电器领域市场竞争充分，市场参与者涵盖国内头部企业、跨界新势力及国际品牌，行业竞争持续升温。若公司不\n能持续巩固和扩大竞争优势，将面临市场份额损失的风险。公司将继续加大研发投入，通过持续的技术创新和品质引领巩\n固品牌影响力和市场地位。\n（4）海外市场风险\n近年来全球局势复杂多变，风险可能持续上升，对公司海外市场业务开展带来不利影响。公司将继续加大海外市场拓\n展力度，优化海外市场布局，着力开拓新兴市场。同时，海外市场人文环境、文化宗教、法律体系、市场需求差异显著，",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "c2199257bd48cbed48e88bcbc9ecc3bff2c5d65cfd7aeac8f9f0523d9704ded4",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、工艺\n降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "c63f5fd4-b047-42b0-bd84-be056526a99c",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "numeric_claim_status": null,
+              "source_status": "current",
+              "text": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、工艺\n降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "00dfc54d7f8e6fd552cf73181b83e26ea3e3b00c82713bc345691af5af185543",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "市场拓展挑战重重，公司将持续推进品牌自主化和运营本土化战略，强化风险管控，提升全球运营能力。\n（5）汇率波动风险\n若人民币汇率短期内出现大幅波动，可能产生汇兑损益，对公司盈利水平与海外业务竞争力造成影响。公司将持续加\n强汇率走势研判与风险敞口管理，提升出口产品定价与议价能力，合理运用远期结售汇、外汇期权等金融工具，有效规避\n汇率波动风险，降低汇兑损失。\n十二、报告期内接待调研、沟通、采访等活动\n适用□不适用\n接待时间\n接待地点\n接待方\n式\n接待对\n象类型\n接待\n对象\n谈论的主\n要内容及\n提供的资\n料\n调研的基本情况索引\n2025 年07\n月21 日\n1.参观公司总部科技展\n厅、珠海格力绿控科技\n有限公司、珠海格力电\n子元器件有限公司\n2.公司总部五楼会议室\n交流"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "e9715664-5d7a-48d2-bb33-368504482dfc",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "numeric_claim_status": null,
+              "source_status": "current",
+              "text": "市场拓展挑战重重，公司将持续推进品牌自主化和运营本土化战略，强化风险管控，提升全球运营能力。\n（5）汇率波动风险\n若人民币汇率短期内出现大幅波动，可能产生汇兑损益，对公司盈利水平与海外业务竞争力造成影响。公司将持续加\n强汇率走势研判与风险敞口管理，提升出口产品定价与议价能力，合理运用远期结售汇、外汇期权等金融工具，有效规避\n汇率波动风险，降低汇兑损失。\n十二、报告期内接待调研、沟通、采访等活动\n适用□不适用\n接待时间\n接待地点\n接待方\n式\n接待对\n象类型\n接待\n对象\n谈论的主\n要内容及\n提供的资\n料\n调研的基本情况索引\n2025 年07\n月21 日\n1.参观公司总部科技展\n厅、珠海格力绿控科技\n有限公司、珠海格力电\n子元器件有限公司\n2.公司总部五楼会议室\n交流",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "c2199257bd48cbed48e88bcbc9ecc3bff2c5d65cfd7aeac8f9f0523d9704ded4",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、工艺\n降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险"
+                },
+                {
+                  "chunk_id": "06062b6ccf098995cc3c12c09a598521ed37f13d3f1894b29ae0514cd04dddc9",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险\n家用电器领域市场竞争充分，市场参与者涵盖国内头部企业、跨界新势力及国际品牌，行业竞争持续升温。若公司不\n能持续巩固和扩大竞争优势，将面临市场份额损失的风险。公司将继续加大研发投入，通过持续的技术创新和品质引领巩\n固品牌影响力和市场地位。\n（4）海外市场风险\n近年来全球局势复杂多变，风险可能持续上升，对公司海外市场业务开展带来不利影响。公司将继续加大海外市场拓\n展力度，优化海外市场布局，着力开拓新兴市场。同时，海外市场人文环境、文化宗教、法律体系、市场需求差异显著，"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "1bcb09ee-8c63-4e8a-b892-a7319d2a51b6",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "年报披露的经营风险包括：宏观经济增速放缓与外部不确定性影响消费需求；铜、铝等原材料价格上涨压缩盈利空间；家电市场竞争加剧，参与者含国内头部、跨界新势力及国际品牌；海外局势与人文法律差异带来海外市场风险；人民币汇率大幅波动产生汇兑损益。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "00dfc54d7f8e6fd552cf73181b83e26ea3e3b00c82713bc345691af5af185543",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "市场拓展挑战重重，公司将持续推进品牌自主化和运营本土化战略，强化风险管控，提升全球运营能力。\n（5）汇率波动风险\n若人民币汇率短期内出现大幅波动，可能产生汇兑损益，对公司盈利水平与海外业务竞争力造成影响。公司将持续加\n强汇率走势研判与风险敞口管理，提升出口产品定价与议价能力，合理运用远期结售汇、外汇期权等金融工具，有效规避\n汇率波动风险，降低汇兑损失。\n十二、报告期内接待调研、沟通、采访等活动\n适用□不适用\n接待时间\n接待地点\n接待方\n式\n接待对\n象类型\n接待\n对象\n谈论的主\n要内容及\n提供的资\n料\n调研的基本情况索引\n2025 年07\n月21 日\n1.参观公司总部科技展\n厅、珠海格力绿控科技\n有限公司、珠海格力电\n子元器件有限公司\n2.公司总部五楼会议室\n交流"
+                },
+                {
+                  "chunk_id": "56951f74e5de9999ae0dcf360897dae9ffa1ab9ea07ea23726cfe13ee55ca5a6",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "e7caffc1b98d4acb216fb1eb16819aac37b502fa7c5bc0ec843cf2d4e247da81",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 70,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "珠海格力电器股份有限公司2025 年年度报告全文\n69\n报告期内委托理财概况\n单位：万元\n产品类别\n风险特征\n报告期内委托理财的余额\n逾期未收回的金额\n银行理财产品\n中低风险\n1,902,514.90\n信托理财产品\n中低风险\n129,369.12\n券商理财产品\n中低风险\n1,201,395.58\n合计\n3,233,279.60\n公司作为单一委托人委托金融机构开展资产管理，或投资安全性较低、流动性较差的高风险委托理财具体情况\n□适用不适用\n（2）委托贷款情况\n□适用不适用\n公司报告期不存在委托贷款。\n4.其他重大合同\n□适用不适用\n公司报告期不存在其他重大合同。\n十六、募集资金使用情况\n□适用不适用\n公司报告期无募集资金使用情况。\n十七、其他重大事项的说明\n适用□不适用"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "2da66cec-7a0a-447a-aea2-30326f53c8b9",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "另有汇率风险应对措施披露（远期结售汇、外汇期权）；委托理财余额列示于报告中，但属资金运用信息，不构成本节经营风险的原文表述。证据仅覆盖上述段落，未见完整风险清单，可能存在未捕获章节。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "3a837a6c-b2eb-4282-9c93-dec7a168b493",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "numeric_claim_status": null,
+              "source_status": "unavailable",
+              "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "c2199257bd48cbed48e88bcbc9ecc3bff2c5d65cfd7aeac8f9f0523d9704ded4",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、工艺\n降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险"
+                },
+                {
+                  "chunk_id": "06062b6ccf098995cc3c12c09a598521ed37f13d3f1894b29ae0514cd04dddc9",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险\n家用电器领域市场竞争充分，市场参与者涵盖国内头部企业、跨界新势力及国际品牌，行业竞争持续升温。若公司不\n能持续巩固和扩大竞争优势，将面临市场份额损失的风险。公司将继续加大研发投入，通过持续的技术创新和品质引领巩\n固品牌影响力和市场地位。\n（4）海外市场风险\n近年来全球局势复杂多变，风险可能持续上升，对公司海外市场业务开展带来不利影响。公司将继续加大海外市场拓\n展力度，优化海外市场布局，着力开拓新兴市场。同时，海外市场人文环境、文化宗教、法律体系、市场需求差异显著，"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "1233b4a7-bd02-4b54-b04f-d030b847901e",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "年报披露的主要经营风险包括：宏观经济增速放缓与外部不确定性导致需求及购买力承压；铜、钢、铝、塑料等原材料价格上涨压缩盈利空间；家电行业竞争加剧可能造成份额流失；海外市场受全球局势及人文法律差异影响；人民币汇率大幅波动带来汇兑损益。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "00dfc54d7f8e6fd552cf73181b83e26ea3e3b00c82713bc345691af5af185543",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "市场拓展挑战重重，公司将持续推进品牌自主化和运营本土化战略，强化风险管控，提升全球运营能力。\n（5）汇率波动风险\n若人民币汇率短期内出现大幅波动，可能产生汇兑损益，对公司盈利水平与海外业务竞争力造成影响。公司将持续加\n强汇率走势研判与风险敞口管理，提升出口产品定价与议价能力，合理运用远期结售汇、外汇期权等金融工具，有效规避\n汇率波动风险，降低汇兑损失。\n十二、报告期内接待调研、沟通、采访等活动\n适用□不适用\n接待时间\n接待地点\n接待方\n式\n接待对\n象类型\n接待\n对象\n谈论的主\n要内容及\n提供的资\n料\n调研的基本情况索引\n2025 年07\n月21 日\n1.参观公司总部科技展\n厅、珠海格力绿控科技\n有限公司、珠海格力电\n子元器件有限公司\n2.公司总部五楼会议室\n交流"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "e92b3541-9801-4721-a402-7dbc62d47417",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "source_status": "current",
+              "text": "证据缺口：现有片段仅覆盖宏观经济、要素价格、竞争、海外与汇率五类风险及公司应对措施，未涵盖其他章节可能披露的风险（如质量、环保、供应链等）；且一次检索未通过核验，风险清单完整性无法确认，相关数值与影响程度均未验证。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "c2199257bd48cbed48e88bcbc9ecc3bff2c5d65cfd7aeac8f9f0523d9704ded4",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、工艺\n降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险"
+                },
+                {
+                  "chunk_id": "06062b6ccf098995cc3c12c09a598521ed37f13d3f1894b29ae0514cd04dddc9",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "降本、技术替代等多措并举，平抑原材料波动对经营的影响。\n（3）市场竞争加剧风险\n家用电器领域市场竞争充分，市场参与者涵盖国内头部企业、跨界新势力及国际品牌，行业竞争持续升温。若公司不\n能持续巩固和扩大竞争优势，将面临市场份额损失的风险。公司将继续加大研发投入，通过持续的技术创新和品质引领巩\n固品牌影响力和市场地位。\n（4）海外市场风险\n近年来全球局势复杂多变，风险可能持续上升，对公司海外市场业务开展带来不利影响。公司将继续加大海外市场拓\n展力度，优化海外市场布局，着力开拓新兴市场。同时，海外市场人文环境、文化宗教、法律体系、市场需求差异显著，"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "731f5e14-9f03-4359-8dea-c8ac87d6a075",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "年报披露的主要经营风险包括：宏观经济增速放缓与外部不确定性导致消费需求与购买力承压；铜、钢、铝、塑料等原材料价格上涨压缩盈利空间；家电行业竞争加剧，参与者涵盖国内头部企业、跨界新势力及国际品牌，可能造成份额流失；海外市场受全球局势及人文法律差异影响；人民币汇率大幅波动带来汇兑损益。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "00dfc54d7f8e6fd552cf73181b83e26ea3e3b00c82713bc345691af5af185543",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 39,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "市场拓展挑战重重，公司将持续推进品牌自主化和运营本土化战略，强化风险管控，提升全球运营能力。\n（5）汇率波动风险\n若人民币汇率短期内出现大幅波动，可能产生汇兑损益，对公司盈利水平与海外业务竞争力造成影响。公司将持续加\n强汇率走势研判与风险敞口管理，提升出口产品定价与议价能力，合理运用远期结售汇、外汇期权等金融工具，有效规避\n汇率波动风险，降低汇兑损失。\n十二、报告期内接待调研、沟通、采访等活动\n适用□不适用\n接待时间\n接待地点\n接待方\n式\n接待对\n象类型\n接待\n对象\n谈论的主\n要内容及\n提供的资\n料\n调研的基本情况索引\n2025 年07\n月21 日\n1.参观公司总部科技展\n厅、珠海格力绿控科技\n有限公司、珠海格力电\n子元器件有限公司\n2.公司总部五楼会议室\n交流"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "fecce8f5-1a42-4e10-a73d-5c404e328b86",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "source_status": "current",
+              "text": "公司对上述风险披露了应对措施，如套期保值、战略备货、加大研发投入、优化海外布局、运用远期结售汇与外汇期权等。但现有证据仅覆盖宏观经济、要素价格、竞争、海外与汇率五类风险，未涵盖其他章节可能披露的风险，风险清单完整性无法确认。",
+              "transcription_review_status": "not_applicable"
+            }
+          ],
+          "job_id": "a91af633-10f8-4ee9-9ff5-9d233956f86a",
+          "limitations": [
+            "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+            "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+          ],
+          "period_label": "2025",
+          "schema_version": "verified-report-job-v2",
+          "state": "completed",
+          "workspace_id": "demo"
+        }
+      }
+    }
+  ],
+  "human_financial_approvals": 0,
+  "browser_errors": [],
+  "report": {
+    "report_id": "c8202e7b-3576-432f-ab42-571c89389237",
+    "revision": 2,
+    "current_source_status": "stale"
+  },
+  "completed": false,
+  "failure": "Error: derived scan binding only"
+}

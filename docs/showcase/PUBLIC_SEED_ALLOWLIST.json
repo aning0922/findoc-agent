@@ -1,0 +1,23 @@
+{
+  "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c": {
+    "origin": "public_official",
+    "id": "gree-2025",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-29/1225250396.PDF"
+  },
+  "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006": {
+    "origin": "public_official",
+    "id": "gree-2024",
+    "url": "https://disc.static.szse.cn/disc/disk03/finalpage/2025-04-25/f3585bca-ade2-42b6-bee3-42bbb839897e.PDF"
+  },
+  "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c": {
+    "origin": "public_official",
+    "id": "midea-2025",
+    "url": "https://www.midea.com.cn/content/dam/mideacn-aem/%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB/2025%E5%B9%B4%E5%BA%A6%E6%8A%A5%E5%91%8A.pdf.coredownload.inline.pdf"
+  },
+  "175235d1122aec489a6c943ec8c1f8f9fcb5ffdd0e75f938f5ce6080c8ed163a": {
+    "origin": "derived_public",
+    "id": "midea-2025-derived-scan-page-9",
+    "derived_from_sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c",
+    "physical_page": 9
+  }
+}

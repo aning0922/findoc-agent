@@ -1,0 +1,15 @@
+{
+  "evidence": "ACTUAL_LOCAL_LAUNCHER_REAL_GATEWAY_MAIN_UI",
+  "kpis": {
+    "companies": 2,
+    "reports_ready": 3,
+    "research_completed": 2,
+    "reports": 2
+  },
+  "logged_out_ready": true,
+  "default_conflict_policy": "wait_only",
+  "llm_calls": 0,
+  "human_financial_approvals": 0,
+  "credentials_printed": false,
+  "owned_launcher_ctrl_c_stopped": true
+}

@@ -1,230 +1,111 @@
-<div align="center">
+# FinDoc Agent · 财报研究工作台
 
-# FinDoc Agent
+**从企业年报到有来源的研究结论。** 选择资料、核对原文、确认研究计划，查看 Agent 分工，并将结果保存为版本报告。
 
-**面向财报研究的 Agent 应用 · 让每个结论都有据可查**
+本分支是 **C 方案求职演示候选**，基于独立 V1.2 分支研发。它覆盖工作包 F01–F18 的功能入口，优先展示真实主路径；真人财务签核、固定评测完整层级和部分旧报告回归仍有明确缺口。当前没有公开部署，也没有合并 main。
 
-读取企业年报，核对财务数据，结合原文形成研究报告。
+![实际演示首页，1440 宽度](docs/showcase/evidence/M5/home-1440.png)
 
-[![Quality](https://github.com/aning0922/findoc-agent/actions/workflows/quality.yml/badge.svg)](https://github.com/aning0922/findoc-agent/actions/workflows/quality.yml)
-![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=flat-square&logo=python&logoColor=white)
-![React](https://img.shields.io/badge/React-19-149ECA?style=flat-square&logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+> 实际 React 页面与本地 HTTP 后端截图。KPI 来自当前种子库存：2 家企业、3 份 READY 官方年报、2 项历史研究、2 份报告。开启的折线／柱图为带水印的虚构界面示意；不能作为真实企业财务数值。已核准财务图仅接受当前有效的真人确认数据。
 
-[功能概览](#功能概览) · [Agent 工作流程](#agent-工作流程) · [本地演示](#本地演示) · [快速开始](#快速开始) · [项目文档](#项目文档)
+[演示录屏](docs/showcase/evidence/M5/showcase-walkthrough.webm) · [实际生成的 5 页报告 PDF](docs/showcase/evidence/M5/real-research-report.pdf) · [手机首页](docs/showcase/evidence/M5/home-390.png) · [三条面试脚本](docs/showcase/INTERVIEW_SCRIPTS.md) · [当前状态与证据](docs/showcase/STATE.md)
 
-</div>
+## 可以实际操作什么
 
----
+| 路径 | 行为与证据边界 |
+|---|---|
+| 登录与首页 | 固定部署者账号、20 分钟独占（可配 30）、冲突剩余时间、等待或 owner 二次确认接管；旧浏览器下线、整代环境恢复。首页搜索、KPI、三类图、最近研究、推荐问题连到真实业务入口。 |
+| 企业与资料 | 已验证演示目录覆盖美的／格力 2024、2025；明确下载后校验真实 PDF、解析和 BGE/Milvus 索引。也保留手动上传。目录不是全市场公告搜索。 |
+| OCR 与财务核对 | 真正执行 macOS Apple Vision OCR，提供原页、bbox 转录与表格候选；扩展总资产、总负债及资产负债率／变化信号，来源和真实财务日期独立保存。候选不自动成为财务事实。 |
+| 统一 AI 工作区 | 快速问答、综合研究、深度研究使用同一冻结资料会话；自然语言意图→计划→明确批准→阶段事件→四类发现→版本报告。需要财务数据时交给旧任务等待本人核对。 |
+| 有限 Multi-Agent | 单 Agent 与两个真实子代理的受限工具交接分别运行；检索、已确认事实、研究笔记工具由服务端检查来源、范围、次数与期限。公开阶段事件不包含私有思维链。 |
+| 记忆、偏好和报告 | BGE 语义笔记跨会话查询与删除，偏好实际改变首页指标／单位／问题顺序；报告不可变版本、原 PDF 页码、历史来源复核、打印保存 PDF。 |
+| 精选历史与评测 | 可恢复的公开精选种子；历史卡明确标识预置演示，不冒充新模型结果。15 条固定题、有限 intent 执行器与只读汇总器，失败与跳过保留。 |
 
-FinDoc Agent 将 **RAG 检索、受控工具调用、LangGraph 工作流与人工确认**结合在一个财报研究工作台中。用户可以上传中文企业年报、核对关键指标、比较财务变化、查阅原文，并将完成的经营研究保存为带有来源证据的版本报告。
+### 三种数据状态
 
-项目关注三个工程问题：**模型回答如何对应到原文，财务计算如何使用已确认的数据，研究任务如何在人工介入后继续执行。** 界面中保留的 FinDoc Analyst 是工作台名称，与本仓库属于同一项目。
+- **已核准**：服务端存在当前有效、由本人明确接受并保存的财务记录；金额与变化用 `Decimal` 计算。
+- **预置演示**：真实公开 PDF、已经完成的历史研究／报告、明确的示例笔记，附来源与版本；历史记录不能授权新任务。
+- **界面示意**：虚构图表序列，页面有醒目标识；没有真实财务确认时不补造企业数值。
 
-![FinDoc 研究首页](docs/images/home-1440.png)
+真实调用中的 AI 解释仍待人工审阅；精确引用校验不能替代语义判断。OCR 完成也不授予财务资格。旧 `ResearchRun` 原文、固定来源 revision、`ACCEPT → SAVE → RESUME` 与旧迁移合同保留。
 
-<sub>工作台读取已保存研究的截图。截图所用数据与运行状态见<a href="docs/project-status.md#界面截图">界面说明</a>。</sub>
+## 本地运行 C 候选
 
-## V1.2 多轮研究助手候选
-
-新增 `/conversations`：选择并冻结 1–4 份年报后，可连续追问、恢复历史，并沿核验引用打开原 PDF。公司、年度或指代不明确时先澄清；财务比较只使用明确选择且当前有效的已确认事实。用户可单独确认、编辑和删除研究偏好，后续会话在有限上下文中召回。
-
-本版以原文证据阅读和确定性财务结果为主，自由解释关闭。GET/历史恢复不会重发模型；未知提交通过原 operation 查询。当前是本地单人开发候选，真实模型观察、自动化测试与真人财务审核分别记录，尚不作为发布通过声明。
-
-[2026-11-03 交付审计](docs/conversation-v12/delivery-audit-20261103.md) · [使用与演示路径](docs/conversation-v12/user-guide.md) · [验证证据](docs/conversation-v12/tests.md) · [交付状态与限制](docs/conversation-v12/release-notes.md) · [可见聊天分工与模型调节](docs/conversation-v12/orchestration.md)
-
-## 本轮 UX 工作台
-
-当前开发分支将首页收敛为开始、待办、最近完成，并增加独立研究任务列表。新研究按目标、年报、核对推进；六项数据与实际 PDF 在同一页面核对，接受、保存和继续研究仍分别由用户明确操作。问答原文使用侧栏阅读；报告列表与版本阅读分离。
-
-迁移范围、独立审查和真实/模拟验收边界见 [UX 交付与验收](product/ux-simplification/verification.md)。上方首页及下方经营研究配图保留为改造前的历史截图。
-
-## 功能概览
-
-| 能力 | 使用方式 |
-| --- | --- |
-| **企业与年报管理** | 建立企业目录，上传年报，绑定报告年度与会计口径，查看解析和索引状态。 |
-| **财务核对与分析** | 提取营业收入、归母净利润、经营活动现金流量净额；对照 PDF 确认并保存后，进行单企业跨年分析或双企业同期比较。 |
-| **多轮研究助手** | 冻结年报范围、连续追问、持久历史与明确确认的研究偏好；证据/财务工具只读。 |
-| **原文问答** | 在选定报告中检索，由模型选择相关证据，服务端返回原文摘录、来源版本与页码；证据不足时拒答。 |
-| **经营研究** | 按研究模板组织数据核对、财务计算、经营原文检索和模型解释；缺少已确认数据时等待用户操作。 |
-| **版本报告** | 从已完成的经营研究生成草稿，编辑标题与结论，保存历史版本并导出指定版本的 Markdown。 |
-
-PDF 阅读器支持物理页定位、缩放、引用切换和金额区域高亮。高亮仅在坐标与同版本原文匹配时显示；没有可靠坐标时，仍可查看对应页和原文片段。
-
-<details>
-<summary><strong>查看经营研究与财务变化</strong></summary>
-
-![经营研究与三项财务变化](docs/images/midea-1440.png)
-
-<sub>已保存研究中的三项财务变化、原始金额、精确差额与证据入口。</sub>
-
-</details>
-
-## Agent 工作流程
-
-```text
-企业年报 PDF → 解析、分块与索引 → 带版本和页码的证据
-                                  │
-                  ┌───────────────┴────────────────┐
-                  ▼                                ▼
-              原文问答                         经营研究
-       检索 → 模型选择证据             财务候选 → 人工核对与接受
-                  │                                │
-                  ▼                                ▼
-       校验引用 → 原文摘录与历史          保存财务事实 → 确定性分析
-                                                   │
-                                                   ▼
-                                     经营原文检索 → 模型解释草稿
-                                                   │
-                                                   ▼
-                                     保存研究 → 报告版本 → 导出
-```
-
-LangGraph 管理经营研究的阶段、人工等待和继续执行。应用校验工具参数、来源范围及调用预算，财务差额和变化率由 Decimal 计算。模型负责证据选择与解释草稿，解释的人工审阅状态单独保留。
-
-用户确认候选数据、保存财务事实、继续研究是三个独立操作。刷新页面只读取已有结果；报告生成与导出复用已保存的经营研究。实现细节见[系统架构](docs/architecture.md)。
-
-## 本地演示
-
-先浏览已保存的研究、问答和报告，只需 Python 3.11+：
+准备 Python 3.11+、`uv`、Node.js 24 与 npm。真实语义检索使用本地 `BAAI/bge-m3`／Milvus Lite。OCR 的已验证引擎要求 macOS 与 Swift/Xcode Command Line Tools；其他平台尚需适配 OCR 引擎。
 
 ```bash
-git clone https://github.com/aning0922/findoc-agent.git
+git clone --branch codex/findoc-showcase-c-integration https://github.com/aning0922/findoc-agent.git
 cd findoc-agent
-python3 demo/serve.py --port 14406
-```
-
-打开 [http://127.0.0.1:14406/projects/findoc/](http://127.0.0.1:14406/projects/findoc/)。演示为静态历史阅读页面，不需要 API Key，也不会调用模型。可按“研究 → 原文问答 → 报告 → 版本比较 → 下载”浏览，详见[演示说明](demo/README.md)。
-
-## 快速开始
-
-以下步骤启动可上传资料和执行研究的完整工作台，命令采用 macOS / Linux shell 写法。
-
-### 1. 安装依赖
-
-准备 Python **3.11+**、`uv`、Node.js **24** 与 npm。克隆仓库后，在项目根目录执行：
-
-```bash
 uv sync --frozen
 npm --prefix frontend ci
 ```
 
-使用 nvm 管理 Node.js 时，可先执行 `nvm install` 和 `nvm use`，仓库的 `.nvmrc` 已指定 24。首次启动会下载或加载 `BAAI/bge-m3`，需要预留模型缓存空间和启动时间。
-
-### 2. 配置模型
-
-复制配置模板：
+首次使用先下载／加载 BGE 缓存。这个步骤可能较慢，launcher 不会自动下载模型或安装软件：
 
 ```bash
-cp -n .env.example .env
+uv run python -c 'from app.rag.embed import embed; print(len(embed(["财报研究"])[0]))'
 ```
 
-在 `.env` 中填写服务商提供的实际配置。完整工作台需要 OpenAI 兼容的 Chat Completions 接口，Agent 工具调用还需要所选模型支持 `tools`：
+### 1. 准备精选种子
 
-```dotenv
-LLM_API_KEY=your-api-key
-LLM_MODEL=your-model-name
-LLM_BASE_URL=https://your-provider.example/v1
-LLM_TIMEOUT_SECONDS=30
-```
-
-`.env` 不进入 Git。配置项说明见[开发指南](docs/development.md#模型与存储配置)。
-
-### 3. 启动后端
+源码 Git 不包含 PDF、数据库和模型权重。随本地候选另交付 `findoc-showcase-seed-v1.tar.gz`（约 29.4 MB），仅包含经过 allowlist 核验的公开资料及衍生历史；它不是私有数据库备份，也不含登录凭据或模型配置。源码远端尚未托管该二进制包，新 clone 需取得同一配套包。
 
 ```bash
-export FINDOC_RUNTIME_ROOT="$PWD/data/analyst-runtime"
-uv run uvicorn app.api.runtime_factory:create_isolated_runtime_app_from_env \
-  --factory \
-  --env-file .env \
-  --host 127.0.0.1 \
-  --port 8000
+# data/showcase-seed-v1 必须尚不存在，避免覆盖任何已有目录。
+test ! -e data/showcase-seed-v1 && tar -xzf /绝对路径/findoc-showcase-seed-v1.tar.gz -C data
+uv run python -c 'from pathlib import Path; from app.demo.seed import verify_seed; print(verify_seed(Path("data/showcase-seed-v1").resolve())[1])'
 ```
 
-该目录用于保存 PDF、索引和业务记录；以后使用同一路径读取已有数据。此入口要求绝对路径，并拒绝默认的 `data/runtime` 目录。使用单进程启动，不添加 `--reload`，以免热重载中断文档处理任务。
+Bundle SHA256：`3693670d2369e6bed5f4981108f00a62602686a6a72bc44a64dc997bc28a2afc`。Manifest SHA256：`efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4`。打包后已实际解包并重新验证。三个官方 READY 年报是格力 2024／2025、美的 2025；另有美的 2025 物理第 9 页派生的单页扫描样本与真实 OCR 产物。完整种子标识仅表示库存齐全。
 
-### 4. 启动前端
-
-另开终端，在项目根目录执行：
+### 2. 建立本机演示账户并启动
 
 ```bash
-npm --prefix frontend run dev -- --host 127.0.0.1
+uv run python scripts/run_showcase_local.py --init-config
+uv run python scripts/run_showcase_local.py --check
+uv run python scripts/run_showcase_local.py
 ```
 
-| 入口 | 地址 |
-| --- | --- |
-| 研究首页 | [http://127.0.0.1:5173/](http://127.0.0.1:5173/) |
-| 企业与资料 | [http://127.0.0.1:5173/companies](http://127.0.0.1:5173/companies) |
-| 研究助手 | [http://127.0.0.1:5173/conversations](http://127.0.0.1:5173/conversations) |
-| 单次原文问答（保留深链） | [http://127.0.0.1:5173/research?mode=qa](http://127.0.0.1:5173/research?mode=qa) |
-| 研究报告 | [http://127.0.0.1:5173/reports](http://127.0.0.1:5173/reports) |
-| API 文档 | [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) |
+`--init-config` 只生成一次 `data/showcase-local.env`，权限 600、Git 忽略。本人在本机文件查看固定账号、随机生成的共享密码与独立 owner 密码；重复初始化拒绝覆盖。可将其中 `DEMO_TTL_MINUTES` 设置为 `20` 或 `30`，默认 20。
 
-Vite 将 `/api` 代理到本地后端的 `8000` 端口。更多路由和端口设置见[开发指南](docs/development.md#页面与-api-入口)。
+打开 **http://127.0.0.1:14530**。默认等待策略 `wait_only`，无模型调用；可浏览完整历史、OCR 和报告。部署者明确需要 owner 接管时，启动参数加 `--owner-takeover`，仍需独立 owner 密码和二次确认。没有公共匿名强制接管配置。Ctrl+C 停止本次 launcher 的进程组；退出／到期／接管恢复隔离代，不覆盖原资料库。
 
-### 5. 开始一次研究
+### 3. 可选：启用真实模型
 
-1. 在首页建立企业，在“企业与资料”或研究的资料准备区域上传年报，核对企业、报告年度和会计准则。
-2. 等待资料处理完成，选择单企业两期或双企业同期研究。
-3. 按页面引导核对三项指标的原值、单位、期间与 PDF 来源，接受后单独保存财务事实。
-4. 返回研究任务，确认继续执行；研究完成后生成报告、保存版本或导出。
+在当前仓库或同一 Git common-dir 的 sibling worktree 中建立权限 600、被 Git 忽略的 `.env`，填写 `LLM_API_KEY`、`LLM_MODEL`、`LLM_BASE_URL`、`LLM_TIMEOUT_SECONDS`。本次预算代理仅验证了官方 `deepseek-flash` 与 `https://api.deepseek.com`（或 `/v1`），超时上限 240 秒；不要把密钥写入前端、命令行或源码。更换提供者需另行校准费用合同。
 
-连续追问可进入“研究助手”，选择报告并创建会话；单次原文核验仍可使用 `/research?mode=qa`。涉及差额、增长率等计算的问题需要走财务核对与分析流程。
-
-也可生成一份虚构资料，先体验 `/legacy` 中的单文档上传与问答：
+部署者首次明确采用本轮 5 元上限时，建立独立共享账本；同一路径已有账本不会清零或补充额度。以后直接复用，演示 reset 也不会补额度。
 
 ```bash
-uv run python scripts/generate_demo_pdf.py
+uv run python -c 'from pathlib import Path; from app.demo.provider_budget import ProviderBudget; ProviderBudget(Path("data/showcase-cost-control/provider-budget.db").resolve(), "5")'
+uv run python scripts/run_showcase_local.py --check --llm-config /绝对路径/.env
+uv run python scripts/run_showcase_local.py --llm-config /绝对路径/.env
 ```
 
-生成器打印实际文件路径，默认目录为 `artifacts/demo/`；这份资料用于基础问答，完整财务研究需要符合支持范围的年报。
+新模型请求均先预留保守上限，UNKNOWN 保留预留且不重试。不要删除账本来绕过原授权。本次开发验证累计 73 次物理调用、保守预留 **1.354700 元／5 元**，实际账单扣费未观测；不是线上账户余额或计费保证。[费用快照](docs/showcase/evidence/M5/latest-cost-summary.json)
 
-## 技术架构
+## 实际验证与限制
 
-| 层次 | 主要技术 |
-| --- | --- |
-| Web 界面 | React 19、TypeScript、Vite、Recharts、PDF.js |
-| API 与校验 | FastAPI、Pydantic |
-| 文档与检索 | PyMuPDF、pdfplumber、bge-m3、Milvus Lite |
-| Agent 与工作流 | OpenAI 兼容 SDK、受控工具循环、LangGraph |
-| 财务与持久化 | Decimal、SQLite、本地文件存储 |
-| 工程验证 | pytest、Ruff、mypy、Node.js 单元测试、Playwright |
+| 验证层 | 已有结果 |
+|---|---|
+| 双访客与 reset | 两个独立 Chromium 进程、真实 HTTP 和 BGE/Milvus；owner 接管、旧会话 401／卸载、脏新增删除、完整 seed 库存及 OCR SHA 恢复通过。 |
+| 真实资料／OCR | 实际官方下载并解析 219 页；真实 Apple Vision 对派生扫描页识别 68 行、54 候选格；三宽 1440／1280／390 实际检查，GET 预览不重做 OCR。 |
+| 模型与报告 | 实际主界面单／双 Agent 研究、来源核验、持久事件、两个报告版本、实际 5 页 PDF 与录屏；单／多分别 4／7 次模型调用，2／4 次工具调用。多 Agent 更优没有得到证明。 |
+| 语义记忆与偏好 | 真实本地 BGE、不同会话换词召回、删除后不再召回，以及首页三项偏好效果。 |
+| 离线与旧回归 | 最终独立审查 23 PASS；主控较宽回归 141 PASS、57 setup ERROR（缺旧 `product/validation/d21-real-research.json` fixture），不能称全套通过。launcher TTL 跟进 6 项测试通过；前端 build/lint 成功，现存 warning 保留。 |
+| 固定评测 | 15 条固定题，仅 5 条实际 intent 观察为 partial，10 条 skipped；其中 2 次模型提案通过验证，3 次走规则回退。尚无满足完整题目层级的 PASS，不报告虚假通过率。 |
+| 真人财务核准 | **未执行**。真实候选和旧任务已到等待本人核对；核准图／比率正向仅有 fake fixture 验证。Agent 未代签 ACCEPT／SAVE／RESUME。 |
 
-核心代码按 `app/documents`、`app/rag`、`app/agent`、`app/research`、`app/conversations`、`app/memory` 和 `app/reports` 划分职责。模块入口与数据流见[系统架构](docs/architecture.md)，前端运行说明见 [frontend/README.md](frontend/README.md)。
+官方目录仅两家两年，发布日期／更正状态未核实时为未知。OCR 表格需核对，派生单页不代表完整原生扫描年报能力；不自动升级旧来源或财务授权。阶段 UI 使用已持久事件轮询／SSE 重放，并非逐 token 流式文本。Dashboard 大量历史计数／排序及报告边界有 P2，见[已知限制](docs/showcase/KNOWN_ISSUES.md)。求职候选不承诺生产 SaaS 的并发、容灾和多租户能力。
 
-## 开发与验证
+## 结构与交付资料
 
-安装依赖后，可先执行：
+- `app/demo/`：独立控制库、会话／代际／子进程网关、种子核验、费用护栏。
+- `app/dashboard/`、`app/disclosures/`、`app/parsing/`、`app/finance_v2/`：首页、官方资料、独立 OCR 与财务扩展层。
+- `app/showcase_research/`、`app/research_memory/`、`app/showcase_reports/`、`app/showcase_seed/`：受限研究、语义记忆、版本报告、只读精选历史。
+- `frontend/`：React 19、TypeScript、Vite、Recharts、PDF.js；FastAPI／SQLite、BGE／Milvus、LangGraph 旧人工工作流。
+- [36 项任务状态](docs/showcase/task-board.csv)、[产品地图](docs/showcase/PRODUCT_MAP.md)、[接口合同](docs/showcase/contracts/API_MINIMUM.md)、[产品决策](docs/showcase/DECISIONS.md)、[验证记录](docs/showcase/EVIDENCE.md)、[最终独立审查](docs/showcase/reviews/FINAL-independent-review.md)、[本地交付说明](docs/showcase/DELIVERY.md)。
+- [V1.2 原 README 存档](docs/showcase/BASELINE_README_V12.md)（保持原文，内部相对链接以仓库根目录为上下文）、[V1.2 用户指南](docs/conversation-v12/user-guide.md)、[旧架构](docs/architecture.md)、[开发说明](docs/development.md)。旧文档不替代当前 C 候选入口与证据。
 
-```bash
-uv run pytest tests/test_parse.py tests/test_demo_pdf.py -q
-npm --prefix frontend test
-npm --prefix frontend run lint
-npm --prefix frontend run build
-```
-
-[Quality 工作流](https://github.com/aning0922/findoc-agent/actions/workflows/quality.yml) 运行受控后端检查、前端测试、构建与 Chromium 回归。模型和检索使用测试替身，覆盖交互与数据校验；真实模型效果需要单独评估。复现命令和私有测试资料的跳过规则见[开发与测试](docs/development.md#测试与-ci)。
-
-## 当前范围
-
-当前版本面向本地单人研究，主要覆盖已验证的中文文本层年报及三项财务指标。扫描件 OCR、任意表格版式、混合检索与 rerank、多用户认证和分布式任务调度尚未提供。
-
-财务记录、计算结果与模型解释分别保存。模型解释仍需人工审阅；来源变更或确认撤销后，系统会重新判断相关结果是否可用于分析和导出。已有验证、截图来源和功能限制见[项目状态](docs/project-status.md)。
-
-## 项目文档
-
-| 文档 | 阅读目的 |
-| --- | --- |
-| [V1.2 多轮与偏好交付](docs/conversation-v12/release-notes.md) | 查看独立分支、运行证据、真实/模拟边界和未完成的人工作业。 |
-| [系统架构](docs/architecture.md) | 理解 RAG、Agent、人工确认与版本报告如何协作。 |
-| [开发与测试](docs/development.md) | 配置运行环境、查找入口、复现测试与排查启动问题。 |
-| [项目状态与截图](docs/project-status.md) | 区分当前实现、公开可复现检查和历史验证记录。 |
-| [静态演示](demo/README.md) | 在不配置模型的情况下浏览历史案例。 |
-
----
-
-<div align="center">
-<strong>回到原文，核对数据，再形成研究结论。</strong>
-</div>
+本项目采用 AI 辅助研发与主控调度。Sol／Terra／Astra 会话分别承担后端、界面与独立审查，按任务实际调整模型和推理强度，交由主控审查集成；[调度记录](docs/showcase/orchestration.json)记录当前交付状态。真实模型、程序验证和财务真人签核分别记载，不将 AI 生成代码等同于作者独立手写经验。

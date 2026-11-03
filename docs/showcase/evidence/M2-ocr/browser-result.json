@@ -1,0 +1,25 @@
+{
+  "evidence": "REAL_CHROMIUM_HTTP_REAL_APPLE_VISION_DERIVED_SCAN",
+  "document_id": "dcf9d2e4b4569ec920e334d6e4978335fb06fd8a3d35e45967d6a2ac09cecfc7",
+  "artifact_id": "ec0cb70f-7ec0-48ab-9342-714088d985b9",
+  "input_sha256": "175235d1122aec489a6c943ec8c1f8f9fcb5ffdd0e75f938f5ce6080c8ed163a",
+  "output_sha256": "8a2f13c85a8bc1eedaabb8e57d6fe335229537971fe437a55414f034af96a84c",
+  "engine": {
+    "name": "Apple Vision VNRecognizeTextRequest",
+    "os_version": "Version 26.6.2 (Build 25G83)",
+    "version": "3"
+  },
+  "lines": 68,
+  "candidate_cells": 54,
+  "candidate_rows": 17,
+  "candidate_columns": 9,
+  "parse_posts": 1,
+  "llm_calls": 0,
+  "human_financial_approvals": 0,
+  "legacy_source_verified": false,
+  "limitations": [
+    "derived raster scan of public Midea page 9, not a native scanned filing",
+    "OCR and layout unreviewed",
+    "no legacy identity/financial approval"
+  ]
+}

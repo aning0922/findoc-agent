@@ -1,0 +1,14 @@
+{
+  "audit_model": "gpt-6.1-terra",
+  "audit_thinking": "medium",
+  "scope": "read-only archive membership, manifest hashes, stored evidence summaries; no browser/provider rerun",
+  "manifest_sha256": "efc10a4b48584747130af71ec82171a4e5f766fc53eb1ea92c21fe319e7b3ff4",
+  "bundle_sha256": "3693670d2369e6bed5f4981108f00a62602686a6a72bc44a64dc997bc28a2afc",
+  "manifest_files_verified": 28,
+  "bundle_exact_member_set": true,
+  "nonregular_or_symlink_members": 0,
+  "forbidden_member_paths": 0,
+  "worker_binary_content_secret_audit": false,
+  "root_additional_current_config_exact_secret_matches_in_seed": 0,
+  "unknown_or_unconfigured_secret_absence_proven": false
+}
