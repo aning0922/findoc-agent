@@ -11,6 +11,7 @@ const sessionPrefixes = [
   "findoc:research-draft-v2:", // product/researchDraft.ts
   "findoc:task-reading:", // product/researchReading.ts
   "findoc:upload-intent:", // product/DocumentLibrary.tsx
+  "findoc:parse-operation:", // product/parsing/ParseQualityPanel.tsx
   "findoc:disclosure-import:", // product/disclosures/DisclosurePanel.tsx
   "findoc:pending-operation:", // product/ResearchRuns.tsx
   "financial-acceptance-pending-v1:", // evidence/FinancialSession.tsx, incl history

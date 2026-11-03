@@ -356,6 +356,7 @@ if (!process.env.SHOWCASE_STORAGE_ONLY) {
     "findoc:upload-intent:old",
     "findoc:pending-operation:old",
     "findoc:disclosure-import:old",
+    "findoc:parse-operation:old",
     "financial-acceptance-pending-v1:old:history:id",
     "financial-facts-pending-v1:old",
     "embedded-review-session-v1:old",
