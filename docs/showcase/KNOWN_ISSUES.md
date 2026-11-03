@@ -1,14 +1,22 @@
-# 已知问题与未验证
+# 已知问题与未验证（主控当前状态）
 
-- P0（待实现）：现有底座没有 Demo 登录/代际复位；当前不能对外宣称支持。
-- P0（待实现）：首页新图表、OCR 真引擎、多 Agent 真交接、语义记忆和报告 PDF 待研发与直接证据。
-- human_pending：真实财务人工签核不能由代理代办；无回执时只展示候选或单独演示数据。
-- unverified：真实 BGE/Milvus 代际进程启动耗时、官方查询可用性、OCR 引擎安装与模型服务资源。不阻塞不相关模块。
-- 原私有测试集、PDF 与数据库保留；不复制未知隐私资产到种子或 Git。
+2026-11-03。完成范围以 task-board.csv 和各固定 SHA 证据为准。
 
-- 已修复的历史B02退回：370e3d0登录/成功流/错误模型设置；0ec4a71+主控8c2c8a7纠正并完成独立UI_MOCK验收，保留历史失败。
-- 外部来源预检：Web找到美的/格力2025年报候选URL，但实际打开分别404、timeout；不能声称官方下载已跑通。M2需真实HTTP与文件SHA核对；手动上传回退保留。
+## 当前待完成
 
-- M1 P0 OPEN（独立复现dcf6a8f）：公开/api pending Cookie路径不符；敏感请求读body跨owner授权到期仍转发。实现者修复中，必须在固定修复SHA定点复验，不能用6原单测PASS关闭。
-- H02/H03/L04视觉与身份候选88b94bc尚未集成，正式组合AppShell截图/负向状态修订进行中；原型UI通过不等同正式数据页完成。
-- D01外部源不再全阻断：四个既有官方PDF直接HTTP成功，详见D01_SOURCE_PREFLIGHT；通用公告查询与真实导入仍待D02。
+- M1/E03：已经验证登录/接管/旧访客下线/代际复位机制；种子仍为1家虚构企业的机制种子，没有完整产品的PDF/会话/报告/研究历史。不得称最终演示环境已经齐备。
+- M2：D02提供美的/格力2024/2025四份已验证演示目录，不是全市场实时公告搜索。发布日期/更正状态未查证，API为null。D03前端、O02解析产物/O03预览、F01–F03新指标研发中。
+- OCR：真实Apple Vision（Mac）已跑68行、27/27数字串诊断命中；样本为公开年报真实页的派生扫描，不是原生扫描公告。表格bbox初步聚类分行与原表不全一致，必须needs_review；MinerU/Paddle未安装，Linux可移植执行未验证。
+- M3：LLM意图/综合解释/Multi-Agent/语义研究记忆/报告PDF尚待实现与真实证据；旧V1.2能力不等于新增能力完成。
+- 外部配置：当前进程及两个已知仓库未找到有效LLM部署配置（只有空.example）。已询问部署者配置文件路径和小额验证预算；不接收聊天明文密钥，不从未知密钥库自行挪用。真实LLM调用尚为0，不阻塞离线模块。
+- human_pending：真实财务ACCEPT/SAVE/RESUME及v2人工签核不能由代理代办；无回执时只展示候选或单独示意数据。未执行财务人工确认、未发布部署、未合main或push。
+- P2：Node构建chunk>500KiB、fast-refresh/effect/ref lint提示，PyMuPDF SWIG弃用提示；真实BGE child退出的resource_tracker semaphore提示保留。没有据此扩大生产容灾/性能工作。
+- 私有测试集、原始PDF/真实数据库保留，不能复制未知隐私资产进seed或Git。所有当前机制测试均全新临时root。
+
+## 已关闭、保留失败记录
+
+- M1 Cookie Path旧P0：a9284b4/5ea5abb曾在/api浏览器失败；7f6f268改Path=/，Astra cf5f881独立真实Chromium/Vite验证login202→operations200→claim200，关闭。详review/M1-auth-followup-review.md（实际目录reviews）。
+- M1 owner grant旧P0：读取body跨5分钟仍转发曾复现；7f6f268读后/转发前重核，独立慢body测试403且upstream0，关闭。
+- D01官方链接Web工具404/timeout历史仍在；直接真实HTTP四PDF200/SHA已验证，D02额外真实格力2025下载/fast READY219页通过，fake embed/index，不把早期失败抹除。
+- UI初稿曾把开发模型切换误做产品设置、成功流/主布局不足；已退回修订。9cdc3d5正式首页新组件、79e7de6跨代提示及同代硬reload恢复已集成。UI_MOCK不等于真实后台；主控另有实际UI双独立Chromium+真实BGE/Milvus机制seed证据。
+- 主控首轮集成UI测试漏重新填写接管共享口令，等待disabled按钮失败；修测试后PASS。实际main样式覆盖Hero白色/导航navy由直接截图发现并修，不将mockfixture通过冒充最终视觉检查。

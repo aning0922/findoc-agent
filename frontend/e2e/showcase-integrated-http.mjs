@@ -20,6 +20,8 @@ try {
   }
   await a.goto(base);
   await a.getByRole('button', { name: '进入演示', exact: true }).waitFor();
+  assert(await a.locator('.demo-story h1').evaluate(el => getComputedStyle(el).color) === 'rgb(255, 255, 255)',
+    'actual global CSS preserves login cover contrast');
   for (const width of [1440, 1280, 390]) {
     await a.setViewportSize({ width, height: 1000 });
     await a.screenshot({ path: `${output}/login-${width}.png`, fullPage: true });
@@ -32,11 +34,25 @@ try {
   assert(initial.lease_generation >= 1 && initial.can_review === false, 'shared login grants no review authority');
   const counts = await a.evaluate(async () => (await fetch('/api/dashboard/overview')).json());
   assert(counts.kpis.companies === 1 && counts.kpis.reports_ready === 0, 'synthetic seed overview');
+  assert(await a.locator('.sd-hero h1').evaluate(el => getComputedStyle(el).color) === 'rgb(255, 255, 255)',
+    'actual product global CSS preserves hero contrast');
+  await a.evaluate(() => sessionStorage.setItem('findoc:conversation-operations:v1', 'UNKNOWN-SAME-LEASE-CHECK'));
+  await a.reload();
+  await a.getByRole('heading', { name: '研究概览', exact: true }).waitFor();
+  assert(await a.evaluate(() => sessionStorage.getItem('findoc:conversation-operations:v1')) === 'UNKNOWN-SAME-LEASE-CHECK',
+    'same verified lease hard reload preserves unknown operation hint');
   for (const width of [1440, 1280, 390]) {
     await a.setViewportSize({ width, height: 1000 });
     await a.screenshot({ path: `${output}/home-${width}.png`, fullPage: true });
     assert(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `home overflow ${width}`);
   }
+  await a.getByLabel('界面示意数据', { exact: true }).check();
+  await a.locator('.showcase-dashboard .recharts-line').waitFor();
+  for (const width of [1440, 390]) {
+    await a.setViewportSize({ width, height: 1000 });
+    await a.screenshot({ path: `${output}/home-illustrative-${width}.png`, fullPage: true });
+  }
+  await a.getByLabel('界面示意数据', { exact: true }).uncheck();
   await a.setViewportSize({ width: 1440, height: 1000 });
   // V1.2 mutation body has no operation_id; bootstrap must add the gateway envelope.
   const dirty = await a.evaluate(async () => {
@@ -76,6 +92,7 @@ try {
   assert(errors.length === 0, `browser runtime errors: ${errors.join('; ')}`);
   const result = { evidence: 'REAL_CHROMIUM_TWO_PROCESSES_REAL_HTTP_REAL_BGE_MILVUS_SYNTHETIC_SEED',
     checks: ['three-width login/home no overflow', 'pending cookie via Vite /api', 'legacy mutation envelope',
+      'same verified lease hard reload preserves UNKNOWN hint', 'actual CSS hero contrast', 'explicit illustrative chart route',
       'second browser conflict and explicit owner takeover', 'new generation restores seed', 'old browser HTTP401 and UI unmount', 'logout resets'],
     first_generation: initial.lease_generation, next_generation: after.session.lease_generation,
     llm_calls: 0, real_pdfs: 0, human_financial_approvals: 0, browser_errors: errors };

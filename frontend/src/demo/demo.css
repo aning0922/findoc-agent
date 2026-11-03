@@ -73,6 +73,7 @@
   font-weight: 700;
 }
 .demo-story h1 {
+  color: white;
   font-size: clamp(38px, 4vw, 60px);
   line-height: 1.3;
 }

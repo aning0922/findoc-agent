@@ -25,3 +25,5 @@ U01主控接线进行中：五导航顺序/中文名、Navy全站tokens、questi
 M1后台候选7f6f268已集成c826a05，Astra独立复核cf5f881→7141ec8正式关闭两旧P0；12定点PASS+真实HTTP到期1PASS，真实OS/HTTP/Chromium合成seed。主控真实产品main→Vite /api→controller→真实BGE/Milvus双独立Chromium也PASS：三宽login/home、旧DTO补X-Operation-ID、冲突/owner二次接管、旧A401/业务卸载、新代公司恢复1、logout ready、seed SHA不变（/private/var/folders/hs/czlwyhb553l9_ghpn6byp6v00000gn/T/findoc-integrated-http-uz81ifdo）。首轮test漏填再次共享口令失败保留，修test后PASS；实际截图发现旧CSS标题/导航覆盖，视觉修补后还需复跑截图。后台L03完整产品seed仍未完成。主控16目标tests PASS/ruff。
 
 下一批：原Demo后端会话转Sol/high F01/F02；原review会话转Terra/high O02独立产物；UI Sol/high正在补同代硬reload UNKNOWN提示保留，后转Terra/medium D03。LLM配置当前未知/缺失，已异步询问配置文件路径和小额验证预算，不收聊天密钥；独立研发继续。
+
+M1最终集成89230aa后实跑通过 ex46xvoe：同代硬reload保留UNKNOWN线索、跨代清理mock、真实CSS Hero白色、显式sample图真实端点（虚构数值有水印）、双独立Chromium真实HTTP/real child再通过，LLM0/真实PDF0/真人财务0。精选首页图与结果存档evidence/M1。查看实际390登录封面发现同类h1深色覆盖，主控demo.css补显式white，下一资料导入真实UI轮次复查；不回报该未复查截图完成。
