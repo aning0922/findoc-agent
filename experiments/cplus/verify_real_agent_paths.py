@@ -317,6 +317,30 @@ class Runner:
         self.save()
         return source, pages
 
+    def frozen_two_years(self):
+        current,current_pages=self.frozen_source()
+        older=[]
+        for doc in self.get('/documents'):
+            if doc['status']!='ready':
+                continue
+            metadata=self.get('/documents/'+quote(doc['document_id'],safe='')+'/metadata')
+            if metadata['company_id']==current['company_id'] and metadata['report_year']==2024:
+                older.append(doc['document_id'])
+        if len(older)!=1:
+            raise StopRun('explicit_gree_2024_not_unique')
+        previous=self.get('/cplus/documents/'+older[0]+'/research-source')
+        raw=self.get('/documents/'+older[0]+'/file',params={'source_revision':previous['source_revision'],'company_id':previous['company_id']},raw=True)
+        if hashlib.sha256(raw).hexdigest()!=previous['content_sha256']:
+            raise StopRun('older_http_pdf_sha_mismatch')
+        import pymupdf
+        with pymupdf.open(stream=raw,filetype='pdf') as pdf:
+            previous_pages=len(pdf)
+        sources=sorted([previous,current],key=lambda r:r['document_id'])
+        pages={current['document_id']:current_pages,previous['document_id']:previous_pages}
+        self.proof.update(interview_scope_variant='two_explicit_report_years_not_the_single_2025_fixed_fixture',sources=sources,http_pdfs=pages)
+        self.save()
+        return sources,pages
+
     def events(self, base, job_id):
         after, events = 0, []
         for _ in range(10):
@@ -333,12 +357,17 @@ class Runner:
         raise StopRun("events_page_bound_exceeded")
 
     def verify_findings(self, job, source, pages):
+        selected=source if isinstance(source,list) else [source]
         findings = job["result"]["findings"]
         if any(f["kind"] == "confirmed_financial" for f in findings):
             raise StopRun("unexpected_financial_authority_with_no_selected_facts")
         verified, seen = [], set()
         for finding in findings:
             for ref in finding.get("evidence_refs", []):
+                matched=[s for s in selected if s['document_id']==ref['document_id']]
+                if len(matched)!=1:
+                    raise StopRun('quote_outside_explicit_sources')
+                frozen=matched[0]
                 for key in (
                     "company_id",
                     "document_id",
@@ -346,9 +375,9 @@ class Runner:
                     "content_sha256",
                     "parser_version",
                 ):
-                    if ref[key] != source[key]:
+                    if ref[key] != frozen[key]:
                         raise StopRun("quote_outside_exact_frozen_source")
-                if not 1 <= ref["physical_page"] <= pages:
+                if not 1 <= ref["physical_page"] <= (pages[ref["document_id"]] if isinstance(pages,dict) else pages):
                     raise StopRun("quote_page_outside_http_pdf")
                 signature = digest(ref)
                 if signature in seen:
@@ -390,6 +419,7 @@ class Runner:
         }
         self.proof["cases"].append(entry)
         self.save()
+        selected=source if isinstance(source,list) else [source]
         prepaid=2 if prepared else 0
         if prepared:
             if prepared['case_id']!=case['id'] or prepared['exact_question']!=case['question'] or prepared['mode']!=mode or prepared.get('job_ack'):
@@ -401,13 +431,13 @@ class Runner:
             conversation = self.post(
                 "/conversations",
                 {
-                    "document_ids": [source["document_id"]],
+                    "document_ids": [s["document_id"] for s in selected],
                     "title": f"C+ {case['id']} {mode} bounded source study",
                 },
                 recovery=lambda oid: "/conversations/by-operation/" + oid,
             )
-            expected = {k: source[k] for k in IDENTITY_KEYS}
-            if conversation["sources"] != [expected] or conversation.get("active_turn_id"):
+            expected = [{k: s[k] for k in IDENTITY_KEYS} for s in selected]
+            if sorted(conversation["sources"],key=lambda r:r["document_id"]) != sorted(expected,key=lambda r:r["document_id"]) or conversation.get("active_turn_id"):
                 raise StopRun("conversation_scope_not_exact_or_has_active_turn")
             entry["conversation"] = conversation
             self.save()
@@ -577,10 +607,10 @@ class Runner:
         entry["budget_after"] = public_budget(self.window.current())
         self.save()
 
-    def execute(self, cases, username, password, *, only_mode=None, paired_case=False):
+    def execute(self, cases, username, password, *, only_mode=None, paired_case=False, two_years=False):
         try:
             self.login(username, password)
-            source, pages = self.frozen_source()
+            source, pages = self.frozen_two_years() if two_years else self.frozen_source()
             modes=(("E01-15","deep",10),("E01-15","synthesis",5)) if paired_case else CASE_MODES
             for case_id, mode, upper in modes:
                 if only_mode and mode != only_mode:
@@ -617,6 +647,7 @@ def main():
     p.add_argument("--max-new-calls", required=True, type=int, choices=range(1, 13))
     p.add_argument("--only-mode", choices=("deep", "synthesis"))
     p.add_argument("--api-prefix",choices=("", "/api"),default="",help="Use /api through the local React gateway; empty for direct controller")
+    p.add_argument("--two-report-years",action="store_true",help="Additional interview scenario with both explicit Gree2024/25 PDFs; not the single-year fixed-case fixture")
     p.add_argument("--paired-case",action="store_true",help="Execute the exact E01-15 question independently in both modes")
     p.add_argument("--private-session-file",type=Path,help="New ignored data/600 storage state for the root-owned browser only; never written into evidence")
     args = p.parse_args()
@@ -690,7 +721,7 @@ def main():
             origin=args.origin,
         )
         result = runner.execute(
-            cases, config["DEMO_USERNAME"], config["DEMO_PASSWORD"], only_mode=args.only_mode, paired_case=args.paired_case
+            cases, config["DEMO_USERNAME"], config["DEMO_PASSWORD"], only_mode=args.only_mode, paired_case=args.paired_case, two_years=args.two_report_years
         )
     print(
         json.dumps(

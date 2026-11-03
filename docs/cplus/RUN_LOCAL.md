@@ -29,16 +29,18 @@ V3本地bundle `data/findoc-showcase-cplus-seed-v3.tar.gz`，SHA-256 `c45d3cb8ec
 
 ## 模型和预算
 
-目前4次C+真实模型尝试均ReadTimeout/UNKNOWN，真实C+AI解释验收未通过。无模型模式展示原文与程序计算，不自动重试UNKNOWN。旧C归档若含旧真实模型结果只作历史展示。
+当前14540主控已启用部署者私有模型配置，真实来源问答/体检/跨年/模板/单多Agent/AI批次均有新成功。模型仅在显式动作后调用；省略以下两项启动即为disabled模式，页面保留真实工具数据而不会冒充AI。
 
-若供应商恢复后需小规模复测，在上方命令增加以下两项（密钥只从部署者私有文件读取）：
+在上方命令增加以下两项启用模型（密钥仅从私有文件读，不发聊天/不提交）：
 
 ```sh
 --llm-config /Users/aipuli/Documents/Projects/findoc-agent/.env \
 --provider-budget-db /Users/aipuli/.codex/worktrees/findoc-showcase-c-integration/findoc-agent/data/showcase-cost-control/provider-budget.db
 ```
 
-**必须是原同一5元账本，禁止初始化新额度、复制ledger或因generation重置预算。** 当前77物理调用（含原C73）、保守预留1.441018元、UNKNOWN4、账单未观察；预留不等于实际扣费。普通页面GET不调用模型。worker不直接调用provider。
+必须是原同一5元账本；禁止初始化新额度、复制ledger、按generation重置、退款UNKNOWN或自动重放。当前123 physical guarded SDK rows/保守预留2.468274元/UNKNOWN4，实际账单未观察。首次4次超时与后续真实成功分开记录。模板最多1次/AI批次每格最多1次，深研究有服务端上限和阶段预算；GET不调用模型。
+
+当前只保留主入口14540；仅用于隔离验收的14542已停止。默认20分钟wait_only；owner接管需另加既有授权配置，并在UI二次确认。退出后新seed恢复，但公共cache与原预算账本跨代保留。
 
 ## 导出与平台
 

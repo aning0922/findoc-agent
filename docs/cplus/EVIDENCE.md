@@ -71,3 +71,12 @@ AllC+current52PASS/3SKIP; standalonefullPDF testsalreadyseparatelyran (Midea1PAS
 - FinalcommandselectedC+ +demo/runtime/launcher90PASS/3SKIP/5SWIGwarnings(20.49s), 3SKIPopt-inrealPDFnotset; Node24 build/lint exit0 butlargechunk/React-hookswarnings retained(40warninglineslatestlog). No modelaccuracy/humanacceptance inferred.
 - Raw real-browser recordings3localwebm, exactbytes/SHA in `recordings.json`, 5–10minute pacedhuman guide `INTERVIEW_DEMOS.md`. Rawprivate/runtime/seeds remainGitignored; PDFs/examples here are publiccandidate artifacts, nofinancialsigning.
 - Samecanonical77physicalcalls/1.441018reservedcap5/UNKNOWN4/actualbillnot_observed unchanged acrossgenerations. C+newrealLLMsuccess0, providerdiagnosticsstopped; finalrepair/rules/retrieval/export0provider.
+
+## 最终候选追加（123-call检查点）
+
+- `eval/results/template-numeric-policy-real-v1`：真正一次新SDK、non_numeric_review_v1解释实际returned且published，AI仍待审；同版10候选点/3规则/趋势/三格式和浏览器PDF。旧年份错配未覆盖，已知缺口Astra独立f657917闭合。
+- `evidence/M5-followup/business-native-corrected.json`及`examples/manifest.json`：真实精确服务端ref/SHA；四示例文件可直接查看，CSV属性-text防Git换行变动。6页PPTX全部查看；6页浏览器PDF首末查看、全文无input_refs，不称全页目视通过。
+- 同图点`point-memory-final.json`原生9检查PASS，location_mode=page_only/物理页7/零矩形，真实明确回退，不写成exactquads；收藏→新context→BGE召回→删除→不命中。CP24加入13required-tier executed，13不是准确答案数。
+- 最终选择性后端命令 `PYTHONPATH=. FINDOC_EXPORT_PYTHON=<isolated-checks-python> <isolated-checks-python> -m pytest -q tests/test_cplus_*.py tests/test_showcase_local_launcher.py tests/test_demo*.py tests/test_runtime_startup.py`：155PASS/3SKIP/5warnings，48.49s。3opt-in真实PDF未设置，真实PDF/OCR/LLM/native另列。C+ env build exit0，大chunk warning保留。
+- 原全局5元ledger123 physical guarded rows/保守预留2.468274元/原UNKNOWN4/账单未观察；新修正窗口1row returned，logout200/旧session401/controllerready。原seed manifest重验相同，原C tracked tree clean45d55d7，main/V1.2未改。
+- readonly scoped child gate不允许把模板内部原answer作为独立report导出，raw answer仍可审阅；父模板仍可列出。初次新fixture缺无关legacy report state导致失败、补齐后9/9受控边界通过，失败不称应用真实权限失败。

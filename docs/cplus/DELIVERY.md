@@ -1,44 +1,33 @@
-# FinDoc C+ 求职展示候选交付
+# C+ 求职演示候选交付
 
-## 版本与状态
+基线 `codex/findoc-showcase-c-integration@45d55d75662f01d9bc78da1a946d845a01a27480`；独立分支 `codex/findoc-showcase-cplus-integration`。最终HEAD由Git和[草稿PR#3](https://github.com/aning0922/findoc-agent/pull/3)记录，base保持原C，未合并main、强推或公开部署。
 
-- BASE：`codex/findoc-showcase-c-integration@45d55d75662f01d9bc78da1a946d845a01a27480`。
-- C+：`codex/findoc-showcase-cplus-integration`，交付代码与证据检查点 `987e0c0712e285c67fbb07d344784b53bd6efcb9`；最终提交由同分支Git HEAD及草稿PR记录，不以文档自指SHA伪造最新状态。
-- M0合同冻结3c73732；独立Astra Ultra/High审查、root独占热点集成、Sol/Terra/Astra随任务调整。可见chat和设置见orchestration.json。
-- F19–F34均有可操作实现/真实限定样例。当前42任务36VERIFIED、6PARTIAL；部分为模型/人工语义/财务确认未验，不能写全绿。
-- 本机14540，独立cookie、20分钟、wait_only、modeldisabled；原C14530与原C/V1.2/main保留。未公开部署/自动合main/强推/代签财务。
+## 可体验成果
 
-草稿 PR：[aning0922/findoc-agent#3](https://github.com/aning0922/findoc-agent/pull/3)，base为原C集成分支，draft=true，未合并。
-
-## 用户能看到的成果
-
-|页面与动作|实际截图/证据|
+|路径|实际证据|
 |---|---|
-|首页真实预置候选曲线/KPI/任务环/搜索|[桌面](evidence/M5-interview/home-final-1440.png)、[1280](evidence/M5-interview/home-final-1280.png)、[手机真实viewport](evidence/M5-mobile-viewport/home-viewport-390.png)、[手机向下滚动的图表](evidence/M5-mobile-viewport/home-scrolled-390.png)|
-|360两年五KPI/折线、三表、三规则体检|[360桌面](evidence/M5-finance/company360-1440.png)、[手机](evidence/M5-finance/company360-390.png)、[三表](evidence/M5-finance/statements-1440.png)、[体检桌面](evidence/M5-finance/checkup-1440.png)、[体检手机](evidence/M5-finance/checkup-390.png)|
-|官网新公司/年报、缓存、恢复|[实际结果](evidence/M5-official-reset/result.json)，修复后拼音/代码跨generation共用PDF并重新建立本代绑定|
-|双年三主题、产品地区结构、四格矩阵|[三主题](evidence/M5-interview/annual-three-topics-1440.png)、[结构](evidence/M5-interview/segment-donut-1440.png)、[四格](evidence/M5-interview/batch-matrix-1440.png)、[逐格耗时/引用](eval/results/batch-v3-fixed/performance-summary.json)|
-|点图→原文→收藏→真实BGE查询→删除|[实际路径](evidence/M5-point-memory/result.json)、[页面](evidence/M5-point-memory/point-memory-1440.png)|
-|同版本CSV/Excel/PPTX/打印PDF|[原生导出](evidence/M5-native-exports/result.json)、[CSV](evidence/M4-native-exports/real-peer.csv)、[Excel](evidence/M4-native-exports/real-peer.xlsx)、[PPTX](evidence/M4-native-exports/real-peer.pptx)、[新版2页PDF](evidence/M5-native-exports/real-peer.pdf)|
+|现代首页、官方企业/年报搜索、显式下载/缓存/READY与恢复|M5-official-reset、M1-M2-native、原三宽首页截图；5READY公开年报，原V1/V3 manifest重验相同|
+|企业360五KPI含Decimal负债率、三表/实际期间/口径/原PDF、体检输入/下一问|[桌面](evidence/M5-followup/overview-1440.png)、[手机](evidence/M5-followup/overview-390.png)、[体检](evidence/M5-followup/checkup-1440.png)、G1-G5-native真实记录|
+|四类结构化模板、同年两公司对标、双年三主题/业务环形|四actual template_runs保留原后续selector失败；scope、核心5cell与原文结果实际可读，模板版本固定|
+|单/多Agent真实工具交接与报告|原单2025固定E01-15与额外2024/25双年路线分别保存；相同问题/来源/事实选择，双方两年引用。阶段事件/工具/报告重读不追加模型调用|
+|异步可取消AI批次|[实际矩阵](evidence/M5-followup/one-fault-three-results-1440.png)：3AI返回+1来源缺失UNKNOWN，恢复原PDF、GET不重放、历史可查；旧revision只取消queued|
+|图表→原文→记忆→删除|[最终实际回执](evidence/M5-followup/point-memory-final.json)：同比较期点位、显式scope、实际location/image、收藏、新context/BGE召回、删除后不命中。实际长表回退原页，不冒充精确quads|
+|真正图表报告草稿及精确版本导出|native chart报告rev1/record_refs重读一致、三格式真实HTTP；精确deep-link服务端SHA、原生CSV/Excel/PPTX、PDF，撤销权限不降级泄露|
 
-手机部分Chrome fullPage工件出现截图拼接重复。未据此宣称可用性通过：另用390×1000实际viewport与真实scroll检查，DOM hero/root各1，scrollY=1000后hero移出视区，图表/卡片正常且无横向溢出。原fullPage工件作为历史保留，主手机交付采用viewport。
+## 可直接检查的新版业务文件
 
-## 三条原始录屏
+[PDF](examples/cash-template-nonnumeric.pdf)、[PPTX](examples/cash-template-nonnumeric.pptx)、[Excel](examples/cash-template-nonnumeric.xlsx)、[CSV](examples/cash-template-nonnumeric.csv)均来自同一真实双年cash模板版本，精确ref/字节SHA见 [manifest](examples/manifest.json)。10个真实候选点、3条程序规则、业务趋势和新真实非数值AI待审解释同版保存。不是原始年报PDF，不授予人工核准。
 
-实际自动Chrome录屏，未剪辑成真人验收；无provider调用、无财务本人签核。5–10分钟讲解节奏见[INTERVIEW_DEMOS](INTERVIEW_DEMOS.md)。二进制保留本机被忽略目录，完整路径/字节SHA见[recordings.json](recordings.json)：
+原AI说明曾把年份金额顺序写反，失败工件/QA仍保留。新增non_numeric_review_v1隔离金额/年份/比率/数词输出，原child answer留作审阅但不作为独立报告导出；不自动重试。新真实单次解释已发布非数值草稿。独立Astra复核关闭已知错配/PDF规则JSON右溢，6页PPTX逐页查看；6页浏览器PDF只目视首末，全文检查无input_refs。不能夸大成所有AI语义正确或PDF所有页逐页审阅。
 
-- `data/cplus-delivery-media/route-a-official.webm`：官网搜索、明确导入、READY与360，约1.2MB。
-- `data/cplus-delivery-media/route-b-chart-memory.webm`：比较期点位、FTS/context、原文收藏/跨context真实语义查询/删除，约3.2MB。
-- `data/cplus-delivery-media/route-c-annual-batch-templates.webm`：三主题、业务环形、四格计划/批准/完成、两种模板、原文定位，约19MB。
+## 演示、运行和边界
 
-GitHub只含公开截图/候选文件和录屏索引，不把本机data链接伪称线上可播放视频。部署者可自行选择录屏发布，主控没有公开上传。
+本机入口 **http://127.0.0.1:14540**，当前预算模型已启用、默认20分钟wait_only、V3种子。最新测试已logout200/旧会话401/controllerready；固定凭据仅在ignored600服务端配置。验证端口14542已停止，旧C14530未修改。关闭本机进程后按[RUN_LOCAL](RUN_LOCAL.md)重启，不承诺无人服务后台永久运行。
 
-## 运行、证据与回退
+[三条5–10分钟面试路线](INTERVIEW_DEMOS.md)及[录屏SHA索引](recordings.json)区分原无模型A/B/C与新真实模型、文件、同图点补证。webm只保留本机ignored data，不将本机路径称为线上可播放地址。
 
-[RUN_LOCAL](RUN_LOCAL.md)包含此机准确Python/Node/seed/export renderer路径、私有配置要求、同账本模型可选参数。V3manifest d96b934...、bundle c45d3cb...完整SHA见该文；真实PDF/模型权重/私有数据库不入Git。原Cseed byte SHA已核验未改变。
+[固定24题矩阵](eval/CORE_EXECUTION_MATRIX.md)按actual execution/program checks/human acceptance分轴；13项required-tier已执行不等于13正确，未运行/错误/UNKNOWN保留。本人财务核准0，precision/MRR人类相关性标签为空。原C历史57fixture ERROR未被本轮局部绿色替代。
 
-[验收汇总](EVAL_RESULTS.md)将18场景与固定24题、真实/fixture/模型/人工分开。实际最终精选90PASS/3SKIP/5SWIGwarnings，Node24 build/lint exit0但chunk/hooks warnings保留。真实四格修复后119.413秒、34exact引用、GET不dispatch；原260秒UNKNOWN未重放。导出最终权限缺口经Astra独立复现、root修复、独立撤销403/恢复原bytes&ETag复验关闭，并补真实Chrome下载。
+最后费用：原同一5元账本123 physical SDK rows、保守预留 **2.468274元**、旧UNKNOWN4、实际账单未观察，无新额度/退款/代签。主控/3可见worker按阶段实际调节Sol/Terra/Astra与High/Medium/Ultra，记录见orchestration.json。最终正常push、同HEAD CI与分支SHA由PR记录；不将CI绿色当真实业务/模型验收。
 
-剩余六项PARTIAL主要是：真人财务核准、人工检索语义标注、真实AI体检/跨年解释与完整模型E2E。4次C+真实供应商请求均ReadTimeout/UNKNOWN，完整新真实模型答案PASS0；当前同一5元账本77次、预留1.441018元、实际账单未知。停止进一步付费诊断；其他所有可独立完成的本地模块/页面/演示已执行，未用mock补模型结果。
-
-恢复：退出重新物化V3seed，不清原数据库；程序UNKNOWN只查原operation；官方限制使用官网/手动上传；复杂表格unsupported保持；本人核准步骤见[HUMAN_PENDING](HUMAN_PENDING.md)。无新增费用/正式发布需要请求批准，后续若购买服务或提高5元cap才另行征询。
+人工剩余：本人核对财务原PDF与确认，人工语义/相关性标注；见[HUMAN_PENDING](HUMAN_PENDING.md)。新机器还需匹配seed bundle/模型权重，Git不包含原PDF/私有DB/凭据。其余有限支持和单期无趋势图限制见[KNOWN_ISSUES](KNOWN_ISSUES.md)。

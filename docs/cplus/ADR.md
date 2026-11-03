@@ -38,3 +38,13 @@
 - Executing an OCR scope requires the same currently active artifact as well as fixed bytes/hash/config/metadata/pages. New successful OCR makes old execution context stale; historical saved snapshots may remain read-only and must be marked historical/currentness separately. No silent artifact substitution or legacy READY grant.
 - Root read-only research-source returns the server-derived fast SourceRef; chart/template intent stored only as browser hints, re-read and expectedrevision checked before explicit context creation. Browser hints never authorize.
 - Native21-assertion proof uses model disabled and two Chromium processes; it is not a real-provider or human-confirmed finance acceptance.
+
+## G1–G7 最终装配补充（2026-11-03）
+
+- `template_run_v1`/`chart_report_v1`加入原单一报告注册表；各自不可变revision1。原始canonical payload SHA由服务器注册表提供，浏览器解析再序列化可能将0.0变0，不能重建原hash。精确GET使用domain/identifier/revision先筛选，再执行原owner/source/receipt/identity resolve；不是跳过校验。
+- 图表复制只接trend_id/kind/metric_keys；服务端重读实际cell/time/receipt后保存record_refs。四模板复用原statements/checkup/annual/peer/hybrid，默认不请求AI，显式请求最多一次。
+- 批次起始completed operation代表durable dispatch ACK，不表示所有格完成；完成状态通过GET。计划冻结pure_tools或ai_review，恢复后的批准界面以保存的limits/flags显示，不取新组件默认值。缺失/矛盾AI元数据禁止批准，旧纯工具兼容。
+- 计划不增格，所以可接受过去revision取消当前仍queued格；未来revision拒绝。取消不发布来源/财务内容，仅身份/owner fence，不让一格坏PDF阻止停止其他格。执行仍逐格校验捕获来源及最终COMMIT。
+- GET下载每次重解析原domain/id/revision/hash展示权限；撤销parent是403，不是历史降级。来源/receipt变化可读历史，不可授新执行资格。新域最终来源和receipt读锁持续到导出COMMIT，过期回滚并留UNKNOWN。
+- v3资产负债率使用所选同企业同一时点且已知一致口径/范围/币种/单位的资产与负债Decimal；分母正值、6位小数，否则空值+reason。未知行业/披露日期不从财年猜测。
+- 同source/完整cell身份/审核状态相同的重复提取，仅UI合并展示，原不可变保存记录保留。source/revision/status不同的不折叠。

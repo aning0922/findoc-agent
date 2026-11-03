@@ -1,0 +1,297 @@
+{
+  "tier": "REAL_REACT_HTTP_PUBLIC_PDF_CANDIDATE",
+  "provider_calls": 0,
+  "human_financial_approvals": 0,
+  "checks": [
+    "Gree 2025 real source",
+    "overview saved five candidate points without model",
+    "exact filtered registry template_run_v1",
+    "exact registry SHA selected template_run_v1",
+    "template_run_v1 no overflow 1440",
+    "template_run_v1 no overflow 390",
+    "export manifest template_run_v1",
+    "download SHA template_run_v1 csv",
+    "download SHA template_run_v1 xlsx",
+    "download SHA template_run_v1 pptx",
+    "selected five point trend",
+    "chart draft created from exact trend",
+    "immutable chart refs reread",
+    "exact filtered registry chart_report_v1",
+    "exact registry SHA selected chart_report_v1",
+    "chart_report_v1 no overflow 1440",
+    "chart_report_v1 no overflow 390",
+    "export manifest chart_report_v1",
+    "download SHA chart_report_v1 csv",
+    "logout and old session invalidated",
+    "service returns ready after logout"
+  ],
+  "http": [
+    {
+      "method": "GET",
+      "path": "/api/cplus/dashboard/financial-observations",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 114
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/d9080344-8c69-4dea-a5d9-51bf84710105/statements",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 36
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/d9080344-8c69-4dea-a5d9-51bf84710105/statements",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 35
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/d9080344-8c69-4dea-a5d9-51bf84710105/checkups",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 56
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/d9080344-8c69-4dea-a5d9-51bf84710105/workflow",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 58
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/401f7afa-48a5-412c-a23c-724d45d0a90d/statements",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 58
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/e345c2ec-3193-4c9d-8f9d-915a14c0ca3f/statements",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 58
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/research-source",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 161
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/documents/1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f/research-source",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 188
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/documents/de3575ae4220fd18b64f32ca74a442e63e06b705d9e4f9cda5065e386f357ccc/research-source",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 188
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/research-source",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 188
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/documents/d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92/research-source",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 188
+    },
+    {
+      "method": "POST",
+      "path": "/api/cplus/template-runs",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 15185
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/export-snapshots",
+      "query": "?domain=template_run_v1&identifier=dc54e30d-7879-4f19-9f47-fe2c4f0c4f22&revision=1",
+      "status": 200,
+      "elapsed_ms": 1425
+    },
+    {
+      "method": "POST",
+      "path": "/api/cplus/exports",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 2567
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/d9080344-8c69-4dea-a5d9-51bf84710105/checkups",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 71
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/401f7afa-48a5-412c-a23c-724d45d0a90d/statements",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 96
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/e345c2ec-3193-4c9d-8f9d-915a14c0ca3f/statements",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 112
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/research-source",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 286
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/research-source",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 318
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/d9080344-8c69-4dea-a5d9-51bf84710105/statements",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 1684
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/d9080344-8c69-4dea-a5d9-51bf84710105/statements",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 2240
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/documents/d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92/research-source",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 3061
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/companies/d9080344-8c69-4dea-a5d9-51bf84710105/workflow",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 3331
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/documents/1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f/research-source",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 3748
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/documents/de3575ae4220fd18b64f32ca74a442e63e06b705d9e4f9cda5065e386f357ccc/research-source",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 3753
+    },
+    {
+      "method": "POST",
+      "path": "/api/cplus/financial/trend-projections",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 2774
+    },
+    {
+      "method": "POST",
+      "path": "/api/cplus/report-drafts",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 805
+    },
+    {
+      "method": "GET",
+      "path": "/api/cplus/export-snapshots",
+      "query": "?domain=chart_report_v1&identifier=cf7bbb7b-1a26-4596-8384-ca7cb23b7b91&revision=1",
+      "status": 200,
+      "elapsed_ms": 2771
+    },
+    {
+      "method": "POST",
+      "path": "/api/cplus/exports",
+      "query": "",
+      "status": 200,
+      "elapsed_ms": 2394
+    }
+  ],
+  "files": [
+    {
+      "domain": "template_run_v1",
+      "format": "csv",
+      "bytes": 10451,
+      "sha256": "27f371da24944f40f158cabc3052767770cd59899d654054cff0fbcdbaf5f0fc",
+      "status": 200
+    },
+    {
+      "domain": "template_run_v1",
+      "format": "xlsx",
+      "bytes": 48909,
+      "sha256": "a510ed5e27744d9c817dfe40491f8a1e878a5ad8b3aaa7e4b65e3ddc2e231acd",
+      "status": 200
+    },
+    {
+      "domain": "template_run_v1",
+      "format": "pptx",
+      "bytes": 165319,
+      "sha256": "9475a642805e9585662100b4b74138a5820b55b214c6107b32893232640b586e",
+      "status": 200
+    },
+    {
+      "domain": "chart_report_v1",
+      "format": "csv",
+      "bytes": 10451,
+      "sha256": "b48fdcfc51e44b1b00c4992d058c39fdc602880a675b1d58e8e9cc916fc8246e",
+      "status": 200
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-template-chart-native/template_run_v1-1440.png",
+      "sha256": "b6a74e668aa87ae23aa71ce6029045f6e171ecd97291328e43b8adb1cfdf8f04"
+    },
+    {
+      "path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-template-chart-native/template_run_v1-390.png",
+      "sha256": "88b140e620e89f3ea07b0be2d7052aa598cd1a5d24ee3dc09e6aa6437dadd096"
+    },
+    {
+      "path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-template-chart-native/chart_report_v1-1440.png",
+      "sha256": "99c860d7813b010b23ed6f8d553b652fbbf8042e5eb118bb246db7f4041adde2"
+    },
+    {
+      "path": "/Users/aipuli/.codex/worktrees/findoc-showcase-cplus-integration/findoc-agent/data/cplus-template-chart-native/chart_report_v1-390.png",
+      "sha256": "8f04529b89caa5185e95807b120e09b3d2d94956a8c55adadd117f923c2aee29"
+    }
+  ],
+  "errors": [],
+  "logout_status": 200,
+  "old_session_status": 401,
+  "post_logout_service": "resetting",
+  "post_logout_ready_status": "ready",
+  "original_raw_proof": {
+    "path": "data/cplus-template-chart-native/result.json",
+    "sha256": "6b13eff3ab6765acb1d6d7f73b404c865cd191d75cafc476d3855788593199ef"
+  }
+}

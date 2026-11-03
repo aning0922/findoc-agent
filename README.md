@@ -1,24 +1,27 @@
 # FinDoc C+ · 有据可查的财报研究演示
 
-当前分支 `codex/findoc-showcase-cplus-integration` 从 **C@45d55d7** 独立研发，面向求职展示。F19–F34均有正式React页面与业务模块；真实公开PDF、程序候选计算、原文研究、批次和文件导出已有可重复路径。**新真实模型解释尚未验成功、本人财务确认仍human_pending，不宣称完整问答或财务验收通过。** 未合并main，未公开部署。
+基于 **C@45d55d7** 独立开发的求职作品，分支 `codex/findoc-showcase-cplus-integration`。F19–F34提供真实React页面与有限业务路径：官方资料、三表/趋势/体检、混合检索/OCR、单与多Agent、跨会话记忆、批量研究及版本报告。新的真实模型执行已成功；所有未由本人核对的财务值均为候选，AI解释均待审。未合并main、未公开部署。
 
-![C+实际企业360，两年真实候选，1440宽](docs/cplus/evidence/M5-finance/company360-1440.png)
+![企业360：真实双年候选、五KPI与资产负债率](docs/cplus/evidence/M5-followup/overview-1440.png)
 
-截图来自真实React→HTTP→公开年报/BGE/Milvus。格力2024/2025候选由实际报表提取，完整Decimal、期间、单位和原PDF页保留；候选不是人工核准。
+[本机运行](docs/cplus/RUN_LOCAL.md) · [单一状态](docs/cplus/STATE.md) · [42项任务](docs/cplus/TASK_BOARD.csv) · [固定24题执行矩阵](docs/cplus/eval/CORE_EXECUTION_MATRIX.md) · [三条面试路线](docs/cplus/INTERVIEW_DEMOS.md) · [交付/录屏](docs/cplus/DELIVERY.md) · [已知限制](docs/cplus/KNOWN_ISSUES.md)
 
-[本机运行](docs/cplus/RUN_LOCAL.md) · [当前状态](docs/cplus/STATE.md) · [42项任务](docs/cplus/TASK_BOARD.csv) · [18场景/24题证据边界](docs/cplus/EVAL_RESULTS.md) · [三条面试路线](docs/cplus/INTERVIEW_DEMOS.md) · [交付与截图/录屏](docs/cplus/DELIVERY.md) · [已知限制](docs/cplus/KNOWN_ISSUES.md)
-
-|可操作路径|实际实现与边界|
+|可操作路径|实现与真实性边界|
 |---|---|
-|官网资料|名称/代码/拼音与证券市场消歧→动态巨潮公告→确认下载→受控公开cache→本代企业绑定→真实READY；接口不可用可官网/上传回退|
-|财务研究|企业360、三大表、五核心指标、真实两年趋势、三类体检规则、双年风险/业务/研发、同行候选和产品/地区结构；程序计算与AI待审解释分层|
-|研究工作区|图表比较期由服务端cell复验→来源固定→FTS/BGE/RRF原文检索；真实Vision OCR转录入研究、原图bbox/精确PDF高亮、跨context收藏/查询/删除|
-|批次与报告|2公司×2纯工具任务，显式计划/批准、四格独立状态，UNKNOWN不重放；4模板/5释义；同domain/id/revision/SHA的CSV/XLSX/PPTX和浏览器PDF|
-|演示隔离|20分钟独占、默认wait_only、独立owner密码二次确认接管；旧会话401、完整V3seed恢复；公开PDF cache与私有上传/研究隔离|
+|官网资料|名称/代码/拼音与市场消歧→巨潮公告→显式下载→受控公开PDF cache→本代身份核验→READY；受限时官网/手工上传回退|
+|财务研究|企业360、三大表、实际期间/口径/范围/币种/物理页、五核心指标、Decimal资产负债率、双年趋势、三类体检、双年三主题、同行/业务结构；不自动授予核准资格|
+|AI工作区|来源固定、LLM Intent与计划、实际evidence/finance/risk/generalist有限分工及工具交接、阶段事件、AI/原文分层与已保存报告；同题单/多Agent分别批准，不宣称多Agent更优|
+|检索与记忆|真实Vision转录→typed OCR研究；BGE/Milvus+FTS/RRF/章节排序；点图追问→原PDF精确匹配或明确回退→收藏→跨context BGE查询→删除不再命中|
+|批量与模板|2×2持久异步ACK、逐格状态/摘要/来源/成本上界、只取消queued、历史恢复；实际3AI成功+1来源失效。四类结构化模板，默认关闭AI、可选每模板一次|
+|报告与演示|图表真正复制到不可变报告草稿rev1；精确domain/id/revision/SHA的CSV/Excel/PPTX/浏览器PDF；20分钟独占、owner-only接管、旧会话401、完整seed恢复，预算不跨代重置|
 
-本机入口 **http://127.0.0.1:14540**。登录密码由本机被Git忽略配置提供，不在前端/仓库。V3五份READY年报、OCR、归档与本地BGE权重**不随Git分发**，需要校验并提供seed bundle；不承诺clone即完整运行。XLSX/PPTX服务端可使用独立Python依赖，见 `requirements-showcase-exports.txt`。
+![真实AI批次：三格返回、一格来源故障，其余结果保留](docs/cplus/evidence/M5-followup/one-fault-three-results-1440.png)
 
-实际精选回归90PASS/3SKIP（3个opt-in真实PDF未设置），三条原生浏览器路线及三宽检查/两模板/财务/导出分层留证；构建和lint exit0但保留warnings。原同一5元账本77物理调用（原C73+C+4），保守预留1.441018元，C+四次ReadTimeout/UNKNOWN，实际账单未观察。模型disabled演示展示真实原文和程序计算，历史模型归档不冒充新结果。
+本机入口 **http://127.0.0.1:14540**，凭据只在Git忽略的服务端配置。V3五份READY公开年报、OCR、历史归档、本地BGE权重和seed bundle**不随Git分发**，clone后需提供并核对bundle；详细命令与依赖见RUN_LOCAL。原C/V1.2/main及原seed保留。
+
+固定24题累计至少12个required-tier真实执行，**不是12题正确或人类接受**。模型、真实PDF/OCR、BGE/Milvus、HTTP/浏览器、受控fixture、人审分别留证；原失败、UNKNOWN与未运行题不改为通过。最新选定后端回归155PASS/3SKIP/5warnings，C+模式构建通过但保留大chunk警告。正向本人财务核准0。
+
+当前同一5元账本：123物理SDK记录（含原C73）、保守预留 **2.468274元**、原UNKNOWN4保留，实际账单未观察；不是新建或重置额度。全部新解释均为AI待审，不作投资结论。官方adapter/有限报表支持、现金流检索不相关样本与单期PPTX没有可用趋势等限制见KNOWN_ISSUES。
 
 ## 原C候选资料（保留历史快照）
 

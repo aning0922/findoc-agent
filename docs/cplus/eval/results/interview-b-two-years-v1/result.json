@@ -1,0 +1,2407 @@
+{
+  "schema_version": "cplus-real-agent-paths-v1",
+  "tier": "OPERATOR_REAL_HTTP_GUARDED_SDK",
+  "execution": "STOPPED_WITH_RECEIPTS_NO_REPLAY",
+  "max_new_calls": 12,
+  "budget_before": {
+    "cap_cny": "5",
+    "physical_guard_rows": 107,
+    "reserved_cny": "2.120688",
+    "unknown_rows": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "physical_denominator": "new existing guarded SDK reservation/attempt rows; not billed cost or accepted-answer count",
+  "logical_denominator": "sr_budgets.attempts from each final job.usage; tool reservations are separate",
+  "operations": [
+    {
+      "path": "/demo/login",
+      "operation_id": "b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 0,
+      "http_status": 202,
+      "result": {
+        "schema_version": "demo-attempt-v1",
+        "state": "pending",
+        "operation_id": "b7a939dd-4626-4979-b27d-f1f17958fe03",
+        "reset_id": "8ff6dd32-b586-4a02-b13a-0e39316a1d18",
+        "claimable": false
+      }
+    },
+    {
+      "path": "/demo/claim",
+      "operation_id": "50864cea-80fc-45f1-bc4f-eea501db396f",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 0,
+      "http_status": 200,
+      "result": {
+        "schema_version": "demo-session-v1",
+        "state": "active",
+        "expires_at": "2026-11-03T13:32:48.943791+00:00",
+        "server_now": "2026-11-03T13:12:48.943998+00:00",
+        "remaining_seconds": 1199,
+        "lease_generation": 76,
+        "seed_version": "showcase-cplus-seed-v3",
+        "can_review": false,
+        "owner_elevated_until": null
+      }
+    },
+    {
+      "path": "/conversations",
+      "operation_id": "9fb193c2-a622-4e9b-ac2f-5ac0db37b603",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 0,
+      "request_body": {
+        "operation_id": "9fb193c2-a622-4e9b-ac2f-5ac0db37b603",
+        "document_ids": [
+          "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+          "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479"
+        ],
+        "title": "C+ E01-15 deep bounded source study"
+      },
+      "request_sha256": "cdc9ddd87cf49676c272b31f53f5629518a4eeb05d4e92b8fe3f5f86da5f8059",
+      "http_status": 201,
+      "result": {
+        "conversation_id": "cbd6485e-9395-41f7-8dcb-d5550701ce8d",
+        "title": "C+ E01-15 deep bounded source study",
+        "status": "active",
+        "source_scope_sha": "5b42a1a14e6eb3e5833f183ddaed6e5a2c3c4be8970f9dbe08adf02a41c34949",
+        "sources": [
+          {
+            "workspace_id": "demo",
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "report_year": 2025,
+            "report_type": "annual",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "basis": "PRC_GAAP",
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+            "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+            "attempt": 1,
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10"
+          },
+          {
+            "workspace_id": "demo",
+            "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "report_year": 2024,
+            "report_type": "annual",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "basis": "PRC_GAAP",
+            "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+            "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+            "attempt": 1,
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10"
+          }
+        ],
+        "source_states": [
+          {
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+            "status": "current_at_read"
+          },
+          {
+            "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+            "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+            "status": "current_at_read"
+          }
+        ],
+        "created_at": "2026-11-03T13:12:49.349118+00:00",
+        "updated_at": "2026-11-03T13:12:49.349118+00:00",
+        "last_turn_seq": 0,
+        "active_turn_id": null,
+        "schema_version": "conversation-v1",
+        "turns": [],
+        "next_before_seq": null
+      }
+    },
+    {
+      "path": "/research/intent",
+      "operation_id": "76783f85-40b0-4757-807f-bb12f69b0a24",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 1,
+      "request_body": {
+        "operation_id": "76783f85-40b0-4757-807f-bb12f69b0a24",
+        "conversation_id": "cbd6485e-9395-41f7-8dcb-d5550701ce8d",
+        "text": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+        "requested_mode": "deep"
+      },
+      "request_sha256": "8fb39ad24e2adcedd75055cbff70dfdc68b9c229c64a47cae78abba0efa86e7f",
+      "http_status": 200,
+      "result": {
+        "schema_version": "intent-v2",
+        "intent_id": "4c6fd596-5853-43a4-9f2a-113841f357ca",
+        "conversation_id": "cbd6485e-9395-41f7-8dcb-d5550701ce8d",
+        "mode": "deep",
+        "goal": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [],
+        "metric_keys": [
+          "operating_cash_flow"
+        ],
+        "actions": [
+          "read_evidence"
+        ],
+        "clarifying_question": null,
+        "requires_confirmed_facts": false,
+        "source_turn_ids": [],
+        "proposal_origin": "model_proposal_program_validated",
+        "provider_error": null,
+        "scope": {
+          "scope_hash": "aadd6806afd250d381b001e28b2b0e03a4738e56bcb5eec4bf76457f45e9756b",
+          "runtime_instance_id": "667856f0-1567-45f6-89fc-0bc8d2cf84db",
+          "lease_generation": 76,
+          "source_scope_sha": "5b42a1a14e6eb3e5833f183ddaed6e5a2c3c4be8970f9dbe08adf02a41c34949",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 2,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      }
+    },
+    {
+      "path": "/synthesis/plans",
+      "operation_id": "b61c8b3d-c0d9-4631-9a5c-8eae3f897fd1",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 1,
+      "request_body": {
+        "operation_id": "b61c8b3d-c0d9-4631-9a5c-8eae3f897fd1",
+        "intent_id": "4c6fd596-5853-43a4-9f2a-113841f357ca"
+      },
+      "request_sha256": "77d0355b968e44517a28138f483dfa44e001766712ef8281e8b7e06a792efd96",
+      "http_status": 200,
+      "result": {
+        "schema_version": "research-plan-v2",
+        "plan_id": "9dd53c12-d35a-4c43-afd1-67f45d47a83e",
+        "revision": 1,
+        "intent_id": "4c6fd596-5853-43a4-9f2a-113841f357ca",
+        "conversation_id": "cbd6485e-9395-41f7-8dcb-d5550701ce8d",
+        "goal": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+        "mode": "deep",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [],
+        "metric_keys": [
+          "operating_cash_flow"
+        ],
+        "roles": [
+          "evidence",
+          "finance"
+        ],
+        "allowed_tools": {
+          "evidence": [
+            "search_evidence",
+            "recall_notes"
+          ],
+          "finance": [
+            "read_confirmed_facts"
+          ]
+        },
+        "limits": {
+          "model_attempts": 10,
+          "tool_calls": 12,
+          "parallel_agents": 2,
+          "execution_seconds": 240,
+          "per_call_output_tokens": 1024,
+          "reserved_input_tokens": 48000,
+          "reserved_output_tokens": 12000
+        },
+        "plan_origin": "supervisor_model_program_validated",
+        "provider_error": null,
+        "requires_explicit_confirmation": true,
+        "plan_sha256": "7d3d76254184fbf5bde7f9812b7036e5ba1c3527842c7b391d96c6f14ed30146",
+        "scope": {
+          "scope_hash": "aadd6806afd250d381b001e28b2b0e03a4738e56bcb5eec4bf76457f45e9756b",
+          "runtime_instance_id": "667856f0-1567-45f6-89fc-0bc8d2cf84db",
+          "lease_generation": 76,
+          "source_scope_sha": "5b42a1a14e6eb3e5833f183ddaed6e5a2c3c4be8970f9dbe08adf02a41c34949",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 2,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      }
+    },
+    {
+      "path": "/deep-research/jobs",
+      "operation_id": "b050edab-29b1-4571-9baf-fca642bb1469",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 8,
+      "request_body": {
+        "operation_id": "b050edab-29b1-4571-9baf-fca642bb1469",
+        "approved_plan_id": "9dd53c12-d35a-4c43-afd1-67f45d47a83e",
+        "approved_plan_revision": 1,
+        "approved_plan_sha256": "7d3d76254184fbf5bde7f9812b7036e5ba1c3527842c7b391d96c6f14ed30146",
+        "confirmed": true
+      },
+      "request_sha256": "252d679b89725d3a8a76f2d260ddc0c191ba9e70da447683c1dd3b1efe05c4fe",
+      "http_status": 202,
+      "result": {
+        "schema_version": "showcase-job-v2",
+        "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+        "mode": "deep",
+        "state": "queued",
+        "conversation_id": "cbd6485e-9395-41f7-8dcb-d5550701ce8d",
+        "plan_id": "9dd53c12-d35a-4c43-afd1-67f45d47a83e"
+      }
+    },
+    {
+      "path": "/showcase-reports/drafts",
+      "operation_id": "70d195b8-1db1-467a-b75a-824d871eb210",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 0,
+      "request_body": {
+        "operation_id": "70d195b8-1db1-467a-b75a-824d871eb210",
+        "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a"
+      },
+      "request_sha256": "b8ef123302149a6eec062b2eb3fa88aa703da12c746ce28fd845c25152aede97",
+      "http_status": 200,
+      "result": {
+        "draft_id": "2e08ea82-ca43-4de6-a478-2eb2b2c6b05f",
+        "snapshot": {
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "workspace_id": "demo",
+          "state": "completed",
+          "schema_version": "verified-report-job-v2",
+          "company_name": "珠海格力电器股份有限公司",
+          "period_label": "披露原文范围",
+          "data_origin": "live",
+          "findings": [
+            {
+              "finding_id": "6999b001-0992-47f7-bfba-41617b617cfc",
+              "kind": "unresolved_question",
+              "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+              "financial_refs": [],
+              "evidence_refs": [],
+              "data_origin": "live",
+              "source_status": "unavailable",
+              "transcription_review_status": "not_applicable",
+              "interpretation_review_status": "not_applicable",
+              "numeric_claim_status": null
+            },
+            {
+              "finding_id": "4009f195-bde9-433f-a1cc-4dbbe94f020a",
+              "kind": "sourced_excerpt",
+              "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14",
+              "financial_refs": [],
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "data_origin": "live",
+              "source_status": "current",
+              "transcription_review_status": "fast_extraction_unreviewed",
+              "interpretation_review_status": "not_applicable",
+              "numeric_claim_status": null
+            },
+            {
+              "finding_id": "cfae84ae-f021-4693-94e9-07a13ef014e8",
+              "kind": "sourced_excerpt",
+              "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77",
+              "financial_refs": [],
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "data_origin": "live",
+              "source_status": "current",
+              "transcription_review_status": "fast_extraction_unreviewed",
+              "interpretation_review_status": "not_applicable",
+              "numeric_claim_status": null
+            },
+            {
+              "finding_id": "693520bd-e105-4855-a278-b6decbb41c13",
+              "kind": "model_interpretation",
+              "text": "待核查：固定来源检索未通过逐页精确引用核验，因此2025年经营活动现金流相关原文尚不能定位；已返回的片段仅为现金流量套期储备、外币报表折算差额等权益变动项目，不能据此推断经营现金流风险。",
+              "financial_refs": [],
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "data_origin": "live",
+              "source_status": "current",
+              "transcription_review_status": "not_applicable",
+              "interpretation_review_status": "ai_unreviewed",
+              "numeric_claim_status": "numeric_claim_unverified"
+            },
+            {
+              "finding_id": "27eeaf2b-1bab-486d-84a8-e086d1cb99e4",
+              "kind": "model_interpretation",
+              "text": "证据缺口：现有多Agent结果只覆盖套期储备与其他债权投资减值准备等科目片段，未出现经营现金流正文或同比说明；是否存在经营现金流下滑、持续性或偿债覆盖风险，须待精确原文核查后再判断，此处不做推断。",
+              "financial_refs": [],
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "data_origin": "live",
+              "source_status": "current",
+              "transcription_review_status": "not_applicable",
+              "interpretation_review_status": "ai_unreviewed",
+              "numeric_claim_status": "no_numeric_claim"
+            },
+            {
+              "finding_id": "e8dccd32-86ab-4c05-8f2f-6efb15b18149",
+              "kind": "unresolved_question",
+              "text": "没有为本次研究明确选择可用的已确认财务事实。",
+              "financial_refs": [],
+              "evidence_refs": [],
+              "data_origin": "live",
+              "source_status": "unavailable",
+              "transcription_review_status": "not_applicable",
+              "interpretation_review_status": "not_applicable",
+              "numeric_claim_status": null
+            },
+            {
+              "finding_id": "0240a716-7725-4c58-8bf9-8cef427fff93",
+              "kind": "model_interpretation",
+              "text": "已按要求读取本地已确认财务事实，但两次调用均返回“未明确选择可用事实”的未解决提示，因此本次无法核实现金流情况，也无法进行单Agent综合与多Agent对比。",
+              "financial_refs": [],
+              "evidence_refs": [],
+              "data_origin": "live",
+              "source_status": "current",
+              "transcription_review_status": "not_applicable",
+              "interpretation_review_status": "ai_unreviewed",
+              "numeric_claim_status": "numeric_claim_unverified"
+            },
+            {
+              "finding_id": "67867a06-bd65-4873-ade7-94fe2d99d9b1",
+              "kind": "model_interpretation",
+              "text": "在缺少已确认事实的前提下，现金流风险的待核查项无法从现有证据判定；所列年报来源仅为候选材料，未提供可直接引用的确认数值，需先完成事实选择再核查。",
+              "financial_refs": [],
+              "evidence_refs": [],
+              "data_origin": "live",
+              "source_status": "current",
+              "transcription_review_status": "not_applicable",
+              "interpretation_review_status": "ai_unreviewed",
+              "numeric_claim_status": "no_numeric_claim"
+            },
+            {
+              "finding_id": "5408b176-512e-4e32-b17d-e4b32f77fec9",
+              "kind": "model_interpretation",
+              "text": "现金流风险待核查项仍存证据缺口：检索未通过固定来源与逐页精确引用核验，已返回片段仅为现金流量套期储备、外币报表折算差额等权益变动项目，不能据此推断经营现金流下滑、持续性或偿债覆盖风险。",
+              "financial_refs": [],
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "data_origin": "live",
+              "source_status": "current",
+              "transcription_review_status": "not_applicable",
+              "interpretation_review_status": "ai_unreviewed",
+              "numeric_claim_status": "no_numeric_claim"
+            },
+            {
+              "finding_id": "5f3f8ea6-8ebe-43c6-b733-7d57a51a7e15",
+              "kind": "model_interpretation",
+              "text": "本次研究未明确选择可用已确认财务事实，且多Agent结果仅覆盖套期储备、其他债权投资减值准备等科目片段，未出现经营现金流正文或同比说明；须先完成事实选择并取得精确原文后再核查。",
+              "financial_refs": [],
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "data_origin": "live",
+              "source_status": "current",
+              "transcription_review_status": "not_applicable",
+              "interpretation_review_status": "ai_unreviewed",
+              "numeric_claim_status": "no_numeric_claim"
+            }
+          ],
+          "limitations": [
+            "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+            "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+          ]
+        }
+      }
+    },
+    {
+      "path": "/showcase-reports",
+      "operation_id": "77d5788a-62e1-4879-a336-ab9fdab5ca97",
+      "state": "RESPONSE_RECEIVED",
+      "maximum_remaining_model_calls_admitted": 0,
+      "request_body": {
+        "operation_id": "77d5788a-62e1-4879-a336-ab9fdab5ca97",
+        "draft_id": "2e08ea82-ca43-4de6-a478-2eb2b2c6b05f",
+        "title": "E01-15 deep · AI待审研究",
+        "notes": "原文与解释分开；没有人工财务签核。"
+      },
+      "request_sha256": "75f63eb89ff300241b07eaf1b6e5da649a220064f386725b109f2b743d43cf27",
+      "http_status": 200,
+      "result": {
+        "schema_version": "showcase-report-v2",
+        "report_id": "925d4633-086c-4e64-af38-1a65863f1d03",
+        "revision": 1,
+        "title": "E01-15 deep · AI待审研究",
+        "notes": "原文与解释分开；没有人工财务签核。",
+        "created_at": "2026-11-03T13:13:19.260912+00:00",
+        "snapshot": {
+          "company_name": "珠海格力电器股份有限公司",
+          "data_origin": "live",
+          "findings": [
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "6999b001-0992-47f7-bfba-41617b617cfc",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "numeric_claim_status": null,
+              "source_status": "unavailable",
+              "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "4009f195-bde9-433f-a1cc-4dbbe94f020a",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "numeric_claim_status": null,
+              "source_status": "current",
+              "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "cfae84ae-f021-4693-94e9-07a13ef014e8",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "numeric_claim_status": null,
+              "source_status": "current",
+              "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "693520bd-e105-4855-a278-b6decbb41c13",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "source_status": "current",
+              "text": "待核查：固定来源检索未通过逐页精确引用核验，因此2025年经营活动现金流相关原文尚不能定位；已返回的片段仅为现金流量套期储备、外币报表折算差额等权益变动项目，不能据此推断经营现金流风险。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "27eeaf2b-1bab-486d-84a8-e086d1cb99e4",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "证据缺口：现有多Agent结果只覆盖套期储备与其他债权投资减值准备等科目片段，未出现经营现金流正文或同比说明；是否存在经营现金流下滑、持续性或偿债覆盖风险，须待精确原文核查后再判断，此处不做推断。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "e8dccd32-86ab-4c05-8f2f-6efb15b18149",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "numeric_claim_status": null,
+              "source_status": "unavailable",
+              "text": "没有为本次研究明确选择可用的已确认财务事实。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "0240a716-7725-4c58-8bf9-8cef427fff93",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "source_status": "current",
+              "text": "已按要求读取本地已确认财务事实，但两次调用均返回“未明确选择可用事实”的未解决提示，因此本次无法核实现金流情况，也无法进行单Agent综合与多Agent对比。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "67867a06-bd65-4873-ade7-94fe2d99d9b1",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "在缺少已确认事实的前提下，现金流风险的待核查项无法从现有证据判定；所列年报来源仅为候选材料，未提供可直接引用的确认数值，需先完成事实选择再核查。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "5408b176-512e-4e32-b17d-e4b32f77fec9",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "现金流风险待核查项仍存证据缺口：检索未通过固定来源与逐页精确引用核验，已返回片段仅为现金流量套期储备、外币报表折算差额等权益变动项目，不能据此推断经营现金流下滑、持续性或偿债覆盖风险。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "5f3f8ea6-8ebe-43c6-b733-7d57a51a7e15",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "本次研究未明确选择可用已确认财务事实，且多Agent结果仅覆盖套期储备、其他债权投资减值准备等科目片段，未出现经营现金流正文或同比说明；须先完成事实选择并取得精确原文后再核查。",
+              "transcription_review_status": "not_applicable"
+            }
+          ],
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "limitations": [
+            "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+            "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+          ],
+          "period_label": "披露原文范围",
+          "schema_version": "verified-report-job-v2",
+          "state": "completed",
+          "workspace_id": "demo"
+        }
+      }
+    }
+  ],
+  "reads": [
+    {
+      "path": "/demo/status",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/operations/b7a939dd-4626-4979-b27d-f1f17958fe03",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/demo/session",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/companies",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/de3575ae4220fd18b64f32ca74a442e63e06b705d9e4f9cda5065e386f357ccc/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/cplus/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/research-source",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/file",
+      "params": {
+        "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105"
+      },
+      "status": 200
+    },
+    {
+      "path": "/documents",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/1d45495b66d7b2c39a4293fbf99df3ead1561e4ae7193ad85928b151d5fc382f/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/de3575ae4220fd18b64f32ca74a442e63e06b705d9e4f9cda5065e386f357ccc/metadata",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/cplus/documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/research-source",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/file",
+      "params": {
+        "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105"
+      },
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a/events",
+      "params": {
+        "after_seq": 0
+      },
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a/events",
+      "params": {
+        "after_seq": 17
+      },
+      "status": 200
+    },
+    {
+      "path": "/documents/6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec/evidence/93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+      "params": {
+        "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105"
+      },
+      "status": 200
+    },
+    {
+      "path": "/documents/6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479/evidence/5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+      "params": {
+        "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+        "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105"
+      },
+      "status": 200
+    },
+    {
+      "path": "/deep-research/jobs/8c274dde-85de-4d08-b620-3fdd75281c9a",
+      "params": null,
+      "status": 200
+    },
+    {
+      "path": "/showcase-reports/925d4633-086c-4e64-af38-1a65863f1d03/revisions/1",
+      "params": null,
+      "status": 200
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "E01-15",
+      "exact_question": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+      "mode": "deep",
+      "state": "COMPLETED_HTTP_AGENT_TOOL_REPORT_PATH_HUMAN_REVIEW_PENDING",
+      "case_upper_model_attempts": 10,
+      "budget_before": {
+        "cap_cny": "5",
+        "physical_guard_rows": 107,
+        "reserved_cny": "2.120688",
+        "unknown_rows": 4,
+        "actual_billed_cny": "not_observed"
+      },
+      "conversation": {
+        "conversation_id": "cbd6485e-9395-41f7-8dcb-d5550701ce8d",
+        "title": "C+ E01-15 deep bounded source study",
+        "status": "active",
+        "source_scope_sha": "5b42a1a14e6eb3e5833f183ddaed6e5a2c3c4be8970f9dbe08adf02a41c34949",
+        "sources": [
+          {
+            "workspace_id": "demo",
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "report_year": 2025,
+            "report_type": "annual",
+            "period_start": "2025-01-01",
+            "period_end": "2025-12-31",
+            "basis": "PRC_GAAP",
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+            "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+            "attempt": 1,
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10"
+          },
+          {
+            "workspace_id": "demo",
+            "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "report_year": 2024,
+            "report_type": "annual",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "basis": "PRC_GAAP",
+            "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+            "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+            "attempt": 1,
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10"
+          }
+        ],
+        "source_states": [
+          {
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+            "status": "current_at_read"
+          },
+          {
+            "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+            "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+            "status": "current_at_read"
+          }
+        ],
+        "created_at": "2026-11-03T13:12:49.349118+00:00",
+        "updated_at": "2026-11-03T13:12:49.349118+00:00",
+        "last_turn_seq": 0,
+        "active_turn_id": null,
+        "schema_version": "conversation-v1",
+        "turns": [],
+        "next_before_seq": null
+      },
+      "intent": {
+        "schema_version": "intent-v2",
+        "intent_id": "4c6fd596-5853-43a4-9f2a-113841f357ca",
+        "conversation_id": "cbd6485e-9395-41f7-8dcb-d5550701ce8d",
+        "mode": "deep",
+        "goal": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [],
+        "metric_keys": [
+          "operating_cash_flow"
+        ],
+        "actions": [
+          "read_evidence"
+        ],
+        "clarifying_question": null,
+        "requires_confirmed_facts": false,
+        "source_turn_ids": [],
+        "proposal_origin": "model_proposal_program_validated",
+        "provider_error": null,
+        "scope": {
+          "scope_hash": "aadd6806afd250d381b001e28b2b0e03a4738e56bcb5eec4bf76457f45e9756b",
+          "runtime_instance_id": "667856f0-1567-45f6-89fc-0bc8d2cf84db",
+          "lease_generation": 76,
+          "source_scope_sha": "5b42a1a14e6eb3e5833f183ddaed6e5a2c3c4be8970f9dbe08adf02a41c34949",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 2,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      },
+      "plan": {
+        "schema_version": "research-plan-v2",
+        "plan_id": "9dd53c12-d35a-4c43-afd1-67f45d47a83e",
+        "revision": 1,
+        "intent_id": "4c6fd596-5853-43a4-9f2a-113841f357ca",
+        "conversation_id": "cbd6485e-9395-41f7-8dcb-d5550701ce8d",
+        "goal": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+        "mode": "deep",
+        "company_ids": [
+          "d9080344-8c69-4dea-a5d9-51bf84710105"
+        ],
+        "periods": [],
+        "metric_keys": [
+          "operating_cash_flow"
+        ],
+        "roles": [
+          "evidence",
+          "finance"
+        ],
+        "allowed_tools": {
+          "evidence": [
+            "search_evidence",
+            "recall_notes"
+          ],
+          "finance": [
+            "read_confirmed_facts"
+          ]
+        },
+        "limits": {
+          "model_attempts": 10,
+          "tool_calls": 12,
+          "parallel_agents": 2,
+          "execution_seconds": 240,
+          "per_call_output_tokens": 1024,
+          "reserved_input_tokens": 48000,
+          "reserved_output_tokens": 12000
+        },
+        "plan_origin": "supervisor_model_program_validated",
+        "provider_error": null,
+        "requires_explicit_confirmation": true,
+        "plan_sha256": "7d3d76254184fbf5bde7f9812b7036e5ba1c3527842c7b391d96c6f14ed30146",
+        "scope": {
+          "scope_hash": "aadd6806afd250d381b001e28b2b0e03a4738e56bcb5eec4bf76457f45e9756b",
+          "runtime_instance_id": "667856f0-1567-45f6-89fc-0bc8d2cf84db",
+          "lease_generation": 76,
+          "source_scope_sha": "5b42a1a14e6eb3e5833f183ddaed6e5a2c3c4be8970f9dbe08adf02a41c34949",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 2,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        }
+      },
+      "explicit_approval": {
+        "approved_plan_id": "9dd53c12-d35a-4c43-afd1-67f45d47a83e",
+        "approved_plan_revision": 1,
+        "approved_plan_sha256": "7d3d76254184fbf5bde7f9812b7036e5ba1c3527842c7b391d96c6f14ed30146",
+        "confirmed": true
+      },
+      "approval_basis": "operator explicitly runs this fixed-case bounded harness; exact stored plan identity/roles checked and persisted before POST",
+      "job_ack": {
+        "schema_version": "showcase-job-v2",
+        "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+        "mode": "deep",
+        "state": "queued",
+        "conversation_id": "cbd6485e-9395-41f7-8dcb-d5550701ce8d",
+        "plan_id": "9dd53c12-d35a-4c43-afd1-67f45d47a83e"
+      },
+      "job": {
+        "schema_version": "showcase-job-v2",
+        "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+        "plan_id": "9dd53c12-d35a-4c43-afd1-67f45d47a83e",
+        "conversation_id": "cbd6485e-9395-41f7-8dcb-d5550701ce8d",
+        "mode": "deep",
+        "state": "completed",
+        "created_at": "2026-11-03T13:12:51.682794+00:00",
+        "ended_at": "2026-11-03T13:13:18.050836+00:00",
+        "error_code": null,
+        "scope": {
+          "scope_hash": "aadd6806afd250d381b001e28b2b0e03a4738e56bcb5eec4bf76457f45e9756b",
+          "runtime_instance_id": "667856f0-1567-45f6-89fc-0bc8d2cf84db",
+          "lease_generation": 76,
+          "source_scope_sha": "5b42a1a14e6eb3e5833f183ddaed6e5a2c3c4be8970f9dbe08adf02a41c34949",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "memory_generation": 2,
+          "allowed_tools": [
+            "search_evidence",
+            "read_confirmed_facts",
+            "recall_notes"
+          ]
+        },
+        "usage": {
+          "id": "4c6fd596-5853-43a4-9f2a-113841f357ca",
+          "deadline": 1793711811.6829572,
+          "max_attempts": 10,
+          "attempts": 8,
+          "tools": 4,
+          "input_tokens": 7097,
+          "output_tokens": 8192,
+          "unknown_attempts": 0,
+          "provider_tokens_actual": null
+        },
+        "steps": [
+          {
+            "step_id": "015ab6a0-b8e4-49a6-ace7-c12e665ea4fc",
+            "agent_id": "evidence",
+            "state": "completed",
+            "tools": [
+              "search_evidence",
+              "search_evidence"
+            ]
+          },
+          {
+            "step_id": "30e1278f-e53a-4a1c-8558-37f6a46aa777",
+            "agent_id": "finance",
+            "state": "completed",
+            "tools": [
+              "read_confirmed_facts",
+              "read_confirmed_facts"
+            ]
+          }
+        ],
+        "result": {
+          "agents": [
+            {
+              "agent_id": "evidence",
+              "state": "completed"
+            },
+            {
+              "agent_id": "finance",
+              "state": "completed"
+            }
+          ],
+          "data_origin": "live",
+          "findings": [
+            {
+              "actions": [
+                {
+                  "href": "/research?mode=operating",
+                  "kind": "review_sources",
+                  "label": "核对来源及明确选择已确认事实"
+                },
+                {
+                  "href": "/sources",
+                  "kind": "reason",
+                  "label": "evidence_or_confirmation_missing"
+                }
+              ],
+              "data_origin": "unresolved",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "6999b001-0992-47f7-bfba-41617b617cfc",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "origin": "system",
+              "schema_version": "research-finding-v2",
+              "source_status": "unresolved",
+              "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+              "transcription_review_status": "not_applicable",
+              "unresolved_question": "检索结果没有通过固定来源和逐页精确引用核验。"
+            },
+            {
+              "data_origin": "local_runtime",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "4009f195-bde9-433f-a1cc-4dbbe94f020a",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "origin": "verified_source",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "local_runtime",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "cfae84ae-f021-4693-94e9-07a13ef014e8",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "origin": "verified_source",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "693520bd-e105-4855-a278-b6decbb41c13",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "待核查：固定来源检索未通过逐页精确引用核验，因此2025年经营活动现金流相关原文尚不能定位；已返回的片段仅为现金流量套期储备、外币报表折算差额等权益变动项目，不能据此推断经营现金流风险。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "27eeaf2b-1bab-486d-84a8-e086d1cb99e4",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "证据缺口：现有多Agent结果只覆盖套期储备与其他债权投资减值准备等科目片段，未出现经营现金流正文或同比说明；是否存在经营现金流下滑、持续性或偿债覆盖风险，须待精确原文核查后再判断，此处不做推断。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "actions": [
+                {
+                  "href": "/research?mode=operating",
+                  "kind": "review_sources",
+                  "label": "核对来源及明确选择已确认事实"
+                },
+                {
+                  "href": "/sources",
+                  "kind": "reason",
+                  "label": "explicit_fact_selection_required"
+                }
+              ],
+              "data_origin": "unresolved",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "e8dccd32-86ab-4c05-8f2f-6efb15b18149",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "origin": "system",
+              "schema_version": "research-finding-v2",
+              "source_status": "unresolved",
+              "text": "没有为本次研究明确选择可用的已确认财务事实。",
+              "transcription_review_status": "not_applicable",
+              "unresolved_question": "没有为本次研究明确选择可用的已确认财务事实。"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "0240a716-7725-4c58-8bf9-8cef427fff93",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "not_applicable",
+              "text": "已按要求读取本地已确认财务事实，但两次调用均返回“未明确选择可用事实”的未解决提示，因此本次无法核实现金流情况，也无法进行单Agent综合与多Agent对比。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "67867a06-bd65-4873-ade7-94fe2d99d9b1",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "not_applicable",
+              "text": "在缺少已确认事实的前提下，现金流风险的待核查项无法从现有证据判定；所列年报来源仅为候选材料，未提供可直接引用的确认数值，需先完成事实选择再核查。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "5408b176-512e-4e32-b17d-e4b32f77fec9",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "现金流风险待核查项仍存证据缺口：检索未通过固定来源与逐页精确引用核验，已返回片段仅为现金流量套期储备、外币报表折算差额等权益变动项目，不能据此推断经营现金流下滑、持续性或偿债覆盖风险。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "ai_draft",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "5f3f8ea6-8ebe-43c6-b733-7d57a51a7e15",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "origin": "model_draft",
+              "schema_version": "research-finding-v2",
+              "source_status": "current_valid",
+              "text": "本次研究未明确选择可用已确认财务事实，且多Agent结果仅覆盖套期储备、其他债权投资减值准备等科目片段，未出现经营现金流正文或同比说明；须先完成事实选择并取得精确原文后再核查。",
+              "transcription_review_status": "not_applicable"
+            }
+          ],
+          "goal": "同一问题分别做单Agent综合和多Agent深度研究：现金流风险还有哪些待核查？",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "limitations": [
+            "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+            "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+          ],
+          "mode": "deep",
+          "schema_version": "showcase-research-result-v2",
+          "scope_hash": "aadd6806afd250d381b001e28b2b0e03a4738e56bcb5eec4bf76457f45e9756b"
+        }
+      },
+      "events": [
+        {
+          "agent_id": "controller",
+          "event_seq": 1,
+          "event_type": "phase",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "批准计划已登记",
+          "public_summary": "批准计划已登记",
+          "schema_version": "execution-event-v1",
+          "state": "completed",
+          "timestamp": "2026-11-03T13:12:51.683736+00:00"
+        },
+        {
+          "agent_id": "supervisor",
+          "event_seq": 2,
+          "event_type": "phase",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "按计划分派只读子任务",
+          "public_summary": "按计划分派只读子任务",
+          "schema_version": "execution-event-v1",
+          "state": "running",
+          "timestamp": "2026-11-03T13:12:51.684841+00:00"
+        },
+        {
+          "agent_id": "evidence",
+          "event_seq": 3,
+          "event_type": "phase",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "子任务开始",
+          "public_summary": "子任务开始",
+          "schema_version": "execution-event-v1",
+          "state": "running",
+          "timestamp": "2026-11-03T13:12:51.685776+00:00"
+        },
+        {
+          "agent_id": "finance",
+          "event_seq": 4,
+          "event_type": "phase",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "子任务开始",
+          "public_summary": "子任务开始",
+          "schema_version": "execution-event-v1",
+          "state": "running",
+          "timestamp": "2026-11-03T13:12:51.689567+00:00"
+        },
+        {
+          "agent_id": "finance",
+          "event_seq": 5,
+          "event_type": "tool",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "read_confirmed_facts",
+          "public_summary": "read_confirmed_facts",
+          "schema_version": "execution-event-v1",
+          "state": "running",
+          "timestamp": "2026-11-03T13:12:52.461194+00:00"
+        },
+        {
+          "agent_id": "finance",
+          "event_seq": 6,
+          "event_type": "tool",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "read_confirmed_facts",
+          "public_summary": "read_confirmed_facts",
+          "schema_version": "execution-event-v1",
+          "state": "completed",
+          "timestamp": "2026-11-03T13:12:52.463575+00:00"
+        },
+        {
+          "agent_id": "evidence",
+          "event_seq": 7,
+          "event_type": "tool",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "search_evidence",
+          "public_summary": "search_evidence",
+          "schema_version": "execution-event-v1",
+          "state": "running",
+          "timestamp": "2026-11-03T13:12:52.810040+00:00"
+        },
+        {
+          "agent_id": "finance",
+          "event_seq": 8,
+          "event_type": "tool",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "read_confirmed_facts",
+          "public_summary": "read_confirmed_facts",
+          "schema_version": "execution-event-v1",
+          "state": "running",
+          "timestamp": "2026-11-03T13:12:53.310517+00:00"
+        },
+        {
+          "agent_id": "finance",
+          "event_seq": 9,
+          "event_type": "tool",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "read_confirmed_facts",
+          "public_summary": "read_confirmed_facts",
+          "schema_version": "execution-event-v1",
+          "state": "completed",
+          "timestamp": "2026-11-03T13:12:53.313431+00:00"
+        },
+        {
+          "agent_id": "finance",
+          "event_seq": 10,
+          "event_type": "phase",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "子任务已交接",
+          "public_summary": "子任务已交接",
+          "schema_version": "execution-event-v1",
+          "state": "completed",
+          "timestamp": "2026-11-03T13:12:55.129513+00:00"
+        },
+        {
+          "agent_id": "evidence",
+          "event_seq": 11,
+          "event_type": "tool",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "search_evidence",
+          "public_summary": "search_evidence",
+          "schema_version": "execution-event-v1",
+          "state": "completed",
+          "timestamp": "2026-11-03T13:13:01.150987+00:00"
+        },
+        {
+          "agent_id": "evidence",
+          "event_seq": 12,
+          "event_type": "tool",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "search_evidence",
+          "public_summary": "search_evidence",
+          "schema_version": "execution-event-v1",
+          "state": "running",
+          "timestamp": "2026-11-03T13:13:01.153115+00:00"
+        },
+        {
+          "agent_id": "evidence",
+          "event_seq": 13,
+          "event_type": "tool",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "search_evidence",
+          "public_summary": "search_evidence",
+          "schema_version": "execution-event-v1",
+          "state": "completed",
+          "timestamp": "2026-11-03T13:13:13.459132+00:00"
+        },
+        {
+          "agent_id": "evidence",
+          "event_seq": 14,
+          "event_type": "phase",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "子任务已交接",
+          "public_summary": "子任务已交接",
+          "schema_version": "execution-event-v1",
+          "state": "completed",
+          "timestamp": "2026-11-03T13:13:15.460896+00:00"
+        },
+        {
+          "agent_id": "verifier",
+          "event_seq": 15,
+          "event_type": "phase",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "复核引用与财务资格",
+          "public_summary": "复核引用与财务资格",
+          "schema_version": "execution-event-v1",
+          "state": "running",
+          "timestamp": "2026-11-03T13:13:15.461932+00:00"
+        },
+        {
+          "agent_id": "verifier",
+          "event_seq": 16,
+          "event_type": "phase",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "结果核验完成，准备保存",
+          "public_summary": "结果核验完成，准备保存",
+          "schema_version": "execution-event-v1",
+          "state": "completed",
+          "timestamp": "2026-11-03T13:13:18.047834+00:00"
+        },
+        {
+          "agent_id": "controller",
+          "event_seq": 17,
+          "event_type": "phase",
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "label": "结果已保存",
+          "public_summary": "结果已保存",
+          "schema_version": "execution-event-v1",
+          "state": "completed",
+          "timestamp": "2026-11-03T13:13:18.051382+00:00"
+        }
+      ],
+      "exact_quotes": [
+        {
+          "evidence_ref": {
+            "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+            "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+            "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 171,
+            "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+            "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+          },
+          "exact_record_verified": true
+        },
+        {
+          "evidence_ref": {
+            "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+            "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+            "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+            "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+            "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+            "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+            "physical_page": 197,
+            "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+            "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+          },
+          "exact_record_verified": true
+        }
+      ],
+      "model_interpretations": 6,
+      "logical_model_attempts": 8,
+      "physical_guard_rows_for_case": 8,
+      "logical_minus_physical": 0,
+      "saved_report": {
+        "schema_version": "showcase-report-v2",
+        "report_id": "925d4633-086c-4e64-af38-1a65863f1d03",
+        "revision": 1,
+        "title": "E01-15 deep · AI待审研究",
+        "notes": "原文与解释分开；没有人工财务签核。",
+        "created_at": "2026-11-03T13:13:19.260912+00:00",
+        "snapshot": {
+          "company_name": "珠海格力电器股份有限公司",
+          "data_origin": "live",
+          "findings": [
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "6999b001-0992-47f7-bfba-41617b617cfc",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "numeric_claim_status": null,
+              "source_status": "unavailable",
+              "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "4009f195-bde9-433f-a1cc-4dbbe94f020a",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "numeric_claim_status": null,
+              "source_status": "current",
+              "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "cfae84ae-f021-4693-94e9-07a13ef014e8",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "numeric_claim_status": null,
+              "source_status": "current",
+              "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "693520bd-e105-4855-a278-b6decbb41c13",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "source_status": "current",
+              "text": "待核查：固定来源检索未通过逐页精确引用核验，因此2025年经营活动现金流相关原文尚不能定位；已返回的片段仅为现金流量套期储备、外币报表折算差额等权益变动项目，不能据此推断经营现金流风险。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "27eeaf2b-1bab-486d-84a8-e086d1cb99e4",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "证据缺口：现有多Agent结果只覆盖套期储备与其他债权投资减值准备等科目片段，未出现经营现金流正文或同比说明；是否存在经营现金流下滑、持续性或偿债覆盖风险，须待精确原文核查后再判断，此处不做推断。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "e8dccd32-86ab-4c05-8f2f-6efb15b18149",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "numeric_claim_status": null,
+              "source_status": "unavailable",
+              "text": "没有为本次研究明确选择可用的已确认财务事实。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "0240a716-7725-4c58-8bf9-8cef427fff93",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "source_status": "current",
+              "text": "已按要求读取本地已确认财务事实，但两次调用均返回“未明确选择可用事实”的未解决提示，因此本次无法核实现金流情况，也无法进行单Agent综合与多Agent对比。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "67867a06-bd65-4873-ade7-94fe2d99d9b1",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "在缺少已确认事实的前提下，现金流风险的待核查项无法从现有证据判定；所列年报来源仅为候选材料，未提供可直接引用的确认数值，需先完成事实选择再核查。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "5408b176-512e-4e32-b17d-e4b32f77fec9",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "现金流风险待核查项仍存证据缺口：检索未通过固定来源与逐页精确引用核验，已返回片段仅为现金流量套期储备、外币报表折算差额等权益变动项目，不能据此推断经营现金流下滑、持续性或偿债覆盖风险。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "5f3f8ea6-8ebe-43c6-b733-7d57a51a7e15",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "本次研究未明确选择可用已确认财务事实，且多Agent结果仅覆盖套期储备、其他债权投资减值准备等科目片段，未出现经营现金流正文或同比说明；须先完成事实选择并取得精确原文后再核查。",
+              "transcription_review_status": "not_applicable"
+            }
+          ],
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "limitations": [
+            "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+            "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+          ],
+          "period_label": "披露原文范围",
+          "schema_version": "verified-report-job-v2",
+          "state": "completed",
+          "workspace_id": "demo"
+        }
+      },
+      "report_revision": {
+        "created_at": "2026-11-03T13:13:19.260912+00:00",
+        "notes": "原文与解释分开；没有人工财务签核。",
+        "report_id": "925d4633-086c-4e64-af38-1a65863f1d03",
+        "revision": 1,
+        "schema_version": "showcase-report-v2",
+        "snapshot": {
+          "company_name": "珠海格力电器股份有限公司",
+          "data_origin": "live",
+          "findings": [
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "6999b001-0992-47f7-bfba-41617b617cfc",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "numeric_claim_status": null,
+              "source_status": "unavailable",
+              "text": "检索结果没有通过固定来源和逐页精确引用核验。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "4009f195-bde9-433f-a1cc-4dbbe94f020a",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "numeric_claim_status": null,
+              "source_status": "current",
+              "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "cfae84ae-f021-4693-94e9-07a13ef014e8",
+              "interpretation_review_status": "not_applicable",
+              "kind": "sourced_excerpt",
+              "numeric_claim_status": null,
+              "source_status": "current",
+              "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77",
+              "transcription_review_status": "fast_extraction_unreviewed"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "693520bd-e105-4855-a278-b6decbb41c13",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "source_status": "current",
+              "text": "待核查：固定来源检索未通过逐页精确引用核验，因此2025年经营活动现金流相关原文尚不能定位；已返回的片段仅为现金流量套期储备、外币报表折算差额等权益变动项目，不能据此推断经营现金流风险。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "27eeaf2b-1bab-486d-84a8-e086d1cb99e4",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "证据缺口：现有多Agent结果只覆盖套期储备与其他债权投资减值准备等科目片段，未出现经营现金流正文或同比说明；是否存在经营现金流下滑、持续性或偿债覆盖风险，须待精确原文核查后再判断，此处不做推断。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "e8dccd32-86ab-4c05-8f2f-6efb15b18149",
+              "interpretation_review_status": "not_applicable",
+              "kind": "unresolved_question",
+              "numeric_claim_status": null,
+              "source_status": "unavailable",
+              "text": "没有为本次研究明确选择可用的已确认财务事实。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "0240a716-7725-4c58-8bf9-8cef427fff93",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "numeric_claim_unverified",
+              "source_status": "current",
+              "text": "已按要求读取本地已确认财务事实，但两次调用均返回“未明确选择可用事实”的未解决提示，因此本次无法核实现金流情况，也无法进行单Agent综合与多Agent对比。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [],
+              "financial_refs": [],
+              "finding_id": "67867a06-bd65-4873-ade7-94fe2d99d9b1",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "在缺少已确认事实的前提下，现金流风险的待核查项无法从现有证据判定；所列年报来源仅为候选材料，未提供可直接引用的确认数值，需先完成事实选择再核查。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "b38de0353e56d5fffbe7e63d2ac210ce1c42a8cbcf404e25e3ea77cee328c9fa",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+                  "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+                  "evidence_id": "93462ca6f9921908cfc6774a67dacf55983f85909a152b64b67241681aecf5bb",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 171,
+                  "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+                  "text": "现金流量套期储备\n-2,219,839.96\n291,500.00\n-2,646,800.00\n445,535.00\n2,492,765.00\n272,925.04\n外币财务报表折算差额\n310,966,134.83\n-36,243,942.69\n-55,607,960.32\n19,364,017.63\n255,358,174.51\n合计\n182,018,285.77\n365,705,645.45\n21,081,781.12\n374,908,461.04\n1,145,982.06\n-56,360,559.63\n24,929,980.86\n125,657,726.14"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "5408b176-512e-4e32-b17d-e4b32f77fec9",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "现金流风险待核查项仍存证据缺口：检索未通过固定来源与逐页精确引用核验，已返回片段仅为现金流量套期储备、外币报表折算差额等权益变动项目，不能据此推断经营现金流下滑、持续性或偿债覆盖风险。",
+              "transcription_review_status": "not_applicable"
+            },
+            {
+              "data_origin": "live",
+              "evidence_refs": [
+                {
+                  "chunk_id": "edebe51949a0ffe3c7daafdafffa679c8e415bb6143c8f0b4ece6ac7548a8992",
+                  "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+                  "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+                  "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+                  "evidence_id": "5e79523b52275f23fb9cf64a235825df91a0cb911e13b12c77c6fd31271a88be",
+                  "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+                  "physical_page": 197,
+                  "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+                  "text": "16,578,380.61 \n2,450.38 \n14,164,310.61 \n其他债权投资信用减值准备 \n-914,210.82 \n23,728,581.13 \n19,004,631.52 \n \n1,401,377.89 \n1,291,886.08 \n2,030,685.64 \n377,675.26 \n现金流量套期储备 \n2,724,303.79 \n-2,646,800.00 \n3,175,475.00 \n \n-878,131.25 \n-4,944,143.75 \n \n-2,219,839.96 \n外币财务报表折算差额 \n289,507,323.36 \n24,158,425.31 \n \n \n \n21,458,811.47 \n2,699,613.84 \n310,966,134.83 \n合计 \n275,538,293.30 \n196,123,509.03 \n22,180,106.52 \n269,119,327.73 \n-6,321,272.44 \n-93,520,007.53 \n4,665,354.75 \n182,018,285.77"
+                }
+              ],
+              "financial_refs": [],
+              "finding_id": "5f3f8ea6-8ebe-43c6-b733-7d57a51a7e15",
+              "interpretation_review_status": "ai_unreviewed",
+              "kind": "model_interpretation",
+              "numeric_claim_status": "no_numeric_claim",
+              "source_status": "current",
+              "text": "本次研究未明确选择可用已确认财务事实，且多Agent结果仅覆盖套期储备、其他债权投资减值准备等科目片段，未出现经营现金流正文或同比说明；须先完成事实选择并取得精确原文后再核查。",
+              "transcription_review_status": "not_applicable"
+            }
+          ],
+          "job_id": "8c274dde-85de-4d08-b620-3fdd75281c9a",
+          "limitations": [
+            "AI interpretation is unreviewed; unresolved findings are not confirmed financial facts.",
+            "Provider token usage is unknown unless separately supplied by the deployment cost guard."
+          ],
+          "period_label": "披露原文范围",
+          "schema_version": "verified-report-job-v2",
+          "state": "completed",
+          "workspace_id": "demo"
+        },
+        "title": "E01-15 deep · AI待审研究",
+        "current_source_status": "current",
+        "history_notice": "已保存的只读版本；来源状态单独复验，内容不自动更新。"
+      },
+      "reads_and_report_writes_zero_new_model_rows": true,
+      "budget_after": {
+        "cap_cny": "5",
+        "physical_guard_rows": 115,
+        "reserved_cny": "2.267696",
+        "unknown_rows": 4,
+        "actual_billed_cny": "not_observed"
+      }
+    }
+  ],
+  "financial_approvals": 0,
+  "full_human_answer_acceptance": false,
+  "paired_same_question_comparison": false,
+  "original_unknown_policy": "baseline unknown rows retained; never retried/refunded",
+  "readonly_recoveries": [],
+  "budget_after": {
+    "cap_cny": "5",
+    "physical_guard_rows": 115,
+    "reserved_cny": "2.267696",
+    "unknown_rows": 4,
+    "actual_billed_cny": "not_observed"
+  },
+  "new_guard_rows": {
+    "ea7c288d-2613-49fb-80bd-93d66a21d300": {
+      "reserved_cny": "0.021718",
+      "state": "returned",
+      "input_tokens": 1489,
+      "output_tokens": 101
+    },
+    "faeaad4d-adab-4aa7-9111-be4fe03cf17a": {
+      "reserved_cny": "0.013474",
+      "state": "returned",
+      "input_tokens": 98,
+      "output_tokens": 31
+    },
+    "7afee544-26db-4ec6-bd78-a408be3ab986": {
+      "reserved_cny": "0.017982",
+      "state": "returned",
+      "input_tokens": 966,
+      "output_tokens": 88
+    },
+    "61385b4f-bce4-44a9-82c4-7f9990bb0efb": {
+      "reserved_cny": "0.017514",
+      "state": "returned",
+      "input_tokens": 951,
+      "output_tokens": 19
+    },
+    "1a8fcf48-0e65-45df-9df2-0ebbeaf83006": {
+      "reserved_cny": "0.017858",
+      "state": "returned",
+      "input_tokens": 1019,
+      "output_tokens": 24
+    },
+    "70adc8b4-ff18-43b5-9841-8ff7126c2607": {
+      "reserved_cny": "0.018358",
+      "state": "returned",
+      "input_tokens": 1092,
+      "output_tokens": 216
+    },
+    "b1a96c97-cea1-4dbe-90b7-319b5a75b18d": {
+      "reserved_cny": "0.020738",
+      "state": "returned",
+      "input_tokens": 1582,
+      "output_tokens": 195
+    },
+    "353701f2-4427-440e-85e5-2099508cc000": {
+      "reserved_cny": "0.019366",
+      "state": "returned",
+      "input_tokens": 1068,
+      "output_tokens": 219
+    }
+  },
+  "new_guard_rows_count": 8,
+  "old_unknown_state_changes": {},
+  "script_sha256": "1940e03113c94d98033ae29fcea46b2cf99212d0d4cb7d8e2046900a9aa96465",
+  "fixed_cases_sha256": "ce1899994a71f1119464b216c19c5f6fe90fa38ece483b7d616647c505f034f8",
+  "source_contract_baseline": "e510876",
+  "runner_checkout_head": "e314981cb4cfb08cdf0be352149387a939a95635",
+  "audited_contract_sha256": {
+    "app/showcase_research/api.py": "aecd7a348b17eb333012d0e54b91d80f1068320b67894d61346613e98936d9fe",
+    "app/showcase_research/models.py": "c50a664eedfa95f9b6cf34959b59690360c99027783d47bf83b723fdaf8ed8ac",
+    "app/showcase_research/jobs.py": "00af57b98751e2bc060eeeba452c80a5a75b433d5fcccd0a23b9e1ca0eb7ba09",
+    "app/showcase_research/agents.py": "536e8c6a6b9978194c73256db06ea79a0314676a1bed53d2b855016b5897aaad",
+    "app/showcase_research/provider.py": "2ebd437c7b446d023ba565549b9c9b54bdb81aa599dce3cbfc3654f84c846281",
+    "app/conversations/models.py": "fc4da1cb9b39b527699df083f3c14f6908d98ad956943e457b436e4d29ce8a0a",
+    "app/showcase_reports/api.py": "5232992b8c003da369ac432e7b70a46eae17baf10cfe65575aecc7e6a6c92e06",
+    "app/showcase_reports/research_adapter.py": "09dfcb035ec71481fc70ff429968bb0d12e05f4f28dd92187983bcf92c13cbea"
+  },
+  "origin": "http://127.0.0.1:14540",
+  "session": {
+    "schema_version": "demo-session-v1",
+    "state": "active",
+    "expires_at": "2026-11-03T13:32:48.943791+00:00",
+    "server_now": "2026-11-03T13:12:48.946321+00:00",
+    "remaining_seconds": 1199,
+    "lease_generation": 76,
+    "seed_version": "showcase-cplus-seed-v3",
+    "can_review": false,
+    "owner_elevated_until": null
+  },
+  "private_session_saved_for_owned_browser": true,
+  "source": {
+    "kind": "fast",
+    "workspace_id": "demo",
+    "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+    "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+    "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+    "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+    "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+    "report_year": 2025,
+    "attempt": 1,
+    "report_type": "annual",
+    "basis": "PRC_GAAP",
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "enrollment_id": null,
+    "artifact_id": null,
+    "artifact_sha256": null,
+    "config_hash": null,
+    "metadata_sha256": null,
+    "selected_pages": [],
+    "identity_status": "fast_source_verified"
+  },
+  "http_pdf": {
+    "sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+    "physical_pages": 219
+  },
+  "interview_scope_variant": "two_explicit_report_years_not_the_single_2025_fixed_fixture",
+  "sources": [
+    {
+      "kind": "fast",
+      "workspace_id": "demo",
+      "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+      "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+      "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+      "content_sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c",
+      "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+      "report_year": 2025,
+      "attempt": 1,
+      "report_type": "annual",
+      "basis": "PRC_GAAP",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "enrollment_id": null,
+      "artifact_id": null,
+      "artifact_sha256": null,
+      "config_hash": null,
+      "metadata_sha256": null,
+      "selected_pages": [],
+      "identity_status": "fast_source_verified"
+    },
+    {
+      "kind": "fast",
+      "workspace_id": "demo",
+      "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+      "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+      "source_revision": "d7093d8c508748b08263fa979251f380744e820ce580c614250196d247ffae52",
+      "content_sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006",
+      "parser_version": "fast-pdf-v4;table-geometry-v2;pymupdf=1.28.0;pdfplumber=0.11.10",
+      "report_year": 2024,
+      "attempt": 1,
+      "report_type": "annual",
+      "basis": "PRC_GAAP",
+      "period_start": "2024-01-01",
+      "period_end": "2024-12-31",
+      "enrollment_id": null,
+      "artifact_id": null,
+      "artifact_sha256": null,
+      "config_hash": null,
+      "metadata_sha256": null,
+      "selected_pages": [],
+      "identity_status": "fast_source_verified"
+    }
+  ],
+  "http_pdfs": {
+    "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec": 219,
+    "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479": 248
+  },
+  "stop": {
+    "type": "StopRun",
+    "reason": "insufficient_physical_call_headroom_no_further_task_started"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "version": "cplus-showcase-addendum-20261103",
+  "basis": "Actual registered runtime and strict DTOs; additive to API_V1, not a migration replacement.",
+  "identity": "Server captured workspace/instance/generation/principal/expiry; final source/receipt locks plus synchronous before-COMMIT identity validation.",
+  "template_runs": {
+    "create": "POST /cplus/template-runs",
+    "request": ["operation_id", "template_id:overview|cash|peer|changes", "template_version:cplus-template-v1", "question", "selected_sources:SourceRef[]", "generate_explanation:false by default"],
+    "source_rules": {"overview":"one annual fast source", "cash":"same company, two different report years", "changes":"same company, two different report years", "peer":"two to three explicit companies, one annual fast source each, same report year"},
+    "read": "GET /cplus/template-runs/{run_id}",
+    "operation": "GET /cplus/template-runs/operations/{operation_id}",
+    "snapshot": "template-run-v1 / run_id / immutable revision1 / selected_sources / collection_refs / financial_points / checkup_rules / topics / findings / interpretation / provider_outcome / financial_authority:false",
+    "interpretation_policy": "non_numeric_review_v1: at most one existing guarded answer call; numerical output withheld as numeric_claim_requires_review, original child answer retained for owner audit, no automatic retry. Nonnumeric output remains ai_unreviewed.",
+    "full_question": "Original user question is saved intact. Child explanation question is bounded and explicitly marked if truncated."
+  },
+  "chart_report_drafts": {
+    "create": "POST /cplus/report-drafts",
+    "request": ["operation_id", "trend_id", "chart_kind:line|bar", "metric_keys[]"],
+    "read": "GET /cplus/report-drafts/{report_id}",
+    "operation": "GET /cplus/report-drafts/operations/{operation_id}",
+    "snapshot": "chart-report-v1 / report_id / revision1 / status:draft / chart.record_refs / selected_sources / collection_refs / financial_points / financial_authority:false",
+    "authority": "Browser money/coordinates are rejected; source/period/cell revision/hash/receipt are rehydrated from the saved trend."
+  },
+  "batch": {
+    "plan_addition": "generate_explanations:false by default; saved limits.execution_mode=pure_tools|ai_review and max_provider_attempts are part of immutable plan/hash",
+    "start": "POST /cplus/batches returns persisted completed operation ACK with dispatch_acknowledged:true and a running matrix; completion is via GET, not inferred from ACK state",
+    "history": "GET /cplus/batches owner-filtered, read-only",
+    "cancel": "POST /cplus/batches/{id}/cancel with expected_revision; past revisions accepted for immutable no-new-cell plan, future revisions rejected, only currently queued cells cancelled",
+    "failure": "Per-cell UNKNOWN retained, independent other cells continue. Cancellation does not need broken source material, but still requires owner/identity and final commit fence.",
+    "cost": "Pure tools:0. AI:unknown observed calls/reservation, upper bound one per cell. Shared original5CNY ledger enforces actual SDK attempts; no per-generation reset."
+  },
+  "report_registry": {
+    "domains_added": ["template_run_v1", "chart_report_v1"],
+    "focused_read": "GET /cplus/export-snapshots?domain=...&identifier=...&revision=1; all three selection fields together; filter before original permission/currentness resolve",
+    "reference": ["domain", "id", "revision", "payload_sha256"],
+    "hash": "Use server reference; browser JSON round trips can change float representations and cannot recreate original canonical SHA.",
+    "intermediate": "Template child answers remain owner-auditable through original answer/operation reads, but are not standalone report exports; export parent template snapshot instead.",
+    "download": "GET saved bytes revalidates exact original domain/revision display permission. Parent revocation is403, never historical-read fallback."
+  },
+  "company_workflow": "GET /cplus/companies/{company_id}/workflow joins owner-checked saved sources, never title text. saved_at is only an actual saved timestamp or null; persistence_order is per domain.",
+  "debt_asset_ratio": "Additive v3 trend.ratios: Decimal liabilities/assets*100,6dp, same company/time and known consistent basis/scope/currency/unit, positive assets; otherwise null+reason. No new financial admission.",
+  "unchanged": ["ResearchRun original text", "v1 three metrics", "v2 instant metrics", "ACCEPT-SAVE-RESUME", "applied migrations", "same global5CNY ledger", "default20-minute wait_only demo"]
+}

@@ -1,28 +1,27 @@
-# C+ 已知限制与未通过项
+# C+ 已知限制与人审边界
 
-## 外部模型与人工
+2026-11-03当前状态。原“4次模型请求全部超时”的检查点已由新真实成功更新；[原记录](checkpoints/KNOWN_ISSUES-e510876.md)仍保留，旧UNKNOWN4未重放或退款。
 
-- **BLOCKED_EXTERNAL**：同一5元账本新增4次C+SDK调用全部ReadTimeout/UNKNOWN。无法确认供应商认证POST健康或实际账单；不推断供应商整体故障。已停止进一步诊断/自动重试。程序规则/双侧原文/纯工具批次可运行，真实新AI解释、多Agent解释及完整问答评测不宣称通过。原C历史模型结果只作历史展示。
-- **HUMAN_PENDING**：没有代用户点击财务确认。v1 ACCEPT→SAVE→RESUME与独立v3 owner gate保持，正向确认图表需用户本人操作。来源封面身份核验、数值提取、模型解读都不等于财务核准。
-- 人工检索语义标注未进行，precision@5/MRR为null。固定24问题只有分层组件证据，完整模型答案PASS0；原15题历史5partial/10skip保留。
+## HUMAN_PENDING
 
-## 本轮已复现并修复（历史失败保留）
+- 本人财务核准0。三表候选、Decimal比率、趋势/同行、AI解释都不等于确认。正向owner确认图表需用户本人对照PDF/期间/币种/范围操作；不由Agent代签。原v1 ACCEPT→SAVE→RESUME不变。
+- 人工检索相关性/引用支持claim/年度标签正确性、单多Agent质量比较未标注。precision@5/MRR为null，固定题executed不等于正确率，AI自评不替代人审。
 
-- 原多库读锁/innerCOMMIT栅栏、研究记忆嵌套写锁、fast收藏错误字段422、OCR历史freshness、报告年与比较期间混淆，已分别修复并独立复验；原Astra报告留存。
-- 官网证券match_type进入公共版本摘要，拼音与代码查询导致同PDF重复下载。d7b4160修复，只排除搜索提示，完整候选SHA仍覆盖全部字段；真实新generation跨查询cache命中已验。旧key不迁移，首次新key可冷下载一次。
-- 首轮真实2×2 start260秒HTTP503，最终效果UNKNOWN未重发。51b791e将候选排序后逐条调用原verifier补足top-k，无跨次来源缓存/不放宽准入；worker四格HTTP119秒与主控native四格均已通过。HTTP超时未扩大。旧失败档案batch-v3-corrected保留。
-- 首页原默认公司覆盖了有数据企业，预置曲线空态；现按明确选择或预置有数据企业绘图。真实首页1440/1280/390已复测。
-- 打印原21页通用字段堆叠，已改业务表/来源节选；新版实际2页，逐页PNG查看无遮挡。旧21页证据未替换。CSV在Git被CRLF转换曾影响SHA，现.gitattributes -text，实际Gitblob字节与工件一致。
+## 有限支持 / P2
 
-- 最终Astra复现导出父会话撤销后已生成文件可读P1，47e5d23下载重新复验精确domain/id/revision/SHA展示权限；受控HTTP撤销403/恢复原bytes和ETag/不rerender，独立841927f复验关闭；真实Chrome导出11检查复测通过。
+- 巨潮是实测公共网页adapter，访问条件可能变化。合理频率和HTTPS、限量下载，不绕过验证码/限制；官网跳转/手工上传回退。美的2024封面缺证券代码时自动绑定拒绝，显式上传仍保持basis unknown，不能自动改为已核验。
+- 3家公司/5份完整年报，有限三表和分部模板；未知行业/口径/币种/合并范围不补造。复杂表格保留unsupported。缺值/不同比较期/非正分母不补零或乱算同比。
+- OCR仅macOS Vision真实执行，Linux OCR未验。转录待审/身份未核验，不进入旧READY或财务事实。OCR词法检索与fast BGE dense分层，不能声称OCR已进入同一dense库。
+- 经营风险章节排序已有真实before/after；现金流问题仍有行政类无关首条，E01-01实际模型如实报告缺证。人工相关性统计未完成，不能用精确引用SHA代替相关性。
+- 原单年度overview PPTX保存5候选点和真实AI，但没有可用双期趋势图；该失败发现保留。受支持的双年cash/真实同行/两年chart draft可展示业务图，不补造额外年份。
+- 全量版本列表在重复研究很多时较慢；精确报告deep-link已先筛domain/id/revision再重验，真实原生闭环通过。旧30秒脚本GET超时、首次未等待资料导致selector失败均保留。脚本错误输出移除可能含会话信息的传输日志；对应测试会话已登出撤销。
+- 原生同图点到原PDF场景若长表原文无法精确匹配，明确降级原页（本次最终点图实际page_only），不伪装高亮成功；真实OCR坐标和匹配原文quads能力另有受控/真实OCR证据。
+- XLSX保留Decimal字符串；PPTX图形用浮点仅作可视化，精确金额看表格/CSV。单/多Agent长解释在PPTX可明确标注节选，完整文本在CSV/XLSX；没有假装全文都在每页。
+- Git不包含PDF/seed/模型权重/私有DB。新机器需提供bundle及本地依赖；中文渲染需要有效字体/fontconfig。默认bundled LibreOffice缺字体初次失败已保留，CJK配置后逐页复查。
+- 大chunk、hooks lint与SWIG warnings保留；原C旧57fixture setup ERROR不会被C+绿色洗掉。没有生产高可用、多租户/极限并发或公开发布验收。
 
-## 限定支持范围/P2
+## 已修复且留有反例
 
-- 动态巨潮为实测公共网页adapter，不是稳定API授权承诺；限频、短超时、验证码/限制不绕过，官网跳转/手动上传回退。美的2024封面缺证券代码自动导入拒绝，使用明确手动上传，并保持basis unknown/候选；未弱化自动身份闸门。
-- 三家公司五份完整年报、有限三表/产品地区模板；复杂表格可unsupported。未把未知同行行业/币种/合并口径自动补齐；缺值不补0。财务比较候选明示，未全行业覆盖。
-- OCR仅本机macOS Vision真跑，68行/54cell文件转录；原扫描文档legacyFAILED保持。未声称OCR身份已核验、财务已核准或OCR dense向量召回。LinuxOCR未验证。
-- 部分现金流问题首条仍为管理信息，精确六题对照保留，不把全文引用exact验证当语义正确。RRF/章节启发式不冒称训练式cross-encoder reranker。
-- 纯工具批次非新增付费多Agent实证。取消只对未dispatch格有效，UNKNOWN不自动重跑。
-- XLSX/PPTX需独立renderer Python依赖，LibreOffice中文渲染需系统字体/fontconfig。Git不含私有/公开PDF种子二进制与模型权重，不能声称clone即完整运行。
-- UI长原文/完整哈希部分页面较长；模板竞争对标先生成单企业草稿，其他企业需显式选择；不是自动同行报告。peer/segments可选图表草稿回调尚未全部挂载，360点位追问已贯通。
-- Node构建大chunk warning、React/hooks lint warnings、SWIG DeprecationWarnings保留。原C旧57fixture setup ERROR未因C+局部绿色而消失。无生产高可用/并发规模验收。
+年度AI提示预算重复来源元数据、排序前过度验证耗时、公共cache搜索提示进入版本key、已保存文件忽略parent撤销、恢复AI计划误报零调用、legacy纯工具恢复误禁用、重复相同提取视图、深链接混合多revision/全量耗时，均有独立提交与证据。UNKNOWN仅查询原操作，不自动重新执行。原始模型超时、输入预算拒绝、FTS五来源422、脚本失败与哈希不一致均按原层级保存。
+
+已知cash年份金额错配另经a1920c0非数值模板政策处理，真实新单次解释成功且无数字，Astra复核f657917关闭已知样本；原child供审阅但不可独立报告导出。规则字符门禁可能保守误伤普通词，仍不能代表语义验证。PDF不再把规则JSON当原文，段落可断行；修正6页PDF仅检查首末，6页PPTX全部查看。

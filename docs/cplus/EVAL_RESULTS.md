@@ -1,47 +1,27 @@
-# C+ 验收证据索引
+# C+ 分层验证结果
 
-各表中的PASS限于所写层级。测试条数不等于功能数量；组件/HTTP成功不等于模型答案正确、人类签核或生产验收。原15题历史及固定24题原文未改写。
+当前以 [固定24题矩阵](eval/CORE_EXECUTION_MATRIX.md)、[原始机器记录](eval/results/core-execution-matrix-v1.json)和 [EVIDENCE](EVIDENCE.md)为准。旧检查点见 [历史汇总](checkpoints/EVAL_RESULTS-e510876.md)，不能把旧“0新模型成功”沿用到已恢复后的结果。
 
-|场景|实际结果/层级|证据|
-|---|---|---|
-|T01 公司模糊搜索|PASS：真实名称/代码/拼音候选及浏览器手选市场|M0官方spike、M5-official-reset|
-|T02 动态公告|PASS：海尔2025非旧catalog中文/英文分离；接口授权稳定性未知|M1-official-import、M5-official-reset|
-|T03 真实下载入库|PASS：官方PDF245页→fast/BGE/Milvus READY，封面身份/元数据独立|M1-official-import|
-|T04 cache|PASS：冷下载后新generation跨搜索词cache_hit=true/current binding|M5-official-reset，d7b4160|
-|T05 接管与清理|PASS组件组合：两个独立Chrome owner接管旧HTTP401；真实新V3退出后物化/OS退出/GC/公开cache不变；“下载正进行时接管”竞态未在真实浏览器重演|M1-M2-native、M5-official-reset、retired_gc临时fixture|
-|T06 三表|PASS限定样本：Gree2024/25各38cells、Midea2025千元列/合并与母公司区分|M1-M2-native、M3-http、真实PDF提取回归|
-|T07 本人确认图表|HUMAN_PENDING；候选趋势PASS，不代签|HUMAN_PENDING.md|
-|T08 360|PASS候选路线：真实KPI/所选趋势/资料/来源，三宽检查|M1-M2-native、M5-interview|
-|T09 财报体检|PASS：三类真实候选程序规则；AI解释BLOCKED_EXTERNAL|M3-http、原生财务路径|
-|T10 跨年文本|PASS工具路线：风险/业务/研发三维双侧原文；真实AI解释未过|M5-interview、batch-v3-fixed|
-|T11 同行|PASS候选：Gree/Midea2025同期间、Decimal、未知口径拒绝|M3-http、M4/M5-native-exports|
-|T12 主营结构|PASS：Gree真实产品/地区收入提取+原生环形；未归一100%|M3-http、M5-interview|
-|T13 图表追问|PASS工具路线：2025报告/2024比较期点由服务端cell解析，显式context后提问|M5-point-memory|
-|T14 2×2|PASS纯工具：真实四格completed、GET不dispatch，119.413秒；原260秒UNKNOWN保留。非真实LLM多Agent验收|eval/results/batch-v3-fixed、M5-interview|
-|T15 OCR|PASS文件转录路线：真实Vision→显式enroll/index/context→OCR引文/bbox；legacyFAILED不改|M1-M2-native|
-|T16 混合检索|PASS风险诊断：六道同题同源baseline重现、风险前列原文、30条exact验证；人工precision/MRR未标注，现金流首条不相关失败保留|eval/results/v1/six-query-before-after.md|
-|T17 多格式|PASS真实同ref：CSV/XLSX/PPTX可下载且独立打开/渲染、浏览器PDF；权限撤销403且原字节不改|M4-native-exports、M5-native-exports、M5-final-boundary-followup|
-|T18 历史/恢复|PASS主路径：真实原operation GET、历史只读、旧会话401、恢复完整V3seed；限定fault/race为fixture|M1-M2-native、M5-official-reset|
+## 执行与正确性分轴
 
-## 固定24题
+固定24题精确文本未改。累计13 required-tier executed：E01-01/06/14/15、CP16/17/18/19/20/21/22/23/24。含实际模型、真实公开PDF/OCR、BGE/Milvus、HTTP/Chrome或指定program_contract。这个分母不是正确率：E01-01实际合成研究未找到适用现金流摘录，部分固定题未运行，所有人工语义接受与财务核准仍pending。
 
-逐题执行层级见 `eval/results/v1/fixed24-execution-tiers.md`；新增Midea2024种子后，E01-02/09工具探针补充见 `eval/results/batch-v3-fixed/fixed24-supplement.json`。这两份是各自执行集，不能把NOT_RUN_BY_THIS_SUITE误读成全项目没有别的证据，也不能反向抹除未执行项。
+CP24最新同图点完整原生9检查（真实page_only回退）；CP21实际3AI返回+1missing PDF UNKNOWN，旧queued3取消仅影响未开始格；E01-14客户端findings/金额refs均422、备注不改变trusted snapshot、旧rev1不可变。原单2025 E01-15与额外双年Interview-B分开记录，不重复计数。
 
-跨context真实BGE收藏/删除、真实OCR、真实导出/官方来源等组件已有上述实际证据；仍没有完整新真实模型答案PASS，人工语义和金融确认仍待办。完整模型成功分母0，不发布“24题准确率”。精确引用身份与原文字符串匹配不等于结论支持度。
+## 真实模型与错误保留
 
-## 最终命令检查点
+- 旧4次ReadTimeout/UNKNOWN保留，不退款、不自动重放。
+- 恢复后实际来源问答、三规则体检、OCR待审说明、年度三主题、模板、单/多Agent和AI批次均有真实返回。
+- 同2025固定问题单多Agent11调用；额外双年deep8+synthesis5=13调用，双方同问题/同两份来源/同事实选择且有双年引用。试验窗口余量不足时不启动下一任务；独立新窗口只启动此前未开始的synthesis，全局原5元cap不变。
+- 旧cash AI年份金额错配独立文件QA发现，保留原样；新的非数值解释门禁7受控例+原15边界通过，真实再验证仅1SDK、解释成功发布且无数字，仍ai_unreviewed。raw child可审阅，但不是独立报告导出。通过字符门禁不代表语义验证，可能保守拦截“统一/进一步”等普通词。
+- 年度首次输入预算拒绝、FTS五来源422、原native selector/30秒GET超时、JS回写0.0→0造成SHA不一致等失败不改为PASS。后续新操作及修复单列。
 
-```sh
-PYTHONPATH=. <full-venv-python> -m pytest -q tests/test_cplus_*.py \
-  tests/test_demo_auth.py tests/test_demo_gateway.py tests/test_runtime_startup.py \
-  tests/test_showcase_local_launcher.py
-# 90 passed, 3 skipped, 5 warnings (20.49s)
-cd frontend
-npm run build
-npm run lint
-# Node24; exit0; chunk and React/hooks warnings retained
-```
+## 文件、浏览器与命令
 
-3个SKIP为未设置opt-in的真实PDF测试，不算通过；有独立真实公开PDF/HTTP/浏览器结果。此前误写测试文件名exit4、默认Python缺依赖、脚本响应字段/选择器/异步等待错误和首次批次超时分别保留，不以最后一轮PASS覆盖。真实native脚本、环境选项与录屏见RUN_LOCAL/DELIVERY。
+实际三宽profile/表格/体检、两个独立浏览器接管旧HTTP401、四模板结构化业务、图表draftrev1、精确版本原生导出均留证。真实四格及故障批次不是fake provider；边界竞态/数字隔离测试则明确synthetic PDF/fake provider。
 
-费用：同原账本77次，预留1.441018元/5元，UNKNOWN4，实际账单未观察；本轮修复、批次、原文研究和导出0外部模型。无用户财务代签、公开部署或main合并。
+C+模式前端build必须显式 VITE_FINDOC_DEMO_MODE=1 / VITE_FINDOC_CPLUS_MODE=1 / VITE_FINDOC_SHOWCASE_PREVIEW_CHARTS=0；未开启C+时tree-shaken bundle不能当C+模式构建证据。大chunk/hooks/SWIG警告保留。后端最后选择性命令覆盖 `test_cplus_*.py`、demo、launcher和runtime startup，3个opt-in真实PDF SKIP仍单列；最终PASS分母见STATE/本轮命令结果。
+
+新候选cash文件四格式4/4 SHA，6页PPTX逐页查看，业务图/10候选点/3规则/非数值AI解释；浏览器PDF6页仅查看首末，未做全页布局人审。旧错误文件4/4 SHA未变。CSV Git属性禁止换行改写，确保Gitblob字节与下载一致。
+
+原ledger最终123物理记录/保守预留2.468274元/上限5/UNKNOWN4/账单未知。没有本人财务确认、main合并、公开部署或购买服务。
