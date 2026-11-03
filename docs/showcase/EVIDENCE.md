@@ -18,3 +18,6 @@
 - Git复制工作包原先受text=auto归一CSV行尾，已加限定gitattributes -text并重新staged逐文件与ZIP比对：0差异；原始ZIP保留Downloads。
 
 - M1 U01局部：主控修改AppShell/tokens/shell/productRoutes/Conversations，运行Node24 `productRoutes.test.ts conversationFoundation.test.ts` 6PASS/0skip，旧QA/task/run/report/revision深链保留；预填实际HTTP无POST验证待联调。
+
+- U01预填边界：Chromium拦截API的UI_MOCK三宽1440/1280/390 PASS，question进草稿、未选来源发送禁用、零POST/PATCH/DELETE；脚本frontend/e2e/showcase-entry.mjs，截图m1-entry。不能代替真实服务集成。
+- M1 UI首候选171ab87/f14e105/c087b4b已读审：真实接口方向可复用，但正式视觉未延续通过的M0；schema cast、失效时限/晚回epoch等退回Terra/high修订。尚未集成/验收H02/H03/L04。
