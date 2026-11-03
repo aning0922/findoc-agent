@@ -1,0 +1,19 @@
+{
+  "snippet": "[{\"code\":\"600690\",\"pinyin\":\"hezj\",\"sjstsBond\":\"false\",\"category\":\"A股\",\"type\":\"shj\",\"delisted\":\"false\",\"orgId\":\"gssh0600690\",\"zwjc\":\"海尔智家\"}]",
+  "scripts": [],
+  "endpoint_context": [
+    "[{\"code\":\"600690\",\"pinyin\":\"hezj\",\"sjstsBond\":\"false\",\"category\":\"A股\",\"type\":\"shj\",\"delisted\":\"false\",\"orgId\":\"gssh0600690\",\"zwjc\":\"海尔智家\"}]"
+  ],
+  "json": [
+    {
+      "code": "600690",
+      "pinyin": "hezj",
+      "sjstsBond": "false",
+      "category": "A股",
+      "type": "shj",
+      "delisted": "false",
+      "orgId": "gssh0600690",
+      "zwjc": "海尔智家"
+    }
+  ]
+}

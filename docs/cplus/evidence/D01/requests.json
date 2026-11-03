@@ -1,0 +1,338 @@
+[
+  {
+    "number": 1,
+    "label": "company-page",
+    "method": "GET",
+    "url": "https://www.cninfo.com.cn/new/snapshot/companyListCn",
+    "form": null,
+    "started_epoch": 1793695647.4666162,
+    "checked_at": "2026-11-03T08:47:27.466617+00:00",
+    "status": 200,
+    "bytes_read": 40168,
+    "sha256": "97148a4f2887c036d16bf402ca30e30aa189b07fe78971fbca1f21184e1b0e4d",
+    "headers": {
+      "content-type": "text/html;charset=utf-8",
+      "content-length": null,
+      "location": null
+    },
+    "elapsed_seconds": 0.196
+  },
+  {
+    "number": 2,
+    "label": "notice-page",
+    "method": "GET",
+    "url": "https://www.cninfo.com.cn/new/commonUrl?url=disclosure%2Flist%2Fnotice",
+    "form": null,
+    "started_epoch": 1793695648.571668,
+    "checked_at": "2026-11-03T08:47:28.571689+00:00",
+    "status": 200,
+    "bytes_read": 66095,
+    "sha256": "4954fdff8744d6b02688bf5b38972ebfddb6b484556a5d22c1eed078ac16f9cf",
+    "headers": {
+      "content-type": "text/html;charset=utf-8",
+      "content-length": null,
+      "location": null
+    },
+    "elapsed_seconds": 0.192
+  },
+  {
+    "number": 3,
+    "label": "company-js",
+    "method": "GET",
+    "url": "https://static.cninfo.com.cn/new/js/app/company-snapshot/company-list-cn.js?v=20260710082532",
+    "form": null,
+    "started_epoch": 1793695660.551245,
+    "checked_at": "2026-11-03T08:47:40.551248+00:00",
+    "status": 200,
+    "bytes_read": 3264,
+    "sha256": "7cde80a5d2316b76ccfa54ed1601497dba11a49b54a4f761db57e9c7f4d4bb19",
+    "headers": {
+      "content-type": "application/javascript",
+      "content-length": "3264",
+      "location": null
+    },
+    "elapsed_seconds": 0.088
+  },
+  {
+    "number": 4,
+    "label": "notice-js",
+    "method": "GET",
+    "url": "https://static.cninfo.com.cn/new/js/app/disclosure/notice/new-notice.js?v=20260710082532",
+    "form": null,
+    "started_epoch": 1793695661.656277,
+    "checked_at": "2026-11-03T08:47:41.656289+00:00",
+    "status": 200,
+    "bytes_read": 57656,
+    "sha256": "6dc481d226c1cfef4d7f5a0d833120d9c0d6e3a2e52cce21cbceeb6059cbbe00",
+    "headers": {
+      "content-type": "application/javascript",
+      "content-length": "57656",
+      "location": null
+    },
+    "elapsed_seconds": 0.029
+  },
+  {
+    "number": 5,
+    "label": "common-js",
+    "method": "GET",
+    "url": "https://static.cninfo.com.cn/new/assets/js/common.js?v=20260826101926",
+    "form": null,
+    "started_epoch": 1793695662.761363,
+    "checked_at": "2026-11-03T08:47:42.761382+00:00",
+    "status": 200,
+    "bytes_read": 38578,
+    "sha256": "3c682e817271d22776dfac27d928c356d7d93fc73ce567e114645413b2ee5af0",
+    "headers": {
+      "content-type": "application/javascript",
+      "content-length": "38578",
+      "location": null
+    },
+    "elapsed_seconds": 0.065
+  },
+  {
+    "number": 6,
+    "label": "resolve-code",
+    "method": "POST",
+    "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+    "form": {
+      "keyWord": "600690",
+      "maxNum": "10"
+    },
+    "started_epoch": 1793695684.323971,
+    "checked_at": "2026-11-03T08:48:04.323972+00:00",
+    "status": 200,
+    "bytes_read": 149,
+    "sha256": "d619148bd22543451443f890e945e0f99afe18a95f79109955c29e79750b8d61",
+    "headers": {
+      "content-type": "application/json;charset=UTF-8",
+      "content-length": null,
+      "location": null
+    },
+    "elapsed_seconds": 0.189
+  },
+  {
+    "number": 7,
+    "label": "resolve-short",
+    "method": "POST",
+    "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+    "form": {
+      "keyWord": "海尔智家",
+      "maxNum": "10"
+    },
+    "started_epoch": 1793695685.4290502,
+    "checked_at": "2026-11-03T08:48:05.429134+00:00",
+    "status": 200,
+    "bytes_read": 298,
+    "sha256": "6dbd3941d52c8772025c6df2338d620cceae24998ffa41f00dc98fc221a66bb0",
+    "headers": {
+      "content-type": "application/json;charset=UTF-8",
+      "content-length": null,
+      "location": null
+    },
+    "elapsed_seconds": 0.131
+  },
+  {
+    "number": 8,
+    "label": "resolve-fuzzy",
+    "method": "POST",
+    "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+    "form": {
+      "keyWord": "海尔",
+      "maxNum": "10"
+    },
+    "started_epoch": 1793695686.534104,
+    "checked_at": "2026-11-03T08:48:06.534122+00:00",
+    "status": 200,
+    "bytes_read": 588,
+    "sha256": "48c16a16743d868d5a76b051aca73cdcc5746c259e9af1770d5264b235ea9460",
+    "headers": {
+      "content-type": "application/json;charset=UTF-8",
+      "content-length": null,
+      "location": null
+    },
+    "elapsed_seconds": 0.185
+  },
+  {
+    "number": 9,
+    "label": "resolve-pinyin",
+    "method": "POST",
+    "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+    "form": {
+      "keyWord": "hezj",
+      "maxNum": "10"
+    },
+    "started_epoch": 1793695687.639146,
+    "checked_at": "2026-11-03T08:48:07.639155+00:00",
+    "status": 200,
+    "bytes_read": 298,
+    "sha256": "6dbd3941d52c8772025c6df2338d620cceae24998ffa41f00dc98fc221a66bb0",
+    "headers": {
+      "content-type": "application/json;charset=UTF-8",
+      "content-length": null,
+      "location": null
+    },
+    "elapsed_seconds": 0.104
+  },
+  {
+    "number": 10,
+    "label": "search-page",
+    "method": "GET",
+    "url": "https://www.cninfo.com.cn/new/commonUrl/pageOfSearch?url=disclosure/list/search&code=600690&name=%E6%B5%B7%E5%B0%94%E6%99%BA%E5%AE%B6",
+    "form": null,
+    "started_epoch": 1793695688.744183,
+    "checked_at": "2026-11-03T08:48:08.744188+00:00",
+    "status": 200,
+    "bytes_read": 60638,
+    "sha256": "b744abe9782ba189fb5e07090825c81c523d5d2c3fb68d14ee5b4220f8882865",
+    "headers": {
+      "content-type": "text/html;charset=utf-8",
+      "content-length": null,
+      "location": null
+    },
+    "elapsed_seconds": 0.261
+  },
+  {
+    "number": 11,
+    "label": "snapshot-common-js",
+    "method": "GET",
+    "url": "https://static.cninfo.com.cn/new/js/app/company-snapshot/common.js?v=20260710082532",
+    "form": null,
+    "started_epoch": 1793695689.849219,
+    "checked_at": "2026-11-03T08:48:09.849223+00:00",
+    "status": 200,
+    "bytes_read": 14936,
+    "sha256": "a280bdbf8340e595d1981f78b20c1210786d527930ec5b3f9c811be0dd1dc23b",
+    "headers": {
+      "content-type": "application/javascript",
+      "content-length": "14936",
+      "location": null
+    },
+    "elapsed_seconds": 0.081
+  },
+  {
+    "number": 12,
+    "label": "history-js",
+    "method": "GET",
+    "url": "https://www.cninfo.com.cn/new/js/app/disclosure/notice/history-notice.js?v=20260710082532",
+    "form": null,
+    "started_epoch": 1793695705.203805,
+    "checked_at": "2026-11-03T08:48:25.203806+00:00",
+    "status": 200,
+    "bytes_read": 70937,
+    "sha256": "ef36c3fb82af6b4176c2b4fcf92c1c7eb58ff03beba7931fa48bc1b2b417213a",
+    "headers": {
+      "content-type": "application/javascript",
+      "content-length": "70937",
+      "location": null
+    },
+    "elapsed_seconds": 0.306
+  },
+  {
+    "number": 13,
+    "label": "history-js-details",
+    "method": "GET",
+    "url": "https://www.cninfo.com.cn/new/js/app/disclosure/notice/history-notice.js?v=20260710082532",
+    "form": null,
+    "started_epoch": 1793695733.63219,
+    "checked_at": "2026-11-03T08:48:53.632193+00:00",
+    "status": 200,
+    "bytes_read": 70937,
+    "sha256": "ef36c3fb82af6b4176c2b4fcf92c1c7eb58ff03beba7931fa48bc1b2b417213a",
+    "headers": {
+      "content-type": "application/javascript",
+      "content-length": "70937",
+      "location": null
+    },
+    "elapsed_seconds": 0.2
+  },
+  {
+    "number": 14,
+    "label": "haier-annual",
+    "method": "POST",
+    "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "form": {
+      "pageNum": "1",
+      "pageSize": "10",
+      "column": "sse",
+      "tabName": "fulltext",
+      "plate": "sh",
+      "stock": "600690,gssh0600690",
+      "searchkey": "2025年年度报告",
+      "secid": "",
+      "category": "category_ndbg_szsh;",
+      "trade": "",
+      "seDate": "2026-01-01~2026-11-03",
+      "sortName": "time",
+      "sortType": "desc",
+      "isHLtitle": "false"
+    },
+    "started_epoch": 1793695734.7370381,
+    "checked_at": "2026-11-03T08:48:54.737062+00:00",
+    "status": 200,
+    "bytes_read": 2182,
+    "sha256": "befd26f753522606c875b6e5633760aa18895cf49a197cfe5a4eae4ce83f833b",
+    "headers": {
+      "content-type": "application/json;charset=UTF-8",
+      "content-length": null,
+      "location": null
+    },
+    "elapsed_seconds": 0.117
+  },
+  {
+    "number": 15,
+    "label": "robots",
+    "method": "GET",
+    "url": "https://www.cninfo.com.cn/robots.txt",
+    "form": null,
+    "started_epoch": 1793695766.023072,
+    "checked_at": "2026-11-03T08:49:26.023073+00:00",
+    "status": 404,
+    "bytes_read": 573,
+    "sha256": "2ea9900e57a76c34865bcc9b4afe51503050d15c308593bdf9c638554e0e4659",
+    "headers": {
+      "content-type": "text/html",
+      "content-length": "573",
+      "location": null
+    },
+    "elapsed_seconds": 0.149
+  },
+  {
+    "number": 16,
+    "label": "haier-full-pdf-preflight",
+    "method": "GET",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-03-27/1225038336.PDF",
+    "form": null,
+    "started_epoch": 1793695767.128138,
+    "checked_at": "2026-11-03T08:49:27.128184+00:00",
+    "status": 200,
+    "bytes_read": 1823191,
+    "sha256": "14186f9f9b47f687c527ba14825664f3b09e51759d581636cddcc248f26e3660",
+    "headers": {
+      "content-type": "application/pdf",
+      "content-length": "1823191",
+      "location": null
+    },
+    "elapsed_seconds": 0.496
+  },
+  {
+    "number": 17,
+    "label": "resolve-fullname",
+    "method": "POST",
+    "url": "https://www.cninfo.com.cn/new/information/topSearch/query",
+    "form": {
+      "keyWord": "海尔智家股份有限公司",
+      "maxNum": "10"
+    },
+    "started_epoch": 1793695771.211244,
+    "checked_at": "2026-11-03T08:49:31.211246+00:00",
+    "status": 200,
+    "bytes_read": 298,
+    "sha256": "6dbd3941d52c8772025c6df2338d620cceae24998ffa41f00dc98fc221a66bb0",
+    "headers": {
+      "content-type": "application/json;charset=UTF-8",
+      "content-length": null,
+      "location": null
+    },
+    "elapsed_seconds": 0.15
+  }
+]
