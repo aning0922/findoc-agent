@@ -164,3 +164,10 @@
   line-height: 2;
   color: #61758b;
 }
+
+.showcase-research { min-width: 0; max-width: 100%; }
+.showcase-research p { overflow-wrap: anywhere; }
+.showcase-research .sr-result-summary { margin-top: 16px; }
+.showcase-research .sr-result-summary article { background: #f0f5ff; border-color: #dae5fb; }
+.showcase-research .sr-result-summary p { color: #334969; font-size: 14px; }
+.showcase-research .sr-result-summary a { margin-right: 14px; }

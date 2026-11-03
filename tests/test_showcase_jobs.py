@@ -46,7 +46,7 @@ class NativeFake(FakeProvider):
         if tool:
             assert tool in allowed
             arguments = {"query": payload["goal"]} if tool == "search_evidence" else {}
-            return ModelCompletion(message={"role": "assistant", "content": None, "tool_calls": [{"id": str(uuid4()), "type": "function",
+            return ModelCompletion(message={"role": "assistant", "content": "FAKE供应商工具前说明：此文本不得作为发现发布。", "tool_calls": [{"id": str(uuid4()), "type": "function",
                 "function": {"name": tool, "arguments": json.dumps(arguments)}}]}, finish_reason="tool_calls")
         refs = [item["reference_id"] for call in payload["tools_used"] for item in call["result"] if item["kind"] == "sourced_excerpt"][:1]
         return ModelCompletion(message={"role": "assistant", "content": json.dumps({"interpretations": [{"text": role + " FAKE角色解释草稿", "evidence_ids": refs}]})}, finish_reason="stop")
@@ -84,6 +84,7 @@ def test_single_vs_dynamic_two_native_agents_persist_and_read_only_report(tmp_pa
         _, single_plan, _, single = await create(service, cid, identity, mode="synthesis", text=question)
         _, deep_plan, request, deep = await create(service, cid, identity, mode="deep", text=question)
         assert single["state"] == deep["state"] == "completed", (single, deep)
+        assert all("供应商工具前说明" not in f["text"] for f in deep["result"]["findings"])
         assert single_plan["roles"] == ["generalist"]
         assert deep_plan["roles"] == ["evidence", "risk_operations"]
         assert single["usage"]["attempts"] == 4 and deep["usage"]["attempts"] == 7
@@ -221,3 +222,22 @@ def test_budget_last_reservation_race_and_plan_hash_no_implicit_replay(tmp_path)
         history = client.get("/synthesis/jobs", params={"conversation_id": cid})
         assert history.status_code == 200 and len(history.json()["items"]) == 1
         assert len(fake.calls) + len(fake.role_calls) == count
+
+
+def test_provider_batch_executes_sequential_gated_tools(tmp_path):
+    class BatchFake(NativeFake):
+        def complete(self, messages, tools):
+            response = super().complete(messages, tools)
+            if response.message.get("tool_calls"):
+                first = response.message["tool_calls"][0]
+                response.message["tool_calls"].append({**first, "id": str(uuid4())})
+            return response
+    h, cid, service, client, identity = environment(tmp_path, BatchFake())
+    install_search(h, service)
+    async def run():
+        _, _, _, job = await create(service, cid, identity, mode="synthesis", text="整理2031年经营风险原文")
+        assert job["state"] == "completed" and job["usage"]["tools"] == 2
+        assert job["steps"][0]["tools"] == ["search_evidence", "search_evidence"]
+        assert all("供应商工具前说明" not in f["text"] for f in job["result"]["findings"])
+        await service.close()
+    asyncio.run(run())

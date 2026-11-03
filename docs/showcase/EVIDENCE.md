@@ -57,3 +57,9 @@ O03 real product isgmzk2o PASS：真实Vision转录/54格与原line/bbox一致�
 ## M02 真实跨会话与偏好
 
 实际Chromium/HTTP、公开部分seed和真实本地BGE。会话A界面保存现金流笔记，会话B以“现金回收和盈利质量”召回、删除后重复语义查询不再召回；三项确认偏好使首页现金流默认/问题排序、万元坐标、对比卡优先生效。1440/1280/390无水平溢出，LLM0/财务确认0/浏览器异常0。evidence/M3-memory。首轮jrzdneto因旧select访问名定位失败，非业务成功；修正aria-label后c4r4b8e_ PASS。
+
+## M3 真实模型与真实工作区
+
+5zk9mqeo：真实HTTP单/双Agent→report→不可变v1/v2→实际PDF PASS，4与7个真实调用，约14.17s/26.27s。ybr4pane：实际main UI点击意图、计划批准、任务事件、四类结果、两份报告，三宽无溢出，约9.554s/16.480s；新PDF实际5页（初版17页已排版改良）。整个ybr runner最终在额外seed扫描上传因测试HTTP Origin缺失FAIL，不冒充整个runner PASS；原UI/模型/报告阶段独立已完成，存research-progress.json。派生OCR/演示notes后由complete_public_seed_material.py在同一停止disposable根使用真实Vision/BGE的in-process ASGI补齐（68行54格、LLM0、人签0）；该部分不是外部HTTP UI证据，已有O03公开gateway UI证据独立存在。
+
+共享账本截至ybr：44真实provider calls、38170 input/5674 output reported tokens、保守预留0.803322元/5元；实际扣费not_observed。所有失败/未知保留evidence/M3-research/retained-failures.json。Astra独立M3 review bbf098f：无复现主链P0/P1；3P2保留。报告无财务人工确认输入，已核准财务章节保持缺项，不生成核准图/金额。

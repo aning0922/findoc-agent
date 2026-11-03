@@ -14,6 +14,8 @@ import { ResearchTasks } from "./ResearchTasks.tsx";
 import { ResearchHome } from "./ResearchHome.tsx";
 import { DocumentLibrary } from "./DocumentLibrary.tsx";
 import { ReportPreview } from "./ReportPreview.tsx";
+import { ShowcaseReportsEntry } from "./showcaseReports/ShowcaseReportsEntry.tsx";
+import { ShowcaseArchivePanel } from "./showcaseArchive/ShowcaseArchivePanel.tsx";
 import { ResearchWorkbench } from "./ResearchWorkbench.tsx";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { AppShell, pathFor } from "./AppShell.tsx";
@@ -122,7 +124,7 @@ export default function FinancialProduct({
           access={access}
         />
       ) : route.page === "tasks" ? (
-        <ResearchTasks companies={companies} />
+        <><ShowcaseArchivePanel kind="job" /><ResearchTasks companies={companies} /></>
       ) : route.page === "companies" ? (
         <CompanyDirectory companies={companies} loading={companiesLoading} />
       ) : route.page === 'conversations' ? (
@@ -138,12 +140,12 @@ export default function FinancialProduct({
           chooseCompany={(id) => navigate("research", id)}
         />
       ) : route.page === "reports" ? (
-        <ReportPreview
+        <><ShowcaseArchivePanel kind="report" /><ShowcaseReportsEntry /><details open={new URLSearchParams(location.search).has("report") || new URLSearchParams(location.search).has("task")}><summary>经营研究历史报告（V1.2）</summary><ReportPreview
           key={route.key}
           companies={companies}
           access={access}
           company={route.company}
-        />
+        /></details></>
       ) : route.page === "documents" ? (
         <DocumentLibrary
           key={route.key}

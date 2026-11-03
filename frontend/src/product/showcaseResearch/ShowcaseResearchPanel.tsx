@@ -10,6 +10,7 @@ type Props = {
   onModeChange?: (mode: Mode) => void;
   initialQuestion?: string;
   initialJobId?: string;
+  initialMode?: Mode;
 };
 export function ShowcaseResearchPanel(props: Props) {
   return <ResearchContent key={props.conversationId} {...props} />;
@@ -19,8 +20,9 @@ function ResearchContent({
   onModeChange,
   initialQuestion = "",
   initialJobId,
+  initialMode = "quick",
 }: Props) {
-  const [mode, setMode] = useState<Mode>("quick"),
+  const [mode, setMode] = useState<Mode>(initialMode),
     [question] = useState(initialQuestion),
     [links, setLinks] = useState<Link[]>([]),
     [state, setState] = useState(""),
@@ -32,7 +34,7 @@ function ResearchContent({
     modeCallback.current = onModeChange;
   }, [onModeChange]);
   useEffect(() => {
-    modeCallback.current?.("quick");
+    modeCallback.current?.(initialMode);
   }, []);
   useEffect(() => {
     const n = ++epoch.current,

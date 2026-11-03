@@ -1,5 +1,8 @@
 """Snapshot counts and facts-only charts. Never migrate, confirm, or call a model."""
 
+import asyncio
+import json
+
 from collections import Counter, defaultdict
 from contextlib import closing
 from datetime import UTC, datetime
@@ -56,6 +59,7 @@ class DashboardService:
         self.workspace, self.tasks, self.facts, self.memory = workspace_id, tasks, facts, memory
         self.generation, self.seed = lease_generation, seed_version
         self.preset_task_ids = frozenset(preset_task_ids)
+        self.archive = self.research = self.showcase_reports = None
 
     def _connect(self):
         connection = sqlite3.connect(self.path.as_uri() + "?mode=ro", uri=True)
@@ -136,6 +140,44 @@ class DashboardService:
                 "仅统计旧研究Task；尚未混入独立v2 jobs。",
             ],
         )
+
+    async def overview_enriched(self):
+        value = await asyncio.to_thread(self.overview)
+        counts = Counter({item["status"]: item["count"] for item in value["task_distribution"]})
+        recent = list(value["recent_research"])
+        if self.research is not None:
+            with closing(sqlite3.connect(self.research.store.path.as_uri() + "?mode=ro", uri=True)) as db:
+                rows = db.execute("SELECT id,conversation_id,mode,state,created_at,result FROM sr_jobs ORDER BY created_at DESC").fetchall()
+            for job_id, cid, mode, state, created, result in rows:
+                counts[state] += 1
+                if result:
+                    saved = json.loads(result)
+                    if self.research.store.get(job_id, "job-result") != saved:
+                        raise DashboardError("research_snapshot_unverified")
+                else:
+                    saved = {}
+                recent.append(dict(id=job_id, title=saved.get("goal", "正在进行的企业研究"), status=state,
+                    href="/conversations?" + urlencode({"conversation": cid, "job": job_id, "research_mode": mode}),
+                    origin="local_runtime", review_status="source_recheck_required", saved_at=created))
+                value["kpis"]["research_completed"] += state == "completed"
+        if self.showcase_reports is not None:
+            value["kpis"]["reports"] += len(await asyncio.to_thread(self.showcase_reports.list))
+        if self.archive is not None:
+            jobs = (await self.archive.list(kind="job"))["items"]
+            reports = (await self.archive.list(kind="report"))["items"]
+            value["kpis"]["research_completed"] += len({item["original_id"] for item in jobs})
+            value["kpis"]["reports"] += len({item["original_id"] for item in reports})
+            counts["completed"] += len(jobs)
+            for item in jobs:
+                recent.append(dict(id=item["archive_id"], title=item["title"], status="completed",
+                    href="/tasks?" + urlencode({"case": item["archive_id"]}), origin="preset_demo",
+                    review_status=item["current_source_status"], saved_at=item["saved_at"]))
+        value["task_distribution"] = [dict(status=status, count=count) for status, count in sorted(counts.items())]
+        value["recent_research"] = sorted(recent, key=lambda item: item.get("saved_at", ""), reverse=True)[:5]
+        if self.research is not None or self.archive is not None:
+            value["limitations"] = ["完成研究和报告包含已保存历史与明确标记的预置案例；当前查看不会重新调用模型。",
+                                    "首页图表只显示已核准财务数据，或明确开启的虚构界面示意。"]
+        return value
 
     def _preferences(self):
         values = ({m.key: m.value for m in self.memory.recall_context().items}

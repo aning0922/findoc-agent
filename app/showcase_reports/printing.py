@@ -18,7 +18,7 @@ def render_print(report):
         }.get(value, "详见审阅记录")
 
     snapshot = report["snapshot"]
-    origin = {"live": "实时研究数据", "seed": "预置演示资料", "fake": "模拟数据 / 非真实 LLM 结果"}
+    origin = {"live": "真实运行快照", "seed": "预置演示资料", "fake": "模拟数据 / 非真实 LLM 结果"}
     labels = {
         "confirmed_financial": "财务已核准引用",
         "sourced_excerpt": "原文引用",
@@ -50,11 +50,11 @@ def render_print(report):
         return (
             "<article><strong>"
             + e(labels[f["kind"]])
-            + "</strong><p>"
+            + ('</strong><p class="excerpt">' if f["kind"] == "sourced_excerpt" else "</strong><p>")
             + e(f["text"])
             + "</p><small>"
             + e(origin[f["data_origin"]])
-            + " · 来源 "
+            + " · 保存时来源 "
             + e(status(f["source_status"]))
             + " · 转录审阅 "
             + e(status(f["transcription_review_status"]))
@@ -84,7 +84,7 @@ def render_print(report):
     return (
         """<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>研究报告</title>
 <style>
-@page{size:A4;margin:18mm 17mm 20mm}*{box-sizing:border-box}body{font-family:"PingFang SC","Noto Sans CJK SC",sans-serif;color:#172a3b;font-size:11pt;line-height:1.7;margin:0}main{max-width:180mm;margin:auto}header{border-top:6px solid #167a73;padding:18px 0 25px}h1{font-size:27pt;line-height:1.3}h2{font-size:16pt;border-bottom:1px solid #ccd8df;padding-bottom:6px;break-after:avoid}article{border-left:3px solid #b6d5cf;padding:9px 16px;margin:12px 0;overflow-wrap:anywhere}p{white-space:pre-wrap;overflow-wrap:anywhere}small,.muted{color:#526575}a{color:#126860;overflow-wrap:anywhere}.banner{padding:12px;background:#fff0cb;border:1px solid #b88a1e;font-weight:bold}.gap{color:#657080}section{margin-top:24px}button{padding:10px;margin:12px}footer{border-top:1px solid #bbcbd5;margin-top:30px;font-size:9pt}@media print{button{display:none}main{max-width:none}.banner{print-color-adjust:exact}section{break-inside:auto}article{break-inside:avoid-page}h1,h2,strong{break-after:avoid}p{orphans:3;widows:3}}
+@page{size:A4;margin:18mm 17mm 20mm}*{box-sizing:border-box}body{font-family:"PingFang SC","Noto Sans CJK SC",sans-serif;color:#172a3b;font-size:11pt;line-height:1.7;margin:0}main{max-width:180mm;margin:auto}header{border-top:6px solid #167a73;padding:18px 0 25px}h1{font-size:27pt;line-height:1.3}h2{font-size:16pt;border-bottom:1px solid #ccd8df;padding-bottom:6px;break-after:avoid}article{border-left:3px solid #b6d5cf;padding:9px 16px;margin:12px 0;overflow-wrap:anywhere}p{white-space:pre-wrap;overflow-wrap:anywhere}p.excerpt{white-space:normal;font-size:10pt}small,.muted{color:#526575}a{color:#126860;overflow-wrap:anywhere}.banner{padding:12px;background:#fff0cb;border:1px solid #b88a1e;font-weight:bold}.gap{color:#657080}section{margin-top:24px}button{padding:10px;margin:12px}footer{border-top:1px solid #bbcbd5;margin-top:30px;font-size:9pt}@media print{button{display:none}main{max-width:none}.banner{print-color-adjust:exact}section{break-inside:auto}article{break-inside:auto}h1,h2,strong{break-after:avoid}p{orphans:3;widows:3}}
 </style><button onclick="window.print()">打印/保存PDF</button><main>"""
         + '<div class="banner">'
         + e(origin[snapshot["data_origin"]])
@@ -107,7 +107,7 @@ def render_print(report):
             + "："
             + e(f["text"][:160] + ("……（详见下文）" if len(f["text"]) > 160 else ""))
             + "</p>"
-            for f in findings[:5]
+            for f in ([f for f in findings if f["kind"] in ("model_interpretation", "confirmed_financial", "unresolved_question")] or findings)[:5]
         )
         + "</section>"
         + sections

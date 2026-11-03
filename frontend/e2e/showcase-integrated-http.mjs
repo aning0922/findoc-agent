@@ -33,7 +33,19 @@ try {
   const initial = await a.evaluate(async () => (await fetch('/api/demo/session')).json());
   assert(initial.lease_generation >= 1 && initial.can_review === false, 'shared login grants no review authority');
   const counts = await a.evaluate(async () => (await fetch('/api/dashboard/overview')).json());
-  assert(counts.kpis.companies === 1 && counts.kpis.reports_ready === 0, 'synthetic seed overview');
+  assert(counts.kpis.companies === Number(process.env.DEMO_CHECK_EXPECTED_COMPANIES || 1) && counts.kpis.reports_ready === Number(process.env.DEMO_CHECK_EXPECTED_READY || 0), 'pinned seed overview inventory');
+  async function inventory(page) {
+    return page.evaluate(async scanId => ({
+      overview: await (await fetch('/api/dashboard/overview')).json(),
+      reports: await (await fetch('/api/showcase-archive/items?kind=report')).json(),
+      jobs: await (await fetch('/api/showcase-archive/items?kind=job')).json(),
+      memories: await (await fetch('/api/research-memories')).json(),
+      conversations: await (await fetch('/api/conversations')).json(),
+      ocr: scanId ? await (await fetch(`/api/documents/${scanId}/parse-quality`)).json() : null,
+    }), process.env.DEMO_CHECK_OCR_DOCUMENT_ID || '');
+  }
+  const pinned = await inventory(a);
+  if (pinned.ocr) assert(pinned.ocr.source_status === 'current' && pinned.ocr.pages[0].lines.length === 68, 'seed OCR artifact remains real/current');
   assert(await a.locator('.sd-hero h1').evaluate(el => getComputedStyle(el).color) === 'rgb(255, 255, 255)',
     'actual product global CSS preserves hero contrast');
   await a.evaluate(() => sessionStorage.setItem('findoc:conversation-operations:v1', 'UNKNOWN-SAME-LEASE-CHECK'));
@@ -61,6 +73,14 @@ try {
     return { status: r.status, data: await r.json() };
   });
   assert(dirty.status === 201 && dirty.data.company_id, 'legacy mutation envelope reaches real runtime');
+  if (Number(process.env.DEMO_CHECK_EXPECTED_READY || 0) > 0) {
+    await a.evaluate(async () => {
+      const post = async (path, body) => { const response = await fetch('/api'+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!response.ok)throw Error('dirty seed write failed');return response.json(); };
+      const sources = await (await fetch('/api/research/sources')).json();
+      await post('/conversations',{operation_id:crypto.randomUUID(),document_ids:[sources.documents.find(d=>d.selectable).document_id]});
+      await post('/research-memories',{operation_id:crypto.randomUUID(),type:'note',text:'复位隔离测试临时笔记；不是财务确认。',confirmed:true});
+    });
+  }
   await login(b);
   await b.getByRole('heading', { name: '演示空间正在使用', exact: true }).waitFor();
   assert(await b.getByRole('button', { name: '确认接管', exact: true }).isDisabled(), 'takeover requires explicit confirmation');
@@ -71,8 +91,13 @@ try {
   await b.getByRole('heading', { name: '研究概览', exact: true }).waitFor();
   const after = await b.evaluate(async () => ({ session: await (await fetch('/api/demo/session')).json(),
     companies: await (await fetch('/api/companies')).json() }));
-  assert(after.session.lease_generation > initial.lease_generation && after.companies.length === 1,
+  assert(after.session.lease_generation > initial.lease_generation && after.companies.length === Number(process.env.DEMO_CHECK_EXPECTED_COMPANIES || 1),
     'takeover switches generation and restores seed');
+  const restored = await inventory(b);
+  assert(restored.overview.kpis.reports === pinned.overview.kpis.reports && restored.overview.kpis.research_completed === pinned.overview.kpis.research_completed, 'historical KPI restored');
+  assert(restored.memories.items.length === pinned.memories.items.length && restored.conversations.items.length === pinned.conversations.items.length, 'visitor notes/conversations removed');
+  assert(JSON.stringify(restored.reports.items.map(x=>[x.archive_id,x.revision,x.current_source_status])) === JSON.stringify(pinned.reports.items.map(x=>[x.archive_id,x.revision,x.current_source_status])), 'preset reports and source state restored');
+  if (pinned.ocr) assert(restored.ocr.artifact_id === pinned.ocr.artifact_id && restored.ocr.output_sha256 === pinned.ocr.output_sha256, 'same OCR output restored without new engine execution');
   assert(!after.companies.some(c => c.company_id === dirty.data.company_id), 'visitor mutation gone after reset');
   assert(await a.evaluate(async () => (await fetch('/api/companies')).status) === 401, 'old browser HTTP rejected');
   await a.getByRole('button', { name: '进入演示', exact: true }).waitFor({ timeout: 15000 });
@@ -90,12 +115,12 @@ try {
   }
   assert(logoutReady, 'logout reset reached ready within budget');
   assert(errors.length === 0, `browser runtime errors: ${errors.join('; ')}`);
-  const result = { evidence: 'REAL_CHROMIUM_TWO_PROCESSES_REAL_HTTP_REAL_BGE_MILVUS_SYNTHETIC_SEED',
+  const result = { evidence: 'REAL_CHROMIUM_TWO_PROCESSES_REAL_HTTP_REAL_BGE_MILVUS_PINNED_SEED',
     checks: ['three-width login/home no overflow', 'pending cookie via Vite /api', 'legacy mutation envelope',
       'same verified lease hard reload preserves UNKNOWN hint', 'actual CSS hero contrast', 'explicit illustrative chart route',
       'second browser conflict and explicit owner takeover', 'new generation restores seed', 'old browser HTTP401 and UI unmount', 'logout resets'],
     first_generation: initial.lease_generation, next_generation: after.session.lease_generation,
-    llm_calls: 0, real_pdfs: 0, human_financial_approvals: 0, browser_errors: errors };
+    llm_calls: 0, real_pdfs: Number(process.env.DEMO_CHECK_EXPECTED_READY || 0), seed_inventory: {kpis:pinned.overview.kpis, archived_report_revisions:pinned.reports.items.length, archived_jobs:pinned.jobs.items.length, memories:pinned.memories.items.length, conversations:pinned.conversations.items.length, ocr_lines:pinned.ocr?.pages[0].lines.length ?? 0}, human_financial_approvals: 0, browser_errors: errors };
   await writeFile(`${output}/browser-result.json`, JSON.stringify(result, null, 2));
   console.log(JSON.stringify(result));
 } finally { await Promise.all(launches.map(b => b.close())); }

@@ -1,7 +1,5 @@
 """Private runtime router; the demo gateway owns authentication and generation admission."""
 
-import asyncio
-
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 
@@ -26,7 +24,7 @@ def create_dashboard_router(service: DashboardService) -> APIRouter:
         if request.query_params:
             return failure(DashboardError("unknown_query_parameter", 422))
         try:
-            return response(await asyncio.to_thread(service.overview))
+            return response(await service.overview_enriched())
         except Exception as exc:
             return failure(exc)
 

@@ -1,0 +1,42 @@
+{
+  "evidence_tier": "REAL_LOCAL_VISION_BGE_IN_PROCESS_ASGI",
+  "documents": [
+    {
+      "document_id": "6086c34fb2c61f64e9d57a572fb560232dc71ad642a3359e3085fc438ef193ec",
+      "status": "ready",
+      "sha256": "7cc972f2d199e2ec3797cc5da479e8268afa59b77875770de3bcd3648242fb8c"
+    },
+    {
+      "document_id": "6947e0bf7a38c4f5ef649c02e8065a26fdba68593d645b514a72f37b05742479",
+      "status": "ready",
+      "sha256": "c7184706caf5f57c04a795990967cfc4f4253024e02f8bdaffe2b260df2c6006"
+    },
+    {
+      "document_id": "d690f1e4c1609f2d9b6938e6f25c7288e6c2b70af6b9e7ee12a05e8fa89c4e92",
+      "status": "ready",
+      "sha256": "c413ed1b993290ec98b254af4bf6ad69edb5a2230bbaec1b15702119b24d4f5c"
+    },
+    {
+      "document_id": "dcf9d2e4b4569ec920e334d6e4978335fb06fd8a3d35e45967d6a2ac09cecfc7",
+      "status": "failed",
+      "sha256": "175235d1122aec489a6c943ec8c1f8f9fcb5ffdd0e75f938f5ce6080c8ed163a"
+    }
+  ],
+  "memory_ids": [
+    "7f30e976-d356-4462-8ae5-1f987c5d708b",
+    "911e6394-6aba-4409-9ade-44c6b110660e"
+  ],
+  "ocr": {
+    "document_id": "dcf9d2e4b4569ec920e334d6e4978335fb06fd8a3d35e45967d6a2ac09cecfc7",
+    "artifact_id": "294e7105-469a-4d03-9921-86255143cc08",
+    "lines": 68,
+    "cells": 54,
+    "legacy_source_verified": false
+  },
+  "report_ids": [
+    "c8202e7b-3576-432f-ab42-571c89389237",
+    "04474472-b64f-4fe2-a83c-2242117f2250"
+  ],
+  "llm_calls": 0,
+  "human_financial_approvals": 0
+}

@@ -202,14 +202,15 @@ class ShowcaseReportService:
         try:
             latest = await self.verified(payload["snapshot"]["job_id"], reader)
             statuses = {f["finding_id"]: f["source_status"] for f in latest["findings"]}
+            source_findings = [f for f in payload["snapshot"]["findings"] if f["evidence_refs"] or f["financial_refs"]]
             status = (
                 "current"
                 if all(
                     statuses.get(f["finding_id"]) == "current"
-                    for f in payload["snapshot"]["findings"]
+                    for f in source_findings
                 )
                 else "stale"
-            )
+            ) if source_findings else "unavailable"
         except Exception:
             status = "unavailable"
         return {

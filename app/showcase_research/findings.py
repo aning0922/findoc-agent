@@ -3,6 +3,7 @@ import re
 from uuid import uuid4
 
 from app.agent.financial_analysis import FinancialAnalysisService, FinancialFactReference
+from app.documents.source_models import SourceError
 from app.showcase_research.models import ConfirmedFinancial, ModelInterpretation, ResearchError, SourcedExcerpt, UnresolvedQuestion
 
 LABELS = {"revenue": "营业收入", "net_profit_parent": "归母净利润", "operating_cash_flow": "经营活动产生的现金流量净额"}
@@ -43,7 +44,13 @@ class Findings:
             raise ResearchError("retrieval_outside_scope")
         _, records = await self.sources.parsed_evidence(hit.document_id, company_id=doc["company_id"], source_revision=hit.source_revision)
         # page_context enforces the existing unsupported-table page rejection.
-        await self.sources.page_context(hit.document_id, hit.source_revision, hit.page)
+        try:
+            await self.sources.page_context(hit.document_id, hit.source_revision, hit.page)
+        except SourceError as exc:
+            if exc.code == "table_structure_unsupported":
+                # Reject this whole page; other retrieved pages may still qualify.
+                raise ResearchError("table_structure_unsupported") from exc
+            raise
         text = hit.text[:1200]
         matches = [r for r in records if r["physical_page"] == hit.page and text and text in r["text"]]
         if len(matches) != 1:

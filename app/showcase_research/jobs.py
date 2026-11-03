@@ -94,7 +94,16 @@ class ResearchJobs:
                 async with semaphore:
                     return await runner.run(job_id, intent, role)
             results = await asyncio.gather(*(run(role) for role in plan["roles"]))
-            findings = [finding for result in results for finding in result["findings"]]
+            findings, seen_findings = [], set()
+            for result in results:
+                for finding in result["findings"]:
+                    # Roles may independently return the same exact original
+                    # excerpt/fact. Preserve one card and its real source refs.
+                    signature = canonical({k: finding.get(k) for k in (
+                        "kind", "text", "financial_refs", "evidence_refs", "actions")})
+                    if signature not in seen_findings:
+                        seen_findings.add(signature)
+                        findings.append(finding)
             partial = any(result["state"] != "completed" for result in results)
             self.store.event(job_id, "verifier", "复核引用与财务资格", "running")
             await self.findings.revalidate_quotes(scope, findings)
@@ -110,7 +119,7 @@ class ResearchJobs:
                 self.scopes.before_model(scope)
                 prompt = "KIND=merge\n" + canonical({"goal": intent["goal"], "verified_findings": [
                     {"reference_id": f["finding_id"], "kind": f["kind"], "text": f["text"][:500]} for f in findings],
-                    "contract": "Return JSON {interpretations:[{text,evidence_ids:[reference_id]}]}; no thinking, no financial_refs, never approve numbers."})
+                    "contract": "Return ONLY JSON {interpretations:[{text,evidence_ids:[reference_id]}]}, no markdown. At most 2 interpretations, each at most 180 Chinese characters and 2 reference IDs; concise synthesis, no full source repetition. No thinking, no financial_refs, never approve numbers."})
                 try:
                     merged = AgentDraft.model_validate(await self.provider.json(intent["intent_id"], "supervisor_merge", prompt))
                     known = {f["finding_id"]: f for f in findings}

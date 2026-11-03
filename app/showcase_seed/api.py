@@ -4,7 +4,10 @@ from uuid import UUID
 from typing import Literal
 
 from fastapi import APIRouter, Query
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
+from copy import deepcopy
+
+from app.showcase_reports.printing import render_print
 from fastapi.routing import APIRoute
 
 from app.showcase_seed.archive import ArchiveError
@@ -48,5 +51,22 @@ def create_showcase_archive_router(service):
         if revision < 1:
             raise ArchiveError("invalid_revision", 422)
         return await service.report(str(archive_id), revision)
+
+    @router.get("/reports/{archive_id}/revisions/{revision}/print")
+    async def printing(archive_id: UUID, revision: int):
+        if revision < 1:
+            raise ArchiveError("invalid_revision", 422)
+        item = await service.report(str(archive_id), revision)
+        # A presentation-only projection; original payload/provenance stay intact.
+        payload = deepcopy(item["snapshot"])
+        payload["snapshot"]["data_origin"] = "seed"
+        for finding in payload["snapshot"]["findings"]:
+            finding["data_origin"] = "seed"
+        payload["current_source_status"] = item["current_source_status"]
+        payload["title"] = "预置演示 · " + payload["title"]
+        return HTMLResponse(render_print(payload), headers={
+            "Cache-Control": "no-store",
+            "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'self'",
+        })
 
     return router

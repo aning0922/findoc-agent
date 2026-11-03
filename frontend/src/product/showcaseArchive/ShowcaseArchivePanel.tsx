@@ -37,6 +37,13 @@ function Archive({ kind }: { kind: Kind }) {
         if (data.schema_version !== "showcase-archive-list-v1" || data.data_origin !== "preset_demo" || !Array.isArray(data.items) || !data.items.every((x: Item) => valid(x, kind))) throw Error();
         if (!active) return;
         setItems(data.items); setListState("ready");
+        if (kind === "job") {
+          const params = new URLSearchParams(window.location.search), id = params.get("case");
+          if (id && uuid.test(id) && params.getAll("case").length === 1) {
+            const item = data.items.find((candidate: Item) => candidate.archive_id === id);
+            if (item) void choose(item);
+          }
+        }
         if (kind === "report") {
           const params = new URLSearchParams(window.location.search), id = params.get("case"), revision = params.get("revision");
           if (id && revision && uuid.test(id) && /^[1-9]\d*$/.test(revision) && params.getAll("case").length === 1 && params.getAll("revision").length === 1) {

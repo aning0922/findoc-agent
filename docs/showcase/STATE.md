@@ -39,3 +39,5 @@ F01/F02已集成c23c0a8，主控显式真实PDF集3PASS13.31s（fast/不可变�
 主控最新：F03源661f8b4已集成ac69ab5，修正图表按真实日期分组及原始Decimal tooltip；实际三宽Chromium+HTTP+公开部分seed PASS amd4nips。4个真实格力资产/负债候选、两日期、2项待核对review；LLM0/真人确认0，confirmed图正向仍human_pending。evidence/M2-finance。部分只读公开seed含Gree2025真实PDF/1003向量行，complete_product_seed=false，非E03完成。S03已集成14d3994、C01/C02/S01第一组05c7afc，待root运行时接线与真LLM。
 
 M02 UI41401e4/db1cfe1已集成2f56aef/3e968de。root挂载研究区，旧偏好保存/恢复派发更新事件，Dashboard从服务端确认偏好改变默认指标、问题顺序、坐标单位、证据/对比视觉顺序。真实HTTP/BGE跨两会话创建/语义查询/删除及三项偏好生效PASS c4r4b8e_，三宽无溢出，LLM0/财务确认0，seed不变。首轮jrzdneto仅旧偏好select精确可访问名定位超时，补aria-label后通过；证据evidence/M3-memory。
+
+M3核心真实LLM HTTP PASS 5zk9mqeo：same Gree2025固定PDF，single 4model/2tools约14.17s，deep 7model/4tools约26.27s，两真子代理分派/检索/汇合/verifier完成；报告current，保存v1/v2并实际生成PDF（初版17页排版需改良）。费用账本累计33calls、保守预留0.599982元/5元，实际扣费未观测。首轮2个真实function calls被单call限制拒绝；允许最多3个顺序受限工具；unsupported表页须整页跳过而非终止；较长JSON加简明输出合同解决partial。所有旧FAIL保留retained-failures.json。Astra独立a0e331b→bbf098f无复现P0/P1，三P2记录。A03/UI和reportlibrary已集成17e82bb/582f20a，root接线，真实UI当前预填textarea访问名定位失败（paid0增量），补aria-label后重跑。

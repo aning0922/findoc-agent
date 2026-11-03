@@ -1,3 +1,4 @@
+import { ExtendedSignalsPanel } from "./ExtendedSignalsPanel.tsx";
 import { useEffect, useRef, useState } from "react";
 import {
   Bar,
@@ -729,6 +730,7 @@ export function ExtendedFinancePanel({ company }: { company: Company }) {
           请求服务端计算资产负债率
         </button>
       </div>
+      {source && <ExtendedSignalsPanel companyId={company.company_id} documentId={source.document_id} sourceRevision={source.source_revision} refreshToken={metrics.map(m => `${m.metric_id}:${m.status}:${m.confirmation_ref?.receipt_id || ""}`).join("|")} />}
       {review && (
         <div className="fv-review">
           <h3>真人核对快照 · 尚未接受</h3>

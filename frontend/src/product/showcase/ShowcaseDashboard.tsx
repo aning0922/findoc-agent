@@ -203,7 +203,7 @@ export function ShowcaseDashboard({
   const [chartError, setChartError] = useState("");
   const [selected, setSelected] = useState(company);
   const [search, setSearch] = useState("");
-  const [sample, setSample] = useState(false);
+  const [sample, setSample] = useState(import.meta.env.VITE_FINDOC_SHOWCASE_PREVIEW_CHARTS === "1");
   const [metricChoice, setMetric] = useState("");
   const [retry, setRetry] = useState(0);
   useEffect(() => {
@@ -262,6 +262,9 @@ export function ShowcaseDashboard({
   const labels: Record<string, string> = {
     completed: "已完成",
     running: "进行中",
+    queued: "待开始",
+    partial: "部分完成",
+    interrupted: "已中断",
     waiting: "待处理",
     waiting_confirmation: "待核对",
     failed: "失败",
@@ -595,7 +598,7 @@ export function ShowcaseDashboard({
                     <span className="sd-icon">▧</span>
                     <div>
                       <b>{r.title}</b>
-                      <small>历史研究 · 打开后重新核验来源</small>
+                      <small>{r.origin === "preset_demo" ? "预置演示 · 历史模型结果，本次未重新生成" : "已保存研究 · 打开后重新核验来源"}</small>
                     </div>
                     <span className="sd-badge">
                       {labels[r.status] || "待处理"}

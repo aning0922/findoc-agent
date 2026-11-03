@@ -30,6 +30,8 @@ from app.research.repository import ResearchOwner, ResearchRepository
 from app.api.research_qa import create_research_qa_router
 from app.api.runtime_paths import DEFAULT_RUNTIME_ROOT
 from app.dashboard import DashboardService, create_dashboard_router
+from app.showcase_seed.archive import ShowcaseArchiveService
+from app.showcase_seed.api import create_showcase_archive_router
 from app.showcase_research.service import ShowcaseResearchService
 from app.showcase_research.api import create_showcase_research_router
 from app.showcase_research.models import demo_identity
@@ -420,6 +422,12 @@ def create_runtime_app(
                 app.state.memory_service = memory_service
                 app.include_router(create_research_memory_router(research_memory))
                 app.state.research_memory_service = research_memory
+                archive_service = ShowcaseArchiveService(
+                    runtime_root, sources=source_service, workspace_id=DEMO_WORKSPACE_ID,
+                    parse_service=parse_service,
+                )
+                app.include_router(create_showcase_archive_router(archive_service))
+                app.state.showcase_archive_service = archive_service
                 dashboard_service = DashboardService(
                     runtime_root=runtime_root,
                     workspace_id=DEMO_WORKSPACE_ID,
@@ -461,6 +469,9 @@ def create_runtime_app(
                     showcase_reports, reader_for_request=report_reader_for_request,
                 ))
                 app.state.showcase_report_service = showcase_reports
+                dashboard_service.archive = archive_service
+                dashboard_service.research = showcase_research
+                dashboard_service.showcase_reports = showcase_reports
                 app.include_router(create_task_router(task_repository, persistent_templates))
                 app.state.task_repository = task_repository
                 app.include_router(create_report_router(ReportService(task_repository, source_service)))

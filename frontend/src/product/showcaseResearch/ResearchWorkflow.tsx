@@ -37,6 +37,8 @@ type Finding = {
   kind: string;
   text: string;
   source_status: string;
+  transcription_review_status?: string;
+  interpretation_review_status?: string;
   origin: string;
   financial_refs?: unknown[];
   numeric_claim_status?: string;
@@ -646,9 +648,12 @@ export function ResearchWorkflow({
   return (
     <div className="sr-card sr-workflow">
       <h3>{mode === "deep" ? "深度研究" : "综合研究"}</h3>
+      <details open={!job}>
+      <summary>{job ? "研究问题与已批准计划" : "准备研究问题与计划"}</summary>
       <label>
         研究问题
         <textarea
+          aria-label="研究问题"
           value={question}
           maxLength={2000}
           disabled={busy || !!pending}
@@ -742,6 +747,7 @@ export function ResearchWorkflow({
           >
             明确准备研究计划
           </button>
+          {(intent.requires_confirmed_facts && ((intent.company_ids.length === 1 && intent.periods.length === 2) || (intent.company_ids.length === 2 && intent.periods.length === 1)) && intent.metric_keys.every(key => ['revenue', 'net_profit_parent', 'operating_cash_flow'].includes(key))) && <>
           <button
             disabled={
               busy || !!pending || !!intent.clarifying_question || !!taskId
@@ -756,6 +762,7 @@ export function ResearchWorkflow({
           >
             明确准备财务核对任务
           </button>
+          </>}
         </section>
       )}
       {plan && (
@@ -793,7 +800,7 @@ export function ResearchWorkflow({
             我已阅读并确认此计划
           </label>
           <button
-            disabled={busy || !!pending || !approved}
+            disabled={busy || !!pending || !approved || !!job}
             onClick={() =>
               void write("job", `${prefix}/jobs`, {
                 approved_plan_id: plan.plan_id,
@@ -814,6 +821,7 @@ export function ResearchWorkflow({
           进入研究任务，由真人核对 →
         </a>
       )}
+      </details>
       {job && (
         <section>
           <h3>研究进度</h3>
@@ -836,10 +844,11 @@ export function ResearchWorkflow({
               <p>{job.error_code}</p>
             </details>
           )}
+          <details open={job.state === "queued" || job.state === "running"}><summary>真实执行轨迹 · {events.length} 个阶段事件</summary>
           <ol>
             {events.map((e) => (
               <li key={e.event_seq}>
-                {e.label} ·{" "}
+                {({ search_evidence: "检索冻结资料", read_confirmed_facts: "读取已确认财务事实", recall_notes: "召回研究笔记" } as Record<string, string>)[e.label] || e.label} ·{" "}
                 {e.state === "completed"
                   ? "完成"
                   : e.state === "running"
@@ -849,7 +858,7 @@ export function ResearchWorkflow({
                       : e.state}
               </li>
             ))}
-          </ol>
+          </ol></details>
           <details>
             <summary>执行分工与用量</summary>
             {job.steps?.map((s, i) => (
@@ -917,6 +926,13 @@ export function ResearchWorkflow({
                   ))}
                 </details>
               )}
+              <div className="sr-result-summary">
+                <h3>综合解读</h3>
+                <p>{job.result.findings.filter(f => f.kind === 'sourced_excerpt').length} 段原文 · {job.result.findings.filter(f => f.kind === 'confirmed_financial').length} 项已核准财务引用 · {job.result.findings.filter(f => f.kind === 'unresolved_question').length} 项待核实</p>
+                {job.result.findings.filter(f => f.kind === 'model_interpretation').slice(-2).map(f => <article key={f.finding_id}><p>{f.text}</p><small>AI 解释待人工审阅{f.numeric_claim_status === 'numeric_claim_unverified' ? ' · 含待核实数字' : ''}</small>{f.evidence_refs?.map((ref, index) => { const href = evidenceHref(ref, f); return href ? <a key={index} href={href} target="_blank" rel="noreferrer">原 PDF · 物理第 {String(ref.physical_page)} 页 ↗</a> : null; })}</article>)}
+                {!job.result.findings.some(f => f.kind === 'model_interpretation') && <p>本次尚未形成可发布的综合解读，请查看执行限制和待核实问题。</p>}
+              </div>
+              <details><summary>展开全部发现、原文及待核实项 · {job.result.findings.length} 条</summary>
               {job.result.findings.map((f) => (
                 <article key={f.finding_id}>
                   <b>
@@ -930,6 +946,7 @@ export function ResearchWorkflow({
                     )[f.kind] || "待核实"}
                   </b>
                   <p>{f.text}</p>
+                  <small>保存时来源：{f.source_status === 'current_valid' ? '核验通过' : f.source_status === 'not_applicable' ? '无原文资格主张' : '尚未核实'} · 转录：{f.transcription_review_status === 'human_reviewed' ? '已人工核对' : f.transcription_review_status === 'fast_extraction_unreviewed' ? '机器提取，待对照原文' : '不适用或待核验'} · 解释：{f.interpretation_review_status === 'ai_unreviewed' ? 'AI 草稿，待人工审阅' : f.interpretation_review_status === 'deterministic' ? '确定性规则结果' : '不适用'}</small>
                   {f.numeric_claim_status === "numeric_claim_unverified" && (
                     <p>数字陈述未核实</p>
                   )}
@@ -951,7 +968,7 @@ export function ResearchWorkflow({
                     const href = evidenceHref(e, f);
                     return href ? (
                       <a key={i} href={href} target="_blank" rel="noreferrer">
-                        查看来源原页 ↗
+                        原 PDF · 物理第 {String(e.physical_page)} 页 ↗
                       </a>
                     ) : (
                       <span key={i}>来源暂不可定位 </span>
@@ -959,6 +976,7 @@ export function ResearchWorkflow({
                   })}
                 </article>
               ))}
+              </details>
             </>
           )}
           {job.state === "completed" && job.result && (

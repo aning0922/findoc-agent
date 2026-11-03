@@ -50,13 +50,16 @@ class Provider:
             if tools is None:
                 return await asyncio.to_thread(llm.generate_once, prompt)
             response = await asyncio.to_thread(llm.complete, [{"role": "user", "content": prompt}], tools)
-            return response.message
+            return response.message, response.finish_reason
         # Timeout may leave a provider thread alive; UNKNOWN stays charged and is never retried.
         result = await asyncio.wait_for(invoke(), timeout=remaining)
         self.store.returned(attempt)
         if time.time() > deadline:
             raise ResearchError("budget_deadline_exhausted")
         if tools is not None:
+            result, finish_reason = result
+            if finish_reason == "length":
+                raise ResearchError("provider_output_truncated")
             encoded = json.dumps(result, ensure_ascii=False)
             if len(encoded) > 12000 or tokens(encoded) > 2048:
                 raise ResearchError("provider_output_too_large")
