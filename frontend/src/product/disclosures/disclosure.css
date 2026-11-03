@@ -44,7 +44,7 @@
   margin-top: 7px;
   font: inherit;
 }
-.disclosure-panel button {
+.disclosure-panel.disclosure-panel button {
   min-height: 44px;
   border: 0;
   border-radius: 8px;
@@ -54,7 +54,7 @@
   font: inherit;
   cursor: pointer;
 }
-.disclosure-panel button:disabled {
+.disclosure-panel.disclosure-panel button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }

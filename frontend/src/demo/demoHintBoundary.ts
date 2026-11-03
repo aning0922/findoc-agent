@@ -8,6 +8,7 @@ const sessionExact = new Set([
   "findoc-report-unknown-operation-v1", // product/reportOperation.ts
 ]);
 const sessionPrefixes = [
+  "findoc:finance-v2-operation:", // product/financeV2/ExtendedFinancePanel.tsx
   "findoc:research-draft-v2:", // product/researchDraft.ts
   "findoc:task-reading:", // product/researchReading.ts
   "findoc:upload-intent:", // product/DocumentLibrary.tsx
