@@ -21,6 +21,8 @@ def create_peer_comparison_router(service, identity_provider):
     router = APIRouter(prefix="/cplus/peer-comparisons")
 
     def fail(e):
+        from app.cplus.diagnostics import safe_failure
+        safe_failure('peer',e)
         return JSONResponse(
             {"detail": {"code": e.code if isinstance(e, RetrievalError) else "peer_unavailable"}},
             status_code=e.status if isinstance(e, RetrievalError) else 503,

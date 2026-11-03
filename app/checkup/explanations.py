@@ -250,6 +250,8 @@ def create_checkup_explanation_router(service, identity_provider):
     router = APIRouter(prefix="/cplus/checkup-explanations")
 
     def error(e):
+        from app.cplus.diagnostics import safe_failure
+        safe_failure('checkup-explanation',e)
         return JSONResponse(
             {
                 "detail": {

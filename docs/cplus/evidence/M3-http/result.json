@@ -1,0 +1,639 @@
+{
+  "tier": "REAL_HTTP_PUBLIC_PDF_BGE_MILVUS_PROVIDER",
+  "generation": 20,
+  "budget_before": {
+    "cap_cny": "5",
+    "physical_calls": 73,
+    "conservative_reserved_cny": "1.354700",
+    "unknown": 0,
+    "actual_billed_cny": "not_observed"
+  },
+  "budget_after": {
+    "cap_cny": "5",
+    "physical_calls": 76,
+    "conservative_reserved_cny": "1.436016",
+    "unknown": 3,
+    "actual_billed_cny": "not_observed"
+  },
+  "result": "PARTIAL",
+  "full_ignored_evidence_sha256": "088615f8906b8e1140aaee6ec0c25cbe9734c1ca2774e9cd820ec9557da8a820",
+  "cases": [
+    {
+      "id": "collect-2025-d9080344",
+      "http_execution": "PASS",
+      "schema_version": "statement-collection-v3",
+      "human_approvals": 0,
+      "cell_count": 38
+    },
+    {
+      "id": "collect-2024-d9080344",
+      "http_execution": "PASS",
+      "schema_version": "statement-collection-v3",
+      "human_approvals": 0,
+      "cell_count": 38
+    },
+    {
+      "id": "collect-2025-401f7afa",
+      "http_execution": "PASS",
+      "schema_version": "statement-collection-v3",
+      "human_approvals": 0,
+      "cell_count": 10
+    },
+    {
+      "id": "build-fast-fts",
+      "http_execution": "PASS",
+      "state": "completed"
+    },
+    {
+      "id": "real-candidate-trends",
+      "http_execution": "PASS",
+      "schema_version": "statement-trend-v3",
+      "candidate_view": true,
+      "points": [
+        {
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "metric_key": "total_assets",
+          "time": {
+            "as_of_date": "2025-12-31",
+            "kind": "instant"
+          },
+          "normalized_decimal": "391371999819.49",
+          "normalized_unit": "CNY_YUAN",
+          "financial_review": "unconfirmed"
+        },
+        {
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "metric_key": "total_liabilities",
+          "time": {
+            "as_of_date": "2025-12-31",
+            "kind": "instant"
+          },
+          "normalized_decimal": "241580719144.79",
+          "normalized_unit": "CNY_YUAN",
+          "financial_review": "unconfirmed"
+        },
+        {
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "metric_key": "revenue",
+          "time": {
+            "kind": "duration",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "period_type": "annual"
+          },
+          "normalized_decimal": "170447058533.57",
+          "normalized_unit": "CNY_YUAN",
+          "financial_review": "unconfirmed"
+        },
+        {
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "metric_key": "net_profit_parent",
+          "time": {
+            "kind": "duration",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "period_type": "annual"
+          },
+          "normalized_decimal": "29003103411.66",
+          "normalized_unit": "CNY_YUAN",
+          "financial_review": "unconfirmed"
+        },
+        {
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "metric_key": "operating_cash_flow",
+          "time": {
+            "kind": "duration",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "period_type": "annual"
+          },
+          "normalized_decimal": "46383114754.02",
+          "normalized_unit": "CNY_YUAN",
+          "financial_review": "unconfirmed"
+        },
+        {
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "metric_key": "total_assets",
+          "time": {
+            "as_of_date": "2024-12-31",
+            "kind": "instant"
+          },
+          "normalized_decimal": "368031704522.86",
+          "normalized_unit": "CNY_YUAN",
+          "financial_review": "unconfirmed"
+        },
+        {
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "metric_key": "total_liabilities",
+          "time": {
+            "as_of_date": "2024-12-31",
+            "kind": "instant"
+          },
+          "normalized_decimal": "226518009574.89",
+          "normalized_unit": "CNY_YUAN",
+          "financial_review": "unconfirmed"
+        },
+        {
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "metric_key": "revenue",
+          "time": {
+            "kind": "duration",
+            "period_end": "2024-12-31",
+            "period_start": "2024-01-01",
+            "period_type": "annual"
+          },
+          "normalized_decimal": "189163654064.64",
+          "normalized_unit": "CNY_YUAN",
+          "financial_review": "unconfirmed"
+        },
+        {
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "metric_key": "net_profit_parent",
+          "time": {
+            "kind": "duration",
+            "period_end": "2024-12-31",
+            "period_start": "2024-01-01",
+            "period_type": "annual"
+          },
+          "normalized_decimal": "32184570372.28",
+          "normalized_unit": "CNY_YUAN",
+          "financial_review": "unconfirmed"
+        },
+        {
+          "company_id": "d9080344-8c69-4dea-a5d9-51bf84710105",
+          "metric_key": "operating_cash_flow",
+          "time": {
+            "kind": "duration",
+            "period_end": "2024-12-31",
+            "period_start": "2024-01-01",
+            "period_type": "annual"
+          },
+          "normalized_decimal": "29369250570.66",
+          "normalized_unit": "CNY_YUAN",
+          "financial_review": "unconfirmed"
+        }
+      ]
+    },
+    {
+      "id": "real-three-rule-checkup",
+      "http_execution": "PASS",
+      "schema_version": "checkup-v1",
+      "candidate_view": true,
+      "rules": [
+        {
+          "rule_id": "income_profit_divergence",
+          "rule_version": "v1",
+          "status": "candidate_observation",
+          "observation": "no_direction_divergence",
+          "unit": "DIRECTION",
+          "input_refs": [
+            "4db2ac72-62e8-55f6-ab6b-0a3560d795c6",
+            "97d93920-a0a4-5477-86fc-e73dc67e832d",
+            "440e741e-59f6-5d98-b083-957a061df4e3",
+            "e18aa49b-1f12-525c-b37b-e030f40c92a1"
+          ],
+          "reason": null,
+          "interpretation_review": "not_generated"
+        },
+        {
+          "rule_id": "cash_profit_divergence",
+          "rule_version": "v1",
+          "status": "candidate_observation",
+          "observation": "direction_diverges",
+          "unit": "DIRECTION",
+          "input_refs": [
+            "2fa0fb16-ef9d-5792-8f94-fff17cd86c4a",
+            "068cee83-4694-5bed-8991-191353bcf8c0",
+            "440e741e-59f6-5d98-b083-957a061df4e3",
+            "e18aa49b-1f12-525c-b37b-e030f40c92a1"
+          ],
+          "reason": null,
+          "interpretation_review": "not_generated"
+        },
+        {
+          "rule_id": "debt_asset_change",
+          "rule_version": "v1",
+          "status": "candidate_observation",
+          "observation": "0.178119",
+          "unit": "PERCENTAGE_POINTS",
+          "input_refs": [
+            "ff04405d-1d87-570e-b7c1-d9ec249ce7fc",
+            "52b16db2-2cc8-576b-adc4-b5a42b3ca102",
+            "94fd71a3-dfb7-5bfd-8541-64c4eb22e5e9",
+            "95175846-6039-53b1-9288-b33055010518"
+          ],
+          "reason": null,
+          "interpretation_review": "not_generated"
+        }
+      ]
+    },
+    {
+      "id": "real-model-checkup-explanation",
+      "http_execution": "FAIL",
+      "error": "POST /cplus/checkup-explanations: 503 {\"detail\":{\"code\":\"checkup_explanation_unavailable\"}}"
+    },
+    {
+      "id": "real-candidate-peer",
+      "http_execution": "FAIL",
+      "error": "POST /cplus/peer-comparisons: 503 {\"detail\":{\"code\":\"peer_unavailable\"}}"
+    },
+    {
+      "id": "real-revenue-segments",
+      "http_execution": "PASS",
+      "schema_version": "revenue-segment-extraction-v1",
+      "financial_authority": false,
+      "human_approvals": 0,
+      "segment_groups": [
+        {
+          "dimension": "product",
+          "time": {
+            "kind": "duration",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "period_type": "annual"
+          },
+          "raw_unit": "元",
+          "items": 5,
+          "sum_matches_disclosed_total": true
+        },
+        {
+          "dimension": "product",
+          "time": {
+            "kind": "duration",
+            "period_end": "2024-12-31",
+            "period_start": "2024-01-01",
+            "period_type": "annual"
+          },
+          "raw_unit": "元",
+          "items": 5,
+          "sum_matches_disclosed_total": true
+        },
+        {
+          "dimension": "region",
+          "time": {
+            "kind": "duration",
+            "period_end": "2025-12-31",
+            "period_start": "2025-01-01",
+            "period_type": "annual"
+          },
+          "raw_unit": "元",
+          "items": 3,
+          "sum_matches_disclosed_total": true
+        },
+        {
+          "dimension": "region",
+          "time": {
+            "kind": "duration",
+            "period_end": "2024-12-31",
+            "period_start": "2024-01-01",
+            "period_type": "annual"
+          },
+          "raw_unit": "元",
+          "items": 3,
+          "sum_matches_disclosed_total": true
+        }
+      ]
+    },
+    {
+      "id": "real-model-annual-diff",
+      "http_execution": "FAIL",
+      "error": "POST /cplus/annual-diffs: 503 {\"detail\":{\"code\":\"annual_diff_unavailable\"}}"
+    },
+    {
+      "id": "retrieval-after:格力2025年的主要经营风险是什么",
+      "http_execution": "PASS",
+      "schema_version": "retrieval-diagnostics-v1",
+      "retrieval_items": [
+        {
+          "physical_page": 39,
+          "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、",
+          "dense_cosine": null,
+          "fusion_score": 0.01639344262295082,
+          "rerank_score": 0.06539344262295083
+        },
+        {
+          "physical_page": 38,
+          "evidence_id": "fe7dbe6f6c15dce17085f70f38af887b1fa3fbdaf42583f0bcd6f5bd27257e9d",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "拓展国际市场新蓝图。立足全球不同区域市场特点与产品类型差异，构建适配区域需求的价格审核与利润管控机制，\n持续提升国际市场竞争优势。深化国际市场本土化运营，优化区域供应链布局，有效降低贸易摩擦带来的不利影响，提高\n对海外市场的响应速度与服务效率，进一步扩大产品海外覆盖范围，打造国际市场发展新蓝图。\n激活工业产品新潜能。聚焦工业领域重点行业与核心客户，推进新领域产品对标研发与市场开发，推动工业板块提质\n增效，强化工业板块整体竞争力。\n（2）强化质量风险预防，提升质量管控水平\n健全预防机制。强化全员全生命周期质量责任意识",
+          "dense_cosine": null,
+          "fusion_score": 0.016129032258064516,
+          "rerank_score": 0.06512903225806452
+        },
+        {
+          "physical_page": 37,
+          "evidence_id": "9ebfe7d0b06bab4ac3db66cedcd058596ad967efb8338c0170b0363e4aaab17a",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "2）报告期内以投机为目的的衍生品投资\n□适用不适用\n公司报告期不存在以投机为目的的衍生品投资。\n八、重大资产和股权出售\n1.出售重大资产情况\n□适用不适用\n公司报告期未出售重大资产。\n2.出售重大股权情况\n□适用不适用\n九、主要控股参股公司分析\n适用不适用\n十、公司控制的结构化主体情况\n□适用不适用\n十一、公司未来发展的展望\n1.公司愿景\n公司秉承“缔造世界一流企业，成就格力百年品牌”的企业愿景，坚持以习近平新时代中国特色社会主义思想为指引，\n不忘初心、牢记使命，坚守实体经济，坚持走自力更生、自主创新的",
+          "dense_cosine": 0.5863041281700134,
+          "fusion_score": 0.02817460317460317,
+          "rerank_score": 0.06117460317460317
+        },
+        {
+          "physical_page": 121,
+          "evidence_id": "344b0cc1d69cd96278678a094284c63513ed4c986976c16ba805fa743059c899",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "流量的风险、时间分布或金额；本公司因向客户转让商品而有权取得的对价很可能收回。\n在合同开始日，本公司识别合同中存在的各单项履约义务，并将交易价格按照各单项履约义务所承\n诺商品的单独售价的相对比例分摊至各单项履约义务。在确定交易价格时考虑了可变对价、合同中存在\n的重大融资成分、非现金对价、应付客户对价等因素的影响。\n本公司在客户取得相关商品控制权的时点将分摊至该单项履约义务的交易价格确认收入。在判断客\n户是否已取得商品控制权时，本公司考虑下列迹象：公司就该商品享有现时收款权利，即客户就该商品\n负有现时付款义务；公司已",
+          "dense_cosine": null,
+          "fusion_score": 0.015625,
+          "rerank_score": 0.048625
+        },
+        {
+          "physical_page": 10,
+          "evidence_id": "6fdb9c2dcf5a83d274b24c1454dec0314b862dbf72360a3ef49dad7823c27f18",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "第三节管理层讨论与分析\n一、报告期内公司从事的主要业务\n公司是一家多元化、科技型的全球工业集团，旗下拥有格力、TOSOT、晶弘、凌达、凯邦、新元等品牌，产业布局覆盖\n消费和工业两大领域。消费领域覆盖家用空调、暖通设备、冰箱、洗衣机、热水器、厨房电器、环境电器等产品，为家庭\n及商用场景提供全品类智能家电及智能楼宇系统解决方案；工业领域聚焦数控机床、工业机器人、精密模具、电机、压缩\n机、电容、半导体、精密铸造、基础材料、工业储能等板块，构建自主可控的产业链体系，助力中国制造转型升级。目前，\n格力产品已服务全球190 多",
+          "dense_cosine": 0.6430400609970093,
+          "fusion_score": 0.032266458495966696,
+          "rerank_score": 0.048266458495966696
+        }
+      ]
+    },
+    {
+      "id": "retrieval-after:原材料价格风险有哪些",
+      "http_execution": "PASS",
+      "schema_version": "retrieval-diagnostics-v1",
+      "retrieval_items": [
+        {
+          "physical_page": 39,
+          "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、",
+          "dense_cosine": null,
+          "fusion_score": 0.01639344262295082,
+          "rerank_score": 0.07339344262295082
+        },
+        {
+          "physical_page": 38,
+          "evidence_id": "fe7dbe6f6c15dce17085f70f38af887b1fa3fbdaf42583f0bcd6f5bd27257e9d",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "拓展国际市场新蓝图。立足全球不同区域市场特点与产品类型差异，构建适配区域需求的价格审核与利润管控机制，\n持续提升国际市场竞争优势。深化国际市场本土化运营，优化区域供应链布局，有效降低贸易摩擦带来的不利影响，提高\n对海外市场的响应速度与服务效率，进一步扩大产品海外覆盖范围，打造国际市场发展新蓝图。\n激活工业产品新潜能。聚焦工业领域重点行业与核心客户，推进新领域产品对标研发与市场开发，推动工业板块提质\n增效，强化工业板块整体竞争力。\n（2）强化质量风险预防，提升质量管控水平\n健全预防机制。强化全员全生命周期质量责任意识",
+          "dense_cosine": null,
+          "fusion_score": 0.015873015873015872,
+          "rerank_score": 0.06487301587301587
+        },
+        {
+          "physical_page": 121,
+          "evidence_id": "344b0cc1d69cd96278678a094284c63513ed4c986976c16ba805fa743059c899",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "流量的风险、时间分布或金额；本公司因向客户转让商品而有权取得的对价很可能收回。\n在合同开始日，本公司识别合同中存在的各单项履约义务，并将交易价格按照各单项履约义务所承\n诺商品的单独售价的相对比例分摊至各单项履约义务。在确定交易价格时考虑了可变对价、合同中存在\n的重大融资成分、非现金对价、应付客户对价等因素的影响。\n本公司在客户取得相关商品控制权的时点将分摊至该单项履约义务的交易价格确认收入。在判断客\n户是否已取得商品控制权时，本公司考虑下列迹象：公司就该商品享有现时收款权利，即客户就该商品\n负有现时付款义务；公司已",
+          "dense_cosine": null,
+          "fusion_score": 0.015384615384615385,
+          "rerank_score": 0.04838461538461539
+        },
+        {
+          "physical_page": 27,
+          "evidence_id": "8803867063baabb4f19a06b4b4b05715a414543154a6b91b4163f941211c4fbb",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "配空调热\n水器\n全屋空调热水一机解决，满\n足能源紧缺地区用户需求。\n品已上市，\n小型化产品\n21K/28K 开\n发中。\n“一机双用”突破性解决方\n案，热水器定点能效突破\n4.5，季节能效满足A+能效要\n求。\n产品，丰富公司产品线布\n局，满足欧洲、北美、澳洲\n等地用户对高效节能产品需\n求。\n宽频高效\nAIRY 系列\n家用空调\n产品\n研发超高速压缩技术，解决\n空调能效和低温制热量难以\n同步提升的难题。\n产品已上\n市。\n搭载全新高速压缩机技术，实\n现季节能效提升10%以上，低\n温制热量提升10%以上，低温\n制热量-15℃",
+          "dense_cosine": null,
+          "fusion_score": 0.015151515151515152,
+          "rerank_score": 0.048151515151515153
+        },
+        {
+          "physical_page": 27,
+          "evidence_id": "9360a3e80e273f3f6d8691930e43ea746f822234a2e5c30e0c449e92924c6be9",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "| 配空调热 水器 | 全屋空调热水一机解决，满 足能源紧缺地区用户需求。 | 品已上市， 小型化产品 21K/28K开 发中。 | “一机双用”突破性解决方 案，热水器定点能效突破 4.5，季节能效满足A+能效要 求。 | 产品，丰富公司产品线布 局，满足欧洲、北美、澳洲 等地用户对高效节能产品需 求。 |\n| --- | --- | --- | --- | --- |\n| 宽频高效 AIRY系列 家用空调 产品 | 研发超高速压缩技术，解决 空调能效和低温制热量难以 同步提升的难题。 | 产品已上 市。 | 搭",
+          "dense_cosine": null,
+          "fusion_score": 0.014925373134328358,
+          "rerank_score": 0.04792537313432836
+        }
+      ]
+    },
+    {
+      "id": "retrieval-after:市场竞争风险有哪些",
+      "http_execution": "PASS",
+      "schema_version": "retrieval-diagnostics-v1",
+      "retrieval_items": [
+        {
+          "physical_page": 39,
+          "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、",
+          "dense_cosine": null,
+          "fusion_score": 0.01639344262295082,
+          "rerank_score": 0.06539344262295083
+        },
+        {
+          "physical_page": 38,
+          "evidence_id": "fe7dbe6f6c15dce17085f70f38af887b1fa3fbdaf42583f0bcd6f5bd27257e9d",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "拓展国际市场新蓝图。立足全球不同区域市场特点与产品类型差异，构建适配区域需求的价格审核与利润管控机制，\n持续提升国际市场竞争优势。深化国际市场本土化运营，优化区域供应链布局，有效降低贸易摩擦带来的不利影响，提高\n对海外市场的响应速度与服务效率，进一步扩大产品海外覆盖范围，打造国际市场发展新蓝图。\n激活工业产品新潜能。聚焦工业领域重点行业与核心客户，推进新领域产品对标研发与市场开发，推动工业板块提质\n增效，强化工业板块整体竞争力。\n（2）强化质量风险预防，提升质量管控水平\n健全预防机制。强化全员全生命周期质量责任意识",
+          "dense_cosine": null,
+          "fusion_score": 0.016129032258064516,
+          "rerank_score": 0.06512903225806452
+        },
+        {
+          "physical_page": 121,
+          "evidence_id": "344b0cc1d69cd96278678a094284c63513ed4c986976c16ba805fa743059c899",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "流量的风险、时间分布或金额；本公司因向客户转让商品而有权取得的对价很可能收回。\n在合同开始日，本公司识别合同中存在的各单项履约义务，并将交易价格按照各单项履约义务所承\n诺商品的单独售价的相对比例分摊至各单项履约义务。在确定交易价格时考虑了可变对价、合同中存在\n的重大融资成分、非现金对价、应付客户对价等因素的影响。\n本公司在客户取得相关商品控制权的时点将分摊至该单项履约义务的交易价格确认收入。在判断客\n户是否已取得商品控制权时，本公司考虑下列迹象：公司就该商品享有现时收款权利，即客户就该商品\n负有现时付款义务；公司已",
+          "dense_cosine": null,
+          "fusion_score": 0.015625,
+          "rerank_score": 0.048625
+        },
+        {
+          "physical_page": 27,
+          "evidence_id": "8803867063baabb4f19a06b4b4b05715a414543154a6b91b4163f941211c4fbb",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "配空调热\n水器\n全屋空调热水一机解决，满\n足能源紧缺地区用户需求。\n品已上市，\n小型化产品\n21K/28K 开\n发中。\n“一机双用”突破性解决方\n案，热水器定点能效突破\n4.5，季节能效满足A+能效要\n求。\n产品，丰富公司产品线布\n局，满足欧洲、北美、澳洲\n等地用户对高效节能产品需\n求。\n宽频高效\nAIRY 系列\n家用空调\n产品\n研发超高速压缩技术，解决\n空调能效和低温制热量难以\n同步提升的难题。\n产品已上\n市。\n搭载全新高速压缩机技术，实\n现季节能效提升10%以上，低\n温制热量提升10%以上，低温\n制热量-15℃",
+          "dense_cosine": null,
+          "fusion_score": 0.015384615384615385,
+          "rerank_score": 0.04838461538461539
+        },
+        {
+          "physical_page": 27,
+          "evidence_id": "9360a3e80e273f3f6d8691930e43ea746f822234a2e5c30e0c449e92924c6be9",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "| 配空调热 水器 | 全屋空调热水一机解决，满 足能源紧缺地区用户需求。 | 品已上市， 小型化产品 21K/28K开 发中。 | “一机双用”突破性解决方 案，热水器定点能效突破 4.5，季节能效满足A+能效要 求。 | 产品，丰富公司产品线布 局，满足欧洲、北美、澳洲 等地用户对高效节能产品需 求。 |\n| --- | --- | --- | --- | --- |\n| 宽频高效 AIRY系列 家用空调 产品 | 研发超高速压缩技术，解决 空调能效和低温制热量难以 同步提升的难题。 | 产品已上 市。 | 搭",
+          "dense_cosine": null,
+          "fusion_score": 0.015151515151515152,
+          "rerank_score": 0.048151515151515153
+        }
+      ]
+    },
+    {
+      "id": "retrieval-after:海外经营风险有哪些",
+      "http_execution": "PASS",
+      "schema_version": "retrieval-diagnostics-v1",
+      "retrieval_items": [
+        {
+          "physical_page": 39,
+          "evidence_id": "3422c5cfad7d695623b2523cc28e568d40b551e49afd53984251e7006dd7de5c",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "当前国内外经济环境复杂多变，宏观经济增速放缓、外部不确定性加剧，将影响消费者可支配收入、消费信心等，进\n而影响客户对公司产品的需求和购买力。公司将持续密切跟踪宏观政策与经济走势，坚持自主创新与高质量发展，持续提\n升智能制造能力，灵活调整经营策略，积极应对宏观经济波动对公司经营的影响。\n（2）生产要素价格波动风险\n公司产品的主要原材料为各种等级的铜材、钢材、铝材和塑料等。近年来，铜、铝等原材料价格持续上涨，影响公司\n盈利空间。公司凭借规模化采购、产业链协同与精细化管理等优势，通过套期保值、战略备货、物料标准化通用化、",
+          "dense_cosine": null,
+          "fusion_score": 0.01639344262295082,
+          "rerank_score": 0.06539344262295083
+        },
+        {
+          "physical_page": 38,
+          "evidence_id": "fe7dbe6f6c15dce17085f70f38af887b1fa3fbdaf42583f0bcd6f5bd27257e9d",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "拓展国际市场新蓝图。立足全球不同区域市场特点与产品类型差异，构建适配区域需求的价格审核与利润管控机制，\n持续提升国际市场竞争优势。深化国际市场本土化运营，优化区域供应链布局，有效降低贸易摩擦带来的不利影响，提高\n对海外市场的响应速度与服务效率，进一步扩大产品海外覆盖范围，打造国际市场发展新蓝图。\n激活工业产品新潜能。聚焦工业领域重点行业与核心客户，推进新领域产品对标研发与市场开发，推动工业板块提质\n增效，强化工业板块整体竞争力。\n（2）强化质量风险预防，提升质量管控水平\n健全预防机制。强化全员全生命周期质量责任意识",
+          "dense_cosine": null,
+          "fusion_score": 0.016129032258064516,
+          "rerank_score": 0.06512903225806452
+        },
+        {
+          "physical_page": 121,
+          "evidence_id": "344b0cc1d69cd96278678a094284c63513ed4c986976c16ba805fa743059c899",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "流量的风险、时间分布或金额；本公司因向客户转让商品而有权取得的对价很可能收回。\n在合同开始日，本公司识别合同中存在的各单项履约义务，并将交易价格按照各单项履约义务所承\n诺商品的单独售价的相对比例分摊至各单项履约义务。在确定交易价格时考虑了可变对价、合同中存在\n的重大融资成分、非现金对价、应付客户对价等因素的影响。\n本公司在客户取得相关商品控制权的时点将分摊至该单项履约义务的交易价格确认收入。在判断客\n户是否已取得商品控制权时，本公司考虑下列迹象：公司就该商品享有现时收款权利，即客户就该商品\n负有现时付款义务；公司已",
+          "dense_cosine": null,
+          "fusion_score": 0.015625,
+          "rerank_score": 0.048625
+        },
+        {
+          "physical_page": 27,
+          "evidence_id": "8803867063baabb4f19a06b4b4b05715a414543154a6b91b4163f941211c4fbb",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "配空调热\n水器\n全屋空调热水一机解决，满\n足能源紧缺地区用户需求。\n品已上市，\n小型化产品\n21K/28K 开\n发中。\n“一机双用”突破性解决方\n案，热水器定点能效突破\n4.5，季节能效满足A+能效要\n求。\n产品，丰富公司产品线布\n局，满足欧洲、北美、澳洲\n等地用户对高效节能产品需\n求。\n宽频高效\nAIRY 系列\n家用空调\n产品\n研发超高速压缩技术，解决\n空调能效和低温制热量难以\n同步提升的难题。\n产品已上\n市。\n搭载全新高速压缩机技术，实\n现季节能效提升10%以上，低\n温制热量提升10%以上，低温\n制热量-15℃",
+          "dense_cosine": null,
+          "fusion_score": 0.015151515151515152,
+          "rerank_score": 0.048151515151515153
+        },
+        {
+          "physical_page": 27,
+          "evidence_id": "9360a3e80e273f3f6d8691930e43ea746f822234a2e5c30e0c449e92924c6be9",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "| 配空调热 水器 | 全屋空调热水一机解决，满 足能源紧缺地区用户需求。 | 品已上市， 小型化产品 21K/28K开 发中。 | “一机双用”突破性解决方 案，热水器定点能效突破 4.5，季节能效满足A+能效要 求。 | 产品，丰富公司产品线布 局，满足欧洲、北美、澳洲 等地用户对高效节能产品需 求。 |\n| --- | --- | --- | --- | --- |\n| 宽频高效 AIRY系列 家用空调 产品 | 研发超高速压缩技术，解决 空调能效和低温制热量难以 同步提升的难题。 | 产品已上 市。 | 搭",
+          "dense_cosine": null,
+          "fusion_score": 0.014925373134328358,
+          "rerank_score": 0.04792537313432836
+        }
+      ]
+    },
+    {
+      "id": "retrieval-after:主要业务有哪些",
+      "http_execution": "PASS",
+      "schema_version": "retrieval-diagnostics-v1",
+      "retrieval_items": [
+        {
+          "physical_page": 10,
+          "evidence_id": "6fdb9c2dcf5a83d274b24c1454dec0314b862dbf72360a3ef49dad7823c27f18",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "第三节管理层讨论与分析\n一、报告期内公司从事的主要业务\n公司是一家多元化、科技型的全球工业集团，旗下拥有格力、TOSOT、晶弘、凌达、凯邦、新元等品牌，产业布局覆盖\n消费和工业两大领域。消费领域覆盖家用空调、暖通设备、冰箱、洗衣机、热水器、厨房电器、环境电器等产品，为家庭\n及商用场景提供全品类智能家电及智能楼宇系统解决方案；工业领域聚焦数控机床、工业机器人、精密模具、电机、压缩\n机、电容、半导体、精密铸造、基础材料、工业储能等板块，构建自主可控的产业链体系，助力中国制造转型升级。目前，\n格力产品已服务全球190 多",
+          "dense_cosine": 0.629306972026825,
+          "fusion_score": 0.01639344262295082,
+          "rerank_score": 0.01639344262295082
+        },
+        {
+          "physical_page": 12,
+          "evidence_id": "36eba914ff35f6cc576bc656063690cf08406a5fd7c5186d7eb46c04b6a7202d",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "超千家“董明珠健康家”线下门店的升级或改造，通过场景化体验、数据可视化、智能交互等方式，全面展示冰箱、洗衣\n机、净水器等全屋健康家电，为消费者提供一站式健康家居解决方案。\n线上渠道方面，公司依托自建平台、第三方电商官方旗舰店以及微信、抖音等新媒体矩阵，实现多平台、广触达的数\n字化营销覆盖。2025 年7 月，公司启动商用空调业务方面的数字化新营销模式，构建全链路、全要素、全场景数字化营销\n体系，沉淀核心渠道资产，提升客户黏性，建立高效的商用渠道数字化管理体系。同时，依托全国生产基地搭建“基地仓+\n区域仓”智能分级仓",
+          "dense_cosine": 0.6185007095336914,
+          "fusion_score": 0.016129032258064516,
+          "rerank_score": 0.016129032258064516
+        },
+        {
+          "physical_page": 11,
+          "evidence_id": "d4fe2e991be5a1b9b72f5755d8677da3cc70f4e58a84482b56f6af89d5d68379",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "亿元，同比增长约4.7%。2025 年9 月，工信部等六部门联合发布《机械行业稳增长工作方案（2025—2026 年）》，明确\n“着力发展智能装备和系统，实施智能装备创新发展工程，推动人工智能等新兴技术与装备深度融合”。\n中国物资再生协会发布的《中国再生资源回收行业发展报告（2026）》显示，2025 年中国再生资源回收行业总体保持\n稳定增长态势，11 个主要品种回收总量达4.17 亿吨，同比增长4.1%，回收总额达1.39 万亿元，同比增长3.8%。报告指\n出，“互联网+回收”和智能设备等数字化手段广泛应用，龙头",
+          "dense_cosine": 0.6177359223365784,
+          "fusion_score": 0.015873015873015872,
+          "rerank_score": 0.015873015873015872
+        },
+        {
+          "physical_page": 14,
+          "evidence_id": "3fed3ab0e502625872117888499ed657e75fe821717b6612ae0cbff3b107c03c",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "“冷静王+”柜机\n报告期内，针对传统空调冷风直吹不适和高温易停机的痛点，公司推出“冷静王+”柜机空调。产品搭载分布式送风与\n高效双吸双向离心风机技术，实现沐浴式制冷、地毯式制热；配备格力第二代冷酷外机，依托大排量压缩机与冷媒流路设\n计，强化极端工况散热与运行稳定性，可在67℃高温环境下稳定制冷、能力不衰减。2025 年7 月，公司以一台“冷静王+”\n空调在吐鲁番火焰山开展极限实测挑战，于地表温度高达75℃的极端环境中，完成48 小时不间断直播运行，以硬核实测\n验证产品极端环境适应力与可靠品质，充分彰显公司在高温制冷",
+          "dense_cosine": 0.6171426177024841,
+          "fusion_score": 0.015625,
+          "rerank_score": 0.015625
+        },
+        {
+          "physical_page": 40,
+          "evidence_id": "80f3a83185a44901fce7fd6b7d5146828d702a3b06bdc247eaa2c159ca700cd7",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "是□否\n公司是否披露了估值提升计划。\n□是否\n具体内容详见公司于2025 年10 月31 日在巨潮资讯网披露的《市值管理制度》。\n十四、“质量回报双提升”行动方案贯彻落实情况\n公司是否披露了“质量回报双提升”行动方案公告。\n是□否\n1.深耕实业，引领美好生活\n公司坚持实业为本，持续深耕空调主业，实现多元化、科技型全球工业集团的转型。\n报告期内，公司充分发挥核心技术与完美质量等优势，进一步打通“好空调格力造”到“好电器格力造”的升级路\n径，旗下格力、大松、晶弘三大消费品牌协同发力，工业品牌凌达、凯邦、新元等持续",
+          "dense_cosine": 0.6145393252372742,
+          "fusion_score": 0.015151515151515152,
+          "rerank_score": 0.015151515151515152
+        }
+      ]
+    },
+    {
+      "id": "retrieval-after:经营现金流变化情况",
+      "http_execution": "PASS",
+      "schema_version": "retrieval-diagnostics-v1",
+      "retrieval_items": [
+        {
+          "physical_page": 126,
+          "evidence_id": "609637255d75aa45f960aabe04410bca2a2b77a426b516d81cfbd4c7707b384d",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "被指定为现金流量套期且符合条件的套期工具，其产生的利得或损失中属于套期有效的部分作为现\n金流量套期储备，计入其他综合收益，无效套期部分计入当期损益。\n如果预期交易使本公司随后确认一项非金融资产或非金融负债，或者非金融资产或非金融负债的预\n期交易形成一项适用于公允价值套期会计的确定承诺时，本公司将原在其他综合收益中确认的现金流量\n套期储备金额转出，计入该资产或负债的初始确认金额。除此之外的现金流量套期，本公司在被套期的\n预期现金流量影响损益的相同期间，将原在其他综合收益中确认的现金流量套期储备金额转出，计入当\n期损益",
+          "dense_cosine": null,
+          "fusion_score": 0.016129032258064516,
+          "rerank_score": 0.024129032258064516
+        },
+        {
+          "physical_page": 158,
+          "evidence_id": "054059884b9c23b1d8aa5357f8aa4edf9f92cda3a10ff3283752fee075e295fa",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "| 所属资产组或组合的构成及依据 | 所属经营分部及依据 |\n| --- | --- |\n| 包括固定资产、在建工程、使用权资产、无形 资产、长期待摊费用、其他长期资产，依据为 可以带来独立的现金流的资产组 | 盾安禾田、珠海华宇等 公司，根据公司管理要 求和业务模块划分 |\n| 包括固定资产、在建工程、使用权资产、无形 资产、长期待摊费用、其他长期资产，依据为 可以带来独立的现金流的资产组 | 盾安机电等公司，根据 公司管理要求和业务模 块划分 |\n| 包括固定资产、在建工程、使用权资产、无形 资产、长期待摊费用",
+          "dense_cosine": null,
+          "fusion_score": 0.015384615384615385,
+          "rerank_score": 0.023384615384615386
+        },
+        {
+          "physical_page": 149,
+          "evidence_id": "af23b42596de9b6a1de8ba7b96aab1f86acdc6bd1f40152daa61439c44e22b97",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "| 确认的股利收 入 | 本期计入其他综 合收益的利得 | 本期计入其他综 合收益的损失 | 本期末累计计入 其他综合收益的 利得 | 本期末累计计入 其他综合收益的 损失 | 其他综合收益 转入留存收益 的金额 | 指定为以公允价值 计量且其变动计入 其他综合收益的原 因 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 2,290,950.74 | 224,513,172.52 |  |  | 381,443,302.19 |  | 根据管理层意图及 合同现金流情况",
+          "dense_cosine": null,
+          "fusion_score": 0.014925373134328358,
+          "rerank_score": 0.02292537313432836
+        },
+        {
+          "physical_page": 149,
+          "evidence_id": "3a14360c3f822bf7542b089c21aada4d9cf10eee6dbccf4b6cf2eac6efd4ed81",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "珠海格力电器股份有限公司2025 年年度报告全文\n148\n项目\n期末余额\n期初余额\n合计\n2,419,998,043.64\n3,039,588,563.46\n（2）非交易性权益工具投资情况\n项目名称\n确认的股利收\n入\n本期计入其他综\n合收益的利得\n本期计入其他综\n合收益的损失\n本期末累计计入\n其他综合收益的\n利得\n本期末累计计入\n其他综合收益的\n损失\n其他综合收益\n转入留存收益\n的金额\n指定为以公允价值\n计量且其变动计入\n其他综合收益的原\n因\n其他综合收益\n转入留存收益\n的原因\n三安光电股份有限\n公司\n2,290,",
+          "dense_cosine": null,
+          "fusion_score": 0.014705882352941176,
+          "rerank_score": 0.022705882352941176
+        },
+        {
+          "physical_page": 158,
+          "evidence_id": "935a9f87d739c84c38c72ea113d6d2ed37ae085fba9f98f784a2034f9db336b8",
+          "source_revision": "9ccf4adc9c76fc6d4fc9f81dee755b1f8b723726502ebc6a62616f1aea1f3395",
+          "text_excerpt": "被投资单位名称或形成商誉的事项\n期初余额\n本期增加\n本期减少\n期末余额\n企业合并形成\n处置\n上海大创汽车技术有限公司\n181,930,623.08\n181,930,623.08\n合计\n2,318,929,187.80\n2,318,929,187.80\n（2）商誉减值准备\n被投资单位名称或形\n成商誉的事项\n期初余额\n本期增加\n本期减少\n期末余额\n格力钛新能源股份有\n限公司\n612,777,583.92\n612,777,583.92\n南京华新有色金属有\n限公司\n274,115,040.11\n274,115,040.11",
+          "dense_cosine": null,
+          "fusion_score": 0.014285714285714285,
+          "rerank_score": 0.022285714285714284
+        }
+      ]
+    },
+    {
+      "id": "real-model-answer-risk",
+      "http_execution": "FAIL",
+      "error": "POST /cplus/research/answers: 503 {\"detail\":{\"code\":\"retrieval_unavailable\"}}"
+    },
+    {
+      "id": "real-model-answer-cash",
+      "http_execution": "FAIL",
+      "error": "POST /cplus/research/answers: 503 {\"detail\":{\"code\":\"retrieval_unavailable\"}}"
+    },
+    {
+      "id": "real-model-ocr-answer",
+      "http_execution": "PASS",
+      "schema_version": "cplus-research-answer-v1",
+      "state": "insufficient_evidence",
+      "interpretation_review_status": "not_generated",
+      "financial_authority": false,
+      "coverage": {
+        "cited_sources": 0,
+        "selected_sources": 1
+      }
+    }
+  ],
+  "actual_billed_cny": "not_observed",
+  "human_approvals": 0
+}

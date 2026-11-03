@@ -38,6 +38,20 @@ class EvidenceRef(Strict):
     bbox: list[float] | None = None
 
 
+class FinancialFocus(Strict):
+    schema_version: Literal['financial-point-focus-v1']
+    collection_id: str
+    cell_id: str
+    cell_revision: int
+    payload_sha256: str
+    metric_key: str
+    time: dict[str,str]
+    normalized_decimal: str
+    normalized_unit: str
+    source_ref: SourceRef
+    financial_authority: Literal[False] = False
+
+
 class Candidate(Strict):
     evidence_ref: EvidenceRef
     text: str

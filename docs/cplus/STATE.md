@@ -78,3 +78,10 @@ Leaf integration through `e60b495`: P1 source/read-lock + before-COMMIT patches,
 Actual main-path browser proof now PASS21, full details `evidence/M1-M2-native/result.json`; four previous failed attempts retained. Two independent Chromium processes, two realPDF UIcandidate collections, realVision68lines, typedOCR citation/highlight/favorite, owner-only confirmedtakeover and oldHTTP401. All1440/1280/390 nooverflow; primary1440/390 screenshots copied. Provider0/human0. SelectedC+suite36PASS/3SKIP; explicit publicseed Midea1PASS.
 
 Still needed: realprovider regression with same73-call ledger/cap5; checkup explanatory UI, realannual/peer/segments/batch/newMidea2024fixture; Excel/PPTX service/render and report integration; delete/relevancefixed24questions/three actualscripts+video/curatedC+seed+draftPR. No user input needed; humanfinancial positive remainshuman_pending without blocking candidate path.
+
+
+## M3 real HTTP / provider checkpoint
+
+Same original ledger now77physical calls, conservative1.441018/5 CNY,4UNKNOWN, actualbilling not_observed. Four new attempts timed out (last bounded12sec diagnostic safe chain TimeoutError/APITimeoutError/ReadTimeout); no observed successful C+realmodel result. Stopped further diagnostics; root temporarily runs modeldisabled/wait_only, ordinary business work continues. Do not call HTTP200 insufficient_evidence a realmodelPASS.
+
+Root nestedmemory write-check self-lock fixed via C+-only readonlyMemoryView; corrected modeldisabled actual19HTTP cases allPASS execution (real source/PDF/BGE), including realpeer/checkup3rules/segments/annual/OCRnaturalquery. Firstlive failures remain. Evidence M3-http/. Independent reviewbd67e29 found4P1: memory, fastfavorite422, OCRhistoricalfreshness, chartperiod; first3 codefixed and root review suite current3PASS plus malformedfavoritecontract test updated; focusserverlookup+context exact cell/time/source validation and comparative2030/report2031 testPASS, actualReact recheck pending. Exports service d683bce/9f6bd3a all3formats implemented and worker actualsyntheticfile renders6PPTX/3XLSX pages; trusted rootresolver/UI stillbeingconnected.

@@ -34,3 +34,10 @@ experiments/cplus/gc_runtime_check.py实际OS+private HTTP synthetic fakechild�
 Four failed runs retained: selector accessible-name mismatch; literal question noOCRhit correctly insufficient; chartgroup label changed during integration; test omitted required re-entry of shared password so takeover remaineddisabled. Corrected run PASS, not hiding failures. Root visually inspected1440home/company360; Hero contrast and compact KPIs fixed; 390 screenshots retained.
 
 After assembly changes: C+ suite36PASS/3SKIP (opt-inPDF tests); separate explicit realpublicseed Midea extractor1PASS proving original Gree2024/2025 payload equality. New generatedPDF highlight/fallback/expiredreader3PASS. Node24 buildPASS; lint exit0 warnings, Swig/chunk warnings retained.
+
+
+## M3 controlled execution
+
+- `evidence/M3-http/result.json`: first actualpaid-path matrix PARTIAL, generic503 failures and 3newUNKNOWN preserved. `diagnostic.json`: one additional12sec bounded SDK ReadTimeout with safe cause chain; no response/usage observed. Samecap5/77calls/1.441018 reserved/4UNKNOWN; billednotobserved.
+- `corrected-no-provider.json`:19actualHTTP executionsPASS with realPDF/BGE/Milvus and rootreadonlymemoryadapter; all5 explanation/answer paths explicitly unconfigured, provider successes0. NaturalOCRquestion retrieved afterboundedFTS terms fix. Not a modelacceptance score. Full raw proof retainedignored with SHA in summary.
+- Independentbd67e29 baseline review1PASS/3XFAIL, --runxfail3FAIL/1PASS retainedreport. Afterrootpatch review rerun3PASS/1FAIL because originalfastfavorite test hardcoded malformedfield; contracttest updated to require422for malformed and200corrected, then targeted8PASS inclmemoryview. Rootsource/parse/memory lock plus forgedquote-tail tests continuepassing. Comparative financialFocus typedserverlookup1PASS verifies report2031 point2030 and rejectsperiod/value/source tamper.

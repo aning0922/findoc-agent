@@ -54,6 +54,8 @@ def register_cplus_runtime(app, runtime_root, *, sources, parse_service, prepare
     from app.batch_research.tools import ExistingToolAdapter
 
     root = Path(runtime_root).resolve()
+    from app.cplus.memory import CPlusMemoryView
+    cplus_memory=CPlusMemoryView(memory)
     expected_instance = os.environ.get("DEMO_INTERNAL_INSTANCE")
 
     def validate_identity(identity):
@@ -99,6 +101,8 @@ def register_cplus_runtime(app, runtime_root, *, sources, parse_service, prepare
                                       'content_sha256','parser_version','report_year','attempt','report_type',
                                       'basis','period_start','period_end')})
                 refs.append(SourceRef.model_validate(raw_ref))
+            if payload.get('financial_focus'):
+                focus_service.verify(payload['financial_focus'],refs)
             ocr_db = None
             if any(r.kind == "ocr" for r in refs):
                 ocr_db = stack.enter_context(closing(sqlite3.connect(parse_service.path.as_uri()+"?mode=ro", uri=True,
@@ -208,7 +212,7 @@ def register_cplus_runtime(app, runtime_root, *, sources, parse_service, prepare
         validate_identity(identity)
         return result
 
-    hybrid = HybridRetrievalService(root, sources, parse_service, dense, memory=memory,
+    hybrid = HybridRetrievalService(root, sources, parse_service, dense, memory=cplus_memory,
                                    provider_once=provider_once if llm_client.model != "disabled-no-calls" else None,
                                    identity_validator=validate_identity, publication_guard=publication_guard,
                                    before_commit=validate_identity,
@@ -224,8 +228,11 @@ def register_cplus_runtime(app, runtime_root, *, sources, parse_service, prepare
     app.include_router(create_annual_diff_router(annual,identity_provider))
     app.state.cplus_annual_diff_service = annual
     statements = StatementService(root, sources)
+    from app.cplus.focus import FinancialFocusService, create_focus_router
+    focus_service=FinancialFocusService(statements,preparer)
+    app.include_router(create_focus_router(focus_service,identity_provider,validate_identity))
     peer = PeerComparisonService(root,statements=statements,identity_validator=validate_identity,
-                                 publication_guard=publication_guard,memory=memory,
+                                 publication_guard=publication_guard,memory=cplus_memory,
                                  commit_check=lambda identity,payload:validate_identity(identity))
     app.include_router(create_peer_comparison_router(peer,identity_provider))
     tools = ExistingToolAdapter(hybrid=hybrid,annual_diff=annual)
@@ -241,10 +248,12 @@ def register_cplus_runtime(app, runtime_root, *, sources, parse_service, prepare
     app.include_router(create_segments_router(statements,identity_provider,publication_guard,validate_identity))
     app.include_router(create_profile_router(ProfileService(statements)))
     app.include_router(create_checkup_router(CheckupService(statements)))
+    from app.cplus.checkup_history import create_checkup_history_router
+    app.include_router(create_checkup_history_router(statements))
     from app.checkup import CheckupExplanationService, create_checkup_explanation_router
     explanations=CheckupExplanationService(root,statements=statements,identity_validator=validate_identity,
                      publication_guard=publication_guard,commit_check=lambda identity,payload:validate_identity(identity),
-                     provider_json=checkup_explanation if llm_client.model!='disabled-no-calls' else None,memory=memory)
+                     provider_json=checkup_explanation if llm_client.model!='disabled-no-calls' else None,memory=cplus_memory)
     app.include_router(create_checkup_explanation_router(explanations,identity_provider))
     app.state.cplus_checkup_explanation_service=explanations
     app.state.cplus_retrieval_service = hybrid

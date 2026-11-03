@@ -2,7 +2,7 @@ from typing import Literal
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 from pydantic import Field, field_validator
-from .models import Strict, SourceRef, RetrievalError
+from .models import Strict, SourceRef, RetrievalError, FinancialFocus
 from .service import resolve
 
 
@@ -39,6 +39,7 @@ class Context(Operation):
     title: str = Field(min_length=1, max_length=200)
     selected_sources: list[SourceRef] = Field(min_length=1, max_length=4)
     parent_conversation_id: str | None = None
+    financial_focus: FinancialFocus | None = None
 
 
 class Answer(Operation):
@@ -94,11 +95,18 @@ def create_retrieval_router(service, identity_provider):
         try:
             identity = await resolve(identity_provider(request))
             owner = await service.authorize(identity)
-            return (
-                service.operation(identifier, owner)
-                if kind == "operation"
-                else service.read(kind, identifier, owner)
-            )
+            if kind == 'operation':
+                return service.operation(identifier,owner)
+            value=service.read(kind,identifier,owner)
+            context=value if kind=='context' else service.read('context',value['context_id'],owner)
+            try:
+                await service.validate_context(context,owner)
+                with service.guard(identity,context):
+                    pass
+                status='current'
+            except Exception:
+                status='stale_or_unavailable'
+            return {**value,'current_source_status':status,'historical_snapshot':True}
         except Exception as exc:
             return error(exc)
 

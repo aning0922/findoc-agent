@@ -6,3 +6,8 @@ M0进行中，所有C+功能仍按TASK_BOARD真实状态。原C财务本人签�
 ## Active M1 P1
 
 Independent review `reviews/M1-boundary-review.md`: source journal check before read lock and retrieval expiry check after inner COMMIT. SolHigh owns leaf fixes; root assembly cannot be called fully accepted until these and actual integration regressions pass. Real official import/cache path is verified via HTTP, browser takeover/GC joint proof pending. No human financial approvals.
+
+
+## Current external/model limit
+
+Four C+physical model attempts endedReadTimeout/UNKNOWN; currentprovider response/billing unknown. Sameexisting5cap, norefund/reset/automaticreplay. Models temporarilydisabled to finish actualdata/UI/export paths; AI explanations remainwired but realC+modelacceptance notpassed. HTTPendpointHEAD reachable withoutcredentials doesnot prove authenticatedPOST/providerhealth.

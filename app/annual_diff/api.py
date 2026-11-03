@@ -8,6 +8,8 @@ def create_annual_diff_router(service, identity_provider):
     router = APIRouter(prefix="/cplus/annual-diffs", tags=["annual-diff"])
 
     def fail(exc):
+        from app.cplus.diagnostics import safe_failure
+        safe_failure('annual',exc)
         return JSONResponse(
             {
                 "detail": {

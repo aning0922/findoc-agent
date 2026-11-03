@@ -16,6 +16,7 @@ const sessionPrefixes = [
   "findoc:cplus-research:",
   "findoc:cplus-annual-diff:",
   "findoc:cplus-segments:",
+  "findoc:cplus-checkup:",
   "findoc:showcase-report-operation:v1:", // product/showcaseReports/ShowcaseReportsPanel.tsx
   "findoc:finance-v2-operation:", // product/financeV2/ExtendedFinancePanel.tsx
   "findoc:research-memory-operation:", // product/researchMemory/ResearchMemoryPanel.tsx

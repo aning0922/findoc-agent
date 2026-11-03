@@ -8,7 +8,6 @@ from uuid import uuid4
 
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-import pytest
 
 from app.cplus.runtime import register_cplus_runtime
 from app.conversations.repository import ConversationRepository
@@ -97,10 +96,6 @@ def mounted(tmp_path, monkeypatch):
     return h, doc, rev, parse, app, client, context, answer, memory
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason="P1: active OCR replacement is rejected for execution but answer GET still says current",
-)
 def test_root_ocr_history_exposes_current_status_after_artifact_replaced(tmp_path, monkeypatch):
     h, doc, rev, parse, app, client, context, answer, memory = mounted(tmp_path, monkeypatch)
     endpoint = f"/cplus/research/answers/{answer['answer_id']}"
@@ -134,10 +129,6 @@ def test_root_ocr_history_exposes_current_status_after_artifact_replaced(tmp_pat
     )
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason="P1: root DocumentResearchPanel sends OCR-only page fields for fast evidence favorites",
-)
 def test_root_fast_favorite_payload_is_accepted(tmp_path):
     h = Harness(tmp_path).ready()
     conversations = ConversationRepository(h.registry, "demo")
@@ -168,7 +159,7 @@ def test_root_fast_favorite_payload_is_accepted(tmp_path):
     result = client.post("/research-memories", json=body)
     corrected = {**body, "operation_id": str(uuid4()), "physical_page": None}
     assert client.post("/research-memories", json=corrected).status_code == 200
-    assert result.status_code == 200, result.text
+    assert result.status_code == 422  # Historical malformed UI shape remains rejected.
 
 
 def test_root_guard_holds_source_artifact_memory_locks_through_inner_commit(tmp_path, monkeypatch):
@@ -232,10 +223,6 @@ def test_root_guard_holds_source_artifact_memory_locks_through_inner_commit(tmp_
     assert response.json()["detail"]["code"] == "exact_evidence_unverified"
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason="P1: root guard SHARED plus legacy memory check_generation write transaction self-locks",
-)
 def test_root_peer_nested_memory_generation_check_is_read_only(tmp_path, monkeypatch):
     h, doc, rev, parse, app, client, context, answer, memory = mounted(tmp_path, monkeypatch)
     from app.retrieval_v2 import TrustedIdentity

@@ -249,7 +249,8 @@ class HybridRetrievalService:
         terms = re.findall(r"[\w\u4e00-\u9fff]+", query)
         terms += [
             x
-            for x in ("经营风险", "原材料", "市场竞争", "委托理财", "现金流", "主营业务", "研发")
+            for x in ("经营风险", "原材料", "市场竞争", "委托理财", "现金流", "主营业务", "研发",
+                      "主要会计数据", "财务指标", "营业收入", "净利润")
             if x in query
         ]
         if "风险" in query:
@@ -258,6 +259,11 @@ class HybridRetrievalService:
                 if any(t in query for t in ("理财", "委托贷款"))
                 else ["主要风险", "风险因素", "市场竞争", "原材料价格", "海外市场"]
             )
+        # A natural Chinese sentence is not one exact phrase in the source. Keep
+        # explicit domain terms first, then bounded overlapping trigrams. This
+        # changes lexical recall only; every hit still verifies its exact source.
+        phrases = re.findall(r"[\u4e00-\u9fff]{4,48}", query)
+        terms += [phrase[i:i+3] for phrase in phrases for i in range(0,len(phrase)-2,2)]
         terms = list(dict.fromkeys(x for x in terms if len(x) >= 3))[:12]
         lex = []
         missing = []
@@ -482,6 +488,7 @@ class HybridRetrievalService:
                 selected_sources=body["selected_sources"],
                 parent_conversation_id=body.get("parent_conversation_id"),
                 memory_generation=None,
+                financial_focus=body.get('financial_focus'),
             )
             if self.memory is not None:
                 with self.memory.tx() as db:
@@ -518,7 +525,11 @@ class HybridRetrievalService:
                 await self.validate_context(context, owner)
                 with self.guard(identity, context):
                     pass
-                draft = await resolve(self.provider(body["question"], evidence))
+                question=body['question']
+                if context.get('financial_focus'):
+                    question=canonical({'user_question':question,'server_verified_point_focus':context['financial_focus'],
+                                        'authority':'unreviewed_focus_not_financial_confirmation'})
+                draft = await resolve(self.provider(question, evidence))
                 if (
                     not isinstance(draft, dict)
                     or not isinstance(draft.get("text"), str)
@@ -555,6 +566,7 @@ class HybridRetrievalService:
                 interpretation_review_status="ai_unreviewed" if interpretation else "not_generated",
                 numeric_claim_status="unverified",
                 financial_authority=False,
+                financial_focus=context.get('financial_focus'),
                 coverage=dict(
                     selected_sources=len(refs),
                     cited_sources=len({sha(c["evidence_ref"]["source_ref"]) for c in evidence}),

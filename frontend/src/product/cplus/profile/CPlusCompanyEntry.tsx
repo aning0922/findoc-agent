@@ -7,6 +7,7 @@ import { PeerComparisonPanel, type PeerCollection } from '../comparisons/PeerCom
 import { SegmentResearchPanel } from '../comparisons/SegmentCandidatesPanel.tsx';
 import { ResearchTemplatesPanel } from '../templates/ResearchTemplatesPanel.tsx';
 import type { ResearchDraft } from '../actions/researchDraft.ts';
+import { CheckupExplanationPanel } from '../research/CheckupExplanationPanel.tsx';
 
 export function CPlusCompanyEntry({companyId,companies}:{companyId:string;companies:Company[]}){
  const [sources,setSources]=useState<AnnualSourceRef[]>([]),[notice,setNotice]=useState('正在核验可用资料…'),[collections,setCollections]=useState<PeerCollection[]>([]),[refresh,setRefresh]=useState(0);
@@ -24,5 +25,6 @@ export function CPlusCompanyEntry({companyId,companies}:{companyId:string;compan
  <details className="product-card"><summary>跨年经营变化 · 双侧原文</summary><AnnualDiffPanel companyId={companyId} sources={sources.filter(s=>s.company_id===companyId)}/></details>
  <details className="product-card"><summary>同行对标 · 明确选择可比数据</summary><p>先在各企业三表中提取候选，再刷新资料。每项选择具体期间，不自动挑最新版本。</p><PeerComparisonPanel companies={companies} collections={collections}/></details>
  <details className="product-card"><summary>主营业务结构 · 产品与地区</summary><SegmentResearchPanel companyId={companyId} sources={sources.filter(s=>s.company_id===companyId)}/></details>
+ <details className="product-card"><summary>AI 体检解释 · 从程序规则到核查建议</summary><CheckupExplanationPanel companyId={companyId}/></details>
  <details className="product-card"><summary>研究模板与指标释义</summary><ResearchTemplatesPanel companyId={companyId} sources={sources.filter(s=>s.company_id===companyId)} onResearchDraft={draft}/></details></>;
 }
