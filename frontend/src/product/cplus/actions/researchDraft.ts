@@ -1,1 +1,1 @@
-export type ResearchDraft={companyId:string;question:string;documentIds:string[];sourceRevisions:string[];metricKey?:string;point?:{time:Record<string,string|undefined>;value_decimal:string}};
+export type ResearchDraft={companyId:string;question:string;documentIds:string[];sourceRevisions:string[];metricKey?:string;point?:{time:Record<string,string|undefined>;value_decimal:string;cell_id:string;cell_revision:number;payload_sha256:string;raw_decimal:string;normalized_decimal:string;document_id:string;source_revision:string}};
