@@ -375,9 +375,9 @@ class Runner:
                 verified.append({"evidence_ref": ref, "exact_record_verified": True})
         return verified
 
-    def run_case(self, case, mode, upper, source, pages):
+    def run_case(self, case, mode, upper, source, pages, *, prepared=None):
         self.window.admit(
-            upper
+            upper - (2 if prepared else 0)
         )  # Require the complete mode's worst-case headroom before its first paid phase.
         first = self.window.current()
         entry = {
@@ -390,57 +390,66 @@ class Runner:
         }
         self.proof["cases"].append(entry)
         self.save()
-        conversation = self.post(
-            "/conversations",
-            {
-                "document_ids": [source["document_id"]],
-                "title": f"C+ {case['id']} {mode} bounded source study",
-            },
-            recovery=lambda oid: "/conversations/by-operation/" + oid,
-        )
-        expected = {k: source[k] for k in IDENTITY_KEYS}
-        if conversation["sources"] != [expected] or conversation.get("active_turn_id"):
-            raise StopRun("conversation_scope_not_exact_or_has_active_turn")
-        entry["conversation"] = conversation
-        self.save()
-        cid = conversation["conversation_id"]
-        intent = self.post(
-            "/research/intent",
-            {"conversation_id": cid, "text": case["question"], "requested_mode": mode},
-            upper=1,
-            recovery=lambda oid: "/research/operations/" + oid,
-        )
-        entry["intent"] = intent
-        self.save()
-        if (
-            intent["provider_error"] is not None
-            or intent["proposal_origin"] != "model_proposal_program_validated"
-            or intent["clarifying_question"]
-        ):
-            raise StopRun("intent_fallback_unknown_or_clarification_retained_no_next_model_phase")
-        if (
-            intent["mode"] != mode
-            or intent["goal"] != case["question"]
-            or intent["scope"]["source_scope_sha"] != conversation["source_scope_sha"]
-        ):
-            raise StopRun("intent_scope_or_goal_changed")
-        after_intent = self.window.current()
-        if len(after_intent["rows"]) - len(first["rows"]) != 1:
-            raise StopRun("intent_physical_denominator_not_one_check_shared_window_or_guard")
-        plan = self.post(
-            "/synthesis/plans",
-            {"intent_id": intent["intent_id"]},
-            upper=1,
-            recovery=lambda oid: "/research/operations/" + oid,
-        )
-        entry["plan"] = plan
-        self.save()
-        roles = ["evidence", "risk_operations"] if mode == "deep" else ["generalist"]
+        prepaid=2 if prepared else 0
+        if prepared:
+            if prepared['case_id']!=case['id'] or prepared['exact_question']!=case['question'] or prepared['mode']!=mode or prepared.get('job_ack'):
+                raise StopRun('prepared_case_mismatch_or_job_already_dispatched')
+            conversation,intent,plan=(prepared[k] for k in ('conversation','intent','plan'))
+            entry.update(conversation=conversation,intent=intent,plan=plan,prepaid_successful_calls=2)
+            after_intent=None
+        else:
+            conversation = self.post(
+                "/conversations",
+                {
+                    "document_ids": [source["document_id"]],
+                    "title": f"C+ {case['id']} {mode} bounded source study",
+                },
+                recovery=lambda oid: "/conversations/by-operation/" + oid,
+            )
+            expected = {k: source[k] for k in IDENTITY_KEYS}
+            if conversation["sources"] != [expected] or conversation.get("active_turn_id"):
+                raise StopRun("conversation_scope_not_exact_or_has_active_turn")
+            entry["conversation"] = conversation
+            self.save()
+            cid = conversation["conversation_id"]
+            intent = self.post(
+                "/research/intent",
+                {"conversation_id": cid, "text": case["question"], "requested_mode": mode},
+                upper=1,
+                recovery=lambda oid: "/research/operations/" + oid,
+            )
+            entry["intent"] = intent
+            self.save()
+            if (
+                intent["provider_error"] is not None
+                or intent["proposal_origin"] != "model_proposal_program_validated"
+                or intent["clarifying_question"]
+            ):
+                raise StopRun("intent_fallback_unknown_or_clarification_retained_no_next_model_phase")
+            if (
+                intent["mode"] != mode
+                or intent["goal"] != case["question"]
+                or intent["scope"]["source_scope_sha"] != conversation["source_scope_sha"]
+            ):
+                raise StopRun("intent_scope_or_goal_changed")
+            after_intent = self.window.current()
+            if len(after_intent["rows"]) - len(first["rows"]) != 1:
+                raise StopRun("intent_physical_denominator_not_one_check_shared_window_or_guard")
+            plan = self.post(
+                "/synthesis/plans",
+                {"intent_id": intent["intent_id"]},
+                upper=1,
+                recovery=lambda oid: "/research/operations/" + oid,
+            )
+            entry["plan"] = plan
+            self.save()
+        roles = plan["roles"]
+        valid_roles=(len(roles)==2 and len(set(roles))==2 and "evidence" in roles and set(roles)<={"evidence","finance","risk_operations"}) if mode=="deep" else roles==["generalist"]
         if (
             plan["provider_error"] is not None
             or plan["plan_origin"] != "supervisor_model_program_validated"
             or plan["mode"] != mode
-            or plan["roles"] != roles
+            or not valid_roles
             or plan["scope"] != intent["scope"]
             or not plan["requires_explicit_confirmation"]
         ):
@@ -452,7 +461,7 @@ class Runner:
         ):
             raise StopRun("server_execution_bounds_changed_do_not_guess_new_denominator")
         after_plan = self.window.current()
-        if len(after_plan["rows"]) - len(after_intent["rows"]) != 1:
+        if not prepared and len(after_plan["rows"]) - len(after_intent["rows"]) != 1:
             raise StopRun("plan_physical_denominator_not_one")
         approval = {
             "approved_plan_id": plan["plan_id"],
@@ -502,7 +511,8 @@ class Runner:
             raise StopRun("native_handoff_phase_events_missing")
         for role in roles:
             steps = [s for s in job["steps"] if s["agent_id"] == role and s["state"] == "completed"]
-            if not steps or not any("search_evidence" in step["tools"] for step in steps):
+            required_tool="read_confirmed_facts" if role=="finance" else "search_evidence"
+            if not steps or not any(required_tool in step["tools"] for step in steps):
                 raise StopRun("required_native_evidence_tool_trace_missing")
         entry["exact_quotes"] = self.verify_findings(job, source, pages)
         entry["model_interpretations"] = sum(
@@ -511,7 +521,7 @@ class Runner:
         entry["logical_model_attempts"] = job["usage"]["attempts"]
         entry["physical_guard_rows_for_case"] = len(self.window.current()["rows"]) - len(
             first["rows"]
-        )
+        ) + prepaid
         entry["logical_minus_physical"] = (
             entry["logical_model_attempts"] - entry["physical_guard_rows_for_case"]
         )
