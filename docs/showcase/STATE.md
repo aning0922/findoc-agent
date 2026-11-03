@@ -9,7 +9,7 @@
 - 主控唯一 owner：runtime_factory.py、migrations.py、DocumentService、AppShell、ResearchHome、Conversations 及产品路由；worker 新文件优先。
 - task-board.csv 为 36 项实时表；work-package/data/task_board.csv 为原始不可改参考。
 - 会话可见、按当前任务改名；模型/推理在每次派工记录。Astra 架构专项；Terra React 中推理；Sol 后端高推理。
-- 后续：独立审查 → UI 原型 → 合同冻结 → M1 Demo/首页并行 → 主控独立审查集成。
+- 当前：M0 完成；M1 首页和Gate前端已接线，L03后端候选及独立复核进行中；D02已集成，准备D03。
 - 未授权：公开部署、合并 main、force push、真实财务人工接受、覆盖真实数据库、购买服务。
 
 M0完成证据：独立审查源49e0eba（集成5feba0c），UI源370e3d0/0ec4a71（集成6c619c0/5209c8e），主控补修8c2c8a7；API_MINIMUM v1.0纳入六项P0合同。主控在集成工作树复跑1440/1280/390 Chromium+主要点击PASS；build/lint PASS（chunk/fast-refresh警告保留）。本地原型 http://127.0.0.1:14521/showcase.html ，仅UI_MOCK。
@@ -19,3 +19,5 @@ M1排程：Sol/high负责L01→L02→L03；Dashboard数据H01独立owner；原UI
 U01主控接线进行中：五导航顺序/中文名、Navy全站tokens、question/company URL仅预填Conversations草稿/资料筛选（不选源/不创建/不发模型）；相关route/conversationFoundation 6PASS。Dashboard与Demo模块待worker交割后接入。
 
 最新调度：H01已集成b5768ee/bfadd8a并独立模块/真实重依赖装配通过；独立认证review dcf6a8f集成2f3223d两P0未关闭；原Dashboard会话转Sol/high做D02官方目录/导入，UI会话Terra/high视觉修订不足后转Sol/high聚焦完整组合布局/负向测试。D01主控f024be2真实官方四PDF通过，D02并行。所有模型/分支/任务状态详CSV+orchestration。
+
+2026-11-03 最新集成：H02/H03/L04 UI9cdc3d5已集成4bf1bef，主控main启用VITE_FINDOC_DEMO_MODE=1时包裹所有入口（默认保留经典模式），ResearchHome接真实Dashboard组件。主控实际AppShell三宽UI_MOCK截图/指标/退出，以及非法overview/Decimal、到期卸载、迟到refresh、UNKNOWN claim只读恢复PASS，截图/tmp/findoc-root-m1-ui。build/lint PASS，chunk、effect/ref和fast-refresh提示保留；尚不代表真实后台登录验收。D02已集成4b36493+f2b7028，14PASS；O01真实Apple Vision spike91cbc67，Mac专用且表结构仍待复核。原D02会话切Astra/high独立复核L03；UI会话Sol/high补跨代存储隔离。

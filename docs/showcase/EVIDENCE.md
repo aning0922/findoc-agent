@@ -27,3 +27,7 @@
 - L01主控静态发现公开/api代理下pending Cookie path=/demo不匹配，已报后端与独审，必须修复并真实浏览器验。内部TestClient通过不代表外部前缀Cookie可用。
 
 - D01真实公开HTTP预检：四份官方PDF均200，SHA与既有来源manifest一致（美的2024/2025、格力2024/2025），276/219/248/295页；程序封面身份匹配。新副本单独Git忽略目录data/showcase-source-preflight-20261103，无旧数据覆盖/模型调用/真人核准。以前web404/timeout保留，本次直接httpx成功。详情D01_SOURCE_PREFLIGHT.json，不宣称全市场查询/实际导入完成。
+
+## 主控 M1 前端接线复跑
+
+集成9cdc3d5→4bf1bef后，main/ResearchHome接线，`SHOWCASE_TEST_URL=http://127.0.0.1:14521 SHOWCASE_TEST_OUTPUT=/tmp/findoc-root-m1-ui node e2e/showcase-live-mock.mjs`：三宽1440/1280/390完整AppShell登录/首页/指标/退出PASS；错误概览、非法Decimal、到期即时卸载+服务器读回、旧refresh不覆盖新session、未知claim保留并GET恢复PASS。实际Chromium，接口拦截UI_MOCK，LLM0/真实PDF0/真人财务0；截图已由主控打开检查。Node24 build/lint成功，保留chunk/effect/ref/fast-refresh提示。真实HTTP和Cookie验证仍待L03及独立review。
