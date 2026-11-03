@@ -26,7 +26,19 @@ for (const width of [1440, 1280, 390]) {
       await r.abort();
       return;
     }
-    const cid = new URL(r.request().url()).pathname.split("/").at(-2);
+    const url = new URL(r.request().url());
+    if (url.pathname.endsWith("/jobs")) {
+      await r.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          schema_version: "showcase-job-list-v2",
+          items: [],
+        }),
+      });
+      return;
+    }
+    const cid = url.pathname.split("/").at(-2);
     if (cid.startsWith("1111") && release === undefined)
       await new Promise((resolve) => (release = resolve));
     await r.fulfill({
@@ -60,8 +72,8 @@ for (const width of [1440, 1280, 390]) {
   await p.getByRole("button", { name: /深度研究/ }).click();
   if ((await p.getByLabel("研究问题").inputValue()) !== "分析现金流")
     throw Error("stale draft");
-  if (await p.getByRole("button", { name: "意图解析暂不可用" }).isEnabled())
-    throw Error("unfrozen endpoint enabled");
+  if (await p.getByRole("button", { name: "明确解析意图" }).isDisabled())
+    throw Error("intent entry disabled");
   if (posts || errors.length) throw Error(errors.join(";") || "mutation");
   console.log(`PASS A03 shell ${width}: mode/CID and stale response`);
   await p.close();

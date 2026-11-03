@@ -115,3 +115,52 @@
     flex-direction: column;
   }
 }
+.showcase-research .sr-workflow section {
+  border-top: 1px solid var(--color-border, #e6edf4);
+  padding: 18px 0;
+  margin-top: 14px;
+}
+.showcase-research .sr-workflow button {
+  margin: 4px 8px 4px 0;
+}
+.showcase-research .sr-workflow input:not([type="checkbox"]) {
+  display: block;
+  min-height: 44px;
+  width: 100%;
+  border: 1px solid #dce5ee;
+  border-radius: 7px;
+  padding: 10px;
+}
+.showcase-research .sr-workflow input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 12px;
+}
+.showcase-research .sr-workflow label {
+  display: block;
+}
+.showcase-research .sr-workflow summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.showcase-research .sr-workflow article {
+  display: block;
+  background: white;
+  border: 1px solid #e9eef5;
+  border-radius: 8px;
+  margin-top: 10px;
+  padding: 14px;
+}
+.showcase-research .sr-workflow .sr-notice {
+  background: #fff4da;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 10px;
+}
+.showcase-research .sr-workflow ol {
+  font-size: 12px;
+  line-height: 2;
+  color: #61758b;
+}

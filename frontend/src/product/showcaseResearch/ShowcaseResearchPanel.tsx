@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./showcaseResearch.css";
+import { ResearchWorkflow } from "./ResearchWorkflow.tsx";
 type Mode = "quick" | "synthesis" | "deep";
 type Link = { intent_id: string; task_id: string | null; state: string };
 type Links = { conversation_id: string; items: Link[] };
@@ -20,7 +21,7 @@ function ResearchContent({
   initialJobId,
 }: Props) {
   const [mode, setMode] = useState<Mode>("quick"),
-    [question, setQuestion] = useState(initialQuestion),
+    [question] = useState(initialQuestion),
     [links, setLinks] = useState<Link[]>([]),
     [state, setState] = useState(""),
     [reload, setReload] = useState(0),
@@ -129,28 +130,13 @@ function ResearchContent({
           <p>请使用当前会话的问答输入框，选择资料并提出问题。</p>
         </div>
       ) : (
-        <div className="sr-card">
-          <h3>{mode === "synthesis" ? "综合研究" : "深度研究"}</h3>
-          <p>先准备研究问题。意图解析、计划确认和执行需要服务端接口就绪。</p>
-          <label>
-            研究问题
-            <textarea
-              maxLength={2000}
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              placeholder="例如：梳理企业近年的经营变化与风险"
-            />
-          </label>
-          <button type="button" disabled>
-            意图解析暂不可用
-          </button>
-          <p className="sr-note">
-            当前不能发起研究；已保存的会话和任务仍可阅读。
-          </p>
-        </div>
-      )}
-      {initialJobId && (
-        <p className="sr-note">当前任务链接待研究接口支持后读取。</p>
+        <ResearchWorkflow
+          key={mode}
+          conversationId={conversationId}
+          mode={mode}
+          initialQuestion={question}
+          initialJobId={initialJobId}
+        />
       )}
       <div className="sr-history">
         <div>
