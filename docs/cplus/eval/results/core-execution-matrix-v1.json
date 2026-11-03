@@ -1,6 +1,6 @@
 {
   "schema_version": "cplus-core-execution-matrix-v1",
-  "snapshot_root_head": "9b4d647b31a69ee7630dc5b70dc3ebe7f60f5646",
+  "snapshot_root_head": "9455ebe33773063c2b4f1a99b00d460692a055ca",
   "fixed_case_count": 24,
   "fixed_cases_sha256": "ce1899994a71f1119464b216c19c5f6fe90fa38ece483b7d616647c505f034f8",
   "archive_action": "READ_ONLY_RECEIPT_RECONCILIATION_NO_NEW_EXECUTION",
@@ -50,19 +50,31 @@
     {
       "path": "docs/cplus/reviews/agent-export-qa/proof.json",
       "sha256": "9a955bfd10ed1daea3bb9be4c66623a8e6ee37a3cefedc4d612470deb20aaf06"
+    },
+    {
+      "path": "docs/cplus/eval/results/agent-paired-e0115-v1/result.json",
+      "sha256": "54f5f7bc168edd84037ce98162318e413a474c422a5a7e7ba9389912b97a9e4d"
+    },
+    {
+      "path": "docs/cplus/eval/results/agent-paired-e0115-continued-v1/result.json",
+      "sha256": "6c87e9a96c96cb7ef28f4fa6ea0e94f0f67dedd5d9cf9f72688ed369f2bbba83"
+    },
+    {
+      "path": "experiments/cplus/continue_prepared_pair.py",
+      "sha256": "f1678f135d73dcfa4e11058a0ad0eeb91f9249baa2a337e236c47ab1313f0e6a"
     }
   ],
   "totals": {
-    "real_agent_completed_paths": 2,
-    "real_agent_sdk_calls": 11,
-    "same_question_pairs": 0,
+    "real_agent_completed_paths": 4,
+    "real_agent_sdk_calls": 22,
+    "same_question_pairs": 1,
     "full_answer_human_accepted": 0,
-    "financial_approvals": 0
+    "financial_approvals": 0,
+    "real_agent_distinct_case_ids": 3
   },
   "pending_root_supplements": [
-    "E01-15 exact same-question pair",
     "CP-21 AI batch and bounded failure/recovery",
-    "four real template paths (related to overview/cash/peer/changes, no automatic fixed-case substitution)"
+    "four real template paths and same-revision financial/AI exports; no prefilled execution claim"
   ],
   "entries": [
     {
@@ -441,17 +453,73 @@
         "只比较已存结果，不假设多Agent更优",
         "GET历史/报告/事件不追加模型调用"
       ],
-      "actual_tier": "NOT_RUN_BY_THIS_SUITE",
-      "status": "skipped",
-      "exact_case_model_executed": false,
-      "observed_mode": null,
-      "actual_provider_calls": null,
+      "actual_tier": "OPERATOR_REAL_HTTP_EXISTING_SUCCESSFUL_PLAN_CONTINUATION",
+      "status": "partial",
+      "exact_case_model_executed": true,
+      "observed_mode": "synthesis_vs_deep",
+      "actual_provider_calls": 11,
       "full_answer_pass": false,
       "human_semantic_review": "pending",
       "human_financial_acceptance": "pending",
-      "result_and_gap": "待补：尚无同一精确问题、同scope/事实选择的独立批准 synthesis/deep pair。E01-01与E01-06题目不同，不能拼作对照。",
-      "evidence": [],
-      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE"
+      "result_and_gap": "同一精确问题、相同来源及空事实选择，两份独立批准plan的deep/synthesis均completed；deep evidence+finance，synthesis generalist。前2次成功准备+延续新增9次=11 SDK。finance无确认事实只可证据不足，confirmed_financial为0；解释含未核验数值和引用缺口，语义/完整性待人工审，不判多Agent更优。",
+      "evidence": [
+        "docs/cplus/eval/results/agent-paired-e0115-v1/result.json",
+        "docs/cplus/eval/results/agent-paired-e0115-continued-v1/result.json",
+        "experiments/cplus/continue_prepared_pair.py"
+      ],
+      "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
+      "execution_verdict": "PASS_SAME_QUESTION_PAIR_EXECUTION_ONLY",
+      "runs": [
+        {
+          "mode": "deep",
+          "job_id": "4021f68c-3306-4d42-b9ad-ccb0d704a498",
+          "job_state": "completed",
+          "plan_id": "0f7cdef1-ac93-4991-a36f-42ea2fa14329",
+          "plan_roles": [
+            "evidence",
+            "finance"
+          ],
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sdk_calls_including_preparation": 7,
+          "prepaid_successful_calls": 2,
+          "logical_attempts": 7,
+          "tool_attempts": 3,
+          "job_duration_seconds": 23.366398,
+          "report_id": "2a7971ff-3e68-4d60-a9ec-9d3f7e354e7c",
+          "report_revision": 1,
+          "confirmed_financial_count": 0,
+          "unresolved_questions": [
+            "没有为本次研究明确选择可用的已确认财务事实。"
+          ],
+          "history_zero_new_model_rows": true,
+          "evidence": "docs/cplus/eval/results/agent-paired-e0115-continued-v1/result.json#cases.0"
+        },
+        {
+          "mode": "synthesis",
+          "job_id": "aaa700a2-6406-4993-b558-91e61bf78148",
+          "job_state": "completed",
+          "plan_id": "cefd7def-6124-4cfd-80bd-1f1738f2831f",
+          "plan_roles": [
+            "generalist"
+          ],
+          "source_scope_sha": "eacf6c068e9edf5ca229b746e0f4257f48c88951408a468e673d034a702edc60",
+          "fact_selection_sha": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sdk_calls_including_preparation": 4,
+          "prepaid_successful_calls": 0,
+          "logical_attempts": 4,
+          "tool_attempts": 2,
+          "job_duration_seconds": 19.449888,
+          "report_id": "0ab14f6a-72f3-41aa-b898-31a89d48783a",
+          "report_revision": 1,
+          "confirmed_financial_count": 0,
+          "unresolved_questions": [
+            "检索结果没有通过固定来源和逐页精确引用核验。"
+          ],
+          "history_zero_new_model_rows": true,
+          "evidence": "docs/cplus/eval/results/agent-paired-e0115-continued-v1/result.json#cases.1"
+        }
+      ]
     },
     {
       "id": "CP-16",
@@ -649,5 +717,64 @@
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
       "related_component_only": true
     }
-  ]
+  ],
+  "paired_continuation_accounting": {
+    "predecessor_preparation_calls": 2,
+    "continuation_new_calls": 9,
+    "pair_total_calls": 11,
+    "global_window_after": {
+      "cap_cny": "5",
+      "physical_guard_rows": 103,
+      "reserved_cny": "1.976784",
+      "unknown_rows": 4,
+      "actual_billed_cny": "not_observed"
+    },
+    "old_unknown_state_changes": {},
+    "predecessor_stopped_before_any_job": true,
+    "predecessor_all_mutations_response_received": true,
+    "same_plan_and_lease_verified": true,
+    "same_sources_question_fact_selection_verified": true,
+    "no_unknown_replay": true,
+    "actual_billed_cost": "not_observed"
+  },
+  "core_real_execution_denominator": {
+    "contract": "fixed-cases.json minimum_core_e2e=12; work-package/11 requires case-level actual execution at required tier, not valid proposals or tool availability",
+    "target": 12,
+    "explicit_complete_required_model_path_case_ids": [
+      "E01-06",
+      "E01-15"
+    ],
+    "explicit_complete_required_model_path_case_count": 2,
+    "real_model_executed_distinct_case_ids": [
+      "E01-01",
+      "E01-06",
+      "E01-15"
+    ],
+    "mode_deviation_excluded_from_strict_complete_count": [
+      "E01-01"
+    ],
+    "component_or_tool_partial_only": [
+      "E01-02",
+      "E01-07",
+      "E01-09",
+      "CP-16",
+      "CP-18",
+      "CP-19",
+      "CP-20",
+      "CP-21"
+    ],
+    "archived_components_not_whole_fixed_case": [
+      "E01-10",
+      "E01-11",
+      "E01-12",
+      "CP-17",
+      "CP-22",
+      "CP-23",
+      "CP-24"
+    ],
+    "case_level_verdict": "MINIMUM_12_COMPLETE_CORE_EXECUTIONS_NOT_ESTABLISHED",
+    "human_semantics_counted_separately": true,
+    "CP-21_counted_as_complete": false,
+    "note": "2 counts only the matching complete model-path subset, not a universal claim that other components have no real execution. CP-16/18/20 remain evidenced tool executions; their fixed-case whole-goal and human axes are separate."
+  }
 }
