@@ -1,6 +1,6 @@
 {
   "schema_version": "cplus-core-execution-matrix-v1",
-  "snapshot_root_head": "e43a9ab88375305f27e71140a6b5a185285ba8e0",
+  "snapshot_root_head": "bc2e7cc46ed470cea4f82d46291485724d868db7",
   "fixed_case_count": 24,
   "fixed_cases_sha256": "ce1899994a71f1119464b216c19c5f6fe90fa38ece483b7d616647c505f034f8",
   "archive_action": "READ_ONLY_RECEIPT_RECONCILIATION_NO_NEW_EXECUTION",
@@ -116,6 +116,26 @@
       "sha256": "aef42f2e723ec57efb355b03e4fb4b5c16cbe2e41d38607df267dfaecf109ec7",
       "last_committed_provenance": "0add53fdf2bff258293f1c1a1988d441dd0999ea 2026-11-03T20:30:40+08:00",
       "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "docs/cplus/eval/results/e0114-report-boundary-v1.json",
+      "sha256": "bd81de767004bbf9d2d01bfd1d6b5b0d898901b9ef0df212d8b2065fe731965a",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "data/cplus-g4-live-v1/result.json",
+      "sha256": "4ee3bd4d1e2d5c0a3945fccf84ded9eef6a6f4e5e54494c99e468d43bb1bd88c",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "data/cplus-g4-finish-v2/result.json",
+      "sha256": "9d8a85386dab3fc8d1290fdf33359186a74f3f8fd6d9fe9765dbac2e813a52fe",
+      "read_only_audit_no_new_execution": true
+    },
+    {
+      "path": "data/cplus-g4-exact-exports-v2/result.json",
+      "sha256": "624fe862d893fa1776f7a85c13e804c3978e49cdcc8c132ddeb496c93915201f",
+      "read_only_audit_no_new_execution": true
     }
   ],
   "totals": {
@@ -128,9 +148,7 @@
     "real_agent_sdk_calls_scope": "22 counts only Agent v2 plus E01-15 pair; business OCR/checkup/annual model executions are separate archived windows, not added blindly"
   },
   "pending_root_supplements": [
-    "CP-21 real AI batch including missing-source and GET no replay",
-    "E01-14 exact report note/extra-field rejection program contract",
-    "four template actual paths and same-revision financial/AI export; do not prefill"
+    "CP-21 actual AI batch fault run final result and core12 audit; do not prefill"
   ],
   "entries": [
     {
@@ -553,22 +571,34 @@
         "客户端findings/金额/refs不被接受",
         "备注不授予事实资格，版本追加不可变"
       ],
-      "actual_tier": "NOT_RUN_BY_THIS_SUITE",
-      "status": "skipped",
+      "actual_tier": "REAL_HTTP_COMPLETED_REAL_MODEL_JOB_PROGRAM_CONTRACT",
+      "status": "partial",
       "exact_case_model_executed": false,
       "observed_mode": null,
-      "actual_provider_calls": null,
+      "actual_provider_calls": 0,
       "full_answer_pass": false,
       "human_semantic_review": "pending",
       "human_financial_acceptance": "pending",
-      "result_and_gap": "已有真实job保存报告路径，但未执行本题客户端备注/金额篡改攻击场景。",
-      "evidence": [],
+      "result_and_gap": "精确问题的真实HTTP程序合同已执行：两次额外findings/金额refs请求422；备注追加rev2，可信completed job snapshot逐值不变，confirmed_financial0；rev1不变由原runner检查记录，原操作与GET不追加provider。程序执行通过，备注不授财务资格，人工语义仍未审。",
+      "evidence": [
+        "docs/cplus/eval/results/e0114-report-boundary-v1.json"
+      ],
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
-      "execution_status": "not_run_exact_case",
+      "execution_status": "executed_program_contract_pass",
       "program_checks": {
-        "whole_case_invariants": "see_result_and_gap"
+        "extra_fields_rejected": "two_HTTP_422_receipts",
+        "immutable_trusted_snapshot": "independently_compared_equal_rev1_rev2",
+        "notes_no_financial_promotion": "confirmed_financial_count_0",
+        "revision1_unchanged": "reported_runner_check_preserved",
+        "read_operation_no_dispatch": "completed_receipt_and_equal_public_budget"
       },
-      "human_acceptance": "pending"
+      "human_acceptance": "pending",
+      "execution_verdict": "PASS_PROGRAM_CONTRACT_HUMAN_SEMANTIC_PENDING",
+      "report_id": "0ab14f6a-72f3-41aa-b898-31a89d48783a",
+      "report_revisions": [
+        1,
+        2
+      ]
     },
     {
       "id": "E01-15",
@@ -938,7 +968,8 @@
         "docs/cplus/reviews/agent-export-qa/proof.json",
         "docs/cplus/evidence/M5-native-exports/result.json",
         "docs/cplus/evidence/M5-native-exports/real-peer.pdf",
-        "docs/cplus/reviews/M5-business-export-handoff.md"
+        "docs/cplus/reviews/M5-business-export-handoff.md",
+        "data/cplus-g4-exact-exports-v2/result.json"
       ],
       "prior_suite_status": "NOT_RUN_BY_THIS_SUITE",
       "execution_status": "executed",
@@ -974,7 +1005,8 @@
           "bytes": 53062,
           "sha256": "46dc857475fccfb897e91967af69e63753a223cb1f31f27d1555ccd2ad83bda3"
         }
-      ]
+      ],
+      "additional_saved_version_http_exports": "three saved refs each 3 formats plus print HTML200; original G4 overall FAILs retained"
     },
     {
       "id": "CP-24",
@@ -1042,9 +1074,10 @@
       "CP-19",
       "CP-20",
       "CP-22",
-      "CP-23"
+      "CP-23",
+      "E01-14"
     ],
-    "cumulative_required_tier_execution_count": 10,
+    "cumulative_required_tier_execution_count": 11,
     "not_claimed_as_full_answer_pass": true,
     "whole_invariants_incomplete_or_deviation_ids": [
       "E01-01",
@@ -1053,8 +1086,204 @@
     ],
     "CP21_excluded_reason": "required REAL_LLM AI batch/partial failure recovery not yet verified",
     "CP24_excluded_from_full_core_count_reason": "real browser components executed; same-point highlight/fallback complete combination not established",
-    "minimum_12_verdict": "NOT_ESTABLISHED_PENDING_ROOT_SUPPLEMENTS",
+    "minimum_12_verdict": "11_REQUIRED_TIER_CASE_EXECUTIONS_CP21_AWAITING_FINAL_RESULT",
     "human_acceptance_count": 0,
     "note": "10 is the cumulative required-tier execution inventory, not 10 accepted answers or proof all program axes passed. Prior count2 was the matching complete model-path subset only, not the total real E2E count."
+  },
+  "supplemental_G4_paths": {
+    "not_additional_fixed_cases": true,
+    "live_v1": {
+      "overall_result": "FAIL",
+      "failure": "TimeoutError: page.waitForResponse: Timeout 45000ms exceeded while waiting for event \"response\"",
+      "completed_template_subpaths": [
+        {
+          "template_id": "overview",
+          "run_id": "14f3a84d-c077-48d7-84d0-fb747986c8e8",
+          "state": "completed",
+          "point_count": 5,
+          "provider_outcome": "returned",
+          "rules": 0,
+          "topics": 0,
+          "selected_company_years": [
+            [
+              "d9080344-8c69-4dea-a5d9-51bf84710105",
+              2025
+            ]
+          ]
+        },
+        {
+          "template_id": "cash",
+          "run_id": "4c7bb35c-b9f2-4bde-9ff5-9dca6390670e",
+          "state": "completed",
+          "point_count": 10,
+          "provider_outcome": "not_requested",
+          "rules": 3,
+          "topics": 0,
+          "selected_company_years": [
+            [
+              "d9080344-8c69-4dea-a5d9-51bf84710105",
+              2024
+            ],
+            [
+              "d9080344-8c69-4dea-a5d9-51bf84710105",
+              2025
+            ]
+          ]
+        },
+        {
+          "template_id": "peer",
+          "run_id": "f2886cfe-73be-4440-80a2-c56f6372f61b",
+          "state": "completed",
+          "point_count": 10,
+          "provider_outcome": "not_requested",
+          "rules": 0,
+          "topics": 0,
+          "selected_company_years": [
+            [
+              "401f7afa-48a5-412c-a23c-724d45d0a90d",
+              2025
+            ],
+            [
+              "d9080344-8c69-4dea-a5d9-51bf84710105",
+              2025
+            ]
+          ]
+        },
+        {
+          "template_id": "changes",
+          "run_id": "71d2e152-971a-4613-a1e6-6fcf8e7d0721",
+          "state": "completed",
+          "point_count": 10,
+          "provider_outcome": "not_requested",
+          "rules": 0,
+          "topics": 3,
+          "selected_company_years": [
+            [
+              "d9080344-8c69-4dea-a5d9-51bf84710105",
+              2024
+            ],
+            [
+              "d9080344-8c69-4dea-a5d9-51bf84710105",
+              2025
+            ]
+          ]
+        }
+      ],
+      "evidence": "data/cplus-g4-live-v1/result.json"
+    },
+    "finish_v2": {
+      "overall_result": "FAIL",
+      "failure": "TimeoutError: apiRequestContext.get: Timeout 30000ms exceeded.\n",
+      "completed_subpaths": [
+        "ten-point real trend",
+        "version-one chart draft saved",
+        "immutable draft reread"
+      ],
+      "chart_report_id": "66cc1e38-c21c-4ef4-9ecb-56b4be0b28d4",
+      "evidence": "data/cplus-g4-finish-v2/result.json"
+    },
+    "exact_exports_v2": {
+      "overall_result": "PASS",
+      "scope": "HTTP CSV/XLSX/PPTX and print HTML for 3 exact saved refs; not fresh native opening or browser-PDF acceptance",
+      "new_provider_calls": 0,
+      "items": [
+        {
+          "name": "chart-draft",
+          "ref": {
+            "domain": "chart_report_v1",
+            "id": "66cc1e38-c21c-4ef4-9ecb-56b4be0b28d4",
+            "revision": 1,
+            "payload_sha256": "84258aa6192fb609915d70c1bafcdce23a6f7bba9b1763876009c33191d0faf8"
+          },
+          "files": [
+            {
+              "bytes": 20485,
+              "format": "csv",
+              "href": "/cplus/exports/53dcca53-942a-44cc-9eff-eb0488f42985/files/csv",
+              "sha256": "e0b0b614d0ff0fb1cf37a6e312b9a830623b6ab1871d5dd739bae3ed494ce0da"
+            },
+            {
+              "bytes": 15901,
+              "format": "xlsx",
+              "href": "/cplus/exports/53dcca53-942a-44cc-9eff-eb0488f42985/files/xlsx",
+              "sha256": "0f18f2b6a3d7f2165341c974af6c4d67293b3aeda6298901d7f249bb135ef239"
+            },
+            {
+              "bytes": 60836,
+              "format": "pptx",
+              "href": "/cplus/exports/53dcca53-942a-44cc-9eff-eb0488f42985/files/pptx",
+              "sha256": "49b747d9da096df8dc1d49a20fe989db485a901b8b563a435549811947c048fb"
+            }
+          ],
+          "status": 200,
+          "print_status": 200
+        },
+        {
+          "name": "paired-deep",
+          "ref": {
+            "domain": "showcase_report_v2",
+            "id": "2a7971ff-3e68-4d60-a9ec-9d3f7e354e7c",
+            "revision": 1,
+            "payload_sha256": "e3b3097a61f0c8dd71167eae5b8c7bc94a68a8502054ec6c2775c16f1408c1c3"
+          },
+          "files": [
+            {
+              "bytes": 28689,
+              "format": "csv",
+              "href": "/cplus/exports/39af2398-7f7f-474e-b57c-b2f5e4f43a30/files/csv",
+              "sha256": "29dbf5247379ccb9dc8af89652adf8ace8f9da05c4cfc76050bbbdb1f62b278d"
+            },
+            {
+              "bytes": 16263,
+              "format": "xlsx",
+              "href": "/cplus/exports/39af2398-7f7f-474e-b57c-b2f5e4f43a30/files/xlsx",
+              "sha256": "5f30be443a722a4f7ae2a7f49a66e528e33216a9df4b18538a63e506333a9fc4"
+            },
+            {
+              "bytes": 69358,
+              "format": "pptx",
+              "href": "/cplus/exports/39af2398-7f7f-474e-b57c-b2f5e4f43a30/files/pptx",
+              "sha256": "a543af1be5e59541f57f573af6db5403c680fd64566720024de0cb716ba23a53"
+            }
+          ],
+          "status": 200,
+          "print_status": 200
+        },
+        {
+          "name": "paired-synthesis",
+          "ref": {
+            "domain": "showcase_report_v2",
+            "id": "0ab14f6a-72f3-41aa-b898-31a89d48783a",
+            "revision": 1,
+            "payload_sha256": "5b4bbd913d394ea577fc942c94f15b5b2dea0b65bc68cb5c58ca3e170d315088"
+          },
+          "files": [
+            {
+              "bytes": 17945,
+              "format": "csv",
+              "href": "/cplus/exports/49b58d12-0c7d-42f9-839b-3301a521d082/files/csv",
+              "sha256": "3c1c5ffa3a939606661803b7d9b44d53ee993505242b25c431b16ca12fad537c"
+            },
+            {
+              "bytes": 14411,
+              "format": "xlsx",
+              "href": "/cplus/exports/49b58d12-0c7d-42f9-839b-3301a521d082/files/xlsx",
+              "sha256": "0ff1f71bc7b58d51c05b853d98a04d24ff1eb4119e0d19b13dcbd9702c7a17ca"
+            },
+            {
+              "bytes": 63105,
+              "format": "pptx",
+              "href": "/cplus/exports/49b58d12-0c7d-42f9-839b-3301a521d082/files/pptx",
+              "sha256": "65cb8c2a3ef42227498a986cd4500b283473484836b52048465439af9e2a3f80"
+            }
+          ],
+          "status": 200,
+          "print_status": 200
+        }
+      ],
+      "evidence": "data/cplus-g4-exact-exports-v2/result.json"
+    },
+    "no_failure_overwrite": true,
+    "human_acceptance": "pending"
   }
 }
