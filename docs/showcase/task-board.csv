@@ -1,37 +1,37 @@
-task_id,stage,title,depends_on,owner,estimate,file_scope,implementation,definition_of_done,status,assigned_model,thinking,branch,commit_sha,evidence,batch
-B00,M0,锁定 V1.2 真实基线,—,主控,0.3–0.5d,Git/README/STATE,fetch 远端；确认 v12 分支 HEAD、main/旧 UX、已有测试；隔离工作树、备份种子；列明未完真人验收,能从独立 v12 创建新集成分支；保留当前工作树无损；基线报告有 SHA/路径/已知限制,completed,,,,,EVIDENCE.md baseline,
-B01,M0,求职定位与全功能地图,B00,产品/架构,0.5–1d,docs/product/*,按 F01–F18 复用表整理产品故事与演示要求；明确非生产要求；固定 3 条演示路线和首屏要素,无功能遗漏或冲突；每项有用户动作/输入/输出/示例/DoD；不会把边缘工程要求当终态,in_progress,,,,,,
-B02,M0,高保真原型+新 DTO/API 冻结,B01,UX/架构,0.5–1d,prototype/*; docs/contracts/*,两套视觉 token 方案、登录/占用/接管/重置/首页/对话核心原型；确认 Demo Controller / Dashboard DTO / Findings v2 / Parse v2 接口,可点击原型，1440/390 有布局；架构审查签署 ADR；热点代码只有主控集成,in_progress,,,,,,
-L01,M1,固定演示账号与服务端 Cookie,B02,Demo 后端,0.5–1d,app/demo/auth/*,配置密码哈希、固定账户、登录/会话/登出 API、TTL=20 或 30、token 哈希、Cookie、中间件和访问控制,未授权不能写入，过期返回 401；秘密不进 Git；自己刷新不延长 20 分钟,not_started,,,,,,
-L02,M1,单人占用与接管冲突,L01,Demo 后端,0.5–1d,app/demo/lease/*,SQLite lease + generation、并发抢占事务、wait_only/takeover_enabled、倒计时和 owner 授权,两浏览器抢占只有一个 winner；密码错误不泄漏占用；有权接管时旧会话失效,not_started,,,,,,
-L03,M1,演示种子与环境复位,L02,Demo 运维,1–2d,app/demo/reset/*; demo/seed/*,独立控制库，seed manifest、代际目录、停止旧 runtime/复制校验/切换；超时/退出/接管恢复；旧线程代际保护,重置前后 seed SHA 相同，用户新增会话/记录消失，原始 PDF/工作目录不受影响,not_started,,,,,,
-L04,M1,登录与接管端到端 UI,L03,前端/QA,0.5–1d,frontend/src/demo/*; frontend/e2e/demo-*,登录页、占用提示/剩余时间/二次接管、被踢/过期/重置中、2 浏览器端到端测试,A 登录 B 占用→正确策略→接管→A 下线→B 恢复 seed；不进入脏数据半重置状态,not_started,,,,,,
-H01,M1,仪表盘数据查询与种子聚合,B02,Dashboard 后端,0.5–1d,app/dashboard/*,聚合企业/文档/研究/报告真实数量和已可用的图表源；区分已核准/预置案例/缺失,相同种子数据 KPI 精确对齐；来源失效不被画成当前已核准,not_started,,,,,,
-H02,M1,惊艳首页视觉重构,"B02,H01",Frontend UX,1–2d,frontend/src/product/ResearchHome.tsx; Dashboard*,高质量 Hero/搜索/CTA、KPI、最近研究、浅底深侧栏、图例/空态和动画；不新增多余导航,1440px 第一眼有视觉层次，390px 无溢出，CTA 可真正进入业务,not_started,,,,,,
-H03,M1,折线柱环三图与交互,"H01,H02",Frontend 图表,0.5–1.5d,frontend/src/product/DashboardCharts*,折线收入趋势、柱状对比、任务状态环形图、tooltip/单位/数据标识/点击证据,三类图可操作；图值与种子一致；没有真实数据不伪装图表,not_started,,,,,,
-U01,M1,统一研究导航与业务入口,"B02,H02",Frontend 集成,0.5–1d,AppShell/productRoutes; ResearchWorkbench; Conversations,统一首页/AI 助手/企业资料/任务/报告，减少双问答入口；从首页到新会话/准备年报的导航贯通,旧 run/task/report 深链不失效，新用户可不读文档找到开始路径,not_started,,,,,,
-D01,M2,官方源发现可用性 Spike,B02,Official source,0.5–1d,experiments/disclosure/*,用至少 2 家公司验证官方年报候选，确认合法页面路径、公告正文/摘要/更正与规则,1 入口可用或明确手动 PDF 回退；保存成功/不可用证据,not_started,,,,,,
-D02,M2,官方目录适配与安全下载,D01,Document 后端,1–2d,app/disclosures/*,代码/年度搜索，下载带 allowlist、超时、大小/重定向/内网拦截、SHA、去重；DocumentService 对接,真实官方 PDF 下载/导入可用；重复不产生两个文件；失败降级,not_started,,,,,,
-D03,M2,自动查找年报的前端流程,"D02,U01",Document 前端,0.5–1d,frontend/src/product/Disclosure*; DocumentLibrary,搜索/选择正文与修订/导入/解析进度，上传/URL 兜底；展示来源说明,用户能从首页到索引可读；无官方源时不阻塞手工使用,not_started,,,,,,
-O01,M2,OCR 引擎与版式 Spike,B02,OCR 专项,0.5–1d,experiments/ocr/*,文本层+扫描页+复杂表格样本，在可用设备真实运行 MinerU/Paddle 候选，验证输出页/表/时间/依赖,选一个真实可执行引擎；不只写 adapter；给出资源需求/失败回退,not_started,,,,,,
-O02,M2,PDF 智能解析路由与结果存储,O01,解析后端,1–2d,app/parsing/*; app/documents/*,fast 为默认，扫描/困难页 OCR；固定原 PDF SHA、parser artifact、状态；隔离重任务,1 份真实扫描样本得到可索引文本；旧 fast 路线仍然可用,not_started,,,,,,
-O03,M2,解析预览、表格与质量提示,O02,OCR UX/QA,0.5–1.5d,frontend/src/product/ParseQuality*,原 PDF/表格对照、页码、异常定位、OCR 页/总页、降级提示,在手机/桌面能查看至少 1 个识别表格与原图，不把 OCR 候选当核准事实,not_started,,,,,,
-F01,M2,扩展财务指标 v2 协议,B02,财务架构,0.5–1d,app/finance_v2/models*,新增指标清单、来源、口径、候选/确认、Decimal/差额公式；保留旧模板 3×2,现有财务 API/六项核对/旧迁移零破坏；v2 只新增,not_started,,,,,,
-F02,M2,2–4 个新增可用财务指标,"F01,O02",财务后端,1–2d,app/finance_v2/extraction*,优先总资产/总负债/资产负债率/净利率等 2–4 项真实可测；来源证据和缺失状态,至少 1 份真实 PDF 的新增指标有来源或确定计算，数值非 LLM 编造,not_started,,,,,,
-F03,M2,新财务图表与变化信号,"F02,H03",财务前端,0.5–1d,frontend/src/product/ExtendedFinance*,趋势、对比、营收增利润降等规则提示，链接原数据/证据,可在真实可用年份出图，缺失年份不补零，来源状态明确,not_started,,,,,,
-C01,M3,LLM 意图理解与兜底解析,B02,Agent 后端,1–2d,app/conversations/intent_v2*,结构化 IntentV2+程序权限校验；处理复杂问题和跨轮指代；旧规则兜底,10–20 个固定复杂问题意图/澄清可演示；不允许越权调用,not_started,,,,,,
-C02,M3,对话与经营任务联动,"C01,U01",Agent 集成,0.5–1.5d,app/research_handoff/*; frontend Conversations,对话内计划卡→用户确认建研究→人工核对→返回会话/报告；操作可追溯,一条实际端到端，不重复 Task，不自动 ACCEPT/SAVE/RESUME,not_started,,,,,,
-S01,M3,可信综合分析结果 schema,"B02,F01",Synthesis 架构,0.5–1d,app/synthesis/models*,分层结构化发现、证据链接、已核准数字/AI 草稿/待核实的状态,旧 ResearchRun 协议不改；模型数字不能成为核准事实,not_started,,,,,,
-S02,M3,可信综合研究 Agent,"S01,C01",Synthesis 后端,1–2d,app/synthesis/*,复用 RAG/确认事实，产经营/风险/财务综合解释，验证引用，保存结果,真实年报产生结构化可读摘要；无证据时不猜数,not_started,,,,,,
-S03,M3,图表报告升级与 PDF 导出,"S02,F03",Report 前端/后端,1–2d,frontend Report*; app/reports/v2/*,新报告摘要/图表/证据/编辑/版本/print-PDF; 旧 Markdown 保留,一份完整真实案例能打印保存 PDF、返回引用来源、读回版本,not_started,,,,,,
-A01,M3,Multi-Agent 分工与路由设计,"C01,S01",Agent 架构,0.5–1d,docs/agent_v2/*,Supervisor/Evidence/Finance/Risk/Report Agent 的结构输入输出、预算、路由、对照任务,复杂任务才启用，简单任务保留快速路径；不是角色名称空壳,not_started,,,,,,
-A02,M3,真实多智能体研究执行,"A01,S02",Multi-Agent 后端,1–2d,app/deep_research/*,Supervisor 动态分派至少 2 子 Agent，读取各自工具、结果合并、独立验证、持久化,一个真实多 Agent 任务有分派/工具/汇合轨迹，LLM 和假实现清楚区分,not_started,,,,,,
-A03,M3,执行轨迹与阶段流式 UI,"A02,C02",Agent 前端/事件,0.5–1.5d,frontend AgentTrace*; app/events/*,显示多 Agent 真实阶段、工具调用、SSE/轮询、最终已保存结果；恢复只读,浏览器能看见 ≥3 真实状态，无私有 CoT，刷新不二次发模型,not_started,,,,,,
-M01,M3,带来源的研究记忆存储,B02,Memory 后端,0.5–1.5d,app/research_memory/*,收藏问答、研究问题、备注与来源身份，显式确认/删除、向量或检索索引,旧枚举偏好不破坏；删除未来不召回；来源变更标过期,not_started,,,,,,
-M02,M3,语义召回及偏好真正生效,"M01,C01,H02",Memory/UX,1–2d,app/research_memory/search*; frontend ResearchPreferences*,新会话搜索上次研究线索，保存偏好改首页问题/图顺序，记忆列表管理,确实跨会话召回、删除还原；无乱用失效数字,not_started,,,,,,
-E01,M4,少量真实资料与精选场景集,"D03,O03,S02",QA/seed,0.5–1d,demo/seed/*; eval/cases/*,准备 3–5 份真实 PDF/1 OCR 页/2–3 报告/10–20 评测题、manifest,演示数据合法可追溯；人工确认和模型待审状态有明示,not_started,,,,,,
-E02,M4,Agent 质量与单多 Agent 对照,"E01,A02,M02",QA评测,0.5–1d,eval/runner*,输出工具路由、引用、指代、记忆、拒答、用量、耗时的真实分母和失败用例,能复跑每种指标；没有数据不显示假百分比；单/多 Agent 结果可对照,not_started,,,,,,
-E03,M4,完整可恢复演示种子,"E01,L03",Demo/QA,0.5–1d,demo/seed/manifest*; scripts/seed*,以实际数据构建只读种子+完整初始 Dashboard，含预置报告和会话,重置 N 次 seed 一致；演示写操作不污染种子,not_started,,,,,,
-G01,M4,集成、关键回归及响应式验收,"E02,E03,A03,S03,F03",主控/QA,1–2d,integration branch; frontend/e2e/*,把各 worktree 有序合入，修 API/UX 冲突，跑关键旧回归/双访客/来源/报告/记忆,3 条完整演示路可跑；旧财务核验不退化；P0问题关完,not_started,,,,,,
-G02,M5,真人走查与现场演示打磨,G01,产品/QA,0.5–1.5d,docs/showcase/*,看登录首页第一眼/图表/搜索/研究/多Agent/记忆/OCR/PDF；修断点,面试路线稳定、没有令人困惑的入口/假数据显示/残留数据,not_started,,,,,,
-G03,M5,作品交付/视频/README与PR,G02,主控/UX,0.5–1d,"README, demo guide, screenshots",启动脚本、录屏脚本、技术结构图、已知限制、代码分支/PR、状态文档、回滚说明,可交给陌生面试官体验并说明真实与预置；不自动合并 main/公开部署,not_started,,,,,,
+task_id,stage,title,depends_on,owner,estimate,file_scope,implementation,definition_of_done,status,assigned_model,thinking,branch,commit_sha,evidence,batch,planned_model,planned_thinking
+B00,M0,锁定 V1.2 真实基线,—,主控/独立评审/UX,0.3–0.5d,Git/README/STATE,fetch 远端；确认 v12 分支 HEAD、main/旧 UX、已有测试；隔离工作树、备份种子；列明未完真人验收,能从独立 v12 创建新集成分支；保留当前工作树无损；基线报告有 SHA/路径/已知限制,completed,,,,,EVIDENCE.md baseline,0-M0,gpt-6.1-terra,medium
+B01,M0,求职定位与全功能地图,B00,主控/独立评审/UX,0.5–1d,docs/product/*,按 F01–F18 复用表整理产品故事与演示要求；明确非生产要求；固定 3 条演示路线和首屏要素,无功能遗漏或冲突；每项有用户动作/输入/输出/示例/DoD；不会把边缘工程要求当终态,in_progress,gpt-6-astra,ultra,codex/showcase-b01-review,,,0-M0,gpt-6-astra,ultra
+B02,M0,高保真原型+新 DTO/API 冻结,B01,主控/独立评审/UX,0.5–1d,prototype/*; docs/contracts/*,两套视觉 token 方案、登录/占用/接管/重置/首页/对话核心原型；确认 Demo Controller / Dashboard DTO / Findings v2 / Parse v2 接口,可点击原型，1440/390 有布局；架构审查签署 ADR；热点代码只有主控集成,in_progress,gpt-6.1-terra,medium,codex/showcase-b02-ui,,,0-M0,gpt-6.1-terra,medium
+L01,M1,固定演示账号与服务端 Cookie,B02,Demo 后端（Sol）/UI 接力（Terra）,0.5–1d,app/demo/auth/*,配置密码哈希、固定账户、登录/会话/登出 API、TTL=20 或 30、token 哈希、Cookie、中间件和访问控制,未授权不能写入，过期返回 401；秘密不进 Git；自己刷新不延长 20 分钟,not_started,,,,,,1-Demo,gpt-6.1-sol,high
+L02,M1,单人占用与接管冲突,L01,Demo 后端（Sol）/UI 接力（Terra）,0.5–1d,app/demo/lease/*,SQLite lease + generation、并发抢占事务、wait_only/takeover_enabled、倒计时和 owner 授权,两浏览器抢占只有一个 winner；密码错误不泄漏占用；有权接管时旧会话失效,not_started,,,,,,1-Demo,gpt-6.1-sol,high
+L03,M1,演示种子与环境复位,L02,Demo 后端（Sol）/UI 接力（Terra）,1–2d,app/demo/reset/*; demo/seed/*,独立控制库，seed manifest、代际目录、停止旧 runtime/复制校验/切换；超时/退出/接管恢复；旧线程代际保护,重置前后 seed SHA 相同，用户新增会话/记录消失，原始 PDF/工作目录不受影响,not_started,,,,,,1-Demo,gpt-6.1-sol,high
+L04,M1,登录与接管端到端 UI,L03,Demo 后端（Sol）/UI 接力（Terra）,0.5–1d,frontend/src/demo/*; frontend/e2e/demo-*,登录页、占用提示/剩余时间/二次接管、被踢/过期/重置中、2 浏览器端到端测试,A 登录 B 占用→正确策略→接管→A 下线→B 恢复 seed；不进入脏数据半重置状态,not_started,,,,,,1-Demo,gpt-6.1-terra,high
+H01,M1,仪表盘数据查询与种子聚合,B02,Dashboard 独立模块；主控接线热点,0.5–1d,app/dashboard/*,聚合企业/文档/研究/报告真实数量和已可用的图表源；区分已核准/预置案例/缺失,相同种子数据 KPI 精确对齐；来源失效不被画成当前已核准,not_started,,,,,,1-Dashboard,gpt-6.1-sol,medium
+H02,M1,惊艳首页视觉重构,"B02,H01",Dashboard 独立模块；主控接线热点,1–2d,frontend/src/product/ResearchHome.tsx; Dashboard*,高质量 Hero/搜索/CTA、KPI、最近研究、浅底深侧栏、图例/空态和动画；不新增多余导航,1440px 第一眼有视觉层次，390px 无溢出，CTA 可真正进入业务,not_started,,,,,,1-Dashboard,gpt-6.1-terra,medium
+H03,M1,折线柱环三图与交互,"H01,H02",Dashboard 独立模块；主控接线热点,0.5–1.5d,frontend/src/product/DashboardCharts*,折线收入趋势、柱状对比、任务状态环形图、tooltip/单位/数据标识/点击证据,三类图可操作；图值与种子一致；没有真实数据不伪装图表,not_started,,,,,,1-Dashboard,gpt-6.1-terra,medium
+U01,M1,统一研究导航与业务入口,"B02,H02",Dashboard 独立模块；主控接线热点,0.5–1d,AppShell/productRoutes; ResearchWorkbench; Conversations,统一首页/AI 助手/企业资料/任务/报告，减少双问答入口；从首页到新会话/准备年报的导航贯通,旧 run/task/report 深链不失效，新用户可不读文档找到开始路径,not_started,,,,,,1-Dashboard,gpt-6.1-terra,medium
+D01,M2,官方源发现可用性 Spike,B02,Document owner（单一接线）,0.5–1d,experiments/disclosure/*,用至少 2 家公司验证官方年报候选，确认合法页面路径、公告正文/摘要/更正与规则,1 入口可用或明确手动 PDF 回退；保存成功/不可用证据,not_started,,,,,,2-Document,gpt-6.1-sol,medium
+D02,M2,官方目录适配与安全下载,D01,Document owner（单一接线）,1–2d,app/disclosures/*,代码/年度搜索，下载带 allowlist、超时、大小/重定向/内网拦截、SHA、去重；DocumentService 对接,真实官方 PDF 下载/导入可用；重复不产生两个文件；失败降级,not_started,,,,,,2-Document,gpt-6.1-sol,high
+D03,M2,自动查找年报的前端流程,"D02,U01",Document owner（单一接线）,0.5–1d,frontend/src/product/Disclosure*; DocumentLibrary,搜索/选择正文与修订/导入/解析进度，上传/URL 兜底；展示来源说明,用户能从首页到索引可读；无官方源时不阻塞手工使用,not_started,,,,,,2-Document,gpt-6.1-sol,medium
+O01,M2,OCR 引擎与版式 Spike,B02,OCR owner（与Document串行接线）,0.5–1d,experiments/ocr/*,文本层+扫描页+复杂表格样本，在可用设备真实运行 MinerU/Paddle 候选，验证输出页/表/时间/依赖,选一个真实可执行引擎；不只写 adapter；给出资源需求/失败回退,not_started,,,,,,2-OCR,gpt-6.1-terra,high
+O02,M2,PDF 智能解析路由与结果存储,O01,OCR owner（与Document串行接线）,1–2d,app/parsing/*; app/documents/*,fast 为默认，扫描/困难页 OCR；固定原 PDF SHA、parser artifact、状态；隔离重任务,1 份真实扫描样本得到可索引文本；旧 fast 路线仍然可用,not_started,,,,,,2-OCR,gpt-6.1-terra,high
+O03,M2,解析预览、表格与质量提示,O02,OCR owner（与Document串行接线）,0.5–1.5d,frontend/src/product/ParseQuality*,原 PDF/表格对照、页码、异常定位、OCR 页/总页、降级提示,在手机/桌面能查看至少 1 个识别表格与原图，不把 OCR 候选当核准事实,not_started,,,,,,2-OCR,gpt-6.1-terra,medium
+F01,M2,扩展财务指标 v2 协议,B02,Finance v2 owner,0.5–1d,app/finance_v2/models*,新增指标清单、来源、口径、候选/确认、Decimal/差额公式；保留旧模板 3×2,现有财务 API/六项核对/旧迁移零破坏；v2 只新增,not_started,,,,,,2-Finance,gpt-6.1-sol,high
+F02,M2,2–4 个新增可用财务指标,"F01,O02",Finance v2 owner,1–2d,app/finance_v2/extraction*,优先总资产/总负债/资产负债率/净利率等 2–4 项真实可测；来源证据和缺失状态,至少 1 份真实 PDF 的新增指标有来源或确定计算，数值非 LLM 编造,not_started,,,,,,2-Finance,gpt-6.1-sol,high
+F03,M2,新财务图表与变化信号,"F02,H03",Finance v2 owner,0.5–1d,frontend/src/product/ExtendedFinance*,趋势、对比、营收增利润降等规则提示，链接原数据/证据,可在真实可用年份出图，缺失年份不补零，来源状态明确,not_started,,,,,,2-Finance,gpt-6.1-sol,high
+C01,M3,LLM 意图理解与兜底解析,B02,Agent owner/Report UI接力,1–2d,app/conversations/intent_v2*,结构化 IntentV2+程序权限校验；处理复杂问题和跨轮指代；旧规则兜底,10–20 个固定复杂问题意图/澄清可演示；不允许越权调用,not_started,,,,,,3-Intent-Synthesis,gpt-6.1-sol,high
+C02,M3,对话与经营任务联动,"C01,U01",Agent owner/Report UI接力,0.5–1.5d,app/research_handoff/*; frontend Conversations,对话内计划卡→用户确认建研究→人工核对→返回会话/报告；操作可追溯,一条实际端到端，不重复 Task，不自动 ACCEPT/SAVE/RESUME,not_started,,,,,,3-Intent-Synthesis,gpt-6.1-sol,high
+S01,M3,可信综合分析结果 schema,"B02,F01",Agent owner/Report UI接力,0.5–1d,app/synthesis/models*,分层结构化发现、证据链接、已核准数字/AI 草稿/待核实的状态,旧 ResearchRun 协议不改；模型数字不能成为核准事实,not_started,,,,,,3-Intent-Synthesis,gpt-6.1-sol,high
+S02,M3,可信综合研究 Agent,"S01,C01",Agent owner/Report UI接力,1–2d,app/synthesis/*,复用 RAG/确认事实，产经营/风险/财务综合解释，验证引用，保存结果,真实年报产生结构化可读摘要；无证据时不猜数,not_started,,,,,,3-Intent-Synthesis,gpt-6.1-sol,high
+S03,M3,图表报告升级与 PDF 导出,"S02,F03",Agent owner/Report UI接力,1–2d,frontend Report*; app/reports/v2/*,新报告摘要/图表/证据/编辑/版本/print-PDF; 旧 Markdown 保留,一份完整真实案例能打印保存 PDF、返回引用来源、读回版本,not_started,,,,,,3-Intent-Synthesis,gpt-6.1-sol,high
+A01,M3,Multi-Agent 分工与路由设计,"C01,S01",Agent owner（不与C/S并发写Graph）,0.5–1d,docs/agent_v2/*,Supervisor/Evidence/Finance/Risk/Report Agent 的结构输入输出、预算、路由、对照任务,复杂任务才启用，简单任务保留快速路径；不是角色名称空壳,not_started,,,,,,3-MultiAgent,gpt-6.1-sol,high
+A02,M3,真实多智能体研究执行,"A01,S02",Agent owner（不与C/S并发写Graph）,1–2d,app/deep_research/*,Supervisor 动态分派至少 2 子 Agent，读取各自工具、结果合并、独立验证、持久化,一个真实多 Agent 任务有分派/工具/汇合轨迹，LLM 和假实现清楚区分,not_started,,,,,,3-MultiAgent,gpt-6.1-sol,high
+A03,M3,执行轨迹与阶段流式 UI,"A02,C02",Agent owner（不与C/S并发写Graph）,0.5–1.5d,frontend AgentTrace*; app/events/*,显示多 Agent 真实阶段、工具调用、SSE/轮询、最终已保存结果；恢复只读,浏览器能看见 ≥3 真实状态，无私有 CoT，刷新不二次发模型,not_started,,,,,,3-MultiAgent,gpt-6.1-sol,high
+M01,M3,带来源的研究记忆存储,B02,Memory owner,0.5–1.5d,app/research_memory/*,收藏问答、研究问题、备注与来源身份，显式确认/删除、向量或检索索引,旧枚举偏好不破坏；删除未来不召回；来源变更标过期,not_started,,,,,,3-Memory,gpt-6.1-terra,high
+M02,M3,语义召回及偏好真正生效,"M01,C01,H02",Memory owner,1–2d,app/research_memory/search*; frontend ResearchPreferences*,新会话搜索上次研究线索，保存偏好改首页问题/图顺序，记忆列表管理,确实跨会话召回、删除还原；无乱用失效数字,not_started,,,,,,3-Memory,gpt-6.1-terra,high
+E01,M4,少量真实资料与精选场景集,"D03,O03,S02",QA/Seed owner,0.5–1d,demo/seed/*; eval/cases/*,准备 3–5 份真实 PDF/1 OCR 页/2–3 报告/10–20 评测题、manifest,演示数据合法可追溯；人工确认和模型待审状态有明示,not_started,,,,,,4-Seed-Eval,gpt-6.1-terra,medium
+E02,M4,Agent 质量与单多 Agent 对照,"E01,A02,M02",QA/Seed owner,0.5–1d,eval/runner*,输出工具路由、引用、指代、记忆、拒答、用量、耗时的真实分母和失败用例,能复跑每种指标；没有数据不显示假百分比；单/多 Agent 结果可对照,not_started,,,,,,4-Seed-Eval,gpt-6.1-terra,medium
+E03,M4,完整可恢复演示种子,"E01,L03",QA/Seed owner,0.5–1d,demo/seed/manifest*; scripts/seed*,以实际数据构建只读种子+完整初始 Dashboard，含预置报告和会话,重置 N 次 seed 一致；演示写操作不污染种子,not_started,,,,,,4-Seed-Eval,gpt-6.1-terra,high
+G01,M4,集成、关键回归及响应式验收,"E02,E03,A03,S03,F03",主控/独立QA/真人,1–2d,integration branch; frontend/e2e/*,把各 worktree 有序合入，修 API/UX 冲突，跑关键旧回归/双访客/来源/报告/记忆,3 条完整演示路可跑；旧财务核验不退化；P0问题关完,not_started,,,,,,5-Integration-Delivery,gpt-6-astra,high
+G02,M5,真人走查与现场演示打磨,G01,主控/独立QA/真人,0.5–1.5d,docs/showcase/*,看登录首页第一眼/图表/搜索/研究/多Agent/记忆/OCR/PDF；修断点,面试路线稳定、没有令人困惑的入口/假数据显示/残留数据,not_started,,,,,,5-Integration-Delivery,gpt-6.1-terra,medium
+G03,M5,作品交付/视频/README与PR,G02,主控/独立QA/真人,0.5–1d,"README, demo guide, screenshots",启动脚本、录屏脚本、技术结构图、已知限制、代码分支/PR、状态文档、回滚说明,可交给陌生面试官体验并说明真实与预置；不自动合并 main/公开部署,not_started,,,,,,5-Integration-Delivery,gpt-6.1-terra,medium

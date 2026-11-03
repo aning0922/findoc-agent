@@ -1,0 +1,26 @@
+{
+  "controller_thread": "01a19f9b-6d5d-77d1-92a6-7df1c95f4c96",
+  "integration_branch": "codex/findoc-showcase-c-integration",
+  "sessions": [
+    {
+      "task": "B01 independent review",
+      "thread_id": "01a19f9d-6c32-7ba2-a9c5-b8b708440c82",
+      "client_thread_id": "client-new-thread:dbd76a05-7cb9-479d-99d1-9b24181cb164",
+      "model": "gpt-6-astra",
+      "thinking": "ultra",
+      "branch": "codex/showcase-b01-review",
+      "worktree": "/Users/aipuli/.codex/worktrees/ce18/findoc-agent",
+      "status": "running"
+    },
+    {
+      "task": "B02 React prototype",
+      "thread_id": "01a19f9d-a871-7520-aed9-dd6d22774d1a",
+      "client_thread_id": "client-new-thread:6cde4161-9153-4002-b48f-e39fa83749da",
+      "model": "gpt-6.1-terra",
+      "thinking": "medium",
+      "branch": "codex/showcase-b02-ui",
+      "worktree": "/Users/aipuli/.codex/worktrees/3f05/findoc-agent",
+      "status": "running"
+    }
+  ]
+}
