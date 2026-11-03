@@ -1,0 +1,17 @@
+# SHOWCASE-C STATE
+- date:
+- baseline_branch: codex/conversation-memory-v12-20261102
+- baseline_sha:
+- integration_branch: codex/findoc-showcase-c-integration
+- integration_sha:
+- current_milestone: M0
+- current_tasks:
+- completed_tasks:
+- blocked_external:
+- demo_seed_version:
+- dashboard_prototype_choice:
+- last_known_tests:
+- next_work_batch:
+- budget_alerts:
+- owner_conflicts:
+- deferred_P2_issues:

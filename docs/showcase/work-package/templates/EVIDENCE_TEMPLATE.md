@@ -1,0 +1,13 @@
+# 功能验收记录
+- feature_id / task_id:
+- branch / SHA:
+- environment: mock | unit_fake | browser_fake | real_data_real_model | human_reviewed
+- 测试数据 SHA / 官方来源:
+- 操作步骤:
+- 预期/实际:
+- PASS/FAIL/SKIP（不可伪造）:
+- screenshot/video:
+- 登录 generation（如适用）:
+- 模型尝试次数/token:
+- P0/P1/P2 未完成问题:
+- 面试怎么演示：
