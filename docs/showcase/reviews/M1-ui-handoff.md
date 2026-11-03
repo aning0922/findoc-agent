@@ -33,3 +33,17 @@ CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' SHOWC
 ```
 
 未运行真实后端鉴权、双浏览器 Cookie、真实 seed/财报/模型、真人财务签核、全量套件或部署。以上 PASS 仅证明组件与模拟合同交互，不是后端权限验收。
+
+## 有限状态隔离修订：浏览器业务提示
+
+真实检索了 product/conversationState、memoryApi、researchDraft、researchReading、sourceIntent、reportOperation、researchReceiptStatus、ResearchRuns、OperatingResearch、DocumentLibrary，以及 evidence/FinancialSession、EvidenceWorkbench、agentRunIndex 的读写点。新增 `demo/demoHintBoundary.ts` 维护精确 allowlist：
+
+- sessionStorage 精确键：`findoc:conversation-operations:v1`、`findoc:memory-operation:v1`、`findoc-report-unknown-operation-v1`。
+- sessionStorage 前缀：`findoc:research-draft-v2:`、`findoc:task-reading:`、`findoc:upload-intent:`、`findoc:pending-operation:`、`financial-acceptance-pending-v1:`（含 history）、`financial-facts-pending-v1:`、`embedded-review-session-v1:`。
+- localStorage 精确键：从原模块导入的 `AGENT_RUN_INDEX_KEY`（`findoc.agent-run-index`）；前缀：`findoc:source-intent:`、`findoc:operating-identity:`。
+
+只在服务器 Session 通过 schema、请求序列/epoch/generation 检查后同步清理，成功后才 setSession/挂载 children；首次 Gate 激活也清，隔离经典模式旧线索。同一已挂载 Gate 内同 generation/seed 的 GET refresh 不清理；任一改变则清理并以 generation+seed key 重建 children。首次挂载（包括整页重新加载）采取重新清理策略；没有持久客户端身份 marker，也不依据任何存储值授权。关闭 demo 后再启用会重新隔离。清理存储失败则保持关门，不继续挂载新工作区。无 `storage.clear()`，不匹配的键包括其他 `findoc:` 键均保留。
+
+Chrome mock 验证新增：预置全部 13 类实际键；首次激活清除、同代 GET 保留、跨 generation 清除、仅 seed 改变清除；无关键和不在 allowlist 的 FinDoc 偏好保留。child 首次 render 探针确认旧 pending hint 在新 children 构造前已移除。模拟测试初版 probe 使用了错误 React hook 实例而失败，改为 class mount probe 后通过；等待响应也改为明确等待 session HTTP 与渲染提交，避免读取前次授权消息。
+
+复跑存储窄集：frontend 目录 `SHOWCASE_STORAGE_ONLY=1 CHROME_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' node e2e/showcase-live-mock.mjs`，Vite 5180。未编辑 main/installGatewayFetch/产品热点；未开始 D03。

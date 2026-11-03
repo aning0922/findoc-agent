@@ -1,6 +1,7 @@
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import "./demo.css";
+import { clearDemoBusinessHints } from "./demoHintBoundary.ts";
 
 type Session = {
   schema_version: "demo-session-v1";
@@ -143,23 +144,34 @@ export function DemoGate({
   const epoch = useRef(0);
   const sequence = useRef(0);
   const generation = useRef(-1);
+  const hintIdentity = useRef<string | null>(null);
+  const prepareHints = useCallback((s: Session) => {
+    const identity = JSON.stringify([s.lease_generation, s.seed_version]);
+    if (hintIdentity.current === identity) return;
+    clearDemoBusinessHints();
+    hintIdentity.current = identity;
+  }, []);
   const [claimUnknown, setClaimUnknown] = useState(false);
   const claimOperation = useRef("");
   const [attempt, setAttempt] = useState<Attempt | null>(null);
-  const activate = useCallback((s: Session) => {
-    if (!live.current) return;
-    if (s.lease_generation < generation.current) return;
-    generation.current = s.lease_generation;
-    sequence.current++;
-    setSession(s);
-    setRemaining(s.remaining_seconds);
-    setStage("active");
-    setPassword("");
-    setOwner("");
-    setConflict(null);
-    setConfirm(false);
-    setMessage("");
-  }, []);
+  const activate = useCallback(
+    (s: Session) => {
+      if (!live.current) return;
+      if (s.lease_generation < generation.current) return;
+      prepareHints(s);
+      generation.current = s.lease_generation;
+      sequence.current++;
+      setSession(s);
+      setRemaining(s.remaining_seconds);
+      setStage("active");
+      setPassword("");
+      setOwner("");
+      setConflict(null);
+      setConfirm(false);
+      setMessage("");
+    },
+    [prepareHints],
+  );
   const refresh = useCallback(async () => {
     const current = epoch.current;
     const serial = ++sequence.current;
@@ -172,6 +184,7 @@ export function DemoGate({
         s.lease_generation < generation.current
       )
         return;
+      prepareHints(s);
       generation.current = s.lease_generation;
       setSession(s);
       setRemaining(s.remaining_seconds);
@@ -186,9 +199,12 @@ export function DemoGate({
         setMessage(err.message);
       else if (err.status !== 401) setMessage("无法验证演示会话，请重试。");
     }
-  }, []);
+  }, [prepareHints]);
   useEffect(() => {
-    if (!enabled) return;
+    if (!enabled) {
+      hintIdentity.current = null;
+      return;
+    }
     live.current = true;
     let alive = true;
     (async () => {
@@ -562,7 +578,11 @@ export function DemoGate({
         </details>
         {message && <span role="status">{message}</span>}
       </div>
-      <Fragment key={session?.lease_generation}>{children}</Fragment>
+      <Fragment
+        key={JSON.stringify([session.lease_generation, session.seed_version])}
+      >
+        {children}
+      </Fragment>
     </div>
   );
 }
