@@ -90,6 +90,7 @@ def test_check_uses_temporary_seed_without_spawning(tmp_path, monkeypatch, capsy
 
     path = repo(tmp_path)
     init_config(path, tmp_path)
+    path.write_text(path.read_text().replace("DEMO_TTL_MINUTES=20", "DEMO_TTL_MINUTES=30"))
     seed = tmp_path / "data/showcase-seed-v1"
     build_synthetic_seed(seed)
     vite = tmp_path / "frontend/node_modules/vite/bin/vite.js"
@@ -118,6 +119,7 @@ def test_check_uses_temporary_seed_without_spawning(tmp_path, monkeypatch, capsy
     )
     output = capsys.readouterr().out
     assert '"llm": "disabled"' in output
+    assert '"ttl_minutes": 30' in output
     assert "DEMO_PASSWORD" not in output
     assert not (tmp_path / "data/showcase-local-controller-v1").exists()
 
@@ -170,3 +172,39 @@ def test_provider_config_from_same_common_worktree_only(tmp_path):
     path.chmod(0o644)
     with pytest.raises(ValueError, match="600"):
         provider_values(path, worktree)
+
+
+def test_ttl_backend_only_and_invalid_rejected(tmp_path):
+    from scripts.run_showcase_local import ttl_minutes
+
+    config = dict(
+        DEMO_USERNAME="fixture", DEMO_PASSWORD="private-a", DEMO_OWNER_PASSWORD="private-b"
+    )
+    assert ttl_minutes(config) == 20
+    config["DEMO_TTL_MINUTES"] = "30"
+    backend, frontend = environments(
+        config,
+        {},
+        tmp_path / "seed",
+        tmp_path / "control",
+        tmp_path / "ledger.db",
+        "http://127.0.0.1:14530",
+        12345,
+        "python",
+        False,
+    )
+    assert backend["DEMO_TTL_MINUTES"] == "30"
+    assert "DEMO_TTL_MINUTES" not in frontend
+    config["DEMO_TTL_MINUTES"] = "21"
+    with pytest.raises(ValueError, match="ttl_must"):
+        environments(
+            config,
+            {},
+            tmp_path / "seed",
+            tmp_path / "control",
+            tmp_path / "ledger.db",
+            "http://127.0.0.1:14530",
+            12345,
+            "python",
+            False,
+        )

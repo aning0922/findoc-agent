@@ -58,7 +58,7 @@ def init_config(path, project=PROJECT):
             + secrets.token_urlsafe(32)
             + "\nDEMO_OWNER_PASSWORD="
             + secrets.token_urlsafe(32)
-            + "\n"
+            + "\nDEMO_TTL_MINUTES=20\n"
         )
 
 
@@ -120,6 +120,13 @@ def provider_values(path, project=PROJECT):
     return {k: values[k] for k in LLM_KEYS}
 
 
+def ttl_minutes(config):
+    value = config.get("DEMO_TTL_MINUTES", "20")
+    if value not in ("20", "30"):
+        raise ValueError("demo_ttl_must_be_20_or_30")
+    return int(value)
+
+
 def environments(config, provider, seed, control, ledger, origin, backend_port, python, takeover):
     from app.demo.config import password_hash
 
@@ -136,6 +143,7 @@ def environments(config, provider, seed, control, ledger, origin, backend_port, 
         "DEMO_COOKIE_SECURE": "false",
         "DEMO_CONFLICT_POLICY": "takeover_enabled" if takeover else "wait_only",
         "DEMO_CHILD_MODE": "real",
+        "DEMO_TTL_MINUTES": str(ttl_minutes(config)),
         "DEMO_CHILD_PYTHON": python,
         "DEMO_CHILD_STARTUP_TIMEOUT": "120",
         "HF_HUB_OFFLINE": "1",
@@ -234,6 +242,7 @@ def main(argv=None):
     ):
         raise ValueError("isolated_data_paths_required")
     config = private_values(args.config, PROJECT)
+    ttl = ttl_minutes(config)
     if any(not config.get(k) for k in ("DEMO_USERNAME", "DEMO_PASSWORD", "DEMO_OWNER_PASSWORD")):
         raise ValueError("missing_login_configuration")
     if config["DEMO_PASSWORD"] == config["DEMO_OWNER_PASSWORD"]:
@@ -256,6 +265,7 @@ def main(argv=None):
         if args.gateway_port == args.port:
             raise ValueError("distinct_ports_required")
     summary = dict(
+        ttl_minutes=ttl,
         origin=f"http://127.0.0.1:{args.port}",
         seed_version=manifest["seed_version"],
         manifest_sha256=digest,
