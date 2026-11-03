@@ -8,3 +8,4 @@ demo/site/** -text -whitespace
 docs/showcase/work-package/** -text
 
 docs/cplus/work-package/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/cplus/evidence/M4-native-exports/*.csv -text
