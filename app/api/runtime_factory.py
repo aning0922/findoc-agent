@@ -28,6 +28,7 @@ from app.research.repository import ResearchOwner, ResearchRepository
 from app.api.research_qa import create_research_qa_router
 from app.api.runtime_paths import DEFAULT_RUNTIME_ROOT
 from app.dashboard import DashboardService, create_dashboard_router
+from app.disclosures import DisclosureService, create_disclosure_router
 from app.chat.service import ChatService
 from app.companies.service import CompanyService
 from app.companies.sqlite_repository import SQLiteCompanyRepository
@@ -283,6 +284,11 @@ def create_runtime_app(
                 companies=company_service,
                 repository=SQLiteSourceRepository(registry),
             )
+            disclosure_service = DisclosureService(
+                runtime_root=runtime_root,
+                sources=source_service,
+                companies=company_service,
+            )
             selection_preparer = DocumentTaskPreparer(
                 document_service=document_service, sources=source_service,
                 workspace_id=DEMO_WORKSPACE_ID, max_selected_documents=max_selected_documents,
@@ -320,6 +326,8 @@ def create_runtime_app(
                 scope=selected_scope_search,
                 model=llm_client.for_operating_research(),
             )
+            app.include_router(create_disclosure_router(disclosure_service))
+            app.state.disclosure_service = disclosure_service
             app.include_router(create_template_router(template_service))
             app.state.template_service = template_service
             app.include_router(create_research_qa_router(
