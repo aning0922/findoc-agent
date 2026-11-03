@@ -16,12 +16,13 @@ from scripts.showcase_demo_http_check import free_port, launch, wait_http
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--flow', choices=('demo', 'disclosure', 'parsing'), default='demo')
+    parser.add_argument('--flow', choices=('demo', 'disclosure', 'parsing', 'finance'), default='demo')
+    parser.add_argument('--seed-root', type=Path)
     args = parser.parse_args()
     project = Path(__file__).resolve().parents[2]
     evidence = Path(tempfile.mkdtemp(prefix="findoc-integrated-http-")).resolve()
-    seed, control = evidence / "seed", evidence / "control"
-    _, digest = build_synthetic_seed(seed)
+    seed, control = args.seed_root.resolve() if args.seed_root else evidence / "seed", evidence / "control"
+    _, digest = verify_seed(seed) if args.seed_root else build_synthetic_seed(seed)
     backend_port, vite_port = free_port(), free_port()
     origin = f"http://127.0.0.1:{vite_port}"
     username, password, owner = "isolated-ui-check", secrets.token_urlsafe(24), secrets.token_urlsafe(24)
@@ -46,7 +47,7 @@ def main():
             processes.append(vite)
             wait_http(origin, vite)
             script = {'demo': 'showcase-integrated-http.mjs', 'disclosure': 'showcase-disclosure-http.mjs',
-                      'parsing': 'showcase-parsing-http.mjs'}[args.flow]
+                      'parsing': 'showcase-parsing-http.mjs', 'finance': 'showcase-finance-http.mjs'}[args.flow]
             result = subprocess.run(["node", str(frontend / 'e2e' / script)], cwd=frontend,
                                     env={**env, "DEMO_CHECK_ORIGIN": origin, "DEMO_CHECK_OUTPUT": str(evidence),
                                          "DEMO_CHECK_USERNAME": username, "DEMO_CHECK_PASSWORD": password,

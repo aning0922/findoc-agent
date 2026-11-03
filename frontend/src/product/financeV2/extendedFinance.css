@@ -1,4 +1,6 @@
 .finance-v2 {
+  min-width: 0;
+  max-width: 100%;
   background: var(--color-surface, #fff);
   border: 1px solid var(--color-border, #e1e8f1);
   border-radius: 14px;

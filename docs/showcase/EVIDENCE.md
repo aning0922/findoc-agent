@@ -49,3 +49,7 @@ O02 root注册后15tests PASS（parse_v2/runtime_startup/demo_gateway/disclosure
 O03 real product isgmzk2o PASS：真实Vision转录/54格与原line/bbox一致，原页PNG可读、三宽及reload GET不重做；evidence/M2-ocr。ayn3q140先FAIL390外溢，修CSS grid min-width后PASS。根新原图大图链接/滚动提示为随后小UX修补。F02指定PDF env真实3PASS13.31s，候选非真人；未指定2PASS1SKIP历史保留。finance/gallery/root注册相关12PASS后8auth/resetPASS/ruff；一次实际进程关闭在macOS group killpg(0)临时EPERM+退出竞态FAIL，改用独立OS pgid inventory核实且未知保持alive、getpgid退出后再查组，定点test+真实fake OS复跑PASS，未放宽PID/birth核验。Memory15目标tests PASS，主控真实BGE合成两note非同词语义排序和删除PASS，LLM0。
 
 用户授权5元外部LLM本轮总预算。官方 https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ 2026-11-03峰值2/8元每百万input/output；shared provider_budget.db位于generation之外，先持久最坏费用reserve再物理call，断线UNKNOWN不重试/不退款，禁native web tools，max4096输出/64KiB输入，显式关闭DeepSeek默认thinking（SDKextra_body），价格/模型/host限定，extra_body不能覆盖token/model。预算2代表性fake+startup7PASS，ruff PASS。evidence/LLM/config-probe.json为第一真实调用：deepseek-flash返回OK，8输入1输出，预留0.004678元（非实际账单），未测任何Agent研究业务。密钥只从原仓库Git忽略.env加载进子进程/SDK，不入证据/命令行。
+
+## F03 主控实际候选路径
+
+2026-11-03，真实Chromium→DemoGateway→真实BGE/Milvus及Gree2025固定PDF版本，三宽1440/1280/390无溢出。4候选（总资产/总负债、2025-01-01及2025-12-31），显式创建2项待核对review。真人财务确认0、LLM0，核准图/比率正向仍需真人。证据evidence/M2-finance；停止后的临时环境findoc-integrated-http-amd4nips，部分公开seed manifest SHA 372d477d6e3afbb71f41c50edd0a5c79a8d2c336b29607c9398bf158b902d6d0保持不变。

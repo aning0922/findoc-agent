@@ -5,11 +5,11 @@
 - Integration: `codex/findoc-showcase-c-integration`。
 - 工作树：`/Users/aipuli/.codex/worktrees/findoc-showcase-c-integration/findoc-agent`。
 - Git fetch 已执行；V1.2 本地/远端 `c8be30808a3ac8c6d13daa5fd9d43c0ea1212c78`；main `1f0a3d4131480ac0ea742772127afac3c892fc7c`。原 V1.2 保留、工作区干净。
-- B00/B01/B02 已完成 M0 产品/视觉/最小合同冻结，自动进入 M1（用户已授权）。M1功能尚未验收。
+- B00/B01/B02 已完成 M0；M1核心真实HTTP/双浏览器验收通过，完整产品种子仍待E03。
 - 主控唯一 owner：runtime_factory.py、migrations.py、DocumentService、AppShell、ResearchHome、Conversations 及产品路由；worker 新文件优先。
 - task-board.csv 为 36 项实时表；work-package/data/task_board.csv 为原始不可改参考。
 - 会话可见、按当前任务改名；模型/推理在每次派工记录。Astra 架构专项；Terra React 中推理；Sol 后端高推理。
-- 当前：M0 完成；M1 首页和Gate前端已接线，L03后端候选及独立复核进行中；D02已集成，准备D03。
+- 当前：M2 真实官方PDF、OCR、扩展财务候选UI已联通；M3 Agent/统一工作区/记忆/报告并行集成。
 - 未授权：公开部署、合并 main、force push、真实财务人工接受、覆盖真实数据库、购买服务。
 
 M0完成证据：独立审查源49e0eba（集成5feba0c），UI源370e3d0/0ec4a71（集成6c619c0/5209c8e），主控补修8c2c8a7；API_MINIMUM v1.0纳入六项P0合同。主控在集成工作树复跑1440/1280/390 Chromium+主要点击PASS；build/lint PASS（chunk/fast-refresh警告保留）。本地原型 http://127.0.0.1:14521/showcase.html ，仅UI_MOCK。
@@ -35,3 +35,5 @@ O03真实HTTP+实际产品UI已PASS isgmzk2o：Midea公开年报第9页派生单
 F01/F02已集成c23c0a8，主控显式真实PDF集3PASS13.31s（fast/不可变证据真实、embed/index假）；4个资产/负债时点候选，未真人确认，正式分析403。F03 UI661f8b4待root审查/接线。M01/M02 backend317d336已集成2db02f8，主控7memory测试及真实BGE语义排序/删除通过，UI未接。新finance owner gate仅私有ASGI marker+当前代trusted header，新增route白名单；共享cost ledger独立于generation。
 
 最新模型配置：用户已完成原仓库.env，授权总费用上限5元人民币。只读4必需项已齐，官方deepseek-flash/api.deepseek.com；密钥不输出/不拷入Git。2026-11-03官方价格峰值cache-miss输入2元/M、输出8元/M作为保守估算，source见provider_budget.py。首个tiny真实probe PASS（input8/output1），不是Agent业务验收；cost ledger data/showcase-cost-control/provider-budget.db，1call保守预留0.004678元，实际账单扣费未观测。所有真实provider验证只由主控统一执行，retry0/max_output<=4096/禁原生SearchFetch，UNKNOWN不退预留，5元到限停止调用但离线研发继续。
+
+主控最新：F03源661f8b4已集成ac69ab5，修正图表按真实日期分组及原始Decimal tooltip；实际三宽Chromium+HTTP+公开部分seed PASS amd4nips。4个真实格力资产/负债候选、两日期、2项待核对review；LLM0/真人确认0，confirmed图正向仍human_pending。evidence/M2-finance。部分只读公开seed含Gree2025真实PDF/1003向量行，complete_product_seed=false，非E03完成。S03已集成14d3994、C01/C02/S01第一组05c7afc，待root运行时接线与真LLM。

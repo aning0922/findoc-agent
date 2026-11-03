@@ -163,7 +163,7 @@ for (const width of [1440, 1280, 390]) {
       body: JSON.stringify(data),
     });
   });
-  await p.goto("http://127.0.0.1:5180/finance-fixture");
+  await p.goto(`${process.env.F03_TEST_URL || "http://127.0.0.1:5180"}/finance-fixture`);
   await p.getByLabel("明确选择已就绪年报").selectOption("doc");
   await p.getByRole("button", { name: "读取所选来源" }).click();
   await p.getByRole("button", { name: "明确收集资产负债候选" }).click();

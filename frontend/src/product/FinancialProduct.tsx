@@ -39,6 +39,7 @@ import type {
 } from "./api.ts";
 import { reportsFor } from "./reports.ts";
 import { CompanyComparison } from "./CompanyComparison.tsx";
+import { ExtendedFinancePanel } from './financeV2/ExtendedFinancePanel.tsx';
 import { FactEvidence } from "./FactEvidence.tsx";
 import "./tokens.css";
 import "./shell.css";
@@ -262,6 +263,7 @@ function CompanySession({
           <span className="dot">·</span> 合并年度财务
         </p>
       </header>
+      {page === "analysis" && <ExtendedFinancePanel company={company} />}
       {page === "analysis" && (
         <div className="analysis-modes" role="group" aria-label="分析模式">
           <button

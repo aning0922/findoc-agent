@@ -4,6 +4,7 @@ import {
   BarChart,
   Line,
   LineChart,
+  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -266,11 +267,24 @@ export function ExtendedFinancePanel({ company }: { company: Company }) {
           m.source_revision === source?.source_revision,
       ),
     );
-  const chart = confirmed.map((m) => ({
-    ...m,
-    name: labels[m.metric_key],
-    coordinate: Number(m.value_decimal),
-  }));
+  type SeriesKey = 'total_assets' | 'total_liabilities';
+  type ChartRow = { as_of_date: string; total_assets?: number; total_liabilities?: number; raw: Partial<Record<SeriesKey, string>> };
+  const byDate = new Map<string, ChartRow>();
+  let ambiguousChart = false;
+  for (const m of confirmed) {
+    if (!m.as_of_date || m.value_decimal === null) continue;
+    const k = m.metric_key as SeriesKey;
+    const row = byDate.get(m.as_of_date) || { as_of_date: m.as_of_date, raw: {} };
+    if (row.raw[k] !== undefined) ambiguousChart = true;
+    row[k] = Number(m.value_decimal); // Plot coordinates only; no financial formula.
+    row.raw[k] = m.value_decimal;
+    byDate.set(m.as_of_date, row);
+  }
+  const chart = ambiguousChart ? [] : [...byDate.values()].sort((a, b) => a.as_of_date.localeCompare(b.as_of_date));
+  const chartTooltip = (_: unknown, __: unknown, item: { dataKey?: unknown; payload?: ChartRow }) => {
+    const k = String(item.dataKey) as SeriesKey;
+    return [`${item.payload?.raw[k] ?? '未提供'} 元`, labels[k]];
+  };
   const pair =
     selected.length === 2 &&
     new Set(selected.map((m) => m.metric_key)).size === 2 &&
@@ -533,6 +547,7 @@ export function ExtendedFinancePanel({ company }: { company: Company }) {
         <label>
           明确选择已就绪年报
           <select
+            aria-label="明确选择已就绪年报"
             value={document}
             onChange={(e) => {
               epoch.current++;
@@ -783,23 +798,21 @@ export function ExtendedFinancePanel({ company }: { company: Company }) {
           {chart.length ? (
             <ResponsiveContainer width="100%" height={230}>
               <LineChart data={chart} margin={{ right: 24 }}>
-                <XAxis dataKey="name" interval={0} tick={{ fontSize: 11 }} />
+                <XAxis dataKey="as_of_date" interval={0} tick={{ fontSize: 10 }} />
                 <YAxis
                   width={52}
                   tickFormatter={(v) => `${Number(v) / 100000000}亿`}
                   tick={{ fontSize: 10 }}
                 />
-                <Tooltip
-                  formatter={(_, __, item) => [
-                    item.payload.value_decimal + " 元",
-                    "已核准值",
-                  ]}
-                />
+                <Tooltip formatter={chartTooltip} />
+                <Legend />
                 <Line
-                  dataKey="coordinate"
+                  dataKey="total_assets"
+                  name="总资产"
                   stroke="#4878d4"
                   isAnimationActive={false}
                 />
+                <Line dataKey="total_liabilities" name="总负债" stroke="#67a6ad" isAnimationActive={false} />
               </LineChart>
             </ResponsiveContainer>
           ) : (
@@ -812,23 +825,21 @@ export function ExtendedFinancePanel({ company }: { company: Company }) {
           {chart.length ? (
             <ResponsiveContainer width="100%" height={230}>
               <BarChart data={chart}>
-                <XAxis dataKey="name" interval={0} tick={{ fontSize: 11 }} />
+                <XAxis dataKey="as_of_date" interval={0} tick={{ fontSize: 10 }} />
                 <YAxis
                   width={52}
                   tickFormatter={(v) => `${Number(v) / 100000000}亿`}
                   tick={{ fontSize: 10 }}
                 />
-                <Tooltip
-                  formatter={(_, __, item) => [
-                    item.payload.value_decimal + " 元",
-                    "已核准值",
-                  ]}
-                />
+                <Tooltip formatter={chartTooltip} />
+                <Legend />
                 <Bar
-                  dataKey="coordinate"
+                  dataKey="total_assets"
+                  name="总资产"
                   fill="#4878d4"
                   isAnimationActive={false}
                 />
+                <Bar dataKey="total_liabilities" name="总负债" fill="#67a6ad" isAnimationActive={false} />
               </BarChart>
             </ResponsiveContainer>
           ) : (
