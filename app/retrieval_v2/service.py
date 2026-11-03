@@ -342,10 +342,6 @@ class HybridRetrievalService:
             )
             if "风险" in query and not entrusted and ("委托理财" in text or numeric > 0.3):
                 relevance -= 0.04
-            try:
-                await self.verify(e)
-            except Exception:
-                continue
             output.append(
                 Candidate(
                     evidence_ref=e,
@@ -356,9 +352,22 @@ class HybridRetrievalService:
                 )
             )
         output.sort(key=lambda c: (-c.rerank_score, c.evidence_ref.evidence_id))
+        # Verification reloads the complete current source and checks the page
+        # gate. Rank first, then verify until top_k admitted results are found;
+        # rejected candidates still backfill from the same deterministic order.
+        # Every returned quote is freshly verified, with no cross-call cache.
+        admitted = []
+        for candidate in output:
+            try:
+                await self.verify(candidate.evidence_ref)
+            except Exception:
+                continue
+            admitted.append(candidate.model_dump())
+            if len(admitted) == top_k:
+                break
         return dict(
             schema_version="retrieval-diagnostics-v1",
-            items=[c.model_dump() for c in output[:top_k]],
+            items=admitted,
             index_status="degraded_not_built" if missing else "ready",
             relevance_policy="topic-table-v1",
             **({"_raw": raw} if _legacy else {}),
