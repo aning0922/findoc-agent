@@ -61,6 +61,9 @@ class DemoConfig:
 
     @classmethod
     def from_env(cls) -> "DemoConfig":
+        secure = os.environ.get("DEMO_COOKIE_SECURE", "true")
+        if secure not in ("true", "false"):
+            raise ValueError("DEMO_COOKIE_SECURE must be true or false")
         return cls(
             control_root=Path(os.environ["DEMO_CONTROL_ROOT"]),
             seed_root=Path(os.environ["DEMO_SEED_ROOT"]),
@@ -70,5 +73,5 @@ class DemoConfig:
             origins=tuple(x.strip() for x in os.environ["DEMO_ALLOWED_ORIGINS"].split(",") if x.strip()),
             ttl_minutes=int(os.environ.get("DEMO_TTL_MINUTES", "20")),
             conflict_policy=os.environ.get("DEMO_CONFLICT_POLICY", "wait_only"),
-            secure_cookie=os.environ.get("DEMO_COOKIE_SECURE", "true") == "true",
+            secure_cookie=secure == "true",
         )

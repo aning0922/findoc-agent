@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import hashlib
 import hmac
 import json
+import logging
 import secrets
 import time
 from typing import Protocol
@@ -78,8 +79,10 @@ class DemoController:
         if self.reset_task:
             self.reset_task.cancel()
             await asyncio.gather(self.reset_task, return_exceptions=True)
-        await self.manager.close()
-        self.store.close()
+        try:
+            await self.manager.close()
+        finally:
+            self.store.close()
 
     def _fingerprint(self, kind, payload):
         encoded = json.dumps([kind, payload], sort_keys=True, separators=(",", ":")).encode()
@@ -157,7 +160,8 @@ class DemoController:
         if self.config.conflict_policy != "takeover_enabled":
             reject(403, "takeover_disabled")
         if payload["confirm"] is not True or not verify_password(
-                payload["owner_password"], self.config.owner_password_hash):
+                payload["owner_password"], self.config.owner_password_hash) or verify_password(
+                    payload["owner_password"], self.config.password_hash):
             reject(403, "owner_authorization_required")
         self.expire()
         fingerprint = self._fingerprint("takeover", payload)
@@ -175,7 +179,8 @@ class DemoController:
     def owner_authorize(self, payload, token):
         self.session(token)
         if not self.config.owner_password_hash or payload["confirm"] is not True or not verify_password(
-                payload["owner_password"], self.config.owner_password_hash):
+                payload["owner_password"], self.config.owner_password_hash) or verify_password(
+                    payload["owner_password"], self.config.password_hash):
             reject(403, "owner_authorization_required")
         fingerprint = self._fingerprint("owner-authorize", payload)
         with self.store.tx() as db:
@@ -206,6 +211,30 @@ class DemoController:
             reject(503, "runtime_unavailable")
         return handle
 
+    def reserve_gateway(self, operation_id, token, generation, digest):
+        with self.store.tx() as db:
+            session = self._session(db, token)
+            if session["lease_generation"] != generation:
+                reject(401, "taken_over")
+            existing = db.execute("SELECT * FROM operations WHERE id=?", (operation_id,)).fetchone()
+            if existing:
+                if (existing["kind"] != "gateway" or existing["request_hash"] != digest or
+                        existing["owner_hash"] != token_hash(token) or existing["generation"] != generation):
+                    reject(409, "operation_conflict")
+                return
+            db.execute("INSERT INTO operations VALUES (?,?,?,?,?,NULL,'unknown',?,?)", (
+                operation_id, "gateway", digest, token_hash(token), generation,
+                self.clock() + session["remaining_seconds"], token_hash(token)))
+
+    def complete_gateway(self, operation_id):
+        with self.store.tx() as db:
+            db.execute("UPDATE operations SET state='completed' WHERE id=? AND kind='gateway'", (operation_id,))
+
+    def runtime_failed(self, generation):
+        # A late failure from N cannot degrade an already-published N+1.
+        with self.store.tx() as db:
+            db.execute("UPDATE slot SET state='degraded' WHERE generation=? AND state='active'", (generation,))
+
     def fence(self, token, generation):
         session = self.session(token)
         if session["lease_generation"] != generation:
@@ -235,11 +264,16 @@ class DemoController:
         return 202, self._operation(operation), None
 
     def _operation(self, row):
+        if row["kind"] not in ("login", "takeover", "claim"):
+            return {"operation_id": row["id"], "state": row["state"]}
         state = row["state"]
         if state in ("expired", "interrupted"):
             state = "cancelled"
-        return {"schema_version": "demo-attempt-v1", "operation_id": row["id"],
-                "state": state, "reset_id": row["reset_id"], "claimable": state == "ready"}
+        result = {"schema_version": "demo-attempt-v1", "operation_id": row["id"],
+                  "state": state, "reset_id": row["reset_id"], "claimable": state == "ready"}
+        if state == "failed":
+            result["error_code"] = "reset_failed"
+        return result
 
     def operation(self, operation_id, token, pending):
         self.expire()
@@ -311,7 +345,9 @@ class DemoController:
             if op:
                 if op["kind"] != "logout" or op["owner_hash"] != token_hash(token):
                     reject(409, "operation_conflict")
-                return self._operation(op)
+                reset = db.execute("SELECT state FROM resets WHERE id=?", (op["reset_id"],)).fetchone()
+                return {"state": "available" if reset and reset["state"] == "completed" else "resetting",
+                        "reset_id": op["reset_id"]}
             self._session(db, token)
             slot = db.execute("SELECT * FROM slot").fetchone()
             reset_id, generation = str(uuid4()), slot["generation"] + 1
@@ -355,6 +391,7 @@ class DemoController:
                                "WHERE reset_id=? AND state='pending'", (reset_id,))
                     db.execute("UPDATE slot SET state='available'")
         except Exception:
+            logging.getLogger(__name__).exception("Demo reset failed for generation %s", generation)
             with self.store.tx() as db:
                 db.execute("UPDATE slot SET state='degraded',session_hash=NULL,expires=NULL WHERE generation=?", (generation,))
                 db.execute("UPDATE resets SET state='failed',phase='failed',error_code='reset_failed' WHERE id=?", (reset_id,))

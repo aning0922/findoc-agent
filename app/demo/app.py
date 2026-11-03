@@ -5,15 +5,14 @@ import time
 from typing import Literal
 from uuid import UUID
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from app.demo.config import DemoConfig
 from app.demo.controller import DemoController
-from app.demo.gateway import GatewayLedger, proxy
-from app.demo.controller import token_hash
+from app.demo.gateway import proxy
 
 COOKIE = "findoc_demo"
 PENDING_COOKIE = "findoc_demo_pending"
@@ -21,6 +20,13 @@ PENDING_COOKIE = "findoc_demo_pending"
 
 class Operation(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
+    @field_validator("*", mode="before", check_fields=False)
+    @classmethod
+    def strict_confirmation(cls, value, info):
+        if info.field_name == "confirm" and value is not True:
+            raise ValueError("Explicit true required")
+        return value
+
     operation_id: str = Field(pattern=r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 
 
@@ -85,7 +91,8 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
                     if not attempts[old_key] or attempts[old_key][-1] < now - 60:
                         del attempts[old_key]
                 if len(attempts) > 2048:
-                    return JSONResponse({"detail": {"code": "rate_limited", "message": "Try later"}}, 429)
+                    return JSONResponse({"detail": {"code": "rate_limited", "message": "Try later"}}, 429,
+                                        headers={"Cache-Control": "no-store"})
             bucket = attempts[key]
             while bucket and bucket[0] <= now - 60:
                 bucket.popleft()
@@ -93,6 +100,15 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
                 return JSONResponse({"detail": {"code": "rate_limited", "message": "Try later"}}, 429,
                                     headers={"Cache-Control": "no-store"})
             bucket.append(now)
+        if request.method == "POST" and request.url.path.startswith("/demo/"):
+            body = bytearray()
+            async for chunk in request.stream():
+                body.extend(chunk)
+                if len(body) > 16384:
+                    return JSONResponse({"detail": {"code": "request_too_large", "message": "Request too large"}}, 413,
+                                        headers={"Cache-Control": "no-store"})
+            # Starlette's cached Request replays this bounded body to the endpoint parser.
+            request._body = bytes(body)
         response = await call_next(request)
         response.headers["Cache-Control"] = "no-store"
         return response
@@ -104,7 +120,7 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
                               samesite="strict", max_age=config.ttl_minutes * 60, path="/")
         if pending:
             result.set_cookie(PENDING_COOKIE, pending, httponly=True, secure=config.secure_cookie,
-                              samesite="strict", max_age=config.pending_seconds, path="/demo")
+                              samesite="strict", max_age=config.pending_seconds, path="/")
         return result
 
     def cookies(request):
@@ -141,18 +157,12 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
     async def logout(payload: Operation, request: Request):
         result = response(controller.logout(payload.operation_id, request.cookies.get(COOKIE)))
         result.delete_cookie(COOKIE, path="/", secure=config.secure_cookie, httponly=True, samesite="strict")
-        result.delete_cookie(PENDING_COOKIE, path="/demo", secure=config.secure_cookie, httponly=True, samesite="strict")
+        result.delete_cookie(PENDING_COOKIE, path="/", secure=config.secure_cookie, httponly=True, samesite="strict")
         return result
 
     @app.get("/demo/operations/{operation_id}")
     async def operation(operation_id: UUID, request: Request):
-        try:
-            return controller.operation(str(operation_id), *cookies(request))
-        except HTTPException as exc:
-            if exc.status_code != 404:
-                raise
-            handle = controller.capture(request.cookies.get(COOKIE))
-            return GatewayLedger(handle.root).state(str(operation_id), token_hash(request.cookies.get(COOKIE)))
+        return controller.operation(str(operation_id), *cookies(request))
 
     @app.get("/demo/resets/{reset_id}")
     async def reset(reset_id: UUID, request: Request):

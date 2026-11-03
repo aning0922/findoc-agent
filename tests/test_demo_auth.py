@@ -108,10 +108,22 @@ def test_boundary_strict_config_and_restart_fail_closed(tmp_path):
         assert client.post("/demo/login", json=op(username="demo", password="unit-password")).status_code == 403
         result = client.post("/demo/login", json=op(username="demo", password="secret-echo", ttl=30), headers=HEADERS)
         assert result.status_code == 422 and "secret-echo" not in result.text
+        assert client.post("/demo/login", json=op(username="demo", password="x" * 17000), headers=HEADERS).status_code == 413
+        now = [1_800_000_000.0]
+        app.state.demo_controller.clock = lambda: now[0]
+        abandoned = op(username="demo", password="unit-password")
+        assert client.post("/demo/login", json=abandoned, headers=HEADERS).status_code == 202
+        for _ in range(50):
+            progress = client.get("/demo/operations/" + abandoned["operation_id"]).json()
+            if progress["claimable"]:
+                break
+        now[0] += 301
+        assert client.get("/demo/status").json()["service_state"] == "ready"
+        assert client.post("/demo/claim", json=op(attempt_operation_id=abandoned["operation_id"]), headers=HEADERS).status_code == 409
         first = attempt(client)
         saved = client.cookies.get(COOKIE)
         assert set(client.get("/demo/status").json()) == {"schema_version", "service_state", "ttl_minutes", "conflict_policy"}
     with TestClient(create_demo_app(config, FakeManager())) as client:
         client.cookies.set(COOKIE, saved)
         assert client.get("/demo/session").status_code == 401
-        assert first.json()["lease_generation"] == 1
+        assert first.json()["lease_generation"] == 2

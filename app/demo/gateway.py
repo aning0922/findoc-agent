@@ -15,7 +15,9 @@ from app.demo.controller import reject, token_hash
 from app.demo.policy import mutation_for
 
 MAX_BYTES = 24 * 1024 * 1024
-RESPONSE_HEADERS = {"content-type", "content-disposition", "content-range", "accept-ranges", "etag"}
+RESPONSE_HEADERS = {"content-type", "content-disposition", "content-range", "accept-ranges", "etag",
+                    "x-report-id", "x-report-revision", "x-report-payload-sha256", "x-markdown-sha256",
+                    "x-report-eligibility", "x-markdown-renderer"}
 REQUEST_HEADERS = {"content-type", "accept", "range", "if-range", "if-none-match", "last-event-id"}
 
 
@@ -105,7 +107,7 @@ async def bounded_body(request):
 
 def operation_key(request, body, rule):
     header = request.headers.get("x-operation-id")
-    content_type = request.headers.get("content-type", "").split(";", 1)[0]
+    content_type = request.headers.get("content-type", "").split(";", 1)[0].strip().lower()
     value = None
     if content_type == "application/json":
         try:
@@ -145,11 +147,13 @@ async def proxy(request: Request, controller):
         reject(403, "mutation_not_allowed")
     body = await bounded_body(request)
     controller.fence(token, generation)
+    controller.capture(token, owner=bool(rule and rule.owner))
     ledger, operation_id = None, None
     if mutating:
         operation_id, upstream_body = operation_key(request, body, rule)
         digest = hashlib.sha256(request.method.encode() + b"\0" + path.encode() + b"\0" +
                                 request.url.query.encode() + b"\0" + body).hexdigest()
+        controller.reserve_gateway(operation_id, token, generation, digest)
         ledger = GatewayLedger(handle.root)
         cached = ledger.reserve(operation_id, token_hash(token), digest)
         if cached:
@@ -165,6 +169,8 @@ async def proxy(request: Request, controller):
     try:
         url = handle.client.base_url.copy_with(path=path, query=request.url.query.encode())
         upstream_request = handle.client.build_request(request.method, url, headers=headers, content=body)
+        controller.fence(token, generation)
+        controller.capture(token, owner=bool(rule and rule.owner))
         upstream = await handle.client.send(upstream_request, stream=True, follow_redirects=False)
         controller.fence(token, generation)
         if 300 <= upstream.status_code < 400:
@@ -186,8 +192,10 @@ async def proxy(request: Request, controller):
         controller.fence(token, generation)
         if ledger:
             ledger.complete(operation_id, upstream.status_code, public_headers, bytes(content))
+            controller.complete_gateway(operation_id)
         return fenced(Response(bytes(content), upstream.status_code, headers=public_headers), controller, token, generation)
     except httpx.HTTPError:
+        controller.runtime_failed(generation)
         reject(503, "runtime_unavailable")
     finally:
         if upstream:
@@ -235,9 +243,9 @@ async def stream_events(upstream, controller, token, generation, ledger, operati
     pending, transcript = b"", bytearray()
     try:
         async for chunk in guarded_chunks(upstream, controller, token, generation):
-            pending += chunk.replace(b"\r\n", b"\n")
+            pending = (pending + chunk).replace(b"\r\n", b"\n")
             if len(pending) > MAX_BYTES:
-                break
+                return
             while b"\n\n" in pending:
                 event, pending = pending.split(b"\n\n", 1)
                 controller.fence(token, generation)
@@ -248,11 +256,14 @@ async def stream_events(upstream, controller, token, generation, ledger, operati
                 yield frame
         controller.fence(token, generation)
         if pending:
-            transcript.extend(pending)
-            yield pending
+            return  # Incomplete SSE frame: retain UNKNOWN rather than certify a truncated stream.
         if ledger:
             ledger.complete(operation_id, upstream.status_code, headers, bytes(transcript))
-    except (HTTPException, httpx.HTTPError):
+            controller.complete_gateway(operation_id)
+    except httpx.HTTPError:
+        controller.runtime_failed(generation)
+        return
+    except HTTPException:
         # Revocation discards data; never emit a final late result or retry provider work.
         return
     finally:

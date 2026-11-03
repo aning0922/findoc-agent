@@ -45,11 +45,11 @@ async def async_login(client):
     payload = op(username="demo", password="unit-password")
     result = await client.post("/demo/login", json=payload, headers=HEADERS)
     assert result.status_code == 202, result.text
-    for _ in range(100):
+    for _ in range(500):
         state = (await client.get("/demo/operations/" + payload["operation_id"])).json()
         if state["claimable"]:
             break
-        await asyncio.sleep(0)
+        await asyncio.sleep(0.02)
     result = await client.post("/demo/claim", json=op(attempt_operation_id=payload["operation_id"]), headers=HEADERS)
     assert result.status_code == 200, result.text
     return result
@@ -155,7 +155,7 @@ def test_late_pdf_and_sse_discarded_old_write_only_old_root(tmp_path):
                 taken = await b.post("/demo/takeover", json=op(username="demo", password="unit-password",
                     owner_password="unit-owner", confirm=True, expected_generation=1), headers=HEADERS)
                 assert taken.status_code == 202
-                for _ in range(100):
+                for _ in range(500):
                     state = (await b.get("/demo/operations/" + taken.json()["operation_id"])).json()
                     if state["claimable"]:
                         break
@@ -183,4 +183,29 @@ def test_late_pdf_and_sse_discarded_old_write_only_old_root(tmp_path):
                     assert exc.detail["code"] == "taken_over"
                 else:
                     raise AssertionError("Old fence unexpectedly passed")
+    asyncio.run(run())
+
+
+def test_owner_grant_expiring_during_body_read_never_dispatches(tmp_path):
+    async def run():
+        manager = HTTPManager(tmp_path / "generations")
+        app = create_demo_app(replace(configuration(tmp_path), owner_password_hash=OWNER_HASH), manager)
+        async with app.router.lifespan_context(app):
+            controller = app.state.demo_controller
+            now = [1_800_000_000.0]
+            controller.clock = lambda: now[0]
+            async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url=ORIGIN) as client:
+                await async_login(client)
+                assert (await client.post("/demo/owner-authorize", json=op(owner_password="unit-owner", confirm=True), headers=HEADERS)).status_code == 200
+                class SlowBody(httpx.AsyncByteStream):
+                    async def __aiter__(self):
+                        yield b'{"operation_id":"'
+                        now[0] += 301
+                        await asyncio.sleep(0)
+                        yield (op()["operation_id"] + '"}').encode()
+                result = await client.post("/financial-facts/confirmations", content=SlowBody(),
+                    headers={**HEADERS, "Content-Type": "application/json"})
+                assert result.status_code == 403, result.text
+                assert result.json()["detail"]["code"] == "owner_authorization_required"
+                assert not manager.calls
     asyncio.run(run())
