@@ -11,7 +11,7 @@
 - `GET /demo/status`：公共只返回 `schema_version=demo-status-v1,state=available|occupied|resetting|degraded,ttl_minutes,conflict_policy`，不泄漏占用余时/身份。认证成功冲突才显示余时。
 - `POST /demo/login`：`{operation_id,username,password}`；服务器 env 配置固定用户名与密码哈希（只接受 20/30 分钟），常数时间验证。成功 Cookie `findoc_demo`（HttpOnly/SameSite，HTTPS Secure）、`Cache-Control:no-store`；同有效 Cookie 登录复用绝对到期时间。
 - `GET /demo/session`：200 `{schema_version:demo-session-v1,state:active,expires_at,server_now,remaining_seconds,lease_generation,seed_version}`；401 `{detail:{code:unauthenticated|expired|taken_over,message}}`。不返回 raw token/hash/internal root。
-- login 423 `{detail:{code:occupied,message,remaining_seconds,expires_at,takeover_available}}`；错误凭据统一 401，验证前不能查占用。
+- login 423 `{detail:{code:occupied,message,remaining_seconds,expires_at,takeover_available,lease_generation}}`；错误凭据统一 401，验证前不能查占用。
 - `POST /demo/takeover`：`{operation_id,username,password,owner_password,confirm:true,expected_generation}`。默认 wait_only 拒绝；takeover_enabled 必须 owner hash 验证+二次明确确认；公共 takeover 此版关闭。expected_generation 是 CAS 查找线索，服务器重验，失败 409；并发只有一个成功者。
 - `POST /demo/logout`：`{operation_id}` 当前 Cookie 验证；撤销、复位，Cookie 清理。Cookie/operation 重复请求可查已完成结果，但不能让撤销 token 访问业务。
 - `GET /demo/operations/{operation_id}`：登录/接管前凭据用安全 POST 查证或当前 Cookie 鉴权；不允许仅凭公开 UUID 重发 token。具体重试响应不可泄漏 secret。

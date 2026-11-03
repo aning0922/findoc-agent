@@ -6,3 +6,6 @@ D003 待专项复核：独立 Demo Controller，控制库在 generation 目录�
 D004 已冻结：旧 ResearchRun 原文、ACCEPT/SAVE/RESUME、Decimal、revision、旧迁移保持；新增 v2 层。
 D005 待视觉比较：Navy/Blue 与 Ink/Teal 两套统一 token，在同结构 React 原型实际截图后择一。
 D006 已冻结：架构/竞态高推理；确定性 UI 中推理；阶段切换重新选择模型与会话名，实际调用结果为证据。
+
+D007 视觉决策（主控独立看图）：370e3d0 的 Navy/Blue 与 Ink/Teal 同结构桌面截图已比较；选 Navy/Blue（深侧栏#111f39、主操作#4878d4、浅背景）。两套图表可读性接近，Navy 的金融研究辨识更强。原型高保真登录与成功流缺口退回修订；B02未完成。手机去除正文后装饰叠层，桌面缩Hero争取y650可见图表。
+D008 调度要求不进入产品：用户的“会话改名/模型推理动态切换”指Codex侧边栏开发聊天；FinDoc只显示快速/深度研究与实际业务状态，不新增无关模型设置。

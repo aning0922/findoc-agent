@@ -13,14 +13,15 @@
       "status": "running"
     },
     {
-      "task": "B02 React prototype",
+      "task": "B02 prototype owner revision",
       "thread_id": "01a19f9d-a871-7520-aed9-dd6d22774d1a",
       "client_thread_id": "client-new-thread:6cde4161-9153-4002-b48f-e39fa83749da",
       "model": "gpt-6.1-terra",
-      "thinking": "medium",
+      "thinking": "high",
       "branch": "codex/showcase-b02-ui",
       "worktree": "/Users/aipuli/.codex/worktrees/3f05/findoc-agent",
-      "status": "running"
+      "status": "running_revision",
+      "reviewed_candidate": "370e3d0e356c982210a8713c8b71fe8b4b80ea60"
     }
   ]
 }
