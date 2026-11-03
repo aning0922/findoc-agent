@@ -5,13 +5,15 @@ import time
 from typing import Literal
 from uuid import UUID
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.demo.config import DemoConfig
-from app.demo.controller import DemoController, reject
+from app.demo.controller import DemoController
+from app.demo.gateway import GatewayLedger, proxy
+from app.demo.controller import token_hash
 
 COOKIE = "findoc_demo"
 PENDING_COOKIE = "findoc_demo_pending"
@@ -117,6 +119,15 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
         code, body, pending = controller.login(payload.model_dump(), *cookies(request))
         return response(body, code, pending=pending)
 
+    @app.post("/demo/takeover")
+    async def takeover(payload: Takeover, request: Request):
+        code, body, pending = controller.takeover(payload.model_dump(), *cookies(request))
+        return response(body, code, pending=pending)
+
+    @app.post("/demo/owner-authorize")
+    async def owner_authorize(payload: OwnerAuthorize, request: Request):
+        return controller.owner_authorize(payload.model_dump(), request.cookies.get(COOKIE))
+
     @app.get("/demo/session")
     async def session(request: Request):
         return controller.session(request.cookies.get(COOKIE))
@@ -135,7 +146,13 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
 
     @app.get("/demo/operations/{operation_id}")
     async def operation(operation_id: UUID, request: Request):
-        return controller.operation(str(operation_id), *cookies(request))
+        try:
+            return controller.operation(str(operation_id), *cookies(request))
+        except HTTPException as exc:
+            if exc.status_code != 404:
+                raise
+            handle = controller.capture(request.cookies.get(COOKIE))
+            return GatewayLedger(handle.root).state(str(operation_id), token_hash(request.cookies.get(COOKIE)))
 
     @app.get("/demo/resets/{reset_id}")
     async def reset(reset_id: UUID, request: Request):
@@ -143,7 +160,6 @@ def create_demo_app(config: DemoConfig, manager) -> FastAPI:
 
     @app.api_route("/{path:path}", methods=["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
     async def business(request: Request, path: str):
-        controller.session(request.cookies.get(COOKIE))
-        reject(503, "runtime_gateway_unavailable")
+        return await proxy(request, controller)
 
     return app

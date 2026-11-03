@@ -152,6 +152,65 @@ class DemoController:
         self._launch_reset(result[1]["reset_id"], slot["generation"] + 1)
         return result
 
+    def takeover(self, payload, token=None, pending=None):
+        self.credentials(payload["username"], payload["password"])
+        if self.config.conflict_policy != "takeover_enabled":
+            reject(403, "takeover_disabled")
+        if payload["confirm"] is not True or not verify_password(
+                payload["owner_password"], self.config.owner_password_hash):
+            reject(403, "owner_authorization_required")
+        self.expire()
+        fingerprint = self._fingerprint("takeover", payload)
+        with self.store.tx() as db:
+            existing = db.execute("SELECT * FROM operations WHERE id=?", (payload["operation_id"],)).fetchone()
+            if existing:
+                return self._repeat(db, existing, fingerprint, token, pending)
+            slot = db.execute("SELECT * FROM slot").fetchone()
+            if slot["state"] != "active" or slot["generation"] != payload["expected_generation"]:
+                reject(409, "generation_conflict")
+            result = self._reserve(db, payload["operation_id"], "takeover", fingerprint, slot)
+        self._launch_reset(result[1]["reset_id"], slot["generation"] + 1)
+        return result
+
+    def owner_authorize(self, payload, token):
+        self.session(token)
+        if not self.config.owner_password_hash or payload["confirm"] is not True or not verify_password(
+                payload["owner_password"], self.config.owner_password_hash):
+            reject(403, "owner_authorization_required")
+        fingerprint = self._fingerprint("owner-authorize", payload)
+        with self.store.tx() as db:
+            session = self._session(db, token)
+            existing = db.execute("SELECT * FROM operations WHERE id=?", (payload["operation_id"],)).fetchone()
+            if existing:
+                if existing["request_hash"] != fingerprint or existing["owner_hash"] != token_hash(token):
+                    reject(409, "operation_conflict")
+                # Repeating an operation cannot refresh the five-minute grant.
+                if not session["can_review"] or existing["deadline"] <= self.clock():
+                    reject(403, "owner_grant_expired")
+                until = existing["deadline"]
+            else:
+                row = db.execute("SELECT expires FROM sessions WHERE hash=?", (token_hash(token),)).fetchone()
+                until = min(row["expires"], self.clock() + 300)
+                db.execute("UPDATE sessions SET owner_until=? WHERE hash=?", (until, token_hash(token)))
+                db.execute("INSERT INTO operations VALUES (?,?,?,?,?,?,?,?,?)", (
+                    payload["operation_id"], "owner-authorize", fingerprint, token_hash(token),
+                    session["lease_generation"], None, "completed", until, token_hash(token)))
+            return {"can_review": True, "owner_elevated_until": iso(until)}
+
+    def capture(self, token, *, owner=False):
+        session = self.session(token)
+        if owner and not session["can_review"]:
+            reject(403, "owner_authorization_required")
+        handle = self.manager.handle
+        if handle is None or handle.generation != session["lease_generation"]:
+            reject(503, "runtime_unavailable")
+        return handle
+
+    def fence(self, token, generation):
+        session = self.session(token)
+        if session["lease_generation"] != generation:
+            reject(401, "taken_over")
+
     def _reserve(self, db, operation_id, kind, fingerprint, slot):
         pending_token, reset_id = secrets.token_urlsafe(32), str(uuid4())
         generation = slot["generation"] + 1
