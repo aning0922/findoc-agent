@@ -1,4 +1,4 @@
-"""ee836e6 independent root assembly regressions; synthetic fixtures, provider disabled."""
+"""b2b73d5 independent root assembly verification; disposable SQLite, provider disabled."""
 
 from datetime import UTC, datetime, timedelta
 import sqlite3
@@ -8,6 +8,7 @@ from uuid import uuid4
 
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
+import pytest
 
 from app.cplus.runtime import register_cplus_runtime
 from app.conversations.repository import ConversationRepository
@@ -16,10 +17,7 @@ from tests.test_document_sources import Harness
 from tests.test_parse_v2 import fixture, run
 
 
-def mounted(tmp_path, monkeypatch):
-    h, doc, _, _, rev, engine, parse = fixture(tmp_path)
-    run(parse.retry(doc, str(uuid4()), rev))
-    quality = run(parse.quality(doc))
+def root_app(h, parse, tmp_path, monkeypatch, preparer=None):
     conversations = ConversationRepository(h.registry, "demo")
     memory = ResearchMemoryService(
         runtime_root=tmp_path,
@@ -41,13 +39,16 @@ def mounted(tmp_path, monkeypatch):
         )
         return await call_next(request)
 
+    async def empty_dense(selection, *, top_k):
+        return []  # Deliberately fake retrieval adapter; never load embeddings or Milvus.
+
     register_cplus_runtime(
         app,
         tmp_path,
         sources=h.service,
         parse_service=parse,
-        preparer=None,
-        dense_scope=None,
+        preparer=preparer,
+        dense_scope=SimpleNamespace(search=empty_dense),
         memory=memory,
         conversations=conversations,
         workspace="demo",
@@ -60,7 +61,16 @@ def mounted(tmp_path, monkeypatch):
         "X-Findoc-Instance": "review-instance",
         "X-Findoc-Lease-Expires-At": (datetime.now(UTC) + timedelta(minutes=5)).isoformat(),
     }
+    app.include_router(create_research_memory_router(memory))
     client = TestClient(app, headers=headers)
+    return app, client, memory
+
+
+def mounted(tmp_path, monkeypatch):
+    h, doc, _, _, rev, engine, parse = fixture(tmp_path)
+    run(parse.retry(doc, str(uuid4()), rev))
+    quality = run(parse.quality(doc))
+    app, client, memory = root_app(h, parse, tmp_path, monkeypatch)
 
     def post(path, body):
         r = client.post(path, json={"operation_id": str(uuid4()), **body})
@@ -99,7 +109,9 @@ def mounted(tmp_path, monkeypatch):
 def test_root_ocr_history_exposes_current_status_after_artifact_replaced(tmp_path, monkeypatch):
     h, doc, rev, parse, app, client, context, answer, memory = mounted(tmp_path, monkeypatch)
     endpoint = f"/cplus/research/answers/{answer['answer_id']}"
-    assert client.get(endpoint).status_code == 200  # same owner/expiry survives HTTP recovery
+    current = client.get(endpoint)
+    assert current.status_code == 200  # same owner/expiry survives HTTP recovery
+    assert current.json()["current_source_status"] == "current"
     expired = {
         **dict(client.headers),
         "x-findoc-lease-expires-at": (datetime.now(UTC) - timedelta(seconds=1)).isoformat(),
@@ -120,29 +132,24 @@ def test_root_ocr_history_exposes_current_status_after_artifact_replaced(tmp_pat
     assert rejected.status_code == 409 and rejected.json()["detail"]["code"] == "artifact_changed"
     with sqlite3.connect(app.state.cplus_retrieval_service.path) as db:
         before = db.execute("SELECT count(*) FROM operations").fetchone()[0]
+        stored_before = db.execute("SELECT * FROM objects").fetchall()
+    context_history = client.get(f"/cplus/research/contexts/{context['context_id']}")
+    assert context_history.status_code == 200
+    assert context_history.json()["current_source_status"] == "stale_or_unavailable"
+    assert context_history.json()["historical_snapshot"] is True
     history = client.get(endpoint).json()
     with sqlite3.connect(app.state.cplus_retrieval_service.path) as db:
         assert db.execute("SELECT count(*) FROM operations").fetchone()[0] == before
+        assert db.execute("SELECT * FROM objects").fetchall() == stored_before
     assert (
         history.get("historical_snapshot") is True
-        and history.get("current_source_status") != "current"
+        and history.get("current_source_status") == "stale_or_unavailable"
     )
 
 
-def test_root_fast_favorite_payload_is_accepted(tmp_path):
+def test_root_fast_favorite_payload_is_accepted(tmp_path, monkeypatch):
     h = Harness(tmp_path).ready()
-    conversations = ConversationRepository(h.registry, "demo")
-    memory = ResearchMemoryService(
-        runtime_root=tmp_path,
-        workspace_id="demo",
-        sources=h.service,
-        conversations=conversations,
-        embedder=lambda t: [[1.0] for x in t],
-        embedding_model_version="fake",
-    )
-    app = FastAPI()
-    app.include_router(create_research_memory_router(memory))
-    client = TestClient(app)
+    app, client, memory = root_app(h, None, tmp_path, monkeypatch)
     body = dict(
         operation_id=str(uuid4()),
         type="saved_evidence",
@@ -158,7 +165,11 @@ def test_root_fast_favorite_payload_is_accepted(tmp_path):
     )
     result = client.post("/research-memories", json=body)
     corrected = {**body, "operation_id": str(uuid4()), "physical_page": None}
-    assert client.post("/research-memories", json=corrected).status_code == 200
+    accepted = client.post("/research-memories", json=corrected)
+    assert accepted.status_code == 200, accepted.text
+    assert (
+        client.get(f"/research-memories/operations/{corrected['operation_id']}").status_code == 200
+    )
     assert result.status_code == 422  # Historical malformed UI shape remains rejected.
 
 
@@ -241,8 +252,176 @@ def test_root_peer_nested_memory_generation_check_is_read_only(tmp_path, monkeyp
         return connect(*args, **kwargs)
 
     monkeypatch.setattr(sqlite3, "connect", short_connect)
+    traced = []
+
+    def traced_connect(*args, **kwargs):
+        db = short_connect(*args, **kwargs)
+        db.set_trace_callback(traced.append)
+        return db
+
+    monkeypatch.setattr(sqlite3, "connect", traced_connect)
     with app.state.cplus_publication_guard(identity, context):
-        assert (
-            app.state.cplus_peer_service.memory.check_generation(context["memory_generation"])
-            == context["memory_generation"]
+        for service in (app.state.cplus_peer_service, app.state.cplus_checkup_explanation_service):
+            assert (
+                service.memory.check_generation(context["memory_generation"])
+                == context["memory_generation"]
+            )
+    assert not any("BEGIN IMMEDIATE" in sql.upper() for sql in traced)
+    assert sum(sql.upper() == "ROLLBACK" for sql in traced) >= 2
+    with connect(memory.path) as db:
+        db.execute("UPDATE generation SET value=value+1 WHERE workspace='demo'")
+    from app.research_memory.service import MemoryError
+
+    with pytest.raises(MemoryError, match="memory_context_changed"):
+        app.state.cplus_peer_service.memory.check_generation(context["memory_generation"])
+
+
+def test_root_financial_focus_http_preserves_comparative_period_and_rejects_changes(
+    tmp_path, monkeypatch
+):
+    from copy import deepcopy
+    from app.documents.preparation import DocumentTaskPreparer
+    from tests.test_finance_v2 import assembled, synthetic_pdf
+
+    h, company, doc, source = assembled(tmp_path, synthetic_pdf())
+    preparer = DocumentTaskPreparer(
+        document_service=h.service.documents, sources=h.service, workspace_id="demo"
+    )
+    app, client, memory = root_app(h, None, tmp_path, monkeypatch, preparer)
+    statements = app.state.cplus_statement_service
+    collection = run(statements.collect(str(uuid4()), doc, source["source_revision"]))
+    cell = next(c for c in collection["cells"] if c["time"].get("as_of_date") == "2030-12-31")
+    endpoint = f"/cplus/financial/cells/{cell['cell_id']}/research-focus"
+    response = client.get(
+        endpoint,
+        params={"revision": cell["cell_revision"], "payload_sha256": cell["payload_sha256"]},
+    )
+    assert response.status_code == 200, response.text
+    focus = response.json()
+    assert focus["cell_id"] == cell["cell_id"] and focus["time"] == cell["time"]
+    assert focus["source_ref"]["report_year"] == 2031
+    assert focus["source_ref"]["document_id"] == doc
+    assert focus["financial_authority"] is False
+    body = dict(
+        title="2031年报中的2030比较期",
+        selected_sources=[deepcopy(focus["source_ref"])],
+        financial_focus=focus,
+    )
+    response = client.post("/cplus/research/contexts", json=dict(operation_id=str(uuid4()), **body))
+    assert response.status_code == 200, response.text
+    context = response.json()["result"]
+    assert context["financial_focus"] == focus
+    question = "请核查2030-12-31的总资产比较数据。"
+    response = client.post(
+        "/cplus/research/answers",
+        json=dict(
+            operation_id=str(uuid4()),
+            context_id=context["context_id"],
+            context_revision=context["revision"],
+            context_sha256=context["context_sha256"],
+            question=question,
+        ),
+    )
+    assert response.status_code == 200, response.text
+    answer = response.json()["result"]
+    assert answer["financial_focus"] == focus and answer["question"] == question
+    assert answer["financial_authority"] is False
+    for field in ("time", "source_ref"):
+        changed = deepcopy(body)
+        if field == "time":
+            changed["financial_focus"]["time"]["as_of_date"] = "2031-12-31"
+        else:
+            changed["financial_focus"]["source_ref"]["document_id"] = "unselected-document"
+        response = client.post(
+            "/cplus/research/contexts", json=dict(operation_id=str(uuid4()), **changed)
         )
+        assert response.status_code == 409, response.text
+        expected = "focus_cell_changed" if field == "time" else "focus_source_changed"
+        assert response.json()["detail"]["code"] == expected
+
+
+def test_root_peer_and_checkup_http_complete_with_real_sqlite_memory_fences(tmp_path, monkeypatch):
+    from app.companies.models import CompanyCreate
+    from app.documents.preparation import DocumentTaskPreparer
+    from app.retrieval_v2.service import sha
+    from tests.test_document_sources import metadata
+    from tests.test_finance_v2 import assembled, synthetic_pdf
+    import pymupdf
+
+    h, company, doc, source = assembled(tmp_path, synthetic_pdf())
+    other = h.companies.create(
+        CompanyCreate(name="测试股份有限公司", security_code="REVIEW2", exchange="DEMO")
+    )
+    with pymupdf.open(stream=synthetic_pdf(), filetype="pdf") as pdf:
+        pdf.set_metadata({"title": "second disposable review company"})
+        second_bytes = pdf.tobytes()
+    response = h.upload(second_bytes, metadata(other.company_id, 2031), filename="second.pdf")
+    assert response.status_code == 202, response.text
+    second = response.json()["document_id"]
+    h.processor.process(second)
+    second_source = h.client.get(f"/documents/{second}/source").json()
+    preparer = DocumentTaskPreparer(
+        document_service=h.service.documents, sources=h.service, workspace_id="demo"
+    )
+    app, client, memory = root_app(h, None, tmp_path, monkeypatch, preparer)
+    statements = app.state.cplus_statement_service
+    collections = [
+        run(statements.collect(str(uuid4()), d, rev))
+        for d, rev in ((doc, source["source_revision"]), (second, second_source["source_revision"]))
+    ]
+    refs = [
+        {
+            "collection_id": c["id"],
+            "cell_ids": [
+                next(
+                    cell["cell_id"]
+                    for cell in c["cells"]
+                    if cell["metric_key"] == "total_assets"
+                    and cell["time"].get("as_of_date") == "2030-12-31"
+                )
+            ],
+        }
+        for c in collections
+    ]
+    response = client.post(
+        "/cplus/peer-comparisons",
+        json=dict(
+            operation_id=str(uuid4()),
+            company_ids=[company, other.company_id],
+            collection_refs=refs,
+            candidate_view=True,
+        ),
+    )
+    assert response.status_code == 200, response.text
+    assert response.json()["state"] == "completed"
+    checkup_refs = [
+        {
+            "collection_id": collections[0]["id"],
+            "cell_ids": [c["cell_id"] for c in collections[0]["cells"]],
+        }
+    ]
+    response = client.post(
+        "/cplus/checkups",
+        json=dict(
+            operation_id=str(uuid4()),
+            collection_refs=checkup_refs,
+            candidate_view=True,
+            generate_explanation=False,
+        ),
+    )
+    assert response.status_code == 200, response.text
+    checkup = response.json()
+    assert any(r["status"] == "candidate_observation" for r in checkup["rules"])
+    response = client.post(
+        "/cplus/checkup-explanations",
+        json=dict(
+            operation_id=str(uuid4()),
+            checkup_id=checkup["id"],
+            expected_payload_sha256=sha(checkup),
+            confirmed=True,
+        ),
+    )
+    assert response.status_code == 200, response.text
+    assert response.json()["state"] == "completed"
+    assert response.json()["result"]["provider_outcome"] == "unconfigured"
+    assert response.json()["result"]["financial_authority"] is False
